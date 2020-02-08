@@ -15,8 +15,8 @@ users.post('/register', (req, res) => {
     username: req.body.username,
     password: req.body.password,
     role: req.body.role,
-    createddate: today,
-    email: req.body.email
+    email: req.body.email,
+    createddate: today
   }
 
   User.findOne({
@@ -27,8 +27,8 @@ users.post('/register', (req, res) => {
     //TODO bcrypt
     .then(user => {
       if (!user) {
-         const hash = bcrypt.hashSync(userData.password, 10)
-         userData.password = hash
+        const hash = bcrypt.hashSync(userData.password, 10)
+        userData.password = hash
 
         User.create(userData)
           .then(user => {
@@ -38,7 +38,7 @@ users.post('/register', (req, res) => {
             res.json({ token: token })
           })
           .catch(err => {
-            res.send('error: ' + err)
+            res.send('errorExpressErr: ' + err)
           })
       } else {
         res.json({ error: 'User already exists' })
@@ -55,20 +55,20 @@ users.post('/login', (req, res) => {
       username: req.body.username
     }
   })
-  .then(user => {
-    if(bcrypt.compare(req.body.password, user.password)) {
-    //if (user) {
-      let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-        expiresIn: 1440
-      })
-      res.json({ token: token })
-    } else {
-      res.send('User does not exist')
-    }
-  })
-  .catch(err => {
-    res.send('error: ' + err)
-  })
+    .then(user => {
+      if (bcrypt.compare(req.body.password, user.password)) {
+        //if (user) {
+        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+          expiresIn: 1440
+        })
+        res.json({ token: token })
+      } else {
+        res.send('User does not exist')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
 })
 
 users.get('/profile', (req, res) => {

@@ -10,20 +10,20 @@ module.exports = db.sequelize.define(
       autoIncrement: true
     },
     username: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     password: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     role: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
+    },
+    email: {
+      type: Sequelize.TEXT
     },
     createddate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
-    },
-    email: {
-      type: Sequelize.STRING
     }
   },
   {

@@ -66,8 +66,8 @@ export class AuthenticationService {
     }
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.http.post(this.baseServerURL + "/users/register", user)
+  public register(user: TokenPayload): Promise<any> {
+    return this.http.post(this.baseServerURL + "/users/register", user).toPromise();
   }
 
   public login(user: TokenPayload): Observable<any> {

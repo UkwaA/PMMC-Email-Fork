@@ -3,7 +3,8 @@ import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 
 @Component({
-    templateUrl: './register.component.html'
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 
 export class RegisterComponent {
@@ -18,13 +19,15 @@ export class RegisterComponent {
     constructor(private auth: AuthenticationService, private router: Router) { }
 
     register() {
-        this.auth.register(this.credentials).subscribe(
-            () => {
-                this.router.navigateByUrl("/profile");
-            },
-            err => {
-                console.error(err);
-            }
-        );
+        this.auth.register(this.credentials).then(() =>{
+            this.router.navigateByUrl("/profile");
+        })
+        //     () => {
+        //         this.router.navigateByUrl("/profile");
+        //     },
+        //     err => {
+        //         console.error(err);
+        //     }
+        // );
     }
 }
