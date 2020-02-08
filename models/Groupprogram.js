@@ -49,7 +49,7 @@ module.exports = db.sequelize.define(
         type: Sequelize.INTEGER
     },
     CreatedBy: {
-        type: Sequelize.TEXT
+        type: Sequelize.INTEGER
     },
     CreatedDate: {
         type: Sequelize.DATE  //TYPE DATETIME IN MYSQL
