@@ -40,6 +40,7 @@ const routes : Routes = [
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
+    HomeComponent,
     CreateProgramComponent,
     GroupProgramComponent,
     IndividualProgramComponent, 
