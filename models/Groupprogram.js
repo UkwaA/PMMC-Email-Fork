@@ -4,73 +4,71 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'groupprogram',
   {
-    GroupProgram_PK: {
+    groupprogrampk: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    Program_FK:{
+    programfk:{
         type: Sequelize.TEXT
     },
-    AdultQuantity:{
-        type: Sequelize.INTEGER
+    adultquantity:{
+        type: Sequelize.BOOLEAN
     }, 
-    Age57Quantity:{
-        type: Sequelize.INTEGER
-    },
-    Age810Quantity:{
-        type: Sequelize.INTEGER
-    },
-    Age1113Quantity:{
-        type: Sequelize.INTEGER
-    },
-    TotalQuantity:{
-        type: Sequelize.INTEGER
-    },
-    Price:{
-        type: Sequelize.DOUBLE
-    },
-    Deposit:{
+    age57quantity:{
         type: Sequelize.BOOLEAN
     },
-    Education_PK:{
-        type: Sequelize.INTEGER
-    },
-    ProgramRestriction:{
+    age810quantity:{
         type: Sequelize.BOOLEAN
     },
-    DepositAmount:{
+    age1113quantity:{
+        type: Sequelize.BOOLEAN
+    },
+    totalquantity:{
+        type: Sequelize.BOOLEAN
+    },
+    deposit:{
+        type: Sequelize.BOOLEAN
+    },
+    education_pK:{
+        type: Sequelize.BOOLEAN
+    },
+    programrestriction:{
+        type: Sequelize.BOOLEAN
+    },
+    depositamount:{
+        type: Sequelize.BOOLEAN
+    },
+    fullamount:{
+        type: Sequelize.BOOLEAN
+    },
+    maximumparticipant:{
+        type: Sequelize.BOOLEAN
+    },
+    createdby: {
         type: Sequelize.INTEGER
     },
-    FullAmount:{
-        type: Sequelize.INTEGER
+    createddate: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
     },
-    MaximumParticipant:{
-        type: Sequelize.INTEGER
+    organizationname: {
+        type: Sequelize.BOOLEAN
     },
-    CreatedBy: {
-        type: Sequelize.INTEGER
+    gradelevel: {
+        type: Sequelize.BOOLEAN
     },
-    CreatedDate: {
-        type: Sequelize.DATE  //TYPE DATETIME IN MYSQL
+    scoutprogram: {
+        type: Sequelize.BOOLEAN
     },
-    OrganizationName: {
-        type: Sequelize.TEXT
+    teachername: {
+        type: Sequelize.BOOLEAN
     },
-    GradeLevel: {
-        type: Sequelize.TEXT
+    teacheremail: {
+        type: Sequelize.BOOLEAN
     },
-    ScoutProgram: {
-        type: Sequelize.TEXT
-    },
-    TeacherName: {
-        type: Sequelize.TEXT
-    },
-    TeacherEmail: {
-        type: Sequelize.TEXT
-    },
-    TeacherPhoneNo: {
-        type: Sequelize.TEXT
+    teacherphoneno: {
+        type: Sequelize.BOOLEAN
     }
   },
   {

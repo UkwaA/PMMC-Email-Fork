@@ -2,23 +2,20 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'user',
+  'program',
   {
-    user_pk: {
+    programpk: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
+    name: {
       type: Sequelize.TEXT
     },
-    password: {
+    description: {
       type: Sequelize.TEXT
     },
-    role_fk: {
-      type: Sequelize.TEXT
-    },
-    email: {
+    createdby: {
       type: Sequelize.TEXT
     },
     createddate: {

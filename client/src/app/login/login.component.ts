@@ -12,11 +12,19 @@ export class LoginComponent {
         user_pk: 0,
         username: '',
         password: '',
-        role: '',
+        role_fk: '',
         email: ''
     }
 
     constructor(private auth:AuthenticationService, private router:Router) {}
+
+    ngOnInit() {
+        this.auth.profile().subscribe(
+            user => {
+                this.router.navigateByUrl('/')
+            }
+        )
+    }
 
     login() {
         this.auth.login(this.credentials).subscribe(() => {

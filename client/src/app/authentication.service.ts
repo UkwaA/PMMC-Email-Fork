@@ -9,7 +9,7 @@ export interface UserDetails {
     user_pk: number
     username: string
     password: string
-    role: string
+    role_fk: string
     email: string
     exp: number
     iat: number
@@ -23,7 +23,7 @@ export interface TokenPayload {
     user_pk: number
     username: string
     password: string
-    role: string
+    role_fk: string
     email: string
 }
 @Injectable()
