@@ -4,72 +4,72 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'groupprogram',
   {
-    GroupProgram_PK: {
+    groupprogram_pk: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    Program_FK:{
+    program_fk:{
         type: Sequelize.TEXT
     },
-    AdultQuantity:{
+    adultquantity:{
         type: Sequelize.INTEGER
     }, 
-    Age57Quantity:{
+    age57quantity:{
         type: Sequelize.INTEGER
     },
-    Age810Quantity:{
+    age810quantity:{
         type: Sequelize.INTEGER
     },
-    Age1113Quantity:{
+    age1113quantity:{
         type: Sequelize.INTEGER
     },
-    TotalQuantity:{
+    totalquantity:{
         type: Sequelize.INTEGER
     },
-    Price:{
+    price:{
         type: Sequelize.DOUBLE
     },
-    Deposit:{
+    deposit:{
         type: Sequelize.BOOLEAN
     },
-    Education_PK:{
+    education_pk:{
         type: Sequelize.INTEGER
     },
-    ProgramRestriction:{
+    programrestriction:{
         type: Sequelize.BOOLEAN
     },
-    DepositAmount:{
+    depositamount:{
         type: Sequelize.INTEGER
     },
-    FullAmount:{
+    fullamount:{
         type: Sequelize.INTEGER
     },
-    MaximumParticipant:{
+    maximumparticipant:{
         type: Sequelize.INTEGER
     },
-    CreatedBy: {
+    createdby: {
         type: Sequelize.INTEGER
     },
-    CreatedDate: {
+    createddate: {
         type: Sequelize.DATE  //TYPE DATETIME IN MYSQL
     },
-    OrganizationName: {
+    organizationname: {
         type: Sequelize.TEXT
     },
-    GradeLevel: {
+    gradelevel: {
         type: Sequelize.TEXT
     },
-    ScoutProgram: {
+    scoutprogram: {
         type: Sequelize.TEXT
     },
-    TeacherName: {
+    teachername: {
         type: Sequelize.TEXT
     },
-    TeacherEmail: {
+    teacheremail: {
         type: Sequelize.TEXT
     },
-    TeacherPhoneNo: {
+    teacherphoneno: {
         type: Sequelize.TEXT
     }
   },

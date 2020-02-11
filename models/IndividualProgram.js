@@ -4,79 +4,79 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'individualprogram',
   {
-    IndividualPK: {
+    individualpk: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    Program_FK:{
+    program_fk:{
         type: Sequelize.TEXT,
         primaryKey: true
     },
-    ParticipantName: {
+    participantname: {
         type: Sequelize.TEXT
     },
-    ParticipantAge :{
+    participantage :{
         type: Sequelize.INTEGER
     },
-    Gender : {
+    gender : {
         type:Sequelize.TEXT
     },
-    MerchSize : {
+    merchsize : {
         type: Sequelize.TEXT
     },
-    AllergyInfo : {
+    allergyinfo : {
         type: Sequelize.TEXT
     },
-    SpecialInfo : {
+    specialinfo : {
         type: Sequelize.TEXT
     },
-    InsuranceProviderName:{
+    insuranceprovidername:{
             type: Sequelize.TEXT
     },
-    InsuranceRecipientName:{
+    insurancerecipientname:{
         type: Sequelize.TEXT
     },
-    InsurancePolicyNo:{
+    insurancepolicyno:{
         type: Sequelize.TEXT
     },
-    InsurancePhoneNo:{
+    insurancephoneno:{
         type: Sequelize.TEXT
     },
-    AuthorizedPickupName1:{
+    authorizedpickupname1:{
         type: Sequelize.TEXT
     },
-    AuthorizedPickupPhone1 :{
+    authorizedpickupphone1 :{
         type: Sequelize.TEXT
     },
-    AuthorizedPickupName2:{
+    authorizedpickupname2:{
         type: Sequelize.TEXT
     },
-    AuthorizedPickupPhone2 :{
+    authorizedpickupphone2 :{
         type: Sequelize.TEXT
     },
-    EarlyDropOff: {
+    earlydropoff: {
         type: Sequelize.TEXT
     },
-    LatePickup:{
+    latepickup:{
         type: Sequelize.TEXT
     },
-    MediaRelease:{
+    mediarelease:{
         type : Sequelize.BOOLEAN
     },
-    EmergencyMedicalRelease:{
+    emergencymedicalrelease:{
         type: Sequelize.BOOLEAN
     },
-    LiabilityAgreement: {
+    liabilityagreement: {
         type: Sequelize.BOOLEAN
     },
-    FullAmount : {
+    fullamount : {
         type: Sequelize.INTEGER
     },
-    CreatedBy: {
+    createdby: {
         type: Sequelize.INTEGER
     },
-    CreatedDate: {
+    createddate: {
         type: Sequelize.DATE
     }
   },

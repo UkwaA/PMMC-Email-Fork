@@ -4,40 +4,40 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'customer',
   {
-    Customer_PK: {
+    customer_pk: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    User_FK: {
+    user_fk: {
         type: Sequelize.TEXT,
         primaryKey: true
     },
-    FirstName: {
+    firstname: {
         type: Sequelize.TEXT
     },
-    LastName: {
+    lastname: {
         type: Sequelize.TEXT
     },
-    Email: {
+    email: {
         type: Sequelize.TEXT
     },
-    PhoneNo: {
+    phoneno: {
         type: Sequelize.TEXT
     },
-    Subscribe: {
+    subscribe: {
         type: Sequelize.BOOLEAN
     },
-    Address: {
+    address: {
         type: Sequelize.TEXT
     },
-    City: {
+    city: {
         type: Sequelize.TEXT
     },
-    State: {
+    state: {
         type: Sequelize.TEXT
     },
-    Zipcode: {
+    zipcode: {
         type: Sequelize.TEXT
     }
   },
