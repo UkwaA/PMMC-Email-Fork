@@ -12,23 +12,23 @@ process.env.SECRET_KEY = 'secret'
 users.post('/register', (req, res) => {
   const today = new Date()
   const userData = {
-    Username: req.body.username,
-    Password: req.body.password,
-    Role_FK: req.body.role_fk,
-    Email: req.body.email,
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Role_FK: 1,
+    Email: req.body.Email,
     CreatedDate: today
   }
 
   User.findOne({
     where: {
-      Email: req.body.email
+      Email: req.body.Email
     }
   })
     //TODO bcrypt
     .then(user => {
       if (!user) {
-        const hash = bcrypt.hashSync(userData.password, 10)
-        userData.password = hash
+        const hash = bcrypt.hashSync(userData.Password, 10)
+        userData.Password = hash
 
         User.create(userData)
           .then(user => {
@@ -52,11 +52,11 @@ users.post('/register', (req, res) => {
 users.post('/login', (req, res) => {
   User.findOne({
     where: {
-      Username: req.body.username
+      Username: req.body.Username
     }
   })
     .then(user => {
-      if (bcrypt.compare(req.body.password, user.Password)) {
+      if (bcrypt.compare(req.body.Password, user.Password)) {
         //if (user) {
         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
           expiresIn: 1440
