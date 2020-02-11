@@ -12,3 +12,6 @@ p {
   color: black;
 }
   
+.header img{
+  filter: brightness(50%);
+}
