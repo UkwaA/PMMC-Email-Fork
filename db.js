@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const db = {}
+
+// Connection to LocalDB
 // const sequelize = new Sequelize('pmmc', 'root', '123456', {
 //   host: 'localhost',
 //   dialect: 'mysql',
@@ -13,6 +15,7 @@ const db = {}
 //   }
 // })
 
+// Connection to AWS
 const sequelize = new Sequelize('pmmc', 'admin', '12345678', {
   host: 'pmmc1.cwdubawie51w.us-west-1.rds.amazonaws.com',
   port: 3306,
