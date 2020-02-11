@@ -1,3 +1,13 @@
 body {
     padding-top: 56px;
+    padding-bottom: 20px;
   }
+
+hr {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  border: 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.123);
+}
