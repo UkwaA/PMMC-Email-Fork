@@ -12,7 +12,7 @@ export class RegisterComponent {
         user_pk: 0,
         username: '',
         password: '',
-        role: '',
+        role_fk: '',
         email: ''
     }
 

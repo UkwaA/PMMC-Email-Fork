@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
 import { HomeComponent } from './home/home.component'
+import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
 import { AuthGuardService } from './auth-guard.service'
 import { GroupProgramComponent } from './group-program/group-program.component' 
@@ -19,9 +20,13 @@ const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+
+  {path: 'createprogram', component: CreateProgramComponent},
+
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
+
   {
     path: 'profile', 
     component: ProfileComponent,
@@ -36,6 +41,7 @@ const routes : Routes = [
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    CreateProgramComponent,
     GroupProgramComponent,
     IndividualProgramComponent, 
     Contact
