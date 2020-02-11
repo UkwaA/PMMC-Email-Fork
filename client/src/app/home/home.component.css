@@ -1,14 +1,14 @@
 .container {
-    padding-top: 80px;
+    padding-top: 100px;
   }
 
 .row{
   padding-top: 56px;
 }
   
-  p {
-    font-family: Gill Sans, sans-serif;
-    font-style: italic;
-    color: black;
-  }
+p {
+  font-family: Gill Sans, sans-serif;
+  font-style: italic;
+  color: black;
+}
   
