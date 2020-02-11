@@ -6,11 +6,11 @@ import { Router } from '@angular/router'
 
 
 export interface UserDetails {
-    user_pk: number
-    username: string
-    password: string
-    role_fk: string
-    email: string
+    UserPK: number
+    Username: string
+    Password: string
+    Role_FK: string
+    Email: string
     exp: number
     iat: number
 }
@@ -20,11 +20,11 @@ interface TokenResponse {
 }
 
 export interface TokenPayload {
-    user_pk: number
-    username: string
-    password: string
-    role_fk: string
-    email: string
+    UserPK: number
+    Username: string
+    Password: string
+    Role_FK: string
+    Email: string
 }
 @Injectable()
 export class AuthenticationService {

@@ -6,11 +6,11 @@
         <table class="table col-md-6 mx-auto">
             <tr>
                 <td>Username</td>
-                <td>{{ details?.username }}</td>
+                <td>{{ details?.Username }}</td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td>{{ details?.email }}</td>
+                <td>{{ details?.Email }}</td>
             </tr>
         </table>
         <button *ngIf="details.role_fk != '1'"  class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>

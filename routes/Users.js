@@ -12,16 +12,16 @@ process.env.SECRET_KEY = 'secret'
 users.post('/register', (req, res) => {
   const today = new Date()
   const userData = {
-    username: req.body.username,
-    password: req.body.password,
-    role_fk: req.body.role_fk,
-    email: req.body.email,
-    createddate: today
+    Username: req.body.username,
+    Password: req.body.password,
+    Role_FK: req.body.role_fk,
+    Email: req.body.email,
+    CreatedDate: today
   }
 
   User.findOne({
     where: {
-      email: req.body.email
+      Email: req.body.email
     }
   })
     //TODO bcrypt
@@ -52,11 +52,11 @@ users.post('/register', (req, res) => {
 users.post('/login', (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username
+      Username: req.body.username
     }
   })
     .then(user => {
-      if (bcrypt.compare(req.body.password, user.password)) {
+      if (bcrypt.compare(req.body.password, user.Password)) {
         //if (user) {
         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
           expiresIn: 1440
@@ -76,7 +76,7 @@ users.get('/profile', (req, res) => {
 
   User.findOne({
     where: {
-      username: decoded.username
+      Username: decoded.Username
     }
   })
     .then(user => {

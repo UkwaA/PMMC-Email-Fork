@@ -4,24 +4,24 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'user',
   {
-    user_pk: {
+    UserPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
+    Username: {
       type: Sequelize.TEXT
     },
-    password: {
+    Password: {
       type: Sequelize.TEXT
     },
-    role: {
+    Role_FK: {
       type: Sequelize.TEXT
     },
-    email: {
+    Email: {
       type: Sequelize.TEXT
     },
-    createddate: {
+    CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     }
