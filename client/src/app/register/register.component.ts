@@ -9,11 +9,11 @@ import { Router } from '@angular/router'
 
 export class RegisterComponent {
     credentials: TokenPayload = {
-        user_pk: 0,
-        username: '',
-        password: '',
-        role_fk: '',
-        email: ''
+        UserPK: 0,
+        Username: '',
+        Password: '',
+        Role_FK: '',
+        Email: ''
     }
 
     constructor(private auth: AuthenticationService, private router: Router) { }
