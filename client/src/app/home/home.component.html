@@ -1,10 +1,48 @@
+<div class="banner">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-12">
+        <h1> PACIFIC MARINE MAMMAL CENTER </h1>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-lg-12">
+        <h2> Enjoy your exploration with our programs! </h2>
+      </div>
+    </div>
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row pl-5">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                <option>Select Types of Program</option>
+                                <option>Group</option>
+                                <option>Individual</option>
+                            </select> 
+                        </div>
+                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                                <option>Select Age Group</option>
+                                <option>5-8</option>
+                                <option>8-12</option>
+                                <option>12-16</option>
+                            </select>
+                        </div>
+                          <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input class="form-control" type="date" value="2020-08-19" id="example-date-input">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-primary wrn-btn">Search</button>
+                        </div>
+                    </div>
+        </form>
+  </div>
+</div> 
   <!-- Page Content -->
   <div class="container">
-    <!-- Jumbotron Header -->
-    <div class="header">
-      <img src="https://static.boredpanda.com/blog/wp-content/uploads/2019/12/seal-pup-waving-norfolk-beach-fb-png__700.jpg" atl="" style="width:100%; height:300px;">
-      <h1>Pacific Marine Mammal Center</h1>
-      <h2>RESCURE - REHAB - RELEASE - EDUCATE - RESEARCH</h2>
+    <div class="row text-center">
+      <div class="col-lg-12">
+        <h1>Most Popular Programs</h1>
+      </div>
     </div>
 
 
@@ -12,7 +50,7 @@
     <div class="row text-center" *ngIf = "programs">
 
       <div class="col-lg-3 col-md-6 mb-4" *ngFor = "let program of programs">
-        <div class="card h-100">
+        <div class="card h-100 border-light">
           <img class="card-img-top" [src]="program.imageURL" alt="">
           <div class="card-body">
             <h4 class="card-title">{{program.title}}</h4>

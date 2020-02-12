@@ -1,9 +1,9 @@
 .container {
-    padding-top: 100px;
+    padding: 56px;
   }
 
 .row{
-  padding-top: 56px;
+  padding: 56px;
 }
   
 p {
@@ -12,18 +12,11 @@ p {
   color: black;
 }
   
-.header img{
-  filter: brightness(50%);
-  position: relative;
-  width: 100%;
-}
-
 h1 {
   position: absolute;
-  top: 200px;  
   width: 100%; 
   text-align: center;
-  color: #ffffff;
+  color: black;
   font-family: Arial;
   font-style: italic;
   font-weight: 500;
@@ -32,10 +25,15 @@ h1 {
 
 h2 {
   position: absolute;
-  top: 250px;  
   width: 100%; 
   text-align: center;
-  color: #ffffff;
+  color: black;
   font-family: monospace;
   font-size: 20px;
+}
+.banner{
+  background: url("https://wallpaperaccess.com/full/369026.jpg");
+  background-size: 100% 100%;
+  padding-top: 86px;
+  padding-bottom: 200px;
 }
