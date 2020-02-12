@@ -41,29 +41,38 @@
   <div class="container">
     <div class="row text-center">
       <div class="col-lg-12">
-        <h1>Most Popular Programs</h1>
+        <h1 style = "color: black">Most Popular Programs</h1>
       </div>
     </div>
 
 
     <!-- Page Features -->
-    <div class="row text-center" *ngIf = "programs">
+    <div class="row" *ngIf = "programs">
 
-      <div class="col-lg-3 col-md-6 mb-4" *ngFor = "let program of programs">
-        <div class="card h-100 border-light">
-          <img class="card-img-top" [src]="program.imageURL" alt="">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor = "let program of programs">
+        <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;">
+          <img class="card-img" [src]="program.imageURL" alt="">
           <div class="card-body">
-            <h4 class="card-title">{{program.title}}</h4>
+            <h3 class="card-title">{{program.title}}</h3>
             <p class="card-text"> {{program.description}}</p>
+            <h4 class="text-right text-muted"> $250 </h4>
+            <div class = "text-right">
+            <a [href]="program.url" class="btn btn-primary pull-right">Find Out More!</a>
           </div>
-          <div class="card-footer">
-            <a [href]="program.url" class="btn btn-primary">Find Out More!</a>
+          </div>
+          <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
+            <div class="stats">
+              <fa-icon [icon]="faClock"></fa-icon> 1h45
+            </div>
+            <div class="stats">
+              <fa-icon [icon]="faComment"></fa-icon> 115
+            </div>
+
           </div>
         </div>
       </div>
       
     </div>
-
-  </div>
+    
 
   
