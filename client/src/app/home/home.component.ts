@@ -13,10 +13,11 @@ export class HomeComponent implements OnInit{
     faClock = faClock;
     faComment = faComment;
     programs : ProgramData[];
+
     constructor( private programService: ProgramServices){   }
     ngOnInit(){
         this.programService.getAllPrograms().then((result) =>{
-            this.programs = result
+            this.programs = result;
         })
         // this.programs = this.createPrograms();
 
