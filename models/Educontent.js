@@ -4,12 +4,12 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'educontent',
   {
-    education_pk: {
+    EducationPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    program_fk:{
+    ProgramFK:{
         type: Sequelize.INTEGER,
         primaryKey: true
     }    

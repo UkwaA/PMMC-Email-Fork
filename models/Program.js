@@ -4,21 +4,21 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'program',
   {
-    programpk: {
+    ProgramPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
+    Name: {
       type: Sequelize.TEXT
     },
-    description: {
+    Description: {
       type: Sequelize.TEXT
     },
-    createdby: {
-      type: Sequelize.TEXT
+    CreatedBy: {
+      type: Sequelize.INTEGER
     },
-    createddate: {
+    CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     }

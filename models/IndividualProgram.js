@@ -4,80 +4,81 @@ const db = require('../db.js')
 module.exports = db.sequelize.define(
   'individualprogram',
   {
-    individualpk: {
+    IndividualPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    program_fk:{
-        type: Sequelize.TEXT,
+    ProgramFK:{
+        type: Sequelize.INTEGER,
         primaryKey: true
     },
-    participantname: {
-        type: Sequelize.TEXT
+    ParticipantName: {
+        type: Sequelize.BOOLEAN
     },
-    participantage :{
-        type: Sequelize.INTEGER
+    ParticipantAge :{
+        type: Sequelize.BOOLEAN
     },
-    gender : {
-        type:Sequelize.TEXT
+    Gender : {
+        type:Sequelize.BOOLEAN
     },
-    merchsize : {
-        type: Sequelize.TEXT
+    MerchSize : {
+        type: Sequelize.BOOLEAN
     },
-    allergyinfo : {
-        type: Sequelize.TEXT
+    AllergyInfo : {
+        type: Sequelize.BOOLEAN
     },
-    specialinfo : {
-        type: Sequelize.TEXT
+    SpecialInfo : {
+        type: Sequelize.BOOLEAN
     },
-    insuranceprovidername:{
-            type: Sequelize.TEXT
+    InsuranceproviderName:{
+        type: Sequelize.BOOLEAN
     },
-    insurancerecipientname:{
-        type: Sequelize.TEXT
+    InsuranceRecipientName:{
+        type: Sequelize.BOOLEAN
     },
-    insurancepolicyno:{
-        type: Sequelize.TEXT
+    InsurancePolicyNo:{
+        type: Sequelize.BOOLEAN
     },
-    insurancephoneno:{
-        type: Sequelize.TEXT
+    InsurancePhoneNo:{
+        type: Sequelize.BOOLEAN
     },
-    authorizedpickupname1:{
-        type: Sequelize.TEXT
+    AuthorizedPickupName1:{
+        type: Sequelize.BOOLEAN
     },
-    authorizedpickupphone1 :{
-        type: Sequelize.TEXT
+    AuthorizedPickupPhone1 :{
+        type: Sequelize.BOOLEAN
     },
-    authorizedpickupname2:{
-        type: Sequelize.TEXT
+    AuthorizedPickupName2:{
+        type: Sequelize.BOOLEAN
     },
-    authorizedpickupphone2 :{
-        type: Sequelize.TEXT
+    AuthorizedPickupPhone2 :{
+        type: Sequelize.BOOLEAN
     },
-    earlydropoff: {
-        type: Sequelize.TEXT
+    EarlyDropOff: {
+        type: Sequelize.BOOLEAN
     },
-    latepickup:{
-        type: Sequelize.TEXT
+    LatePickup:{
+        type: Sequelize.BOOLEAN
     },
-    mediarelease:{
+    MediaRelease:{
         type : Sequelize.BOOLEAN
     },
-    emergencymedicalrelease:{
+    EmergencyMedicalRelease:{
         type: Sequelize.BOOLEAN
     },
-    liabilityagreement: {
+    LiabilityAgreement: {
         type: Sequelize.BOOLEAN
     },
-    fullamount : {
+    FullAmount : {
         type: Sequelize.INTEGER
     },
     createdby: {
         type: Sequelize.INTEGER
     },
     createddate: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
     }
   },
   {
