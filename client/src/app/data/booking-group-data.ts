@@ -1,26 +1,26 @@
 export class BookingGroupData {
     GroupProgramPK: number;
     ProgramFK: number;
-    AldultQuantity: number;
-    Age57Quantity: number;
-    Age810Quantity: number;
-    Age1113Quantity: number;
-    TotalQuantity: number;
-    Price: number;
-    Deposit: number;
-    EducationFK: number;
-    ProgramRestriction: string;
-    DepositAmount: number;
+    AldultQuantity: boolean;
+    Age57Quantity: boolean;
+    Age810Quantity: boolean;
+    Age1113Quantity: boolean;
+    TotalQuantity: boolean;
+    Price: boolean;
+    Deposit: boolean;
+    EducationFK: boolean;
+    ProgramRestriction: boolean;
+    DepositAmount: boolean;
     FullAmount: boolean;
-    MaximumParticipant: number;
-    CreatedBy: string;
-    CreateDate: Date;
-    OrganizationName: string;
-    GradeLevel: number;
-    ScoutProgram: string;
-    TeacherName: string;
-    TeacherEmail: string;
-    TeacherPhoneNo: number;
+    MaximumParticipant: boolean;
+    CreatedBy: boolean;
+    CreateDate: boolean;
+    OrganizationName: boolean;
+    GradeLevel: boolean;
+    ScoutProgram: boolean;
+    TeacherName: boolean;
+    TeacherEmail: boolean;
+    TeacherPhoneNo: boolean;
 
     constructor (){
         
