@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component'
 import { HomeComponent } from './home/home.component'
 import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
+import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { GroupProgramComponent } from './group-program/group-program.component' 
@@ -71,7 +72,7 @@ const routes : Routes = [
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [AuthGuardService, AuthenticationService],
+  providers: [ProgramServices, AuthRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,6 +15,9 @@ module.exports = db.sequelize.define(
     Description: {
       type: Sequelize.TEXT
     },
+    FullAmount: {
+      type: Sequelize.INTEGER
+    },
     CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
@@ -23,7 +26,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER
     },
     ImgData: {
-      type: Sequelize.BLOB
+      type: Sequelize.TEXT
     }
   },
   {

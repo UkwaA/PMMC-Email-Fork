@@ -1,13 +1,17 @@
 export class ProgramData {
-    title:string;
-    description: string;
-    imageURL: string;
-    url: string;
+    ProgramPk: number
+    Name: string
+    Description: string
+    FullAmount: number
+    CreatedDate: string
+    CreatedBy: number
+    ImgData: string
 
-    constructor(nTitle:string, nDescription:string, nImageURL:string, nURL:string){
-        this.title = nTitle;
-        this.description = nDescription;
-        this.imageURL = nImageURL;
-        this.url = nURL;
+    constructor(nTitle:string, nDescription:string, nImageURL:string, nURL:string, price: number){
+        this.ProgramPk = 0;
+        this.Name = nTitle;
+        this.Description = nDescription;
+        this.FullAmount = price;
+        this.ImgData = nImageURL;
     }
 }

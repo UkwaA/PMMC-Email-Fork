@@ -13,6 +13,6 @@
                 <td>{{ details?.Email }}</td>
             </tr>
         </table>
-        <button *ngIf="details.Role_FK != '1'"  class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
+        <button *ngIf="details?.Role_FK != '1'"  class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
     </div>
 </div>

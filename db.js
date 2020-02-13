@@ -1,8 +1,13 @@
 const Sequelize = require('sequelize')
 const db = {}
 
+process.env.DBNAME = 'pmmc'
+process.env.USERNAME = 'root'
+process.env.PASSWORD = '123456'
+
+
 // Connection to LocalDB
-const sequelize = new Sequelize('pmmc', 'root', '123456', {
+const sequelize = new Sequelize(process.env.DBNAME, process.env.USERNAME, process.env.PASSWORD, {
   host: 'localhost',
   dialect: 'mysql',
   define: {
