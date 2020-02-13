@@ -6,32 +6,7 @@
   padding: 56px;
 }
   
-/* p {
-  font-family: 'Courier New', Courier, monospace, sans-serif;
-  font-style: italic;
-  color: black;
-}
-  
-h1 {
-  position: absolute;
-  width: 100%; 
-  text-align: center;
-  color: black;
-  font-family: Arial;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 50px;
-}
-
-h2 {
-  position: absolute;
-  width: 100%; 
-  text-align: center;
-  color: black;
-  font-family: monospace;
-  font-size: 20px;
-} */
-h1 { color: white; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+h1 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
 
 
 h2 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0; }
