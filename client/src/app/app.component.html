@@ -24,14 +24,24 @@
         <li *ngIf="!auth.isLoggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li *ngIf="auth.isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink="" (click)="auth.logout()">Logout</a>
+        <li *ngIf="auth.isLoggedIn()" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </a>
+          <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
+            <a class="nav-link" routerLink="/profile">Profile</a>
+            <a class="nav-link" routerLink="" (click)="auth.logout()">Logout</a>
+          </div>
         </li>
+
+        <!-- <li *ngIf="auth.isLoggedIn()" class="nav-item">
+          <a class="nav-link" routerLink="" (click)="auth.logout()">Logout</a>
+        </li> -->
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </nav>

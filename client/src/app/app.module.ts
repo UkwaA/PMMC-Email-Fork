@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component'
 import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
 import { AuthGuardService } from './auth-guard.service'
+import { AuthRoleGuardService} from './auth-role-guard.service'
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
@@ -24,7 +25,11 @@ const routes : Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
 
-  {path: 'createprogram', component: CreateProgramComponent},
+  {
+    path: 'createprogram', 
+    component: CreateProgramComponent,
+    canActivate: [AuthRoleGuardService]
+  },
 
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
