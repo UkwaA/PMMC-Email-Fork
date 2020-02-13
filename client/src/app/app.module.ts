@@ -65,7 +65,9 @@ const routes : Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled'
+    }),
     FontAwesomeModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
