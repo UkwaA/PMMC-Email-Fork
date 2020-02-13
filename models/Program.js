@@ -15,13 +15,19 @@ module.exports = db.sequelize.define(
     Description: {
       type: Sequelize.TEXT
     },
-    CreatedBy: {
-      type: Sequelize.INTEGER
-    },
     CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    CreatedBy: {
+      type: Sequelize.INTEGER
+    },
+    ImgData: {
+      type: Sequelize.BLOB
     }
+  },
+  {
+    freezeTableName: true,
   },
   {
     timestamps: false

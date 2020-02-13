@@ -5,6 +5,9 @@ const db = {}
 const sequelize = new Sequelize('pmmc', 'root', '123456', {
   host: 'localhost',
   dialect: 'mysql',
+  define: {
+    timestamps: false
+  },
   operatorsAliases: false,
   pool: {
     max: 5,

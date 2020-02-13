@@ -15,26 +15,8 @@ app.use(
 var Users = require('./routes/Users')
 app.use('/users', Users)
 
-
-// // Create connection
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '123456',
-//     database: 'pmmc'
-// });
-
-// // Connect
-// db.connect((err) => {
-//     if(err){
-//         console.log("error: " + err);
-//     }
-//     else{
-//         console.log('MySQl Connected ...');
-//     }
-// })
-
-
+var Program = require('./routes/Program')
+app.use('/program', Program)
 
 app.listen(port , () =>{
   console.log("Server started on port 3000");
