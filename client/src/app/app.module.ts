@@ -15,7 +15,8 @@ import { AuthenticationService } from './authentication.service'
 import { AuthGuardService } from './auth-guard.service'
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
-import { Contact } from './contact/contact.component'
+import { Contact } from './contact/contact.component';
+import { BookingIndividualProgramComponent } from './booking-individual-program/booking-individual-program.component'
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -27,6 +28,7 @@ const routes : Routes = [
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
+  {path: 'booking-individual-program', component: BookingIndividualProgramComponent},
 
   {
     path: 'profile', 
@@ -45,7 +47,8 @@ const routes : Routes = [
     CreateProgramComponent,
     GroupProgramComponent,
     IndividualProgramComponent, 
-    Contact
+    Contact, 
+    BookingIndividualProgramComponent
   ],
   imports: [
     BrowserModule,
