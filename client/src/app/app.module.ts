@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
@@ -18,7 +18,9 @@ import { GroupProgramComponent } from './group-program/group-program.component'
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
 import { BookingIndividualProgramComponent } from './booking-individual-program/booking-individual-program.component'
-import { BookingGroupProgramComponent } from './booking-group-program/booking-group-program.component'
+import { BookingGroupProgramComponent } from './booking-group-program/booking-group-program.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -63,7 +65,11 @@ const routes : Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
