@@ -47,28 +47,37 @@
 </nav>
 <router-outlet></router-outlet>
 
+
 <!-- Footer -->
-<footer class="mainfooter" role="contentinfo" style= "background-color: #5077a9; color: white; padding-top:50px; padding-bottom:50px;">
+<footer class="mainfooter" role="contentinfo" 
+        style= "background: #16222A; background: -webkit-linear-gradient(59deg, #3A6073, #16222A); background: linear-gradient(59deg, #3A6073, #16222A);
+                color: white; padding-top:50px; padding-bottom:50px;">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <!--Column Info-->
         <div class="footer-info">
-          <h3>PACIFIC MARINCE MAMMAL CENTER</h3>
+          <h4 style="padding-bottom:20px;">PACIFIC MARINCE MAMMAL CENTER</h4>
           <p class="text-justify" style="color: rgb(192, 183, 183);">Our patient are sentinel species of our environment. Their intricate involvement on both the terrestrial and marine environments provides us with a unique wealth of knowledge.</p>
-            <div class="social-network fa-2x">
+            <div class="social-network ">
               <a>Follow Us</a>
-              <a style="padding-left:25px; color: rgb(0, 89, 255);" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(158, 41, 41);" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(158, 41, 41);" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(0, 89, 255);" href="#" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
-            </div>			
+              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
+              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
+              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
+              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="#" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
+            <div style="padding-top:10px;" class="subcribe">
+              <form action="">
+                <input type="email">
+                <input type="submit" value="Subscibe">
+              </form>
+            </div>
+            </div>		
         </div>
       </div>
       <div class="col-md-3">
         <!--Column1-->
         <div class="footer-pad">
-          <h4>Useful Links</h4>
+          <h5 style="padding-bottom:20px;">Useful Links</h5>
           <ul class="list-unstyled">
             <li><a style="color: rgb(192, 183, 183);" href="#">Home</a></li>
             <li><a style="color: rgb(192, 183, 183);" href="#">Login</a></li>
@@ -80,7 +89,7 @@
       <div class="col-md-3">
         <!--Column1-->
         <div class="footer-pad">
-          <h4>Visit Us</h4>
+          <h5 style="padding-bottom:20px;">Visit Us</h5>
           <p style="color: rgb(192, 183, 183);" class="info">Open Daily 10AM - 4PM Pacific 
             <br />Admission is FREE
             <br />Donations are Welcome!
@@ -91,9 +100,11 @@
       </div>
     </div>
 		<div class="col-md-12">
-			<p class="text-center">Privacy Policy | Terms of Use
-        <br />Copyright © 2018 Pacific Marine Mammal Center. All rights reserved.</p>
+      <div style="padding-top:20px;" class="Policy-Term text-center">
+        <a style="color: white;" href="https://www.pacificmmc.org/privacy-policy">Privacy Policy </a>
+        <a style="color: white;" href="https://www.pacificmmc.org/terms-of-use">| Term of Use</a>
+			  <p>Copyright © 2018 Pacific Marine Mammal Center. All rights reserved.</p>
+      </div>
 		</div>
   </div>
 </footer>
-
