@@ -7,9 +7,11 @@ import { BookingGroupData } from '../data/booking-group-data';
   styleUrls: ['./booking-group-program.component.css']
 })
 export class BookingGroupProgramComponent implements OnInit {
+  bookingGroup: BookingGroupData;
   constructor() { }
 
   ngOnInit() {
+    this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
   }
 
 }
