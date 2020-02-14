@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="row text-center text-white mb-5">
-        <div class="col-lg-7 mx-auto">
-            <h1 class="text-primary">Individual Program List</h1>
+    <div class="row text-left text-white mb-5">
+        <div class="col-lg-12 mx-auto">
+            <h1 class="text-primary">Individual Program List <hr/></h1>
         </div>
     </div>
     <div class="row" *ngIf = programs>
-        <div class="col-lg-12 mx-auto" *ngFor = 'let program of programs'>
+        <div class="col-lg-6 mx-auto" style="width: 50px;" *ngFor = 'let program of programs'>
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
