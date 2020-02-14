@@ -18,11 +18,14 @@ hr {
 
 .full-width {
   width: 100%;
-  max-width: 500px;
+  max-width: 500px;  
+  min-height: 130px;
+  height: 100%;
 }
 
 .inputField{
   min-width: 150px;
   max-width: 500px;
+  height: 80px;
   width: 100%;
 }
