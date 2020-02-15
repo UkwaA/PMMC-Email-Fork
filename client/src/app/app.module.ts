@@ -22,6 +22,7 @@ import { BookingIndividualProgramComponent } from './booking-individual-program/
 import { BookingGroupProgramComponent } from './booking-group-program/booking-group-program.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -72,7 +73,8 @@ const routes : Routes = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CKEditorModule
   ],
   providers: [ProgramServices, AuthRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]

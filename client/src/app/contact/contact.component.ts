@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 
 @Component({
@@ -10,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class Contact implements OnInit{
 
     myForm : FormGroup;
+    public Editor = DecoupledEditor;
 
     constructor(private fb: FormBuilder){
 
@@ -44,5 +46,12 @@ export class Contact implements OnInit{
 
     get message() {
         return this.myForm.get('message');
+    }
+
+    public onReady( editor ) {
+        editor.ui.getEditableElement().parentElement.insertBefore(
+            editor.ui.view.toolbar.element,
+            editor.ui.getEditableElement()
+        );
     }
 }
