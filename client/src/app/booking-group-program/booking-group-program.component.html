@@ -8,8 +8,8 @@
     <div class="row text-left">
       <p>Price</p>
     </div>
-    <div class="row text-left">
-      <p>Maximum participant</p>
+    <div class="row text-left" *ngIf= "bookingGroup.MaximumParticipant">
+      <p>Maximum participant: ---</p>
     </div>
     <form>
         <div class="form-group" *ngIf = "bookingGroup.AdultQuantity">
@@ -38,14 +38,12 @@
             <option>Cadette Program</option>
           </select>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.PowerPoint">
-          <label for="PowerPoint">PowerPoint Selection: </label>
-          <p> Please choose from the list of available PowerPoints below:</p>
+        <div class="form-group" *ngIf = "bookingGroup.EducationFK">
+          <label for="EducationFK">Education Content: </label>
+          <p> Please choose an education content below:</p>
           <select class="form-control" id="GradeLevel">
-            <option>Rescue</option>
-            <option>Marine Mammal</option>
-            <option>Sea Otter & Urchin</option>
-            <option>Pinniped and Parasites</option>
+            <option>Education Content 1</option>
+            <option>Education Content 1</option>
           </select>
         </div>
         <div class="form-group" *ngIf = "bookingGroup.OrganizationName">
@@ -86,32 +84,21 @@
           <label for="TotalQuantity">Number of Participating Students: </label>
           <input class="form-control" type="text" placeholder="">
         </div>
-        <div class="form-group">
-          <label for="Channel">How did you hear about us? </label>
-          <select class="form-control" id="Channel">
-            <option>Others </option>
-            <option>PMMC Website</option>
-            <option>Friend/ Family</option>
-            <option>Marketplace Activities Fair</option>
-            <option>Online Research</option>
-            <option>Email</option>
-            <option>The Dish</option>
-            <option>Stu News</option>
-            <option>School News</option>
-            <option>OC Mom Blog</option>
-            <option>OC Family</option>
-            <option>Facebook</option>
-            <option>Instagram</option>
-            <option>Peachjar</option>
+        <div class="form-group" *ngIf = "bookingGroup.ProgramRestriction">
+          <label for="ProgramRestriction">Are you a Title One School? </label>
+          <select class="form-control" id="GradeLevel">
+            <option>No </option>
+            <option>Yes</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="OtherChannel">If Other, how? </label>
-          <input class="form-control" type="text" placeholder="">
+        <div class="form-group" *ngIf = "bookingGroup.Deposit">
+          <label for="Deposit">This program requires deposit. </label>
         </div>
-        <div class="form-group">
-          <label for="UserFriendly"> Was This User Friendly? </label>
-          <textarea class="form-control" id="UserFriendly" rows="3"></textarea>
+        <div class="form-group" *ngIf = "bookingGroup.DepositAmount">
+          <label for="DepositAmount">Deposit Amount: $$$$ </label>
+        </div>
+        <div class="form-group" *ngIf = "bookingGroup.FullAmount">
+          <label for="FullAmount">This program requires you to pay full amount. </label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

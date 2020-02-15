@@ -12,7 +12,7 @@ export class BookingIndividualProgramComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true, true, true, true);
+    this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true, true);
   }
 
 }

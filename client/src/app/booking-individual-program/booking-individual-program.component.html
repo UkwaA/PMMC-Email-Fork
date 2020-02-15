@@ -124,33 +124,7 @@
         <label for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
         <input class="form-control" type="text" placeholder="xxx-xxx-xxxx">
       </div>
-      <div class="form-group">
-        <label for="Channel">How did you hear about us? </label>
-        <select class="form-control" id="Channel">
-          <option>Others </option>
-          <option>PMMC Website</option>
-          <option>Friend/ Family</option>
-          <option>Marketplace Activities Fair</option>
-          <option>Online Research</option>
-          <option>Email</option>
-          <option>The Dish</option>
-          <option>Stu News</option>
-          <option>School News</option>
-          <option>OC Mom Blog</option>
-          <option>OC Family</option>
-          <option>Facebook</option>
-          <option>Instagram</option>
-          <option>Peachjar</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="OtherChannel">If Other, how? </label>
-        <input class="form-control" type="text" placeholder="">
-      </div>
-      <div class="form-group">
-        <label for="UserFriendly"> Was This User Friendly? </label>
-        <textarea class="form-control" id="UserFriendly" rows="3"></textarea>
-      </div>
+      
       <div class="form-group" *ngIf = "bookingIndividual.EarlyDropOff">
         <label for="EarlyDropOff">Early Drop Off: </label>
         <select class="form-control" id="EarlyDropOff">
@@ -170,6 +144,9 @@
           <option>Wednesday Late Pick-Up  (+$7)</option>
           <option>Thursday Late Pick-Up  (+$7)</option>
         </select>
+      </div>
+      <div class="form-group" *ngIf = "bookingIndividual.FullAmount">
+        <label for="FullAmount">This program requires you to pay full amount. </label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

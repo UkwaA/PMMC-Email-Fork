@@ -11,7 +11,7 @@ export class BookingGroupProgramComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+    this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
   }
 
 }
