@@ -1,5 +1,8 @@
 .container {
-    padding: 56px;
+    padding-top: 56px;
+    padding-bottom: 56px;
+    padding-left: 0%;
+    padding-right: 0%;
   }
 
 .row{

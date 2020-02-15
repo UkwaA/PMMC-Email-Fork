@@ -28,7 +28,7 @@
                             </select>
                         </div>
                           <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                            <input class="form-control" type="date" value="2020-08-19" id="example-date-input">
+                            <input class="form-control" type="date" id="example-date-input">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
                             <button type="button" class="btn btn-primary wrn-btn">Search</button>
@@ -47,10 +47,10 @@
 
 
     <!-- Page Features -->
-    <div class="row" *ngIf = "programs">
+    <div class="row">
 
-      <div class="col-lg-4 col-md-6 mb-4" *ngFor = "let program of programs">
-        <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;">
+      <div class="col-lg-3 col-md-6 mb-4" *ngFor = "let program of programs; let i = index;">
+        <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" *ngIf = "i < 4">
           <img class="card-img" [src]="program.ImgData" alt="">
           <div class="card-body">
             <h3 class="card-title">{{program.Name}}</h3>
