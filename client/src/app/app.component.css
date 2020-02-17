@@ -1,3 +1,37 @@
 footer {
     background: #16222A !important;
 }
+
+.subscribe-form {
+}
+.subscribe2-wrapper .subscribe-form input {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 300;
+    height: 57px;
+    margin-right: 17px;
+    padding-left: 35px;
+    width: 70%;
+    cursor: pointer;
+}
+ 
+.subscribe2-wrapper .subscribe-form button {
+    background: #ffff;
+    border: none;
+    border-radius: 30px;
+    color: #4b5d73;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 18px 46px;
+    transition: all 0.3s ease 0s;
+}
+.subscribe2-wrapper .subscribe-form button i {
+    font-size: 18px;
+    padding-left: 5px;
+}

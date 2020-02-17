@@ -3,7 +3,7 @@ const db = {}
 
 process.env.DBNAME = 'pmmc'
 process.env.USERNAME = 'root'
-process.env.PASSWORD = '0923'
+process.env.PASSWORD = '1121'
 
 
 // Connection to LocalDB

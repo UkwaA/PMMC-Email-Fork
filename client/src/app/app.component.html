@@ -54,43 +54,57 @@
                 color: white; padding-top:50px; padding-bottom:50px;">
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5" >
         <!--Column Info-->
         <div class="footer-info">
           <h4 style="padding-bottom:20px;">PACIFIC MARINCE MAMMAL CENTER</h4>
           <p class="text-justify" style="color: rgb(192, 183, 183);">Our patient are sentinel species of our environment. Their intricate involvement on both the terrestrial and marine environments provides us with a unique wealth of knowledge.</p>
             <div class="social-network ">
               <a>Follow Us</a>
-              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
-              <a style="padding-left:25px; color: rgb(192, 183, 183);" href="mailto:info@pacificmmc.org" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
+              <a style="padding-left:25px; color: white;" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
+              <a style="padding-left:25px; color: white;" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
+              <a style="padding-left:25px; color: white;" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
+              <a style="padding-left:25px; color: white;" href="mailto:info@pacificmmc.org" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
             <div style="padding-top:20px; padding-bottom:20p;">
-              <form action="">
-                <input type="email" placeholder="Enter your email">
-                <input type="submit" value="Subscibe">   
-              </form>
+              <div class="subscribe-wrapper subscribe2-wrapper mb-15">
+                <div class="subscribe-form">
+                  <form action="#">
+                    <input placeholder="Enter Your Email" type="email" 
+                            style="background: none; border: 1px solid #fff; border-radius: 30px; color: #fff; display: inline-block;
+                            font-size: 15px; font-weight: 300; height: 40px; margin-right: 12px; padding-left: 35px; width: 70%; cursor: pointer;">
+                    <button style=" background: #ffff; border: none; border-radius: 30px; color: #4b5d73; display: inline-block; font-size: 15px;
+                            font-weight: 400; line-height: 1; padding: 12px 15px; transition: all 0.3s ease 0s;">Subscribe
+                      <i class="fas fa-long arrow-alt-right"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <!-- <form action="#" method="Post">
+                <input type="text" placeholder="Enter Your Email">
+                <button type="button" class="btn btn-primary">Subscribe</button> 
+              </form> -->
             </div>
             </div>		
         </div>
       </div>
+      <div class="col-md-1"></div>
       <div class="col-md-3">
         <!--Column1-->
         <div class="footer-pad">
           <h5 style="padding-bottom:20px;">Useful Links</h5>
-          <ul class="list-unstyled">
-            <li><a style="color: rgb(192, 183, 183);" href="#">Home</a></li>
-            <li><a style="color: rgb(192, 183, 183);" href="#">Login</a></li>
-            <li><a style="color: rgb(192, 183, 183);" href="#">Register</a></li>
-            <li><a style="color: rgb(192, 183, 183);" href="#">Contacts</a></li>
-          </ul>
+          <p class="link" style="line-height:200%;">
+            <a style="color: rgb(192, 183, 183);" href="#">Home</a>
+            <br /><a style="color: rgb(192, 183, 183);" routerLink="/login">Login</a>
+            <br /><a style="color: rgb(192, 183, 183);" routerLink="/register">Register</a>
+            <br /><a style="color: rgb(192, 183, 183);" routerLink="/contact">Contacts</a>
+          </p>
         </div>
       </div>
       <div class="col-md-3">
         <!--Column1-->
         <div class="footer-pad">
           <h5 style="padding-bottom:20px;">Visit Us</h5>
-          <p style="color: rgb(192, 183, 183);" class="info">
+          <p style="color: rgb(192, 183, 183); line-height:200%;" class="info" >
             <fa-icon [icon]="faDoorOpen"></fa-icon> Open Daily 10AM - 4PM Pacific 
             <br /><fa-icon [icon]="faLaughWink"></fa-icon> Admission is FREE
             <br /><fa-icon [icon]="faHandHoldingUsd"></fa-icon> Donations are Welcome!
