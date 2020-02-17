@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,29 +7,28 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
     styleUrls: ['./contact.component.css']
 })
 
-export class Contact implements OnInit{
+export class Contact implements OnInit {
 
-    myForm : FormGroup;
-    public Editor = DecoupledEditor;
+    myForm: FormGroup;
 
-    constructor(private fb: FormBuilder){
+    constructor(private fb: FormBuilder) {
 
     }
-    ngOnInit(){
+    ngOnInit() {
         this.myForm = this.fb.group({
             fullName: '',
-            email: ['',[
-                Validators.required, 
+            email: ['', [
+                Validators.required,
                 Validators.email
             ]],
-            subject: ['',[
+            subject: ['', [
                 Validators.required,
                 Validators.minLength(3)
             ]],
-            message: ['',[
+            message: ['', [
                 Validators.required,
                 Validators.minLength(5)
-            ]] 
+            ]]
         })
 
         this.myForm.valueChanges.subscribe(console.log);
@@ -48,10 +46,4 @@ export class Contact implements OnInit{
         return this.myForm.get('message');
     }
 
-    public onReady( editor ) {
-        editor.ui.getEditableElement().parentElement.insertBefore(
-            editor.ui.view.toolbar.element,
-            editor.ui.getEditableElement()
-        );
-    }
 }

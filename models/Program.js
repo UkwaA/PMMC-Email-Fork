@@ -13,7 +13,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.TEXT
     },
     Description: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT('long')
     },
     FullAmount: {
       type: Sequelize.INTEGER

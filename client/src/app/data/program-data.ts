@@ -5,7 +5,7 @@ export class ProgramData {
     FullAmount: number
     CreatedDate: string
     CreatedBy: number
-    ImgData: string
+    ImgData: any
 
     constructor(nTitle:string, nDescription:string, nImageURL:string, nURL:string, price: number){
         this.ProgramPk = 0;

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data'
+import { ok } from 'assert'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class ProgramServices {
@@ -17,7 +19,16 @@ export class ProgramServices {
     return this.sendRequestToExpress('/program/get-programs')
   }
 
-  public addNewProgram(program: ProgramData): Promise<any> {
-    return this.http.post(this.expressBaseUrl + '/program/add-program', program).toPromise()
+  public addNewProgram(program: ProgramData): Observable<any> {
+    // var httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'multipart/form-data',
+    //   })
+    // };
+    return this.http.post(this.expressBaseUrl + '/program/add-program', program)
   }
+  // public addNewProgram(program:any): Observable<any> {
+  //   return this.http.post(this.expressBaseUrl + '/program/add-program', program)
+  // }
 }
+
