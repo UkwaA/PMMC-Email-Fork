@@ -14,10 +14,7 @@ hr{
 .list-group{
   border-width:0px;
 }
-.list-group-item{
-  margin-bottom:1em;
-  /* border-width:20px; */
-}
+
 .container {
   padding-top: 120px;
 }
@@ -25,7 +22,3 @@ hr{
 .col-lg-12{
   padding-bottom: 25px;
 }
-
-/* .col-lg-7{
-  float: left;
-} */

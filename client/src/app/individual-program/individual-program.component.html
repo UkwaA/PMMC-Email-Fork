@@ -4,8 +4,8 @@
             <h1 class="text-primary">Individual Program List <hr/></h1>
         </div>
     </div>
-    <div class="row" *ngIf = programs>
-        <div class="col-lg-6 mx-auto" style="width: 50px;" *ngFor = 'let program of programs'>
+    <div class="row"  *ngFor = 'let program of programs'>
+        <div class="col-lg-12 mx-auto" *ngIf = "program.ProgramPK > 9">
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
@@ -19,7 +19,7 @@
                                 <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
                                 <a routerLink ="/booking-individual-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
                             </div>
-                        </div><img [src]="program.ImgData" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div><img src="https://static.boredpanda.com/blog/wp-content/uploads/2019/12/seal-pup-waving-norfolk-beach-fb-png__700.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                     </div> <!-- End -->
                 </li> <!-- End -->
             </ul> <!-- End -->
