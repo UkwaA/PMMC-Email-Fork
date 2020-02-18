@@ -7,7 +7,7 @@ import { AuthenticationService, UserDetails} from '../authentication.service'
 })
 
 export class ProfileComponent {
-    details: UserDetails
+    details: UserDetails   
     
     constructor(private auth: AuthenticationService) {}
 
@@ -21,4 +21,5 @@ export class ProfileComponent {
             }
         )
     }
+        
 }

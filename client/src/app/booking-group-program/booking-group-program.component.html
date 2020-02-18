@@ -13,7 +13,7 @@
     </div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group font-weight-bold" *ngIf = "bookingGroup.AdultQuantity">
-          <label for="AldultQuantity">Aldult Quantity: </label>
+          <label for="AldultQuantity">Adult Quantity: </label>
           <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="AldultQuantity" 
                   [ngClass]="{'is-invalid': submitted && f.AldultQuantity.errors }">
           <div *ngIf="submitted && f.AldultQuantity.errors" class="invalid-feedback">

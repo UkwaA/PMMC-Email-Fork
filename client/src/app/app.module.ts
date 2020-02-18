@@ -21,15 +21,16 @@ import { Contact } from './contact/contact.component';
 import { BookingIndividualProgramComponent } from './booking-individual-program/booking-individual-program.component'
 import { BookingGroupProgramComponent } from './booking-group-program/booking-group-program.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component'
-import { ProgramDetailsComponent } from './program-details/program-details.component'
+import { ProgramDetailsComponent } from './program-details/program-details.component';
+import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component'
 const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-
+  {path: 'set-user-role', component: SetUserRoleComponent},
   {
     path: 'createprogram', 
     component: CreateProgramComponent,
@@ -64,7 +65,8 @@ const routes : Routes = [
     BookingIndividualProgramComponent,
     BookingGroupProgramComponent,
     ProgramManagementComponent,
-    ProgramDetailsComponent
+    ProgramDetailsComponent,
+    SetUserRoleComponent
     
   ],
   imports: [
@@ -79,7 +81,8 @@ const routes : Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    CKEditorModule
+    CKEditorModule,
+    MatListModule
   ],
   providers: [ProgramServices, AuthRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
