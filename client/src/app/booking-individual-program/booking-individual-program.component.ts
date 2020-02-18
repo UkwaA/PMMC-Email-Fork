@@ -18,7 +18,7 @@ export class BookingIndividualProgramComponent implements OnInit {
   ngOnInit() {
     this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true, true);
     this.registerForm = this.fb.group({
-      ParticipateName: ['', Validators.required],
+      ParticipateName: ['', [Validators.required, Validators.minLength(3)]],
       ParticipateAge: ['', Validators.required],
       Gender: ['', Validators.required],
       MerchSize: ['', Validators.required],
@@ -27,14 +27,14 @@ export class BookingIndividualProgramComponent implements OnInit {
       MediaRelease: [false, Validators.requiredTrue],
       EmergencyMedicalRelease: [false, Validators.requiredTrue],
       LiabilityAgreement: [false, Validators.requiredTrue],
-      InsureProviderName: ['', Validators.required],
-      InsureRecipientName: ['', Validators.required],
-      InsurePolicyNo: ['', Validators.required],
-      InsurePhoneNo: ['', Validators.required],
-      AuthorizedPickupName1: ['', Validators.required],
-      AuthorizedPickupPhone1: ['', Validators.required],
-      AuthorizedPickupName2: ['', Validators.required],
-      AuthorizedPickupPhone2: ['', Validators.required],
+      InsureProviderName: ['', [Validators.required, Validators.minLength(3)]],
+      InsureRecipientName: ['', [Validators.required, Validators.minLength(3)]],
+      InsurePolicyNo: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(5)]],
+      InsurePhoneNo: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
+      AuthorizedPickupName1: ['', [Validators.required, Validators.minLength(3)]],
+      AuthorizedPickupPhone1: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
+      AuthorizedPickupName2: ['', [Validators.required, Validators.minLength(3)]],
+      AuthorizedPickupPhone2: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
       EarlyDropOff: ['', Validators.required],
       LatePickup: ['', Validators.required]
 
