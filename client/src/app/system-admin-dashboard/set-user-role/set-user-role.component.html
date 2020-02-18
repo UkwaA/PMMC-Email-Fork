@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="text-primary">Set User Role</h1>
+        </div>
+    </div>    
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col md-4 row-header">Users</div>
+                <div class="col md-4 row-header">Current Role</div>
+                <div class="col md-4 row-header">Set New Role</div>
+            </div>
+        </li>        
+        <li class="list-group-item" *ngFor = "let user of listOfUsers">
+            <div class="row">
+                <div class = "col md-4">{{user.username}}</div>
+                <div class = "col md-4">{{user.role}}</div>
+                <div class = "col md-2">
+                    <select>
+                        <option *ngFor="let role of userRoles">{{role}}</option>    
+                    </select>
+                </div>
+            </div>
+        </li>
+        <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/profile']">Save</button>
+    </ul>   
+
+</div>
