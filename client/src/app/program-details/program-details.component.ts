@@ -15,8 +15,20 @@ declare var $: any;
 })
 
 export class ProgramDetailsComponent {
-    programPK: number
-    programData: ProgramData
+    ProgramPK: number
+    programData: ProgramData = {
+        ProgramPk: 0,
+        Name: '',
+        Description: '',
+        FullAmount: 0,
+        CreatedDate: '',
+        CreatedBy: 0,
+        ImgData: ''
+    }
+    files: File;
+    onFileChange(event) {
+        this.files = event.target.files[0];
+    }
     Editor = DecoupledEditor;
     programCategories:string[] = ['Group Program', 'Individual Program'];
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
@@ -25,10 +37,11 @@ export class ProgramDetailsComponent {
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e, e));  
           });
+
         this.route.params.subscribe(val => {
-            this.programPK = parseInt(this.route.snapshot.paramMap.get('ProgramPK'));
-            this.services.getProgramDetailsByID(this.programPK).subscribe((program) => {
-               
+            this.ProgramPK = val.id
+            this.services.getProgramDetailsByID(this.ProgramPK).subscribe(program => {
+               this.programData = program
             })
         })
     }
@@ -38,5 +51,25 @@ export class ProgramDetailsComponent {
             editor.ui.view.toolbar.element,
             editor.ui.getEditableElement()
         );
+    }
+
+    upLoad() {
+        this.http.post("http://localhost:3000/program/add-image", this.programData).subscribe((program) => {
+          
+        })
+    }
+
+    getFormData(){
+
+        const formData = new FormData();
+        formData.append('file', this.files, this.files.name);
+        for(const key of Object.keys(this.programData)){
+            const value = this.programData[key];
+            formData.append(key, value);
+
+        }
+
+        return formData;
+
     }
 }

@@ -19,8 +19,8 @@ export class ProgramServices {
     return this.sendRequestToExpress('/program/get-programs')
   }
 
-  public getProgramDetailsByID(programPK: number): Observable<any> {
-    return this.http.post(this.expressBaseUrl + '/program/get-program-detail', programPK);
+  public getProgramDetailsByID(ProgramPK: number): Observable<any> {
+     return this.http.get(this.expressBaseUrl + '/program/get-program-details/' + ProgramPK);
   }
 
   public addNewProgram(program: ProgramData): Observable<any> {

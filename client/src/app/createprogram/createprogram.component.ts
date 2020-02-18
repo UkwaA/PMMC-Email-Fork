@@ -13,13 +13,8 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 })
 
 export class CreateProgramComponent {
-    files: File;
+    file: File
     Editor = DecoupledEditor;
-    onFileChange(event) {
-        this.files = event.target.files[0];
-        //let formData = new FormData()
-
-    }
     user: UserDetails
     programData: ProgramData = {
         ProgramPk: 0,
@@ -37,15 +32,26 @@ export class CreateProgramComponent {
 
     }
 
+    onFileChange(event) {
+        if (event.target.files.length > 0) {
+            this.file = event.target.files[0]
+        }
+    }
+
     createProgram() {
         this.user = this.auth.getUserDetails();
         this.programData.CreatedBy = this.user.UserPK;
         this.programData.ImgData = "";
+        
+        // this.http.post("http://localhost:3000/program/add-program", this.programData).subscribe((program) => {
+        //     const url = "/program-management"
+        //     this.router.navigateByUrl(url)
+        // })
 
-        this.http.post("http://localhost:3000/program/add-program", this.programData).subscribe((program) => {
-            const url = "/program-management"
-            this.router.navigateByUrl(url)
-        })
+        this.http.post("http://localhost:3000/program/add-program", this.getFormData())
+                .subscribe((response) => {
+                    console.log('response received is ', response);
+         })
         // this.services.addNewProgram(this.programData).subscribe(() => {
         //     console.log(this.programData)
         //     // this.router.navigateByUrl("/createprogram")
@@ -58,18 +64,18 @@ export class CreateProgramComponent {
             editor.ui.getEditableElement()
         );
     }
-    // getFormData(){
+    getFormData() {
 
-    //     const formData = new FormData();
-    //     formData.append('file', this.files, this.files.name);
-    //     // for(const key of Object.keys(this.programData)){
-    //     //     const value = this.programData[key];
-    //     //     formData.append(key, value);
+        const formData = new FormData();
+        formData.append('file', this.file, this.file.name);
+        for (const key of Object.keys(this.programData)) {
+            const value = this.programData[key];
+            formData.append(key, value);
 
-    //     // }
+        }
 
-    //     return formData;
+        return formData;
 
-    // }
+    }
 
 }
