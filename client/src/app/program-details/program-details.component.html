@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <ckeditor [editor]="Editor" data="" (ready)="onReady($event)"></ckeditor>
+                    <ckeditor [editor]="Editor" [(ngModel)]="programData.Description" name="description" readOnly ="true"></ckeditor>
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -46,7 +46,7 @@
                     <input type="file" name="sampleFile" />
                     <input type='submit' value='Upload!' />
                 </form>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Create Program</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Update Program Details</button>
             </form>
 
         </div>

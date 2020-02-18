@@ -42,20 +42,12 @@ export class CreateProgramComponent {
         this.user = this.auth.getUserDetails();
         this.programData.CreatedBy = this.user.UserPK;
         this.programData.ImgData = "";
-        
-        // this.http.post("http://localhost:3000/program/add-program", this.programData).subscribe((program) => {
-        //     const url = "/program-management"
-        //     this.router.navigateByUrl(url)
-        // })
 
         this.http.post("http://localhost:3000/program/add-program", this.getFormData())
-                .subscribe((response) => {
-                    console.log('response received is ', response);
-         })
-        // this.services.addNewProgram(this.programData).subscribe(() => {
-        //     console.log(this.programData)
-        //     // this.router.navigateByUrl("/createprogram")
-        // })
+            .subscribe((response) => {
+                const url = "/program-management"
+                this.router.navigateByUrl(url)
+            })
     }
 
     onReady(editor) {

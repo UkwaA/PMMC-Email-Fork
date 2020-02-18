@@ -16,6 +16,7 @@ declare var $: any;
 
 export class ProgramDetailsComponent {
     ProgramPK: number
+     
     programData: ProgramData = {
         ProgramPk: 0,
         Name: '',
@@ -29,7 +30,8 @@ export class ProgramDetailsComponent {
     onFileChange(event) {
         this.files = event.target.files[0];
     }
-    Editor = DecoupledEditor;
+    Editor = DecoupledEditor
+    
     programCategories:string[] = ['Group Program', 'Individual Program'];
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
@@ -46,12 +48,12 @@ export class ProgramDetailsComponent {
         })
     }
 
-    onReady(editor) {
-        editor.ui.getEditableElement().parentElement.insertBefore(
-            editor.ui.view.toolbar.element,
-            editor.ui.getEditableElement()
-        );
-    }
+    // onReady(editor) {
+    //     editor.ui.getEditableElement().parentElement.insertBefore(
+    //         editor.ui.view.toolbar.element,
+    //         editor.ui.getEditableElement()
+    //     );
+    // }
 
     upLoad() {
         this.http.post("http://localhost:3000/program/add-image", this.programData).subscribe((program) => {
