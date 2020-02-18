@@ -5,22 +5,23 @@
         </div>
     </div>
     <div class="row" *ngIf = programs>
-        <div class="col-lg-6 mx-auto" style="width: 50px;" *ngFor = 'let program of programs'>
+        <div class="col-lg-6 mx-auto" style="width: 350px;" *ngFor = 'let program of programs'>
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
                 <li class="list-group-item">
                     <!-- Custom content-->
-                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">{{program.Name}}</h5>
-                            <p class="font-italic text-muted mb-0 small">{{program.Description}}</p>
-                            <div class="d-flex align-items-center justify-content-between mt-1">
-                                <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
-                                <a routerLink ="/booking-individual-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
+                        <div class = "pic col">
+                            <img [src]="program.ImgData" alt="Generic placeholder image" width="200" class="pic ml-lg-2">
+                        </div>
+                        <div class="media-body col">
+                            <h6 class="mt-0 font-weight-bold text-center mb-2">{{program.Name}}</h6>
+                            <p class="program-desc font-italic text-center mb-0 small">{{program.Description}}</p>
+                            <div class="priceinfo d-flex justify-content-between mt-1">
+                                <h6 class="price font-weight-bold my-2">${{program.FullAmount}}</h6>
+                                <a routerLink ="/booking-individual-program" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Book now!</a>
                             </div>
-                        </div><img [src]="program.ImgData" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                    </div> <!-- End -->
+                        </div>
                 </li> <!-- End -->
             </ul> <!-- End -->
         </div>
