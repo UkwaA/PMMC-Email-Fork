@@ -10,24 +10,24 @@
         <form action="#" method="post" novalidate="novalidate">
             <div class="row search-bar pl-5">
                         <div class="col-lg-3 col-md-3 col-sm-12 p-1">
-                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1" style="width: 220px">
                                 <option>Select Types of Program</option>
                                 <option>Group</option>
                                 <option>Individual</option>
                             </select> 
                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-12 p-1">
-                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                         <div class="col-lg-3 col-md-3 col-sm-12 p-1 pl-5">
+                            <select class="form-control search-slt" id="exampleFormControlSelect1" style="width: 175px">
                                 <option>Select Age Group</option>
                                 <option>5-8</option>
                                 <option>8-12</option>
                                 <option>12-16</option>
                             </select>
                         </div>
-                          <div class="col-lg-3 col-md-3 col-sm-12 p-1">
-                            <input class="form-control" type="date" value="" id="example-date-input">
+                          <div class="col-lg-3 col-md-3 col-sm-12 p-1 pl-5">
+                            <input class="form-control" type="date" value="" id="example-date-input" style="width: 170px">
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 p-1">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-1 pl-5">
                             <button type="button" class="btn btn-primary wrn-btn">Search</button>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
           <div class="card-body">
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
-            <p class="block-with-text"> {{program.Description}}</p>
+            <p class="block-with-text" style="min-height: 200px;"> {{program.Description}}</p>
             <h5 class="text-right text-muted"> ${{program.FullAmount}} </h5>
           <div class = "text-left">
             <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
