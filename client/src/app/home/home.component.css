@@ -1,23 +1,27 @@
 
 .container {
-    padding: 56px;
+    padding: 120px;
   }
 
 .row{
-  padding: 56px;
+  padding-bottom: 26px;
 }
   
-h1 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; padding-bottom: 10px; }
+h1 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; padding-bottom: 15px; }
 
 
-h2 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 28px; font-weight: 400; line-height: 32px; margin: 0; }
+h2 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0; }
 
 h3 {  color:#5077a9;}
 
-p { color: #4c4a37; font-family: 'Source Sans Pro', sans-serif; font-size: 18px; line-height: 32px; margin: 0 0; }
+p { color: #4c4a37; font-size: 16px; line-height: 1.75;; margin: 0 0; }
 
 h4{
-  color: black; font-family: 'Source Sans Pro', sans-serif; font-size: 20px; font-weight: 400; line-height: 32px; margin: 0; 
+  font-size: 20px; font-weight: bold; line-height: 1.25; margin: 0; 
+}
+
+h5{
+  color:black; font-family: 'Source Sans Pro', sans-serif; font-size: 16px; font-weight: 300; line-height: 32px; margin: 0; 
 }
 
 .banner{
@@ -26,11 +30,43 @@ h4{
   
   background-size: 100% 100%;
   
-  padding-top: 86px;
-  padding-bottom: 10px;
+  padding: 120px;
 }
 
-.card-img {
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+.block-with-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 2.4em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+}
+.block-with-text:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.block-with-text:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  background: white;
+}
+
+
+.card {
+  margin: 5% 0%;
+}
+
+.card-img-top{
+  height: 260px;
+}
+
+.card-body{
+  padding-bottom: 0px;
 }

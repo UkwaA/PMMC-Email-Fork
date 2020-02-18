@@ -8,15 +8,15 @@
     </div>
     
         <form action="#" method="post" novalidate="novalidate">
-            <div class="row pl-5">
-                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+            <div class="row search-bar pl-5">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-1">
                             <select class="form-control search-slt" id="exampleFormControlSelect1">
                                 <option>Select Types of Program</option>
                                 <option>Group</option>
                                 <option>Individual</option>
                             </select> 
                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                         <div class="col-lg-3 col-md-3 col-sm-12 p-1">
                             <select class="form-control search-slt" id="exampleFormControlSelect1">
                                 <option>Select Age Group</option>
                                 <option>5-8</option>
@@ -24,10 +24,10 @@
                                 <option>12-16</option>
                             </select>
                         </div>
-                          <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                          <div class="col-lg-3 col-md-3 col-sm-12 p-1">
                             <input class="form-control" type="date" value="" id="example-date-input">
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-1">
                             <button type="button" class="btn btn-primary wrn-btn">Search</button>
                         </div>
                     </div>
@@ -44,25 +44,33 @@
 
 
     <!-- Page Features -->
-    <div class="row">
+    <div class="card-deck row">
 
-      <div class="col-lg-4 col-md-6 mb-4"  *ngFor = "let program of programs">
+      <div class="col-xs-12 col-sm-6 col-md-4"  *ngFor = "let program of programs">
         <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" *ngIf = "program.ProgramPK < 4">
-          <img class="card-img" src="https://www.rimonthly.com/content/uploads/2019/01/JA9EC54SEA.jpg" alt="">
+      <!--     <img class="card-img" src="https://www.rimonthly.com/content/uploads/2019/01/JA9EC54SEA.jpg" alt=""> -->
+       <!--Card image-->
+          <div class="view overlay">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+            <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
           <div class="card-body">
-            <h3 class="card-title">{{program.Name}}</h3>
-            <p class="card-text"> {{program.Description}}</p>
-            <h4 class="text-right text-muted"> ${{program.FullAmount}} </h4>
-            <div class = "text-right">
-            <a routerLink ="/booking-individual-program" class="btn btn-primary pull-right">Find Out More!</a>
+            <h4 class="card-title">{{program.Name}}</h4>
+            <hr class="card__item card__divider">
+            <p class="block-with-text"> {{program.Description}}</p>
+            <h5 class="text-right text-muted"> ${{program.FullAmount}} </h5>
+          <div class = "text-left">
+            <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
           </div>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
             <div class="stats">
-              <fa-icon [icon]="faClock"></fa-icon> 1h45
+              <a style = "color: #5077a9;" ><fa-icon [icon]="faClock"></fa-icon> 1h45 </a>
             </div>
             <div class="stats">
-              <fa-icon [icon]="faComment"></fa-icon> 115
+              <a style = "color: #5077a9;" > <fa-icon [icon]="faComment"></fa-icon> 115 </a>
             </div>
 
           </div>
