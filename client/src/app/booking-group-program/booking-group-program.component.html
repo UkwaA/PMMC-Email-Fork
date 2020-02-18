@@ -2,7 +2,7 @@
     <div class="row text-left">
             <h1 class="text-primary">Program Name</h1>
     </div>
-    <div class="row text-left">
+    <div class="row text-left font-italic">
       <p>This will be the description of program</p>
     </div>
     <div class="row text-left">
@@ -11,60 +11,107 @@
     <div class="row text-left" *ngIf= "bookingGroup.MaximumParticipant">
       <p>Maximum participant: ---</p>
     </div>
-    <form>
-        <div class="form-group" *ngIf = "bookingGroup.AdultQuantity">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.AdultQuantity">
           <label for="AldultQuantity">Aldult Quantity: </label>
-          <input class="form-control" type="number" min = "0" max = "35" placeholder="">
+          <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="AldultQuantity" 
+                  [ngClass]="{'is-invalid': submitted && f.AldultQuantity.errors }">
+          <div *ngIf="submitted && f.AldultQuantity.errors" class="invalid-feedback">
+            <div *ngIf="f.AldultQuantity.errors.required">This is required</div>
+            <div *ngIf="f.AldultQuantity.errors.max">Maximum for a group is 35</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.Age57Quantity">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Age57Quantity">
           <label for="Age57Quantity">Children Age 5-7: </label>
-          <input class="form-control" type="number" min = "0" max = "35" placeholder="">
+          <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age57Quantity" 
+                  [ngClass]="{'is-invalid': submitted && f.Age57Quantity.errors }">
+          <div *ngIf="submitted && f.Age57Quantity.errors" class="invalid-feedback">
+            <div *ngIf="f.Age57Quantity.errors.required">This is required</div>
+            <div *ngIf="f.AldultQuantity.errors.max">Maximum for a group is 35</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.Age810Quantity">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Age810Quantity">
           <label for="Age810Quantity">Children Age 8-10: </label>
-          <input class="form-control" type="number" min = "0" max = "35" placeholder="">
+          <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+                  [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }">
+          <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
+            <div *ngIf="f.Age810Quantity.errors.required">This is required</div>
+            <div *ngIf="f.AldultQuantity.errors.max">Maximum for a group is 35</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.Age1113Quantity">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1113Quantity">
           <label for="Age1113Quantity">Children Age 11-13: </label>
-          <input class="form-control" type="number" min = "0" max = "35" placeholder="">
+          <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age1113Quantity" 
+                  [ngClass]="{'is-invalid': submitted && f.Age1113Quantity.errors }">
+          <div *ngIf="submitted && f.Age1113Quantity.errors" class="invalid-feedback">
+            <div *ngIf="f.Age1113Quantity.errors.required">This is required</div>
+            <div *ngIf="f.AldultQuantity.errors.max">Maximum for a group is 35</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.ScoutProgram">
-          <label for="ScoutProgram">Scout Program </label>
-          <p> Please select type of program:</p>
-          <select class="form-control" id="GradeLevel">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.ScoutProgram">
+          <label for="ScoutProgram" >Scout Program </label>
+          <p class="info font-weight-normal font-italic"> Please select type of program:</p>
+          <select class="form-control " formControlName="ScoutProgram" [ngClass]="{'is-invalid': submitted && f.ScoutProgram.errors }">
             <option>Daisy Program </option>
             <option>Brownie Program</option>
             <option>Junior Program</option>
             <option>Cadette Program</option>
           </select>
+          <div *ngIf="submitted && f.ScoutProgram.errors" class="invalid-feedback">
+            <div *ngIf="f.ScoutProgram.errors.required">This is required</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.EducationFK">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.EducationFK">
           <label for="EducationFK">Education Content: </label>
-          <p> Please choose an education content below:</p>
-          <select class="form-control" id="GradeLevel">
+          <p class="info font-weight-normal font-italic"> Please choose an education content below:</p>
+          <select class="form-control" formControlName="EducationFK" [ngClass]="{'is-invalid': submitted && f.ScoutProgram.errors }">
             <option>Education Content 1</option>
-            <option>Education Content 1</option>
+            <option>Education Content 2</option>
           </select>
+          <div *ngIf="submitted && f.EducationFK.errors" class="invalid-feedback">
+            <div *ngIf="f.EducationFK.errors.required">This is required</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.OrganizationName">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.OrganizationName">
           <label for="OrganizationName">School Name: </label>
-          <input class="form-control" type="text" placeholder="">
+          <input class="form-control" type="text" placeholder="" formControlName="OrganizationName" 
+                  [ngClass]="{'is-invalid': submitted && f.OrganizationName.errors }">
+          <div *ngIf="submitted && f.OrganizationName.errors" class="invalid-feedback">
+            <div *ngIf="f.OrganizationName.errors.required">This is required</div>
+            <div *ngIf="f.OrganizationName.errors.minlength">Must be at least 3 characters long.</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.TeacherName">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherName">
           <label for="TeacherName">Teacher Name: </label>
-          <input class="form-control" type="text" placeholder="">
+          <input class="form-control" type="text" placeholder="" formControlName="TeacherName" 
+                  [ngClass]="{'is-invalid': submitted && f.TeacherName.errors }">
+          <div *ngIf="submitted && f.TeacherName.errors" class="invalid-feedback">
+            <div *ngIf="f.TeacherName.errors.required">This is required</div>
+            <div *ngIf="f.TeacherName.errors.minlength">Must be at least 3 characters long.</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.TeacherEmail">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherEmail">
           <label for="TeacherEmail">Teacher Email: </label>
-          <input class="form-control" type="text" placeholder="">
+          <input class="form-control" type="text" placeholder="" formControlName="TeacherEmail"
+                  [ngClass]="{ 'is-invalid': submitted && f.TeacherEmail.errors }" />
+          <div *ngIf="submitted && f.TeacherEmail.errors" class="invalid-feedback">
+              <div *ngIf="f.TeacherEmail.errors.required">Email is required</div>
+              <div *ngIf="f.TeacherEmail.errors.email">Email must be a valid email address</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.TeacherPhoneNo">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherPhoneNo">
           <label for="TeacherPhoneNo">Teacher Phone Number: </label>
-          <input class="form-control" type="text" placeholder="xxx-xxx-xxxx">
+          <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="TeacherPhoneNo"
+                  [ngClass]="{ 'is-invalid': submitted && f.TeacherPhoneNo.errors }" />
+          <div *ngIf="submitted && f.TeacherPhoneNo.errors" class="invalid-feedback">
+            <div *ngIf="f.TeacherPhoneNo.errors.required">This is required</div>
+            <div *ngIf="f.TeacherPhoneNo.errors.minlength">Please enter correct phone number</div>
+            <div *ngIf="f.TeacherPhoneNo.errors.pattern">Invalid Phone Number</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.GradeLevel">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.GradeLevel">
           <label for="GradeLevel">Grade Level </label>
-          <select class="form-control" id="GradeLevel">
+          <select class="form-control" formControlName="GradeLevel" [ngClass]="{ 'is-invalid': submitted && f.GradeLevel.errors }">
             <option>Kindergarten </option>
             <option>1st</option>
             <option>2nd</option>
@@ -79,25 +126,35 @@
             <option>11th</option>
             <option>12th</option>
           </select>
+          <div *ngIf="submitted && f.GradeLevel.errors" class="invalid-feedback">
+            <div *ngIf="f.GradeLevel.errors.required">This is required</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.TotalQuantity">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.TotalQuantity">
           <label for="TotalQuantity">Number of Participating Students: </label>
-          <input class="form-control" type="text" placeholder="">
+          <input class="form-control" type="text" placeholder="" formControlName="TotalQuantity" 
+                  [ngClass]="{ 'is-invalid': submitted && f.TotalQuantity.errors }">
+          <div *ngIf="submitted && f.TotalQuantity.errors" class="invalid-feedback">
+            <div *ngIf="f.TotalQuantity.errors.required">This is required</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.ProgramRestriction">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.ProgramRestriction">
           <label for="ProgramRestriction">Are you a Title One School? </label>
-          <select class="form-control" id="GradeLevel">
+          <select class="form-control" formControlName="GradeLevel" [ngClass]="{ 'is-invalid': submitted && f.ProgramRestriction.errors }">
             <option>No </option>
             <option>Yes</option>
           </select>
+          <div *ngIf="submitted && f.ProgramRestriction.errors" class="invalid-feedback">
+            <div *ngIf="f.ProgramRestriction.errors.required">This is required</div>
+          </div>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.Deposit">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Deposit">
           <label for="Deposit">This program requires deposit. </label>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.DepositAmount">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.DepositAmount">
           <label for="DepositAmount">Deposit Amount: $$$$ </label>
         </div>
-        <div class="form-group" *ngIf = "bookingGroup.FullAmount">
+        <div class="form-group font-weight-bold" *ngIf = "bookingGroup.FullAmount">
           <label for="FullAmount">This program requires you to pay full amount. </label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -9,25 +9,38 @@
   <div class="row text-left mb-5">
     <p>Price</p>
   </div>
-  <form>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group" *ngIf = "bookingIndividual.ParticipateName">
         <label for="ParticipateName">Participant Name: </label>
-        <input class="form-control" type="text" placeholder="Full name">
+        <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipateName" 
+                [ngClass]="{'is-invalid': submitted && f.ParticipateName.errors }">
+        <div *ngIf="submitted && f.ParticipateName.errors" class="invalid-feedback">
+          <div *ngIf="f.ParticipateName.errors.required">Paticipate Name is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.ParticipateAge">
         <label for="ParticipateAage">Participant Age: </label>
-        <input class="form-control" type="number" min = "8" max = "12" placeholder="">
+        <input class="form-control" type="number" min = "8" max = "12" placeholder="" formControlName="ParticipateAge"
+                [ngClass]="{'is-invalid': submitted && f.ParticipateAge.errors }">
+        <div *ngIf="submitted && f.ParticipateAge.errors" class="invalid-feedback">
+          <div *ngIf="f.ParticipateAge.errors.required">Paticipate Age is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.Gender">
         <label for="Gender">Gender: </label>
-        <select class="form-control" id="Gender">
+        <select class="form-control" formControlName="Gender"
+                  [ngClass]="{ 'is-invalid': submitted && f.Gender.errors }">
           <option>Male</option>
           <option>Female</option>
         </select>
+        <div *ngIf="submitted && f.Gender.errors" class="invalid-feedback">
+          <div *ngIf="f.Gender.errors.required">Gender is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.MerchSize">
         <label for="MerchSize">T-Shirt Size: </label>
-        <select class="form-control" id="MerchSize">
+        <select class="form-control" formControlName="MerchSize"
+                  [ngClass]="{ 'is-invalid': submitted && f.MerchSize.errors }">
           <option>Youth Small</option>
           <option>Youth Medium</option>
           <option>Youth Large</option>
@@ -36,6 +49,9 @@
           <option>Aldult Medium</option>
           <option>Aldult Large</option>
         </select>
+        <div *ngIf="submitted && f.MerchSize.errors" class="invalid-feedback">
+          <div *ngIf="f.MerchSize.errors.required">Gender is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.AllergyInfo">
         <label for="AllergyInfo">Allergy Information: </label>
@@ -52,10 +68,12 @@
           <h6> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</h6>
         </div>
         <div class = "row">
-          <input class="form-check-input" type="checkbox" value="" id="MediaRelease">
+          <input class="form-check-input" type="checkbox" value="" formControlName="MediaRelease"
+                  [ngClass]="{ 'is-invalid': submitted && f.MediaRelease.errors }">
           <label class="form-check-label" for="MediaRelease">
             I argree.
           </label>
+          <div *ngIf="submitted && f.MediaRelease.errors" class="invalid-feedback">Accept Media Release is required</div>
         </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.EmergencyMedicalRelease">
@@ -70,10 +88,12 @@
           <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH CHANGES.</h6>
         </div>
         <div class = "row">
-          <input class="form-check-input" type="checkbox" value="" id="EmergencyMedicalRelease">
+          <input class="form-check-input" type="checkbox" value="" formControlName="EmergencyMedicalRelease"
+                  [ngClass]="{ 'is-invalid': submitted && f.EmergencyMedicalRelease.errors }">
           <label class="form-check-label" for="EmergencyMedicalRelease">
             I argree.
           </label>
+          <div *ngIf="submitted && f.EmergencyMedicalRelease.errors" class="invalid-feedback">Accept Emergency Medical Release is required</div>
         </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.LiabilityAgreement">
@@ -86,64 +106,106 @@
           <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out of any claims and demands whether made by or on behalf of my child or any other per-son or entity for either injuries to my child's person or property, or arising out of claims that my child's actions caused injury or damage to another person or property, whether or not such claims, injuries and damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>
         </div>
         <div class = "row">
-          <input class="form-check-input" type="checkbox" value="" id="LiabilityAgreement">
+          <input class="form-check-input" type="checkbox" value="" formControlName="LiabilityAgreement"
+                  [ngClass]="{ 'is-invalid': submitted && f.LiabilityAgreement.errors }">
           <label class="form-check-label" for="LiabilityAgreement">
             I argree.
           </label>
+          <div *ngIf="submitted && f.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required</div>
         </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.InsureProviderName">
         <label for="InsureProviderName">Name of Insurance Carrier: </label>
-        <input class="form-control" type="text" placeholder="">
+        <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
+                [ngClass]="{ 'is-invalid': submitted && f.InsureProviderName.errors }">
+        <div *ngIf="submitted && f.InsureProviderName.errors" class="invalid-feedback">
+          <div *ngIf="f.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
+        </div>        
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.InsureRecipientName">
         <label for="InsureRecipientName">Name of Insured Child: </label>
-        <input class="form-control" type="text" placeholder="">
+        <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
+                [ngClass]="{ 'is-invalid': submitted && f.InsureRecipientName.errors }">
+        <div *ngIf="submitted && f.InsureRecipientName.errors" class="invalid-feedback">
+          <div *ngIf="f.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.InsurePolicyNo">
         <label for="InsurePolicyNo">Insurance Policy Number: </label>
-        <input class="form-control" type="text" placeholder="">
+        <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
+                [ngClass]="{ 'is-invalid': submitted && f.InsurePolicyNo.errors }">
+        <div *ngIf="submitted && f.InsurePolicyNo.errors" class="invalid-feedback">
+          <div *ngIf="f.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.InsurePhoneNo">
         <label for="InsurePhoneNo">Insurance Phone Number: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx">
+        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+                [ngClass]="{ 'is-invalid': submitted && f.InsurePhoneNo.errors }">
+        <div *ngIf="submitted && f.InsurePhoneNo.errors" class="invalid-feedback">
+          <div *ngIf="f.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.AuthorizedPickupName1">
         <label for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
-        <input class="form-control" type="text" placeholder="Full name">
+        <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName1.errors }">
+        <div *ngIf="submitted && f.AuthorizedPickupName1.errors" class="invalid-feedback">
+          <div *ngIf="f.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
         <label for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx">
+        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
+        <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+          <div *ngIf="f.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.AuthorizedPickupName2">
         <label for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
-        <input class="form-control" type="text" placeholder="Full name">
+        <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
+        <div *ngIf="submitted && f.AuthorizedPickupName2.errors" class="invalid-feedback">
+          <div *ngIf="f.AuthorizedPickupName2.errors.required">Authorized Pickup Name is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
         <label for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx">
+        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }">
+        <div *ngIf="submitted && f.AuthorizedPickupPhone2.errors" class="invalid-feedback">
+          <div *ngIf="f.AuthorizedPickupPhone2.errors.required">Authorized Pickup Phone is required</div>
+        </div>
       </div>
-      
+
       <div class="form-group" *ngIf = "bookingIndividual.EarlyDropOff">
         <label for="EarlyDropOff">Early Drop Off: </label>
-        <select class="form-control" id="EarlyDropOff">
+        <select class="form-control" formControlName="EarlyDropOff" 
+                  [ngClass]="{ 'is-invalid': submitted && f.EarlyDropOff.errors }">
           <option>No, thanks! (+$0) </option>
           <option>Monday Early Drop Off (+$7)</option>
           <option>Tueday Early Drop Off (+$7)</option>
           <option>Wednesday Early Drop Off (+$7)</option>
           <option>Thursday Early Drop Off (+$7)</option>
         </select>
+        <div *ngIf="submitted && f.EarlyDropOff.errors" class="invalid-feedback">
+          <div *ngIf="f.EarlyDropOff.errors.required">This is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.LatePickup">
         <label for="LatePickup">Late Pick Up: </label>
-        <select class="form-control" id="LatePickup">
+        <select class="form-control" formControlName="LatePickup"
+                  [ngClass]="{ 'is-invalid': submitted && f.LatePickup.errors }">
           <option>No, thanks! (+$0) </option>
           <option>Monday Late Pick-Up (+$7)</option>
           <option>Tueday Late Pick-Up  (+$7)</option>
           <option>Wednesday Late Pick-Up  (+$7)</option>
           <option>Thursday Late Pick-Up  (+$7)</option>
         </select>
+        <div *ngIf="submitted && f.LatePickup.errors" class="invalid-feedback">
+          <div *ngIf="f.LatePickup.errors.required">This is required</div>
+        </div>
       </div>
       <div class="form-group" *ngIf = "bookingIndividual.FullAmount">
         <label for="FullAmount">This program requires you to pay full amount. </label>
