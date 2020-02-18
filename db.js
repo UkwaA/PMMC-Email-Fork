@@ -1,14 +1,11 @@
+require('dotenv').config()
 const Sequelize = require('sequelize')
 const db = {}
 
-process.env.DBNAME = 'pmmc'
-process.env.USERNAME = 'root'
-process.env.PASSWORD = '123456'
-
 
 // Connection to LocalDB
-const sequelize = new Sequelize(process.env.DBNAME, process.env.USERNAME, process.env.PASSWORD, {
-  host: 'localhost',
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: 'mysql',
   define: {
     timestamps: false
