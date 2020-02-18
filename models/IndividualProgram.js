@@ -31,16 +31,16 @@ module.exports = db.sequelize.define(
     SpecialInfo : {
         type: Sequelize.BOOLEAN
     },
-    InsuranceproviderName:{
+    InsureProviderName:{
         type: Sequelize.BOOLEAN
     },
-    InsuranceRecipientName:{
+    InsureRecipientName:{
         type: Sequelize.BOOLEAN
     },
-    InsurancePolicyNo:{
+    InsurePolicyNo:{
         type: Sequelize.BOOLEAN
     },
-    InsurancePhoneNo:{
+    InsurePhoneNo:{
         type: Sequelize.BOOLEAN
     },
     AuthorizedPickupName1:{
@@ -73,13 +73,16 @@ module.exports = db.sequelize.define(
     FullAmount : {
         type: Sequelize.INTEGER
     },
-    createdby: {
+    CreatedBy: {
         type: Sequelize.INTEGER
     },
-    createddate: {
+    CreatedDate: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
     }
+  },
+  {
+    freezeTableName: true,
   },
   {
     timestamps: false

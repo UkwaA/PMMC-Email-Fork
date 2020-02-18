@@ -16,15 +16,10 @@
                     <label>Full Amount</label>
                     <input type="number" class="form-control" name="fullamount" placeholder="Enter Program Price" [(ngModel)]="programData.FullAmount" required>
                 </div>
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label>Image</label>
-                    <input type="file" name="uploadImage" />
-                </div> -->
-                
-                <!-- <form (submit)="createProgram()" encType="multipart/form-data">
-                    <input type="file" name="sampleFile" />
-                    <input type='submit' value='Upload!' />
-                </form>  -->
+                    <input type="file" (change)="onFileChange($event)"/>
+                </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Create Program</button>
             </form>
                

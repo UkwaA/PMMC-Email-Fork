@@ -30,7 +30,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.4.1",
-    "express-fileupload": "^1.1.6",
+    "g": "^2.0.1",
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
     "rxjs": "~6.4.0",

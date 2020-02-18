@@ -1,19 +1,17 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const cors = require('cors')
 const program = express.Router()
-// const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
+const fileUpload = require('express-fileupload');
 
 const Program = require('../models/Program')
 const IndividualProgram = require('../models/IndividualProgram')
 const GroupProgram = require('../models/Groupprogram')
 
-// program.use(bodyParser.json());
-// program.use(bodyParser.urlencoded({extended: false}));
+program.use(bodyParser.json());
+program.use(bodyParser.urlencoded({extended: false}));
 program.use(cors())
-program.use(fileUpload())
-// individualprograms.user(cors())
-// groupprograms.user(cors())
+program.use(fileUpload());
 
 process.env.SECRET_KEY = 'secret'
 
@@ -32,10 +30,10 @@ program.get('/get-programs', (req, res) => {
     })
 })
 
-program.get('/get-program-details', (req, res) => {
+program.get('/get-program-details/:id', (req, res) => {
   Program.findOne({
     where: {
-      ProgramPK: req.body.ProgramPK
+      ProgramPK: req.params.id
     }
   })
     .then(program => {
@@ -46,7 +44,7 @@ program.get('/get-program-details', (req, res) => {
       }
     })
     .catch(err => {
-      res.send('error: ' + err)
+      res.send('error: ' + err + "   " + req.body.ProgramPK)
     })
 })
 
@@ -83,87 +81,35 @@ program.get('/get-group-program-details', (req, res) => {
     })
 })
 
-program.post('/add-program', (req, res, next) => {
+program.post('/add-program', (req, res) => {
   const today = new Date()
-  const programData = {
-    Name: req.body.Name,
-    Description: req.body.Description,
-    FullAmount: req.body.FullAmount,
-    CreatedDate: today,
-    CreatedBy: req.body.CreatedBy,
-    ImgData: ''
-  }
-
-  Program.create(programData)
-    .then(program => {
-      res.json(program.ProgramPK)
-    })
-    .catch(err => {
-      res.send('errorResponse' + err)
-    })
-  // res.send("Image added " + req.files.sampleFile.name);
-  // var imageFile = req.files.sampleFile
-  // // Add path and filename for image
-  // var imgPath = './uploads' + imageFile.name;
-  // imageFile.mv(imgPath, function (err) {
-  //   if(err){
-  //     return res.status(500).send(err);
-  //   }
-  //   else{
-  //     // const programData = {
-  //     //   Name: req.body.Name,
-  //     //   Description: req.body.Description,
-  //     //   FullAmount: req.body.FullAmount,
-  //     //   CreatedDate: today,
-  //     //   CreatedBy: req.body.CreatedBy,
-  //     //   ImgData:  imgPath
-  //     // }
-
-  //     // Program.create(programData)
-  //     //   .then(program => {
-  //     //     res.json("Program Added!")
-  //     //   })
-  //     //   .catch(err => {
-  //     //     res.send('errorResponse' + err)
-  //     //   })
-  //     res.send("Image added " + req.files.sampleFile.name );
-  //   }
-
-  // })
-  // if (imageFile.mimetype == "image/jpeg" ||
-  //     imageFile.mimetype == "image/png" ||
-  //     imageFile.mimetype == "image/gif") {
-  //   // Create folder and upload image to server
-  //   imageFile.mv(imgPath, function (err) {
-  //     if(err){
-  //       return res.status(500).send(err);
-  //     }
-  //     else{
-  //       // const programData = {
-  //       //   Name: req.body.Name,
-  //       //   Description: req.body.Description,
-  //       //   FullAmount: req.body.FullAmount,
-  //       //   CreatedDate: today,
-  //       //   CreatedBy: req.body.CreatedBy,
-  //       //   ImgData:  imgPath
-  //       // }
-
-  //       // Program.create(programData)
-  //       //   .then(program => {
-  //       //     res.json("Program Added!")
-  //       //   })
-  //       //   .catch(err => {
-  //       //     res.send('errorResponse' + err)
-  //       //   })
-  //       res.send("Image added " + req.files.sampleFile.name );
-  //     }
-
-  //   })
-  // } else {
-  //   message = "This format is not allowed , please upload file with '.png','.gif','.jpg'";
-  //   res.send(message);
+  var file = req.files.file;
+  console.log(req.body.Name)
+  file.mv('./uploads/' + file.name);
+  // const programData = {
+  //   Name: req.body.Name,
+  //   Description: req.body.Description,
+  //   FullAmount: req.body.FullAmount,
+  //   CreatedDate: today,
+  //   CreatedBy: req.body.CreatedBy,
+  //   ImgData: ''
   // }
+
+  // Program.create(programData)
+  //   .then(program => {
+  //     res.json(program.ProgramPK)
+  //   })
+  //   .catch(err => {
+  //     res.send('errorResponse' + err)
+  //   })
 })
+
+program.post('/add-image', (req, res) => {
+  var file = req.files.file;
+  console.log(file)
+
+})
+
 
 module.exports = program
 
