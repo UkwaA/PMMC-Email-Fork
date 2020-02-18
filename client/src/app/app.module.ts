@@ -42,7 +42,7 @@ const routes : Routes = [
   {path: 'booking-individual-program', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'program-management', component: ProgramManagementComponent},
-  {path: 'program-details', component: ProgramDetailsComponent},
+  {path: 'program-details/:id', component: ProgramDetailsComponent},
   {
     path: 'profile', 
     component: ProfileComponent,

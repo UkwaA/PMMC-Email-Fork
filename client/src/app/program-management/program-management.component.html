@@ -1,33 +1,26 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 mt-5 mx-auto">
-            <form (submit)="createProgram()" enctype="multipart/form-data">
-                <h1 class="h3 mb-3 font-weight-normal">Program Management</h1>
-                <div class="form-group">
-                    <label>Program Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter Program Name"
-                        [(ngModel)]="programData.Name" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <ckeditor [editor]="Editor" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
-                </div>
-                <div class="form-group">
-                    <label>Full Amount</label>
-                    <input type="number" class="form-control" name="fullamount" placeholder="Enter Program Price" [(ngModel)]="programData.FullAmount" required>
-                </div>
-                <!-- <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="uploadImage" />
-                </div> -->
-                
-                <!-- <form (submit)="createProgram()" encType="multipart/form-data">
-                    <input type="file" name="sampleFile" />
-                    <input type='submit' value='Upload!' />
-                </form>  -->
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Create Program</button>
-            </form>
-               
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="text-primary">Program Management</h1>
+        </div>
+    </div>
+    <div class="row"  *ngFor = 'let program of programs'>
+        <div class="col-lg-12 mx-auto">
+            <!-- List group-->
+            <ul class="list-group shadow">
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <!-- Custom content-->
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                <h6 class="font-weight-bold my-2">{{program.Name}}</h6>
+                                <a [routerLink]="['/program-details', program.ProgramPK]" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+                            </div>
+                        </div>
+                    </div> <!-- End -->
+                </li> <!-- End -->
+            </ul> <!-- End -->
         </div>
     </div>
 </div>

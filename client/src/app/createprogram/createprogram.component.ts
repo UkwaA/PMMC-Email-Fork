@@ -42,8 +42,9 @@ export class CreateProgramComponent {
         this.programData.CreatedBy = this.user.UserPK;
         this.programData.ImgData = "";
 
-        this.http.post("http://localhost:3000/program/add-program", this.programData).subscribe(() => {
-            this.router.navigateByUrl("/createprogram")
+        this.http.post("http://localhost:3000/program/add-program", this.programData).subscribe((program) => {
+            const url = "/program-management"
+            this.router.navigateByUrl(url)
         })
         // this.services.addNewProgram(this.programData).subscribe(() => {
         //     console.log(this.programData)

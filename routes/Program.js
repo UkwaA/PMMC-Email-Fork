@@ -18,7 +18,6 @@ program.use(fileUpload())
 process.env.SECRET_KEY = 'secret'
 
 program.get('/get-programs', (req, res) => {
-
   Program.findAll({
   })
     .then(program => {
@@ -33,6 +32,56 @@ program.get('/get-programs', (req, res) => {
     })
 })
 
+program.get('/get-program-details', (req, res) => {
+  Program.findOne({
+    where: {
+      ProgramPK: req.body.ProgramPK
+    }
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+
+program.get('/get-individual-program-details', (req, res) => {
+
+  IndividualProgram.findAll({
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+program.get('/get-group-program-details', (req, res) => {
+
+  GroupProgram.findAll({
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
 
 program.post('/add-program', (req, res, next) => {
   const today = new Date()
@@ -47,7 +96,7 @@ program.post('/add-program', (req, res, next) => {
 
   Program.create(programData)
     .then(program => {
-      res.json("Program Added!")
+      res.json(program.ProgramPK)
     })
     .catch(err => {
       res.send('errorResponse' + err)

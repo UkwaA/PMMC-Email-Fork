@@ -12,9 +12,13 @@ import { HttpClient } from '@angular/common/http'
 })
 
 export class ProgramManagementComponent {
-    constructor(private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
+    programs : ProgramData[]
+
+    constructor(private programService: ProgramServices,private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
-
+        this.programService.getAllPrograms().then((result) =>{
+            this.programs = result; 
+        })
     }
 }
