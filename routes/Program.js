@@ -100,7 +100,6 @@ program.post('/add-program', (req, res) => {
       // After insert, return the PK
       programPK = program.ProgramPK
 
-
       var tempDir = './uploads/' + programPK 
       // Check the directory of the program. Create new if not exist
       if (!fs.existsSync(tempDir)) {
@@ -115,7 +114,7 @@ program.post('/add-program', (req, res) => {
       program.update({
         ImgData: filePath
       })
-      
+
       res.json(programPK)
     })
     .catch(err => {
