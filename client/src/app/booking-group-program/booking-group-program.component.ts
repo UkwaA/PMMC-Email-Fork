@@ -24,7 +24,7 @@ export class BookingGroupProgramComponent implements OnInit {
       ScoutProgram: ['', Validators.required],
       EducationFK: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherName: ['', [Validators.required, Validators.minLength(6)]],
+      TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email]],
       TeacherPhoneNo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
       GradeLevel: ['', Validators.required],

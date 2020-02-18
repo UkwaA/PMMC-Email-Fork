@@ -60,30 +60,33 @@
         <div class="footer-info">
           <h4 style="padding-bottom:20px;">PACIFIC MARINCE MAMMAL CENTER</h4>
           <p class="text-justify" style="color: rgb(192, 183, 183);">Our patient are sentinel species of our environment. Their intricate involvement on both the terrestrial and marine environments provides us with a unique wealth of knowledge.</p>
-            <div class="social-network ">
+            <div class="social-network fa-lg">
               <a>Follow Us</a>
-              <a style="padding-left:25px; color: white;" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
-              <a style="padding-left:25px; color: white;" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
-              <a style="padding-left:25px; color: white;" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
-              <a style="padding-left:25px; color: white;" href="mailto:info@pacificmmc.org" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
+              <a style="padding-left:25px;" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
+              <a style="padding-left:25px;" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
+              <a style="padding-left:25px;" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
+              <a style="padding-left:25px;" href="mailto:info@pacificmmc.org" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
             <div style="padding-top:20px; padding-bottom:20p;">
               <div class="subscribe-wrapper subscribe2-wrapper mb-15">
                 <div class="subscribe-form">
-                  <form action="#">
+                  <form action="#" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <input placeholder="Enter Your Email" type="email" 
                             style="background: none; border: 1px solid #fff; border-radius: 30px; color: #fff; display: inline-block;
-                            font-size: 15px; font-weight: 300; height: 40px; margin-right: 12px; padding-left: 35px; width: 70%; cursor: pointer;">
+                            font-size: 18px; font-weight: 200; height: 40px; margin-right: 12px; padding-left: 35px; width: 70%; cursor: pointer;"
+                            class="form-control" formControlName="subscribeEmail"
+                            [ngClass]="{ 'is-invalid': submitted && f.subscribeEmail.errors }">
                     <button style=" background: #ffff; border: none; border-radius: 30px; color: #4b5d73; display: inline-block; font-size: 15px;
                             font-weight: 400; line-height: 1; padding: 12px 15px; transition: all 0.3s ease 0s;">Subscribe
                       <i class="fas fa-long arrow-alt-right"></i>
                     </button>
+                    <div *ngIf="submitted && f.subscribeEmail.errors" class="invalid-feedback">
+                      <div *ngIf="f.subscribeEmail.errors.required">Email is required</div>
+                      <div *ngIf="f.subscribeEmail.errors.email">Email must be a valid email address</div>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
-              <!-- <form action="#" method="Post">
-                <input type="text" placeholder="Enter Your Email">
-                <button type="button" class="btn btn-primary">Subscribe</button> 
-              </form> -->
             </div>
             </div>		
         </div>
@@ -109,7 +112,7 @@
             <fa-icon [icon]="faDoorOpen"></fa-icon> Open Daily 10AM - 4PM Pacific 
             <br /><fa-icon [icon]="faLaughWink"></fa-icon> Admission is FREE
             <br /><fa-icon [icon]="faHandHoldingUsd"></fa-icon> Donations are Welcome!
-            <br /><fa-icon [icon]="faPhone"></fa-icon> (949)494-3050
+            <br /><fa-icon [icon]="faPhone"></fa-icon> (949) 494-3050
             <br /><fa-icon [icon]="faMapMarkedAlt"></fa-icon> 20612 Laguna Canyon Road, Laguna Beach, CA 92651
           </p>
         </div>
