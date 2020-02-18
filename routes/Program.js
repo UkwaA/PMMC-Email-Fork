@@ -100,7 +100,7 @@ program.post('/add-program', (req, res) => {
       // After insert, return the PK
       programPK = program.ProgramPK
 
-      var tempDir = './uploads/' + programPK 
+      var tempDir = './public/uploads/' + programPK 
       // Check the directory of the program. Create new if not exist
       if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir);
