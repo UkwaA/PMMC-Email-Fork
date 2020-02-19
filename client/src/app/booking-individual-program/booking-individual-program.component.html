@@ -62,22 +62,22 @@
         <label for="SpecialInfo">Special Information: </label>
         <textarea class="form-control" id="SpecialInfo" rows="3"></textarea>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.MediaRelease">
+      <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.MediaRelease">
         <label for="MediaRelease">Media Release: </label>
-        <div class="row">
+        <div class="media_release row">
           <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as advertising on our website at www.pacificmmc.org.</p>
-          <h6> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</h6>
+          <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</p>
         </div>
-        <div class = "row">
+        <div class = "form_checkbox row">
           <input class="form-check-input" type="checkbox" value="" formControlName="MediaRelease"
                   [ngClass]="{ 'is-invalid': submitted && f.MediaRelease.errors }">
           <label class="form-check-label" for="MediaRelease">
-            I argree.
+            I agree.
           </label>
           <div *ngIf="submitted && f.MediaRelease.errors" class="invalid-feedback">Accept Media Release is required</div>
         </div>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.EmergencyMedicalRelease">
+      <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.EmergencyMedicalRelease">
         <label for="EmergencyMedicalRelease">Emergency Medical Release: </label>
         <div class="row">
           <p>In case of emergency, the Pacific Marine Mammal Center will make every effort to contact the guardians of the child involved before any treatment has begun. However, in the event we are unable to contact you, the guardians, we require this medical release to be signed for all participants in the program.</p>
@@ -88,16 +88,16 @@
             24301 El Toro Rd, Laguna Woods, CA 92637</p>
           <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH CHANGES.</h6>
         </div>
-        <div class = "row">
+        <div class = "form_checkbox row">
           <input class="form-check-input" type="checkbox" value="" formControlName="EmergencyMedicalRelease"
                   [ngClass]="{ 'is-invalid': submitted && f.EmergencyMedicalRelease.errors }">
           <label class="form-check-label" for="EmergencyMedicalRelease">
-            I argree.
+            I agree.
           </label>
           <div *ngIf="submitted && f.EmergencyMedicalRelease.errors" class="invalid-feedback">Accept Emergency Medical Release is required</div>
         </div>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.LiabilityAgreement">
+      <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.LiabilityAgreement">
         <label for="LiabilityAgreement">Liability Agreement: </label>
         <div class="row">
           <p>I hereby acknowledge that I am the parent or legal guardian of the child who I have registered to participate in services and programs offered by Pacific Marine Mammal Center.  I recognize that children at play may suffer injuries despite adequate supervision. I know of the risks involved, accept them, and I nonetheless have voluntarily enrolled my child at Pacific Marine Mammal Center.</p>
@@ -106,11 +106,11 @@
           <p>In addition, I hereby release and discharge Pacific Marine Mammal Center from all causes of action, claims, or demands that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me many now have or may hereafter have for injury or damage resulting from my child's participation in Pacific Marine Mammal Center’s programs and services.</p>
           <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out of any claims and demands whether made by or on behalf of my child or any other per-son or entity for either injuries to my child's person or property, or arising out of claims that my child's actions caused injury or damage to another person or property, whether or not such claims, injuries and damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>
         </div>
-        <div class = "row">
+        <div class = "form_checkbox row">
           <input class="form-check-input" type="checkbox" value="" formControlName="LiabilityAgreement"
                   [ngClass]="{ 'is-invalid': submitted && f.LiabilityAgreement.errors }">
           <label class="form-check-label" for="LiabilityAgreement">
-            I argree.
+            I agree.
           </label>
           <div *ngIf="submitted && f.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required</div>
         </div>
