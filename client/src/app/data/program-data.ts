@@ -6,6 +6,7 @@ export class ProgramData {
     CreatedDate: string
     CreatedBy: number
     ImgData: any
+    ProgramType: number
 
     constructor(nTitle:string, nDescription:string, nImageURL:string, nURL:string, price: number){
         this.ProgramPk = 0;

@@ -5,6 +5,7 @@ import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { HttpClient } from '@angular/common/http'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+declare var $: any;
 
 @Component({
     templateUrl: './createprogram.component.html',
@@ -16,6 +17,7 @@ export class CreateProgramComponent {
     file: File
     Editor = DecoupledEditor;
     user: UserDetails
+    selectedValue = 0
     programData: ProgramData = {
         ProgramPk: 0,
         Name: '',
@@ -23,13 +25,27 @@ export class CreateProgramComponent {
         FullAmount: 0,
         CreatedDate: '',
         CreatedBy: 0,
-        ImgData: ''
+        ImgData: '',
+        ProgramType: 0
     }
+
+    programCategories: Array<Object> = [
+        { id: 0, name: "Group Program" },
+        { id: 1, name: "Individual Program" }
+    ]
 
     constructor(private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
+        this.programCategories.forEach(e => {
+            $("#programCat").append(new Option(e['name'], e['id']));
+        });
+    }
 
+    // EventHandler for drop down list
+    selectChangeHandler(event: any) {
+        // Update the variable
+        this.selectedValue = event.target.value;
     }
 
     onFileChange(event) {
@@ -42,6 +58,7 @@ export class CreateProgramComponent {
         this.user = this.auth.getUserDetails();
         this.programData.CreatedBy = this.user.UserPK;
         this.programData.ImgData = "";
+        this.programData.ProgramType = this.selectedValue
 
         this.http.post("http://localhost:3000/program/add-program", this.getFormData())
             .subscribe((response) => {
@@ -57,7 +74,6 @@ export class CreateProgramComponent {
         );
     }
     getFormData() {
-
         const formData = new FormData();
         formData.append('file', this.file, this.file.name);
         for (const key of Object.keys(this.programData)) {
