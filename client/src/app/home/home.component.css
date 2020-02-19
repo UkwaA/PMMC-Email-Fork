@@ -33,12 +33,20 @@ h5{
   padding: 120px;
 }
 
+.bottom_info{
+  padding-top: 10px;
+  justify-content: space-evenly;
+  /* margin-left: 3%; */
+  margin-bottom: auto;
+}
+
 .block-with-text {
   overflow: hidden;
   position: relative;
   line-height: 1.2em;
-  max-height: 2.4em;
-  text-align: justify;
+  min-height: 200px;
+  /* max-height: 2.4em; */
+  /* text-align: justify; */
   margin-right: -1em;
   padding-right: 1em;
 }
@@ -64,9 +72,10 @@ h5{
 }
 
 .card-img-top{
-  height: 260px;
+  height: 50%;
 }
 
 .card-body{
   padding-bottom: 0px;
+  /* height: 200px; */
 }

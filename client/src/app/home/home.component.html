@@ -35,10 +35,10 @@
   </div>
 </div> 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
     <div class="row text-center">
       <div class="col-lg-12">
-        <h1 class="text-primary">Most Popular Programs</h1>
+        <h1 class="text-primary mt-5">Most Popular Programs</h1>
       </div>
     </div>
 
@@ -48,10 +48,10 @@
 
       <div class="col-xs-12 col-sm-6 col-md-4"  *ngFor = "let program of programs">
         <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" *ngIf = "program.ProgramPK < 4">
-      <!--     <img class="card-img" src="https://www.rimonthly.com/content/uploads/2019/01/JA9EC54SEA.jpg" alt=""> -->
+          <!-- <img class="card-img" src="https://www.rimonthly.com/content/uploads/2019/01/JA9EC54SEA.jpg" alt=""> -->
        <!--Card image-->
           <div class="view overlay">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+            <img class="card-img flex-fill" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
             <a href="#!">
               <div class="mask rgba-white-slight"></div>
             </a>
@@ -59,11 +59,11 @@
           <div class="card-body">
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
-            <p class="block-with-text" style="min-height: 100px;"> {{program.Description}}</p>
-            <h5 class="text-right text-muted"> ${{program.FullAmount}} </h5>
-          <div class = "text-left">
-            <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
-          </div>
+            <p class="block-with-text"> {{program.Description}}</p>
+          <div class = "bottom_info row">
+              <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
+              <h5 class="text-muted"> ${{program.FullAmount}} </h5>
+            </div>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
             <div class="stats">
