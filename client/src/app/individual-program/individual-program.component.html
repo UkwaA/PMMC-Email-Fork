@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row text-center mb-5">
         <div class="col-lg-7 mx-auto">
-            <h1 id="title">Individual Program List</h1>
+            <h1 class="title">Individual Program List</h1>
         </div>
     </div>
-    <div class="row"  *ngFor = 'let program of programs'>
+    <div class="row"  *ngFor = 'let program of programs' >
         <div class="col-lg-12 mx-auto" *ngIf='program.ProgramType == 1'>
             <!-- List group-->
             <ul class="list-group shadow">
@@ -12,7 +12,7 @@
                 <li class="list-group-item">
                     <!-- Custom content-->
                     <div class="image-wrapper p-3">
-                        <img src="https://unsplash.com/photos/DDXpun_CQR0/download" class="float-left p-3" alt="Generic placeholder image" width="250" height="180">
+                        <img src={{program.ImgData}} class="float-left p-3" alt="Generic placeholder image" width="250" height="180">
                         <h5 class="mt-0 font-weight-bold m-3">{{program.Name}}</h5>
                         <!-- <p class="font-italic text-muted mb-0 small">{{program.Description}}</p> -->
                         <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
