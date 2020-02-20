@@ -6,11 +6,24 @@
 .row{
   padding-bottom: 26px;
 }
+
   
-h1 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; padding-bottom: 15px; }
+ h1 { 
+  color: #0ebbff; 
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-weight: normal; 
+  line-height: 48px; 
+  margin-top: 25px; 
+  padding-bottom: 15px; }
 
 
-h2 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0; }
+/* h2 { 
+  color: white; 
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 30px; 
+  font-weight: 300; 
+  line-height: 32px; 
+  margin: 0; } */
 
 h3 {  color:#5077a9;}
 
