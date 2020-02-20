@@ -49,7 +49,7 @@ export class RegisterComponent {
             return;
         }        
 
-        this.auth.register(this.credentials).then(() =>{
+        this.auth.register(this.credentials).subscribe(() =>{
             this.router.navigateByUrl("/profile");
         })
         //     () => {
