@@ -4,7 +4,7 @@
   }
 
 .row{
-  padding-bottom: 26px;
+  /* padding-bottom: 26px; */
 }
 
   
@@ -46,11 +46,18 @@ h5{
   padding: 120px;
 }
 
+.col-xs-12{
+  padding-bottom: 50px;
+}
+
 .bottom_info{
   padding-top: 10px;
+  padding-left: 10px;
   justify-content: space-evenly;
   /* margin-left: 3%; */
-  margin-bottom: auto;
+  /* margin-bottom: auto; */
+  position: absolute;
+  bottom: 10px;
 }
 
 .block-with-text {
@@ -89,6 +96,8 @@ h5{
 }
 
 .card-body{
-  padding-bottom: 0px;
+  padding-bottom: 28px;
+  position: relative;
   /* height: 200px; */
+
 }
