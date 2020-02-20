@@ -1,4 +1,16 @@
 <div class="container">
+    <h4 class="text-center">Choose the options you'd like to display:</h4>
+    <div class="row" *ngFor = 'let item of varLabels'>
+      <div class="col">
+        <h5> {{item.label}} </h5>
+      </div>
+      <div class="col">
+        <mat-radio-group aria-label="Select an option"  [(ngModel)]="item.var">
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+      </div>
+    </div>
    <!--  <div class = "row">
         <h1> Adult Quantity </h1>
         <mat-radio-group aria-label="Select an option">
