@@ -9,9 +9,16 @@ body {
 
 .dropdown:hover>.dropdown-menu {
     display: block;
-  }
+}
   
-  .dropdown>.dropdown-toggle:active {
+.dropdown>.dropdown-toggle:active {
     /*Without this, clicking will make it sticky*/
       pointer-events: none;
-  }
+}
+
+.mainfooter {
+    background: #16222A; 
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white; padding-top:50px; padding-bottom:50px;
+}

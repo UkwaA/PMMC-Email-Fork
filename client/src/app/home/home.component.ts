@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProgramData } from '../data/program-data';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
-import { ProgramServices } from '../services/program.services'
+import { ProgramServices } from '../services/program.services';
+import { AppConstants } from '../constants';
 @Component({
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit{
         this.programService.getAllPrograms().then((result) =>{
             this.programs = result;
             this.programs.forEach(e => {
-                e.ImgData = "http://localhost:3000" + e.ImgData
+                e.ImgData = AppConstants.SERVER_URL + e.ImgData
             });
         })
     }
