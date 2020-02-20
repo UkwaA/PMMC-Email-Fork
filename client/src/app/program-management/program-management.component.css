@@ -5,3 +5,12 @@
 .col-lg-12{
     padding-bottom: 25px;
 }
+
+h1 {
+  font-family: sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: bold;
+  padding-top: 20px;
+  color: #0ebbff; 
+}
