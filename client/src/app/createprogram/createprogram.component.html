@@ -8,8 +8,10 @@
                     <input type="text" class="form-control" name="name" placeholder="Enter Program Name"
                         [(ngModel)]="programData.Name" required>
                 </div>
-                <div class="form-group font-weight-bold">
-                    <label>Description</label>
+                <div class="form-group">
+                    <div class="des font-weight-bold">
+                        <label>Description</label>
+                    </div>
                     <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
                 
                 </div>

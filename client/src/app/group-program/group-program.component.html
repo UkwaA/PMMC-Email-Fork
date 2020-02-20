@@ -1,11 +1,12 @@
+<body id="group-program">
 <div class="container">
-    <div class="row text-center text-white mb-5">
+    <div class="row text-center mb-5">
         <div class="col-lg-7 mx-auto">
-            <h1 class="text-primary">Group Program List</h1>
+            <h1 class="title">Group Program List</h1>
         </div>
     </div>
     <div class="row"  *ngFor = 'let program of programs'>
-        <div class="col-lg-12 mx-auto" *ngIf = "program.ProgramPK < 10">
+        <div class="col-lg-12 mx-auto">
             <!-- List group-->
             <ul class="list-group shadow">
                 <!-- list group item-->
@@ -14,7 +15,8 @@
                     <div class="media align-items-lg-center flex-column flex-lg-row p-3">
                         <div class="media-body order-2 order-lg-1">
                             <h5 class="mt-0 font-weight-bold mb-2">{{program.Name}}</h5>
-                            <p class="font-italic text-muted mb-0 small">{{program.Description}}</p>
+                            <!-- <p class="font-italic text-muted mb-0 small">{{program.Description}}</p> -->
+                            <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
                                 <a routerLink="/booking-group-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
@@ -26,3 +28,4 @@
         </div>
     </div>
 </div>
+</body>
