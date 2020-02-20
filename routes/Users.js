@@ -91,6 +91,61 @@ users.get('/profile', (req, res) => {
     })
 })
 
+users.get('/edit-user', (req, res) => {
+  //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+
+  User.findAll({})
+    .then(user => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.send('There is no user available');
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+users.get('/get-user-details/:id', (req,res) => {
+  User.findOne({
+    where:{
+      UserPk: req.params.id
+    }
+  })
+  .then(user => {
+    if (user) {
+      res.json(user)
+    } else {
+      res.send('User does not exist')
+    }
+  })
+  .catch(err => {
+    res.send('error: ' + err)
+  })
+})
+
+users.put('/get-user-details/:id', (req,res) => {  
+  const id = req.params.id
+  User.update(req.body, {
+    where: {UserPk: id} //body or params???
+  })
+  .then(result => {    
+    if(result == 1) {
+      res.send({
+        message: "User was updated successfully."
+      });
+    }
+    else {
+      res.send({        
+        message: "User route error: Cannot update user details."
+      });
+    }
+  })
+  .catch(err => {
+    res.send('error: ' + err)
+  })
+})
 module.exports = users
 
 

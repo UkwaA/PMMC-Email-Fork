@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5 mx-auto">
+            <form>
+                <h1 class="h3 mb-3 font-weight-normal">User Details</h1>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>UserName</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="name" [(ngModel)]="userDetails.Username" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Password</label>
+                    </div>
+                    <div class="col-md-8">***********                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="email" [(ngModel)]="userDetails.Email">
+                        </div>
+                    </div>
+                </div>     
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Current Role</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div *ngIf = "userDetails.Role_FK == 1">Customer</div>
+                            <div *ngIf = "userDetails.Role_FK == 2">Manager</div>
+                            <div *ngIf = "userDetails.Role_FK == 3">System Admin</div>
+                        </div>
+                    </div>
+                </div>   
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>New Role</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="roleSelection">                                
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="updateUserDetail()">Update User Details</button>
+            </form>
+         
+        </div>
+    </div>
+</div>

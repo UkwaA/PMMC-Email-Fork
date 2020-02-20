@@ -25,12 +25,22 @@ import { MatFormFieldModule, MatInputModule, MatListModule } from '@angular/mate
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component'
 import { ProgramDetailsComponent } from './program-details/program-details.component';
-import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component'
+import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component';
+import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component'
 const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'set-user-role', component: SetUserRoleComponent},
+  {
+    path: 'set-user-role',
+    component: SetUserRoleComponent,
+    canActivate: [AuthRoleGuardService]
+  },
+  {
+    path: 'user-details/:id', 
+    component: UserDetailsComponent,
+    canActivate: [AuthRoleGuardService]
+  },
   {
     path: 'createprogram', 
     component: CreateProgramComponent,
@@ -44,6 +54,7 @@ const routes : Routes = [
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'program-management', component: ProgramManagementComponent},
   {path: 'program-details/:id', component: ProgramDetailsComponent},
+  
   {
     path: 'profile', 
     component: ProfileComponent,
@@ -66,7 +77,8 @@ const routes : Routes = [
     BookingGroupProgramComponent,
     ProgramManagementComponent,
     ProgramDetailsComponent,
-    SetUserRoleComponent
+    SetUserRoleComponent,
+    UserDetailsComponent
     
   ],
   imports: [

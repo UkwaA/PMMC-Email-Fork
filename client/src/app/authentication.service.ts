@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
+import {UserData} from './data/user-data'
 
 
 export interface UserDetails {
@@ -92,8 +93,22 @@ export class AuthenticationService {
   }
 
   public logout(): void {
-    this.token = ''
+    this.token = '' 
     window.localStorage.removeItem('usertoken')
     this.router.navigateByUrl('/')
+  }
+
+  public getAllUser(): Observable<any> {
+    return this.http.get(this.baseServerURL + "/users/edit-user", {
+      headers: { Authorization: `${this.getToken()}` }
+    })
+  }
+
+  public getUserDetailsByID(UserPK: number):  Observable<any> {
+    return this.http.get(this.baseServerURL + "/users/get-user-details/" + UserPK)
+  }
+
+  public updateUserDetail(UserPK:number, userDetails: UserDetails): Observable<any>{
+    return this.http.put(this.baseServerURL + "/users/get-user-details/" + UserPK, userDetails);
   }
 }

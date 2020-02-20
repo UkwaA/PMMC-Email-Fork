@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserData} from '../../data/user-data';
+import { AuthenticationService, UserDetails} from '../../authentication.service'
 declare var $: any;
 
 @Component({
@@ -6,28 +8,17 @@ declare var $: any;
   templateUrl: './set-user-role.component.html',
   styleUrls: ['./set-user-role.component.css']
 })
-export class SetUserRoleComponent implements OnInit {
-  listOfUsers: any
+export class SetUserRoleComponent {
+  listOfUsers: UserDetails;
   userRoles:string[]
-  constructor() { }
+  constructor(private auth: AuthenticationService) {}
 
   ngOnInit() {      
       this.userRoles = ['Customer', 'Manager','System Admin'];
-      this.listOfUsers = [{
-        'username': "huy",
-        'id' : 17,
-        'role': 'Customer'
-      },
-      {   'username': "b",
-        'id' : 18,
-        'role': 'Customer'
-      },
-      {   'username': "hoang",
-        'id' : 19,
-        'role': 'System Admin'
-      }]
-      console.log(this.userRoles);
-      console.log(this.listOfUsers[0].username);
+      this.auth.getAllUser().subscribe((result) => {
+        console.log(result);
+        this.listOfUsers = result;        
+      })      
    }
   }
 
