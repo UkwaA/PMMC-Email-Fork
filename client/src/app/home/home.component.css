@@ -60,9 +60,8 @@ h5{
   overflow: hidden;
   position: relative;
   line-height: 1.2em;
-  min-height: 200px;
-  /* max-height: 2.4em; */
-  /* text-align: justify; */
+  max-height: 3.6em;
+  text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
 }
@@ -81,7 +80,6 @@ h5{
   margin-top: 0.2em;
   background: white;
 }
-
 
 .card {
   margin: 5% 0%;

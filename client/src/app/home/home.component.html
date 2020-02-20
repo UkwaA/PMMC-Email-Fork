@@ -7,7 +7,7 @@
       </div>
     </div>
     
-        <form action="#" method="post" novalidate="novalidate">
+       <!--  <form action="#" method="post" novalidate="novalidate">
             <div class="row search-bar pl-5">
                         <div class="col-lg-3 col-md-3 col-sm-12 p-1">
                             <select class="form-control search-slt" id="exampleFormControlSelect1" style="width: 220px">
@@ -31,7 +31,7 @@
                             <button type="button" class="btn btn-primary wrn-btn">Search</button>
                         </div>
                     </div>
-        </form>
+        </form> -->
   </div>
 </div> 
   <!-- Page Content -->
@@ -60,7 +60,9 @@
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
             <!-- <p class="block-with-text"> {{program.Description}}</p> -->
+            <div class="block-with-text">
             <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
+          </div>
           <div class = "bottom_info row">
               <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
               <h5 class="text-muted ml-4"> ${{program.FullAmount}} </h5>
