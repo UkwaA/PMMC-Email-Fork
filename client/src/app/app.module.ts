@@ -26,7 +26,12 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component'
 import { ProgramDetailsComponent } from './program-details/program-details.component';
 import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component';
-import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component'
+import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
+import {IProgramComponent } from './components/i-program/i-program.component'
+import {GProgramComponent } from './components/g-program/g-program.component'
+import { MatRadioModule } from '@angular/material/radio';
+
+
 const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -78,7 +83,9 @@ const routes : Routes = [
     ProgramManagementComponent,
     ProgramDetailsComponent,
     SetUserRoleComponent,
-    UserDetailsComponent
+    UserDetailsComponent, 
+    IProgramComponent,
+    GProgramComponent
     
   ],
   imports: [
@@ -94,7 +101,8 @@ const routes : Routes = [
     MatFormFieldModule,
     MatInputModule,
     CKEditorModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   providers: [ProgramServices, AuthRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 export class BookingIndividualData {
-    GroupProgramPK: number;
+    IndividualProgramPK: number;
     ProgramFK: number;
     ParticipateName: boolean;
     ParticipateAge: boolean;

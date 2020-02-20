@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
+import { BookingGroupData } from 'src/app/data/booking-group-data';
 
 
 @Component({
-  selector: 'app-g-program',
+  selector: 'g-program',
   templateUrl: './g-program.component.html',
   styleUrls: ['./g-program.component.css']
 })
 export class GProgramComponent implements OnInit {
 
+  bookingGroup: BookingGroupData;
   //TODO: inject the service
   constructor(private service:ProgramServices) { }
 

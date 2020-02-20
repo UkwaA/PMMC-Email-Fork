@@ -6,6 +6,9 @@ import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { HttpClient } from '@angular/common/http'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { IProgramComponent } from '../components/i-program/i-program.component';
+
+
 declare var $: any;
 
 @Component({
@@ -70,16 +73,12 @@ export class ProgramDetailsComponent {
     }
 
     getFormData(){
-
         const formData = new FormData();
         formData.append('file', this.files, this.files.name);
         for(const key of Object.keys(this.programData)){
             const value = this.programData[key];
             formData.append(key, value);
-
         }
-
         return formData;
-
     }
 }

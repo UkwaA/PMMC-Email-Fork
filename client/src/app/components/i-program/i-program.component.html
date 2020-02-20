@@ -1,0 +1,226 @@
+<div class="container">
+    <h4 class="text-center">Choose the options you'd like to display:</h4>
+    <form>
+        <div class="form-row border border-primary">
+          <div class="col">
+            <h5> Participant Name: </h5>
+          </div>
+          <div class="col">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button [(ngModel)]="bookingIndividual.ParticipateName" value="true">Yes</mat-radio-button>
+                <mat-radio-button [(ngModel)]="bookingIndividual.ParticipateName" value="false">No</mat-radio-button>
+              </mat-radio-group>
+          </div>
+          <hr class="card__item card__divider">
+        </div>
+        <div class="form-row">
+            <div class="col">
+              <h5> Participant Age: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.ParticipateAge" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.ParticipateAge" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Gender: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.Gender" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.Gender"value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> T-Shirt Size: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.MerchSize" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.MerchSize" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Allergy Information: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AllergyInfo" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AllergyInfo" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Special Information: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.SpecialInfo"  value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.SpecialInfo" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Insurance Provider Name: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsureProviderName" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsureProviderName" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Insured Recipient Name: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsureRecipientName" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsureRecipientName" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Insurance Policy Number: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsurePolicyNo" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsurePolicyNo" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Insurance Phone Number: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsurePhoneNo" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.InsurePhoneNo" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Authorized Pickup Name 1: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupName1" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupName1" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Authorized Pickup Phone 1: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupPhone1" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupPhone1" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Authorized Pickup Name 2: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupName2" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupName2" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Authorized Pickup Phone 2: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupPhone2" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.AuthorizedPickupPhone2" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Early Drop Off: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.EarlyDropOff" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.EarlyDropOff" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Late Pick-up: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.LatePickup" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.LatePickup" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Media Release: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.MediaRelease" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.MediaRelease" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Emergency Medical Release: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.EmergencyMedicalRelease" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.EmergencyMedicalRelease" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Liability Agreement</h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.LiabilityAgreement" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.LiabilityAgreement" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <h5> Full Amount: </h5>
+            </div>
+            <div class="col">
+              <mat-radio-group aria-label="Select an option">
+                  <mat-radio-button [(ngModel)]="bookingIndividual.FullAmount" value="true">Yes</mat-radio-button>
+                  <mat-radio-button [(ngModel)]="bookingIndividual.FullAmount" value="false">No</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+    </form>
+</div>
