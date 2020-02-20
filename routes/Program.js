@@ -92,7 +92,8 @@ program.post('/add-program', (req, res) => {
     FullAmount: req.body.FullAmount,
     CreatedDate: today,
     CreatedBy: req.body.CreatedBy,
-    ImgData: ''
+    ImgData: '',
+    ProgramType: req.body.ProgramType
   }
 
   Program.create(programData)
@@ -100,7 +101,9 @@ program.post('/add-program', (req, res) => {
       // After insert, return the PK
       programPK = program.ProgramPK
 
-      var tempDir = './public/uploads/' + programPK 
+      // Create folder to store image of the program
+      var tempDir = './public/uploads/' + programPK
+
       // Check the directory of the program. Create new if not exist
       if (!fs.existsSync(tempDir)) {
         fs.mkdirSync(tempDir);
@@ -112,14 +115,47 @@ program.post('/add-program', (req, res) => {
 
       // Update filePath of Image for program
       program.update({
-        ImgData: filePath
+        ImgData: filePath.substring(8)
       })
 
-      res.json(programPK)
+      // Create Program Details: Insert data to GroupProgram or IndividualProgram
+      // based on ProgramType:
+      // 0 - Group Program
+      // 1 - Individual Program
+
+
+      switch (req.body.ProgramType) {
+        case '0':
+          var groupDetail = {
+            ProgramFK: programPK,
+            CreatedDate: today,
+            CreatedBy: req.body.CreatedBy,
+          }
+          GroupProgram.create(groupDetail)
+            .then(program => {
+              console.log(program.GroupProgramPK)
+              res.json(program.GroupProgramPK)
+            })
+          break;
+        case '1':
+          var individualDetail = {
+            ProgramFK: programPK,
+            CreatedDate: today,
+            CreatedBy: req.body.CreatedBy,
+          }
+          IndividualProgram.create(individualDetail)
+            .then(program => {
+              console.log(program.IndividualProgramPK)
+              res.json(program.IndividualProgramPK)
+            })
+          break;
+      }
+
     })
     .catch(err => {
       res.send('errorResponse' + err)
     })
+
 })
 
 module.exports = program

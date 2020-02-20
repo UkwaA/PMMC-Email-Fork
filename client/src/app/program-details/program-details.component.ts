@@ -16,7 +16,6 @@ declare var $: any;
 
 export class ProgramDetailsComponent {
     ProgramPK: number
-     
     programData: ProgramData = {
         ProgramPk: 0,
         Name: '',
@@ -24,40 +23,49 @@ export class ProgramDetailsComponent {
         FullAmount: 0,
         CreatedDate: '',
         CreatedBy: 0,
-        ImgData: ''
+        ImgData: '',
+        ProgramType: 0
     }
+    selectedValue: any
     files: File;
+
+    // EventHandler for file upload
     onFileChange(event) {
         this.files = event.target.files[0];
     }
     Editor = DecoupledEditor
     
-    programCategories:string[] = ['Group Program', 'Individual Program'];
+    // Option for dropdown list
+    programCategories:Array<Object> = [
+        {id: 0, name: "Group Program"},
+        {id: 1, name: "Individual Program"}
+    ]
+
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
         this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e, e));  
+            $("#programCat").append(new Option(e['name'], e['id']));  
           });
 
         this.route.params.subscribe(val => {
             this.ProgramPK = val.id
             this.services.getProgramDetailsByID(this.ProgramPK).subscribe(program => {
                this.programData = program
+               this.programData.ImgData = "http://localhost:3000" +  this.programData.ImgData 
             })
         })
     }
 
-    // onReady(editor) {
-    //     editor.ui.getEditableElement().parentElement.insertBefore(
-    //         editor.ui.view.toolbar.element,
-    //         editor.ui.getEditableElement()
-    //     );
-    // }
+    // EventHandler for drop down list
+    selectChangeHandler(event: any) {
+        // Update the variable
+        this.selectedValue = event.target.value;
+        //console.log(this.selectedValue)
+    }
 
     upLoad() {
         this.http.post("http://localhost:3000/program/add-image", this.programData).subscribe((program) => {
-          
         })
     }
 

@@ -44,7 +44,5 @@ export class BookingGroupData {
             this.TeacherName = TeacherName;
             this.TeacherEmail = TeacherEmail;
             this.TeacherPhoneNo = TeacherPhoneNo;
-
-        
     }
 }
