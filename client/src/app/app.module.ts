@@ -15,6 +15,7 @@ import { AuthenticationService } from './authentication.service'
 import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
+import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
@@ -26,7 +27,12 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component'
 import { ProgramDetailsComponent } from './program-details/program-details.component';
 import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component';
-import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component'
+import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
+import {IProgramComponent } from './components/i-program/i-program.component'
+import {GProgramComponent } from './components/g-program/g-program.component'
+import { MatRadioModule } from '@angular/material/radio';
+
+
 const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -34,12 +40,12 @@ const routes : Routes = [
   {
     path: 'set-user-role',
     component: SetUserRoleComponent,
-    canActivate: [AuthRoleGuardService]
+    canActivate: [AuthSystemRoleGuardService]
   },
   {
     path: 'user-details/:id', 
     component: UserDetailsComponent,
-    canActivate: [AuthRoleGuardService]
+    canActivate: [AuthSystemRoleGuardService]
   },
   {
     path: 'createprogram', 
@@ -78,7 +84,9 @@ const routes : Routes = [
     ProgramManagementComponent,
     ProgramDetailsComponent,
     SetUserRoleComponent,
-    UserDetailsComponent
+    UserDetailsComponent, 
+    IProgramComponent,
+    GProgramComponent
     
   ],
   imports: [
@@ -94,9 +102,10 @@ const routes : Routes = [
     MatFormFieldModule,
     MatInputModule,
     CKEditorModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
-  providers: [ProgramServices, AuthRoleGuardService, AuthGuardService, AuthenticationService],
+  providers: [ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,13 +4,26 @@
   }
 
 .row{
-  padding-bottom: 26px;
+  /* padding-bottom: 26px; */
 }
+
   
-h1 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; padding-bottom: 15px; }
+ h1 { 
+  color: #0ebbff; 
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-weight: normal; 
+  line-height: 48px; 
+  margin-top: 25px; 
+  padding-bottom: 15px; }
 
 
-h2 { color: white; font-family: 'Source Sans Pro', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0; }
+/* h2 { 
+  color: white; 
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 30px; 
+  font-weight: 300; 
+  line-height: 32px; 
+  margin: 0; } */
 
 h3 {  color:#5077a9;}
 
@@ -33,11 +46,18 @@ h5{
   padding: 120px;
 }
 
+.col-xs-12{
+  padding-bottom: 50px;
+}
+
 .bottom_info{
   padding-top: 10px;
+  padding-left: 10px;
   justify-content: space-evenly;
   /* margin-left: 3%; */
-  margin-bottom: auto;
+  /* margin-bottom: auto; */
+  position: absolute;
+  bottom: 10px;
 }
 
 .block-with-text {
@@ -76,6 +96,8 @@ h5{
 }
 
 .card-body{
-  padding-bottom: 0px;
+  padding-bottom: 28px;
+  position: relative;
   /* height: 200px; */
+
 }

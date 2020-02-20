@@ -20,7 +20,7 @@ users.post('/register', (req, res) => {
 
   User.findOne({
     where: {
-      Email: req.body.Email
+      Username: req.body.Username
     }
   })
     //TODO bcrypt

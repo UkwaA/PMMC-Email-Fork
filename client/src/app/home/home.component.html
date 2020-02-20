@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row text-center">
       <div class="col-lg-12">
-        <h1> PACIFIC MARINE MAMMAL CENTER </h1>
-        <h2> Enjoy your exploration with our programs! </h2>
+        <h1 class="text" style="color: white; font-size: 50px; margin-top: 25px; padding-bottom: 15px;"> PACIFIC MARINE MAMMAL CENTER </h1>
+        <h2 class="greeting" style="color: white;"> Enjoy your exploration with our programs! </h2>
       </div>
     </div>
     
@@ -38,7 +38,7 @@
   <div class="container-fluid">
     <div class="row text-center">
       <div class="col-lg-12">
-        <h1 class="text-primary mt-5">Most Popular Programs</h1>
+        <h1>Most Popular Programs</h1>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
     <div class="card-deck row">
 
       <div class="col-xs-12 col-sm-6 col-md-4"  *ngFor = "let program of programs">
-        <div class="card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" >
+        <div class="program_card card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" >
        <!--Card image-->
           <div class="view overlay">
             <img class="card-img flex-fill" src={{program.ImgData}} alt="Card image cap">
@@ -59,19 +59,17 @@
           <div class="card-body">
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
-            <p class="block-with-text"> {{program.Description}}</p>
+            <!-- <p class="block-with-text"> {{program.Description}}</p> -->
+            <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
           <div class = "bottom_info row">
               <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
-              <h5 class="text-muted"> ${{program.FullAmount}} </h5>
+              <h5 class="text-muted ml-4"> ${{program.FullAmount}} </h5>
             </div>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
-            <div class="stats">
-              <a style = "color: #5077a9;" ><fa-icon [icon]="faClock"></fa-icon> 1h45 </a>
-            </div>
-            <div class="stats">
-              <a style = "color: #5077a9;" > <fa-icon [icon]="faComment"></fa-icon> 115 </a>
-            </div>
+            <a style = "color: #5077a9;" ><fa-icon [icon]="faClock"></fa-icon> 1h45 </a>
+            <a style = "color: #5077a9;" > <fa-icon [icon]="faComment"></fa-icon> 115 </a>
+            
 
           </div>
         </div>
