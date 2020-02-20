@@ -1,4 +1,17 @@
-footer {
+/* footer {
     background: #16222A !important;
-}
+} */
 
+body {
+    overflow-y:hidden;
+    overflow-x:hidden;
+  }
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+      pointer-events: none;
+  }

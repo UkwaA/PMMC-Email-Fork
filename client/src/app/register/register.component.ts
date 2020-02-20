@@ -24,8 +24,6 @@ export class RegisterComponent {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            //firstName: ['', Validators.required],
-            //lastName: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(3)]],
@@ -35,7 +33,7 @@ export class RegisterComponent {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }    
+    get f() { return this.registerForm.controls; }
 
     // onReset() {
     //     this.submitted = false;
@@ -47,17 +45,17 @@ export class RegisterComponent {
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
-        }        
+        }
 
-        this.auth.register(this.credentials).subscribe(() =>{
+        this.auth.register(this.credentials).subscribe(() => {
             this.router.navigateByUrl("/profile");
-        })
+        },
+            err => {
+                console.error(err);
+            }
+        );
         //     () => {
         //         this.router.navigateByUrl("/profile");
-        //     },
-        //     err => {
-        //         console.error(err);
-        //     }
-        // );
+        //     
     }
 }

@@ -62,8 +62,7 @@ export class CreateProgramComponent {
 
         this.http.post("http://localhost:3000/program/add-program", this.getFormData())
             .subscribe((response) => {
-                const url = "/program-management"
-                this.router.navigateByUrl(url)
+                this.router.navigateByUrl("/program-management")
             })
     }
 
