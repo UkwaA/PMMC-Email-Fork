@@ -45,10 +45,11 @@
                         <img class="card-img flex-fill" [src]="programData.ImgData" alt="Card image cap">
                     </div>
                 </div>
-                <!-- <form (submit)="upLoad()" encType="multipart/form-data">
+                <form (submit)="upLoad()" encType="multipart/form-data">
                     <input type="file" name="sampleFile" />
                     <input type='submit' value='Upload!' />
-                </form> -->
+                </form>
+                <div *ngIf = "selectedValue=='1'"><i-program></i-program></div>
                 <div class="button pt-5 pb-5">
                     <button class="btn btn-lg btn-info btn-block " type="submit">Update Program Details</button>
                 </div>
