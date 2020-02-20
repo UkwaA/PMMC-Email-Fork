@@ -2,25 +2,32 @@
     <div class="row">
         <div class="col-md-6 mt-5 mx-auto">
             <form (submit)="createProgram()" enctype="multipart/form-data">
-                <h1 class="h3 mb-3 font-weight-normal">Create Program Information</h1>
-                <div class="form-group">
+                <h1 class="text-center text-info pb-5 pt-5">Create Program Information</h1>
+                <div class="form-group font-weight-bold">
                     <label>Program Name</label>
                     <input type="text" class="form-control" name="name" placeholder="Enter Program Name"
                         [(ngModel)]="programData.Name" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group font-weight-bold">
                     <label>Description</label>
-                    <ckeditor [editor]="Editor" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
+                    <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
+                
                 </div>
-                <div class="form-group">
+                <div class="form-group font-weight-bold">
                     <label>Full Amount</label>
                     <input type="number" class="form-control" name="fullamount" placeholder="Enter Program Price" [(ngModel)]="programData.FullAmount" required>
                 </div>
-                <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" (change)="onFileChange($event)" accept="image/x-png,image/gif,image/jpeg" />
+                <div class="form-group font-weight-bold">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Image</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="file" (change)="onFileChange($event)" accept="image/x-png,image/gif,image/jpeg" />
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group font-weight-bold">
                     <div class="row">
                         <div class="col-md-4">
                             <label>Program Type</label>
@@ -31,7 +38,9 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Create Program</button>
+                <div class="button pt-5 pb-5">
+                    <button class="btn btn-lg btn-info btn-block" type="submit">Create Program</button>
+                </div>  
             </form>
                
         </div>
