@@ -28,8 +28,8 @@ import { ProgramManagementComponent } from './program-management/program-managem
 import { ProgramDetailsComponent } from './program-details/program-details.component';
 import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component';
 import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
-import {IProgramComponent } from './components/i-program/i-program.component'
-import {GProgramComponent } from './components/g-program/g-program.component'
+import { IProgramComponent } from './components/i-program/i-program.component'; 
+import { GProgramComponent } from './components/g-program/g-program.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 

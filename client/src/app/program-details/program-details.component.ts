@@ -72,6 +72,13 @@ export class ProgramDetailsComponent {
         })
     }
 
+    onReady(editor) {
+        editor.ui.getEditableElement().parentElement.insertBefore(
+           editor.isReadOnly = true,
+           editor.ui.getEditableElement()
+        );
+    }
+
     getFormData(){
         const formData = new FormData();
         formData.append('file', this.files, this.files.name);
