@@ -27,6 +27,9 @@ module.exports = db.sequelize.define(
     },
     ImgData: {
       type: Sequelize.TEXT
+    },
+    ProgramType: {
+      type: Sequelize.INTEGER
     }
   },
   {
