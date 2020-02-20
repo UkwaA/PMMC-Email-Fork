@@ -15,9 +15,11 @@
         </table>
         <div *ngIf="details?.Role_FK == '2'">
             <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
+            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/program-management']">Program Management</button>
         </div>
         <div *ngIf="details?.Role_FK == '3'">
             <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
+            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/program-management']">Program Management</button>
             <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/set-user-role']">Set User's role</button>
         </div>
     </div>
