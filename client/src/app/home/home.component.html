@@ -50,7 +50,7 @@
         <div class="program_card card h-100 border-light" style="box-shadow: 0px 2px 2px #34393a80;" >
        <!--Card image-->
           <div class="view overlay">
-            <img class="card-img flex-fill" src={{program.ImgData}} alt="Card image cap">
+            <img class="card-img flex-fill" src={{program.ImgData}} alt="Card image cap" width="300" height="300">
 
             <a href="#!">
               <div class="mask rgba-white-slight"></div>
@@ -61,7 +61,7 @@
             <hr class="card__item card__divider">
             <!-- <p class="block-with-text"> {{program.Description}}</p> -->
             <div class="block-with-text">
-            <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
+            <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description"></ckeditor>
           </div>
           <div class = "bottom_info row">
               <a routerLink ="/booking-individual-program" class="btn btn-outline-primary pull-left">Find Out More!</a>
