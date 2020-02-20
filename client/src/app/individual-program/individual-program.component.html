@@ -10,34 +10,17 @@
             <ul class="list-group shadow">
                 <!-- list group item-->
                 <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-md-6 align-items-lg-center flex-column flex-lg-row p-3">
-                            <img src={{program.ImgData}} alt="Generic placeholder image" width="400" height="300" >
-                        </div>
-                        <div class="col-md-6">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">{{program.Name}}</h5>
-                                <!-- <p class="font-italic text-muted mb-0 small">{{program.Description}}</p> -->
-                                <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
-                                    <a routerLink="/booking-group-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
-                                </div>
-                            </div>
+                    <!-- Custom content-->
+                    <div class="image-wrapper p-3">
+                        <img src={{program.ImgData}} class="float-left p-3" alt="Generic placeholder image" width="250" height="180">
+                        <h5 class="mt-0 font-weight-bold m-3">{{program.Name}}</h5>
+                        <!-- <p class="font-italic text-muted mb-0 small">{{program.Description}}</p> -->
+                        <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
+                        <div class="d-flex align-items-center justify-content-between mt-1">
+                            <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
+                            <a routerLink="/booking-group-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
                         </div>
                     </div>
-                    <!-- Custom content-->
-                    <!-- <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                            <h5 class="mt-0 font-weight-bold mb-2">{{program.Name}}</h5>
-                             <p class="font-italic text-muted mb-0 small">{{program.Description}}</p>
-                            <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description" readOnly="true"></ckeditor>
-                            <div class="d-flex align-items-center justify-content-between mt-1">
-                                <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
-                                <a routerLink="/booking-group-program" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Book now!</a>
-                            </div>
-                        </div>
-                    </div>-->
                 </li> <!-- End -->
             </ul> <!-- End -->
         </div>
