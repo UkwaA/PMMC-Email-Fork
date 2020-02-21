@@ -26,8 +26,8 @@ users.post('/register', (req, res) => {
     //TODO bcrypt
     .then(user => {
       if (!user) {
-        // const hash = bcrypt.hashSync(userData.Password, 8)
-        // userData.Password = hash
+        const hash = bcrypt.hashSync(userData.Password, 8)
+        userData.Password = hash
 
         User.create(userData)
           .then(user => {
@@ -52,16 +52,21 @@ users.post('/login', (req, res) => {
   //res.send('error: ' + req.body.Password + "--" + req.body.Username)
   User.findOne({
     where: {
-      Username: req.body.Username,
-      Password: req.body.Password
+      Username: req.body.Username
+      // Password: req.body.Password
     }
   })
     .then(user => {
       if (user) {
-        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-          expiresIn: 1440
-        })
-        res.json({ token: token })
+        if(bcrypt.compareSync(req.body.Password, user.Password)) {
+          let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+            expiresIn: 1440
+          })
+          res.json({ token: token })
+        } else {
+          res.send('Wrong password')
+        }
+        
 
       } else {
         res.send('User does not exist')
