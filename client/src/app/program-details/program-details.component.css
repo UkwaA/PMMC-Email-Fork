@@ -7,3 +7,7 @@
     min-height: 300px !important;
     border-color: gray;
 }
+
+.form-group{
+    padding: 20px;
+}

@@ -1,147 +1,14 @@
 <div class="container">
     <h4 class="text-center">Choose the options you'd like to display:</h4>
     <div class="row" *ngFor = 'let item of varLabels'>
-      <div class="col">
+      <div class="col-xl-8 col-md-6 col-sm-6">
         <h5> {{item.label}} </h5>
       </div>
-      <div class="col">
+      <div class="col-xl-4 col-md-6 col-sm-6">
         <mat-radio-group aria-label="Select an option"  [(ngModel)]="item.var">
             <mat-radio-button value="true">Yes</mat-radio-button>
             <mat-radio-button value="false">No</mat-radio-button>
           </mat-radio-group>
       </div>
     </div>
-   <!--  <div class = "row">
-        <h1> Adult Quantity </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Age 5-7 Quantity </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Age 8-10 Quantity </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Age 11-13 Quantity </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Total Quantity </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Price </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Deposit </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Education FK </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Program Restriction </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Deposit Amount </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Full Amount </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Maximum Participant </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Organization Name </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Grade Level </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Scout Program </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Price </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Teacher Name </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Teacher Email </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div>
-    <div class = "row">
-        <h1> Teacher Phone Number </h1>
-        <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">Yes</mat-radio-button>
-            <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group> 
-    </div> -->
 </div>
