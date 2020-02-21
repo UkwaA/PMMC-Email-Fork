@@ -9,10 +9,10 @@ import { BookingGroupData } from 'src/app/data/booking-group-data';
   styleUrls: ['./g-program.component.css']
 })
 export class GProgramComponent implements OnInit {
-
   bookingGroup: BookingGroupData;
   varLabels:Array<Object>;
   //TODO: inject the service
+
   constructor(private service:ProgramServices) { }
 
   ngOnInit() {
