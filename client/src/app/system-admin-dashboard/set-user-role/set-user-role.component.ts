@@ -11,6 +11,7 @@ declare var $: any;
 export class SetUserRoleComponent {
   listOfUsers: UserDetails;
   userRoles:string[]
+  currentUserID: number
   constructor(private auth: AuthenticationService) {}
 
   ngOnInit() {      
@@ -18,7 +19,9 @@ export class SetUserRoleComponent {
       this.auth.getAllUser().subscribe((result) => {
         console.log(result);
         this.listOfUsers = result;        
-      })      
+      })
+
+      this.currentUserID = this.auth.getUserDetails().UserPK
    }
   }
 
