@@ -59,39 +59,28 @@ h5{
 .block-with-text {
   overflow: hidden;
   position: relative;
-  line-height: 1.6em;
-  max-height: 8.0em;
-  /* text-align: justify; */
+  line-height: 16px;
+  max-height: 98px;
+  text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
-}
-.block-with-text:before {
-  content: '...';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-.block-with-text:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 1em;
-  height: 1em;
-  margin-top: 0.2em;
-  background: white;
 }
 
 .card {
   margin: 5% 0%;
 }
 
+.card-deck{
+  padding: 20px;
+}
+
 .card-img-top{
   height: 50%;
 }
 
-.card-body{
-  padding-bottom: 28px;
+/* .card-body{
+  padding-bottom: 0px;
   position: relative;
-  /* height: 200px; */
+  height: 200px;
 
-}
+} */

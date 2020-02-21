@@ -40,8 +40,9 @@ export class ProgramDetailsComponent {
     
     // Option for dropdown list
     programCategories:Array<Object> = [
-        {id: 0, name: "Group Program"},
-        {id: 1, name: "Individual Program"}
+        {id: 0, name: "---Choose type---"},
+        {id: 1, name: "Group Program"},
+        {id: 2, name: "Individual Program"}
     ]
 
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
