@@ -3,6 +3,7 @@
         <div class="col-md-6 mt-5 mx-auto">
             <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <h1 class="text-center">Register</h1>
+                <p class = "error" *ngIf = "errorMessage">{{errorMessage}}</p>
                 <div class="form-group font-weight-bold">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" formControlName="username" placeholder="Enter Username" [(ngModel)] ="credentials.Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
@@ -37,7 +38,7 @@
                 <div class="form-group text-center form-check">
                     <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
                     <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
-                    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback"></div>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             </form>

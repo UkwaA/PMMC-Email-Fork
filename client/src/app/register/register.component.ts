@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent {
     registerForm: FormGroup;
     submitted = false;
+    errorMessage = ''
 
     credentials: TokenPayload = {
         UserPK: 0,
@@ -68,8 +69,15 @@ export class RegisterComponent {
             return;
         }
 
-        this.auth.register(this.credentials).subscribe(() => {
-            this.router.navigateByUrl("/profile");
+        this.auth.register(this.credentials).subscribe((res) => {
+            if(res.error)
+            {
+                console.log(res)
+                this.errorMessage = "*" + res.error
+                return
+            }
+            else
+                this.router.navigateByUrl("/profile");            
         },
             err => {
                 console.error(err);

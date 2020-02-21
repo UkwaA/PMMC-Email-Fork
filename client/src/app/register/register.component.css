@@ -11,3 +11,7 @@ h1 {
     padding-top: 20px;
     color: #0ebbff; 
   }
+
+.error {
+    color : red;
+}
