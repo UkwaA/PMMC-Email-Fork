@@ -25,24 +25,33 @@ export class UserDetailsComponent implements OnInit {
   //     value: '3'
   //   },
   // ]
-  userRoles = ['Customer','Manager','System Admin']
+  userRoles:string[]
+  editedUserRoleFK:string
   UserPK: number
   userDetails: UserDetails
   NewRole: string = ''
   message = ''
   constructor(private route: ActivatedRoute, private auth: AuthenticationService, private router: Router) { }
 
-  ngOnInit() {
-    this.userRoles.forEach(e => {
-      $("#roleSelection").append(new Option(e, e));  
-    });
-
+  ngOnInit() {   
     this.route.params.subscribe(val => {
       this.UserPK = val.id
       this.auth.getUserDetailsByID(this.UserPK).subscribe(user => {
         this.userDetails = user
+        this.editedUserRoleFK = this.userDetails.Role_FK
+        console.log(this.editedUserRoleFK)
+
+        if(this.editedUserRoleFK == "1")
+          {this.userRoles = ['Customer','Manager','System Admin']}
+        else if(this.editedUserRoleFK == "2")
+          this.userRoles = ['Manager','System Admin','Customer']
+        else
+          this.userRoles = ['System Admin','Customer','Manager']
+
+        this.userRoles.forEach(e => {
+          $("#roleSelection").append(new Option(e, e));  
+        });
       })
-      
     })
   }
 
