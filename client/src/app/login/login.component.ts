@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
     loginForm: FormGroup;
     submitted = false;
+    errorMessage = ''
 
     credentials: TokenPayload ={
         UserPK: 0,
@@ -25,9 +26,8 @@ export class LoginComponent {
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(3)]]
-        });
-
+            password: ['', [Validators.required]]
+        });        
 
         this.auth.profile().subscribe(
             user => {
@@ -40,19 +40,19 @@ export class LoginComponent {
     get f() { return this.loginForm.controls; }
 
     login() {
-        this.submitted = true;
-        
+        this.submitted = true;        
         if (this.loginForm.invalid) {
             return;
         }
 
-        alert('SUCCESS!!')
-
-        this.auth.login(this.credentials).subscribe(() => {
+        this.auth.login(this.credentials).subscribe(() => {            
             this.router.navigateByUrl('/profile')
         }, 
         err => {
-            console.error(err)
+            //alert('Username and password do not match')            
+            this.errorMessage = '*Username and password do not match'
+            console.error(err)      
+            return
         })
     }
 
