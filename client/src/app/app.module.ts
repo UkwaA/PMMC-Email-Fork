@@ -31,6 +31,7 @@ import { UserDetailsComponent } from './system-admin-dashboard/user-details/user
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 
 
 const routes : Routes = [
@@ -52,6 +53,7 @@ const routes : Routes = [
     component: CreateProgramComponent,
     canActivate: [AuthRoleGuardService]
   },
+  {path: 'customer-register', component: CustomerRegisterComponent},
 
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
@@ -86,7 +88,9 @@ const routes : Routes = [
     SetUserRoleComponent,
     UserDetailsComponent, 
     IProgramComponent,
-    GProgramComponent
+    GProgramComponent,
+    // UserRegisterComponent,
+    CustomerRegisterComponent
     
   ],
   imports: [

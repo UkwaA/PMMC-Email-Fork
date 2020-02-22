@@ -1,0 +1,24 @@
+.container {
+    /* padding-top: 120px;
+    padding-bottom: 56px;
+    padding-left: 100px;
+    padding-right: 100px; */
+    padding-top:120px;
+    padding-left: 180px;
+    padding-right: 180px;
+    padding-bottom: 50px;
+    /* margin-right: 50px; */
+}
+
+.title{
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 20px;
+    color: #0ebbff; 
+  }
