@@ -1,42 +1,54 @@
+<!-- I read online about overwhelming users with too much info at once,
+so I think it's a better idea to ask for their address info after they
+finish checking out a program -->
+
 <div class = "container">
     <h2 class = "title text-center text-primary"> Register an account </h2>
     <div class = "row">
-        <!-- <h2 class = "text-primary"> Register an account </h2> -->
-    <form>
+    <form [formGroup] = "customerForm">
+        <!-- #customerForm ngSubmit)="userSubmit(heroForm) -->
+        <!-- {{ customerForm.form.valid }} -->
         <div class = "user_info row">
             <div class = "form-group col-sm-9"> 
                 <label for="firstname"> First name </label>
-                <input type = "string" class = "form-control" id = "firstname">
+                <input type = "string" class = "form-control" formControlName="firstName">
             </div> 
             <div class = "form-group col-sm-3"> 
                 <label for="middleinitials"> M.I. </label>
-                <input type = "string" class = "form-control" id = "middleinitials">
+                <input type = "string" class = "form-control" formControlName = "middleInitials">
             </div> 
             <div class = "form-group col-sm-12"> 
                 <label for="lastname"> Last name </label>
-                <input type = "string" class = "form-control" id = "lastname">
+                <input type = "string" class = "form-control" formControlName = "lastName">
             </div> 
             <div class = "form-group col-sm-6">
                 <label for="email"> Email </label>
-                <input type="email" class="form-control" id="emailinput" placeholder="abc@example.com">
+                <input type="email" class="form-control" formControlName="email" placeholder="abc@example.com">
             </div>
             <div class = "form-group col-sm-6">
                 <label for="Phone number"> Phone number </label>
-                <input type="number" class="form-control" id="phonenum">
+                <input type="number" class="form-control" formControlName="phoneNum">
             </div>
             <div class = "form-group col-sm-12">
                 <label for="Username"> Username </label>
-                <input type = "string" class = "form-control" id = "username">
+                <input type = "string" class = "form-control" formControlName = "username">
             </div>
             <div class = "form-group col-sm-12">
                 <label for="Password"> Password </label>
                 <small class = "text-muted"> Must be at least six characters </small>
-                <input type = "string" class = "form-control" id = "password">
+                <input type = "string" class = "form-control" formControlName = "password" 
+                required minlength = 6>
+            </div>
+            <!-- <div *ngIf="password.errors.minlength"> Password must be at least six characters long</div> -->
+            <div class = "form-group col-sm-12">
+                <label for="confirmPassword"> Confirm Password </label>
+                <input type = "string" class = "form-control" id = "confirmpassword" required minlength = 6>
             </div>
         </div>
     </form>
     <div class = "submit_button"> 
-        <button class = "btn btn-primary" type="submit"> Submit </button>
+        <button class = "submit_btn btn btn-primary" type="submit" 
+        (click)="toggleDisabled()"> Submit </button>
     </div>
     <!-- <form> -->
         <!-- <div class = "row username -->
