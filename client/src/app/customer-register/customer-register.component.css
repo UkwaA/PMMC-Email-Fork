@@ -12,6 +12,7 @@
 
 .title{
     padding-bottom: 20px;
+    padding-left: -15px;
 }
 
 h1 {
@@ -22,3 +23,21 @@ h1 {
     padding-top: 20px;
     color: #0ebbff; 
   }
+
+/* input.ng-invalid {
+    border:1px solid #f00;
+} */
+
+input.ng-touched.ng-invalid{ color: red; 
+    border-color: red;}
+/* input.ng-submitclicked{color: red; 
+    border-color: red;} */
+/* input:required:invalid{ color: red; 
+    border-color: red; 
+    box-shadow: 0 0 6px red;} */
+
+/* .registerform.ng-invalid input{
+    border:1px solid #f00;
+} */
+
+/* input.ng-invalid { background: red; } */
