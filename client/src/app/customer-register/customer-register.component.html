@@ -6,8 +6,8 @@ finish checking out a program -->
     <h2 class = "title text-center text-primary"> Register an account </h2>
     <div class = "row">
     <form [formGroup] = "customerForm" (ngSubmit) = "checkSubmission()" ng-class="{submitted:this.submitted}" class="registerform">
-        {{ this.submitted }} 
-        {{customerForm.ng-valid}}
+        <!-- {{ this.submitted }}  -->
+        <!-- {{customerForm.ng-valid}} -->
         <div class = "user_info row">
             <div class = "form-group col-sm-9"> 
                 <label for="firstname"> First name </label>
