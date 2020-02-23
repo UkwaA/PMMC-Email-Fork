@@ -3,18 +3,14 @@ so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
 <div class = "container">
-    <h2 class = "title text-center text-primary"> Register an account </h2>
+    <h2 class = "title text-center"> Register an account </h2>
     <div class = "row">
     <form [formGroup] = "customerForm" (ngSubmit) = "checkSubmission()" ng-class="{submitted:this.submitted}" class="registerform">
-        <!-- {{ this.submitted }}  -->
-        <!-- {{customerForm.ng-valid}} -->
         <div class = "user_info row">
             <div class = "form-group col-sm-9"> 
                 <label for="firstname"> First name </label>
                 <input id = "name" name = "name" type = "string" ng-class="{submitclicked:this.submitted}" class = "ng-invalid form-control" formControlName="firstName">
-                <!-- {{firstname.submittedform}} -->
-                <!-- {{ customerForm.get('firstName').valid }} -->
-                <div *ngIf="submitted && !customerForm.get('firstName').valid"> This input is required </div>
+                <div *ngIf="submitted && !customerForm.get('firstName').valid" class = "warning"> <small>This input is required </small></div>
             </div> 
             <div class = "form-group col-sm-3"> 
                 <label for="middleinitials"> M.I. </label>
@@ -23,44 +19,43 @@ finish checking out a program -->
             <div class = "form-group col-sm-12"> 
                 <label for="lastname"> Last name </label>
                 <input type = "string" class = "form-control" formControlName = "lastName" required>
-                <div class="valid-feedback"> Ok! </div>
-                <div class = "invalid-feedback">Wrong</div>
+                <div *ngIf="submitted && !customerForm.get('lastName').valid" class = "warning"> <small>This input is required </small></div>
             </div> 
             <div class = "form-group col-sm-6">
                 <label for="email"> Email </label>
-                <input type="email" class="form-control" formControlName="email" placeholder="abc@example.com">
+                <input type="email" class="form-control" formControlName="email" placeholder="abc@example.com" required>
+                <div *ngIf="submitted && !customerForm.get('email').valid" class = "warning"> <small>This input is required </small></div>
             </div>
             <div class = "form-group col-sm-6">
-                <label for="Phone number"> Phone number </label>
+                <label for="Phone number"> Phone Number </label>
                 <input type="number" class="form-control" formControlName="phoneNum">
+                <div *ngIf="submitted && !customerForm.get('phoneNum').valid" class = "warning"> <small>This input is required </small></div>
             </div>
             <div class = "form-group col-sm-12">
                 <label for="Username"> Username </label>
                 <input type = "string" class = "form-control" formControlName = "username">
+                <div *ngIf="submitted && !customerForm.get('username').valid" class = "warning"> <small>This input is required </small></div>
             </div>
             <div class = "form-group col-sm-12">
                 <label for="Password"> Password </label>
                 <small class = "text-muted"> Must be at least six characters </small>
                 <input id = "password" name="password" type = "string" class = "form-control" formControlName = "password" 
                 required minlength = 6 ng-class="{'has-warning': form.password.$touched}">
+                <div *ngIf="submitted && !customerForm.get('password').valid" class = "warning"> <small>This input is required </small></div>
             </div>
-            <!-- <div *ngIf="password.errors.minlength"> Password must be at least six characters long</div> -->
             <div class = "form-group col-sm-12">
                 <label for="confirmPassword"> Confirm Password </label>
                 <input id = "confirmpassword" type = "string" class = "form-control" formControlName="confirmed_password">
                 <div *ngIf="this.customerForm.get('confirmed_password').value != ''">
                     <div *ngIf="!passwordsMatch()"> <small> Passwords do not match </small> </div>    
-                </div>    
+                </div>   
+                <div *ngIf="submitted && !customerForm.get('firstName').valid" class = "warning"> <small>This input is required </small></div> 
             </div>
         </div>
         <div class = "submit_button"> 
             <button  class = "submit_btn btn btn-primary" [disabled] = "customerForm.ng-invalid" type="submit"> Submit </button>
         </div>
     </form>
-    <!-- <form> -->
-        <!-- <div class = "row username -->
-        <!-- <label for="Username" id="username" -->
-    <!-- </form> -->
 </div>
 
 

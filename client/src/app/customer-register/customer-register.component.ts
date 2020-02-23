@@ -12,7 +12,7 @@ export class CustomerRegisterComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     middleInitials: new FormControl(''),
     lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.email),
+    email: new FormControl('', [Validators.email, Validators.required]),
     phoneNum: new FormControl('', Validators.minLength(9)),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.minLength(6)),
