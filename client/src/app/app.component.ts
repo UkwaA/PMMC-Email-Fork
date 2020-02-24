@@ -3,6 +3,7 @@ import { AuthenticationService } from './authentication.service';
 import { faFacebook,faYoutube, faYelp} from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhone, faMapMarkedAlt, faHandHoldingUsd, faDoorOpen, faLaughWink} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HFService } from './services/hf.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(public auth: AuthenticationService, private fb: FormBuilder) { }
+  constructor(public auth: AuthenticationService, private fb: FormBuilder, public hf: HFService) { }
 
   faFacebook = faFacebook;
   faYoutube = faYoutube;
