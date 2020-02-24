@@ -33,14 +33,11 @@ import { UserDetailsComponent } from './system-admin-dashboard/user-details/user
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
 import { MatRadioModule } from '@angular/material/radio';
-<<<<<<< HEAD
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-=======
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
->>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
 
 
 const routes : Routes = [
@@ -62,12 +59,7 @@ const routes : Routes = [
     component: CreateProgramComponent,
     canActivate: [AuthRoleGuardService]
   },
-<<<<<<< HEAD
  */
-=======
-  {path: 'customer-register', component: CustomerRegisterComponent},
-
->>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
@@ -112,11 +104,8 @@ const routes : Routes = [
     UserDetailsComponent, 
     IProgramComponent,
     GProgramComponent,
-<<<<<<< HEAD
-=======
     // UserRegisterComponent,
     CustomerRegisterComponent
->>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
     
   ],
   imports: [
@@ -140,11 +129,7 @@ const routes : Routes = [
     MatButtonModule,
     MatIconModule
   ],
-<<<<<<< HEAD
-  providers: [ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
-=======
-  providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
->>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
+  providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
