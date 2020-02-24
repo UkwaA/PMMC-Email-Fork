@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from '../services/email.services';
 
 
 @Component({
@@ -8,10 +9,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class Contact implements OnInit {
-
+    loading = false
     myForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, public emailService:EmailService) {
 
     }
     ngOnInit() {
@@ -30,8 +31,6 @@ export class Contact implements OnInit {
                 Validators.minLength(5)
             ]]
         })
-
-        this.myForm.valueChanges.subscribe(console.log);
     }
 
     get email() {
@@ -46,4 +45,36 @@ export class Contact implements OnInit {
         return this.myForm.get('message');
     }
 
+    submit(){
+        this.loading = true;
+        let user = {
+        name: this.myForm.value.fullName,
+        email: this.myForm.value.email,
+        subject: this.myForm.value.subject,
+        message: this.myForm.value.message
+        }
+
+        this.emailService.sendEmail(user).subscribe(
+        data => {
+            let res:any = data; 
+            console.log(
+            `👏 > 👏 > 👏 > 👏 ${user.name} is successfully register and mail has been sent and the message id is ${res.messageId}`
+            );
+        },
+        err => {
+            console.log(err);
+            this.loading = false;
+            console.log("submitted")
+        },() => {
+            //this.loading = false;
+            //this.buttionText = "Submit";
+        }
+        );
+    }
+
+    reset(){
+        this.myForm.reset()
+        this.loading = false
+
+    }
 }

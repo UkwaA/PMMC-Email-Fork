@@ -1,21 +1,40 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { faFacebook,faYoutube, faYelp} from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhone, faMapMarkedAlt, faHandHoldingUsd, faDoorOpen, faLaughWink} from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { HFService } from './services/hf.service';
+=======
+import { trigger, state, transition, style, animate } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
+
+declare const window: any;
+>>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations:[ 
+    trigger('fade',
+    [ 
+      state('void', style({ opacity : 0})),
+      transition(':enter',[ animate(300)]),
+      transition(':leave',[ animate(500)]),
+    ]
+)]
 
 })
 export class AppComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
+<<<<<<< HEAD
   constructor(public auth: AuthenticationService, private fb: FormBuilder, public hf: HFService) { }
+=======
+  constructor(public auth: AuthenticationService, private fb: FormBuilder, @Inject(DOCUMENT) document) { }
+>>>>>>> 641e8faf9c11c1287138e55a5253479401a415b1
 
   faFacebook = faFacebook;
   faYoutube = faYoutube;
@@ -47,4 +66,15 @@ export class AppComponent implements OnInit {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
 
+  // Change color on scroll
+  header_variable = false;
+  @HostListener('document:scroll', ['$event'])
+  scrollfunction(){
+    if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50){
+      this.header_variable = true;
+    }
+    else {
+      this.header_variable = false;
+    }
+  }
 }

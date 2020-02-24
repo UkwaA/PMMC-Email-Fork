@@ -1,0 +1,28 @@
+.container {
+    padding-top:120px;
+    padding-left: 350px;
+    padding-right: 350px;
+    padding-bottom: 50px;
+}
+
+.title{
+    padding-bottom: 20px;
+    padding-left: -15px;
+    color: #0ebbff;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 20px;
+    color: #0ebbff; 
+  }
+
+input.ng-touched.ng-invalid{ color: red; 
+    border-color: red;}
+
+.warning{
+    color: red; 
+}

@@ -111,4 +111,6 @@ export class AuthenticationService {
   public updateUserDetail(UserPK:number, userDetails: UserDetails): Observable<any>{
     return this.http.put(this.baseServerURL + "/users/get-user-details/" + UserPK, userDetails);
   }
+
+  
 }
