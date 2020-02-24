@@ -16,6 +16,7 @@ import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
+import { EmailService } from './services/email.services'
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
@@ -109,7 +110,7 @@ const routes : Routes = [
     MatListModule,
     MatRadioModule
   ],
-  providers: [ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
+  providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

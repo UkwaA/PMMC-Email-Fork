@@ -8,7 +8,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <form [formGroup] = "myForm"> 
+      <div *ngIf = "loading">
+        Thank you for contacting us. Your message has been successfully submitted. 
+        We will response to you as soon as possible.
+        <br><br>Click <button type="button" class="btn btn-primary btn-sm" (click) = "reset()">HERE</button> to send another message.
+      </div>
+      <form *ngIf="!loading" [formGroup] = "myForm" (ngSubmit)="submit(myForm.value)"> 
         <mat-form-field class="inputField">
           <input matInput placeholder="Full Name" formControlName = "fullName">          
         </mat-form-field>
