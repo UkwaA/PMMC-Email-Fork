@@ -60,14 +60,14 @@ export class AppComponent implements OnInit {
 }
 
   // Change color on scroll
-  header_variable = false;
-  @HostListener('document:scroll', ['$event'])
-  scrollfunction(){
-    if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50){
-      this.header_variable = true;
-    }
-    else {
-      this.header_variable = false;
-    }
-  }
-}
+   header_variable = false;
+   @HostListener('document:scroll', ['$event'])
+   scrollfunction(){
+     if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50){
+       this.header_variable = true;
+     }
+     else {
+       this.header_variable = false;
+     }
+   }
+ }
