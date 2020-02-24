@@ -2,6 +2,7 @@ import {Component} from '@angular/core'
 import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faUser, faKey} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     templateUrl: './login.component.html',
@@ -22,6 +23,9 @@ export class LoginComponent {
     }
 
     constructor(private auth:AuthenticationService, private router:Router, private formBuilder: FormBuilder) {}
+
+    faUser = faUser;
+    faKey = faKey;
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
