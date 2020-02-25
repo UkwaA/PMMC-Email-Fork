@@ -78,9 +78,9 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: CreateProgramComponent},
-      {path: 'createprogram', component: CreateProgramComponent },
-      {path: 'program-management', component: ProgramManagementComponent},
+      {path: '', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'set-user-role',
         component: SetUserRoleComponent,
