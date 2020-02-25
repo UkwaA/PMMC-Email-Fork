@@ -42,6 +42,7 @@ export class IProgramComponent implements OnInit {
     ]
   }
 
+  //check in console
   check(){
     console.log(this.bookingIndividual);
   }
