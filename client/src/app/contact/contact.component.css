@@ -2,7 +2,7 @@ body {
     padding-top: 56px;
     padding-bottom: 20px;
     background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');
-
+    background-size:100%;
   }
 
 h1{
@@ -37,21 +37,6 @@ h1{
  background-color: white !important;;
 }
 
-.mat-focused .placeholder {
-  color: #00D318;
-}
-
-/* ::ng-deep.mat-form-field-placeholder{
-  color:red;
-}
-
-::ng-deep.mat-focused .mat-form-field-placeholder{
-  color:red;
-} */
-
-.myForm {
-  color: white;
-}
 
 hr {
   margin-top: 4rem;
