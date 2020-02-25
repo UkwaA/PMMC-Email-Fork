@@ -38,6 +38,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 const routes : Routes = [
@@ -77,9 +78,9 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: CreateProgramComponent},
-      {path: 'createprogram', component: CreateProgramComponent },
-      {path: 'program-management', component: ProgramManagementComponent},
+      {path: '', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'set-user-role',
         component: SetUserRoleComponent,
@@ -130,7 +131,8 @@ const routes : Routes = [
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent]

@@ -18,7 +18,7 @@ export class GProgramComponent implements OnInit {
   constructor(private service:ProgramServices) { }
 
   ngOnInit() {
-    this.bookingGroup = new BookingGroupData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false, false);
+    this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true);
     this.varLabels = [
       {var: this.bookingGroup.AdultQuantity, label: "Adult Quantity"},
       {var: this.bookingGroup.Age57Quantity, label: "Age 5-7 Quantity"},
@@ -39,6 +39,11 @@ export class GProgramComponent implements OnInit {
       {var: this.bookingGroup.TeacherEmail ,label: "Teacher Email"},
       {var: this.bookingGroup.TeacherPhoneNo ,label: "Teacher Phone Number"}
     ]
+  }
+
+  //check the data of checklist button
+  check(){
+    console.log(this.bookingGroup);
   }
 
   onItemChange(value){
