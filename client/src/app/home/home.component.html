@@ -46,20 +46,16 @@
     <!-- Page Features -->
     <div class="card-deck row">
 
-      <div class="col-xs-12 col-sm-6 col-md-4"  *ngFor = "let program of programs">
-        <div class="program_card card h-95 border-light" style="box-shadow: 0px 2px 2px #34393a80;" >
+      <div class="col-xs-12 col-sm-6 col-md-4"  *ngFor = "let program of programs; let i = index">
+        <div class="program_card card h-95 border-light" style="box-shadow: 0px 2px 2px #34393a80;" *ngIf = "i < 6">
        <!--Card image-->
           <div class="view overlay">
             <img class="card-img flex-fill p-1" src={{program.ImgData}} alt="Card image cap" width="300" height="260">
 
-           <!--  <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a> -->
           </div>
           <div class="card-body">
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
-            <!-- <p class="block-with-text"> {{program.Description}}</p> -->
             <div class="block-with-text">
               <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description"></ckeditor>
             </div>
