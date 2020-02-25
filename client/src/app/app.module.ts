@@ -65,8 +65,12 @@ const routes : Routes = [
   {path: 'contact', component: Contact},
   {path: 'booking-individual-program', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
-/*   {path: 'program-management', component: ProgramManagementComponent}, */
-  {path: 'program-details/:id', component: ProgramDetailsComponent},
+  {path: 'customer-register', component: CustomerRegisterComponent}, 
+  { 
+    path: 'program-details/:id', 
+    component: ProgramDetailsComponent,
+    canActivate: [AuthRoleGuardService], 
+  },
   
   {
     path: 'profile', 
@@ -104,7 +108,6 @@ const routes : Routes = [
     UserDetailsComponent, 
     IProgramComponent,
     GProgramComponent,
-    // UserRegisterComponent,
     CustomerRegisterComponent
     
   ],

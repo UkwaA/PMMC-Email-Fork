@@ -2,68 +2,72 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'groupprogram',
+  'individualdetails',
   {
-    GroupProgramPK: {
+    IndividualProgramPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
-    AdultQuantity:{
-        type: Sequelize.BOOLEAN
-    }, 
-    Age57Quantity:{
+    ParticipantName: {
         type: Sequelize.BOOLEAN
     },
-    Age810Quantity:{
+    ParticipantAge :{
         type: Sequelize.BOOLEAN
     },
-    Age1113Quantity:{
+    Gender : {
+        type:Sequelize.BOOLEAN
+    },
+    MerchSize : {
         type: Sequelize.BOOLEAN
     },
-    TotalQuantity:{
+    AllergyInfo : {
         type: Sequelize.BOOLEAN
     },
-    Deposit:{
+    SpecialInfo : {
         type: Sequelize.BOOLEAN
     },
-    EducationFK:{
+    InsureProviderName:{
         type: Sequelize.BOOLEAN
     },
-    ProgramRestriction:{
+    InsureRecipientName:{
         type: Sequelize.BOOLEAN
     },
-    DepositAmount:{
+    InsurePolicyNo:{
         type: Sequelize.BOOLEAN
     },
-    FullAmount:{
+    InsurePhoneNo:{
         type: Sequelize.BOOLEAN
     },
-    MaximumParticipant:{
-        type: Sequelize.BOOLEAN
-    },    
-    OrganizationName: {
+    AuthorizedPickupName1:{
         type: Sequelize.BOOLEAN
     },
-    GradeLevel: {
+    AuthorizedPickupPhone1 :{
         type: Sequelize.BOOLEAN
     },
-    ScoutProgram: {
+    AuthorizedPickupName2:{
         type: Sequelize.BOOLEAN
     },
-    TeacherName: {
+    AuthorizedPickupPhone2 :{
         type: Sequelize.BOOLEAN
     },
-    TeacherEmail: {
+    EarlyDropOff: {
         type: Sequelize.BOOLEAN
     },
-    TeacherPhoneNo: {
+    LatePickup:{
         type: Sequelize.BOOLEAN
     },
-    AlternativeDate: {
+    MediaRelease:{
+        type : Sequelize.BOOLEAN
+    },
+    EmergencyMedicalRelease:{
         type: Sequelize.BOOLEAN
     },
-    EducationPurpose:{
+    LiabilityAgreement: {
         type: Sequelize.BOOLEAN
+    },
+    FullAmount : {
+        type: Sequelize.INTEGER
     },
     CreatedBy: {
         type: Sequelize.INTEGER

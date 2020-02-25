@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output} from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingIndividualData } from 'src/app/data/booking-individual-data';
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
@@ -9,7 +9,8 @@ import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
   styleUrls: ['./i-program.component.css']
 })
 export class IProgramComponent implements OnInit {
-  bookingIndividual: BookingIndividualData;
+  @Input() ProgramPK: number;
+  @Output() bookingIndividual: BookingIndividualData;
   varLabels:Array<Object>;
  
   //TODO: inject the service
