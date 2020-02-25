@@ -54,11 +54,11 @@ export class Contact implements OnInit {
         message: this.myForm.value.message
         }
 
-        this.emailService.sendEmail(user).subscribe(
+        this.emailService.sendContactEmail(user).subscribe(
         data => {
             let res:any = data; 
             console.log(
-            `👏 > 👏 > 👏 > 👏 ${user.name} is successfully register and mail has been sent and the message id is ${res.messageId}`
+            `👏 > 👏 > 👏 > 👏 Email has been sent and the message id is ${res.messageId}`
             );
         },
         err => {
