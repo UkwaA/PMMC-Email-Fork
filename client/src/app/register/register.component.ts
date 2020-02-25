@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     templateUrl: './register.component.html',
@@ -22,6 +23,11 @@ export class RegisterComponent {
     }
 
     constructor(private auth: AuthenticationService, private router: Router, private formBuilder: FormBuilder) { }
+
+    faUser = faUser;
+    faKey = faKey;
+    faEnvelope = faEnvelope;
+    faCheckDouble = faCheckDouble;
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({

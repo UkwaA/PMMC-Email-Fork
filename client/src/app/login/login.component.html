@@ -12,8 +12,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="username"
-                            formControlName="username" placeholder="Enter Username" [(ngModel)] ="credentials.Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                            <input type="text" class="form-control" formControlName="username" placeholder="Enter Username" 
+                            [(ngModel)] ="credentials.Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                                 <div *ngIf="f.username.errors.required">Username is required</div>
                             </div> 
