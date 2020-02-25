@@ -19,6 +19,7 @@ declare var $: any;
 
 export class ProgramDetailsComponent {
     ProgramPK: number
+    ProgramTypeText: string
     programData: ProgramData = {
         ProgramPk: 0,
         Name: '',
@@ -57,6 +58,12 @@ export class ProgramDetailsComponent {
             this.services.getProgramDetailsByID(this.ProgramPK).subscribe(program => {
                this.programData = program
                this.programData.ImgData = "http://localhost:3000" +  this.programData.ImgData 
+               if(this.programData.ProgramType == 0) {
+                    this.ProgramTypeText = "Group Program"
+               }
+               else {
+                    this.ProgramTypeText = "Individual Program"
+               }
             })
         })
     }

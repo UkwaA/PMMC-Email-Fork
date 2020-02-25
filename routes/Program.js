@@ -123,11 +123,10 @@ program.post('/add-program', (req, res) => {
       // 0 - Group Program
       // 1 - Individual Program
 
-
       switch (req.body.ProgramType) {
         case '0':
           var groupDetail = {
-            ProgramFK: programPK,
+            GroupProgramPK: programPK,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
@@ -139,7 +138,7 @@ program.post('/add-program', (req, res) => {
           break;
         case '1':
           var individualDetail = {
-            ProgramFK: programPK,
+            IndividualProgramPK: programPK,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }

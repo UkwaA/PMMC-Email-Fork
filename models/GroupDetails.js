@@ -2,11 +2,11 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'groupprogram',
+  'groupdetails',
   {
-    GroupProgramPK: {
+    GroupDetailsPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
     },
     AdultQuantity:{
         type: Sequelize.BOOLEAN

@@ -26,7 +26,7 @@ declare const window: any;
 export class AppComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-
+  userName: string;
   constructor(public auth: AuthenticationService, private fb: FormBuilder, public hf: HFService, @Inject(DOCUMENT) document) { }
 
   faFacebook = faFacebook;

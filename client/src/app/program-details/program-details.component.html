@@ -34,26 +34,26 @@
                         <img class="card-img flex-fill" [src]="programData.ImgData" alt="Card image cap">
                     </div>
                 </div>
-                <form (submit)="upLoad()" encType="multipart/form-data">
+                <!-- <form (submit)="upLoad()" encType="multipart/form-data">
                     <input type="file" name="sampleFile" />
                     <input type='submit' value='Upload!' />
-                </form>
+                </form> -->
                 <div class="form-group font-weight-bold">
                     <div class="row">
                         <div class="col-md-4">
                             <label>Program Type</label>
                         </div>
                         <div class="col-md-8">
-                            <select id="programCat" (change)="selectChangeHandler($event)">
-                            </select>
+                            <input type="text" class="form-control" name="ProgramType"
+                            [(ngModel)]="ProgramTypeText" readonly>
                         </div>
                     </div>
                 </div>
-                <div *ngIf = "selectedValue=='2'"><i-program></i-program></div>
-                <div *ngIf = "selectedValue=='1'"><g-program></g-program></div>
-                <div class="button pt-5 pb-5">
+                <div *ngIf = "programData.ProgramType=='1'" ><i-program [ProgramPK]="ProgramPK"></i-program></div>
+                <div *ngIf = "programData.ProgramType=='0'" ><g-program [ProgramPK]="ProgramPK"></g-program></div>
+                <!-- <div class="button pt-5 pb-5">
                     <button class="btn btn-lg btn-info btn-block " type="submit">Update Program Details</button>
-                </div>
+                </div> -->
             </form>
 
         </div>
