@@ -1,5 +1,4 @@
 <div class="container">
-  <form (submit)="updateProgram()" >
   <h4 class="text-center">Choose the options you'd like to display:</h4>
   <div class="row" *ngFor = 'let item of varLabels; let i=index'>
     <section class="options-section">
@@ -9,5 +8,4 @@
   <div class="button pt-5 pb-5">
     <button class="btn btn-lg btn-info btn-block " type="submit" (click)="check()">Update Program Details</button>
   </div>
-</form>
 </div>
