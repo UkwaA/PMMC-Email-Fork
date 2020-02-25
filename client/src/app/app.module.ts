@@ -38,6 +38,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 const routes : Routes = [
@@ -130,7 +131,8 @@ const routes : Routes = [
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent]

@@ -1,19 +1,9 @@
 <div class="container">
   <h4 class="text-center">Choose the options you'd like to display:</h4>
   <div class="row" *ngFor = 'let item of varLabels; let i=index'>
-    <div class="col-xl-8 col-md-6 col-sm-6">
-      <h5> {{item.label}} </h5>
-    </div>
-    <div class="col-xl-4 col-md-6 col-sm-6">
-      <mat-radio-group aria-label="Select an option"  [(ngModel)]="bookingIndividual[item.var]">
-          <mat-radio-button value=true>Yes</mat-radio-button>
-          <mat-radio-button value=false>No</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <h5> {{item.var}} </h5>
-  </div>
-  <div class="row" *ngFor = 'let item of varLabels'>
-    <h2>  {{item.var}} </h2>
+    <section class="options-section">
+      <mat-checkbox class="options-margin" [(ngModel)]="bookingIndividual[item.var]">{{item.label}}</mat-checkbox>
+    </section>
   </div>
   <div class="button pt-5 pb-5">
     <button class="btn btn-lg btn-info btn-block " type="submit" (click)="check()">Update Program Details</button>
