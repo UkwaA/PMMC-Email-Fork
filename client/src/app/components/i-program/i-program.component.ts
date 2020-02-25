@@ -41,4 +41,8 @@ export class IProgramComponent implements OnInit {
       {var: this.bookingIndividual.FullAmount , label: "Full Amount"}
     ]
   }
+
+  updateProgram() {
+    console.log(this.varLabels)
+  }
 }

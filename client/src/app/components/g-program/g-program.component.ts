@@ -20,24 +20,24 @@ export class GProgramComponent implements OnInit {
   ngOnInit() {
     this.bookingGroup = new BookingGroupData(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false,false, false);
     this.varLabels = [
-      {var: "AdultQuantity", label: "Adult Quantity"},
-      {var: "Age57Quantity", label: "Age 5-7 Quantity"},
-      {var: "Age810Quantity" ,label: "Age 8-10 Quantity"},
-      {var: "Age1113Quantity" ,label: "Age 11-13 Quantity"},
-      {var: "TotalQuantity" ,label: "Total Quantity"},
-      {var: "Price" ,label: "Price"},
-      {var: "Deposit" ,label: "Deposit"},
-      {var: "EducationFK" ,label: "Education Content"},
-      {var: "ProgramRestriction" ,label: "Program Restriction"},
-      {var: "DepositAmount" ,label: "Deposit Amount"},
-      {var: "FullAmount" ,label: "Full Amount"},
-      {var: "MaximumParticipant" ,label: "Maximum Participant"},
-      {var: "OrganizationName" ,label: "Organization Name"},
-      {var: "GradeLevel" ,label: "Grade Level"},
-      {var: "ScoutProgram" ,label: "Scout Program"},
-      {var: "TeacherName" ,label: "Teacher Name"},
-      {var: "TeacherEmail" ,label: "Teacher Email"},
-      {var: "TeacherPhoneNo" ,label: "Teacher Phone Number"}
+      {var: this.bookingGroup.AdultQuantity, label: "Adult Quantity"},
+      {var: this.bookingGroup.Age57Quantity, label: "Age 5-7 Quantity"},
+      {var: this.bookingGroup.Age810Quantity ,label: "Age 8-10 Quantity"},
+      {var: this.bookingGroup.Age1113Quantity ,label: "Age 11-13 Quantity"},
+      {var: this.bookingGroup.TotalQuantity ,label: "Total Quantity"},
+      {var: this.bookingGroup.Price ,label: "Price"},
+      {var: this.bookingGroup.Deposit ,label: "Deposit"},
+      {var: this.bookingGroup.EducationFK ,label: "Education Content"},
+      {var: this.bookingGroup.ProgramRestriction ,label: "Program Restriction"},
+      {var: this.bookingGroup.DepositAmount ,label: "Deposit Amount"},
+      {var: this.bookingGroup.FullAmount ,label: "Full Amount"},
+      {var: this.bookingGroup.MaximumParticipant ,label: "Maximum Participant"},
+      {var: this.bookingGroup.OrganizationName ,label: "Organization Name"},
+      {var: this.bookingGroup.GradeLevel ,label: "Grade Level"},
+      {var: this.bookingGroup.ScoutProgram ,label: "Scout Program"},
+      {var: this.bookingGroup.TeacherName ,label: "Teacher Name"},
+      {var: this.bookingGroup.TeacherEmail ,label: "Teacher Email"},
+      {var: this.bookingGroup.TeacherPhoneNo ,label: "Teacher Phone Number"}
     ]
   }
 
