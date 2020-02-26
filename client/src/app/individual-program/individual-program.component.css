@@ -3,8 +3,8 @@ h1 {
   font-size: 50px;
   font-weight: bold;
   padding-top: 20px;
-  color: #ffffff; 
-  text-shadow: 1px 1px 2px #00000080;
+  color: #08b2b8; 
+  /* text-shadow: 1px 1px 2px #00000080; */
 
 }
 
@@ -24,7 +24,7 @@ hr{
   padding-bottom: 25px;
 }
 
-body {
+/* body {
   background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');
   background-size:100%;
-}
+} */
