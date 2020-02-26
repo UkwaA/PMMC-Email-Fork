@@ -3,53 +3,55 @@ so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
 <div class = "container">
-    <h2 class = "title text-center"> Personal Information </h2>
+    <h2 class = "title text-center"> Registration </h2>
     <form [formGroup] = "customerForm" (ngSubmit) = "checkSubmission()" ng-class="{submitted:this.submitted}" class="registerform">
     <div class = "row">
     <!-- <form [formGroup] = "customerForm" (ngSubmit) = "checkSubmission()" ng-class="{submitted:this.submitted}" class="registerform"> -->
-        <div class = "user_info col-6">
+        <div class = "user_info col-12">
+            <h6 class="title text-center text-dark"> Personal Information </h6>
             <div class = "form-group col-lg-11"> 
-                <label for="firstname"> First name </label>
-                <input id = "name" name = "name" type = "string" ng-class="{submitclicked:this.submitted}" class = "ng-invalid form-control" formControlName="firstName">
-                <div *ngIf="submitted && !customerForm.get('firstName').valid" class = "warning"> <small>This input is required </small></div>
+                <!-- <label for="firstname"> First name </label> -->
+                <input id = "name" name = "name" type = "string" class = "form-control" formControlName="firstName" placeholder = "First Name">
+                <div *ngIf="submitted && !customerForm.get('firstName').valid" class = "warning"> <small>First name is required </small></div>
             </div> 
             <div class = "form-group col-lg-11"> 
-                <label for="lastname"> Last name </label>
-                <input type = "string" class = "form-control" formControlName = "lastName" required>
-                <div *ngIf="submitted && !customerForm.get('lastName').valid" class = "warning"> <small>This input is required </small></div>
+                <!-- <label for="lastname"> Last name </label> -->
+                <input type = "string" class = "form-control" formControlName = "lastName" placeholder = "Last Name">
+                <div *ngIf="submitted && !customerForm.get('lastName').valid" class = "warning"> <small>Last name is required </small></div>
             </div> 
             <div class = "form-group col-6">
-                <label for="Phone number"> Phone Number </label>
-                <input type="number" class="form-control" formControlName="phoneNum">
-                <div *ngIf="submitted && !customerForm.get('phoneNum').valid" class = "warning"> <small>This input is required </small></div>
+                <!-- <label for="Phone number"> Phone Number </label> -->
+                <input type="number" class="form-control" formControlName="phoneNum" placeholder = "Phone Number">
+                <div *ngIf="submitted && !customerForm.get('phoneNum').valid" class = "warning"> <small>Phone number is required </small></div>
             </div>
         </div>
-        <div class = "address_info col-6">
+        <div class = "address_info col-12">
+            <h6 class="title text-center text-dark"> Address </h6>
             <div class = "form-group col-12">
-                <label for="Username"> Street Address </label>
-                <input type = "string" class = "form-control" formControlName = "address_street">
-                <div *ngIf="submitted && !customerForm.get('address_street').valid" class = "warning"> <small>This input is required </small></div>
+                <!-- <label for="Username"> Street Address </label> -->
+                <input type = "string" class = "form-control" formControlName = "address_street" placeholder = "Street Address">
+                <div *ngIf="submitted && !customerForm.get('address_street').valid" class = "warning"> <small>Street Address is required</small></div>
             </div>
             <div class = "form-group col-12">
-                <label for="Username"> Unit number </label>
-                <input type = "string" class = "form-control" formControlName = "address_unit" placeholder="Apartment, suite, unit, etc.">
-                <div *ngIf="submitted && !customerForm.get('address_unit').valid" class = "warning"> <small>This input is required </small></div>
+                <!-- <label for="Username"> Unit number </label> -->
+                <input type = "string" class = "form-control" formControlName = "address_unit" placeholder="Street Address Line 2">
+                <!-- <div *ngIf="submitted && !customerForm.get('address_unit').valid" class = "warning"> <small>This input is required </small></div> -->
             </div>
             <div class="location_info row">
                 <div class = "form-group col-6">
-                    <label for="City"> City </label>
-                    <input type = "string" class = "form-control" formControlName = "address_city">
-                    <div *ngIf="submitted && !customerForm.get('address_city').valid" class = "warning"> <small>This input is required </small></div>
+                    <!-- <label for="City"> City </label> -->
+                    <input type = "string" class = "form-control" formControlName = "address_city" placeholder="City">
+                    <div *ngIf="submitted && !customerForm.get('address_city').valid" class = "warning"> <small>City is required</small></div>
                 </div>
-                <div class = "form-group col-2">
-                    <label for="State"> State </label>
-                    <input type = "string" maxlength="2" class = "form-control" formControlName = "address_state">
-                    <div *ngIf="submitted && !customerForm.get('address_state').valid" class = "warning"> <small>This input is required </small></div>
+                <div class = "form-group col-3">
+                    <!-- <label for="State"> State </label> -->
+                    <input type = "string" maxlength="2" class = "form-control" formControlName = "address_state" placeholder="State">
+                    <div *ngIf="submitted && !customerForm.get('address_state').valid" class = "warning"> <small>State is required </small></div>
                 </div>
-                <div class = "form-group col-4">
-                    <label for="ZipCode"> Zip Code </label>
-                    <input type = "string" class = "form-control" formControlName = "address_zipcode">
-                    <div *ngIf="submitted && !customerForm.get('address_zipcode').valid" class = "warning"> <small>This input is required </small></div>
+                <div class = "form-group col-3">
+                    <!-- <label for="ZipCode"> Zip Code </label> -->
+                    <input type = "string" class = "form-control" formControlName = "address_zipcode" placeholder="Zip Code">
+                    <div *ngIf="submitted && !customerForm.get('address_zipcode').valid" class = "warning"> <small>Zip code is required </small></div>
                 </div>
             </div>
             <!-- <div class = "form-group col-sm-12">

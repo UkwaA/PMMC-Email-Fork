@@ -1,7 +1,7 @@
 .container {
     padding-top:120px;
-    padding-left: 50px;
-    /* padding-right: 350px; */
+    padding-left: 300px;
+    padding-right: 300px;
     padding-bottom: 50px;
 }
 
@@ -13,6 +13,10 @@
 
 .location_info{
     margin: auto;
+}
+
+.address_info{
+    padding-top:30px;
 }
 
 .submit_button{
