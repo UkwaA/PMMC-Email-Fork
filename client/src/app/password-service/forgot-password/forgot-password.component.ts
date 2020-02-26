@@ -11,7 +11,7 @@ import { EmailService } from '../../services/email.services';
 export class ForgotPasswordComponent{
     myForm: FormGroup
     errorMessage = ''
-    submitted = false;
+    submitted = false
     userInfo = {
         UserPK: '',
         name: '',
@@ -33,8 +33,7 @@ export class ForgotPasswordComponent{
 
     get f() { return this.myForm.controls; }
 
-    resetPassword(){
-        this.submitted = true;
+    resetPassword(){        
         if (this.myForm.invalid) {
             return;
         }
@@ -44,10 +43,12 @@ export class ForgotPasswordComponent{
                 if(res.error){
                     console.log("fotgot ts file: " + res.error)
                     this.errorMessage = "*" + res.error
+                    this.submitted = false
                 }
                 else{
                     this.errorMessage = "*Reset Email has been sent to " + this.userInfo.email
                     console.log("Reset Email has been sent to " + this.userInfo.email)                    
+                    this.submitted = true
                 }
             },
             err => {

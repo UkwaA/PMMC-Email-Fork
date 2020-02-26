@@ -33,6 +33,7 @@ import { UserDetailsComponent } from './system-admin-dashboard/user-details/user
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
 import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
+import { ResetPasswordComponent} from './password-service/reset-password/reset-password.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -40,6 +41,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const routes : Routes = [
@@ -69,6 +71,7 @@ const routes : Routes = [
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'customer-register', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
+  {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   { 
     path: 'program-details/:id', 
     component: ProgramDetailsComponent,
@@ -112,8 +115,8 @@ const routes : Routes = [
     IProgramComponent,
     GProgramComponent,
     CustomerRegisterComponent,
-    ForgotPasswordComponent
-    
+    ForgotPasswordComponent,
+    ResetPasswordComponent   
   ],
   imports: [
     BrowserModule,
@@ -135,7 +138,8 @@ const routes : Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent]

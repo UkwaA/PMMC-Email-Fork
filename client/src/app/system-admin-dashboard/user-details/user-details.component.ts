@@ -79,7 +79,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   //TO-DO:
-  removeUser(){
+  disableUser(){
 
   }
 
