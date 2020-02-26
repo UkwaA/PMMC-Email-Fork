@@ -32,6 +32,7 @@ import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set
 import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
+import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -67,6 +68,7 @@ const routes : Routes = [
   {path: 'booking-individual-program', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'customer-register', component: CustomerRegisterComponent}, 
+  {path: 'login/forgot-password', component: ForgotPasswordComponent},
   { 
     path: 'program-details/:id', 
     component: ProgramDetailsComponent,
@@ -109,7 +111,8 @@ const routes : Routes = [
     UserDetailsComponent, 
     IProgramComponent,
     GProgramComponent,
-    CustomerRegisterComponent
+    CustomerRegisterComponent,
+    ForgotPasswordComponent
     
   ],
   imports: [

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Observable, of } from 'rxjs'
 
 @Injectable(
   {providedIn: "root"}
@@ -8,16 +9,14 @@ export class EmailService {
   private expressBaseUrl: string = "http://localhost:3000"
   test = "Testing"
   constructor(private http: HttpClient) {}
+ 
 
-  httpGet(url) {
-    return this.http.get(url);
+  public sendContactEmail(data)  {
+    return this.http.post(this.expressBaseUrl + '/service/send-contact-email', data);
   }
 
-  httpPost(url, {}) {
-    return this.http.post(url, { name: "Subrat" });
+  public sendResetPasswordEmail(userInfo): Observable<any>{
+    return this.http.post(this.expressBaseUrl + '/service/send-reset-password-email', userInfo);
   }
 
-  public sendEmail(data) {
-    return this.http.post(this.expressBaseUrl + '/service/sendmail', data);
-  }
 }
