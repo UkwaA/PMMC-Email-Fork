@@ -20,7 +20,8 @@ users.post('/register', (req, res) => {
 
   User.findOne({
     where: {
-      Username: req.body.Username
+      //Username: req.body.Username
+      Email : req.body.Email
     }
   })
     //TODO bcrypt
@@ -135,7 +136,7 @@ users.get('/get-user-details/:id', (req, res) => {
 users.put('/get-user-details/:id', (req, res) => {
   const id = req.params.id
   User.update(req.body, {
-    where: { UserPk: id } //body or params???
+    where: { UserPk: id } 
   })
     .then(result => {
       if (result == 1) {
@@ -153,6 +154,8 @@ users.put('/get-user-details/:id', (req, res) => {
       res.send('error: ' + err)
     })
 })
+
+
 module.exports = users
 
 

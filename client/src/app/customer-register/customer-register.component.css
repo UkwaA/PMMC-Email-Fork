@@ -1,7 +1,7 @@
 .container {
     padding-top:120px;
-    padding-left: 350px;
-    padding-right: 350px;
+    padding-left: 300px;
+    padding-right: 300px;
     padding-bottom: 50px;
 }
 
@@ -9,6 +9,19 @@
     padding-bottom: 20px;
     padding-left: -15px;
     color: #0ebbff;
+}
+
+.location_info{
+    margin: auto;
+}
+
+.address_info{
+    padding-top:30px;
+}
+
+.submit_button{
+    margin-right: 15px;
+    margin-top: 15px;
 }
 
 h1 {
