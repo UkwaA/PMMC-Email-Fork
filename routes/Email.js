@@ -62,7 +62,7 @@ async function sendContactEmail(user, callback) {
 app.post('/send-reset-password-email', (req,res) => {
     User.findOne({
         where: {          
-          Email : req.body.email
+          Email : req.body.Email
         }
       })
       .then(user =>{
@@ -71,7 +71,7 @@ app.post('/send-reset-password-email', (req,res) => {
           }
           else{                        
             let userInfo = req.body
-            userInfo.name = user.Username
+            userInfo.Username = user.Username
             userInfo.UserPK = user.UserPK            
             
             //send email to user            
@@ -116,11 +116,11 @@ async function sendResetPasswordEmail(userInfo, callback) {
     let mailOptions = {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
-    from: "hoangt5@uci.edu", // sender address
-    to: "hoangt5@uci.edu", // need to put userE mail.email
+    from: "hoangt5@uci.edu", // sender address need to change to Sponsor email
+    to: "hoangt5@uci.edu", // need to put userInfo.Email
     subject: "Reset Your Password", // Subject line
-    html: `<h1>Hi ${userInfo.name}</h1><br>
-    <h4>Email: ${userInfo.email}</h4>
+    html: `<h1>Hi ${userInfo.Username}</h1><br>
+    <h4>Email: ${userInfo.Email}</h4>
     <h4>Decode UserPK: ${decodeUserPK} </h4>
     <h4>Token Expire: ${date} </h4>    
     <h6>Here's the link to reset your password: </h6>

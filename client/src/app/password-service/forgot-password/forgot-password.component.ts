@@ -14,8 +14,8 @@ export class ForgotPasswordComponent{
     submitted = false
     userInfo = {
         UserPK: '',
-        name: '',
-        email: '',
+        Username: '',
+        Email: '',
         resetPasswordToken: ''
     }
 
@@ -46,8 +46,8 @@ export class ForgotPasswordComponent{
                     this.submitted = false
                 }
                 else{
-                    this.errorMessage = "*Reset Email has been sent to " + this.userInfo.email
-                    console.log("Reset Email has been sent to " + this.userInfo.email)                    
+                    this.errorMessage = "*Reset Email has been sent to " + this.userInfo.Email
+                    console.log("Reset Email has been sent to " + this.userInfo.Email)                    
                     this.submitted = true
                 }
             },
