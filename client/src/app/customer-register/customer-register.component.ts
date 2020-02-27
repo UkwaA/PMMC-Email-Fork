@@ -10,14 +10,16 @@ export class CustomerRegisterComponent implements OnInit {
   submitted = false;
   customerForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
-    middleInitials: new FormControl(''),
     lastName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.email, Validators.required]),
     phoneNum: new FormControl('', Validators.minLength(9)),
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.minLength(6)),
-    confirmed_password: new FormControl('', Validators.required)
-  });
+    address_street: new FormControl('', Validators.required),
+    address_unit: new FormControl(''),
+    address_city: new FormControl('', Validators.required),
+    address_state: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]),
+    address_zipcode: new FormControl('', [Validators.required, Validators.minLength(5)])
+    });
+
+    
   
     constructor() { }
 

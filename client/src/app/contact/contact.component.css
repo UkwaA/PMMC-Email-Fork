@@ -60,3 +60,7 @@ hr {
   height: 80px;
   width: 100%;
 }
+
+.confirmMessage {
+  color: white;
+}
