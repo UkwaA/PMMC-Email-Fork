@@ -33,7 +33,7 @@ export class RegisterComponent {
         this.registerForm = this.formBuilder.group({
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(3)]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required],
             acceptTerms: [false, Validators.requiredTrue]        
         },{
@@ -61,12 +61,7 @@ export class RegisterComponent {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
-
-    // onReset() {
-    //     this.submitted = false;
-    //     this.registerForm.reset();
-    // }
+    get f() { return this.registerForm.controls; }    
 
     register() {
         this.submitted = true;
@@ -89,8 +84,6 @@ export class RegisterComponent {
                 console.error(err);
             }
         );
-        //     () => {
-        //         this.router.navigateByUrl("/profile");
-        //     
+            
     }
 }

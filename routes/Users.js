@@ -155,6 +155,31 @@ users.put('/get-user-details/:id', (req, res) => {
     })
 })
 
+users.put('/reset-password/:id', (req, res) => {
+  const id = req.params.id
+  const hash = bcrypt.hashSync(req.body.Password, 8)
+  req.body.Password = hash
+
+  User.update(req.body, {
+    where: { UserPk: id } 
+  })
+    .then(result => {
+      if (result == 1) {
+        res.send({
+          message: "User was updated successfully."
+        });
+      }
+      else {
+        res.send({
+          message: "User route error: Cannot update user details."
+        });
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
 
 module.exports = users
 
