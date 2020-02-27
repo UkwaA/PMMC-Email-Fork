@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
     this.registerForm = this.fb.group({
       subscribeEmail: ['', [Validators.required, Validators.email]]
     });
+    this.userName = this.auth.getUserDetails().Username
   }
 
   get f() { return this.registerForm.controls;}
