@@ -2,6 +2,8 @@ import {Component} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { EmailService } from '../../services/email.services';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
     templateUrl: './forgot-password.component.html',
@@ -20,6 +22,8 @@ export class ForgotPasswordComponent{
     }
 
     constructor(private fb: FormBuilder, private auth: AuthenticationService, public emailService:EmailService){}
+
+    faEnvelope = faEnvelope;
 
     ngOnInit(){
         this.myForm = this.fb.group({            
