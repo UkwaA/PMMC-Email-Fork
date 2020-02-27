@@ -20,8 +20,8 @@ export class IProgramComponent implements OnInit {
   ngOnInit() {
     this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.varLabels = [
-      {var: "ParticipateName" , label: "Participant Name"},
-      {var: "ParticipateAge" , label: "Participant Age"},
+      {var: "ParticipantName" , label: "Participant Name"},
+      {var: "ParticipantAge" , label: "Participant Age"},
       {var: "Gender" , label: "Gender"},
       {var: "MerchSize" , label: "T-Shirt Size"},
       {var: "AllergyInfo" , label: "Allergy Information"},
