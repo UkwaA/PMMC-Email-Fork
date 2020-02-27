@@ -17,7 +17,7 @@
                         <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description"></ckeditor>
                         <div class="d-flex align-items-center justify-content-between mt-1">
                             <h6 class="font-weight-bold my-2">${{program.FullAmount}}</h6>
-                            <a routerLink="/booking-group-program" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Book now!</a>
+                            <a [routerLink]="['/booking-group-program', program.ProgramPK]" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Book now!</a>
                         </div>
                     </div>
                 </li> <!-- End -->

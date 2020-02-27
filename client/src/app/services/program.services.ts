@@ -26,8 +26,7 @@ export class ProgramServices {
   public addNewProgram(program: any): Observable<any> {
     return this.http.post(this.expressBaseUrl + '/program/add-program', program)
   }
-
-
+  
   public updateProgramLayoutDetails(programType: string, programData: any) : Observable<any> {
     switch(programType)
     {
@@ -36,6 +35,18 @@ export class ProgramServices {
         break;
       case 'i':
         return this.http.post(this.expressBaseUrl + '/program/update-i-program-requirement', programData)
+        break;
+    }
+  }
+
+  public getProgramRequirementDetails(programType: string, ProgramPK: number) : Observable<any> {
+    switch(programType)
+    {
+      case 'g':
+        return this.http.get(this.expressBaseUrl + '/program/get-group-requirement/' + ProgramPK)
+        break;
+      case 'i':
+        return this.http.get(this.expressBaseUrl + '/program/get-individual-requirement/' + ProgramPK)
         break;
     }
   }
