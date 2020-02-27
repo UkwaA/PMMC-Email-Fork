@@ -71,8 +71,8 @@ const routes : Routes = [
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'customer-register', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
-  /* { 
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
+  /*
   { 
     path: 'program-details/:id', 
     component: ProgramDetailsComponent,
