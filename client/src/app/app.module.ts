@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'

@@ -1,9 +1,11 @@
 <div class="container">
   <h4 class="text-center">Choose the options you'd like to display:</h4>
-  <div class="row" *ngFor = 'let item of varLabels'>
-    <section class="options-section">
-      <mat-checkbox class="options-margin" [(ngModel)]="bookingGroup[item.var]">{{item.label}}</mat-checkbox>
-    </section>
+  <div class="row">
+    <div class = "col-sm-6" *ngFor = 'let item of varLabels'>
+      <section class="options-section">
+        <mat-checkbox class="options-margin" [(ngModel)]="bookingGroup[item.var]">{{item.label}}</mat-checkbox>
+      </section>
+    </div>
   </div>
   <div class="button pt-5 pb-5">
     <button class="btn btn-lg btn-info btn-block " type="submit" (click)="submit()">Update Program Requirement</button>

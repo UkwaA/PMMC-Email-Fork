@@ -2,7 +2,7 @@
 so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
-<body>
+<div class="banner">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
@@ -68,7 +68,12 @@ finish checking out a program -->
                         </div>
                     </form>
                 </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account!<a [routerLink]="['/login']">Sign In</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</body>
+</div>

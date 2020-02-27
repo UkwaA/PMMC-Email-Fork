@@ -8,6 +8,13 @@ h1 {
 
 }
 
+h5 {
+  color: #08b2b8 !important;
+  font-weight: bold;
+  text-decoration: underline;
+
+}
+
 hr{
   margin-top: 2em;
   margin-bottom:-1em;
