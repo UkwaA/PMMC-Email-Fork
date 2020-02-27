@@ -1,7 +1,7 @@
 export class BookingIndividualData {
     IndividualProgramPK: number;
-    ParticipateName: boolean;
-    ParticipateAge: boolean;
+    ParticipantName: boolean;
+    ParticipantAge: boolean;
     Gender: boolean;
     MerchSize: boolean;
     AllergyInfo: boolean;
@@ -23,13 +23,13 @@ export class BookingIndividualData {
     CreatedBy: number;
     CreatedDate: Date;
     
-    constructor (ParticipateName: boolean, ParticipateAge: boolean, Gender: boolean, MerchSize: boolean, AllergyInfo: boolean, 
+    constructor (ParticipantName: boolean, ParticipantAge: boolean, Gender: boolean, MerchSize: boolean, AllergyInfo: boolean, 
         SpecialInfo: boolean, InsureProviderName: boolean, InsureRecipientName: boolean, InsurePolicyNo: boolean, InsurePhoneNo: boolean,
         AuthorizedPickupName1: boolean, AuthorizedPickupPhone1: boolean, AuthorizedPickupName2: boolean, AuthorizedPickupPhone2: boolean,
         EarlyDropOff: boolean, LatePickup: boolean, MediaRelease: boolean, EmergencyMedicalRelease: boolean, LiabilityAgreement: boolean,
         FullAmount: boolean){
-            this.ParticipateName = ParticipateName;
-            this.ParticipateAge = ParticipateAge;
+            this.ParticipantName = ParticipantName;
+            this.ParticipantAge = ParticipantAge;
             this.Gender = Gender;
             this.MerchSize = MerchSize;
             this.AllergyInfo = AllergyInfo;
