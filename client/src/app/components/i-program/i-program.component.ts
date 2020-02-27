@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingIndividualData } from 'src/app/data/booking-individual-data';
-import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
-
+import { Router } from '@angular/router'
+import { AuthenticationService } from '../../authentication.service'
 @Component({
   selector: 'i-program',
   templateUrl: './i-program.component.html',
@@ -10,11 +10,12 @@ import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
 })
 export class IProgramComponent implements OnInit {
   @Input() ProgramPK: number;
-  @Output() bookingIndividual: BookingIndividualData;
   varLabels:Array<Object>;
- 
-  //TODO: inject the service
-  constructor(private service:ProgramServices) { }
+  bookingIndividual: BookingIndividualData
+  
+  constructor(private auth: AuthenticationService, 
+              private service:ProgramServices,
+              private router: Router) { }
 
   ngOnInit() {
     this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
@@ -40,10 +41,14 @@ export class IProgramComponent implements OnInit {
       {var: "LiabilityAgreement" , label: "Liability Agreement"},
       {var: "FullAmount" , label: "Full Amount"}
     ]
+    this.bookingIndividual.IndividualProgramPK = this.ProgramPK
+    this.bookingIndividual.CreatedBy = this.auth.getUserDetails().UserPK
   }
 
-  //check in console
-  check(){
-    console.log(this.bookingIndividual);
+  submit(){
+    this.service.updateProgramLayoutDetails('i', this.bookingIndividual)
+      .subscribe((response) => {
+        this.router.navigateByUrl("/profile/program-management")
+      })
   }
 }
