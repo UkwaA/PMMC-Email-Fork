@@ -69,12 +69,12 @@ const routes : Routes = [
   {path: 'booking-group-program', component: BookingGroupProgramComponent},
   {path: 'customer-register', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
-  { 
+  /* { 
     path: 'program-details/:id', 
     component: ProgramDetailsComponent,
     canActivate: [AuthRoleGuardService], 
-  },
-  
+  }, */
+
   {
     path: 'profile', 
     component: ProfileComponent,
@@ -83,6 +83,11 @@ const routes : Routes = [
       {path: '', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      { 
+        path: 'program-details/:id', 
+        component: ProgramDetailsComponent,
+        canActivate: [AuthRoleGuardService], 
+      },
       {
         path: 'set-user-role',
         component: SetUserRoleComponent,
