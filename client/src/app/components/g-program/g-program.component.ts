@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingGroupData } from 'src/app/data/booking-group-data';
-
-
+import { Router } from '@angular/router'
+import { AuthenticationService } from '../../authentication.service'
 @Component({
   selector: 'g-program',
   templateUrl: './g-program.component.html',
@@ -15,7 +15,9 @@ export class GProgramComponent implements OnInit {
   varLabels:Array<Object>;
   //TODO: inject the service
 
-  constructor(private service:ProgramServices) { }
+  constructor(private auth: AuthenticationService, 
+              private service:ProgramServices,
+              private router: Router) { }
 
   ngOnInit() {
     this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true);
@@ -39,18 +41,14 @@ export class GProgramComponent implements OnInit {
       {var: "TeacherEmail" ,label: "Teacher Email"},
       {var: "TeacherPhoneNo" ,label: "Teacher Phone Number"}
     ]
+    this.bookingGroup.GroupProgramPK = this.ProgramPK
+    this.bookingGroup.CreatedBy = this.auth.getUserDetails().UserPK
   }
 
-  //check the data of checklist button
-  check(){
-    console.log(this.bookingGroup);
-  }
-
-  onItemChange(value){
-    console.log(" Value is : ", value );
-  }
-
-  updateProgram() {
-    console.log(this.bookingGroup)
+  submit(){
+    this.service.updateProgramLayoutDetails('g', this.bookingGroup)
+      .subscribe((response) => {
+        this.router.navigateByUrl("/profile/program-management")
+      })
   }
 }

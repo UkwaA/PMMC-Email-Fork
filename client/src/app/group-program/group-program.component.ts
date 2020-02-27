@@ -22,4 +22,11 @@ export class GroupProgramComponent implements OnInit{
         })
     }
 
+    onReady(editor) {
+        console.log(editor)
+        editor.ui.getEditableElement().parentElement.insertBefore(
+            editor.ui.getEditableElement()
+        );
+    }
+
 }
