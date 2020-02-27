@@ -30,7 +30,7 @@
         </li>
         <li *ngIf="auth.isLoggedIn()" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{userName}}
+            {{auth.getUserDetails().Username}}
           </a>
           <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdownMenuLink">
             <a class="nav-link" routerLink="/profile"> Account </a>

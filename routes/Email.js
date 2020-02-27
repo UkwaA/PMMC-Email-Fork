@@ -119,14 +119,14 @@ async function sendResetPasswordEmail(userInfo, callback) {
     from: "hoangt5@uci.edu", // sender address need to change to Sponsor email
     to: "hoangt5@uci.edu", // need to put userInfo.Email
     subject: "Reset Your Password", // Subject line
-    html: `<h1>Hi ${userInfo.Username}</h1><br>
+    html: `<h1>Hi ${userInfo.Username},</h1><br>
     <h4>Email: ${userInfo.Email}</h4>
     <h4>Decode UserPK: ${decodeUserPK} </h4>
     <h4>Token Expire: ${date} </h4>    
-    <h6>Here's the link to reset your password: </h6>
-    <h6>http://localhost:4200/login/reset-password/${token}</h6>
-    <h6>The link will expire within 1 hour</h6>
-    <h6>If you did not request this, please ignore this email and your password will remain unchanged.</h6>`
+    <h4>Here's the link to reset your password: </h4>
+    <h4>http://localhost:4200/login/reset-password/${token}</h4>
+    <h4>The link will expire within 1 hour</h4>
+    <h4>If you did not request this, please ignore this email and your password will remain unchanged.</h4>`
     };
 
     // send mail with defined transport object

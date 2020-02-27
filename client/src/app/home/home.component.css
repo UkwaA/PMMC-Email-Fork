@@ -4,25 +4,34 @@
   }
 
   
- h1 { 
-  color: #e94848; 
+ /* h1 { 
+  color: #08b2b8; 
   font-family: 'Source Sans Pro', sans-serif; 
   font-weight: bold; 
   line-height: 50px; 
-  margin-top: 20px; 
+  margin-top: 50px; 
   padding-bottom: 15px;
+ }
   /* text-shadow: 1px 1px 2px #00000080; */
 
-}
+ 
+
+  h1 {
+    background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+    background-size: cover;
+    color: transparent;
+    -moz-background-clip: text;
+    -webkit-background-clip: text;
+    text-transform: uppercase;
+    font-size: 40px; 
+    padding-bottom: 10px;
+    padding-top: 50px;
+    line-height: 50px; 
+  }
 
 
-/* h2 { 
-  color: white; 
-  font-family: 'Source Sans Pro', sans-serif; 
-  font-size: 30px; 
-  font-weight: 300; 
-  line-height: 32px; 
-  margin: 0; } */
+
+
 
 h3 {  color:#5077a9;}
 
@@ -31,6 +40,7 @@ p { color: #4c4a37; font-size: 16px; line-height: 1.75;; margin: 0 0; }
 h4{
   color:#08b2b8; font-size: 20px; font-weight: bold; line-height: 1.25; margin: 0; 
 }
+
 
 h5{
   color:black; font-family: 'Source Sans Pro', sans-serif; font-size: 16px; font-weight: 300; line-height: 32px; margin: 0; 

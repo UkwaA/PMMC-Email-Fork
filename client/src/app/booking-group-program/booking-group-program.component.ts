@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingGroupData } from '../data/booking-group-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { ProgramServices } from 'src/app/services/program.services';
+import { ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router'
 @Component({
   selector: 'app-booking-group-program',
   templateUrl: './booking-group-program.component.html',
@@ -11,11 +13,25 @@ export class BookingGroupProgramComponent implements OnInit {
   bookingGroup: BookingGroupData;
   registerForm: FormGroup;
   submitted = false;
+  ProgramPK: number;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private fb: FormBuilder, 
+              private service: ProgramServices) { }
 
   ngOnInit() {
-    this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+    this.route.params.subscribe(val => { 
+      this.ProgramPK = val.id 
+      this.service.getProgramRequirementDetails('g', this.ProgramPK)
+        .subscribe(program => {
+          this.bookingGroup = program
+          console.log(this.bookingGroup)
+        })
+    })
+
+
+    // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
       AldultQuantity: ['', [Validators.required, Validators.max(35)]],
       Age57Quantity: ['', [Validators.required, Validators.max(35)]],

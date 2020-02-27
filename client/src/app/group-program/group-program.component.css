@@ -4,7 +4,12 @@ h1 {
   font-weight: bold;
   padding-top: 20px;
   color: #08b2b8; 
-  /* text-shadow: 1px 1px 2px #08b2b8; */
+} 
+
+h5 {
+  color: #08b2b8 !important;
+  font-weight: bold;
+  text-decoration: underline;
 
 }
 

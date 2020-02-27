@@ -1,41 +1,35 @@
-body {
-    padding-top: 56px;
-    padding-bottom: 20px;
-    background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');
-    background-size:100%;
-  }
 
-h1{
+h1 {
   font-family: 'Source Sans Pro', sans-serif; 
   font-size: 50px;
   font-weight: bold;
-  padding-top: 20px;
-  color: #ffffff; 
-  text-shadow: 1px 1px 2px #00000080;
+  padding-top: 90px;
+  color: #08b2b8; 
 }
 
 .inputField {
-  color: white;
+  color: black;
 }
 
 .full-width {
-  color: white;
+  color: black;
 }
 
-::ng-deep .mat-focused .mat-form-field-label {
-  /*change color of label*/
-  color: white !important;
+/*change color of label*/
+/* ::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
  }
 
- ::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
-  background-color: white !important;
-} 
 
-::ng-deep.mat-form-field-ripple {
- /*change color of underline when focused*/
- background-color: white !important;;
-}
+ /*change color of underline*/
+ /*::ng-deep.mat-form-field-underline {
+  background-color: black !important;
+}/*
+
+/*change color of underline when focused*/
+/*::ng-deep.mat-form-field-ripple {
+ background-color: black !important;;
+}*/
 
 
 hr {
