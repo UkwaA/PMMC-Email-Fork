@@ -1,4 +1,4 @@
-<body>
+
 <div class="container py-5">
   <div class="row text-center text-white mb-5">
       <div class="col-lg-7 mx-auto">
@@ -16,26 +16,25 @@
       </div>
       <form *ngIf="!loading" [formGroup] = "myForm" (ngSubmit)="submit(myForm.value)"> 
         <mat-form-field class="inputField">
-          <input matInput type="text" formControlName = "fullName">      
-          <mat-placeholder style="color:white">Full Name</mat-placeholder>    
+          <input matInput type="text" formControlName = "fullName" placeholder = "Full Name" >
         </mat-form-field>
         <mat-form-field class="inputField">
-          <input matInput type="email" formControlName = "email">
-          <mat-placeholder style="color:white">Email</mat-placeholder>
+          <input matInput type="email" formControlName = "email" placeholder = "Email">
+          <!-- <mat-placeholder style="color:white">Email</mat-placeholder> -->
           <mat-error *ngIf = "email.invalid && email.touched">
             Email is invalid
           </mat-error>
         </mat-form-field>
         <mat-form-field class="inputField">
-          <input matInput type="text" formControlName = "subject">
-          <mat-placeholder style="color:white">Subject</mat-placeholder>
+          <input matInput type="text" formControlName = "subject" placeholder = "Subject">
+          <!-- <mat-placeholder style="color:white">Subject</mat-placeholder> -->
           <mat-error *ngIf = "subject.touched">
             Minimum 3 characters
           </mat-error>
         </mat-form-field>
         <mat-form-field class="full-width">
-          <textarea matInput type="text" formControlName = "message"></textarea>
-          <mat-placeholder style="color:white">Your Messages</mat-placeholder>
+          <textarea matInput type="text" formControlName = "message" placeholder = "Your Messages"> </textarea>
+          <!-- <mat-placeholder style="color:white">Your Messages</mat-placeholder> -->
           <mat-error *ngIf = "message.touched">
             Minimum 5 characters
           </mat-error>
@@ -53,4 +52,3 @@
   </div>
 </div>
 </div>
-</body>

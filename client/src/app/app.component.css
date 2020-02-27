@@ -24,19 +24,29 @@
 
 .header_change a{
     color: rgb(54, 53, 53) !important;
+
+}
+
+.header_change a:hover{
+    color: #08b2b8!important;
 }
 
 .nav-item{
     text-align: right;
 }
 
+.nav-link:hover{
+    color: #08b2b8!important;
+
+}
+
 .nav-link{
-    color: rgb(54, 53, 53) !important;
+    color: black !important;
     /* text-shadow: 1px 1px 2px #0021dd80; */
-    font-weight: bold;
+    font-weight: normal;
     font-size: 18px;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: white;
+    /* -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: white; */
 
 }
 
@@ -65,4 +75,9 @@ body {
     background: linear-gradient(59deg, #3A6073, #16222A);
     color: white; padding-top:50px; padding-bottom:50px;
 }
+
+a:hover {
+    color:#ffffff !important;
+}
+
 
