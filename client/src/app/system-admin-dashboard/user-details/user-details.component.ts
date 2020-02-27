@@ -72,7 +72,7 @@ export class UserDetailsComponent implements OnInit {
       console.log(response)
       this.message = "User was updated sucessfully"
 
-      const url = "/set-user-role"
+      const url = "/profile/set-user-role"
       this.router.navigateByUrl(url)
     },
     error => {

@@ -96,7 +96,12 @@ const routes : Routes = [
       {
         path: 'set-user-role',
         component: SetUserRoleComponent,
-        canActivate: [AuthSystemRoleGuardService]
+        canActivate: [AuthSystemRoleGuardService],
+      },
+      { 
+        path: 'user-details/:id', 
+        component: UserDetailsComponent,
+        canActivate: [AuthRoleGuardService], 
       }
     ]
   }
@@ -150,6 +155,6 @@ const routes : Routes = [
     MatProgressSpinnerModule
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
