@@ -20,6 +20,7 @@ export class ProfileComponent {
     details: UserDetails;
     faPhone = faPhone;
     option: string;
+    role:string;
     
     constructor(private auth: AuthenticationService, public hf: HFService, private breakpointObserver: BreakpointObserver) {}
 
@@ -29,7 +30,9 @@ export class ProfileComponent {
 
         this.auth.profile().subscribe(
             user => {
-                this.details = user
+                this.details = user;
+                this.role = user.Role_FK;
+                console.log(this.role);
             },
             err => {
                 console.error(err)
