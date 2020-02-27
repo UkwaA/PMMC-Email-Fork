@@ -19,6 +19,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+ 
   }
   .mat-toolbar{
     padding-left: 30px;
@@ -53,4 +54,12 @@
   font-weight: bold;
   margin: 0 15px 5px 15px;
   border-radius: 15px;
+}
+
+h1{
+  
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 30px;
+
 }
