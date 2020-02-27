@@ -42,6 +42,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 
 const routes : Routes = [
@@ -84,7 +85,7 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: '', component: DashboardComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
@@ -122,7 +123,8 @@ const routes : Routes = [
     GProgramComponent,
     CustomerRegisterComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent   
+    ResetPasswordComponent, 
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
