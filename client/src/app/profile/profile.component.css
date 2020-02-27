@@ -1,15 +1,4 @@
-/* .container {
-    padding-top: 56px;
-}
 
-h1 {
-    font-family: sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: bold;
-    padding-top: 20px;
-    color: #0ebbff; 
-  }*/
   .sidenav-container {
     height: 100%;  
   }
@@ -23,6 +12,8 @@ h1 {
   }
 
   .mat-toolbar.mat-primary {
+    background: #08b2b8;
+    color: #fff;
     position: sticky;
     top: 0;
     z-index: 1;

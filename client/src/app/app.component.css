@@ -31,9 +31,13 @@
 }
 
 .nav-link{
-    color: #ffffff !important;
+    color: rgb(54, 53, 53) !important;
     /* text-shadow: 1px 1px 2px #0021dd80; */
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 18px;
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: white;
+
 }
 
 .active {
