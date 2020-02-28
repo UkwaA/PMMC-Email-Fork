@@ -42,6 +42,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 
 
 const routes : Routes = [
@@ -128,7 +129,8 @@ const routes : Routes = [
     CustomerRegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent, 
-    DashboardComponent
+    DashboardComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,

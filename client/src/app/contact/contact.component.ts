@@ -11,7 +11,8 @@ import { EmailService } from '../services/email.services';
 export class Contact implements OnInit {
     loading = false
     myForm: FormGroup;
-
+    modalHeader = "Contact Form"
+    modalContent = " Thank you for contacting us. Your message has been successfully submitted. We will response to you as soon as possible."
     constructor(private fb: FormBuilder, public emailService:EmailService) {
 
     }
@@ -52,24 +53,23 @@ export class Contact implements OnInit {
         email: this.myForm.value.email,
         subject: this.myForm.value.subject,
         message: this.myForm.value.message
-        }
-
-        this.emailService.sendContactEmail(user).subscribe(
-        data => {
-            let res:any = data; 
-            console.log(
-            `👏 > 👏 > 👏 > 👏 Email has been sent and the message id is ${res.messageId}`
-            );
-        },
-        err => {
-            console.log(err);
-            this.loading = false;
-            console.log("submitted")
-        },() => {
-            //this.loading = false;
-            //this.buttionText = "Submit";
-        }
-        );
+        }        
+        // this.emailService.sendContactEmail(user).subscribe(
+        // data => {
+        //     let res:any = data; 
+        //     console.log(
+        //     `👏 > 👏 > 👏 > 👏 Email has been sent and the message id is ${res.messageId}`
+        //     );
+        // },
+        // err => {
+        //     console.log(err);
+        //     this.loading = false;
+        //     console.log("submitted")
+        // },() => {
+        //     //this.loading = false;
+        //     //this.buttionText = "Submit";
+        // }
+        // );
     }
 
     reset(){

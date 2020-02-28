@@ -42,17 +42,16 @@ export class ForgotPasswordComponent{
             return;
         }
         console.log(this.userInfo)
+        this.submitted = true
         this.emailService.sendResetPasswordEmail(this.userInfo).subscribe(
             (res) => {
                 if(res.error){
                     console.log("fotgot ts file: " + res.error)
-                    this.errorMessage = "*" + res.error
-                    this.submitted = false
+                    this.errorMessage = "*" + res.error                    
                 }
                 else{
                     this.errorMessage = "*Reset Email has been sent to " + this.userInfo.Email
-                    console.log("Reset Email has been sent to " + this.userInfo.Email)                    
-                    this.submitted = true
+                    console.log("Reset Email has been sent to " + this.userInfo.Email)                                        
                 }
             },
             err => {
