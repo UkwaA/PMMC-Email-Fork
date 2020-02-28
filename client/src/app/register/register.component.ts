@@ -83,11 +83,7 @@ export class RegisterComponent {
             err => {
                 console.error(err);
             }
-<<<<<<< HEAD
-        );  
-=======
         );
             
->>>>>>> f49b2f281e07ce46fc42c3ae2191151f152a4308
     }
 }

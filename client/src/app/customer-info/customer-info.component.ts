@@ -68,11 +68,6 @@ export class CustomerRegisterComponent implements OnInit {
 
   checkBoxClicked():any{
     console.log("Checkbox Clicked");
-    // this.credentials.Subscribe 
-    // if (this.credentials.Subscribe == 0)
-    //   this.credentials.Subscribe = 1;
-    // else
-    //   this.credentials.Subscribe = 0;
     if (this.customerInfoForm.get('subscribe').value == 0)
       this.customerInfoForm.get('subscribe').setValue(1)
     else
@@ -83,10 +78,7 @@ export class CustomerRegisterComponent implements OnInit {
 
   finishregister() {
     this.submitted = true;
-    // stop here if form is invalid
     console.log("Form Submitted")
-    // console.log(this.customerInfoForm.value)
-    // this.customerInfoForm.get('subscribe').setValue(this.credentials.Subscribe)
     if (this.customerInfoForm.invalid) {
         console.log("Form Invalid")
         return;
