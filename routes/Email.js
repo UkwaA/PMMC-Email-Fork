@@ -19,7 +19,7 @@ app.post('/send-contact-email', (req, res) => {
   let user = req.body;
   console.log(user);
   sendContactEmail(user, info => {
-    console.log(`The mail has beed send 😃 and the id is ${info.messageId}`);
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
     res.send(info);
   });
 });
@@ -62,7 +62,7 @@ async function sendContactEmail(user, callback) {
 app.post('/send-reset-password-email', (req,res) => {
     User.findOne({
         where: {          
-          Email : req.body.email
+          Email : req.body.Email
         }
       })
       .then(user =>{
@@ -71,12 +71,12 @@ app.post('/send-reset-password-email', (req,res) => {
           }
           else{                        
             let userInfo = req.body
-            userInfo.name = user.Username
+            userInfo.Username = user.Username
             userInfo.UserPK = user.UserPK            
             
             //send email to user            
             sendResetPasswordEmail(userInfo, info => {
-                console.log(`The mail has beed send 😃 and the id is ${info.messageId}`);
+                console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
                 res.send(info);
               });
           }          
@@ -95,8 +95,12 @@ async function sendResetPasswordEmail(userInfo, callback) {
         expiresIn: 3600 //expires in 1 hour
       })
 
-    //let tokenDecode = jwt.decode(token, process.env.SECRET_KEY)
-    // decodeUserPK = tokenDecode.userID
+    //For Testing only
+    let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
+    let decodeUserPK = decodedToken.userID
+    let expirationTime = decodedToken.exp
+    const date = new Date(0)
+    date.setUTCSeconds(expirationTime)    
 
     let transporter = nodemailer.createTransport({
         host: "email-smtp.us-west-2.amazonaws.com",
@@ -112,21 +116,72 @@ async function sendResetPasswordEmail(userInfo, callback) {
     let mailOptions = {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
-    from: "hoangt5@uci.edu", // sender address
-    to: "hoangt5@uci.edu", // need to put userEmail.email
+    from: "hoangt5@uci.edu", // sender address need to change to Sponsor email
+    to: "hoangt5@uci.edu", // need to put userInfo.Email
     subject: "Reset Your Password", // Subject line
-    html: `<h1>Hi ${userInfo.name}</h1><br>
-    <h4>Email: ${userInfo.email}</h4>
-    <h4>UserPK: ${userInfo.UserPK}</h4>    
-    <h6>Here's the link to reset your password: </h6>
-    <h6>http://localhost:4200/login/reset-password/${token}</h6>
-    <h6>The link will expire within 1 hour</h6>
-    <h6>If you did not request this, please ignore this email and your password will remain unchanged.</h6>`
+    html: `<h1>Hi ${userInfo.Username},</h1><br>
+    <h4>Email: ${userInfo.Email}</h4>
+    <h4>Decode UserPK: ${decodeUserPK} </h4>
+    <h4>Token Expire: ${date} </h4>    
+    <h4>Here's the link to reset your password: </h4>
+    <h4>http://localhost:4200/login/reset-password/${token}</h4>
+    <h4>The link will expire within 1 hour</h4>
+    <h4>If you did not request this, please ignore this email and your password will remain unchanged.</h4>`
     };
 
     // send mail with defined transport object
     let info = await transporter.sendMail(mailOptions);
     callback(info);
 };
+
+/**************************
+ VALIDATE RESET PASSWORD TOKEN
+ ***************************/
+app.post('/reset-password/:token', (req, res) => {
+    //Check if token is valid
+    if(!req.body.resettoken){
+        return res.status(500).json({ message: 'Token is required'})
+    }
+    else{
+        let decodedToken = jwt.decode(req.params.token, process.env.SECRET_KEY)
+        //Decode token to get userID and token expiration time
+        let currentUserPK = decodedToken.userID
+        let expirationTime = decodedToken.exp
+        //get token expiration date
+        if(expirationTime === undefined){
+            return res.status(500).json({ message: 'Token is required'})
+        }
+        else{
+            const date = new Date(0)
+            date.setUTCSeconds(expirationTime)
+            //Check if token is expired
+            if(date.valueOf() > new Date().valueOf()){
+                User.findOne({
+                    where: {
+                    UserPk: currentUserPK
+                    }
+                })
+                .then(user =>{
+                    if(!user){
+                        //return res.status(409).json({ message: 'Invalid URL'})
+                        res.json({message: 'UserNotFound'})
+                    }
+                    else{
+                        res.json(user)
+                    }
+                })
+                .catch(err => {
+                    res.send('error: ' + err)
+                })
+            }
+            else{
+                res.json({ message: 'ExpiredToken' })
+            }            
+        }
+    }
+  });
+
+
+
 //main().catch(console.error);
 module.exports = app

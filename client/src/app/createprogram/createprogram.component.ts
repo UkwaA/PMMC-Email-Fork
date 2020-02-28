@@ -3,7 +3,6 @@ import { AuthenticationService, UserDetails } from '../authentication.service'
 import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
-import { HttpClient } from '@angular/common/http'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 declare var $: any;
 
@@ -34,7 +33,9 @@ export class CreateProgramComponent {
         { id: 1, name: "Individual Program" }
     ]
 
-    constructor(private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
+    constructor(private services: ProgramServices, 
+                private auth: AuthenticationService, 
+                private router: Router) { }
 
     ngOnInit() {
         this.programCategories.forEach(e => {
@@ -60,9 +61,9 @@ export class CreateProgramComponent {
         this.programData.ImgData = "";
         this.programData.ProgramType = this.selectedValue
 
-        this.http.post("http://localhost:3000/program/add-program", this.getFormData())
+        this.services.addNewProgram(this.getFormData())
             .subscribe((response) => {
-                this.router.navigateByUrl("/program-management")
+                this.router.navigateByUrl("/profile/program-management")
             })
     }
 

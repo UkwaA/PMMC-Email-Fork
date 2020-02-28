@@ -20,19 +20,34 @@ export class ProgramServices {
   }
 
   public getProgramDetailsByID(ProgramPK: number): Observable<any> {
-     return this.http.get(this.expressBaseUrl + '/program/get-program-details/' + ProgramPK);
+    return this.http.get(this.expressBaseUrl + '/program/get-program-details/' + ProgramPK);
   }
 
-  public addNewProgram(program: ProgramData): Observable<any> {
-    // var httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'multipart/form-data',
-    //   })
-    // };
+  public addNewProgram(program: any): Observable<any> {
     return this.http.post(this.expressBaseUrl + '/program/add-program', program)
   }
-  // public addNewProgram(program:any): Observable<any> {
-  //   return this.http.post(this.expressBaseUrl + '/program/add-program', program)
-  // }
-}
+  
+  public updateProgramLayoutDetails(programType: string, programData: any) : Observable<any> {
+    switch(programType)
+    {
+      case 'g':
+        return this.http.post(this.expressBaseUrl + '/program/update-g-program-requirement', programData)
+        break;
+      case 'i':
+        return this.http.post(this.expressBaseUrl + '/program/update-i-program-requirement', programData)
+        break;
+    }
+  }
 
+  public getProgramRequirementDetails(programType: string, ProgramPK: number) : Observable<any> {
+    switch(programType)
+    {
+      case 'g':
+        return this.http.get(this.expressBaseUrl + '/program/get-group-requirement/' + ProgramPK)
+        break;
+      case 'i':
+        return this.http.get(this.expressBaseUrl + '/program/get-individual-requirement/' + ProgramPK)
+        break;
+    }
+  }
+}

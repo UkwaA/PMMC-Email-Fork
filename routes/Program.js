@@ -16,6 +16,7 @@ program.use(fileUpload());
 
 process.env.SECRET_KEY = 'secret'
 
+// Get All Program Header Information 
 program.get('/get-programs', (req, res) => {
   Program.findAll({
   })
@@ -31,6 +32,7 @@ program.get('/get-programs', (req, res) => {
     })
 })
 
+// Get All Program Header Information by ID
 program.get('/get-program-details/:id', (req, res) => {
   Program.findOne({
     where: {
@@ -49,9 +51,8 @@ program.get('/get-program-details/:id', (req, res) => {
     })
 })
 
-
+// Get All Program Header Information of Individual Program
 program.get('/get-individual-program-details', (req, res) => {
-
   IndividualProgram.findAll({
   })
     .then(program => {
@@ -66,8 +67,8 @@ program.get('/get-individual-program-details', (req, res) => {
     })
 })
 
+// Get All Program Header Information of Group Program
 program.get('/get-group-program-details', (req, res) => {
-
   GroupProgram.findAll({
   })
     .then(program => {
@@ -82,6 +83,7 @@ program.get('/get-group-program-details', (req, res) => {
     })
 })
 
+// Create New Program Header
 program.post('/add-program', (req, res) => {
   const today = new Date()
   var programPK = 0
@@ -156,6 +158,146 @@ program.post('/add-program', (req, res) => {
     })
 
 })
+
+// Update Layout Setting of Group Program
+program.post('/update-g-program-requirement', (req, res) => {
+  const today = new Date()
+  var programPK = 0
+
+  // Select the Program Layout Details if available
+  GroupProgram.findOne({
+    where: {
+      GroupProgramPK: req.body.GroupProgramPK
+    }
+  })
+    // Update the layout details
+    .then(program => {
+      if (program) {
+        program.update({
+          AdultQuantity: req.body.AdultQuantity,
+          Age57Quantity: req.bodyAge57Quantity,
+          Age810Quantity: req.body.Age810Quantity,
+          Age1113Quantity: req.body.Age1113Quantity,
+          TotalQuantity: req.body.TotalQuantity,
+          Deposit: req.body.Deposit,
+          EducationFK: req.body.EducationFK,
+          ProgramRestriction: req.body.ProgramRestriction,
+          DepositAmount: req.body.DepositAmount,
+          FullAmount: req.body.FullAmount,
+          MaximumParticipant: req.body.MaximumParticipant,
+          OrganizationName: req.body.OrganizationName,
+          GradeLevel: req.body.GradeLevel,
+          ScoutProgram: req.body.ScoutProgram,
+          TeacherName: req.body.TeacherName,
+          TeacherEmail: req.body.TeacherEmail,
+          TeacherPhoneNo: req.body.TeacherPhoneNo,
+          AlternativeDate: req.body.AlternativeDate,
+          EducationPurpose: req.body.EducationPurpose,
+          CreatedBy: req.body.CreatedBy,
+          CreatedDate: today
+        })
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .then(() => {
+      res.json('Program Updated')
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.ProgramPK)
+    })
+
+})
+
+// Update Layout Setting of Individual Program
+program.post('/update-i-program-requirement', (req, res) => {
+  const today = new Date()
+  var programPK = 0
+
+  // Select the Program Layout Details if available
+  IndividualProgram.findOne({
+    where: {
+      IndividualProgramPK: req.body.IndividualProgramPK
+    }
+  })
+    // Update the layout details
+    .then(program => {
+      if (program) {
+        program.update({
+          ParticipantName: req.body.ParticipantName,
+          ParticipantAge: req.body.ParticipantAge,
+          Gender: req.body.Gender,
+          MerchSize: req.body.MerchSize,
+          AllergyInfo: req.body.AllergyInfo,
+          SpecialInfo: req.body.SpecialInfo,
+          InsureProviderName: req.body.InsureProviderName,
+          InsureRecipientName: req.body.InsureRecipientName,
+          InsurePolicyNo: req.body.InsurePolicyNo,
+          InsurePhoneNo: req.body.InsurePhoneNo,
+          AuthorizedPickupName1: req.body.AuthorizedPickupName1,
+          AuthorizedPickupPhone1: req.body.AuthorizedPickupPhone1,
+          AuthorizedPickupName2: req.body.AuthorizedPickupName2,
+          AuthorizedPickupPhone2: req.body.AuthorizedPickupPhone2,
+          EarlyDropOff: req.body.EarlyDropOff,
+          LatePickup: req.body.LatePickup,
+          MediaRelease: req.body.MediaRelease,
+          EmergencyMedicalRelease: req.body.EmergencyMedicalRelease,
+          LiabilityAgreement: req.body.LiabilityAgreement,
+          FullAmount: req.body.FullAmount,
+          CreatedBy: req.body.CreatedBy,
+          CreatedDate: today
+        })
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .then(() => {
+      res.json('Program Updated')
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.ProgramPK)
+    })
+
+})
+
+// Get Requirement Setting for Individual Program by ID
+program.get('/get-individual-requirement/:id', (req, res) => {
+  IndividualProgram.findOne({
+    where: {
+      IndividualProgramPK: req.params.id
+    }
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.IndividualProgramPK)
+    })
+})
+
+// Get Requirement Setting for Group Program by ID
+program.get('/get-group-requirement/:id', (req, res) => {
+  GroupProgram.findOne({
+    where: {
+      GroupProgramPK: req.params.id
+    }
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.GroupProgramPK)
+    })
+})
+
 
 module.exports = program
 

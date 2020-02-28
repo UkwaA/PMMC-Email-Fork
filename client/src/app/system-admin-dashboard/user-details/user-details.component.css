@@ -1,8 +1,12 @@
-.container {
-    padding-top: 100px;
-    padding-bottom: 56px;
-  }
 
   .row-header {
       font-weight: bold;
   }
+
+  h1 {
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: #08b2b8; 
+}

@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'
@@ -34,12 +33,15 @@ import { UserDetailsComponent } from './system-admin-dashboard/user-details/user
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
 import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
+import { ResetPasswordComponent} from './password-service/reset-password/reset-password.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 
 const routes : Routes = [
@@ -65,28 +67,40 @@ const routes : Routes = [
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  {path: 'booking-individual-program', component: BookingIndividualProgramComponent},
-  {path: 'booking-group-program', component: BookingGroupProgramComponent},
+  {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
+  {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
   {path: 'customer-register', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
+  {path: 'login/reset-password/:token', component: ResetPasswordComponent},
+  /*
   { 
     path: 'program-details/:id', 
     component: ProgramDetailsComponent,
     canActivate: [AuthRoleGuardService], 
-  },
-  
+  }, */
+
   {
     path: 'profile', 
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: '', component: DashboardComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      { 
+        path: 'program-details/:id', 
+        component: ProgramDetailsComponent,
+        canActivate: [AuthRoleGuardService], 
+      },
       {
         path: 'set-user-role',
         component: SetUserRoleComponent,
-        canActivate: [AuthSystemRoleGuardService]
+        canActivate: [AuthSystemRoleGuardService],
+      },
+      { 
+        path: 'user-details/:id', 
+        component: UserDetailsComponent,
+        canActivate: [AuthRoleGuardService], 
       }
     ]
   }
@@ -112,8 +126,9 @@ const routes : Routes = [
     IProgramComponent,
     GProgramComponent,
     CustomerRegisterComponent,
-    ForgotPasswordComponent
-    
+    ForgotPasswordComponent,
+    ResetPasswordComponent, 
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -135,9 +150,10 @@ const routes : Routes = [
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

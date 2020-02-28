@@ -2,7 +2,7 @@
 so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
-<body>
+<div class="banner">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
@@ -41,7 +41,7 @@ finish checking out a program -->
                                 [(ngModel)]="credentials.Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                 <div *ngIf="f.password.errors.required">Password is required</div>
-                                <div *ngIf="f.password.errors.minlength">Password must be at least 3 characters</div>
+                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                             </div>
                         </div>
                         <div class="input-group form-group">
@@ -68,7 +68,12 @@ finish checking out a program -->
                         </div>
                     </form>
                 </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Already have an account!<a [routerLink]="['/login']">Sign In</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</body>
+</div>

@@ -4,13 +4,12 @@
   }
 
   
-h1 {
-  font-family: sans-serif;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: bold;
-  padding-top: 20px;
-  color: #0ebbff; 
+  h1 {
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: #08b2b8; 
 }
 
 .row{
@@ -22,10 +21,6 @@ h1 {
 
 .form-check-label{
   padding-left: 10px;
-}
-
-h6{
-  /* max-width: 400px; */
 }
 
 .form_checkbox{

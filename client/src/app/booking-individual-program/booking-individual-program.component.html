@@ -10,26 +10,38 @@
     <p>Price</p>
   </div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipateName">
-        <label for="ParticipateName">Participant Name: </label>
-        <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipateName" 
-                [ngClass]="{'is-invalid': submitted && f.ParticipateName.errors }">
-        <div *ngIf="submitted && f.ParticipateName.errors" class="invalid-feedback">
-          <div *ngIf="f.ParticipateName.errors.required">Paticipate Name is required</div>
-          <div *ngIf="f.ParticipateName.errors.minlength">Must be at least 3 characters long.</div>
+    <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
+      <div class="row">
+        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipantName">Participant Name:</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName" 
+          [ngClass]="{'is-invalid': submitted && f.ParticipantName.errors }">
+          <div *ngIf="submitted && f.ParticipantName.errors" class="invalid-feedback">
+            <div *ngIf="f.ParticipantName.errors.required">Paticipant Name is required</div>
+            <div *ngIf="f.ParticipantName.errors.minlength">Must be at least 3 characters long.</div>
+          </div>
         </div>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipateAge">
-        <label for="ParticipateAage">Participant Age: </label>
-        <input class="form-control" type="number" min = "8" max = "12" placeholder="" formControlName="ParticipateAge"
-                [ngClass]="{'is-invalid': submitted && f.ParticipateAge.errors }">
-        <div *ngIf="submitted && f.ParticipateAge.errors" class="invalid-feedback">
-          <div *ngIf="f.ParticipateAge.errors.required">Paticipate Age is required</div>
+    </fieldset>
+    <!-- Participant Age -->
+    <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantAge">
+      <div class="row">
+        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipateAge">Participant Age: </label>
+        <div class="col-sm-10">
+          <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
+                [ngClass]="{'is-invalid': submitted && f.ParticipantAge.errors }">
+          <div *ngIf="submitted && f.ParticipantAge.errors" class="invalid-feedback">
+            <div *ngIf="f.ParticipantAge.errors.required">Paticipaant Age is required</div>
+          </div>
         </div>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.Gender">
-        <label for="Gender">Gender: </label>
-        <select class="form-control" formControlName="Gender"
+    </fieldset>
+    <!-- Gender -->
+    <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.Gender">
+      <div class="row">
+        <label class="col-form-label col-sm-2 pt-0 pl-0" for="Gender">Gender: </label>
+        <div class="col-sm-10">
+          <select class="form-control" formControlName="Gender"
                   [ngClass]="{ 'is-invalid': submitted && f.Gender.errors }">
           <option>Male</option>
           <option>Female</option>
@@ -37,32 +49,41 @@
         <div *ngIf="submitted && f.Gender.errors" class="invalid-feedback">
           <div *ngIf="f.Gender.errors.required">Gender is required</div>
         </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.MerchSize">
-        <label for="MerchSize">T-Shirt Size: </label>
-        <select class="form-control" formControlName="MerchSize"
-                  [ngClass]="{ 'is-invalid': submitted && f.MerchSize.errors }">
-          <option>Youth Small</option>
-          <option>Youth Medium</option>
-          <option>Youth Large</option>
-          <option>Youth X Large</option>
-          <option>Aldult Small</option>
-          <option>Aldult Medium</option>
-          <option>Aldult Large</option>
-        </select>
-        <div *ngIf="submitted && f.MerchSize.errors" class="invalid-feedback">
-          <div *ngIf="f.MerchSize.errors.required">Gender is required</div>
         </div>
       </div>
+    </fieldset>
+    <!-- T-Shirt Size -->
+    <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.MerchSize">
+      <div class="row">
+        <label class="col-form-label col-sm-2 pt-0 pl-0" for="MerchSize">T-Shirt Size: </label>
+        <div class="col-sm-10">
+          <select class="form-control" formControlName="MerchSize"
+                  [ngClass]="{ 'is-invalid': submitted && f.MerchSize.errors }">
+            <option>Youth Small</option>
+            <option>Youth Medium</option>
+            <option>Youth Large</option>
+            <option>Youth X Large</option>
+            <option>Aldult Small</option>
+            <option>Aldult Medium</option>
+            <option>Aldult Large</option>
+          </select>
+          <div *ngIf="submitted && f.MerchSize.errors" class="invalid-feedback">
+            <div *ngIf="f.MerchSize.errors.required">Gender is required</div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <!-- Allergy Info -->
       <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AllergyInfo">
         <label for="AllergyInfo">Allergy Information: </label>
         <textarea class="form-control" id="AllergyInfo" rows="3"></textarea>
       </div>
+
       <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.SpecialInfo">
         <label for="SpecialInfo">Special Information: </label>
         <textarea class="form-control" id="SpecialInfo" rows="3"></textarea>
       </div>
-      <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.MediaRelease">
+      <div class="form-group card bg-light font-weight-bold pl-3" *ngIf = "bookingIndividual.MediaRelease">
         <label for="MediaRelease">Media Release: </label>
         <div class="media_release row">
           <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as advertising on our website at www.pacificmmc.org.</p>
@@ -115,114 +136,165 @@
           <div *ngIf="submitted && f.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required</div>
         </div>
       </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureProviderName">
-        <label for="InsureProviderName">Name of Insurance Carrier: </label>
-        <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
+      <!-- Name of Insurance Carrier -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureProviderName">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsureProviderName">Name of Insurance Carrier: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
                 [ngClass]="{ 'is-invalid': submitted && f.InsureProviderName.errors }">
-        <div *ngIf="submitted && f.InsureProviderName.errors" class="invalid-feedback">
-          <div *ngIf="f.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
-          <div *ngIf="f.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
-        </div>        
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureRecipientName">
-        <label for="InsureRecipientName">Name of Insured Child: </label>
-        <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
+            <div *ngIf="submitted && f.InsureProviderName.errors" class="invalid-feedback">
+              <div *ngIf="f.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
+              <div *ngIf="f.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
+            </div> 
+          </div>
+        </div>
+      </fieldset>
+      <!-- Name of Insured Child -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureRecipientName">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsureRecipientName">Name of Insured Child:  </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
                 [ngClass]="{ 'is-invalid': submitted && f.InsureRecipientName.errors }">
-        <div *ngIf="submitted && f.InsureRecipientName.errors" class="invalid-feedback">
-          <div *ngIf="f.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
-          <div *ngIf="f.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
+            <div *ngIf="submitted && f.InsureRecipientName.errors" class="invalid-feedback">
+              <div *ngIf="f.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
+              <div *ngIf="f.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePolicyNo">
-        <label for="InsurePolicyNo">Insurance Policy Number: </label>
-        <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
-                [ngClass]="{ 'is-invalid': submitted && f.InsurePolicyNo.errors }">
-        <div *ngIf="submitted && f.InsurePolicyNo.errors" class="invalid-feedback">
-          <div *ngIf="f.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
-          <div *ngIf="f.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
-          <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Phone Number</div>
-        </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePhoneNo">
-        <label for="InsurePhoneNo">Insurance Phone Number: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
-                [ngClass]="{ 'is-invalid': submitted && f.InsurePhoneNo.errors }">
-        <div *ngIf="submitted && f.InsurePhoneNo.errors" class="invalid-feedback">
-          <div *ngIf="f.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
-          <div *ngIf="f.InsurePhoneNo.errors.minlength">Please enter correct phone number</div>
-            <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div>
-        </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName1">
-        <label for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
-        <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
-                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName1.errors }">
-        <div *ngIf="submitted && f.AuthorizedPickupName1.errors" class="invalid-feedback">
-          <div *ngIf="f.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
-          <div *ngIf="f.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
-        </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
-        <label for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
-                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
-        <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
-          <div *ngIf="f.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
-          <div *ngIf="f.AuthorizedPickupPhone1.errors.minlength">Please enter correct phone number</div>
-            <div *ngIf="f.AuthorizedPickupPhone1.errors.pattern">Invalid Phone Number</div>
-        </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName2">
-        <label for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
-        <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
-                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
-        <div *ngIf="submitted && f.AuthorizedPickupName2.errors" class="invalid-feedback">
-          <div *ngIf="f.AuthorizedPickupName2.errors.required">Authorized Pickup Name is required</div>
-          <div *ngIf="f.AuthorizedPickupName2.errors.minlength">Must be at least 3 characters long.</div>
-        </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
-        <label for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
-        <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
-                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }">
-        <div *ngIf="submitted && f.AuthorizedPickupPhone2.errors" class="invalid-feedback">
-          <div *ngIf="f.AuthorizedPickupPhone2.errors.required">Authorized Pickup Phone is required</div>
-          <div *ngIf="f.AuthorizedPickupPhone2.errors.minlength">Please enter correct phone number</div>
-            <div *ngIf="f.AuthorizedPickupPhone2.errors.pattern">Invalid Phone Number</div>
-        </div>
-      </div>
+      </fieldset>
 
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.EarlyDropOff">
-        <label for="EarlyDropOff">Early Drop Off: </label>
-        <select class="form-control" formControlName="EarlyDropOff" 
+      <!-- Insurance Policy Number -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePolicyNo">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsurePolicyNo">Insurance Policy Number:  </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
+                [ngClass]="{ 'is-invalid': submitted && f.InsurePolicyNo.errors }">
+            <div *ngIf="submitted && f.InsurePolicyNo.errors" class="invalid-feedback">
+              <div *ngIf="f.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
+              <div *ngIf="f.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
+              <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Phone Number</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Insurance Phone Number -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePhoneNo">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsurePhoneNo">Insurance Phone Number:  </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+                [ngClass]="{ 'is-invalid': submitted && f.InsurePhoneNo.errors }">
+            <div *ngIf="submitted && f.InsurePhoneNo.errors" class="invalid-feedback">
+              <div *ngIf="f.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
+              <div *ngIf="f.InsurePhoneNo.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Authorized Pickup Name 1 -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName1">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName1.errors }">
+            <div *ngIf="submitted && f.AuthorizedPickupName1.errors" class="invalid-feedback">
+              <div *ngIf="f.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
+              <div *ngIf="f.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Authorized Pickup Phone 1 -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
+            <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+              <div *ngIf="f.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
+              <div *ngIf="f.AuthorizedPickupPhone1.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.AuthorizedPickupPhone1.errors.pattern">Invalid Phone Number</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Authorized Pickup Name 2 -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName2">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
+            <div *ngIf="submitted && f.AuthorizedPickupName1.errors" class="invalid-feedback">
+              <div *ngIf="f.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
+              <div *ngIf="f.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Authorized Pickup Phone 2 -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
+            <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+              <div *ngIf="f.AuthorizedPickupPhone2.errors.required">Authorized Pickup Phone is required</div>
+              <div *ngIf="f.AuthorizedPickupPhone2.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.AuthorizedPickupPhone2.errors.pattern">Invalid Phone Number</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- Early Dropoff -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.EarlyDropOff">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="EarlyDropOff">Early Drop Off: </label>
+          <div class="col-sm-9">
+            <select class="form-control" formControlName="EarlyDropOff" 
                   [ngClass]="{ 'is-invalid': submitted && f.EarlyDropOff.errors }">
-          <option>No, thanks! (+$0) </option>
-          <option>Monday Early Drop Off (+$7)</option>
-          <option>Tueday Early Drop Off (+$7)</option>
-          <option>Wednesday Early Drop Off (+$7)</option>
-          <option>Thursday Early Drop Off (+$7)</option>
-        </select>
-        <div *ngIf="submitted && f.EarlyDropOff.errors" class="invalid-feedback">
-          <div *ngIf="f.EarlyDropOff.errors.required">This is required</div>
+              <option>No, thanks! (+$0) </option>
+              <option>Monday Early Drop Off (+$7)</option>
+              <option>Tueday Early Drop Off (+$7)</option>
+              <option>Wednesday Early Drop Off (+$7)</option>
+              <option>Thursday Early Drop Off (+$7)</option>
+            </select>
+            <div *ngIf="submitted && f.EarlyDropOff.errors" class="invalid-feedback">
+              <div *ngIf="f.EarlyDropOff.errors.required">This is required</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.LatePickup">
-        <label for="LatePickup">Late Pick Up: </label>
-        <select class="form-control" formControlName="LatePickup"
+      </fieldset>
+      <!-- Late Pickup -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.LatePickup">
+        <div class="row">
+          <label class="col-form-label col-sm-3 pt-0 pl-0" for="LatePickup">Late Pick Up: </label>
+          <div class="col-sm-9">
+            <select class="form-control" formControlName="LatePickup"
                   [ngClass]="{ 'is-invalid': submitted && f.LatePickup.errors }">
-          <option>No, thanks! (+$0) </option>
-          <option>Monday Late Pick-Up (+$7)</option>
-          <option>Tueday Late Pick-Up  (+$7)</option>
-          <option>Wednesday Late Pick-Up  (+$7)</option>
-          <option>Thursday Late Pick-Up  (+$7)</option>
-        </select>
-        <div *ngIf="submitted && f.LatePickup.errors" class="invalid-feedback">
-          <div *ngIf="f.LatePickup.errors.required">This is required</div>
+              <option>No, thanks! (+$0) </option>
+              <option>Monday Late Pick-Up (+$7)</option>
+              <option>Tueday Late Pick-Up  (+$7)</option>
+              <option>Wednesday Late Pick-Up  (+$7)</option>
+              <option>Thursday Late Pick-Up  (+$7)</option>
+            </select>
+            <div *ngIf="submitted && f.LatePickup.errors" class="invalid-feedback">
+              <div *ngIf="f.LatePickup.errors.required">This is required</div>
+            </div>
+          </div>
         </div>
-      </div>
+      </fieldset>
+
       <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.FullAmount">
         <label for="FullAmount">This program requires you to pay full amount. </label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-info">Submit</button>
     </form>
 </div>

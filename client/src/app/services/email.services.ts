@@ -6,10 +6,8 @@ import { Observable, of } from 'rxjs'
   {providedIn: "root"}
 )
 export class EmailService {
-  private expressBaseUrl: string = "http://localhost:3000"
-  test = "Testing"
+  private expressBaseUrl: string = "http://localhost:3000"  
   constructor(private http: HttpClient) {}
- 
 
   public sendContactEmail(data)  {
     return this.http.post(this.expressBaseUrl + '/service/send-contact-email', data);
@@ -17,6 +15,10 @@ export class EmailService {
 
   public sendResetPasswordEmail(userInfo): Observable<any>{
     return this.http.post(this.expressBaseUrl + '/service/send-reset-password-email', userInfo);
+  }
+
+  public ValidPasswordToken(body): Observable<any>{    
+    return this.http.post(this.expressBaseUrl + '/service/reset-password/' + body.resettoken, body);
   }
 
 }

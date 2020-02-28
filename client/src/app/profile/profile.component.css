@@ -1,21 +1,10 @@
-/* .container {
-    padding-top: 56px;
-}
 
-h1 {
-    font-family: sans-serif;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: bold;
-    padding-top: 20px;
-    color: #0ebbff; 
-  }*/
   .sidenav-container {
     height: 100%;  
   }
   
   .sidenav {
-    width: 220px;
+    width: 250px;
   }
   
   .sidenav .mat-toolbar {
@@ -23,9 +12,14 @@ h1 {
   }
 
   .mat-toolbar.mat-primary {
+    background: #16222A; 
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white; padding-top:50px; padding-bottom:48px;
     position: sticky;
     top: 0;
     z-index: 1;
+ 
   }
   .mat-toolbar{
     padding-left: 30px;
@@ -60,4 +54,12 @@ h1 {
   font-weight: bold;
   margin: 0 15px 5px 15px;
   border-radius: 15px;
+}
+
+h1{
+  
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 30px;
+
 }

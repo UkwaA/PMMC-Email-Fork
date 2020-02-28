@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {UserData} from '../../data/user-data';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
+import { EmailService } from '../../services/email.services';
 import { Router } from '@angular/router'
 declare var $: any;
 
@@ -31,7 +32,8 @@ export class UserDetailsComponent implements OnInit {
   userDetails: UserDetails
   NewRole: string = ''
   message = ''
-  constructor(private route: ActivatedRoute, private auth: AuthenticationService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private auth: AuthenticationService, 
+    private router: Router, public emailService:EmailService) { }
 
   ngOnInit() {   
     this.route.params.subscribe(val => {
@@ -70,7 +72,7 @@ export class UserDetailsComponent implements OnInit {
       console.log(response)
       this.message = "User was updated sucessfully"
 
-      const url = "/set-user-role"
+      const url = "/profile/set-user-role"
       this.router.navigateByUrl(url)
     },
     error => {
@@ -78,8 +80,20 @@ export class UserDetailsComponent implements OnInit {
     })
   }
 
+  resetUserPassword(){
+    this.emailService.sendResetPasswordEmail(this.userDetails).subscribe((res) => {
+      if(res.error){
+        console.log("user-detail-ts file error: " + res.error)        
+    }
+    else{
+        //this.errorMessage = "*Reset Email has been sent to " + this.userDetails.Email
+        console.log("Reset Email has been sent to " + this.userDetails.Email)                            
+    }
+    });
+  }
+
   //TO-DO:
-  removeUser(){
+  disableUser(){
 
   }
 
