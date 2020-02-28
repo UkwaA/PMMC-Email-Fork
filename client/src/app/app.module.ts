@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
+import { CustomerRegisterComponent } from './customer-info/customer-info.component';
 import { HomeComponent } from './home/home.component'
 import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
@@ -38,7 +39,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 

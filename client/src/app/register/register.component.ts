@@ -68,7 +68,7 @@ export class RegisterComponent {
     //     this.registerForm.reset();
     // }
 
-    register() {
+    continue_register() {
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
@@ -83,14 +83,11 @@ export class RegisterComponent {
                 return
             }
             else
-                this.router.navigateByUrl("/profile");            
+                this.router.navigateByUrl("/customer-register");            
         },
             err => {
                 console.error(err);
             }
-        );
-        //     () => {
-        //         this.router.navigateByUrl("/profile");
-        //     
+        );  
     }
 }
