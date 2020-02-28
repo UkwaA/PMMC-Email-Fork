@@ -9,6 +9,11 @@ module.exports = db.sequelize.define(
       allowNull: false,
       primaryKey: true
     },
+    UserFK:
+    {
+      type:Sequelize.TEXT,
+      default:'0'
+    },
     FirstName: {
       type: Sequelize.TEXT
     },
@@ -17,12 +22,11 @@ module.exports = db.sequelize.define(
     },
     PhoneNo: {
       type: Sequelize.TEXT,
-      default: ''
     },
-    StreetAddress: {
+    Address: {
       type: Sequelize.TEXT
     },
-    StreetAddress2: {
+    Address2: {
       type: Sequelize.TEXT
     },
     City: {

@@ -57,10 +57,11 @@ users.post('/customer-register', (req, res) => {
   console.log(req.body.ZipCode)
   const customerData = {
     CustomerPK: 0,
+    // UserFK: '0',
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
     PhoneNo: req.body.PhoneNo,
-    StreetAddress: req.body.StreetAddress,
+    Address: req.body.Address,
     City: req.body.City,
     State: req.body.State,
     ZipCode: req.body.ZipCode,

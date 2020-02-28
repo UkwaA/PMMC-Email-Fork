@@ -33,8 +33,8 @@ export interface TokenPayload2{
   FirstName: string
   LastName: string
   PhoneNo: String
-  StreetAddress: string
-  StreetAddress2: string
+  Address: string
+  Address2: string
   City: string
   State: String
   ZipCode: String
