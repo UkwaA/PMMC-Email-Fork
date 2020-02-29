@@ -2,7 +2,7 @@
 so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
-<body>
+<div class="banner">
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
@@ -10,7 +10,7 @@ finish checking out a program -->
                     <h3 class="text-center">Register</h3>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="register()" [formGroup]="registerForm">
+                    <form (ngSubmit)="openModal()" [formGroup]="registerForm">
                         <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -76,4 +76,4 @@ finish checking out a program -->
             </div>
         </div>
     </div>
-</body>
+</div>

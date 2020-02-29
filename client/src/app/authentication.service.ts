@@ -27,6 +27,20 @@ export interface TokenPayload {
     Role_FK: string
     Email: string
 }
+
+export interface TokenPayload2{
+  CustomerPK: number
+  FirstName: string
+  LastName: string
+  PhoneNo: String
+  Address: string
+  Address2: string
+  City: string
+  State: String
+  ZipCode: String
+  Subscribe: number
+}
+
 @Injectable()
 export class AuthenticationService {
   private token: string
@@ -69,6 +83,10 @@ export class AuthenticationService {
 
   public register(user: TokenPayload): Observable<any> {
     return this.http.post(this.baseServerURL + "/users/register", user);
+  }
+
+  public finishregister(customer: TokenPayload2): Observable<any>{
+    return this.http.post(this.baseServerURL + "/users/customer-register", customer);
   }
 
   public login(user: TokenPayload): Observable<any> {

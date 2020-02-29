@@ -44,8 +44,9 @@ async function sendContactEmail(user, callback) {
     from: "hoangt5@uci.edu", // sender address
     to: "hoangt5@uci.edu", // list of receivers
     subject: user.subject, // Subject line
-    html: `<h1>Hi ${user.name}</h1><br>
-    <h4>${user.message}</h4>`
+    html: `
+    <h4>There is a message from ${user.name} at ${user.email}</h4><br>
+    <h4>Message content: ${user.message}</h4>`
   };
 
   // send mail with defined transport object

@@ -5,8 +5,11 @@
     padding-bottom: 50px;
 }
 
+.user_info{
+    padding-top: 20px;
+}
+
 .title{
-    padding-bottom: 20px;
     padding-left: -15px;
     color: #0ebbff;
 }
@@ -16,13 +19,26 @@
 }
 
 .address_info{
-    padding-top:30px;
+    padding-top:15px;
 }
 
 .submit_button{
     margin-right: 15px;
-    margin-top: 15px;
 }
+
+.checkbox{
+    padding-top:10px;
+    padding-left: 39px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+  }
+
+  .form-check-label{
+    font-size:17px;
+    margin-left: 5px;
+  }
 
 h1 {
     font-family: sans-serif;

@@ -2,6 +2,8 @@ import {Component} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { EmailService } from '../../services/email.services';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
     templateUrl: './forgot-password.component.html',
@@ -21,6 +23,8 @@ export class ForgotPasswordComponent{
 
     constructor(private fb: FormBuilder, private auth: AuthenticationService, public emailService:EmailService){}
 
+    faEnvelope = faEnvelope;
+
     ngOnInit(){
         this.myForm = this.fb.group({            
             email: ['', [
@@ -34,21 +38,21 @@ export class ForgotPasswordComponent{
     get f() { return this.myForm.controls; }
 
     resetPassword(){        
+        this.submitted = true
         if (this.myForm.invalid) {
             return;
         }
         console.log(this.userInfo)
+        
         this.emailService.sendResetPasswordEmail(this.userInfo).subscribe(
             (res) => {
                 if(res.error){
                     console.log("fotgot ts file: " + res.error)
-                    this.errorMessage = "*" + res.error
-                    this.submitted = false
+                    this.errorMessage = "*" + res.error                    
                 }
                 else{
                     this.errorMessage = "*Reset Email has been sent to " + this.userInfo.Email
-                    console.log("Reset Email has been sent to " + this.userInfo.Email)                    
-                    this.submitted = true
+                    console.log("Reset Email has been sent to " + this.userInfo.Email)                                        
                 }
             },
             err => {

@@ -6,9 +6,12 @@ const users = express.Router()
 const bcrypt = require('bcryptjs')
 
 const User = require('../models/User')
+const Customer = require('../models/Customer')
 users.use(cors())
 
+
 users.post('/register', (req, res) => {
+  console.log("Posting regular register")
   const today = new Date()
   const userData = {
     Username: req.body.Username,
@@ -46,6 +49,34 @@ users.post('/register', (req, res) => {
     })
     .catch(err => {
       res.send('error: ' + err)
+    })
+})
+
+users.post('/customer-register', (req, res) => {
+  console.log("Posting customer-register")
+  console.log(req.body.ZipCode)
+  const customerData = {
+    CustomerPK: 0,
+    // UserFK: '0',
+    FirstName: req.body.FirstName,
+    LastName: req.body.LastName,
+    PhoneNo: req.body.PhoneNo,
+    Address: req.body.Address,
+    City: req.body.City,
+    State: req.body.State,
+    ZipCode: req.body.ZipCode,
+    Subscribe: req.body.Subscribe
+  }
+
+  Customer.create(customerData)
+    .then(customer => {
+      let token = jwt.sign(customer.dataValues, process.env.SECRET_KEY, {
+        expiresIn: 1440
+      })
+        res.json({ token: token })
+      })
+    .catch(err => {
+      res.send('errorExpressErr: ' + err)
     })
 })
 

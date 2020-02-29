@@ -21,6 +21,7 @@ export class BookingGroupProgramComponent implements OnInit {
               private service: ProgramServices) { }
 
   ngOnInit() {
+    // Get Group Program Requirement
     this.route.params.subscribe(val => { 
       this.ProgramPK = val.id 
       this.service.getProgramRequirementDetails('g', this.ProgramPK)

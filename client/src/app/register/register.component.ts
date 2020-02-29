@@ -3,6 +3,9 @@ import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+
 
 @Component({
     templateUrl: './register.component.html',
@@ -22,7 +25,8 @@ export class RegisterComponent {
         Email: ''
     }
 
-    constructor(private auth: AuthenticationService, private router: Router, private formBuilder: FormBuilder) { }
+    constructor(private auth: AuthenticationService, private router: Router, 
+        private formBuilder: FormBuilder, public matDialog: MatDialog) { }
 
     faUser = faUser;
     faKey = faKey;
@@ -63,13 +67,42 @@ export class RegisterComponent {
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }    
 
-    register() {
+    //Configure Modal Dialog
+    openModal(){
+        //Validate form before open modal dialog
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
         }
 
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "200px";
+        dialogConfig.width = "350px";
+        dialogConfig.data = {
+            title: "Register Confirmation",
+            description: "All information is correct?",            
+            actionButtonText: "Confirm",            
+          }
+          // https://material.angular.io/components/dialog/overview
+        // https://material.angular.io/components/dialog/overview
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //call register function                
+                this.continue_register()
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+    }
+
+    continue_register() {
         this.auth.register(this.credentials).subscribe((res) => {
             if(res.error)
             {
@@ -78,7 +111,7 @@ export class RegisterComponent {
                 return
             }
             else
-                this.router.navigateByUrl("/profile");            
+                this.router.navigateByUrl("/customer-register");            
         },
             err => {
                 console.error(err);

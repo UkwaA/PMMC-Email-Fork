@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
+import { CustomerRegisterComponent } from './customer-info/customer-info.component';
 import { HomeComponent } from './home/home.component'
 import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
@@ -38,10 +39,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CustomerRegisterComponent } from './customer-register/customer-register.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 
 
 const routes : Routes = [
@@ -128,7 +130,8 @@ const routes : Routes = [
     CustomerRegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent, 
-    DashboardComponent
+    DashboardComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -151,9 +154,11 @@ const routes : Routes = [
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatDialogModule,
+    MatProgressSpinnerModule    
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent],
+  entryComponents: [ModalDialogComponent]
 })
 export class AppModule { }

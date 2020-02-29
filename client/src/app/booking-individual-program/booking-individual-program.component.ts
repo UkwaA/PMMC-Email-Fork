@@ -22,6 +22,7 @@ export class BookingIndividualProgramComponent implements OnInit {
               private service: ProgramServices) { }
 
   ngOnInit() {
+    // Get Individual Program Requirement
     this.route.params.subscribe(val => { 
       this.ProgramPK = val.id 
       this.service.getProgramRequirementDetails('i', this.ProgramPK)
