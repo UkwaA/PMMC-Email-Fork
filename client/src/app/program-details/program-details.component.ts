@@ -32,6 +32,7 @@ export class ProgramDetailsComponent {
     }
     selectedValue: any
     files: File;
+    isDisabled: boolean;
 
     // EventHandler for file upload
     onFileChange(event) {
@@ -40,15 +41,16 @@ export class ProgramDetailsComponent {
     Editor = DecoupledEditor
     
     // Option for dropdown list
-    programCategories:Array<Object> = [
-        {id: 0, name: "---Choose type---"},
-        {id: 1, name: "Group Program"},
-        {id: 2, name: "Individual Program"}
+    programCategories: Array<Object> = [
+        { id: 0, name: "Group Program" },
+        { id: 1, name: "Individual Program" }
     ]
 
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
+        this.isDisabled = false;
+
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));  
           });
@@ -80,10 +82,17 @@ export class ProgramDetailsComponent {
         })
     }
 
-    onReady(editor) {
+    /* onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
            editor.isReadOnly = true,
            editor.ui.getEditableElement()
+        );
+    } */
+
+    onReady(editor) {
+        editor.ui.getEditableElement().parentElement.insertBefore(
+            editor.ui.view.toolbar.element,
+            editor.ui.getEditableElement()
         );
     }
 
