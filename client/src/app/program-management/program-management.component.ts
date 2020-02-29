@@ -12,7 +12,11 @@ import { HttpClient } from '@angular/common/http'
 })
 
 export class ProgramManagementComponent {
-    programs : ProgramData[]
+    programs : ProgramData[];
+    programCategories: Array<Object> = [
+        { id: 0, name: "Group Program" },
+        { id: 1, name: "Individual Program" }
+    ]
 
     constructor(private programService: ProgramServices,private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
