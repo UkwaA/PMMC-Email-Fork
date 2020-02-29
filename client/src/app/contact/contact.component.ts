@@ -54,22 +54,22 @@ export class Contact implements OnInit {
         subject: this.myForm.value.subject,
         message: this.myForm.value.message
         }        
-        // this.emailService.sendContactEmail(user).subscribe(
-        // data => {
-        //     let res:any = data; 
-        //     console.log(
-        //     `👏 > 👏 > 👏 > 👏 Email has been sent and the message id is ${res.messageId}`
-        //     );
-        // },
-        // err => {
-        //     console.log(err);
-        //     this.loading = false;
-        //     console.log("submitted")
-        // },() => {
-        //     //this.loading = false;
-        //     //this.buttionText = "Submit";
-        // }
-        // );
+        this.emailService.sendContactEmail(user).subscribe(
+        data => {
+            let res:any = data; 
+            console.log(
+            `👏 > 👏 > 👏 > 👏 Email has been sent and the message id is ${res.messageId}`
+            );
+        },
+        err => {
+            console.log(err);
+            this.loading = false;
+            console.log("submitted")
+        },() => {
+            //this.loading = false;
+            //this.buttionText = "Submit";
+        }
+        );
     }
 
     reset(){

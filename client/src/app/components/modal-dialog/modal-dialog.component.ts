@@ -1,4 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core'
+import {Component, OnInit, Input, Inject} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'modal-dialog',
@@ -6,13 +7,24 @@ import {Component, OnInit, Input} from '@angular/core'
     styleUrls: ['./modal-dialog.component.css']
 })
 
-export class ModalDialogComponent{
-    @Input() modalHeader: String
-    @Input() modalContent: String
+export class ModalDialogComponent implements OnInit{
+     modalHeader: String
+     modalContent: String
 
-    constructor(){}
+    constructor(public dialogRef: MatDialogRef<ModalDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) private modalData: any){}
 
     ngOnInit(){
 
     }
+
+    actionFunction() {        
+        //this.closeModal();
+        this.dialogRef.close("Yes");
+      }
+    
+      closeModal() {
+        this.dialogRef.close("No");
+      }
+    
 }

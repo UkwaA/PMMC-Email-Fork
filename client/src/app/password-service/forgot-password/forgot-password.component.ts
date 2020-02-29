@@ -38,11 +38,12 @@ export class ForgotPasswordComponent{
     get f() { return this.myForm.controls; }
 
     resetPassword(){        
+        this.submitted = true
         if (this.myForm.invalid) {
             return;
         }
         console.log(this.userInfo)
-        this.submitted = true
+        
         this.emailService.sendResetPasswordEmail(this.userInfo).subscribe(
             (res) => {
                 if(res.error){

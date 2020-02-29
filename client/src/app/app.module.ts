@@ -40,6 +40,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
@@ -153,9 +154,11 @@ const routes : Routes = [
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatDialogModule,
+    MatProgressSpinnerModule    
   ],
   providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
   bootstrap: [AppComponent],
+  entryComponents: [ModalDialogComponent]
 })
 export class AppModule { }
