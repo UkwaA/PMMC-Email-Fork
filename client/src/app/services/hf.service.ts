@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 export class HFService {
   visible: boolean;
 
-  constructor() { this.visible = false; }
+  constructor() { this.visible = true; }
 
-  show() { this.visible = false; }
+  show() { this.visible = true; }
 
-  hide() { this.visible = true; }
+  hide() { this.visible = false; }
 
   toggle() { this.visible = !this.visible; }
 
