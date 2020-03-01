@@ -19,6 +19,7 @@ export class ForgotPasswordComponent{
     userInfo = {
         UserPK: '',
         Username: '',
+        Password: '',
         Email: '',
         resetPasswordToken: ''
     }

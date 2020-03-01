@@ -73,7 +73,9 @@ app.post('/send-reset-password-email', (req,res) => {
           else{                        
             let userInfo = req.body
             userInfo.Username = user.Username
-            userInfo.UserPK = user.UserPK            
+            userInfo.UserPK = user.UserPK
+            userInfo.Email = user.Email
+            userInfo.Password = user.Password            
             
             //send email to user            
             sendResetPasswordEmail(userInfo, info => {
@@ -90,15 +92,23 @@ app.post('/send-reset-password-email', (req,res) => {
 
 
 async function sendResetPasswordEmail(userInfo, callback) {
-    // Create new token
-    let userID = userInfo.UserPK
-    let token = jwt.sign({userID}, process.env.SECRET_KEY, {
-        expiresIn: 86400 //expires in 1 hour
-      })
+    //let userPassword = userInfo.Password
+    //Create new token
+    let payload = {
+      userID: userInfo.UserPK,
+      userEmail: userInfo.Email,
+      userPassword : userInfo.Password
+    };
+
+    let token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: 86400 //expires in 1 hour
+    })
 
     //For Testing only
     let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
     let decodeUserPK = decodedToken.userID
+    let decodeUserEmail = decodedToken.userEmail
+    let decodeUserPassword = decodedToken.userPassword
     let expirationTime = decodedToken.exp
     const date = new Date(0)
     date.setUTCSeconds(expirationTime)    
@@ -118,11 +128,10 @@ async function sendResetPasswordEmail(userInfo, callback) {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
     from: "nhatv@uci.edu", // sender address need to change to Sponsor email
-    to: "nhatv@uci.edu, hoangt5@uci.edu", // need to put userInfo.Email
+    to: "hoangt5@uci.edu", // need to put userInfo.Email
     subject: "Reset Your Password", // Subject line
     html: `<h1>Hi ${userInfo.Username},</h1><br>
-    <h4>Email: ${userInfo.Email}</h4>
-    <h4>Decode UserPK: ${decodeUserPK} </h4>
+    <h4>Email: ${userInfo.Email}</h4>    
     <h4>Token Expire: ${date} </h4>    
     <h4>Here's the link to reset your password: </h4>
     <h4>http://localhost:4200/login/reset-password/${token}</h4>
@@ -138,51 +147,54 @@ async function sendResetPasswordEmail(userInfo, callback) {
 /**************************
  VALIDATE RESET PASSWORD TOKEN
  ***************************/
-app.post('/reset-password/:token', (req, res) => {
-    //Check if token is valid
-    if(!req.body.resettoken){
+app.post('/reset-password/:token', (req, res) => {    
+    let decodedToken = jwt.decode(req.params.token, process.env.SECRET_KEY)
+    //Decode token to get userID and token expiration time
+    let decodedUserPK = decodedToken.userID
+    let decodedUserEmail = decodedToken.userEmail
+    let decodedUserPassword = decodedToken.userPassword
+    let expirationTime = decodedToken.exp
+    //get token expiration date
+    if(expirationTime === undefined){
         return res.status(500).json({ message: 'Token is required'})
     }
     else{
-        let decodedToken = jwt.decode(req.params.token, process.env.SECRET_KEY)
-        //Decode token to get userID and token expiration time
-        let currentUserPK = decodedToken.userID
-        let expirationTime = decodedToken.exp
-        //get token expiration date
-        if(expirationTime === undefined){
-            return res.status(500).json({ message: 'Token is required'})
+        const date = new Date(0)
+        date.setUTCSeconds(expirationTime)
+        //Check if token is expired
+        if(date.valueOf() > new Date().valueOf()){
+            User.findOne({
+                where: {
+                UserPk: decodedUserPK
+                }
+            })
+            .then(user =>{
+                if(!user){
+                    //return res.status(409).json({ message: 'Invalid URL'})
+                    res.json({message: 'UserNotFound'})
+                }
+                else{
+                  //Compare currentPassword with decoded password, if different, password has been changed => token is invalid
+                  if(decodedUserPassword === user.Password){
+                    res.json(user)
+                  }
+                  //Password has been changed.
+                  else{                    
+                    res.json({message: 'PasswordHasChanged'})
+                  }
+                    
+                }
+            })
+            .catch(err => {
+                res.send('error: ' + err)
+            })
         }
+        //If token is expired, display error
         else{
-            const date = new Date(0)
-            date.setUTCSeconds(expirationTime)
-            //Check if token is expired
-            if(date.valueOf() > new Date().valueOf()){
-                User.findOne({
-                    where: {
-                    UserPk: currentUserPK
-                    }
-                })
-                .then(user =>{
-                    if(!user){
-                        //return res.status(409).json({ message: 'Invalid URL'})
-                        res.json({message: 'UserNotFound'})
-                    }
-                    else{
-                        res.json(user)
-                    }
-                })
-                .catch(err => {
-                    res.send('error: ' + err)
-                })
-            }
-            else{
-                res.json({ message: 'ExpiredToken' })
-            }            
-        }
+            res.json({ message: 'ExpiredToken' })
+        }            
     }
-  });
-
-
+  }); 
 
 //main().catch(console.error);
 module.exports = app
