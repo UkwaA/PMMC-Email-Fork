@@ -2,9 +2,11 @@
     <header id="modal-header">
         <h1 id="modal-title">{{modalData.title}}</h1>
     </header>
+    <mat-divider></mat-divider>
     <section id="modal-body">
         <p>{{modalData.description}}</p>
     </section>
+    <mat-divider></mat-divider>
     <footer id="modal-footer">
         <button mat-raised-button id="modal-action-button" (click)="actionFunction()">
             {{modalData.actionButtonText}}

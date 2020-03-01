@@ -26,9 +26,10 @@
                         <div class="col-md-4">•••••••••••••                     
                         </div>
                         <button type="button" class="btn btn-md btn-warning col-md-4" 
-                            (click)="resetUserPassword()" data-toggle="modal" data-target="#ModalCenter" >
+                            (click)="openModalResetPassword()">
                             Reset Password</button>
-                        <!-- Modal -->
+                            <!--
+                        
                             <div class="modal fade " id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop = "false">
                                 <div class="modal-dialog modal-dialog-centered" role="document" >
                                     <div class="modal-content">
@@ -46,7 +47,8 @@
                                     </div>
                                     </div>
                                 </div>
-                            </div>  <!--  Modal end -->
+                            </div>  
+                        -->
                     </div>
                 </div>
                 <div class="form-group">
@@ -82,7 +84,7 @@
                         </div>
                     </div> 
                 </div>
-                <button class="btn btn-lg btn-info btn-block" type="submit" (click)="updateUserDetail()">Update User Details</button>
+                <button class="btn btn-lg btn-info btn-block" type="submit" (click)="openModalUpdateUserDetail()">Update User Details</button>
             </form>
          
         </div>

@@ -14,10 +14,13 @@
 #modal-footer {
     justify-self: right;
     align-self: center;
+    padding-top: 10px;
 }
 
 #modal-body{
     color: black;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 #modal-action-button {
