@@ -55,12 +55,14 @@ export class IProgramComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose =true;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "250px";
+    dialogConfig.height = "auto";
+    dialogConfig.maxHeight = "500px";
     dialogConfig.width = "430px";
     dialogConfig.data = {
         title: "Update Individual Program Details",
         description: "All information is correct?",            
-        actionButtonText: "Confirm",            
+        actionButtonText: "Confirm",
+        numberOfButton: "2"
       }
       // https://material.angular.io/components/dialog/overview
     // https://material.angular.io/components/dialog/overview
