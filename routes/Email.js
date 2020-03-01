@@ -93,7 +93,7 @@ async function sendResetPasswordEmail(userInfo, callback) {
     // Create new token
     let userID = userInfo.UserPK
     let token = jwt.sign({userID}, process.env.SECRET_KEY, {
-        expiresIn: 3600 //expires in 1 hour
+        expiresIn: 86400 //expires in 1 hour
       })
 
     //For Testing only
@@ -117,8 +117,8 @@ async function sendResetPasswordEmail(userInfo, callback) {
     let mailOptions = {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
-    from: "hoangt5@uci.edu", // sender address need to change to Sponsor email
-    to: "hoangt5@uci.edu", // need to put userInfo.Email
+    from: "nhatv@uci.edu", // sender address need to change to Sponsor email
+    to: "nhatv@uci.edu, hoangt5@uci.edu", // need to put userInfo.Email
     subject: "Reset Your Password", // Subject line
     html: `<h1>Hi ${userInfo.Username},</h1><br>
     <h4>Email: ${userInfo.Email}</h4>
