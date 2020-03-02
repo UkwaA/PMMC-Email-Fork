@@ -4,6 +4,7 @@ import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { EmailService } from '../../services/email.services';
 import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
+//import { ConsoleReporter } from 'jasmine';
 
 @Component({
     templateUrl: './reset-password.component.html',
@@ -87,6 +88,7 @@ export class ResetPasswordComponent{
                         this.userDetails = user                        
                     })
                 }
+                console.log(this.CurrentState)
             },
             err => {
                 console.log("No data")
