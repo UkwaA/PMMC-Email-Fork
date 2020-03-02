@@ -64,6 +64,24 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <h1>PACIFIC MARINE MAMMAL CENTER</h1>
+        <!-- User Information -->
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+          <span>{{userName}} </span>
+          <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
+          <mat-icon matListIcon>account_circle</mat-icon>
+        </a>
+        <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#">
+            <mat-icon>info</mat-icon>
+            Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" (click)="auth.logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Logout
+          </a>
+        </div>
       </mat-toolbar>
       <!-- Add Content Here --> 
       <router-outlet></router-outlet>

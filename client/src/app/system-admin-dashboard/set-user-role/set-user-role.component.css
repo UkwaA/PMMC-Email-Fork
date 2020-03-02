@@ -12,3 +12,31 @@ h1 {
     /* padding-top: 20px; */
     color: #08b2b8; 
 }
+
+thead{
+  background-color:  rgba(0, 0, 0, 0.658);
+  color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+td {
+  font-size: 18px;
+}
+
+td.name{
+  color:  #08b2b8;
+}
+
+th {
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.btn{
+  margin-right: 20px;
+}

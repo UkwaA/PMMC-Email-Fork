@@ -28,14 +28,26 @@
 }
 
 .header_change a:hover{
+    color: rgb(15, 58, 87)!important;
+    text-decoration: underline;
+}
+
+.header_change a:active{
     color: #08b2b8!important;
 }
 
 .nav-item{
     text-align: right;
+    font-family: "Trebuchet MS" !important;
 }
 
 .nav-link:hover{
+    color: #08b2b8!important;
+    text-decoration: underline;
+
+}
+
+.nav-link:active{
     color: #08b2b8!important;
 
 }

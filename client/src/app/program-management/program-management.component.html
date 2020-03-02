@@ -22,24 +22,24 @@
     </div> -->
     <!--  Create table -->
     <div class="table-responsive-sm">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th> Program Name </th>
-                <th> Program Type </th>
-                <th colspan="3"> Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr  *ngFor = 'let program of programs'>
-                <td class="name"> {{program.Name}} </td>
-                <td *ngIf = "program.ProgramType =='0'" > Group Program </td>
-                <td *ngIf = "program.ProgramType =='1'" > Individual Program </td>
-                <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-info"><mat-icon matListIcon>visibility</mat-icon> View </button> </td>
-                <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button></td>
-                <td><button class="btn btn-danger"><mat-icon matListIcon>delete</mat-icon> Delete</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+        <table class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:45%"> Program Name </th>
+                    <th style="width:20%"> Program Type </th>
+                    <th style="width:35%"> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor = 'let program of programs'>
+                    <td class="name"> {{program.Name}} </td>
+                    <td *ngIf = "program.ProgramType =='0'" > Group Program </td>
+                    <td *ngIf = "program.ProgramType =='1'" > Individual Program </td>
+                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-info"><mat-icon matListIcon>visibility</mat-icon> View </button> 
+                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
+                        <button class="btn btn-danger"><mat-icon matListIcon>delete</mat-icon> Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
