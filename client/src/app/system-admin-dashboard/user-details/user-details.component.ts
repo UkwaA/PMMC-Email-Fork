@@ -4,6 +4,8 @@ import {UserData} from '../../data/user-data';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { EmailService } from '../../services/email.services';
 import { Router } from '@angular/router'
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 declare var $: any;
 
 @Component({
@@ -11,21 +13,7 @@ declare var $: any;
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements OnInit {
-  // userRoles = [
-  //   {
-  //     role: 'Customer',
-  //     value: '1'
-  //   },
-  //   {      
-  //     role: 'Manager',
-  //     value: '2'
-  //   },
-  //   {      
-  //     role: 'System Admin',
-  //     value: '3'
-  //   },
-  // ]
+export class UserDetailsComponent implements OnInit {  
   userRoles:string[]
   editedUserRoleFK:string
   UserPK: number
@@ -33,7 +21,7 @@ export class UserDetailsComponent implements OnInit {
   NewRole: string = ''
   message = ''
   constructor(private route: ActivatedRoute, private auth: AuthenticationService, 
-    private router: Router, public emailService:EmailService) { }
+    private router: Router, public emailService:EmailService, public matDialog: MatDialog) { }
 
   ngOnInit() {   
     this.route.params.subscribe(val => {
@@ -56,6 +44,36 @@ export class UserDetailsComponent implements OnInit {
       })
     })
   }
+
+//Configure Modal Dialog
+openModalUpdateUserDetail(){ 
+  //Configure Modal Dialog
+  const dialogConfig = new MatDialogConfig();
+  // The user can't close the dialog by clicking outside its body
+  dialogConfig.disableClose =true;
+  dialogConfig.id = "modal-component";
+  dialogConfig.height = "auto";
+  dialogConfig.maxHeight = "500px";
+  dialogConfig.width = "350px";
+  dialogConfig.data = {
+      title: "Update User detail",
+      description: "All information is correct?",            
+      actionButtonText: "Confirm",   
+      numberOfButton: "2"         
+    }
+    // https://material.angular.io/components/dialog/overview
+  // https://material.angular.io/components/dialog/overview
+  const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+  modalDialog.afterClosed().subscribe(result =>{
+      if(result == "Yes"){
+          //call register function                
+          this.updateUserDetail()
+      }
+      else{
+          console.log("stop")                
+      }
+  })
+}
 
   updateUserDetail(){
     this.NewRole = $("#roleSelection :selected").text();
@@ -80,6 +98,36 @@ export class UserDetailsComponent implements OnInit {
     })
   }
 
+//Configure Modal Dialog
+openModalResetPassword(){ 
+  //Configure Modal Dialog
+  const dialogConfig = new MatDialogConfig();
+  // The user can't close the dialog by clicking outside its body
+  dialogConfig.disableClose =true;
+  dialogConfig.id = "modal-component";
+  dialogConfig.height = "auto";
+  dialogConfig.maxHeight = "500px";
+  dialogConfig.width = "350px";
+  dialogConfig.data = {
+      title: "Reset Password",
+      description: "Are you sure to reset the password?",            
+      actionButtonText: "Confirm",   
+      numberOfButton: "2"         
+    }
+    // https://material.angular.io/components/dialog/overview
+  // https://material.angular.io/components/dialog/overview
+  const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+  modalDialog.afterClosed().subscribe(result =>{
+      if(result == "Yes"){
+          //call register function                
+          this.resetUserPassword()
+      }
+      else{
+          console.log("stop")                
+      }
+  })
+}
+
   resetUserPassword(){
     this.emailService.sendResetPasswordEmail(this.userDetails).subscribe((res) => {
       if(res.error){
@@ -96,7 +144,4 @@ export class UserDetailsComponent implements OnInit {
   disableUser(){
 
   }
-
-  //Send reset password email
-  
 }

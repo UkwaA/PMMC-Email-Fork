@@ -48,7 +48,9 @@ export class ResetPasswordComponent{
             
             //If token is empty, navigate to homepage, else verify the token
             if(!params.token){
+                //Need to research on this
                 this.router.navigateByUrl("/")
+                console.log("Token is empty")
             }
             else{                
                 this.VerifyToken()                
@@ -60,14 +62,21 @@ export class ResetPasswordComponent{
         this.emailService.ValidPasswordToken({resettoken: this.resetToken}).subscribe(
             data => {                
                 console.log("Response data: " + data.message)
+                //Token is expired
                 if(data.message == "ExpiredToken")
                 {
                     this.CurrentState = "NotVerified"    
                     this.errorMessage = "Token is invalid or expired"
                 }
+                //User is deleted before setting new password
                 else if(data.message == "UserNotFound"){
                     this.CurrentState = "NotVerified" 
-                    this.errorMessage = "User is not found"
+                    this.errorMessage = "Token is invalid or expired"
+                }
+                //The reset password link has been used before, token is invalid
+                else if(data.message == "PasswordHasChanged"){
+                    this.CurrentState = "NotVerified" 
+                    this.errorMessage = "Token is invalid or expired"
                 }
                 else{
                     this.CurrentState = "TokenValid"
@@ -80,6 +89,7 @@ export class ResetPasswordComponent{
                 }
             },
             err => {
+                console.log("No data")
                 this.CurrentState = "NotVerified"                
                 this.errorMessage = "Token is invalid or expired"
             }
@@ -121,7 +131,7 @@ export class ResetPasswordComponent{
             setTimeout(() =>{
                 //switch to log in page in 5 sec                
                 this.router.navigateByUrl('/login')
-            }, 5000)
+            }, 3000)
         })
     }
 

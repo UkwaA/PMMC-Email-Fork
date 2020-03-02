@@ -81,12 +81,14 @@ export class RegisterComponent {
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose =true;
         dialogConfig.id = "modal-component";
-        dialogConfig.height = "200px";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
         dialogConfig.data = {
             title: "Register Confirmation",
             description: "All information is correct?",            
-            actionButtonText: "Confirm",            
+            actionButtonText: "Confirm",   
+            numberOfButton: "2"         
           }
           // https://material.angular.io/components/dialog/overview
         // https://material.angular.io/components/dialog/overview
