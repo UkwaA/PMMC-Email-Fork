@@ -21,6 +21,7 @@ export class ProfileComponent {
     faPhone = faPhone;
     option: string;
     role:string;
+    userName:string;
     
     constructor(private auth: AuthenticationService, public hf: HFService, private breakpointObserver: BreakpointObserver) {}
 
@@ -32,6 +33,7 @@ export class ProfileComponent {
             user => {
                 this.details = user;
                 this.role = user.Role_FK;
+                this.userName = user.Username;
                 console.log(this.role);
             },
             err => {
