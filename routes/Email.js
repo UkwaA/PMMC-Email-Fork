@@ -101,7 +101,7 @@ async function sendResetPasswordEmail(userInfo, callback) {
     };
 
     let token = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: 86400 //expires in 1 hour
+      expiresIn: 3600 //expires in 1 hour
     })
 
     //For Testing only

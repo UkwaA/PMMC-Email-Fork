@@ -47,7 +47,6 @@ export class ResetPasswordComponent{
         this.route.params.subscribe(params => {
             this.resetToken = params.token
             console.log(this.resetToken)
-            
             //If token is empty, navigate to homepage, else verify the token
             if(!params.token){
                 //Need to research on this
