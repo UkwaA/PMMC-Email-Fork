@@ -80,16 +80,11 @@ export class ForgotPasswordComponent{
             actionButtonText: "Close",   
             numberOfButton: "1"         
           }
-          // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                //call register function
-                setTimeout(() =>{
-                    //switch to log in page in 5 sec                
-                    this.router.navigateByUrl('/login')
-                }, 1000)
+                //Redirect users to login page
+                this.router.navigateByUrl('/login')
             }
             else{
                 console.log("stop")                

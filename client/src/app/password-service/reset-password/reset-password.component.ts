@@ -4,6 +4,8 @@ import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { EmailService } from '../../services/email.services';
 import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 //import { ConsoleReporter } from 'jasmine';
 
 @Component({
@@ -20,7 +22,6 @@ export class ResetPasswordComponent{
     userDetails: UserDetails
     currentUserPK: number
     newPassword: string  
-    successMessage = ''  
     
     //Icon for UI
     faUser = faUser;
@@ -29,12 +30,12 @@ export class ResetPasswordComponent{
     faCheckDouble = faCheckDouble;
 
     constructor(private fb: FormBuilder, private auth: AuthenticationService, 
-        public emailService:EmailService, private route:ActivatedRoute, private router: Router ){            
+        public emailService:EmailService, private route:ActivatedRoute, 
+        private router: Router, public matDialog: MatDialog ){            
     }
 
     ngOnInit(){
         this.errorMessage = ''
-        this.successMessage = ''
         this.resetPasswordForm = this.fb.group({            
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required],            
@@ -129,11 +130,39 @@ export class ResetPasswordComponent{
         console.log(this.userDetails)
         this.auth.updateUserPassword(this.currentUserPK, this.userDetails).subscribe(response => {
             console.log("Respone: " + response.message)
-            this.successMessage = response.message
-            setTimeout(() =>{
-                //switch to log in page in 5 sec                
+            this.openModal()            
+            // setTimeout(() =>{
+            //     //switch to log in page in 5 sec                
+            //     this.router.navigateByUrl('/login')
+            // }, 3000)
+        })
+    }
+
+    //Configure Modal Dialog
+    openModal(){        
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.data = {
+            title: "Set New Password",
+            description: "Password has been successfully updated. You are now redirecting to Login Page" ,
+            actionButtonText: "Close",   
+            numberOfButton: "1"         
+          }
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //redirect Users to login page
                 this.router.navigateByUrl('/login')
-            }, 3000)
+            }
+            else{
+                console.log("stop")                
+            }
         })
     }
 
