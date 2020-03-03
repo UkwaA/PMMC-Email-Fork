@@ -21,12 +21,12 @@ export class IndividualProgramComponent implements OnInit{
             });
         })
     }
-    onReady(editor) {
+  /*   onReady(editor) {
         console.log(editor)
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.getEditableElement()
         );
-    }
+    } */
     clearSearch() {
         this.searchText = "";
     }
