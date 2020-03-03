@@ -38,6 +38,7 @@ import { ForgotPasswordComponent} from './password-service/forgot-password/forgo
 import { ResetPasswordComponent} from './password-service/reset-password/reset-password.component';
 import { ChangeCurrentPasswordComponent} from './password-service/change-current-password/change-current-password.component';
 import { AccountSetting } from './account-setting/account-setting.component';
+import { ProfileInfo } from './profile-info/profile-info.component';
 
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -92,6 +93,11 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService], 
       },
       { 
+        path: 'profile-info/:id', 
+        component: ProfileInfo,
+        canActivate: [AuthGuardService], 
+      },
+      { 
         path: 'account-setting/:id', 
         component: AccountSetting,
         canActivate: [AuthGuardService], 
@@ -130,7 +136,8 @@ const routes : Routes = [
     ChangeCurrentPasswordComponent,
     DashboardComponent,
     ModalDialogComponent,
-    AccountSetting
+    AccountSetting,
+    ProfileInfo
   ],
   imports: [
     BrowserModule,
