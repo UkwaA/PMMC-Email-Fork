@@ -1,12 +1,22 @@
 
 .header_change{
     position: fixed;
-    background: white;
+    background: white !important;
     width: 100%;
     z-index: 1;
     box-shadow: 0px 2px 2px #585d5e80;
     /* text-shadow: 1px 1px 2px #0021dd80; */
 
+}
+
+
+.navbar-toggler{
+    border-color: rgb(34, 33, 33);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(34, 33, 33)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    
 }
 
 .header_change .navbar-toggler {
@@ -27,12 +37,17 @@
 
 }
 
-.header_change a:hover{
-    color: rgb(15, 58, 87)!important;
+.header_change .nav-link:hover{
+    color: #08b2b8!important;
     text-decoration: underline;
 }
 
-.header_change a:active{
+
+.header_change .nav-link:active{
+    color: #08b2b8!important;
+}
+
+.header_change .nav-link:focus{
     color: #08b2b8!important;
 }
 
@@ -47,13 +62,12 @@
 
 }
 
-.nav-link:active{
+.nav-link:active, .nav-link:focus{
     color: #08b2b8!important;
-
 }
 
 .nav-link{
-    color: black !important;
+    color: rgb(19, 39, 77)!important;
     /* text-shadow: 1px 1px 2px #0021dd80; */
     font-weight: normal;
     font-size: 18px;
@@ -61,10 +75,6 @@
     -webkit-text-stroke-color: white; */
 
 }
-
-.active {
-    background-color: rgba(34,34,34,0.8);
-  }
 
 
 body {
@@ -91,5 +101,4 @@ body {
 a:hover {
     color:#ffffff !important;
 }
-
 
