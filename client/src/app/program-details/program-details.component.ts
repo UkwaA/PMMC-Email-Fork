@@ -22,6 +22,7 @@ export class ProgramDetailsComponent {
     PageMode: string
     ProgramTypeText: string
     programData: ProgramData = {
+        IsActive: true,
         ProgramPk: 0,
         Name: '',
         Description: '',
