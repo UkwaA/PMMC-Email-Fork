@@ -53,22 +53,11 @@ const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  /* {
-    path: 'set-user-role',
-    component: SetUserRoleComponent,
-    canActivate: [AuthSystemRoleGuardService]
-  }, */
   {
     path: 'user-details/:id', 
     component: UserDetailsComponent,
     canActivate: [AuthSystemRoleGuardService]
   },
-  /* {
-    path: 'createprogram', 
-    component: CreateProgramComponent,
-    canActivate: [AuthRoleGuardService]
-  },
- */
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
@@ -77,13 +66,6 @@ const routes : Routes = [
   {path: 'customer-register', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
-  /*
-  { 
-    path: 'program-details/:id', 
-    component: ProgramDetailsComponent,
-    canActivate: [AuthRoleGuardService], 
-  }, */
-
   {
     path: 'profile', 
     component: ProfileComponent,

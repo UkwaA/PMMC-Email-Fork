@@ -95,7 +95,8 @@ program.post('/add-program', (req, res) => {
     CreatedDate: today,
     CreatedBy: req.body.CreatedBy,
     ImgData: '',
-    ProgramType: req.body.ProgramType
+    ProgramType: req.body.ProgramType,
+    IsActive: req.body.IsActive
   }
 
   Program.create(programData)
@@ -120,7 +121,7 @@ program.post('/add-program', (req, res) => {
         ImgData: filePath.substring(8)
       })
 
-      // Create Program Details: Insert data to GroupProgram or IndividualProgram
+      // Create Program Requirement for layout: Insert data to GroupProgramRequirement or IndividualProgramRequirement
       // based on ProgramType:
       // 0 - Group Program
       // 1 - Individual Program
@@ -133,10 +134,23 @@ program.post('/add-program', (req, res) => {
             CreatedBy: req.body.CreatedBy,
           }
           GroupProgramRequirement.create(groupDetail)
-            .then(program => {
-              console.log(program.GroupProgramPK)
-              res.json(program.GroupProgramPK)
-            })
+          .catch(err => {
+            res.send('err Insert Groupl Requirement' + err)
+          })
+            // .then(program => {
+            //   console.log(program.GroupProgramPK)
+            //   Program.findOne({
+            //     where: {
+            //       ProgramPK: programPK
+            //     }
+            //   })
+            //   .then(result => {
+            //     result.update({
+            //       IsActive : true
+            //     })
+            //   })
+            //   res.json(program.GroupProgramPK)
+            // })
           break;
         case '1':
           var individualDetail = {
@@ -145,12 +159,39 @@ program.post('/add-program', (req, res) => {
             CreatedBy: req.body.CreatedBy,
           }
           IndividualProgramRequirement.create(individualDetail)
-            .then(program => {
-              console.log(program.IndividualProgramPK)
-              res.json(program.IndividualProgramPK)
-            })
+          .catch(err => {
+            res.send('err Insert Individual Requirement' + err)
+          })
+            // .then(program => {
+            //   console.log(program.IndividualProgramPK)
+            //   // Program.findOne({
+            //   //   where: {
+            //   //     ProgramPK: programPK
+            //   //   }
+            //   // })
+            //   // .then(result => {
+            //   //   result.update({
+            //   //     IsActive : true
+            //   //   })
+            //   // })
+            //   // res.json(program.IndividualProgramPK)
+            // })
           break;
       }
+
+      // Update IsActive for Program header
+      Program.findOne({
+        where: {
+          ProgramPK: programPK
+        }
+      })
+      .then(result => {
+        result.update({
+          IsActive : true
+        })
+        res.json(programPK)
+      })
+      
 
     })
     .catch(err => {

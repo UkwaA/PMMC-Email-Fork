@@ -25,7 +25,8 @@ export class CreateProgramComponent {
         CreatedDate: '',
         CreatedBy: 0,
         ImgData: '',
-        ProgramType: 0
+        ProgramType: 0,
+        IsActive: false
     }
 
     programCategories: Array<Object> = [
