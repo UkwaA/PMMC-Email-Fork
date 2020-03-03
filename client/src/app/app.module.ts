@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 import { LoginComponent } from './login/login.component'
@@ -144,6 +146,7 @@ const routes : Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled'
     }),

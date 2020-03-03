@@ -6,8 +6,7 @@ module.exports = db.sequelize.define(
   {
     IndividualProgramPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     ParticipantName: {
         type: Sequelize.BOOLEAN

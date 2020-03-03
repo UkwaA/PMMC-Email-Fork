@@ -6,8 +6,8 @@ const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload');
 
 const Program = require('../models/Program')
-const IndividualProgram = require('../models/IndividualProgram')
-const GroupProgram = require('../models/Groupprogram')
+const IndividualProgramRequirement = require('../models/IndividualRequirement')
+const GroupProgramRequirement = require('../models/GroupRequirement')
 
 program.use(bodyParser.json());
 program.use(bodyParser.urlencoded({ extended: false }));
@@ -51,37 +51,37 @@ program.get('/get-program-details/:id', (req, res) => {
     })
 })
 
-// Get All Program Header Information of Individual Program
-program.get('/get-individual-program-details', (req, res) => {
-  IndividualProgram.findAll({
-  })
-    .then(program => {
-      if (program) {
-        res.json(program)
-      } else {
-        res.send('There is no program available.')
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err)
-    })
-})
+// // Get All Program Header Information of Individual Program
+// program.get('/get-individual-program-details', (req, res) => {
+//   IndividualProgram.findAll({
+//   })
+//     .then(program => {
+//       if (program) {
+//         res.json(program)
+//       } else {
+//         res.send('There is no program available.')
+//       }
+//     })
+//     .catch(err => {
+//       res.send('error: ' + err)
+//     })
+// })
 
-// Get All Program Header Information of Group Program
-program.get('/get-group-program-details', (req, res) => {
-  GroupProgram.findAll({
-  })
-    .then(program => {
-      if (program) {
-        res.json(program)
-      } else {
-        res.send('There is no program available.')
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err)
-    })
-})
+// // Get All Program Header Information of Group Program
+// program.get('/get-group-program-details', (req, res) => {
+//   GroupProgram.findAll({
+//   })
+//     .then(program => {
+//       if (program) {
+//         res.json(program)
+//       } else {
+//         res.send('There is no program available.')
+//       }
+//     })
+//     .catch(err => {
+//       res.send('error: ' + err)
+//     })
+// })
 
 // Create New Program Header
 program.post('/add-program', (req, res) => {
@@ -132,7 +132,7 @@ program.post('/add-program', (req, res) => {
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
-          GroupProgram.create(groupDetail)
+          GroupProgramRequirement.create(groupDetail)
             .then(program => {
               console.log(program.GroupProgramPK)
               res.json(program.GroupProgramPK)
@@ -144,7 +144,7 @@ program.post('/add-program', (req, res) => {
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
-          IndividualProgram.create(individualDetail)
+          IndividualProgramRequirement.create(individualDetail)
             .then(program => {
               console.log(program.IndividualProgramPK)
               res.json(program.IndividualProgramPK)
@@ -165,7 +165,7 @@ program.post('/update-g-program-requirement', (req, res) => {
   var programPK = 0
 
   // Select the Program Layout Details if available
-  GroupProgram.findOne({
+  GroupProgramRequirement.findOne({
     where: {
       GroupProgramPK: req.body.GroupProgramPK
     }
@@ -215,7 +215,7 @@ program.post('/update-i-program-requirement', (req, res) => {
   var programPK = 0
 
   // Select the Program Layout Details if available
-  IndividualProgram.findOne({
+  IndividualProgramRequirement.findOne({
     where: {
       IndividualProgramPK: req.body.IndividualProgramPK
     }
@@ -262,7 +262,7 @@ program.post('/update-i-program-requirement', (req, res) => {
 
 // Get Requirement Setting for Individual Program by ID
 program.get('/get-individual-requirement/:id', (req, res) => {
-  IndividualProgram.findOne({
+  IndividualProgramRequirement.findOne({
     where: {
       IndividualProgramPK: req.params.id
     }
@@ -281,7 +281,7 @@ program.get('/get-individual-requirement/:id', (req, res) => {
 
 // Get Requirement Setting for Group Program by ID
 program.get('/get-group-requirement/:id', (req, res) => {
-  GroupProgram.findOne({
+  GroupProgramRequirement.findOne({
     where: {
       GroupProgramPK: req.params.id
     }

@@ -2,11 +2,12 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'individualprogram',
+  'individualrequirement',
   {
     IndividualProgramPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     ParticipantName: {
         type: Sequelize.BOOLEAN

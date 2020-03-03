@@ -10,6 +10,7 @@ import { AppConstants } from '../constants';
 
 export class GroupProgramComponent implements OnInit{
     programs:ProgramData[];
+    searchText = "";
     constructor(private programService: ProgramServices){
 
     }
@@ -27,6 +28,10 @@ export class GroupProgramComponent implements OnInit{
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.getEditableElement()
         );
+    }
+
+    clearSearch() {
+        this.searchText = "";
     }
 
 }

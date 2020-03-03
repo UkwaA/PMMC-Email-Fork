@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'groupprogram',
+  'grouprequirement',
   {
     GroupProgramPK: {
       type: Sequelize.INTEGER,
