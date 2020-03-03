@@ -64,7 +64,8 @@ export class CreateProgramComponent {
 
         this.services.addNewProgram(this.getFormData())
             .subscribe((response) => {
-                this.router.navigateByUrl("/profile/program-management")
+                console.log(response)
+                this.router.navigateByUrl("/profile/program-details/" + response)
             })
     }
 

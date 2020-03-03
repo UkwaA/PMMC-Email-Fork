@@ -63,7 +63,7 @@ const routes : Routes = [
   {path: 'contact', component: Contact},
   {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
-  {path: 'customer-register', component: CustomerRegisterComponent}, 
+  {path: 'customer-register/:id', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
@@ -75,7 +75,7 @@ const routes : Routes = [
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
-        path: 'program-details/:id', 
+        path: 'program-details/:id/:mode', 
         component: ProgramDetailsComponent,
         canActivate: [AuthRoleGuardService], 
       },

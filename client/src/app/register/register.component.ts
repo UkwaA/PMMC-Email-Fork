@@ -112,8 +112,9 @@ export class RegisterComponent {
                 this.errorMessage = "*" + res.error
                 return
             }
-            else
-                this.router.navigateByUrl("/customer-register");            
+            else{
+                this.router.navigateByUrl("/customer-register/" + this.auth.getUserDetails().UserPK);            
+            }
         },
             err => {
                 console.error(err);
