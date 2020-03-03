@@ -37,6 +37,8 @@ import { GProgramComponent } from './components/g-program/g-program.component';
 import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
 import { ResetPasswordComponent} from './password-service/reset-password/reset-password.component';
 import { ChangeCurrentPasswordComponent} from './password-service/change-current-password/change-current-password.component';
+import { AccountSetting } from './account-setting/account-setting.component';
+
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -90,6 +92,11 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService], 
       },
       { 
+        path: 'account-setting/:id', 
+        component: AccountSetting,
+        canActivate: [AuthGuardService], 
+      },
+      { 
         path: 'change-current-password', 
         component: ChangeCurrentPasswordComponent,
         canActivate: [AuthGuardService], 
@@ -122,7 +129,8 @@ const routes : Routes = [
     ResetPasswordComponent, 
     ChangeCurrentPasswordComponent,
     DashboardComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    AccountSetting
   ],
   imports: [
     BrowserModule,

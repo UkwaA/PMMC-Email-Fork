@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-4 mx-auto">
+            <div class="row text-center text-white mb-5">
+                <div class="col-lg-7 mx-auto">
+                    <h1>User Account</h1>
+                </div>
+            </div>
+            <form>                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 text-bold">
+                            <label>UserName</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="name" [(ngModel)]="userDetails.Username" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 text-bold">
+                            <label>Password</label>
+                        </div>
+                        <div class="col-md-4">•••••••••••••                     
+                        </div>
+                        <button type="button" class="btn btn-md btn-warning col-md-4" 
+                            [routerLink]="['/profile/change-current-password']">
+                            Change Password</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 text-bold">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="email" [(ngModel)]="userDetails.Email" readonly>
+                        </div>
+                    </div>
+                </div>     
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 text-bold">
+                            <label>Role</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div *ngIf = "userDetails.Role_FK == 1">Customer</div>
+                            <div *ngIf = "userDetails.Role_FK == 2">Manager</div>
+                            <div *ngIf = "userDetails.Role_FK == 3">System Admin</div>
+                        </div>
+                    </div>
+                </div>   
+            </form>
+        </div>
+    </div>
+</div>

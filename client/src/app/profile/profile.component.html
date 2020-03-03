@@ -76,7 +76,7 @@
             <mat-icon>info</mat-icon>
             Profile
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" [routerLink]="['/profile', 'account-setting', details.UserPK]">
             <mat-icon>settings</mat-icon>
             Account Setting
           </a>
