@@ -7,5 +7,11 @@ import { Component, OnInit } from '@angular/core'
   })
 
   export class ProfileInfo implements OnInit {
+    submitted = false;
+    
     ngOnInit() {}
+
+    onSubmit(){
+      this.submitted = true;
+    }
   }
