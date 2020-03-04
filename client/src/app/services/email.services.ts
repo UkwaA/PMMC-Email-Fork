@@ -21,4 +21,8 @@ export class EmailService {
     return this.http.post(this.expressBaseUrl + '/service/reset-password/' + body.resettoken, body);
   }
 
+  public sendPasswordConfirmationEmail(body): Observable<any>{
+    return this.http.post(this.expressBaseUrl + '/service/send-password-confirmation-email/', body);
+  }
+
 }

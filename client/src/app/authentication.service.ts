@@ -91,7 +91,7 @@ export class AuthenticationService {
     return this.http.post(this.baseServerURL + "/users/register", user);
   }
 
-  public finishregister(customer: TokenPayload2): Observable<any>{
+  public finisRegister(customer: TokenPayload2): Observable<any>{
     return this.http.post(this.baseServerURL + "/users/customer-register", customer);
   }
 
