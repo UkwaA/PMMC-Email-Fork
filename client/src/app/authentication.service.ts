@@ -16,6 +16,12 @@ export interface UserDetails {
     iat: number
 }
 
+export interface UserSecretData {
+    UserPK: number
+    currentPassword: string
+    newPassword: string
+}
+
 interface TokenResponse {
     token: string
 }
@@ -130,8 +136,12 @@ export class AuthenticationService {
     return this.http.put(this.baseServerURL + "/users/get-user-details/" + UserPK, userDetails);
   }
 
-  public updateUserPassword(UserPK:number, userDetails: UserDetails): Observable<any>{
+  public resetUserPassword(UserPK:number, userDetails: UserDetails): Observable<any>{
     return this.http.put(this.baseServerURL + "/users/reset-password/" + UserPK, userDetails);
   }  
+
+  public changeCurrentPassword(UserPK:number, userDetails: UserSecretData): Observable<any>{
+    return this.http.post(this.baseServerURL + "/users/change-current-password/" + UserPK, userDetails);
+  }
 
 }

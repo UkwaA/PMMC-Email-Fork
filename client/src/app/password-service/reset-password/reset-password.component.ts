@@ -127,7 +127,7 @@ export class ResetPasswordComponent{
         }
         this.userDetails.Password = this.newPassword
         console.log(this.userDetails)
-        this.auth.updateUserPassword(this.currentUserPK, this.userDetails).subscribe(response => {
+        this.auth.resetUserPassword(this.currentUserPK, this.userDetails).subscribe(response => {
             console.log("Respone: " + response.message)
             this.openModal()            
             // setTimeout(() =>{
