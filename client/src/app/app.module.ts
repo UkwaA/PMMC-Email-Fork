@@ -37,6 +37,9 @@ import { GProgramComponent } from './components/g-program/g-program.component';
 import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
 import { ResetPasswordComponent} from './password-service/reset-password/reset-password.component';
 import { ChangeCurrentPasswordComponent} from './password-service/change-current-password/change-current-password.component';
+import { AccountSetting } from './account-setting/account-setting.component';
+import { ProfileInfo } from './profile-info/profile-info.component';
+
 import { MatRadioModule } from '@angular/material/radio';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -53,37 +56,19 @@ const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  /* {
-    path: 'set-user-role',
-    component: SetUserRoleComponent,
-    canActivate: [AuthSystemRoleGuardService]
-  }, */
   {
     path: 'user-details/:id', 
     component: UserDetailsComponent,
     canActivate: [AuthSystemRoleGuardService]
   },
-  /* {
-    path: 'createprogram', 
-    component: CreateProgramComponent,
-    canActivate: [AuthRoleGuardService]
-  },
- */
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
   {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
-  {path: 'customer-register', component: CustomerRegisterComponent}, 
+  {path: 'customer-register/:id', component: CustomerRegisterComponent}, 
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
-  /*
-  { 
-    path: 'program-details/:id', 
-    component: ProgramDetailsComponent,
-    canActivate: [AuthRoleGuardService], 
-  }, */
-
   {
     path: 'profile', 
     component: ProfileComponent,
@@ -93,7 +78,7 @@ const routes : Routes = [
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
-        path: 'program-details/:id', 
+        path: 'program-details/:id/:mode', 
         component: ProgramDetailsComponent,
         canActivate: [AuthRoleGuardService], 
       },
@@ -106,6 +91,16 @@ const routes : Routes = [
         path: 'user-details/:id', 
         component: UserDetailsComponent,
         canActivate: [AuthRoleGuardService], 
+      },
+      { 
+        path: 'profile-info/:id', 
+        component: ProfileInfo,
+        canActivate: [AuthGuardService], 
+      },
+      { 
+        path: 'account-setting/:id', 
+        component: AccountSetting,
+        canActivate: [AuthGuardService], 
       },
       { 
         path: 'change-current-password', 
@@ -140,7 +135,9 @@ const routes : Routes = [
     ResetPasswordComponent, 
     ChangeCurrentPasswordComponent,
     DashboardComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    AccountSetting,
+    ProfileInfo
   ],
   imports: [
     BrowserModule,

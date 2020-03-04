@@ -57,7 +57,8 @@
             <h4 class="card-title">{{program.Name}}</h4>
             <hr class="card__item card__divider">
             <div class="block-with-text">
-              <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description"></ckeditor>
+              <!-- <ckeditor [editor]="Editor" [(ngModel)]="program.Description" name="description"></ckeditor> -->
+              <div [innerHTML]="program.Description"></div>
             </div>
             <h4> ... </h4>
             <div class="text-right pt-1">

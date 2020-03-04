@@ -15,7 +15,7 @@ export class GroupProgramComponent implements OnInit{
 
     }
     ngOnInit(){
-        this.programService.getAllPrograms().then((result) =>{
+        this.programService.getActivePrograms().then((result) =>{
             this.programs = result;
             this.programs.forEach(e => {
                 e.ImgData = AppConstants.SERVER_URL + e.ImgData
@@ -23,12 +23,12 @@ export class GroupProgramComponent implements OnInit{
         })
     }
 
-    onReady(editor) {
+    /* onReady(editor) {
         console.log(editor)
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.getEditableElement()
         );
-    }
+    } */
 
     clearSearch() {
         this.searchText = "";

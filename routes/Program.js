@@ -32,6 +32,27 @@ program.get('/get-programs', (req, res) => {
     })
 })
 
+// Get Program Header Information With IsActive Property
+program.get('/get-active-programs', (req, res) => {
+  Program.findAll({
+    where: {
+      IsActive: true
+    }
+
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+
 // Get All Program Header Information by ID
 program.get('/get-program-details/:id', (req, res) => {
   Program.findOne({
@@ -95,7 +116,8 @@ program.post('/add-program', (req, res) => {
     CreatedDate: today,
     CreatedBy: req.body.CreatedBy,
     ImgData: '',
-    ProgramType: req.body.ProgramType
+    ProgramType: req.body.ProgramType,
+    IsActive: req.body.IsActive
   }
 
   Program.create(programData)
@@ -120,7 +142,7 @@ program.post('/add-program', (req, res) => {
         ImgData: filePath.substring(8)
       })
 
-      // Create Program Details: Insert data to GroupProgram or IndividualProgram
+      // Create Program Requirement for layout: Insert data to GroupProgramRequirement or IndividualProgramRequirement
       // based on ProgramType:
       // 0 - Group Program
       // 1 - Individual Program
@@ -133,10 +155,23 @@ program.post('/add-program', (req, res) => {
             CreatedBy: req.body.CreatedBy,
           }
           GroupProgramRequirement.create(groupDetail)
-            .then(program => {
-              console.log(program.GroupProgramPK)
-              res.json(program.GroupProgramPK)
+            .catch(err => {
+              res.send('err Insert Group Requirement' + err)
             })
+          // .then(program => {
+          //   console.log(program.GroupProgramPK)
+          //   Program.findOne({
+          //     where: {
+          //       ProgramPK: programPK
+          //     }
+          //   })
+          //   .then(result => {
+          //     result.update({
+          //       IsActive : true
+          //     })
+          //   })
+          //   res.json(program.GroupProgramPK)
+          // })
           break;
         case '1':
           var individualDetail = {
@@ -145,13 +180,27 @@ program.post('/add-program', (req, res) => {
             CreatedBy: req.body.CreatedBy,
           }
           IndividualProgramRequirement.create(individualDetail)
-            .then(program => {
-              console.log(program.IndividualProgramPK)
-              res.json(program.IndividualProgramPK)
+            .catch(err => {
+              res.send('err Insert Individual Requirement' + err)
             })
+          // .then(program => {
+          //   console.log(program.IndividualProgramPK)
+          //   // Program.findOne({
+          //   //   where: {
+          //   //     ProgramPK: programPK
+          //   //   }
+          //   // })
+          //   // .then(result => {
+          //   //   result.update({
+          //   //     IsActive : true
+          //   //   })
+          //   // })
+          //   // res.json(program.IndividualProgramPK)
+          // })
           break;
       }
 
+      res.json(programPK)
     })
     .catch(err => {
       res.send('errorResponse' + err)
@@ -162,7 +211,7 @@ program.post('/add-program', (req, res) => {
 // Update Layout Setting of Group Program
 program.post('/update-g-program-requirement', (req, res) => {
   const today = new Date()
-  var programPK = 0
+  var programPK = req.body.GroupProgramPK
 
   // Select the Program Layout Details if available
   GroupProgramRequirement.findOne({
@@ -201,6 +250,17 @@ program.post('/update-g-program-requirement', (req, res) => {
       }
     })
     .then(() => {
+      // Update IsActive for Program header after insert Requirement for Program
+      Program.findOne({
+        where: {
+          ProgramPK: programPK
+        }
+      })
+        .then(result => {
+          result.update({
+            IsActive: true
+          })
+        })
       res.json('Program Updated')
     })
     .catch(err => {
@@ -212,7 +272,7 @@ program.post('/update-g-program-requirement', (req, res) => {
 // Update Layout Setting of Individual Program
 program.post('/update-i-program-requirement', (req, res) => {
   const today = new Date()
-  var programPK = 0
+  var programPK = req.body.IndividualProgramPK
 
   // Select the Program Layout Details if available
   IndividualProgramRequirement.findOne({
@@ -252,6 +312,17 @@ program.post('/update-i-program-requirement', (req, res) => {
       }
     })
     .then(() => {
+      // Update IsActive for Program header after insert Requirement for Program
+      Program.findOne({
+        where: {
+          ProgramPK: programPK
+        }
+      })
+        .then(result => {
+          result.update({
+            IsActive: true
+          })
+        })
       res.json('Program Updated')
     })
     .catch(err => {
@@ -262,39 +333,59 @@ program.post('/update-i-program-requirement', (req, res) => {
 
 // Get Requirement Setting for Individual Program by ID
 program.get('/get-individual-requirement/:id', (req, res) => {
-  IndividualProgramRequirement.findOne({
+  // Select active Program only
+  Program.findOne({
     where: {
-      IndividualProgramPK: req.params.id
+      ProgramPK: req.params.id,
+      IsActive: true
     }
   })
     .then(program => {
-      if (program) {
-        res.json(program)
-      } else {
-        res.send('There is no program available.')
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err + "   " + req.body.IndividualProgramPK)
+      // Select active Program Requirement
+      IndividualProgramRequirement.findOne({
+        where: {
+          IndividualProgramPK: program.ProgramPK
+        }
+      })
+        .then(program => {
+          if (program) {
+            res.json(program)
+          } else {
+            res.send('There is no program available.')
+          }
+        })
+        .catch(err => {
+          res.send('error: ' + err + "   " + req.body.IndividualProgramPK)
+        })
     })
 })
 
 // Get Requirement Setting for Group Program by ID
 program.get('/get-group-requirement/:id', (req, res) => {
-  GroupProgramRequirement.findOne({
+  // Select active Program only
+  Program.findOne({
     where: {
-      GroupProgramPK: req.params.id
+      ProgramPK: req.params.id,
+      IsActive: true
     }
   })
     .then(program => {
-      if (program) {
-        res.json(program)
-      } else {
-        res.send('There is no program available.')
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err + "   " + req.body.GroupProgramPK)
+      // Select active Program Requirement
+      GroupProgramRequirement.findOne({
+        where: {
+          GroupProgramPK: program.ProgramPK
+        }
+      })
+        .then(program => {
+          if (program) {
+            res.json(program)
+          } else {
+            res.send('There is no program available.')
+          }
+        })
+        .catch(err => {
+          res.send('error: ' + err + "   " + req.body.IndividualProgramPK)
+        })
     })
 })
 

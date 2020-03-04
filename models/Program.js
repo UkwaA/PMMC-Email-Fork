@@ -30,6 +30,9 @@ module.exports = db.sequelize.define(
     },
     ProgramType: {
       type: Sequelize.INTEGER
+    },
+    IsActive: {
+      type: Sequelize.BOOLEAN
     }
   },
   {

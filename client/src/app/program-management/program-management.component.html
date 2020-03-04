@@ -23,8 +23,8 @@
             <thead>
                 <tr>
                     <th style="width:45%"> Program Name </th>
-                    <th style="width:20%"> Program Type </th>
-                    <th style="width:35%"> Actions</th>
+                    <th style="width:25%"> Program Type </th>
+                    <th style="width:30%"> Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,16 +32,21 @@
                     <td class="name"> {{program.Name}} </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
-                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-info">
+                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']" class="btn btn-info">
                             <mat-icon matListIcon>visibility</mat-icon> View
                         </button>
-                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK]"
+                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
                             class="btn btn-warning">
                             <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
-                        <button class="btn btn-danger">
-                            <mat-icon matListIcon>delete</mat-icon> Delete
-                        </button></td>
+                        <div *ngIf="program.IsActive == false">
+                            <mat-icon color="red">error</mat-icon> 
+                            <label>Need Requirement</label>
+                            
+                        </div>
+                        <!-- <button class="btn btn-danger">
+                            <mat-icon matListIcon>error</mat-icon> Delete
+                        </button></td> -->
                 </tr>
             </tbody>
         </table>

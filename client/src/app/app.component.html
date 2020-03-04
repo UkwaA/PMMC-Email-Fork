@@ -2,17 +2,17 @@
   <div class="container">  
   <a  class="navbar-brand" href="#">
     <img src = "https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png" width="120" height="60"> </a>
-    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item current">
           <a class="nav-link" href="#">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item current">
           <a class="nav-link" routerLink="/group-program">Group Program</a>
         </li>
         <li class="nav-item">
@@ -21,10 +21,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact">Contact</a>
         </li>
-        <li class = "nav-item" >
+        <!-- <li class = "nav-item" >
           <a class = "nav-link" routerLink="/customer-register"> Register </a>
         </li>
-        
+         -->
         <li *ngIf="!auth.isLoggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>

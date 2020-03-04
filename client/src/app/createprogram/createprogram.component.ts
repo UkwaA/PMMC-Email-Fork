@@ -25,7 +25,8 @@ export class CreateProgramComponent {
         CreatedDate: '',
         CreatedBy: 0,
         ImgData: '',
-        ProgramType: 0
+        ProgramType: 0,
+        IsActive: false
     }
 
     programCategories: Array<Object> = [
@@ -63,7 +64,8 @@ export class CreateProgramComponent {
 
         this.services.addNewProgram(this.getFormData())
             .subscribe((response) => {
-                this.router.navigateByUrl("/profile/program-management")
+                console.log(response)
+                this.router.navigateByUrl("/profile/program-details/" + response)
             })
     }
 

@@ -85,4 +85,5 @@ export class AppComponent implements OnInit{
        this.header_variable = false;
      }
    }
+   
  }
