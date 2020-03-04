@@ -1,7 +1,7 @@
 .container {
     padding-top:120px;
-    padding-left: 300px;
-    padding-right: 300px;
+    padding-left: 150px;
+    padding-right: 200px;
     padding-bottom: 50px;
 }
 
@@ -11,7 +11,7 @@
 
 .title{
     padding-left: -15px;
-    color: #0ebbff;
+    color: #08b2b8;
 }
 
 .location_info{
@@ -32,12 +32,12 @@
 }
 
 input[type=checkbox] {
-    transform: scale(1.5);
+    transform: scale(1.25);
   }
 
   .form-check-label{
     font-size:17px;
-    margin-left: 5px;
+    /* margin-left: 5px; */
   }
 
 h1 {

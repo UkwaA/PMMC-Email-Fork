@@ -76,7 +76,7 @@ export class CustomerRegisterComponent implements OnInit {
     console.log(this.customerInfoForm.get('subscribe').value);
   }
 
-  finishregister() {
+  finisRegister() {
     this.submitted = true;
     console.log("Form Submitted")
     if (this.customerInfoForm.invalid) {
@@ -87,7 +87,7 @@ export class CustomerRegisterComponent implements OnInit {
     
     console.log(this.customerInfoForm.value);
 
-    this.auth.finishregister(this.credentials).subscribe((res) => {
+    this.auth.finisRegister(this.credentials).subscribe((res) => {
         if(res.error)
         {
             console.log("Error in the finish register")
@@ -96,7 +96,7 @@ export class CustomerRegisterComponent implements OnInit {
             return
         }
         else
-            this.router.navigateByUrl("/profile");            
+            this.router.navigateByUrl("/home");            
     },
         err => {
             console.log("Err section")
