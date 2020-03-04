@@ -1,6 +1,6 @@
 import {Component} from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
+import { EmailService } from '../../services/email.services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService, UserSecretData, TokenPayload} from '../../authentication.service'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -31,7 +31,7 @@ export class ChangeCurrentPasswordComponent{
         Email: ''
     }
 
-    constructor(private fb: FormBuilder, private auth: AuthenticationService, 
+    constructor(private fb: FormBuilder, private auth: AuthenticationService, public emailService:EmailService,
         private route:ActivatedRoute, private router: Router, public matDialog: MatDialog ){            
     }
 
@@ -50,10 +50,8 @@ export class ChangeCurrentPasswordComponent{
         this.currentUserPK = this.auth.getUserDetails().UserPK        
         
         this.credentials.UserPK = this.auth.getUserDetails().UserPK
-        this.credentials.Username = this.auth.getUserDetails().Username  
-        
-        console.log(this.credentials.Username)
-        
+        this.credentials.Username = this.auth.getUserDetails().Username
+        this.credentials.Email = this.auth.getUserDetails().Email
     }
 
     get f() { return this.changePasswordForm.controls; }
@@ -144,5 +142,19 @@ export class ChangeCurrentPasswordComponent{
             console.log(err)
             return
         })
+
+        //Send confirmation email about changing password
+        this.emailService.sendPasswordConfirmationEmail(this.credentials).subscribe(
+            (res) => {
+                if(res.error){
+                    console.log("fotgot ts file: " + res.error)                                     
+                }
+                else{                    
+                    console.log("Reset Email has been sent to " + this.credentials.Email)
+                }
+            },
+            err => {
+                console.log(err)
+            })
     }
 }

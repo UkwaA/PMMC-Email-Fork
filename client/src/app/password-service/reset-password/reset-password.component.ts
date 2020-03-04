@@ -135,6 +135,20 @@ export class ResetPasswordComponent{
             //     this.router.navigateByUrl('/login')
             // }, 3000)
         })
+
+        this.emailService.sendPasswordConfirmationEmail(this.userDetails).subscribe(
+            (res) => {
+                if(res.error){
+                    console.log("fotgot ts file: " + res.error)                                     
+                }
+                else{                    
+                    console.log("Reset Email has been sent to " + this.userDetails.Email)
+                }
+            },
+            err => {
+                console.log(err)
+            })
+
     }
 
     //Configure Modal Dialog
