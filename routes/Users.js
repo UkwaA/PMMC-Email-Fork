@@ -18,7 +18,8 @@ users.post('/register', (req, res) => {
     Password: req.body.Password,
     Role_FK: 1,
     Email: req.body.Email,
-    CreatedDate: today
+    CreatedDate: today,
+    IsActive: true
   }
 
   User.findOne({

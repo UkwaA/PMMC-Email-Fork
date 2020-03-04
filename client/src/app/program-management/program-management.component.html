@@ -32,15 +32,20 @@
                     <td class="name"> {{program.Name}} </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
-                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK]" class="btn btn-info">
+                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']" class="btn btn-info">
                             <mat-icon matListIcon>visibility</mat-icon> View
                         </button>
-                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK]"
+                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
                             class="btn btn-warning">
                             <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
+                        <div *ngIf="program.IsActive == false">
+                            <mat-icon color="red">error</mat-icon> 
+                            <label>Need Requirement</label>
+                            
+                        </div>
                         <!-- <button class="btn btn-danger">
-                            <mat-icon matListIcon>delete</mat-icon> Delete
+                            <mat-icon matListIcon>error</mat-icon> Delete
                         </button></td> -->
                 </tr>
             </tbody>

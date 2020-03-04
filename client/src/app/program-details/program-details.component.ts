@@ -7,7 +7,7 @@ import { ProgramServices } from '../services/program.services'
 import { HttpClient } from '@angular/common/http'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { IProgramComponent } from '../components/i-program/i-program.component';
-
+import { AppConstants } from '../constants';
 
 declare var $: any;
 
@@ -19,6 +19,7 @@ declare var $: any;
 
 export class ProgramDetailsComponent {
     ProgramPK: number
+    PageMode: string
     ProgramTypeText: string
     programData: ProgramData = {
         IsActive: true,
@@ -29,7 +30,8 @@ export class ProgramDetailsComponent {
         CreatedDate: '',
         CreatedBy: 0,
         ImgData: '',
-        ProgramType: 0
+        ProgramType: 0,
+        IsActive: true
     }
     selectedValue: any
     files: File;
@@ -50,17 +52,31 @@ export class ProgramDetailsComponent {
     constructor(private route: ActivatedRoute, private http: HttpClient, private services: ProgramServices, private auth: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
-        this.isDisabled = false;
-
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));  
           });
 
         this.route.params.subscribe(val => {
             this.ProgramPK = val.id
+
+            // Get the Page mode: View/Edit
+            this.PageMode = val.mode
+            
+            // Set isDisable for component
+            switch(this.PageMode)
+            {
+                case 'view':
+                    this.isDisabled = true;
+                    break;
+                case 'edit':
+                    this.isDisabled = false;
+                    break;
+            }
+
+            // Get program details by ID
             this.services.getProgramDetailsByID(this.ProgramPK).subscribe(program => {
                this.programData = program
-               this.programData.ImgData = "http://localhost:3000" +  this.programData.ImgData 
+               this.programData.ImgData = AppConstants.SERVER_URL +  this.programData.ImgData 
                if(this.programData.ProgramType == 0) {
                     this.ProgramTypeText = "Group Program"
                }

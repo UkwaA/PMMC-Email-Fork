@@ -24,6 +24,9 @@ module.exports = db.sequelize.define(
     CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    IsActive: {
+      type: Sequelize.BOOLEAN
     }
   },
   {

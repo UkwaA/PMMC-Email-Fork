@@ -19,6 +19,9 @@ export class ProgramServices {
     return this.sendRequestToExpress('/program/get-programs')
   }
 
+  public getActivePrograms(): Promise<ProgramData[]> {
+    return this.sendRequestToExpress('/program/get-active-programs')
+  }
   public getProgramDetailsByID(ProgramPK: number): Observable<any> {
     return this.http.get(this.expressBaseUrl + '/program/get-program-details/' + ProgramPK);
   }
