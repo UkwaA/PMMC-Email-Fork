@@ -41,6 +41,12 @@ h4{
   color:#08b2b8; font-size: 20px; font-weight: bold; line-height: 1.25; margin: 0; 
 }
 
+.image_div{
+  padding: 1.1rem!important;
+  padding-top:.25rem!important;
+  padding-bottom: 0rem!important;
+}
+
 
 h5{
   color:black; font-family: 'Source Sans Pro', sans-serif; font-size: 16px; font-weight: 300; line-height: 32px; margin: 0; 
