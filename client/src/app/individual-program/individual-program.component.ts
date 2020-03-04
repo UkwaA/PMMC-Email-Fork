@@ -14,7 +14,7 @@ export class IndividualProgramComponent implements OnInit{
 
     }
     ngOnInit(){
-        this.programService.getAllPrograms().then((result) =>{
+        this.programService.getActivePrograms().then((result) =>{
             this.programs = result;
             this.programs.forEach(e => {
                 e.ImgData = AppConstants.SERVER_URL + e.ImgData
