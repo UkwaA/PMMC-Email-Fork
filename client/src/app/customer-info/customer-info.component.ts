@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AuthenticationService, NewCustomer } from '../authentication.service'
+import { AuthenticationService } from '../authentication.service'
 import { Router } from '@angular/router'
 import { CustomerData } from '../data/customer-data'
+import { CustomerService } from '../services/customer.services'
 
 
 @Component({
@@ -30,7 +31,8 @@ export class CustomerRegisterComponent implements OnInit {
 
     
   
-    constructor(private auth: AuthenticationService, private router: Router, private formBuilder: FormBuilder) { }
+    constructor(private auth: AuthenticationService, private router: Router, 
+      private formBuilder: FormBuilder, public customerService:CustomerService) { }
 
   ngOnInit() {
     this.customerInfoForm = this.formBuilder.group({
@@ -92,7 +94,7 @@ export class CustomerRegisterComponent implements OnInit {
     
     console.log(this.customerInfoForm.value);
 
-    this.auth.finishRegister(this.credentials).subscribe((res) => {
+    this.customerService.finishRegister(this.credentials).subscribe((res) => {
         if(res.error)
         {
             console.log("Error in the finish register")

@@ -35,18 +35,6 @@ export interface TokenPayload {
     Email: string
 }
 
-export interface NewCustomer{
-  CustomerPK: number
-  FirstName: string
-  LastName: string
-  PhoneNo: String
-  Address: string
-  Address2: string
-  City: string
-  State: String
-  ZipCode: String
-  Subscribe: number
-}
 
 @Injectable()
 export class AuthenticationService {
@@ -90,10 +78,6 @@ export class AuthenticationService {
 
   public register(user: TokenPayload): Observable<any> {
     return this.http.post(this.baseServerURL + "/users/register", user);
-  }
-
-  public finishRegister(customer: CustomerData): Observable<any>{
-    return this.http.post(this.baseServerURL + "/users/customer-register", customer);
   }
 
   public login(user: TokenPayload): Observable<any> {
