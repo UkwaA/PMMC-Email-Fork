@@ -101,7 +101,7 @@ export class CustomerRegisterComponent implements OnInit {
             return
         }
         else
-            this.router.navigateByUrl("/home");            
+            this.router.navigateByUrl("/");            
     },
         err => {
             console.log("Err section")
