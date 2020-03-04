@@ -113,7 +113,7 @@ export class RegisterComponent {
                 return
             }
             else{
-                this.router.navigateByUrl("/customer-register/" + this.auth.getUserDetails().UserPK);            
+                this.router.navigateByUrl("/customer-register/" + res.UserPK);            
             }
         },
             err => {

@@ -38,19 +38,7 @@
                             <input type="text" class="form-control" name="email" [(ngModel)]="userDetails.Email" readonly>
                         </div>
                     </div>
-                </div>     
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-4 text-bold">
-                            <label>Role</label>
-                        </div>
-                        <div class="col-md-8">
-                            <div *ngIf = "userDetails.Role_FK == 1">Customer</div>
-                            <div *ngIf = "userDetails.Role_FK == 2">Manager</div>
-                            <div *ngIf = "userDetails.Role_FK == 3">System Admin</div>
-                        </div>
-                    </div>
-                </div>   
+                </div>                    
             </form>
         </div>
     </div>

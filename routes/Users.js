@@ -39,7 +39,7 @@ users.post('/register', (req, res) => {
             let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.json({ token: token })
+            res.json({ UserPK: user.UserPK })
           })
           .catch(err => {
             res.send('errorExpressErr: ' + err)
@@ -212,6 +212,31 @@ users.put('/reset-password/:id', (req, res) => {
     })
 })
 
+users.post('/change-current-password/:id', (req,res) => {
+  const newPasswordHash = bcrypt.hashSync(req.body.newPassword, 8)
+  
+  User.findOne({
+    where: {
+      UserPk: req.params.id
+    }
+  })
+    .then(user => {
+      //Check if input current Password matches with current Password
+      if(bcrypt.compareSync(req.body.currentPassword, user.Password)){
+        //if input current Password is correct, update new Password
+        user.update({
+          Password: newPasswordHash
+        })
+        res.json({message: "Password has been changed"})
+      }
+      else{
+        res.json({error: "Current Password is incorrect"})
+      }   
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
 
 module.exports = users
 
