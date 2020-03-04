@@ -1,28 +1,28 @@
 export class CustomerData {
-    CustomerPk: number
-    First_Name: string
-    Last_Name: string
-    Phone_Num: string
-    Street_Address: string
-    Street_Address2: string
+    CustomerPK: number
+    FirstName: string
+    LastName: string
+    PhoneNo: string
+    StreetAddress: string
+    StreetAddress2: string
     City: string
     State: string
-    Zip_Code: String
-    Subscribe: boolean
+    ZipCode: String
+    Subscribe: number
 
-    constructor(nUserPK:number, nFirstName:string, nLastName:string, nPhone_Num:string, 
+    constructor(nUserPK:number, nFirstName:string, nLastName:string, nPhone_No:string, 
         nStreet_Address: string, nStreet_Address2: string, nCity: string, nState: string, 
-        nZipCode: String, nSubscribe: boolean){
+        nZipCode: String, nSubscribe: number){
         
-        this.CustomerPk = nUserPK;
-        this.First_Name = nFirstName;
-        this.Last_Name = nLastName;
-        this.Phone_Num = nPhone_Num;
-        this.Street_Address = nStreet_Address;
-        this.Street_Address2 = nStreet_Address2;
+        this.CustomerPK = nUserPK;
+        this.FirstName = nFirstName;
+        this.LastName = nLastName;
+        this.PhoneNo = nPhone_No;
+        this.StreetAddress = nStreet_Address;
+        this.StreetAddress2 = nStreet_Address2;
         this.City = nCity;
         this.State = nState;
-        this.Zip_Code = nZipCode;
+        this.ZipCode = nZipCode;
         this.Subscribe = nSubscribe;
     }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AuthenticationService, TokenPayload2 } from '../authentication.service'
+import { AuthenticationService, NewCustomer } from '../authentication.service'
 import { Router } from '@angular/router'
+import { CustomerData } from '../data/customer-data'
 
 
 @Component({
@@ -14,13 +15,13 @@ export class CustomerRegisterComponent implements OnInit {
   submitted = false;
   errorMessage = '';
 
-    credentials: TokenPayload2 = {
-      CustomerPK: 0,
+    credentials: CustomerData = {
+      CustomerPK: this.auth.getUserDetails().UserPK,
       FirstName: '',
       LastName: '',
       PhoneNo:'',
-      Address:'',
-      Address2:'',
+      StreetAddress:'',
+      StreetAddress2:'',
       City:'',
       State:'',
       ZipCode:'',
@@ -45,6 +46,7 @@ export class CustomerRegisterComponent implements OnInit {
     
      })
     console.log(this.customerInfoForm.value);
+    console.log(this.auth.getUserDetails().UserPK)
   }
 
   checkSubmission(): any {
@@ -79,10 +81,13 @@ export class CustomerRegisterComponent implements OnInit {
   finishRegister() {
     this.submitted = true;
     console.log("Form Submitted")
+    console.log(this.credentials)
     if (this.customerInfoForm.invalid) {
         console.log("Form Invalid")
         return;
     }
+
+    // this.customer = new CustomerData()
 
     
     console.log(this.customerInfoForm.value);

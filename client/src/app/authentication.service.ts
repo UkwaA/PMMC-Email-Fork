@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import {UserData} from './data/user-data'
+import {CustomerData} from './data/customer-data'
 
 
 export interface UserDetails {
@@ -34,7 +35,7 @@ export interface TokenPayload {
     Email: string
 }
 
-export interface TokenPayload2{
+export interface NewCustomer{
   CustomerPK: number
   FirstName: string
   LastName: string
@@ -91,7 +92,7 @@ export class AuthenticationService {
     return this.http.post(this.baseServerURL + "/users/register", user);
   }
 
-  public finishRegister(customer: TokenPayload2): Observable<any>{
+  public finishRegister(customer: CustomerData): Observable<any>{
     return this.http.post(this.baseServerURL + "/users/customer-register", customer);
   }
 

@@ -55,21 +55,21 @@ users.post('/register', (req, res) => {
 
 users.post('/customer-register', (req, res) => {
   console.log("Posting customer-register")
-  console.log(req.body.ZipCode)
-  const customerData = {
-    CustomerPK: 0,
+  console.log(req.body)
+  const customer = {
+    CustomerPK: req.body.CustomerPK,
     // UserFK: '0',
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
     PhoneNo: req.body.PhoneNo,
-    Address: req.body.Address,
+    Address: req.body.StreetAddress,
     City: req.body.City,
     State: req.body.State,
     ZipCode: req.body.ZipCode,
     Subscribe: req.body.Subscribe
   }
 
-  Customer.create(customerData)
+  Customer.create(customer)
     .then(customer => {
       let token = jwt.sign(customer.dataValues, process.env.SECRET_KEY, {
         expiresIn: 1440

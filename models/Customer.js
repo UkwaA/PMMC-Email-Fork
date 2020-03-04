@@ -9,11 +9,6 @@ module.exports = db.sequelize.define(
       allowNull: false,
       primaryKey: true
     },
-    UserFK:
-    {
-      type:Sequelize.TEXT,
-      default:'0'
-    },
     FirstName: {
       type: Sequelize.TEXT
     },

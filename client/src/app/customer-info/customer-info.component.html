@@ -50,7 +50,7 @@ finish checking out a program -->
         <div class = "col">
         <input type = "string" class = "form-control" 
         formControlName="address_street" 
-        [(ngModel)]="credentials.Address" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
+        [(ngModel)]="credentials.StreetAddress" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
         <div *ngIf="submitted && !customerInfoForm.get('address_street').valid" 
         class = "warning"> <small>Street Address is required </small></div>
         </div> 
@@ -61,7 +61,7 @@ finish checking out a program -->
         <div class = "col">
         <input type = "string" class = "form-control" 
         formControlName="address_unit" 
-        [(ngModel)]="credentials.Address2">
+        [(ngModel)]="credentials.StreetAddress2">
         </div> 
     </div>
 
@@ -79,7 +79,7 @@ finish checking out a program -->
     <div class = "form-group row">
         <label for = "state" class="col-form-label col-sm-3 font-weight-bold"> State </label>
         <div class = "col">
-        <input type = "string" class = "form-control" 
+        <input type = "string" class = "form-control" maxlength = "2"
         formControlName="address_state" 
         [(ngModel)]="credentials.State" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_state').valid}">
         <div *ngIf="submitted && !customerInfoForm.get('address_state').valid" 
@@ -90,9 +90,9 @@ finish checking out a program -->
     <div class = "form-group row">
         <label for = "zipcode" class="col-form-label col-sm-3 font-weight-bold"> Zip Code </label>
         <div class = "col">
-        <input type = "string" class = "form-control" 
+        <input type = "number" class = "form-control" 
         formControlName="address_zipcode" 
-        [(ngModel)]="credentials.City" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
+        [(ngModel)]="credentials.ZipCode" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
         <div *ngIf="submitted && !customerInfoForm.get('address_zipcode').valid" 
         class = "warning"> <small>Zip Code is required </small></div>
         </div> 
