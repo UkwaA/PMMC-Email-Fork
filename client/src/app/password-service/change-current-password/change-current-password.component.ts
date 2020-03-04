@@ -89,16 +89,28 @@ export class ChangeCurrentPasswordComponent{
         dialogConfig.width = "350px";
         dialogConfig.data = {
             title: "Change Password",
-            description: "Password has been successfully updated. You are now redirecting to Account Detail Page" ,
+            description: "Password has been successfully updated. You are now redirecting to Dashboard" ,
             actionButtonText: "Close",   
             numberOfButton: "1"         
           }
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                //redirect Users to Account Details page
-                this.router.navigateByUrl('/login')
-                //this.auth.logout()                                    
+                //********************
+                //IMPORTANT:
+                //********************/
+                //Need to log out and log in again to generate new token for this new session
+                this.auth.logout()
+                //Login
+                this.auth.login(this.credentials).subscribe(() => {
+                    this.router.navigateByUrl('/profile')                    
+                }, 
+                err => {
+                    //alert('Username and password do not match')            
+                    this.errorMessage = '*Error while changing password'
+                    console.error(err)      
+                    return
+                })
             }
             else{
                 console.log("stop")                
@@ -120,35 +132,12 @@ export class ChangeCurrentPasswordComponent{
         this.auth.changeCurrentPassword(this.userData.UserPK, this.userData).subscribe(
             data =>{
                 if(data.error){
-                    debugger
                     this.errorMessage = data.error
                     return
                 }
                 else{
                     console.log(data)        
-                    //this.openModal()           
-                    
-                    //********************
-                    //IMPORTANT:
-                    //********************/
-                    //Need to log out and log in again to generate new token for this new session                    
-                    //this.auth.logout()
-
-                    //Log in again 
-                    console.log(this.credentials)
-                        this.auth.login(this.credentials).subscribe(() => {
-                            //Open Modal
-                            this.openModal()
-                            this.auth.logout()
-                            //this.router.navigateByUrl('/login')
-                            
-                        }, 
-                        err => {
-                            //alert('Username and password do not match')            
-                            this.errorMessage = '*Error while changing password'
-                            console.error(err)      
-                            return
-                        })          
+                    this.openModal()                    
                 }                
         },
         err => {

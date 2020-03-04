@@ -39,7 +39,7 @@ users.post('/register', (req, res) => {
             let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.json({ token: token })
+            res.json({ UserPK: user.UserPK })
           })
           .catch(err => {
             res.send('errorExpressErr: ' + err)
