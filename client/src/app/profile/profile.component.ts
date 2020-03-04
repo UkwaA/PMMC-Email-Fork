@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { AuthenticationService, UserDetails} from '../authentication.service'
 import { faEnvelope, faPhone, faMapMarkedAlt, faHandHoldingUsd, faDoorOpen, faLaughWink} from '@fortawesome/free-solid-svg-icons';
-import { HFService } from '../services/hf.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -22,19 +21,20 @@ export class ProfileComponent {
     option: string;
     role:string;
     userName:string;
+    id: number;
     
-    constructor(private auth: AuthenticationService, public hf: HFService, private breakpointObserver: BreakpointObserver) {}
+    constructor(private auth: AuthenticationService, private breakpointObserver: BreakpointObserver) {}
 
     ngOnInit() {
         this.option = "";
-        this.hf.hide(); 
+        /* this.hf.hide();  */
 
         this.auth.profile().subscribe(
             user => {
                 this.details = user;
                 this.role = user.Role_FK;
                 this.userName = user.Username;
-                console.log(this.role);
+                this.id = user.UserPK;
             },
             err => {
                 console.error(err)

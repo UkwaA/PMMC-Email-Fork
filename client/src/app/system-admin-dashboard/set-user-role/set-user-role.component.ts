@@ -17,7 +17,6 @@ export class SetUserRoleComponent {
   ngOnInit() {      
       this.userRoles = ['Customer', 'Manager','System Admin'];
       this.auth.getAllUser().subscribe((result) => {
-        console.log(result);
         this.listOfUsers = result;        
       })
 

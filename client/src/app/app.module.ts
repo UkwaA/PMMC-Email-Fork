@@ -15,7 +15,6 @@ import { HomeComponent } from './home/home.component'
 import { CreateProgramComponent } from './createprogram/createprogram.component'
 import { AuthenticationService } from './authentication.service'
 import { ProgramServices } from './services/program.services'
-import { HFService } from './services/hf.service'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
@@ -164,7 +163,7 @@ const routes : Routes = [
     MatDialogModule,
     MatProgressSpinnerModule    
   ],
-  providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService, HFService],
+  providers: [EmailService, ProgramServices, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent]
 })

@@ -70,7 +70,6 @@ export class CreateProgramComponent {
     }
 
     onReady(editor) {
-        console.log(editor)
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.view.toolbar.element,
             editor.ui.getEditableElement()
