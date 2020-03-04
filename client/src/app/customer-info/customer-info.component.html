@@ -3,11 +3,13 @@ so I think it's a better idea to ask for their address info after they
 finish checking out a program -->
 
 <div class = "container">
-    <h2 class = "title text-center"> Personal Info </h2>
+    <div class = "header_title row">
+        <h2 class = "title text-center"> Personal Info </h2>
+    </div>
     <form [formGroup] = "customerInfoForm" (ngSubmit) = "finisRegister()" 
     ng-class="{submitted:this.submitted}" class="registerform">
-    <div> 
-        <h5 class = "title text-center text-dark ml-7 mt-5 mb-3"> Contact Info </h5>
+    <div class = "contact_header_title row"> 
+        <h5 class = "text-center text-dark mt-5 mb-3"> Contact Info </h5>
     </div>
     <div class = "form-group row">
         <label for = "fname" class="col-form-label col-sm-3 font-weight-bold"> First Name </label>
@@ -39,8 +41,8 @@ finish checking out a program -->
         class = "warning"> <small>Phone number is required </small></div>
         </div> 
     </div>
-    <div> 
-        <h5 class = "title text-center text-dark mt-5 mb-3"> Address </h5>
+    <div class = "address_header_title row"> 
+        <h5 class = "text-center text-dark mt-5 mb-3"> Address </h5>
     </div>
 
     <div class = "form-group row">

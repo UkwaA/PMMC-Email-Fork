@@ -10,8 +10,21 @@
 }
 
 .title{
-    padding-left: -15px;
+    /* padding-left: -15px; */
     color: #08b2b8;
+    /* padding-left: -20px; */
+}
+
+.header_title{
+    padding-left: 270px;
+}
+
+.contact_header_title{
+    padding-left: 300px;
+}
+
+.address_header_title{
+    padding-left: 320px;
 }
 
 .location_info{
