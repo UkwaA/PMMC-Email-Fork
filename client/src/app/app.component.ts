@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
   faLaughWink = faLaughWink;
 
   ngOnInit() {
-    var pattern = /^http:\/\/.+((\/$)|(\/#$)|(\/group-program$)|(\/booking-group-program.+)|(\/individual-program$)|(\/booking-individual-program.+)|(\/contact$)|(\/customer-register$)|(\/login$))/
+    var pattern = /^http:\/\/.+((\/$)|(\/#$)|(\/group-program$)|(\/booking-group-program.+)|(\/individual-program$)|(\/booking-individual-program.+)|(\/contact$)|(\/register$)|(\/customer-register$)|(\/login))/
     this.location.onPopState(() => {
       this.loadingURL = this.location.href;
       /* if (this.loadingURL == "http://localhost:4200/" || this.loadingURL == "http://localhost:4200/group-program"
