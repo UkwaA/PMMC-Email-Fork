@@ -9,7 +9,9 @@ const User = require('../models/User')
 const Customer = require('../models/Customer')
 users.use(cors())
 
-
+/**************************
+*        REGISTER
+***************************/
 users.post('/register', (req, res) => {
   console.log("Posting regular register")
   const today = new Date()
@@ -53,34 +55,11 @@ users.post('/register', (req, res) => {
     })
 })
 
-users.post('/customer-register', (req, res) => {
-  console.log("Posting customer-register")
-  console.log(req.body)
-  const customer = {
-    CustomerPK: req.body.CustomerPK,
-    // UserFK: '0',
-    FirstName: req.body.FirstName,
-    LastName: req.body.LastName,
-    PhoneNo: req.body.PhoneNo,
-    Address: req.body.StreetAddress,
-    City: req.body.City,
-    State: req.body.State,
-    ZipCode: req.body.ZipCode,
-    Subscribe: req.body.Subscribe
-  }
 
-  Customer.create(customer)
-    .then(customer => {
-      let token = jwt.sign(customer.dataValues, process.env.SECRET_KEY, {
-        expiresIn: 1440
-      })
-        res.json({ token: token })
-      })
-    .catch(err => {
-      res.send('errorExpressErr: ' + err)
-    })
-})
 
+/**************************
+*        LOG IN
+***************************/
 users.post('/login', (req, res) => {
   //res.send('error: ' + req.body.Password + "--" + req.body.Username)
   User.findOne({
@@ -110,6 +89,9 @@ users.post('/login', (req, res) => {
     })
 })
 
+/**************************
+*    GET USER'S PROFILE
+***************************/
 users.get('/profile', (req, res) => {
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
@@ -131,6 +113,9 @@ users.get('/profile', (req, res) => {
     })
 })
 
+/****************************************
+   EDIT USER'S ACCOUNT - FOR ADMIN ONLY
+****************************************/
 users.get('/edit-user', (req, res) => {
   //var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
@@ -147,6 +132,9 @@ users.get('/edit-user', (req, res) => {
     })
 })
 
+/****************************************
+    GET USER ACCOUNT DETAIL BY USERID
+****************************************/
 users.get('/get-user-details/:id', (req, res) => {
   User.findOne({
     where: {
@@ -165,6 +153,9 @@ users.get('/get-user-details/:id', (req, res) => {
     })
 })
 
+/****************************************
+  UPDATE USER ACCOUNT DETAIL BY USERID
+****************************************/
 users.put('/get-user-details/:id', (req, res) => {
   const id = req.params.id
   User.update(req.body, {
@@ -187,6 +178,9 @@ users.put('/get-user-details/:id', (req, res) => {
     })
 })
 
+/****************************************
+        RESET USER'S PASSWORD
+****************************************/
 users.put('/reset-password/:id', (req, res) => {
   const id = req.params.id
   const hash = bcrypt.hashSync(req.body.Password, 8)
@@ -212,6 +206,9 @@ users.put('/reset-password/:id', (req, res) => {
     })
 })
 
+/****************************************
+      CHANGE CURRENT PASSWORD
+****************************************/
 users.post('/change-current-password/:id', (req,res) => {
   const newPasswordHash = bcrypt.hashSync(req.body.newPassword, 8)
   

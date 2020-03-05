@@ -21,16 +21,16 @@ module.exports = db.sequelize.define(
     Address: {
       type: Sequelize.TEXT
     },
-    Address2: {
-      type: Sequelize.TEXT
-    },
+    // Address2: {
+    //   type: Sequelize.TEXT
+    // },
     City: {
         type: Sequelize.TEXT
     },
     State: {
         type: Sequelize.TEXT
     },
-    ZipCode: {
+    Zipcode: {
         type: Sequelize.TEXT
     },
     Subscribe: {

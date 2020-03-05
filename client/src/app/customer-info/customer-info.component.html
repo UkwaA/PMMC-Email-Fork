@@ -93,7 +93,7 @@ finish checking out a program -->
         <input type = "number" class = "form-control" maxlength = "5"
         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
         formControlName="address_zipcode" 
-        [(ngModel)]="credentials.ZipCode" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
+        [(ngModel)]="credentials.Zipcode" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
         <div *ngIf="submitted && !customerInfoForm.get('address_zipcode').valid" 
         class = "warning"> <small>Zip Code is required </small></div>
         </div> 
