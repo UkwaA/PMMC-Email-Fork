@@ -68,10 +68,12 @@ export class BookingIndividualProgramComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    console.log("submitted");
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        return;
+      console.log("invalid");
+      return;
     }
 
     // display form values on success

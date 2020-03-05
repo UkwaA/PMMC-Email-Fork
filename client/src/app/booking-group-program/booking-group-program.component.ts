@@ -63,12 +63,15 @@ export class BookingGroupProgramComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    console.log("submitted"); 
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        return;
+      console.log("invalid");
+      return;
     }
 
+    console.log("valid");
     // display form values on success
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
