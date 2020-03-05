@@ -59,5 +59,31 @@ customers.get('/profile-info/:id', (req, res) => {
     })
 })
 
+/**************************
+*  UPDATE CUSTOMER INFO
+***************************/
+customers.put('/update-customer-info/:id', (req,res) =>{
+    const customerID = req.params.id
+    Customer.update(req.body, {
+        where: {CustomerPK: customerID}
+    })
+    .then(result => {
+        if (result == 1) {
+          res.send({
+            message: "Customer was updated successfully."
+          });
+        }
+        else {
+          res.send({
+            message: "Customer route error: Cannot update user details."
+          });
+        }
+      })
+      .catch(err => {
+        res.send('error: ' + err)
+      })
+})
+
+
 module.exports = customers
 

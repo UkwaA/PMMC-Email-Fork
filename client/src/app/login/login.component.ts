@@ -33,11 +33,11 @@ export class LoginComponent {
             password: ['', [Validators.required]]
         });        
 
-        this.auth.profile().subscribe(
-            user => {
-                this.router.navigateByUrl('/')
-            }
-        )
+        // this.auth.profile().subscribe(
+        //     user => {
+        //         this.router.navigateByUrl('/')
+        //     }
+        // )
     }
 
     // convenience getter for easy access to form fields

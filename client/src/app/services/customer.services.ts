@@ -15,4 +15,8 @@ export class CustomerService{
     public getCustomerInfoByID(CustomerPK: number):Observable<any>{
         return this.http.get(this.expressBaseUrl + "/customers/profile-info/" + CustomerPK);
     }
+
+    public updateCustomerInfo(CustomerPK: number, customer: CustomerData):Observable<any>{
+        return this.http.put(this.expressBaseUrl + "/customers/update-customer-info/" + CustomerPK, customer);
+    }
 }
