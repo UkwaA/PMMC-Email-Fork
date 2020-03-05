@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
 import { ProgramServices } from 'src/app/services/program.services';
+import { ProgramData } from '../data/program-data';
 
 @Component({
   selector: 'app-booking-individual-program',
@@ -15,7 +16,9 @@ export class BookingIndividualProgramComponent implements OnInit {
   bookingIndividual: BookingIndividualData;
   registerForm: FormGroup;
   submitted = false;
-  ProgramPK: number
+  ProgramPK: number;
+  programDetails: ProgramData;
+  
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
@@ -28,8 +31,11 @@ export class BookingIndividualProgramComponent implements OnInit {
       this.service.getProgramRequirementDetails('i', this.ProgramPK)
         .subscribe(program => {
           this.bookingIndividual = program
-          console.log(this.bookingIndividual)
-        })
+      })
+      this.service.getProgramDetailsByID(this.ProgramPK)
+      .subscribe(details =>{
+        this.programDetails = details;
+      })
     })
 
 

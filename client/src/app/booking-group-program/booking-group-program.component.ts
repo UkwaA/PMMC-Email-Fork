@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgramServices } from 'src/app/services/program.services';
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
+import { ProgramData } from '../data/program-data';
+
 @Component({
   selector: 'app-booking-group-program',
   templateUrl: './booking-group-program.component.html',
@@ -14,6 +16,7 @@ export class BookingGroupProgramComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   ProgramPK: number;
+  programDetails: ProgramData;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -29,7 +32,12 @@ export class BookingGroupProgramComponent implements OnInit {
           this.bookingGroup = program
           console.log(this.bookingGroup)
         })
-    })
+        this.service.getProgramDetailsByID(this.ProgramPK)
+        .subscribe(details =>{
+          this.programDetails = details;
+          console.log(this.programDetails);
+        })
+      })
 
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);

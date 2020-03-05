@@ -1,16 +1,17 @@
 <div class="container">
     <div class="row text-left">
-            <h1>Program Name</h1>
+            <h1>{{programDetails.Name}}</h1>
     </div>
-    <div class="row text-left font-italic">
-      <p>This will be the description of program</p>
+    <hr>
+    <div class="row">
+      <div [innerHTML]="programDetails.Description"></div>
     </div>
-    <div class="row text-left">
-      <p>Price</p>
+    <hr>
+    <!-- <div class="row text-left" style="font-weight: bold;">
+      <p>${{programDetails.FullAmount}}</p>
     </div>
-    <div class="row text-left" *ngIf= "bookingGroup.MaximumParticipant">
-      <p>Maximum participant: ---</p>
-    </div>
+    <hr> -->
+  
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Adult Quantity -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.AdultQuantity">
@@ -215,6 +216,9 @@
           </div>
         </div>
       </fieldset>
+      <div class="form-group font-weight-bold" *ngIf = "bookingGroup.MaximumParticipant">
+        <label for="MaximumParticipant">There is a restriction on the maximum participants.</label>
+      </div>
       <!-- Deposit  -->
       <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Deposit">
         <label for="Deposit">This program requires deposit. </label>
