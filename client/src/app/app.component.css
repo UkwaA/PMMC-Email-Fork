@@ -83,14 +83,19 @@ body {
   }
 
 .dropdown:hover>.dropdown-menu {
-    display: block;
-}
-  
-.dropdown>.dropdown-toggle:active {
-    /*Without this, clicking will make it sticky*/
-      pointer-events: none;
+    display: block !important;
+    transition-delay: 10s ;
+    opacity:1; 
+    visibility: visible;
+ 
 }
 
+/*
+.dropdown>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+     /* pointer-events: none;
+}
+*/
 .mainfooter {
     background: #16222A; 
     background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
