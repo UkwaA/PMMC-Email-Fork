@@ -9,6 +9,10 @@ export class CustomerService{
     constructor(private http: HttpClient) {}
 
     public finishRegister(customer: CustomerData): Observable<any>{
-        return this.http.post(this.expressBaseUrl + "/users/customer-register", customer);
+        return this.http.post(this.expressBaseUrl + "/customers/customer-register", customer);
+    }
+
+    public getCustomerInfoByID(CustomerPK: number):Observable<any>{
+        return this.http.get(this.expressBaseUrl + "/customers/profile-info/" + CustomerPK);
     }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router';
+import { CustomerService } from '../services/customer.services';
 
 @Component({
     selector: 'profile-info',
@@ -8,10 +10,20 @@ import { Component, OnInit } from '@angular/core'
 
   export class ProfileInfo implements OnInit {
     submitted = false;
-    isDisabled: boolean;
-    
+    currentCustomerPK: number
+    customerDetails: any
+    constructor(private route:ActivatedRoute, 
+      private router: Router,
+      private customer: CustomerService) {}
+
     ngOnInit() {
-      this.isDisabled = true;
+      this.route.params.subscribe(val =>{
+        this.currentCustomerPK = val.id
+        this.customer.getCustomerInfoByID(this.currentCustomerPK).subscribe(cus =>{
+          this.customerDetails = cus
+          console.log(this.customerDetails)
+        })
+      })
     }
 
     onSubmit(){

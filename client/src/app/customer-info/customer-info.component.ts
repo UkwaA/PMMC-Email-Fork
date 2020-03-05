@@ -25,7 +25,7 @@ export class CustomerRegisterComponent implements OnInit {
       StreetAddress2:'',
       City:'',
       State:'',
-      ZipCode:'',
+      Zipcode:'',
       Subscribe: 0
     }
   

@@ -23,6 +23,9 @@ app.use('/program', Program)
 var Email = require('./routes/Email')
 app.use('/service', Email)
 
+var Customer = require('./routes/Customers')
+app.use('/customers', Customer)
+
 app.listen(port , () =>{
   console.log("Server started on port 3000");
 });
