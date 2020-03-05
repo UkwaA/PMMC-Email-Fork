@@ -6,7 +6,7 @@ finish checking out a program -->
     <div class = "page_title row justify-content-center">
         <h2 class = "text-center"> Personal Info </h2>
     </div>
-    <form [formGroup] = "customerInfoForm" (ngSubmit) = "finishRegister()" 
+    <form [formGroup] = "customerInfoForm" (ngSubmit) = "openModal()" 
     ng-class="{submitted:this.submitted}" class="registerform">
     <div class = "contact_header_title row justify-content-center"> 
         <h5 class = "text-center text-dark mt-5 mb-3"> Contact Info </h5>
