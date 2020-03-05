@@ -1,10 +1,10 @@
 <div class = "container">
-    <div class = "header_title row">
-        <h2 class = "title text-center"> Personal Info </h2>
+    <div class = "page_title row justify-content-center">
+        <h2 class = "text-center"> Personal Info </h2>
     </div>
     <form [formGroup] = "customerInfoForm" (ngSubmit) = "finishRegister()" 
     ng-class="{submitted:this.submitted}" class="registerform">
-    <div class = "contact_header_title row"> 
+    <div class = "contact_header_title row justify-content-center"> 
         <h5 class = "text-center text-dark mt-5 mb-3"> Contact Info </h5>
     </div>
     <div class = "form-group row">
@@ -37,7 +37,7 @@
         class = "warning"> <small>Phone number is required </small></div>
         </div> 
     </div>
-    <div class = "address_header_title row"> 
+    <div class = "address_header_title row justify-content-center"> 
         <h5 class = "text-center text-dark mt-5 mb-3"> Address </h5>
     </div>
 
