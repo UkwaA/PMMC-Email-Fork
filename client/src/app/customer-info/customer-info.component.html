@@ -27,7 +27,7 @@ finish checking out a program -->
         <input id = "fname" type = "string" class = "form-control" 
         formControlName="lastName" 
         [(ngModel)]="credentials.LastName" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('lastName').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('firstName').valid" 
+        <div *ngIf="submitted && !customerInfoForm.get('lastName').valid" 
         class = "warning"> <small>Last name is required </small></div>
         </div> 
     </div>

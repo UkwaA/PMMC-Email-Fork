@@ -16,6 +16,7 @@ export class RegisterComponent {
     registerForm: FormGroup;
     submitted = false;
     errorMessage = ''
+    currentUserPK: number
 
     credentials: TokenPayload = {
         UserPK: 0,
@@ -112,14 +113,18 @@ export class RegisterComponent {
                 this.errorMessage = "*" + res.error
                 return
             }
-            else{
-                this.router.navigateByUrl("/customer-register/" + res.UserPK);            
+            else{                
+                this.currentUserPK = res.UserPK
+                console.log(this.currentUserPK)
+                this.router.navigateByUrl("/customer-register/" + this.currentUserPK);            
             }
         },
             err => {
                 console.error(err);
+                return
             }
         );
+        //this.router.navigateByUrl("/customer-register/" + this.currentUserPK);
             
     }
 }

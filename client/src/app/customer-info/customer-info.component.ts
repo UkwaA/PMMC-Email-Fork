@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthenticationService, NewCustomer } from '../authentication.service'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { CustomerData } from '../data/customer-data'
 
 
@@ -16,7 +16,7 @@ export class CustomerRegisterComponent implements OnInit {
   errorMessage = '';
 
     credentials: CustomerData = {
-      CustomerPK: this.auth.getUserDetails().UserPK,
+      CustomerPK: 0,
       FirstName: '',
       LastName: '',
       PhoneNo:'',
@@ -27,10 +27,9 @@ export class CustomerRegisterComponent implements OnInit {
       ZipCode:'',
       Subscribe: 0
     }
-
-    
   
-    constructor(private auth: AuthenticationService, private router: Router, private formBuilder: FormBuilder) { }
+    constructor(private auth: AuthenticationService, private router: Router, 
+      private formBuilder: FormBuilder, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.customerInfoForm = this.formBuilder.group({
@@ -42,11 +41,12 @@ export class CustomerRegisterComponent implements OnInit {
     address_city: ['', Validators.required],
     address_state: ['', [Validators.required, Validators.minLength(2)]],
     address_zipcode: ['', [Validators.required, Validators.minLength(5)]],
-    subscribe: [0] 
-    
+    subscribe: [0]     
      })
-    console.log(this.customerInfoForm.value);
-    console.log(this.auth.getUserDetails().UserPK)
+    this.route.params.subscribe(val =>{
+      this.credentials.CustomerPK = val.id
+    })
+    
   }
 
   checkSubmission(): any {
