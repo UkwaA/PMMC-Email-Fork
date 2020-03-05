@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core'
 
   export class ProfileInfo implements OnInit {
     submitted = false;
+    isDisabled: boolean;
     
-    ngOnInit() {}
+    ngOnInit() {
+      this.isDisabled = true;
+    }
 
     onSubmit(){
       this.submitted = true;
