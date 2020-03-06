@@ -99,7 +99,7 @@ export class ProgramManagementComponent {
         if (this.isDisabled){
             dialogConfig.data = {
                 title: "Enable Program",
-                description: "This program is not able to view by customers. Are you sure to enable this program?",            
+                description: "This program is not able to be viewed by customers. Are you sure to enable this program?",            
                 actionButtonText: "Confirm",   
                 numberOfButton: "1"         
             }
@@ -107,7 +107,7 @@ export class ProgramManagementComponent {
         else {
             dialogConfig.data = {
                 title: "Disable Program",
-                description: "This program is able to view by customers. Are you sure to disable this program?",            
+                description: "This program is able to be viewed by customers. Are you sure to disable this program?",            
                 actionButtonText: "Confirm",   
                 numberOfButton: "1"         
             }
