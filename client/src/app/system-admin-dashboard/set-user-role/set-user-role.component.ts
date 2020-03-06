@@ -71,7 +71,7 @@ export class SetUserRoleComponent {
             this.isDisabled = !this.isDisabled;
         }
         else{
-            //otherwise, do notthing            
+            //otherwise, do nothing            
         }
     })
 }
