@@ -235,15 +235,27 @@ users.post('/change-current-password/:id', (req,res) => {
     })
 })
 
+
+/****************************************
+      SET USER ACCOUNT STATUS
+****************************************/
+users.get('/set-user-status/:id/:status', (req, res) => {
+  const id = req.params.id
+  const status = req.params.status
+  User.findOne({
+    where: {
+      UserPK: id
+    }
+  })
+    .then(user => {
+      user.update({
+        IsActive: status
+      })
+      res.json({message: "User status has been changed"})
+    })
+    .catch(err => {
+      res.send('error: Set User Status ' + err)
+    })
+})
+
 module.exports = users
-
-
-// // Get Login Data
-// app.get('/login', (req, res) => {
-//     let sql = 'SELECT SINGLE FROM USER';
-//     db.query(sql, (err, result) =>{
-//         if(err) throw err;
-//         console.log(result);
-//         res.send("Database created...");
-//     });
-// })
