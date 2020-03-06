@@ -1,33 +1,29 @@
 
+.top-nav-collapse {
+    background-color: #ffffff !important;
+    box-shadow: 0px 2px 2px #585d5e80;
+  }
+
+@media (max-width: 991px) {
+    .navbar:not(.top-nav-collapse) {
+      background: #ffffff !important;
+      box-shadow: 0px 2px 2px #585d5e80;
+    }
+  }
+
 .header_change{
     position: fixed;
-    background: white !important;
+    background: rgb(255, 255, 255) !important;
     width: 100%;
     z-index: 1;
     box-shadow: 0px 2px 2px #585d5e80;
-    /* text-shadow: 1px 1px 2px #0021dd80; */
-
 }
 
-
-.navbar-toggler{
+.navbar-toggler, .header_change .navbar-toggler {
     border-color: rgb(34, 33, 33);
 }
 
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(34, 33, 33)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
-    
-}
-
-.header_change .navbar-toggler {
-    border-color: rgb(34, 33, 33);
-}
-
-/* .header_change .navbar-toggler-icon {
-    border-color: black !important;
-} */
-
-.header_change .navbar-toggler-icon {
+.navbar-toggler-icon, .header_change .navbar-toggler-icon  {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(34, 33, 33)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
     
 }
@@ -37,45 +33,32 @@
 
 }
 
-.header_change .nav-link:hover{
+.header_change .nav-link:hover, .nav-link:hover{
     color: #08b2b8!important;
     text-decoration: underline;
 }
 
-
-.header_change .nav-link:active{
+.header_change .nav-link:active, .nav-link:focus, .nav-link:active, .header_change .nav-link:focus{
     color: #08b2b8!important;
 }
 
-.header_change .nav-link:focus{
-    color: #08b2b8!important;
-}
 
 .nav-item{
     text-align: right;
     font-family: "Trebuchet MS" !important;
 }
 
-.nav-link:hover{
+/* .nav-link:active, .nav-link:focus{
     color: #08b2b8!important;
-    text-decoration: underline;
-
-}
-
-.nav-link:active, .nav-link:focus{
-    color: #08b2b8!important;
-}
+    outline: 0 !important;
+} */
 
 .nav-link{
     color: rgb(19, 39, 77)!important;
-    /* text-shadow: 1px 1px 2px #0021dd80; */
     font-weight: normal;
     font-size: 18px;
-    /* -webkit-text-stroke-width: 0.1px;
-    -webkit-text-stroke-color: white; */
 
 }
-
 
 body {
     overflow-y:hidden;
@@ -90,20 +73,15 @@ body {
  
 }
 
-/*
 .dropdown>.dropdown-toggle:active {
     /*Without this, clicking will make it sticky*/
-     /* pointer-events: none;
+     pointer-events: none;
 }
-*/
+
+
 .mainfooter {
     background: #16222A; 
     background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
     background: linear-gradient(59deg, #3A6073, #16222A);
     color: white; padding-top:50px; padding-bottom:50px;
 }
-
-a:hover {
-    color:#ffffff !important;
-}
-
