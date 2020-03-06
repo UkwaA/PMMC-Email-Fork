@@ -81,7 +81,6 @@ export class CreateProgramComponent {
         for (const key of Object.keys(this.programData)) {
             const value = this.programData[key];
             formData.append(key, value);
-
         }
 
         return formData;

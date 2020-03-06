@@ -1,6 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core'
-import { AuthenticationService, UserDetails } from '../authentication.service'
-import { Router } from '@angular/router'
+import { Component } from '@angular/core'
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { HttpClient } from '@angular/common/http'
@@ -18,8 +16,8 @@ export class ProgramManagementComponent {
 
     programs : ProgramData[];
     allPrograms : ProgramData[];
-    individualProgram: ProgramData[];
-    groupProgram: ProgramData[];
+    individualProgram: ProgramData[] = [];
+    groupProgram: ProgramData[] = [];
     searchText: string;
     selectedValue = 0;
     isDisabled= true; //temporary variabe to hold the value for enable/disable button of program
@@ -29,6 +27,8 @@ export class ProgramManagementComponent {
     //     { id: 1, name: "Program Name" },
     //     { id: 3, name: "Program Type" }
     // ]
+  
+    // Dropdown Meny Option
     programCategories: Array<Object> = [
         { id: 0, name: "All Program" },
         { id: 1, name: "Group Program" },
@@ -40,18 +40,22 @@ export class ProgramManagementComponent {
                 // private services: ProgramServices, 
                 // private auth: AuthenticationService, 
                 // private router: Router,
-                private changeDetectorRefs: ChangeDetectorRef,
                 public matDialog: MatDialog) { }
 
     ngOnInit() {
+        // Add option for the dropdown menu
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
         });
 
+        // Service call to get data from server
         this.programService.getAllPrograms().then((result) =>{
             this.programs = result;
             this.allPrograms = result
+
+            // Filter program into Group and Individual
             this.programs.forEach(e => {
+                console.log(e)
                 if(e.ProgramType == 0) {
                     this.groupProgram.push(e);
                 } else {
@@ -65,16 +69,18 @@ export class ProgramManagementComponent {
         this.searchText = "";
     }
 
+    // Catch the event dropdown menu
     selectChangeHandler(event: any) {
-        // Update the variable
-       switch(event.target.value) {
-            case 0:
+        let choice = event.target.value;
+        // Update the data of table
+       switch(choice) {
+            case '0':
                 this.programs = this.allPrograms;
                 break;
-            case 1:
+            case '1':
                 this.programs = this.groupProgram;
                 break;
-            case 1:
+            case '2':
                 this.programs = this.individualProgram;
                 break;
        }

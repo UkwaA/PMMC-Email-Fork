@@ -19,26 +19,25 @@ export class BookingGroupProgramComponent implements OnInit {
   programDetails: ProgramData;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private fb: FormBuilder, 
-              private service: ProgramServices) { }
+    private router: Router,
+    private fb: FormBuilder,
+    private service: ProgramServices) { }
 
   ngOnInit() {
     // Get Group Program Requirement
-    this.route.params.subscribe(val => { 
-      this.ProgramPK = val.id 
-      this.service.getProgramRequirementDetails('g', this.ProgramPK)
-        .subscribe(program => {
-          this.bookingGroup = program
-          console.log(this.bookingGroup)
-        })
-        this.service.getProgramDetailsByID(this.ProgramPK)
-        .subscribe(details =>{
-          this.programDetails = details;
-          console.log(this.programDetails);
-        })
+    this.route.params.subscribe(val => {
+      this.ProgramPK = val.id
+    })
+    this.service.getProgramRequirementDetails('g', this.ProgramPK)
+      .subscribe(program => {
+        this.bookingGroup = program
+        console.log(this.bookingGroup)
       })
-
+    this.service.getProgramDetailsByID(this.ProgramPK)
+      .subscribe(details => {
+        this.programDetails = details;
+        console.log(this.programDetails);
+      })
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
@@ -59,13 +58,13 @@ export class BookingGroupProgramComponent implements OnInit {
     });
   }
 
-  get f() { return this.registerForm.controls;}
+  get f() { return this.registerForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    console.log("submitted"); 
+    console.log("submitted");
 
-    // stop here if form is invalid
+    // Stop here if form is invalid
     if (this.registerForm.invalid) {
       console.log("invalid");
       return;
@@ -74,5 +73,5 @@ export class BookingGroupProgramComponent implements OnInit {
     console.log("valid");
     // display form values on success
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-}
+  }
 }
