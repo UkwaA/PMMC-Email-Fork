@@ -45,5 +45,11 @@ body{
 } 
 
 a:hover {
-  background-color:#185e61 !important;
+  background-color:#a5a5a5 !important;
+}
+
+.filter{
+  padding: 20px;
+  margin-left: 50px;
+  font-weight: bold;
 }
