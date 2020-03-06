@@ -4,6 +4,8 @@ import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { HttpClient } from '@angular/common/http'
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 declare var $: any;
 
 @Component({
@@ -20,6 +22,8 @@ export class ProgramManagementComponent {
     groupProgram: ProgramData[];
     searchText: string;
     selectedValue = 0;
+    isDisabled= true; //temporary variabe to hold the value for enable/disable button of program
+
     // searchCategories: Array<Object> = [
     //     { id: 0, name: "Any" },
     //     { id: 1, name: "Program Name" },
@@ -36,7 +40,8 @@ export class ProgramManagementComponent {
                 // private services: ProgramServices, 
                 // private auth: AuthenticationService, 
                 // private router: Router,
-                private changeDetectorRefs: ChangeDetectorRef) { }
+                private changeDetectorRefs: ChangeDetectorRef,
+                public matDialog: MatDialog) { }
 
     ngOnInit() {
         this.programCategories.forEach(e => {
@@ -73,5 +78,54 @@ export class ProgramManagementComponent {
                 this.programs = this.individualProgram;
                 break;
        }
+    }
+
+    //open Modal when switching Activate/Deactivate button
+    openModalSwitch(){
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        if (this.isDisabled){
+            dialogConfig.data = {
+                title: "Enable Program",
+                description: "This program is not able to view by customers. Are you sure to enable this program?",            
+                actionButtonText: "Confirm",   
+                numberOfButton: "1"         
+            }
+        }
+        else {
+            dialogConfig.data = {
+                title: "Disable Program",
+                description: "This program is able to view by customers. Are you sure to disable this program?",            
+                actionButtonText: "Confirm",   
+                numberOfButton: "1"         
+            }
+        }
+            // https://material.angular.io/components/dialog/overview
+        // https://material.angular.io/components/dialog/overview
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //deactivate or activate the program here
+                if (this.isDisabled){ 
+                    //activate program here
+
+                }
+                else {
+                    //deactivate program here
+
+                }
+                //switch the button
+                this.isDisabled = !this.isDisabled;
+            }
+            else{
+                //otherwise, do notthing               
+            }
+        })
     }
 }

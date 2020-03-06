@@ -35,7 +35,14 @@
                     <td class="name"> {{user.Username}} </td>
                     <td> {{user.Email}} </td>
                     <td><button [routerLink]="['/profile', 'user-details', user.UserPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
-                        <button [routerLink]="" class="btn btn-info"> Activate </button>
+                        <button *ngIf = "isDisabled" (click) = "openModalSwitch()"
+                            class="btn btn-success">
+                            <mat-icon matListIcon> sentiment_very_satisfied </mat-icon> Activate
+                        </button>
+                        <button *ngIf = "!isDisabled" (click) = "openModalSwitch()"
+                            class="btn btn-danger">
+                            <mat-icon matListIcon> sentiment_very_dissatisfied </mat-icon> Deactivate
+                        </button>
                 </tr>
             </tbody>
         </table>
