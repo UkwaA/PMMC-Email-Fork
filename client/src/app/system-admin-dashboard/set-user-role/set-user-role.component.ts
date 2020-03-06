@@ -42,7 +42,7 @@ export class SetUserRoleComponent {
             title: "Activate Account",
             description: "This account is deactivated. Are you sure to activate this account?",            
             actionButtonText: "Confirm",   
-            numberOfButton: "1"
+            numberOfButton: "2"
         }
     }
     else {
@@ -50,7 +50,7 @@ export class SetUserRoleComponent {
             title: "Deactivate Account",
             description: "This account is actived. Are you sure to deactivate this activate?",            
             actionButtonText: "Confirm",   
-            numberOfButton: "1"
+            numberOfButton: "2"
         }
     }
         // https://material.angular.io/components/dialog/overview

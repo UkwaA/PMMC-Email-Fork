@@ -35,7 +35,8 @@ a:hover {
   background-color:#185e61 !important;
 }
 
-/* body {
-  background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');
-  background-size:100%;
-} */
+.filter{
+  padding: 20px;
+  margin-left: 50px;
+  font-weight: bold;
+}
