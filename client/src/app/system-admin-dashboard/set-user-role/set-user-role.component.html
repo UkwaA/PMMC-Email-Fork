@@ -35,13 +35,13 @@
                     <td class="name"> {{user.Username}} </td>
                     <td> {{user.Email}} </td>
                     <td><button [routerLink]="['/profile', 'user-details', user.UserPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
-                        <button *ngIf = "isDisabled" (click) = "openModalSwitch()"
+                        <button *ngIf = "!user.IsActive" (click) = "openModalSwitch(user.UserPK)"
                             class="btn btn-success">
-                            <mat-icon matListIcon> sentiment_very_satisfied </mat-icon> Activate
+                            Activate Account  
                         </button>
-                        <button *ngIf = "!isDisabled" (click) = "openModalSwitch()"
+                        <button *ngIf = "user.IsActive" (click) = "openModalSwitch(user.UserPK)"
                             class="btn btn-danger">
-                            <mat-icon matListIcon> sentiment_very_dissatisfied </mat-icon> Deactivate
+                            Deactivate Account
                         </button>
                 </tr>
             </tbody>

@@ -1,4 +1,4 @@
-<nav *ngIf="visible" [class.header_change]="header_variable" class="navbar navbar-expand-lg fixed-top navbar-dark" >
+<nav *ngIf="visible" [class.header_change]="header_variable" class="navbar navbar-expand-lg navbar-dark fixed-top" >
   <div class="container">  
   <a  class="navbar-brand" href="#">
     <img src = "https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png" width="120" height="60"> </a>
@@ -7,26 +7,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item current">
+        <li class="nav-item">
           <a class="nav-link" href="#">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item current">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
           <a class="nav-link" routerLink="/group-program">Group Program</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
           <a class="nav-link" routerLink="/individual-program">Individual Program</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
           <a class="nav-link" routerLink="/contact">Contact</a>
         </li>
         <!-- <li class = "nav-item" >
           <a class = "nav-link" routerLink="/customer-register"> Register </a>
         </li>
          -->
-        <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" [routerLink]="['/login']" >Login</a>
         </li>
         <li *ngIf="auth.isLoggedIn()" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,15 +40,6 @@
       </ul>
     </div>
   </div>
-  <script>
-    $(function () {
-  $(document).scroll(function () {
-	  var $nav = $(".navbar-fixed-top");
-	  $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-	});
-});
-
-  </script>
 </nav>
 <router-outlet></router-outlet>
 
@@ -56,27 +47,42 @@
 <footer *ngIf="visible" class="mainfooter" role="contentinfo">
   <div class="container">
     <div class="row">
-      <div class="col-md-5" >
+      <div class="col-md-5">
         <!--Column Info-->
         <div class="footer-info">
           <h4 style="padding-bottom:20px;">PACIFIC MARINE MAMMAL CENTER</h4>
-          <p class="text-justify" style="color: rgb(192, 183, 183);">Our patient are sentinel species of our environment. Their intricate involvement on both the terrestrial and marine environments provides us with a unique wealth of knowledge.</p>
-            <div class="social-network fa-lg">
-              <a>Follow Us</a>
-              <a style="padding-left:25px; color: #0ebbff;" href="https://www.facebook.com/pacificmmc/" class="faFacebook" title="faFacebook"><fa-icon [icon]="faFacebook"></fa-icon></a>
-              <a style="padding-left:25px; color: #0ebbff" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q" class="faYoutube" title="faYoutube"><fa-icon [icon]="faYoutube"></fa-icon></a>
-              <a style="padding-left:25px; color: #0ebbff" href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp"><fa-icon [icon]="faYelp"></fa-icon></a>
-              <a style="padding-left:25px; color: #0ebbff" href="mailto:info@pacificmmc.org" class="faEnvelope" title="faEnvelope"><fa-icon [icon]="faEnvelope"></fa-icon></a>
+          <p class="text-justify" style="color: rgb(192, 183, 183);">Our patient are sentinel species of our
+            environment. Their intricate involvement on both the terrestrial and marine environments provides us with a
+            unique wealth of knowledge.</p>
+          <div class="social-network fa-lg">
+            <a>Follow Us</a>
+            <a style="padding-left:25px; color: #0ebbff;" href="https://www.facebook.com/pacificmmc/" class="faFacebook"
+              title="faFacebook">
+              <fa-icon [icon]="faFacebook"></fa-icon>
+            </a>
+            <a style="padding-left:25px; color: #0ebbff" href="https://www.youtube.com/channel/UCApjY-oadg3lgl8Ahn3h53Q"
+              class="faYoutube" title="faYoutube">
+              <fa-icon [icon]="faYoutube"></fa-icon>
+            </a>
+            <a style="padding-left:25px; color: #0ebbff"
+              href="https://www.yelp.com/biz/pacific-marine-mammal-center-laguna-beach" class="faYelp" title="faYelp">
+              <fa-icon [icon]="faYelp"></fa-icon>
+            </a>
+            <a style="padding-left:25px; color: #0ebbff" href="mailto:info@pacificmmc.org" class="faEnvelope"
+              title="faEnvelope">
+              <fa-icon [icon]="faEnvelope"></fa-icon>
+            </a>
             <div style="padding-top:20px; padding-bottom:20p;">
               <div class="subscribe-wrapper subscribe2-wrapper mb-15">
                 <div class="subscribe-form">
                   <form action="#" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                    <input placeholder="Enter Your Email" type="email" 
-                            style="background: none; border: 1px solid #fff; border-radius: 30px; color: #fff; display: inline-block;
-                            font-size: 18px; font-weight: 200; height: 40px; margin-right: 12px; padding-left: 35px; width: 70%; cursor: pointer;"
-                            class="form-control" formControlName="subscribeEmail"
-                            [ngClass]="{ 'is-invalid': submitted && f.subscribeEmail.errors }">
-                    <button style=" background: #ffff; border: none; border-radius: 30px; color: #4b5d73; display: inline-block; font-size: 15px;
+                    <input placeholder="Enter Your Email" type="email"
+                      style="background: none; border: 1px solid #fff; border-radius: 30px; color: #fff; display: inline-block;
+                            font-size: 18px; font-weight: 200; height: 40px; margin-right: 12px; padding-left: 35px; width: 70%; cursor: pointer;" class="form-control"
+                      formControlName="subscribeEmail"
+                      [ngClass]="{ 'is-invalid': submitted && f.subscribeEmail.errors }">
+                    <button
+                      style=" background: #ffff; border: none; border-radius: 30px; color: #4b5d73; display: inline-block; font-size: 15px;
                             font-weight: 400; line-height: 1; padding: 12px 15px; transition: all 0.3s ease 0s;">Subscribe
                       <i class="fas fa-long arrow-alt-right"></i>
                     </button>
@@ -88,7 +94,7 @@
                 </div>
               </div>
             </div>
-            </div>		
+          </div>
         </div>
       </div>
       <div class="col-md-1"></div>
@@ -108,22 +114,26 @@
         <!--Column1-->
         <div class="footer-pad">
           <h5 style="padding-bottom:20px;">Visit Us</h5>
-          <p style="color: rgb(192, 183, 183); line-height:200%;" class="info" >
-            <fa-icon [icon]="faDoorOpen"></fa-icon> Open Daily 10AM - 4PM Pacific 
-            <br /><fa-icon [icon]="faLaughWink"></fa-icon> Admission is FREE
-            <br /><fa-icon [icon]="faHandHoldingUsd"></fa-icon> Donations are Welcome!
-            <br /><fa-icon [icon]="faPhone"></fa-icon> (949) 494-3050
-            <br /><fa-icon [icon]="faMapMarkedAlt"></fa-icon> 20612 Laguna Canyon Road, Laguna Beach, CA 92651
+          <p style="color: rgb(192, 183, 183); line-height:200%;" class="info">
+            <fa-icon [icon]="faDoorOpen"></fa-icon> Open Daily 10AM - 4PM Pacific
+            <br />
+            <fa-icon [icon]="faLaughWink"></fa-icon> Admission is FREE
+            <br />
+            <fa-icon [icon]="faHandHoldingUsd"></fa-icon> Donations are Welcome!
+            <br />
+            <fa-icon [icon]="faPhone"></fa-icon> (949) 494-3050
+            <br />
+            <fa-icon [icon]="faMapMarkedAlt"></fa-icon> 20612 Laguna Canyon Road, Laguna Beach, CA 92651
           </p>
         </div>
       </div>
     </div>
-		<div class="col-md-12">
+    <div class="col-md-12">
       <div style="padding-top:20px;" class="Policy-Term text-center">
         <a style="color: white;" href="https://www.pacificmmc.org/privacy-policy">Privacy Policy </a>
         <a style="color: white;" href="https://www.pacificmmc.org/terms-of-use">| Term of Use</a>
-			  <p>Copyright © 2020 Pacific Marine Mammal Center. All rights reserved.</p>
+        <p>Copyright © 2020 Pacific Marine Mammal Center. All rights reserved.</p>
       </div>
-		</div>
+    </div>
   </div>
 </footer>

@@ -101,7 +101,7 @@ export class ProgramManagementComponent {
                 title: "Enable Program",
                 description: "This program is not able to be viewed by customers. Are you sure to enable this program?",            
                 actionButtonText: "Confirm",   
-                numberOfButton: "1"         
+                numberOfButton: "2"         
             }
         }
         else {
@@ -109,7 +109,7 @@ export class ProgramManagementComponent {
                 title: "Disable Program",
                 description: "This program is able to be viewed by customers. Are you sure to disable this program?",            
                 actionButtonText: "Confirm",   
-                numberOfButton: "1"         
+                numberOfButton: "2"         
             }
         }
             // https://material.angular.io/components/dialog/overview
