@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import {UserData} from './data/user-data'
-import {CustomerData} from './data/customer-data'
 import { AppConstants } from './constants'
 
 export interface UserDetails {

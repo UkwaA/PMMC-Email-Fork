@@ -33,7 +33,7 @@ export class CustomerRegisterComponent implements OnInit {
     Zipcode: '',
     Subscribe: 0
   }
-  
+
   ngOnInit() {
     this.customerInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -55,10 +55,6 @@ export class CustomerRegisterComponent implements OnInit {
   checkSubmission(): any {
     this.submitted = true;
 
-
-    console.log("This button works");
-    console.log(this.customerInfoForm.get('firstName').valid)
-    console.log(this.customerInfoForm.value);
     return this.customerInfoForm.status;
   }
 
@@ -94,23 +90,10 @@ export class CustomerRegisterComponent implements OnInit {
             //call register function                
             this.finishRegister()
         }
-        else{
-            console.log("stop")                
-        }
     })
 }
 
-  passwordsMatch(): any {
-    console.log("Checking passowrds");
-    if (this.customerInfoForm.get('password').value != '' && this.customerInfoForm.get('confirmed_password').value != '') {
-      console.log("is this working?");
-      console.log(this.customerInfoForm.get('password').value == this.customerInfoForm.get('confirmed_password').value)
-      return this.customerInfoForm.get('password').value == this.customerInfoForm.get('confirmed_password').value;
-    }
-  }
-
   checkBoxClicked(): any {
-    console.log("Checkbox Clicked");
     if (this.customerInfoForm.get('subscribe').value == 0)
       this.customerInfoForm.get('subscribe').setValue(1)
     else
@@ -121,19 +104,13 @@ export class CustomerRegisterComponent implements OnInit {
 
   finishRegister() {
     this.submitted = true;
-    console.log("Form Submitted")
-    console.log(this.credentials)
     if (this.customerInfoForm.invalid) {
-      console.log("Form Invalid")
       return;
     }
     // this.customer = new CustomerData()
-    console.log(this.customerInfoForm.value);
 
     this.customerService.finishRegister(this.credentials).subscribe((res) => {
       if (res.error) {
-        console.log("Error in the finish register")
-        console.log(res)
         this.errorMessage = "*" + res.error
         return
       }
@@ -141,7 +118,6 @@ export class CustomerRegisterComponent implements OnInit {
         this.router.navigateByUrl("/");
     },
       err => {
-        console.log("Err section")
         console.error(err);
       }
     );
