@@ -14,7 +14,7 @@ export class SetUserRoleComponent {
   listOfUsers: UserDetails;
   userRoles:string[]
   currentUserID: number
-  isDisabled= true; //temporary variabe to hold the value for deactivate/activate button of user account
+  IsActive: boolean; //temporary variabe to hold the value for deactivate/activate button of user account
 
   constructor(private auth: AuthenticationService, public matDialog: MatDialog) {}
 
@@ -28,7 +28,7 @@ export class SetUserRoleComponent {
   }
 
   //open Modal when switching Activate/Deactivate button
-  openModalSwitch(){
+  openModalSwitch(userPK: number){
     //Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
@@ -37,12 +37,12 @@ export class SetUserRoleComponent {
     dialogConfig.height = "auto";
     dialogConfig.maxHeight = "500px";
     dialogConfig.width = "350px";
-    if (this.isDisabled){
+    if (this.IsActive){
         dialogConfig.data = {
             title: "Activate Account",
             description: "This account is deactivated. Are you sure to activate this account?",            
             actionButtonText: "Confirm",   
-            numberOfButton: "1"         
+            numberOfButton: "2"
         }
     }
     else {
@@ -50,7 +50,7 @@ export class SetUserRoleComponent {
             title: "Deactivate Account",
             description: "This account is actived. Are you sure to deactivate this activate?",            
             actionButtonText: "Confirm",   
-            numberOfButton: "1"         
+            numberOfButton: "2"
         }
     }
         // https://material.angular.io/components/dialog/overview
@@ -59,16 +59,23 @@ export class SetUserRoleComponent {
     modalDialog.afterClosed().subscribe(result =>{
         if(result == "Yes"){
             //deactivate or activate the account here
-            if (this.isDisabled){ 
-                //activate account here
+            if (this.IsActive){ 
+                //deactivate account here
+                this.auth.setUserActiveStatus(userPK, false)
+                    .subscribe((res) => {
+                        // reload the button
+                    })
 
             }
             else {
-                //deactivate account here
-
+                //activate account here
+                this.auth.setUserActiveStatus(userPK, true)
+                    .subscribe((res) => {
+                        // reload the button
+                    })
             }
             //switch the button
-            this.isDisabled = !this.isDisabled;
+            this.IsActive = !this.IsActive;
         }
         else{
             //otherwise, do nothing            

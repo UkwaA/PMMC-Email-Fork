@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router'
 import {UserData} from './data/user-data'
-
+import { AppConstants } from './constants'
 
 export interface UserDetails {
     UserPK: number
@@ -38,7 +38,6 @@ export interface TokenPayload {
 @Injectable()
 export class AuthenticationService {
   private token: string
-  private baseServerURL:string = "http://localhost:3000"
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -76,11 +75,11 @@ export class AuthenticationService {
   }
 
   public register(user: TokenPayload): Observable<any> {
-    return this.http.post(this.baseServerURL + "/users/register", user);
+    return this.http.post(AppConstants.SERVER_URL  + "/users/register", user);
   }
 
   public login(user: TokenPayload): Observable<any> {
-    const base = this.http.post(this.baseServerURL + "/users/login", user)
+    const base = this.http.post(AppConstants.SERVER_URL  + "/users/login", user)
 
     const request = base.pipe(
       map((data: TokenResponse) => {
@@ -95,7 +94,7 @@ export class AuthenticationService {
   }
 
   public profile(): Observable<any> {
-    return this.http.get(this.baseServerURL + "/users/profile", {
+    return this.http.get(AppConstants.SERVER_URL  + "/users/profile", {
       headers: { Authorization: `${this.getToken()}` }
     })
   }
@@ -107,25 +106,28 @@ export class AuthenticationService {
   }
 
   public getAllUser(): Observable<any> {
-    return this.http.get(this.baseServerURL + "/users/edit-user", {
+    return this.http.get(AppConstants.SERVER_URL  + "/users/edit-user", {
       headers: { Authorization: `${this.getToken()}` }
     })
   }
 
   public getUserDetailsByID(UserPK: number):  Observable<any> {
-    return this.http.get(this.baseServerURL + "/users/get-user-details/" + UserPK)
+    return this.http.get(AppConstants.SERVER_URL  + "/users/get-user-details/" + UserPK)
   }
 
   public updateUserDetail(UserPK:number, userDetails: UserDetails): Observable<any>{
-    return this.http.put(this.baseServerURL + "/users/get-user-details/" + UserPK, userDetails);
+    return this.http.put(AppConstants.SERVER_URL  + "/users/get-user-details/" + UserPK, userDetails);
   }
 
   public resetUserPassword(UserPK:number, userDetails: UserDetails): Observable<any>{
-    return this.http.put(this.baseServerURL + "/users/reset-password/" + UserPK, userDetails);
+    return this.http.put(AppConstants.SERVER_URL  + "/users/reset-password/" + UserPK, userDetails);
   }  
 
   public changeCurrentPassword(UserPK:number, userDetails: UserSecretData): Observable<any>{
-    return this.http.post(this.baseServerURL + "/users/change-current-password/" + UserPK, userDetails);
+    return this.http.post(AppConstants.SERVER_URL + "/users/change-current-password/" + UserPK, userDetails);
   }
 
+  public setUserActiveStatus(UserPK: number, IsActive: boolean):  Observable<any> {
+    return this.http.get(AppConstants.SERVER_URL  + "/users/set-user-status/" + UserPK + "/" + IsActive);
+  }
 }

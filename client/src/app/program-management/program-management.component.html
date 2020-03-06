@@ -4,18 +4,17 @@
             <h1>Program Management</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <label>Filter by Program Type</label>
-        </div>
-        <div class="col-md-8">
-            <select id="programCat" (change)="selectChangeHandler($event)" >
+    <div class="row filter">
+        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+            <select class="form-control" style = "font-weight: bold" id="programCat" (change)="selectChangeHandler($event)" >
             </select>
         </div>
-    </div>
-    <div class="row">
-        <input type="text" class="form-control" placeholder="Type In Program Name or Description to Seacrh" [(ngModel)]="searchText">
-        <button mat-raised-button (click)="clearSearch()">Clear Search</button>
+        <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
+            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search" [(ngModel)]="searchText">
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <button mat-raised-button color="warn" (click)="clearSearch()">Clear Search</button>
+        </div>
     </div>
     <!--  Create table -->
     <div class="table-responsive-sm">
