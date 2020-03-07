@@ -54,7 +54,8 @@
 
 .checkbox{
     padding-top:10px;
-    padding-left: 39px;
+    /* padding-left: 39px; */
+    margin-left: auto;
 }
 
 input[type=checkbox] {
