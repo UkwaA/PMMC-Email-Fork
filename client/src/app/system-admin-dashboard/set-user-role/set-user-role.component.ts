@@ -28,7 +28,8 @@ export class SetUserRoleComponent {
   }
 
   //open Modal when switching Activate/Deactivate button
-  openModalSwitch(userPK: number){
+  openModalSwitch(userPK: number, status:boolean){
+    this.IsActive = status;
     //Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
@@ -37,7 +38,7 @@ export class SetUserRoleComponent {
     dialogConfig.height = "auto";
     dialogConfig.maxHeight = "500px";
     dialogConfig.width = "350px";
-    if (this.IsActive){
+    if (!this.IsActive){
         dialogConfig.data = {
             title: "Activate Account",
             description: "This account is deactivated. Are you sure to activate this account?",            
@@ -53,8 +54,7 @@ export class SetUserRoleComponent {
             numberOfButton: "2"
         }
     }
-        // https://material.angular.io/components/dialog/overview
-    // https://material.angular.io/components/dialog/overview
+      
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
     modalDialog.afterClosed().subscribe(result =>{
         if(result == "Yes"){
@@ -63,7 +63,7 @@ export class SetUserRoleComponent {
                 //deactivate account here
                 this.auth.setUserActiveStatus(userPK, false)
                     .subscribe((res) => {
-                        // reload the button
+                        window.location.reload();
                     })
 
             }
@@ -71,7 +71,7 @@ export class SetUserRoleComponent {
                 //activate account here
                 this.auth.setUserActiveStatus(userPK, true)
                     .subscribe((res) => {
-                        // reload the button
+                        window.location.reload();
                     })
             }
             //switch the button
