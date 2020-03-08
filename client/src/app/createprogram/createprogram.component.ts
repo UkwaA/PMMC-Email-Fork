@@ -4,6 +4,8 @@ import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 declare var $: any;
 
 @Component({
@@ -36,7 +38,8 @@ export class CreateProgramComponent {
 
     constructor(private services: ProgramServices, 
                 private auth: AuthenticationService, 
-                private router: Router) { }
+                private router: Router,
+                public matDialog: MatDialog) { }
 
     ngOnInit() {
         this.programCategories.forEach(e => {
@@ -57,16 +60,42 @@ export class CreateProgramComponent {
     }
 
     createProgram() {
-        this.user = this.auth.getUserDetails();
-        this.programData.CreatedBy = this.user.UserPK;
-        this.programData.ImgData = "";
-        this.programData.ProgramType = this.selectedValue
+        //check form validation here
 
-        this.services.addNewProgram(this.getFormData())
-            .subscribe((response) => {
-                console.log(response)
-                this.router.navigateByUrl("/profile/program-details/" + response +"/edit")
-            })
+        //add Modal Dialog
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.data = {
+            title: "New Program Confirmation",
+            description: "Are you sure to create this program?",            
+            actionButtonText: "Confirm",   
+            numberOfButton: "2"         
+          }
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                this.user = this.auth.getUserDetails();
+                this.programData.CreatedBy = this.user.UserPK;
+                this.programData.ImgData = "";
+                this.programData.ProgramType = this.selectedValue
+        
+                this.services.addNewProgram(this.getFormData())
+                    .subscribe((response) => {
+                        console.log(response)
+                        this.router.navigateByUrl("/profile/program-details/" + response +"/edit")
+                    })        
+            }
+            else{
+                //do nothing
+                console.log("stop")                
+            }
+        })
     }
 
     onReady(editor) {

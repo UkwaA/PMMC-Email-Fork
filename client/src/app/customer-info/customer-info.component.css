@@ -1,6 +1,6 @@
 .container {
     max-width: 720px;
-    max-height: 1000px;
+    /* max-height: 1000px; */
     padding-top:120px;
     /* padding-left: 150px;
     padding-right: 200px; */
@@ -54,12 +54,9 @@
 
 .checkbox{
     padding-top:10px;
-    padding-left: 39px;
+    /* padding-left: 39px; */
+    margin-left: auto;
 }
-
-input[type=checkbox] {
-    transform: scale(1.25);
-  }
 
   .form-check-label{
     font-size:17px;

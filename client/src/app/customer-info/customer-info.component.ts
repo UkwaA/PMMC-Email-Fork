@@ -6,7 +6,7 @@ import { CustomerData } from '../data/customer-data'
 import { CustomerService } from '../services/customer.services'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-customer-info',
@@ -70,7 +70,6 @@ export class CustomerRegisterComponent implements OnInit {
 
     //Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose =true;
     dialogConfig.id = "modal-component";
     dialogConfig.height = "auto";
@@ -82,12 +81,9 @@ export class CustomerRegisterComponent implements OnInit {
         actionButtonText: "Confirm",   
         numberOfButton: "2"         
       }
-      // https://material.angular.io/components/dialog/overview
-    // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
     modalDialog.afterClosed().subscribe(result =>{
         if(result == "Yes"){
-            //call register function                
             this.finishRegister()
         }
     })
@@ -99,7 +95,6 @@ export class CustomerRegisterComponent implements OnInit {
     else
       this.customerInfoForm.get('subscribe').setValue(0)
     this.credentials.Subscribe = this.customerInfoForm.get('subscribe').value
-    console.log(this.customerInfoForm.get('subscribe').value);
   }
 
   finishRegister() {
@@ -123,3 +118,7 @@ export class CustomerRegisterComponent implements OnInit {
     );
   }
 }
+
+// providers: [
+//   {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+// ]
