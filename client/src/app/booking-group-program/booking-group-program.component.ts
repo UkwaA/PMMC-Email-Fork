@@ -41,7 +41,7 @@ export class BookingGroupProgramComponent implements OnInit {
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
-      AldultQuantity: ['', [Validators.required, Validators.max(35)]],
+      AldultQuantity: ['',[Validators.required, Validators.max(35)]],
       Age57Quantity: ['', [Validators.required, Validators.max(35)]],
       Age810Quantity: ['', [Validators.required, Validators.max(35)]],
       Age1113Quantity: ['', [Validators.required, Validators.max(35)]],
@@ -50,7 +50,7 @@ export class BookingGroupProgramComponent implements OnInit {
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email]],
-      TeacherPhoneNo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
+      TeacherPhoneNo: ['', [Validators.required, Validators.minLength(10)]],
       GradeLevel: ['', Validators.required],
       TotalQuantity: ['', Validators.required],
       ProgramRestriction: ['', Validators.required]
