@@ -13,6 +13,7 @@ declare var $: any;
 export class SetUserRoleComponent {
   listOfUsers: UserDetails;
   userRoles:string[]
+  searchText: string
   currentUserID: number
   IsActive: boolean; //temporary variabe to hold the value for deactivate/activate button of user account
 
@@ -26,6 +27,10 @@ export class SetUserRoleComponent {
 
     this.currentUserID = this.auth.getUserDetails().UserPK
   }
+
+  clearSearch() {
+    this.searchText = "";
+}
 
   //open Modal when switching Activate/Deactivate button
   openModalSwitch(userPK: number, status:boolean){

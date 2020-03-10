@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
-import { HttpClient } from '@angular/common/http'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 declare var $: any;
