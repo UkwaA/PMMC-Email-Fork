@@ -42,3 +42,9 @@ th {
 .btn{
   margin-right: 20px;
 }
+
+.filter{
+  padding-bottom: 30px;
+  padding-left: 30px;
+  font-weight: bold;
+}
