@@ -5,6 +5,8 @@ import { Router } from '@angular/router'
 import { AuthenticationService } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
+declare var $: any;
+
 @Component({
   selector: 'g-program',
   templateUrl: './g-program.component.html',
@@ -16,8 +18,7 @@ export class GProgramComponent implements OnInit {
   @Output() dataChange: EventEmitter<BookingGroupData> = new EventEmitter();
   
   bookingGroup: BookingGroupData;
-  varLabels: Array<Object>;
-  //TODO: inject the service
+  varLabels: Array<Object>; 
 
   constructor(private auth: AuthenticationService,
     private service: ProgramServices,
@@ -25,6 +26,7 @@ export class GProgramComponent implements OnInit {
     public matDialog: MatDialog) { }
 
   ngOnInit() {
+    $('[data-toggle="tooltip"]').tooltip()
     this.service.getProgramRequirementByID('g', this.ProgramPK)
       .subscribe((res) => {
         this.bookingGroup = res

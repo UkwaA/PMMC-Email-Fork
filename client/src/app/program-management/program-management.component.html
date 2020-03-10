@@ -29,7 +29,7 @@
             <tbody>
                 <tr *ngFor="let program of programs | filter:searchText">
                     <td class="name"> {{program.Name}} 
-                        <div class="errorMessage" *ngIf="!hasRequiredField">
+                        <div class="errorMessage" *ngIf="!program.IsActive">
                             <mat-icon color="red">error</mat-icon> 
                             <label>Need Requirement</label>
                         </div>

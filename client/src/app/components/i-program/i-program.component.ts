@@ -5,6 +5,9 @@ import { Router } from '@angular/router'
 import { AuthenticationService } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
+
+declare var $: any;
+
 @Component({
   selector: 'i-program',
   templateUrl: './i-program.component.html',
@@ -16,20 +19,21 @@ export class IProgramComponent implements OnInit {
   @Output() dataChange: EventEmitter<BookingIndividualData> = new EventEmitter();
   varLabels:Array<Object>;
   bookingIndividual: BookingIndividualData
-  
+
   constructor(private auth: AuthenticationService, 
               private service:ProgramServices,
               private router: Router,
               public matDialog: MatDialog) { }
 
   ngOnInit() {
+    $('[data-toggle="tooltip"]').tooltip()
     this.service.getProgramRequirementByID('i', this.ProgramPK)
     .subscribe((res) => {
       this.bookingIndividual = res
     })
 
     this.varLabels = [
-      {var: "ParticipantName" , label: "Participant Name"},
+      {var: "ParticipantName" , label: "Participant Name", tooltip: ""},
       {var: "ParticipantAge" , label: "Participant Age"},
       {var: "Gender" , label: "Gender"},
       {var: "MerchSize" , label: "T-Shirt Size"},
@@ -47,7 +51,7 @@ export class IProgramComponent implements OnInit {
       {var: "LatePickup" , label: "Late Pick-up"},
       {var: "MediaRelease" , label: "Media Release"},
       {var: "EmergencyMedicalRelease" , label: "Emergency Medical Release"},
-      {var: "LiabilityAgreement" , label: "Liability Agreement"}
+      {var: "LiabilityAgreement" , label: "Liability Agreement", tooltip: "Require User to sign the Liability Agreement"}
     ]
     this.bookingIndividual.IndividualProgramPK = this.ProgramPK
     this.bookingIndividual.CreatedBy = this.auth.getUserDetails().UserPK

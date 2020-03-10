@@ -8,3 +8,9 @@
 .options-margin {
   margin: 0 10px;
 }
+
+.mat-tooltip
+{
+    font-size: 8pt;
+    
+}
