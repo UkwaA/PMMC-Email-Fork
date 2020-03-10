@@ -32,7 +32,7 @@ export class BookingIndividualProgramComponent implements OnInit {
         .subscribe(program => {
           this.bookingIndividual = program
       })
-      this.service.getProgramDetailsByID(this.ProgramPK)
+      this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe(details =>{
         this.programDetails = details;
       })
