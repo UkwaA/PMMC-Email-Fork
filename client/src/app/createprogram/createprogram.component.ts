@@ -24,9 +24,9 @@ export class CreateProgramComponent {
         ProgramPk: 0,
         Name: '',
         Description: '',
-        DepositAmount: 0,
-        PricePerParticipant: 0,
-        MaximumParticipant: 0,
+        DepositAmount: null,
+        PricePerParticipant: null,
+        MaximumParticipant: null,
         ImgData: '',
         ProgramType: 0,
         CreatedDate: '',
@@ -113,5 +113,7 @@ export class CreateProgramComponent {
         return formData;
 
     }
+
+
 
 }
