@@ -48,8 +48,6 @@ export class BookingGroupProgramComponent implements OnInit {
       Age1314Quantity: ['', [Validators.required, Validators.max(35)]],
       Age1415Quantity: ['', [Validators.required, Validators.max(35)]],
       Age1517Quantity: ['', [Validators.required, Validators.max(35)]],
-      //ScoutProgram: ['', Validators.required],
-      //EducationFK: ['', Validators.required],
       ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],

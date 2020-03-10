@@ -1,29 +1,3 @@
-<!-- <div class="container">
-    <div class="jumbotron mt-5">
-        <div class="col-sm-8 mx-auto">
-            <h1 class="text-center">Profile</h1>
-        </div>
-        <table class="table col-md-6 mx-auto font-weight-bold">
-            <tr>
-                <td>Username:</td>
-                <td>{{ details?.Username }}</td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>{{ details?.Email }}</td>
-            </tr>
-        </table>
-        <div *ngIf="details?.Role_FK == '2'">
-            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
-            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/program-management']">Program Management</button>
-        </div>
-        <div *ngIf="details?.Role_FK == '3'">
-            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/createprogram']">Create New Program</button>
-            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/program-management']">Program Management</button>
-            <button class="btn btn-lg btn-primary btn-block" [routerLink]="['/set-user-role']">User Management</button>
-        </div>
-    </div>
-</div> -->
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -36,7 +10,7 @@
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
       <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
       <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
-        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]="selected" matListIcon>add_circle</mat-icon> New Program</a>
+        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]='selected' matListIcon>add_circle</mat-icon> New Program</a>
         <a mat-list-item [routerLink]="['/profile/program-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>edit</mat-icon> Program Management</a>
       </mat-nav-list>
       <section *ngIf = "role == '3'"> Account</section>
@@ -81,7 +55,7 @@
             Account Setting
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)="auth.logout()">
+          <a class="dropdown-item" href="#" (click)='auth.logout()'>
             <mat-icon>exit_to_app</mat-icon>
             Logout
           </a>
