@@ -28,7 +28,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let program of programs | filter:searchText">
-                    <td class="name"> {{program.Name}} </td>
+                    <td class="name"> {{program.Name}} 
+                        <div class="errorMessage" *ngIf="program.IsActive == false">
+                            <mat-icon color="red">error</mat-icon> 
+                            <label>Need Requirement</label>
+                        </div>
+                    </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
                     <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']" class="btn btn-info">
@@ -46,10 +51,7 @@
                             class="btn btn-danger">
                             <mat-icon matListIcon> visibility_off </mat-icon> Disable
                         </button>
-                        <div *ngIf="program.IsActive == false">
-                            <mat-icon color="red">error</mat-icon> 
-                            <label>Need Requirement</label>
-                        </div>
+                        
                         <!-- <button class="btn btn-danger">
                             <mat-icon matListIcon>error</mat-icon> Delete
                         </button></td> -->

@@ -54,7 +54,6 @@ export class ProgramManagementComponent {
 
             // Filter program into Group and Individual
             this.programs.forEach(e => {
-                console.log(e)
                 if(e.ProgramType == 0) {
                     this.groupProgram.push(e);
                 } else {
