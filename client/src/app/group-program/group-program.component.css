@@ -16,6 +16,11 @@ hr{
   margin-top: 2em;
   margin-bottom:-1em;
 }
+
+.mat-button, .mat-raised-button:hover{
+  background-color: rgb(6, 3, 189);
+} 
+
 .list-group{
   border-width:0px;
 }

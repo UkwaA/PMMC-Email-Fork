@@ -111,39 +111,6 @@ program.get('/get-individual-program-requirement/:id', (req, res) => {
     })
 })
 
-
-// // Get All Program Header Information of Individual Program
-// program.get('/get-individual-program-details', (req, res) => {
-//   IndividualProgram.findAll({
-//   })
-//     .then(program => {
-//       if (program) {
-//         res.json(program)
-//       } else {
-//         res.send('There is no program available.')
-//       }
-//     })
-//     .catch(err => {
-//       res.send('error: ' + err)
-//     })
-// })
-
-// // Get All Program Header Information of Group Program
-// program.get('/get-group-program-details', (req, res) => {
-//   GroupProgram.findAll({
-//   })
-//     .then(program => {
-//       if (program) {
-//         res.json(program)
-//       } else {
-//         res.send('There is no program available.')
-//       }
-//     })
-//     .catch(err => {
-//       res.send('error: ' + err)
-//     })
-// })
-
 // Create New Program Header
 program.post('/add-program', (req, res) => {
   const today = new Date()
@@ -201,20 +168,6 @@ program.post('/add-program', (req, res) => {
             .catch(err => {
               res.send('err Insert Group Requirement' + err)
             })
-          // .then(program => {
-          //   console.log(program.GroupProgramPK)
-          //   Program.findOne({
-          //     where: {
-          //       ProgramPK: programPK
-          //     }
-          //   })
-          //   .then(result => {
-          //     result.update({
-          //       IsActive : true
-          //     })
-          //   })
-          //   res.json(program.GroupProgramPK)
-          // })
           break;
         case '1':
           var individualDetail = {
@@ -226,20 +179,6 @@ program.post('/add-program', (req, res) => {
             .catch(err => {
               res.send('err Insert Individual Requirement' + err)
             })
-          // .then(program => {
-          //   console.log(program.IndividualProgramPK)
-          //   // Program.findOne({
-          //   //   where: {
-          //   //     ProgramPK: programPK
-          //   //   }
-          //   // })
-          //   // .then(result => {
-          //   //   result.update({
-          //   //     IsActive : true
-          //   //   })
-          //   // })
-          //   // res.json(program.IndividualProgramPK)
-          // })
           break;
       }
 
@@ -456,7 +395,6 @@ program.get('/get-group-requirement/:id', (req, res) => {
         })
     })
 })
-
 
 module.exports = program
 
