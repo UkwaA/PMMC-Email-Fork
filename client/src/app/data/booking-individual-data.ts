@@ -19,15 +19,13 @@ export class BookingIndividualData {
     MediaRelease: boolean;
     EmergencyMedicalRelease: boolean;
     LiabilityAgreement: boolean;
-    FullAmount: boolean;
     CreatedBy: number;
     CreatedDate: Date;
     
     constructor (ParticipantName: boolean, ParticipantAge: boolean, Gender: boolean, MerchSize: boolean, AllergyInfo: boolean, 
         SpecialInfo: boolean, InsureProviderName: boolean, InsureRecipientName: boolean, InsurePolicyNo: boolean, InsurePhoneNo: boolean,
         AuthorizedPickupName1: boolean, AuthorizedPickupPhone1: boolean, AuthorizedPickupName2: boolean, AuthorizedPickupPhone2: boolean,
-        EarlyDropOff: boolean, LatePickup: boolean, MediaRelease: boolean, EmergencyMedicalRelease: boolean, LiabilityAgreement: boolean,
-        FullAmount: boolean){
+        EarlyDropOff: boolean, LatePickup: boolean, MediaRelease: boolean, EmergencyMedicalRelease: boolean, LiabilityAgreement: boolean){
             this.ParticipantName = ParticipantName;
             this.ParticipantAge = ParticipantAge;
             this.Gender = Gender;
@@ -47,8 +45,5 @@ export class BookingIndividualData {
             this.MediaRelease = MediaRelease;
             this.EmergencyMedicalRelease = EmergencyMedicalRelease;
             this.LiabilityAgreement = LiabilityAgreement;
-            this.FullAmount = FullAmount;
-
-        
     }
 }

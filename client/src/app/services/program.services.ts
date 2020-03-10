@@ -4,6 +4,7 @@ import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data'
 import { ok } from 'assert'
 import { Observable } from 'rxjs'
+import { AppConstants } from '../constants'
 
 @Injectable()
 export class ProgramServices {
@@ -12,7 +13,7 @@ export class ProgramServices {
   constructor(private http: HttpClient, private router: Router) { }
 
   public sendRequestToExpress(endpoint: string): Promise<any> {
-    return this.http.get(this.expressBaseUrl + endpoint).toPromise();
+    return this.http.get(AppConstants.SERVER_URL + endpoint).toPromise();
   }
 
   public getAllPrograms(): Promise<ProgramData[]> {
@@ -22,34 +23,45 @@ export class ProgramServices {
   public getActivePrograms(): Promise<ProgramData[]> {
     return this.sendRequestToExpress('/program/get-active-programs')
   }
-  public getProgramDetailsByID(ProgramPK: number): Observable<any> {
-    return this.http.get(this.expressBaseUrl + '/program/get-program-details/' + ProgramPK);
+  public getProgramHeaderDeatailsByID(ProgramPK: number): Observable<any> {
+    return this.http.get(AppConstants.SERVER_URL + '/program/get-program-header/' + ProgramPK);
   }
 
   public addNewProgram(program: any): Observable<any> {
-    return this.http.post(this.expressBaseUrl + '/program/add-program', program)
+    return this.http.post(AppConstants.SERVER_URL + '/program/add-program', program)
   }
-  
-  public updateProgramLayoutDetails(programType: string, programData: any) : Observable<any> {
-    switch(programType)
-    {
+
+  public updateProgramHeader(programHeaderData: any): Observable<any> {
+    return this.http.post(AppConstants.SERVER_URL + '/program/update-program-header', programHeaderData)
+  }
+
+  public getProgramRequirementByID(programType: string,ProgramPK: number): Observable<any> {
+    switch (programType) {
       case 'g':
-        return this.http.post(this.expressBaseUrl + '/program/update-g-program-requirement', programData)
+        return this.http.get(AppConstants.SERVER_URL + '/program/get-group-program-requirement/' + ProgramPK);
+      case 'i':
+        return this.http.get(AppConstants.SERVER_URL + '/program/get-individual-program-requirement/' + ProgramPK);
+    }
+  }
+
+  public updateProgramLayoutDetails(programType: string, programData: any): Observable<any> {
+    switch (programType) {
+      case 'g':
+        return this.http.post(AppConstants.SERVER_URL + '/program/update-g-program-requirement', programData)
         break;
       case 'i':
-        return this.http.post(this.expressBaseUrl + '/program/update-i-program-requirement', programData)
+        return this.http.post(AppConstants.SERVER_URL + '/program/update-i-program-requirement', programData)
         break;
     }
   }
 
-  public getProgramRequirementDetails(programType: string, ProgramPK: number) : Observable<any> {
-    switch(programType)
-    {
+  public getProgramRequirementDetails(programType: string, ProgramPK: number): Observable<any> {
+    switch (programType) {
       case 'g':
-        return this.http.get(this.expressBaseUrl + '/program/get-group-requirement/' + ProgramPK)
+        return this.http.get(AppConstants.SERVER_URL + '/program/get-group-requirement/' + ProgramPK)
         break;
       case 'i':
-        return this.http.get(this.expressBaseUrl + '/program/get-individual-requirement/' + ProgramPK)
+        return this.http.get(AppConstants.SERVER_URL + '/program/get-individual-requirement/' + ProgramPK)
         break;
     }
   }

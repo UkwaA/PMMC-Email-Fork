@@ -5,7 +5,6 @@ export class AppConstants {
     public static get ERR_EMAIL_NOT_FOUND(): string { return "http://localhost:4200/api"; }
     public static get ERR_EMAIL_DUPLICATE(): string { return "http://localhost:4200/api"; }
     public static get ERR_WRONG_PASSWORD(): string { return "http://localhost:4200/api"; }
-
     
 
 }

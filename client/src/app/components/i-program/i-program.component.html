@@ -3,11 +3,11 @@
     <div class="row">
       <div class = "col-sm-6" *ngFor = 'let item of varLabels'>
         <section class="options-section">
-          <mat-checkbox class="options-margin" [(ngModel)]="bookingIndividual[item.var]">{{item.label}}</mat-checkbox>
+          <mat-checkbox class="options-margin" [(ngModel)]="bookingIndividual[item.var]" (change)="chkbDataChange($event)">{{item.label}}</mat-checkbox>
         </section>
       </div>
     </div>
-    <div class="button pt-5 pb-5">
+    <!-- <div class="button pt-5 pb-5">
       <button class="btn btn-lg btn-info btn-block " type="submit" (click)="openModal()">Update Program Requirement</button>
-    </div>
+    </div> -->
 </div>

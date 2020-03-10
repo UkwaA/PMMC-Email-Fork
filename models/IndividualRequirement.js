@@ -66,9 +66,6 @@ module.exports = db.sequelize.define(
     LiabilityAgreement: {
         type: Sequelize.BOOLEAN
     },
-    FullAmount : {
-        type: Sequelize.INTEGER
-    },
     CreatedBy: {
         type: Sequelize.INTEGER
     },
@@ -84,3 +81,4 @@ module.exports = db.sequelize.define(
     timestamps: false
   }
 )
+

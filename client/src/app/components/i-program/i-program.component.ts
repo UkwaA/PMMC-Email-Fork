@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingIndividualData } from 'src/app/data/booking-individual-data';
 import { Router } from '@angular/router'
@@ -12,6 +12,8 @@ import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 })
 export class IProgramComponent implements OnInit {
   @Input() ProgramPK: number;
+  @Input() formData: FormData;
+  @Output() dataChange: EventEmitter<BookingIndividualData> = new EventEmitter();
   varLabels:Array<Object>;
   bookingIndividual: BookingIndividualData
   
@@ -21,7 +23,11 @@ export class IProgramComponent implements OnInit {
               public matDialog: MatDialog) { }
 
   ngOnInit() {
-    this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+    this.service.getProgramRequirementByID('i', this.ProgramPK)
+    .subscribe((res) => {
+      this.bookingIndividual = res
+    })
+
     this.varLabels = [
       {var: "ParticipantName" , label: "Participant Name"},
       {var: "ParticipantAge" , label: "Participant Age"},
@@ -41,11 +47,15 @@ export class IProgramComponent implements OnInit {
       {var: "LatePickup" , label: "Late Pick-up"},
       {var: "MediaRelease" , label: "Media Release"},
       {var: "EmergencyMedicalRelease" , label: "Emergency Medical Release"},
-      {var: "LiabilityAgreement" , label: "Liability Agreement"},
-      {var: "FullAmount" , label: "Full Amount"}
+      {var: "LiabilityAgreement" , label: "Liability Agreement"}
     ]
     this.bookingIndividual.IndividualProgramPK = this.ProgramPK
     this.bookingIndividual.CreatedBy = this.auth.getUserDetails().UserPK
+  }
+
+  
+  chkbDataChange(event) {
+    this.dataChange.emit(this.bookingIndividual)
   }
 
   //Configure Modal Dialog

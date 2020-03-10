@@ -15,7 +15,19 @@ module.exports = db.sequelize.define(
     Description: {
       type: Sequelize.TEXT('long')
     },
-    FullAmount: {
+    DepositAmount: {
+      type: Sequelize.INTEGER
+    },
+    PricePerParticipant: {
+      type: Sequelize.INTEGER
+    },
+    MaximumParticipant: {
+      type: Sequelize.INTEGER
+    },
+    ImgData: {
+      type: Sequelize.TEXT
+    },
+    ProgramType: {
       type: Sequelize.INTEGER
     },
     CreatedDate: {
@@ -23,12 +35,6 @@ module.exports = db.sequelize.define(
       defaultValue: Sequelize.NOW
     },
     CreatedBy: {
-      type: Sequelize.INTEGER
-    },
-    ImgData: {
-      type: Sequelize.TEXT
-    },
-    ProgramType: {
       type: Sequelize.INTEGER
     },
     IsActive: {

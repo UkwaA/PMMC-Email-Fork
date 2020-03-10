@@ -44,16 +44,19 @@ export class BookingGroupProgramComponent implements OnInit {
       AldultQuantity: ['', [Validators.required, Validators.max(35)]],
       Age57Quantity: ['', [Validators.required, Validators.max(35)]],
       Age810Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age1113Quantity: ['', [Validators.required, Validators.max(35)]],
-      ScoutProgram: ['', Validators.required],
-      EducationFK: ['', Validators.required],
+      Age1112Quantity: ['', [Validators.required, Validators.max(35)]],
+      Age1314Quantity: ['', [Validators.required, Validators.max(35)]],
+      Age1415Quantity: ['', [Validators.required, Validators.max(35)]],
+      Age1517Quantity: ['', [Validators.required, Validators.max(35)]],
+      //ScoutProgram: ['', Validators.required],
+      //EducationFK: ['', Validators.required],
+      ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
+      GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email]],
       TeacherPhoneNo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
-      GradeLevel: ['', Validators.required],
-      TotalQuantity: ['', Validators.required],
-      ProgramRestriction: ['', Validators.required]
+      TotalQuantity: ['', Validators.required]
 
     });
   }
