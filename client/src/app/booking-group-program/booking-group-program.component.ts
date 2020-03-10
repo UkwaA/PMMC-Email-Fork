@@ -33,7 +33,7 @@ export class BookingGroupProgramComponent implements OnInit {
         this.bookingGroup = program
         console.log(this.bookingGroup)
       })
-    this.service.getProgramDetailsByID(this.ProgramPK)
+    this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe(details => {
         this.programDetails = details;
         console.log(this.programDetails);
@@ -41,7 +41,7 @@ export class BookingGroupProgramComponent implements OnInit {
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
-      AldultQuantity: ['', [Validators.required, Validators.max(35)]],
+      AldultQuantity: ['',[Validators.required, Validators.max(35)]],
       Age57Quantity: ['', [Validators.required, Validators.max(35)]],
       Age810Quantity: ['', [Validators.required, Validators.max(35)]],
       Age1112Quantity: ['', [Validators.required, Validators.max(35)]],

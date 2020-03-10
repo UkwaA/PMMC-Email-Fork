@@ -178,7 +178,7 @@
             <div *ngIf="submitted && f.InsurePolicyNo.errors" class="invalid-feedback">
               <div *ngIf="f.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
               <div *ngIf="f.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
-              <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Phone Number</div>
+              <!-- <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Number</div> -->
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@
             <div *ngIf="submitted && f.InsurePhoneNo.errors" class="invalid-feedback">
               <div *ngIf="f.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
               <div *ngIf="f.InsurePhoneNo.errors.minlength">Please enter correct phone number</div>
-              <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div>
+              <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@
             <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
               <div *ngIf="f.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
               <div *ngIf="f.AuthorizedPickupPhone1.errors.minlength">Please enter correct phone number</div>
-              <div *ngIf="f.AuthorizedPickupPhone1.errors.pattern">Invalid Phone Number</div>
+              <!-- <div *ngIf="f.AuthorizedPickupPhone1.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
         </div>
@@ -234,9 +234,9 @@
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
-            <div *ngIf="submitted && f.AuthorizedPickupName1.errors" class="invalid-feedback">
-              <div *ngIf="f.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
-              <div *ngIf="f.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
+            <div *ngIf="submitted && f.AuthorizedPickupName2.errors" class="invalid-feedback">
+              <div *ngIf="f.AuthorizedPickupName2.errors.required">Authorized Pickup Name is required</div>
+              <div *ngIf="f.AuthorizedPickupName2.errors.minlength">Must be at least 3 characters long.</div>
             </div>
           </div>
         </div>
@@ -247,11 +247,11 @@
           <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
-                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
-            <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }">
+            <div *ngIf="submitted && f.AuthorizedPickupPhone2.errors" class="invalid-feedback">
               <div *ngIf="f.AuthorizedPickupPhone2.errors.required">Authorized Pickup Phone is required</div>
               <div *ngIf="f.AuthorizedPickupPhone2.errors.minlength">Please enter correct phone number</div>
-              <div *ngIf="f.AuthorizedPickupPhone2.errors.pattern">Invalid Phone Number</div>
+              <!-- <div *ngIf="f.AuthorizedPickupPhone2.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
         </div>

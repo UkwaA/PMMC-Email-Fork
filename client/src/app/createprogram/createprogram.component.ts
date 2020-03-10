@@ -5,6 +5,8 @@ import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 //import { AppConstants } from '../constants'
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 declare var $: any;
 
 @Component({
