@@ -50,16 +50,16 @@
             <img class="image_div card-img flex-fill p-1" src={{program.ImgData}} alt="Card image cap" width="270" height="260">
           </div>
           <div class="card-body">
-            <a *ngIf = "program.ProgramTye" [routerLink] = "['/booking-individual-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
-            <a *ngIf = "!program.ProgramTye" [routerLink] = "['/booking-group-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
+            <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
+            <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
             <hr class="card__item card__divider">
             <div class="block-with-text">
               <div [innerHTML]="program.Description"></div>
             </div>
             <h4> ... </h4>
             <div class="text-right pt-1">
-              <a *ngIf = "program.ProgramTye" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
-              <a *ngIf = "!program.ProgramTye" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
+              <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
+              <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
             </div>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
