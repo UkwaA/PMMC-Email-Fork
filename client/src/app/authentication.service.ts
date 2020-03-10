@@ -38,6 +38,7 @@ export interface TokenPayload {
 @Injectable()
 export class AuthenticationService {
   private token: string
+  public registeredPK: string;
 
   constructor(private http: HttpClient, private router: Router) {}
 

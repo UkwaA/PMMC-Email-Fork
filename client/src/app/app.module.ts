@@ -17,6 +17,7 @@ import { AuthenticationService } from './authentication.service'
 import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
+import { AuthCustomerGuardService } from './auth-customer-guard.service'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
@@ -60,6 +61,11 @@ const routes : Routes = [
     path: 'user-details/:id', 
     component: UserDetailsComponent,
     canActivate: [AuthSystemRoleGuardService]
+  },
+  {
+    path: 'customer-register/:id',
+    component:CustomerRegisterComponent,
+    canActivate: [AuthCustomerGuardService],
   },
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
@@ -164,7 +170,7 @@ const routes : Routes = [
     MatDialogModule,
     MatProgressSpinnerModule    
   ],
-  providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthenticationService],
+  providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthCustomerGuardService, AuthenticationService],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent]
 })

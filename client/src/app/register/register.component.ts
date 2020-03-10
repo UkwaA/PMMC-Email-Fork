@@ -17,6 +17,7 @@ export class RegisterComponent {
     submitted = false;
     errorMessage = ''
     currentUserPK: number
+    registered = false;
 
     credentials: TokenPayload = {
         UserPK: 0,
@@ -115,7 +116,8 @@ export class RegisterComponent {
             }
             else{                
                 this.currentUserPK = res.UserPK
-                console.log(this.currentUserPK)
+                this.auth.registeredPK = this.currentUserPK.toString();
+                console.log("Current PK: " + this.currentUserPK)
                 this.router.navigateByUrl("/customer-register/" + this.currentUserPK);            
             }
         },
