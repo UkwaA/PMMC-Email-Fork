@@ -55,7 +55,7 @@ export class BookingGroupProgramComponent implements OnInit {
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email]],
-      TeacherPhoneNo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.minLength(10)]],
+      TeacherPhoneNo: ['', [Validators.required, Validators.minLength(10)]],
       TotalQuantity: ['', Validators.required]
 
     });

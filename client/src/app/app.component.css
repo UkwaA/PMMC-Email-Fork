@@ -38,7 +38,7 @@
     text-decoration: underline;
 }
 
-.header_change .nav-link:active, .nav-link:focus, .nav-link:active, .header_change .nav-link:focus{
+.header_change .nav-link.active, .nav-link:focus, .nav-link.active, .header_change .nav-link:focus{
     color: #08b2b8!important;
 }
 
