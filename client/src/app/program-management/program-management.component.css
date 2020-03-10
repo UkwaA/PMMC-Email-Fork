@@ -45,3 +45,7 @@ th {
   padding-left: 30px;
   font-weight: bold;
 }
+
+.errorMessage{
+  color: red;
+}
