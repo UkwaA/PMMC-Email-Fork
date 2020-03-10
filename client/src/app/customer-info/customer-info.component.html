@@ -1,116 +1,114 @@
-<div class = "container">
-    <div class = "page_title row justify-content-center">
-        <h2 class = "text-center"> Personal Information </h2>
-    </div>
-    <form [formGroup] = "customerInfoForm" (ngSubmit) = "openModal()" 
-    ng-class="{submitted:this.submitted}" class="registerform">
-    <div class = "contact_header_title row justify-content-center"> 
-        <h5 class = "text-center text-dark mt-5 mb-3"> Contact Info </h5>
-    </div>
-    <div class = "form-group row">
-        <label for = "fname" class="col-form-label col-sm-3 font-weight-bold"> First Name </label>
-        <div class = "col">
-        <input id = "fname" type = "string" class = "form-control" 
-        formControlName="firstName" 
-        [(ngModel)]="credentials.FirstName" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('firstName').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('firstName').valid" 
-        class = "warning"> <small>First name is required </small></div>
-        </div> 
-    </div>
-    <div class = "form-group row">
-        <label for = "fname" class="col-form-label col-sm-3 font-weight-bold"> Last Name </label>
-        <div class = "col">
-        <input id = "fname" type = "string" class = "form-control" 
-        formControlName="lastName" 
-        [(ngModel)]="credentials.LastName" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('lastName').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('lastName').valid" 
-        class = "warning"> <small>Last name is required </small></div>
-        </div> 
-    </div>
-    <div class = "form-group row">
-        <label for = "PhoneNo" class="col-form-label col-sm-3 font-weight-bold"> Phone Number </label>
-        <div class = "col">
-        <input type = "number" class = "form-control" 
-        formControlName="phoneNum" 
-        [(ngModel)]="credentials.PhoneNo" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('phoneNum').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('phoneNum').valid" 
-        class = "warning"> <small>Phone number is required </small></div>
-        </div> 
-    </div>
-    <div class = "address_header_title row justify-content-center"> 
-        <h5 class = "text-center text-dark mt-5 mb-3"> Address </h5>
-    </div>
+<div class = "banner">
+    <div class = "container">
+        <div class="d-flex justify-content-center h-100"></div>
+            <div class = "card">
+                <div class = "card-header">
+                    <h3 class = "text_header text-center"> Personal Info </h3>
+                </div>
+                <div class = "card-body">
+                <form [formGroup] = "customerInfoForm" (ngSubmit) = "openModal()" 
+                ng-class="{submitted:this.submitted}" class="registerform">
+                <div class = "contact_header_title row justify-content-center"> 
+                    <h5 class = "text_header text-center mb-1"> </h5>
+                </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faAddressBook"></fa-icon></span>
+                    </div>
+                    <input id = "fname" type = "string" class = "form-control" placeholder = "First Name"
+                    formControlName="firstName" 
+                    [(ngModel)]="credentials.FirstName" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('firstName').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('firstName').valid" 
+                    class = "warning col-12 pl-0"> <small>First name is required </small></div>
+                </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faAddressBook"></fa-icon></span>
+                    </div>
+                    <input id = "fname" type = "string" class = "form-control" placeholder = "Last Name" 
+                    formControlName="lastName" 
+                    [(ngModel)]="credentials.LastName" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('lastName').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('lastName').valid" 
+                    class = "warning col-12 pl-0"> <small>Last name is required </small></div>
+                </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faPhoneSquare"></fa-icon></span>
+                    </div>
+                    <input type = "number" class = "form-control" placeholder = "Phone Number"
+                    formControlName="phoneNum" 
+                    [(ngModel)]="credentials.PhoneNo" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('phoneNum').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('phoneNum').valid" 
+                    class = "warning col-12 pl-0"> <small>Phone number is required </small></div>
+                </div>
+                <div class = "address_header_title row justify-content-center"> 
+                    <h5 class = "text_header text-center mt-3 mb-3">  </h5>
+                </div>
 
-    <div class = "form-group row">
-        <label for = "address" class="col-form-label col-sm-3 font-weight-bold"> Street Address </label>
-        <div class = "col">
-        <input type = "string" class = "form-control" 
-        formControlName="address_street" 
-        [(ngModel)]="credentials.StreetAddress" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('address_street').valid" 
-        class = "warning"> <small>Street Address is required </small></div>
-        </div> 
-    </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faHome"></fa-icon></span>
+                    </div>
+                    <input type = "string" class = "form-control" placeholder = "Street Address"
+                    formControlName="address_street" 
+                    [(ngModel)]="credentials.StreetAddress" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('address_street').valid" 
+                    class = "warning col-12 pl-0"> <small>Street Address is required </small></div>
+                </div>
 
-    <div class = "form-group row">
-        <label for = "address2" class="col-form-label col-sm-3 font-weight-bold"> Line 2 </label>
-        <div class = "col">
-        <input type = "string" class = "form-control" 
-        formControlName="address_unit" 
-        [(ngModel)]="credentials.StreetAddress2">
-        </div> 
-    </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faHome"></fa-icon></span>
+                    </div>
+                    <input type = "string" class = "form-control" placeholder = "Line 2" 
+                    formControlName="address_unit" 
+                    [(ngModel)]="credentials.StreetAddress2">
+                </div> 
 
-    <div class = "form-group row">
-        <label for = "city" class="col-form-label col-sm-3 font-weight-bold"> City </label>
-        <div class = "col">
-        <input type = "string" class = "form-control" 
-        formControlName="address_city" 
-        [(ngModel)]="credentials.City" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_city').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('address_city').valid" 
-        class = "warning"> <small>City is required </small></div>
-        </div> 
-    </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faMapPin"></fa-icon></span>
+                    </div>
+                    <input type = "string" class = "form-control" placeholder  = "City"
+                    formControlName="address_city" 
+                    [(ngModel)]="credentials.City" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_city').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('address_city').valid" 
+                    class = "warning col-12 pl-0"> <small>City is required </small></div>
+                </div>
 
-    <div class = "form-group row">
-        <label for = "state" class="col-form-label col-sm-3 font-weight-bold"> State </label>
-        <div class = "col">
-        <input type = "string" class = "form-control" maxlength = "2"
-        formControlName="address_state" 
-        [(ngModel)]="credentials.State" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_state').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('address_state').valid" 
-        class = "warning"> <small>State is required </small></div>
-        </div> 
-    </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faMap"></fa-icon></span>
+                    </div>
+                    <input type = "string" class = "form-control" maxlength = "2" placeholder = "State"
+                    formControlName="address_state" 
+                    [(ngModel)]="credentials.State" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_state').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('address_state').valid" 
+                    class = "warning col-12 pl-0"> <small>State is required </small></div>
+                </div>
 
-    <div class = "form-group row">
-        <label for = "zipcode" class="col-form-label col-sm-3 font-weight-bold"> Zip Code </label>
-        <div class = "col">
-        <input type = "number" class = "form-control" maxlength = "5"
-        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-        formControlName="address_zipcode" 
-        [(ngModel)]="credentials.Zipcode" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
-        <div *ngIf="submitted && !customerInfoForm.get('address_zipcode').valid" 
-        class = "warning"> <small>Zip Code is required </small></div>
-        </div> 
-    </div>
+                <div class = "input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><fa-icon [icon]="faMapMarker"></fa-icon></span>
+                    </div>
+                    <input type = "number" class = "form-control" maxlength = "5" placeholder = "Zip Code"
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                    formControlName="address_zipcode" 
+                    [(ngModel)]="credentials.Zipcode" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}">
+                    <div *ngIf="submitted && !customerInfoForm.get('address_zipcode').valid" 
+                    class = "warning col-12 pl-0"> <small>Zip Code is required </small></div>
+                </div>
 
-    <div class = "row ml-auto mr-auto"> 
-        <h5 class = "title text-dark mt-5 mb-3"> Subscribe to Newsletter </h5>
+                <div class = "form-group checkbox">
+                    <mat-checkbox color = "primary" class = "form-control" (change) = "checkBoxClicked()"> Check to subscribe to our newsletter </mat-checkbox>
+                </div>
+
+            <div class = "d-flex submit_button flex-row-reverse"> 
+                <button  class = "submit_btn btn btn-primary" [disabled] = "customerInfoForm.ng-invalid" type="submit"> Submit </button>
+            </div>
+        </form>
+        </div>
     </div>
-    <!-- <div class= "form-group checkbox row">
-        <input class="col-sm-1 form-control" type="checkbox" (change)="checkBoxClicked()" >
-        <label class="col-form-label col-sm-9 form-check-label" for="defaultCheck1">
-            Check to subscribe to our newsletter </label>
-    </div> -->
-    <div class = "form-group checkbox row">
-        <mat-checkbox class = "form-control" (change) = "checkBoxClicked()"> Check to subscribe to our newsletter </mat-checkbox>
     </div>
-            <!-- </div> -->
-        <!-- </div> -->
-<!-- </div> -->
-<div class = "d-flex submit_button flex-row-reverse"> 
-    <button  class = "submit_btn btn btn-primary" [disabled] = "customerInfoForm.ng-invalid" type="submit"> Submit </button>
 </div>
-</form>
 

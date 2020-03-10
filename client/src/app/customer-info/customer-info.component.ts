@@ -6,7 +6,7 @@ import { CustomerData } from '../data/customer-data'
 import { CustomerService } from '../services/customer.services'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { faAddressBook, faPhoneSquare, faHome, faMapMarker,faMapPin, faMap} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customer-info',
@@ -17,10 +17,20 @@ export class CustomerRegisterComponent implements OnInit {
   customerInfoForm: FormGroup;
   submitted = false;
   errorMessage = '';
+
+
   
-    constructor(private auth: AuthenticationService, private router: Router, private route:ActivatedRoute,
-      private formBuilder: FormBuilder, public customerService:CustomerService,
-      public matDialog: MatDialog) { }
+  constructor(private auth: AuthenticationService, private router: Router, private route:ActivatedRoute,
+    private formBuilder: FormBuilder, public customerService:CustomerService,
+    public matDialog: MatDialog) { }
+
+    faAddressBook =faAddressBook;
+    faPhoneSquare = faPhoneSquare;
+    faHome = faHome;
+    faMapMarker = faMapMarker;
+    faMapPin = faMapPin;
+    faMap = faMap;
+
   credentials: CustomerData = {
     CustomerPK: 0,
     FirstName: '',
