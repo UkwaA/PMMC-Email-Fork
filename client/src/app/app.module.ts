@@ -61,11 +61,6 @@ const routes : Routes = [
     component: UserDetailsComponent,
     canActivate: [AuthSystemRoleGuardService]
   },
-  {
-    path: 'customer-register/:id',
-    component:CustomerRegisterComponent,
-    canActivate: [AuthSystemRoleGuardService],
-  },
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
