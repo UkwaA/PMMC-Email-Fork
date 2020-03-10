@@ -29,7 +29,7 @@
     <!-- Participant Age -->
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantAge">
       <div class="row">
-        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipateAge">Participant Age: </label>
+        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipantAge">Participant Age: </label>
         <div class="col-sm-10">
           <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
                 [ngClass]="{'is-invalid': submitted && f.ParticipantAge.errors }">
