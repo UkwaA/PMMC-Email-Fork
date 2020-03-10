@@ -26,6 +26,7 @@ export class ProgramDetailsComponent {
     @ViewChild(GProgramComponent, { static: false }) gComponent: GProgramComponent;
     @ViewChild(IProgramComponent, { static: false }) iComponent: IProgramComponent;
 
+    viewImgHref: string
     formData = new FormData()
     bookingGroupData: BookingGroupData
     bookingIndividualData: BookingIndividualData
@@ -90,7 +91,8 @@ export class ProgramDetailsComponent {
             // Get program details by ID
             this.services.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program => {
                 this.programData = program
-                this.programData.ImgData = AppConstants.SERVER_URL + this.programData.ImgData
+
+                this.viewImgHref = AppConstants.SERVER_URL + this.programData.ImgData
                 if (this.programData.ProgramType == 0) {
                     this.ProgramTypeText = "Group Program"
                     this.programTypeShortText = 'g'
