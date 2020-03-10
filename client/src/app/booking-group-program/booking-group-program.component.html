@@ -55,52 +55,58 @@
           </div>
         </div>
       </fieldset>
-      <!-- Age 11-13 -->
-      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1113Quantity">
+      <!-- Age 11-12 -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1112Quantity">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1113Quantity">Children Age 11-13: </label>
+          <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1112Quantity">Children Age 11-12: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age1113Quantity" 
-                    [ngClass]="{'is-invalid': submitted && f.Age1113Quantity.errors }">
-            <div *ngIf="submitted && f.Age1113Quantity.errors" class="invalid-feedback">
-              <div *ngIf="f.Age1113Quantity.errors.required">This is required</div>
-              <div *ngIf="f.Age1113Quantity.errors.max">Maximum for a group is 35</div>
+            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+                    [ngClass]="{'is-invalid': submitted && f.Age1112Quantity.errors }">
+            <div *ngIf="submitted && f.Age1112Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1112Quantity.errors.required">This is required</div>
+              <div *ngIf="f.Age1112Quantity.errors.max">Maximum for a group is 35</div>
             </div>
           </div>
         </div>
       </fieldset>
-      <!-- Scout Program -->
-      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.ScoutProgram">
+       <!-- Age 13-14 -->
+       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1314Quantity">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="ScoutProgram">Scout Program: </label>
+          <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1314Quantity">Children Age 13-14: </label>
           <div class="col-sm-10">
-            <p class="info font-weight-normal font-italic"> Please select type of program:</p>
-            <select class="form-control " formControlName="ScoutProgram" [ngClass]="{'is-invalid': submitted && f.ScoutProgram.errors }">
-              <option>Daisy Program </option>
-              <option>Brownie Program</option>
-              <option>Junior Program</option>
-              <option>Cadette Program</option>
-            </select>
-            <div *ngIf="submitted && f.ScoutProgram.errors" class="invalid-feedback">
-              <div *ngIf="f.ScoutProgram.errors.required">This is required</div>
+            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+                    [ngClass]="{'is-invalid': submitted && f.Age1314Quantity.errors }">
+            <div *ngIf="submitted && f.Age1314Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1314Quantity.errors.required">This is required</div>
+              <div *ngIf="f.Age1314Quantity.errors.max">Maximum for a group is 35</div>
             </div>
           </div>
         </div>
       </fieldset>
-      <!-- Education FK -->
-      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.EducationFK">
+       <!-- Age 14-15 -->
+       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1415Quantity">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="EducationFK">Education Content: </label>
+          <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1415Quantity">Children Age 14-15: </label>
           <div class="col-sm-10">
-            <p class="info font-weight-normal font-italic"> Please choose an education content below:</p>
-            <select class="form-control" formControlName="EducationFK" [ngClass]="{'is-invalid': submitted && f.ScoutProgram.errors }">
-              <option>Power Point 1</option>
-              <option>Power Point 2</option>
-              <option>Power Point 3</option>
-              <option>Power Point 4</option>
-            </select>
-            <div *ngIf="submitted && f.EducationFK.errors" class="invalid-feedback">
-              <div *ngIf="f.EducationFK.errors.required">This is required</div>
+            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+                    [ngClass]="{'is-invalid': submitted && f.Age1415Quantity.errors }">
+            <div *ngIf="submitted && f.Age1415Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1415Quantity.errors.required">This is required</div>
+              <div *ngIf="f.Age1415Quantity.errors.max">Maximum for a group is 35</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+       <!-- Age 15-17 -->
+       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.Age1517Quantity">
+        <div class="row">
+          <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1517Quantity">Children Age 15-17: </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+                    [ngClass]="{'is-invalid': submitted && f.Age1517Quantity.errors }">
+            <div *ngIf="submitted && f.Age1517Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1517Quantity.errors.required">This is required</div>
+              <div *ngIf="f.Age1517Quantity.errors.max">Maximum for a group is 35</div>
             </div>
           </div>
         </div>

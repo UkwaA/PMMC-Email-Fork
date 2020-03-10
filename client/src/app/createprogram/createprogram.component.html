@@ -13,11 +13,18 @@
                         <label>Description</label>
                     </div>
                     <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
-                
                 </div>
                 <div class="form-group font-weight-bold">
-                    <label>Full Amount</label>
-                    <input type="number" class="form-control" name="fullamount" placeholder="Enter Program Price" [(ngModel)]="programData.FullAmount" required>
+                    <label>Deposit Amount</label>
+                    <input type="number" class="form-control" name="deposit" placeholder="Enter Program Deposit Require" [(ngModel)]="programData.DepositAmount" required>
+                </div>
+                <div class="form-group font-weight-bold">
+                    <label>Price Per Participant</label>
+                    <input type="number" class="form-control" name="fullamount" placeholder="Enter Price for 1 Participant" [(ngModel)]="programData.PricePerParticipant" required>
+                </div>
+                <div class="form-group font-weight-bold">
+                    <label>Maximum Number of Participant</label>
+                    <input type="number" class="form-control" name="numerofParticipant" placeholder="Enter Number of Participant" [(ngModel)]="programData.MaximumParticipant" required>
                 </div>
                 <div class="form-group font-weight-bold">
                     <div class="row">
@@ -36,6 +43,17 @@
                         </div>
                         <div class="col-md-8">
                             <select id="programCat" (change)="selectChangeHandler($event)" >
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group font-weight-bold">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Sub Type Of Group Program</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select id="programSubCategories" (change)="selectSubTypeChangeHandler($event)" >
                             </select>
                         </div>
                     </div>

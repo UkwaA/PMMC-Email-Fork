@@ -53,8 +53,8 @@ program.get('/get-active-programs', (req, res) => {
 })
 
 
-// Get All Program Header Information by ID
-program.get('/get-program-details/:id', (req, res) => {
+// Get Program Header Information by ID
+program.get('/get-program-header/:id', (req, res) => {
   Program.findOne({
     where: {
       ProgramPK: req.params.id
@@ -71,6 +71,46 @@ program.get('/get-program-details/:id', (req, res) => {
       res.send('error: ' + err + "   " + req.body.ProgramPK)
     })
 })
+
+// Get Group Program Requirement by ID
+program.get('/get-group-program-requirement/:id', (req, res) => {
+  GroupProgramRequirement.findOne({
+    where: {
+      GroupProgramPK: req.params.id
+    }
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.ProgramPK)
+    })
+})
+
+
+// Get Individual Program Requirement by ID
+program.get('/get-individual-program-requirement/:id', (req, res) => {
+  IndividualProgramRequirement.findOne({
+    where: {
+      IndividualProgramPK: req.params.id
+    }
+  })
+    .then(program => {
+      if (program) {
+        res.json(program)
+      } else {
+        res.send('There is no program available.')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err + "   " + req.body.ProgramPK)
+    })
+})
+
 
 // // Get All Program Header Information of Individual Program
 // program.get('/get-individual-program-details', (req, res) => {
@@ -112,7 +152,9 @@ program.post('/add-program', (req, res) => {
   const programData = {
     Name: req.body.Name,
     Description: req.body.Description,
-    FullAmount: req.body.FullAmount,
+    DepositAmount: req.body.DepositAmount,
+    PricePerParticipant: req.body.PricePerParticipant,
+    MaximumParticipant: req.body.MaximumParticipant,
     CreatedDate: today,
     CreatedBy: req.body.CreatedBy,
     ImgData: '',
@@ -151,6 +193,7 @@ program.post('/add-program', (req, res) => {
         case '0':
           var groupDetail = {
             GroupProgramPK: programPK,
+            SubProgramPk: req.body.SubProgramPk,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
@@ -208,6 +251,35 @@ program.post('/add-program', (req, res) => {
 
 })
 
+// Update Program Header 
+program.post('/update-program-header', (req, res) => {
+  Program.findOne({
+    where: {
+      ProgramPK: req.body.ProgramPK
+    }
+  })
+    .then(program => {
+      if (program) {
+        program.update({
+          Description: req.body.Description,
+          DepositAmount: req.body.DepositAmount,
+          PricePerParticipant: req.body.PricePerParticipant,
+          MaximumParticipant: req.body.MaximumParticipant,
+          ImgData: req.body.ImgData
+        })
+        res.status(200).send({
+          message: 'Program Header Updated!'
+        });
+        res
+      } else {
+        res.status(400).send({
+          message: 'Program is not found!'
+        });
+      }
+
+    })
+})
+
 // Update Layout Setting of Group Program
 program.post('/update-g-program-requirement', (req, res) => {
   const today = new Date()
@@ -224,19 +296,16 @@ program.post('/update-g-program-requirement', (req, res) => {
       if (program) {
         program.update({
           AdultQuantity: req.body.AdultQuantity,
-          Age57Quantity: req.bodyAge57Quantity,
+          Age57Quantity: req.body.Age57Quantity,
           Age810Quantity: req.body.Age810Quantity,
-          Age1113Quantity: req.body.Age1113Quantity,
+          Age1112Quantity: req.body.Age1112Quantity,
+          Age1314Quantity: req.body.Age1314Quantity,
+          Age1415Quantity: req.body.Age1415Quantity,
+          Age1517Quantity: req.body.Age1517Quantity,
           TotalQuantity: req.body.TotalQuantity,
-          Deposit: req.body.Deposit,
-          EducationFK: req.body.EducationFK,
           ProgramRestriction: req.body.ProgramRestriction,
-          DepositAmount: req.body.DepositAmount,
-          FullAmount: req.body.FullAmount,
-          MaximumParticipant: req.body.MaximumParticipant,
           OrganizationName: req.body.OrganizationName,
           GradeLevel: req.body.GradeLevel,
-          ScoutProgram: req.body.ScoutProgram,
           TeacherName: req.body.TeacherName,
           TeacherEmail: req.body.TeacherEmail,
           TeacherPhoneNo: req.body.TeacherPhoneNo,
@@ -303,7 +372,6 @@ program.post('/update-i-program-requirement', (req, res) => {
           MediaRelease: req.body.MediaRelease,
           EmergencyMedicalRelease: req.body.EmergencyMedicalRelease,
           LiabilityAgreement: req.body.LiabilityAgreement,
-          FullAmount: req.body.FullAmount,
           CreatedBy: req.body.CreatedBy,
           CreatedDate: today
         })

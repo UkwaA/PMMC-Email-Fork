@@ -8,46 +8,40 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
+    SubProgramPK:{
+        type: Sequelize.INTEGER
+    }, 
     AdultQuantity:{
         type: Sequelize.BOOLEAN
     }, 
     Age57Quantity:{
         type: Sequelize.BOOLEAN
-    },
+    }, 
     Age810Quantity:{
         type: Sequelize.BOOLEAN
     },
-    Age1113Quantity:{
+    Age1112Quantity:{
+        type: Sequelize.BOOLEAN
+    },
+    Age1314Quantity:{
+        type: Sequelize.BOOLEAN
+    },
+    Age1415Quantity:{
+        type: Sequelize.BOOLEAN
+    },
+    Age1517Quantity:{
         type: Sequelize.BOOLEAN
     },
     TotalQuantity:{
         type: Sequelize.BOOLEAN
     },
-    Deposit:{
-        type: Sequelize.BOOLEAN
-    },
-    EducationFK:{
-        type: Sequelize.BOOLEAN
-    },
     ProgramRestriction:{
         type: Sequelize.BOOLEAN
     },
-    DepositAmount:{
-        type: Sequelize.BOOLEAN
-    },
-    FullAmount:{
-        type: Sequelize.BOOLEAN
-    },
-    MaximumParticipant:{
-        type: Sequelize.BOOLEAN
-    },    
     OrganizationName: {
         type: Sequelize.BOOLEAN
     },
     GradeLevel: {
-        type: Sequelize.BOOLEAN
-    },
-    ScoutProgram: {
         type: Sequelize.BOOLEAN
     },
     TeacherName: {
