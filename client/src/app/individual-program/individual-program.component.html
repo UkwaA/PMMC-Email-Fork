@@ -9,7 +9,7 @@
             <input type="text" class="form-control" placeholder="Type in Program Name or Description to Search" [(ngModel)]="searchText">
         </div>
         <div class="col-lg-2 col-md-3 col-sm-4">
-            <button mat-raised-button color="warn" (click)="clearSearch()">Clear Search</button>
+            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
         </div>
     </div>
     <div class="row"  *ngFor = 'let program of programs | filter:searchText' >
