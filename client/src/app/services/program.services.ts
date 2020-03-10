@@ -59,10 +59,12 @@ export class ProgramServices {
     switch (programType) {
       case 'g':
         return this.http.get(AppConstants.SERVER_URL + '/program/get-group-requirement/' + ProgramPK)
-        break;
       case 'i':
         return this.http.get(AppConstants.SERVER_URL + '/program/get-individual-requirement/' + ProgramPK)
-        break;
     }
+  }
+
+  public setProgramActiveStatus(ProgramPK: number, IsActive: boolean):Observable<any> {
+    return this.http.get(AppConstants.SERVER_URL + "/program/set-program-status/" + ProgramPK + "/" + IsActive)
   }
 }

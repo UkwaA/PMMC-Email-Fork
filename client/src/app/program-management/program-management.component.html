@@ -43,11 +43,11 @@
                             class="btn btn-warning">
                             <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
-                        <button *ngIf = "isDisabled" (click) = "openModalSwitch()"
+                        <button *ngIf = "!program.IsActive" (click) = "openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-success">
                             <mat-icon matListIcon> visibility </mat-icon> Enable
                         </button>
-                        <button *ngIf = "!isDisabled" (click) = "openModalSwitch()"
+                        <button *ngIf = "program.IsActive" (click) = "openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-danger">
                             <mat-icon matListIcon> visibility_off </mat-icon> Disable
                         </button>

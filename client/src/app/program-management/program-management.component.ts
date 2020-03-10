@@ -85,7 +85,8 @@ export class ProgramManagementComponent {
     }
 
     //open Modal when switching Activate/Deactivate button
-    openModalSwitch(){
+    openModalSwitch(programPK: number, status: boolean){
+        this.isDisabled = status
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
@@ -96,16 +97,16 @@ export class ProgramManagementComponent {
         dialogConfig.width = "350px";
         if (this.isDisabled){
             dialogConfig.data = {
-                title: "Enable Program",
-                description: "This program is not able to be viewed by customers. Are you sure to enable this program?",            
+                title: "Disable Program",
+                description: "This program is not able to be viewed by customers. Are you sure to disable this program?",            
                 actionButtonText: "Confirm",   
                 numberOfButton: "2"         
             }
         }
         else {
             dialogConfig.data = {
-                title: "Disable Program",
-                description: "This program is able to be viewed by customers. Are you sure to disable this program?",            
+                title: "Enable Program",
+                description: "This program is able to be viewed by customers. Are you sure to enable this program?",            
                 actionButtonText: "Confirm",   
                 numberOfButton: "2"         
             }
@@ -117,12 +118,20 @@ export class ProgramManagementComponent {
             if(result == "Yes"){
                 //deactivate or activate the program here
                 if (this.isDisabled){ 
-                    //activate program here
+                    //disable program here
+                    this.programService.setProgramActiveStatus(programPK, false)
+                    .subscribe((res) =>{
+                        window.location.reload();
 
+                    })
                 }
                 else {
-                    //deactivate program here
-
+                    //enable program here
+                    this.programService.setProgramActiveStatus(programPK, true)
+                    .subscribe((res) =>{
+                        console.log(res.message)
+                        window.location.reload();
+                    })
                 }
                 //switch the button
                 this.isDisabled = !this.isDisabled;

@@ -396,6 +396,28 @@ program.get('/get-group-requirement/:id', (req, res) => {
     })
 })
 
+/****************************************
+      SET PROGRAM ACTIVE STATUS
+****************************************/
+program.get('/set-program-status/:id/:status', (req,res) => {
+  const id = req.params.id
+  const status = req.params.status
+  Program.findOne({
+    where: {
+      ProgramPK: id
+    }
+  })
+    .then(program => {
+      program.update({
+        IsActive: status
+      })
+      res.json({message: "Program status has been changed"})
+    })
+    .catch(err => {
+      res.send('error: Set Program Status ' + err)
+    })
+})
+
 module.exports = program
 
 
