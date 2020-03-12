@@ -1282,10 +1282,10 @@ let AuthenticationService = class AuthenticationService {
         }
     }
     register(user) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/register", user);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/register", user);
     }
     login(user) {
-        const base = this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/login", user);
+        const base = this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/login", user);
         const request = base.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((data) => {
             if (data.token) {
                 this.saveToken(data.token);
@@ -1295,7 +1295,7 @@ let AuthenticationService = class AuthenticationService {
         return request;
     }
     profile() {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/profile", {
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/profile", {
             headers: { Authorization: `${this.getToken()}` }
         });
     }
@@ -1305,24 +1305,24 @@ let AuthenticationService = class AuthenticationService {
         /* this.router.navigateByUrl('/') */
     }
     getAllUser() {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/edit-user", {
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/edit-user", {
             headers: { Authorization: `${this.getToken()}` }
         });
     }
     getUserDetailsByID(UserPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/get-user-details/" + UserPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/get-user-details/" + UserPK);
     }
     updateUserDetail(UserPK, userDetails) {
-        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/get-user-details/" + UserPK, userDetails);
+        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/get-user-details/" + UserPK, userDetails);
     }
     resetUserPassword(UserPK, userDetails) {
-        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/reset-password/" + UserPK, userDetails);
+        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/reset-password/" + UserPK, userDetails);
     }
     changeCurrentPassword(UserPK, userDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/change-current-password/" + UserPK, userDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/change-current-password/" + UserPK, userDetails);
     }
     setUserActiveStatus(UserPK, IsActive) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].SERVER_URL + "/users/set-user-status/" + UserPK + "/" + IsActive);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_5__["AppConstants"].EXPRESS_SERVER_URL + "users/set-user-status/" + UserPK + "/" + IsActive);
     }
 };
 AuthenticationService.ctorParameters = () => [
@@ -1912,7 +1912,9 @@ __webpack_require__.r(__webpack_exports__);
 
 class AppConstants {
     static get BASE_URL() { return "http://localhost:4200/"; }
-    static get SERVER_URL() { return "http://localhost:3000"; }
+    static get EXPRESS_SERVER_URL() {
+        return (window.location.origin.toString() + "/");
+    }
     static get ERR_USER_NOT_FOUND() { return "http://localhost:4200/api"; }
     static get ERR_EMAIL_NOT_FOUND() { return "http://localhost:4200/api"; }
     static get ERR_EMAIL_DUPLICATE() { return "http://localhost:4200/api"; }
@@ -2427,7 +2429,7 @@ let GroupProgramComponent = class GroupProgramComponent {
         this.programService.getActivePrograms().then((result) => {
             this.programs = result;
             this.programs.forEach(e => {
-                e.ImgData = _constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].SERVER_URL + e.ImgData;
+                e.ImgData = _constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + e.ImgData;
             });
         });
     }
@@ -2494,7 +2496,7 @@ let HomeComponent = class HomeComponent {
         this.programService.getAllPrograms().then((result) => {
             for (var i = 0; i < 6; i++) {
                 this.programs.push(result[i]);
-                this.programs[i].ImgData = _constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + result[i].ImgData;
+                this.programs[i].ImgData = _constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + result[i].ImgData;
             }
         });
     }
@@ -2554,7 +2556,7 @@ let IndividualProgramComponent = class IndividualProgramComponent {
         this.programService.getActivePrograms().then((result) => {
             this.programs = result;
             this.programs.forEach(e => {
-                e.ImgData = _constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].SERVER_URL + e.ImgData;
+                e.ImgData = _constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + e.ImgData;
             });
         });
     }
@@ -3542,7 +3544,7 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
             // Get program details by ID
             this.services.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program => {
                 this.programData = program;
-                this.viewImgHref = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].SERVER_URL + this.programData.ImgData;
+                this.viewImgHref = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].EXPRESS_SERVER_URL + this.programData.ImgData;
                 if (this.programData.ProgramType == 0) {
                     this.ProgramTypeText = "Group Program";
                     this.programTypeShortText = 'g';
@@ -4006,22 +4008,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
+
 
 
 
 let CustomerService = class CustomerService {
     constructor(http) {
         this.http = http;
-        this.expressBaseUrl = "http://localhost:3000";
     }
     finishRegister(customer) {
-        return this.http.post(this.expressBaseUrl + "/customers/customer-register", customer);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "customers/customer-register", customer);
     }
     getCustomerInfoByID(CustomerPK) {
-        return this.http.get(this.expressBaseUrl + "/customers/profile-info/" + CustomerPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "customers/profile-info/" + CustomerPK);
     }
     updateCustomerInfo(CustomerPK, customer) {
-        return this.http.put(this.expressBaseUrl + "/customers/update-customer-info/" + CustomerPK, customer);
+        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "customers/update-customer-info/" + CustomerPK, customer);
     }
 };
 CustomerService.ctorParameters = () => [
@@ -4048,25 +4051,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
+
 
 
 
 let EmailService = class EmailService {
     constructor(http) {
         this.http = http;
-        this.expressBaseUrl = "http://localhost:3000";
     }
     sendContactEmail(data) {
-        return this.http.post(this.expressBaseUrl + '/service/send-contact-email', data);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'service/send-contact-email', data);
     }
     sendResetPasswordEmail(userInfo) {
-        return this.http.post(this.expressBaseUrl + '/service/send-reset-password-email', userInfo);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'service/send-reset-password-email', userInfo);
     }
     ValidPasswordToken(body) {
-        return this.http.post(this.expressBaseUrl + '/service/reset-password/' + body.resettoken, body);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'service/reset-password/' + body.resettoken, body);
     }
     sendPasswordConfirmationEmail(body) {
-        return this.http.post(this.expressBaseUrl + '/service/send-password-confirmation-email/', body);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'service/send-password-confirmation-email/', body);
     }
 };
 EmailService.ctorParameters = () => [
@@ -4104,54 +4108,54 @@ let ProgramServices = class ProgramServices {
     constructor(http, router) {
         this.http = http;
         this.router = router;
-        this.expressBaseUrl = "http://localhost:3000";
+        this.expressBaseUrl = "http://localhost:3000/";
     }
     sendRequestToExpress(endpoint) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + endpoint).toPromise();
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + endpoint).toPromise();
     }
     getAllPrograms() {
-        return this.sendRequestToExpress('/program/get-programs');
+        return this.sendRequestToExpress('program/get-programs');
     }
     getActivePrograms() {
-        return this.sendRequestToExpress('/program/get-active-programs');
+        return this.sendRequestToExpress('program/get-active-programs');
     }
     getProgramHeaderDeatailsByID(ProgramPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/get-program-header/' + ProgramPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/get-program-header/' + ProgramPK);
     }
     addNewProgram(program) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/add-program', program);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/add-program', program);
     }
     updateProgramHeader(programHeaderData) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/update-program-header', programHeaderData);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/update-program-header', programHeaderData);
     }
     getProgramRequirementByID(programType, ProgramPK) {
         switch (programType) {
             case 'g':
-                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/get-group-program-requirement/' + ProgramPK);
+                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/get-group-program-requirement/' + ProgramPK);
             case 'i':
-                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/get-individual-program-requirement/' + ProgramPK);
+                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/get-individual-program-requirement/' + ProgramPK);
         }
     }
     updateProgramLayoutDetails(programType, programData) {
         switch (programType) {
             case 'g':
-                return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/update-g-program-requirement', programData);
+                return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/update-g-program-requirement', programData);
                 break;
             case 'i':
-                return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/update-i-program-requirement', programData);
+                return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/update-i-program-requirement', programData);
                 break;
         }
     }
     getProgramRequirementDetails(programType, ProgramPK) {
         switch (programType) {
             case 'g':
-                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/get-group-requirement/' + ProgramPK);
+                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/get-group-requirement/' + ProgramPK);
             case 'i':
-                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + '/program/get-individual-requirement/' + ProgramPK);
+                return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + 'program/get-individual-requirement/' + ProgramPK);
         }
     }
     setProgramActiveStatus(ProgramPK, IsActive) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].SERVER_URL + "/program/set-program-status/" + ProgramPK + "/" + IsActive);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_4__["AppConstants"].EXPRESS_SERVER_URL + "program/set-program-status/" + ProgramPK + "/" + IsActive);
     }
 };
 ProgramServices.ctorParameters = () => [

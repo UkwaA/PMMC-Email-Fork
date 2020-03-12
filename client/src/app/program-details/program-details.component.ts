@@ -92,7 +92,7 @@ export class ProgramDetailsComponent {
             this.services.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program => {
                 this.programData = program
 
-                this.viewImgHref = AppConstants.SERVER_URL + this.programData.ImgData
+                this.viewImgHref = AppConstants.EXPRESS_SERVER_URL + this.programData.ImgData
                 if (this.programData.ProgramType == 0) {
                     this.ProgramTypeText = "Group Program"
                     this.programTypeShortText = 'g'
