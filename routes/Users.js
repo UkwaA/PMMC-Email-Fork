@@ -74,7 +74,8 @@ users.post('/login', (req, res) => {
           let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
             expiresIn: 1440
           })
-          res.json({ token: token })
+          res.json({ token: token, user: user })
+          
         } else {
           res.send('Wrong password')
         }
