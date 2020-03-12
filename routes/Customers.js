@@ -12,9 +12,9 @@ customers.use(cors())
 *  PROVIDE CUSTOMER INFO FOR REGISTRATION
 *******************************************/
 customers.post('/customer-register', (req, res) => {
+    const customerID = req.body.CustomerPK
     const customer = {
-      CustomerPK: req.body.CustomerPK,
-      // UserFK: '0',
+      //CustomerPK: req.body.CustomerPK,      
       FirstName: req.body.FirstName,
       LastName: req.body.LastName,
       PhoneNo: req.body.PhoneNo,
@@ -25,13 +25,27 @@ customers.post('/customer-register', (req, res) => {
       Subscribe: req.body.Subscribe
     }
   
-    Customer.create(customer)
-      .then(customer => {
-        let token = jwt.sign(customer.dataValues, process.env.SECRET_KEY, {
-          expiresIn: 1440
-        })
-          res.json({ token: token })
-        })
+    Customer.update(customer, {
+      where: {
+        CustomerPK: customerID
+      }
+    })
+      .then(result => {
+        // let token = jwt.sign(customer.dataValues, process.env.SECRET_KEY, {
+        //   expiresIn: 1440
+        // })
+        //   res.json({ token: token })
+        if (result == 1) {
+          res.send({
+            message: "Customer was created successfully."
+          });
+        }
+        else {
+          res.send({
+            message: "Customers route error: Cannot update user details."
+          });
+        }
+      })
       .catch(err => {
         res.send('errorExpressErr: ' + err)
       })
