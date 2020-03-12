@@ -18,7 +18,7 @@ export class GroupProgramComponent implements OnInit{
         this.programService.getActivePrograms().then((result) =>{
             this.programs = result;
             this.programs.forEach(e => {
-                e.ImgData = AppConstants.SERVER_URL + e.ImgData
+                e.ImgData = AppConstants.EXPRESS_SERVER_URL + e.ImgData
             });
         })
     }

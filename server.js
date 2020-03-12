@@ -26,6 +26,13 @@ app.use('/service', Email)
 var Customer = require('./routes/Customers')
 app.use('/customers', Customer)
 
+/************** Use for deploy on AWS **************/
+// app.use(express.static(__dirname + '/dist/client'));
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname + '/dist/client'))
+// });
+/**************************************************/
+
 app.listen(port , () =>{
   console.log("Server started on port 3000");
 });

@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit{
         this.programService.getAllPrograms().then((result) =>{
             for(var i = 0; i < 6; i++) {
                 this.programs.push(result[i]);
-                this.programs[i].ImgData = AppConstants.SERVER_URL + result[i].ImgData
+                this.programs[i].ImgData = AppConstants.EXPRESS_SERVER_URL + result[i].ImgData
             }
         })
     }
