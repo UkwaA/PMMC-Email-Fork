@@ -49,13 +49,15 @@ export class LoginComponent {
             return;
         }
 
-        this.auth.login(this.credentials).subscribe(() => {            
-            this.router.navigateByUrl('/profile')
+        this.auth.login(this.credentials).subscribe((res) => {
+            if(res.user.Role_FK == "1")            
+                this.router.navigateByUrl('/')
+            else
+                this.router.navigateByUrl('/profile')
         }, 
         err => {
             //alert('Username and password do not match')            
             this.errorMessage = '*Username and password do not match'
-            console.error(err)      
             return
         })
     }

@@ -56,12 +56,7 @@ import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.com
 const routes : Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {
-    path: 'user-details/:id', 
-    component: UserDetailsComponent,
-    canActivate: [AuthSystemRoleGuardService]
-  },
+  {path: 'register', component: RegisterComponent},  
   {
     path: 'customer-register/:id',
     component:CustomerRegisterComponent,
@@ -80,7 +75,7 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: DashboardComponent, canActivate: [AuthRoleGuardService]},
+      {path: '', component: DashboardComponent},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
@@ -96,7 +91,7 @@ const routes : Routes = [
       { 
         path: 'user-details/:id', 
         component: UserDetailsComponent,
-        canActivate: [AuthRoleGuardService], 
+        canActivate: [AuthSystemRoleGuardService], 
       },
       { 
         path: 'profile-info/:id', 
