@@ -2,7 +2,8 @@ export class AppConstants {
     public static get BASE_URL(): string { return "http://localhost:4200/"; }
     public static get EXPRESS_SERVER_URL(): string { 
        // return (window.location.origin.toString() + "/"); 
-        return "http://localhost:3000/";
+        // return "http://localhost:3000/";
+        return "http://ec2-35-161-182-188.us-west-2.compute.amazonaws.com:3000/";
     }
     public static get ERR_USER_NOT_FOUND(): string { return "http://localhost:4200/api"; }
     public static get ERR_EMAIL_NOT_FOUND(): string { return "http://localhost:4200/api"; }

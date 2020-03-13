@@ -4,6 +4,7 @@ const cors = require('cors')
 const jwt = require('jsonwebtoken')
 const users = express.Router()
 const bcrypt = require('bcryptjs')
+const path = require('path');
 
 const User = require('../models/User')
 const Customer = require('../models/Customer')
