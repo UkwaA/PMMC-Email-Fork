@@ -6,7 +6,6 @@ const serveStatic = require('serve-static')
 const port = process.env.PORT || 3000
 const path = require('path');
 
-app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(cors())
 app.use(
@@ -26,6 +25,9 @@ app.use('/service', Email)
 
 var Customer = require('./routes/Customers')
 app.use('/customers', Customer)
+
+// Folder for photo
+app.use(express.static('public'));
 
 /************** Use for deploy on AWS **************/
 app.use(express.static(__dirname + '/dist/client'));
