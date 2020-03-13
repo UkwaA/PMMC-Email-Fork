@@ -24,10 +24,12 @@ users.post('/register', (req, res) => {
     IsActive: true
   }
 
+  
   User.findOne({
     where: {
-      //Username: req.body.Username
-      Email : req.body.Email
+      //check if the username exists
+      Username: req.body.Username
+      //Email : req.body.Email
     }
   })
     //TODO bcrypt
@@ -42,6 +44,27 @@ users.post('/register', (req, res) => {
               expiresIn: 1440
             })
             res.json({ UserPK: user.UserPK })
+          
+          //Create new customer entry in Customer table
+          Customer.findOne({
+            where: {
+              CustomerPK: user.UserPK
+            }
+          })
+          .then(customer =>{
+            //If customer does not exist, create new one
+            if(!customer){
+              Customer.create({CustomerPK: user.UserPK})
+              .catch(err => {
+                res.send('errorExpressErr: ' + err)
+              })
+            }
+            else{
+              res.json({ error: 'Customer already exists' })
+            }
+          })
+
+
           })
           .catch(err => {
             res.send('errorExpressErr: ' + err)
