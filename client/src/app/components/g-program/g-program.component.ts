@@ -17,7 +17,7 @@ export class GProgramComponent implements OnInit {
   @Input() formData: FormData;
   @Output() dataChange: EventEmitter<BookingGroupData> = new EventEmitter();
   
-  bookingGroup: BookingGroupData;
+  bookingGroup = new BookingGroupData();
   varLabels: Array<Object>; 
 
   constructor(private auth: AuthenticationService,

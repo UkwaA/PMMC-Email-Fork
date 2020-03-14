@@ -222,19 +222,6 @@
           </div>
         </div>
       </fieldset>
-      <div class="form-group font-weight-bold" *ngIf = "bookingGroup.MaximumParticipant">
-        <label for="MaximumParticipant">There is a restriction on the maximum participants.</label>
-      </div>
-      <!-- Deposit  -->
-      <div class="form-group font-weight-bold" *ngIf = "bookingGroup.Deposit">
-        <label for="Deposit">This program requires deposit. </label>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingGroup.DepositAmount">
-        <label for="DepositAmount">Deposit Amount: $$$$ </label>
-      </div>
-      <div class="form-group font-weight-bold" *ngIf = "bookingGroup.FullAmount">
-        <label for="FullAmount">This program requires you to pay full amount. </label>
-      </div>
       <button type="submit" class="btn btn-info">Submit</button>
     </form>
   </div>

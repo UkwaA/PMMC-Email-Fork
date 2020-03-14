@@ -18,7 +18,7 @@ export class IProgramComponent implements OnInit {
   @Input() formData: FormData;
   @Output() dataChange: EventEmitter<BookingIndividualData> = new EventEmitter();
   varLabels:Array<Object>;
-  bookingIndividual: BookingIndividualData
+  bookingIndividual = new BookingIndividualData();
 
   constructor(private auth: AuthenticationService, 
               private service:ProgramServices,

@@ -10,7 +10,7 @@
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
       <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
       <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
-        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]='selected' matListIcon>add_circle</mat-icon> New Program</a>
+        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]="selected" matListIcon>add_circle</mat-icon> New Program</a>
         <a mat-list-item [routerLink]="['/profile/program-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>edit</mat-icon> Program Management</a>
       </mat-nav-list>
       <section *ngIf = "role == '3'"> Account</section>
@@ -18,14 +18,6 @@
       <mat-nav-list *ngIf = "role == '3'">
         <a mat-list-item [routerLink]="['/profile/set-user-role']" [routerLinkActive]="['active']"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>
       </mat-nav-list>
-      <!-- <mat-nav-list>
-        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"><mat-icon matListIcon>account_circle</mat-icon>Your Account</a>
-      </mat-nav-list>
-      <section> Others </section>
-      <mat-divider></mat-divider>
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"><mat-icon matListIcon>settings</mat-icon>Setting</a>
-      </mat-nav-list> -->
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar color="primary">
@@ -55,7 +47,7 @@
             Account Setting
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" (click)='auth.logout()'>
+          <a class="dropdown-item" href="#" (click)="auth.logout()">
             <mat-icon>exit_to_app</mat-icon>
             Logout
           </a>
