@@ -31,7 +31,7 @@ import { MatFormFieldModule, MatInputModule, MatListModule, MatSidenavModule } f
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component'
 import { ProgramDetailsComponent } from './program-details/program-details.component';
-import { SetUserRoleComponent } from './system-admin-dashboard/set-user-role/set-user-role.component';
+import { UserManagementComponent } from './system-admin-dashboard/user-management/user-management.component';
 import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
@@ -83,8 +83,8 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService], 
       },
       {
-        path: 'set-user-role',
-        component: SetUserRoleComponent,
+        path: 'user-management',
+        component: UserManagementComponent,
         canActivate: [AuthSystemRoleGuardService],
       },
       { 
@@ -126,7 +126,7 @@ const routes : Routes = [
     BookingGroupProgramComponent,
     ProgramManagementComponent,
     ProgramDetailsComponent,
-    SetUserRoleComponent,
+    UserManagementComponent,
     UserDetailsComponent, 
     IProgramComponent,
     GProgramComponent,

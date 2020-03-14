@@ -16,7 +16,7 @@
       <section *ngIf = "role == '3'"> Account</section>
       <mat-divider *ngIf = "role == '3'"></mat-divider>
       <mat-nav-list *ngIf = "role == '3'">
-        <a mat-list-item [routerLink]="['/profile/set-user-role']" [routerLinkActive]="['active']"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>
+        <a mat-list-item [routerLink]="['/profile/user-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>
       </mat-nav-list>
       <!-- <mat-nav-list>
         <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"><mat-icon matListIcon>account_circle</mat-icon>Your Account</a>
