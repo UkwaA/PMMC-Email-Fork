@@ -90,7 +90,7 @@ openModalUpdateUserDetail(){
       console.log(response)
       this.message = "User was updated sucessfully"
 
-      const url = "/profile/set-user-role"
+      const url = "/profile/user-management"
       this.router.navigateByUrl(url)
     },
     error => {

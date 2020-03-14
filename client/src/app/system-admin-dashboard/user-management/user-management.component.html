@@ -4,7 +4,11 @@
             <h1>User Management</h1>
         </div>
     </div>      
-    <div class="row filter">        
+    <div class="row filter">
+        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+            <select class="form-control" style = "font-weight: bold" id="userStatus" (change)="selectChangeHandler($event)" >
+            </select>
+        </div>     
         <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
             <input type="text" class="form-control" placeholder="Type in Username or Keywords to Search" [(ngModel)]="searchText">
         </div>
@@ -17,14 +21,19 @@
         <table class="table table-hover" style="width:100%">
             <thead>
                 <tr>
-                    <th style="width:35%"> User Name </th>
-                    <th style="width:35%"> Email </th>
+                    <th style="width:25%"> User Name </th>
+                    <th style="width:20%"> Current Role </th>
+                    <th style="width:25%"> Email </th>
                     <th style="width:30%"> Actions</th>
                 </tr>
             </thead>
             <tbody *ngFor = 'let user of listOfUsers | filter:searchText'>
                 <tr *ngIf ="user.UserPK != currentUserID">
                     <td class="name"> {{user.Username}} </td>
+                    <td *ngIf="user.Role_FK == 1">Customer</td>
+                    <td *ngIf="user.Role_FK == 2">Manager</td>
+                    <td *ngIf="user.Role_FK == 3">System Admin</td>
+                    
                     <td> {{user.Email}} </td>
                     <td><button [routerLink]="['/profile', 'user-details', user.UserPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
                         <button *ngIf = "!user.IsActive" (click) = "openModalSwitch(user.UserPK, user.IsActive)"

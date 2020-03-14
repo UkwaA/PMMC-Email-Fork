@@ -6,23 +6,46 @@ import { ModalDialogComponent } from 'src/app/components/modal-dialog/modal-dial
 declare var $: any;
 
 @Component({
-  selector: 'app-set-user-role',
-  templateUrl: './set-user-role.component.html',
-  styleUrls: ['./set-user-role.component.css']
+  selector: 'app-user-management',
+  templateUrl: './user-management.component.html',
+  styleUrls: ['./user-management.component.css']
 })
-export class SetUserRoleComponent {
-  listOfUsers: UserDetails;
+export class UserManagementComponent {
+  listOfUsers: UserData[];
   userRoles:string[]
   searchText: string
   currentUserID: number
+  allUsers: UserData[] = []
+  activeUsers: UserData[] = []
+  inactiveUsers: UserData[] = []
   IsActive: boolean; //temporary variabe to hold the value for deactivate/activate button of user account
-
+    // Dropdown Meny Option
+    userStatus: Array<Object> = [
+        { id: 0, name: "All Users" },
+        { id: 1, name: "Active Users" },
+        { id: 2, name: "Inactive Users" }
+]
+    
   constructor(private auth: AuthenticationService, public matDialog: MatDialog) {}
 
-  ngOnInit() {      
+  ngOnInit() {
+    // Add option for the dropdown menu
+    this.userStatus.forEach(e => {
+        $("#userStatus").append(new Option(e['name'], e['id']));
+    });
+
     this.userRoles = ['Customer', 'Manager','System Admin'];
     this.auth.getAllUser().subscribe((result) => {
-      this.listOfUsers = result;        
+      this.listOfUsers = result;
+      this.allUsers = result;
+      this.listOfUsers.forEach(e =>{
+          if(e.IsActive){
+              this.activeUsers.push(e);
+          }
+          else{
+              this.inactiveUsers.push(e);
+          }
+      })        
     })
 
     this.currentUserID = this.auth.getUserDetails().UserPK
@@ -31,6 +54,24 @@ export class SetUserRoleComponent {
   clearSearch() {
     this.searchText = "";
 }
+
+// Catch the event dropdown menu
+selectChangeHandler(event: any) {
+    let choice = event.target.value;
+    // Update the data of table
+   switch(choice) {
+        case '0':
+            this.listOfUsers = this.allUsers;
+            break;
+        case '1':
+            this.listOfUsers = this.activeUsers;
+            break;
+        case '2':
+            this.listOfUsers = this.inactiveUsers;
+            break;
+   }
+}
+
 
   //open Modal when switching Activate/Deactivate button
   openModalSwitch(userPK: number, status:boolean){
