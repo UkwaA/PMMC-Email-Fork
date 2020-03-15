@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService, UserDetails} from '../authentication.service';
+import { UserData } from '../data/user-data';
 
 
 @Component({
@@ -10,7 +11,15 @@ import { AuthenticationService, UserDetails} from '../authentication.service';
   })
   export class AccountSetting implements OnInit {
     UserPK: number
-    userDetails: UserDetails
+    userDetails: UserData = {
+      UserPK: 0,
+      Username: '',
+      Password: '',
+      Role_FK: '',
+      Email: '',      
+      IsActive: false,
+      CreatedDate: ''      
+  }
    
     constructor(private route: ActivatedRoute, private auth: AuthenticationService) { }
     ngOnInit() {

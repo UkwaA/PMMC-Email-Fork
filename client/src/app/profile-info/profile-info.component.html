@@ -1,10 +1,10 @@
 <h1> Profile Information Page </h1>
 <hr>
 <div class="container bootstrap snippet">
-    <div class="row">
-  		<div class="col-sm-10"><h2>User name</h2></div>
+    <!-- <div class="row"> -->
+  		<!-- <div class="col-sm-10"><h2>User name</h2></div> -->
     <!-- 	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div> -->
-        </div>
+        <!-- </div> -->
     <div class="row">
   		<div class="col-sm-3 col-md-5"><!--left col-->
             <div class="text-center">
@@ -16,7 +16,13 @@
         </div><!--/col-3-->
     	<div class="col-sm-9 col-md-7">
             <section class="readonly">
-                <mat-checkbox [(ngModel)]="isDisabled"> Read Only </mat-checkbox>
+                <!-- <mat-checkbox [(ngModel)]="isDisabled"> Read Only </mat-checkbox> -->
+                <button *ngIf="isDisabled" class="btn btn-sm btn-warning" type="submit" (click)="viewOrEditMode()">
+                    <mat-icon matListIcon>edit</mat-icon>Edit
+                </button>
+                <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary" type="submit" (click)="viewOrEditMode()">
+                    Editing...
+                </button>
             </section>
             <hr>
                 <form [formGroup]="customerInfoForm" (ngSubmit)="openModal()">

@@ -133,8 +133,7 @@ export class ChangeCurrentPasswordComponent{
                     this.errorMessage = data.error
                     return
                 }
-                else{
-                    console.log(data)        
+                else{                    
                     this.openModal()                    
                 }                
         },

@@ -12,6 +12,7 @@ export interface UserDetails {
     Password: string
     Role_FK: string
     Email: string
+    IsActive: boolean
     exp: number
     iat: number
 }
@@ -116,7 +117,7 @@ export class AuthenticationService {
     return this.http.get(AppConstants.EXPRESS_SERVER_URL  + "users/get-user-details/" + UserPK)
   }
 
-  public updateUserDetail(UserPK:number, userDetails: UserDetails): Observable<any>{
+  public updateUserDetail(UserPK:number, userDetails: UserData): Observable<any>{
     return this.http.put(AppConstants.EXPRESS_SERVER_URL  + "users/get-user-details/" + UserPK, userDetails);
   }
 
