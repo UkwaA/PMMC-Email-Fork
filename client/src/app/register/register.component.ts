@@ -1,16 +1,22 @@
-import { Component } from '@angular/core'
+import { Component, Inject } from '@angular/core'
 import { AuthenticationService, TokenPayload } from '../authentication.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RegisterModalDialogComponent } from '../components/register-modal-dialog/register-modal-dialog.component';
 
 
 @Component({
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
+
+// export class registrationDialog{
+//     constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+        
+//     }
+// }
 
 export class RegisterComponent {
     registerForm: FormGroup;
@@ -26,6 +32,7 @@ export class RegisterComponent {
         Role_FK: '',
         Email: ''
     }
+
 
     constructor(private auth: AuthenticationService, private router: Router, 
         private formBuilder: FormBuilder, public matDialog: MatDialog) { }
@@ -88,13 +95,18 @@ export class RegisterComponent {
         dialogConfig.width = "350px";
         dialogConfig.data = {
             title: "Register Confirmation",
-            description: "All information is correct?",            
+            username: this.registerForm.get('username').value,
+            email: this.registerForm.get('email').value,
+            // description: "Are you sure you would like to register with the following information? Username: {{data.username}}",            
             actionButtonText: "Confirm",   
             numberOfButton: "2"         
           }
           // https://material.angular.io/components/dialog/overview
         // https://material.angular.io/components/dialog/overview
-        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        // const modalDialog = this.matDialog.open(ModalDialogComponent, {width: "350px", data: {title: "Registration Confirmation", 
+        // username: this.registerForm.get('username').value,
+        // email: this.registerForm.get('email').value, actionButtonText: "Confirm", numberOfButton: "2"}});
+        const modalDialog = this.matDialog.open(RegisterModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
                 //call register function                

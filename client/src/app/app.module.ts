@@ -51,7 +51,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-
+import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
+import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -136,6 +137,8 @@ const routes : Routes = [
     ChangeCurrentPasswordComponent,
     DashboardComponent,
     ModalDialogComponent,
+    RegisterModalDialogComponent,
+    CustomerModalDialogComponent,
     AccountSetting,
     ProfileInfo
   ],
@@ -166,6 +169,6 @@ const routes : Routes = [
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthCustomerGuardService, AuthenticationService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent]
+  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent]
 })
 export class AppModule { }

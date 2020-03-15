@@ -1,0 +1,26 @@
+<div id="modal-content-wrapper">
+    <header id="modal-header">
+        <h1 id="modal-title">{{modalData.title}}</h1>
+    </header>
+    <mat-divider></mat-divider>
+    <section id="modal-body">
+        <!-- <p text-center> Are you sure you would like to register with the following information? </p> -->
+        <p>First Name: {{modalData.firstName}} </p>
+        <p> Last Name: {{modalData.lastName}} </p>
+        <p> Phone Number: {{modalData.phoneNo}} </p>
+        <p mt-3> Street Address: {{modalData.streetAddress}} </p>
+        <p> Line 2: {{modalData.streetAddress2}} </p>
+        <p> City: {{modalData.addressCity}} </p>
+        <p> State: {{modalData.addressState}} </p>
+        <p> Zip Code: {{modalData.addressZipCode}} </p>
+    </section>
+    <mat-divider></mat-divider>
+    <footer id="modal-footer">
+        <button mat-raised-button id="modal-action-button" (click)="actionFunction()">
+            {{modalData.actionButtonText}}
+        </button>
+        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+            Cancel
+        </button>
+    </footer>
+</div>

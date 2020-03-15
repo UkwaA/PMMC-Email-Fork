@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { CustomerData } from '../data/customer-data'
 import { CustomerService } from '../services/customer.services'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { CustomerModalDialogComponent } from '../components/customer-modal-dialog/customer-modal-dialog.component';
 import { faAddressBook, faPhoneSquare, faHome, faMapMarker,faMapPin, faMap} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -87,11 +87,18 @@ export class CustomerRegisterComponent implements OnInit {
     dialogConfig.width = "350px";
     dialogConfig.data = {
         title: "Register Confirmation",
-        description: "All information is correct?",            
+        firstName: this.customerInfoForm.get('firstName').value,
+        lastName: this.customerInfoForm.get('lastName').value,
+        phoneNo: this.customerInfoForm.get('phoneNum').value,
+        streetAddress: this.customerInfoForm.get('address_street').value,  
+        streetAddress2: '',
+        addressCity: this.customerInfoForm.get('address_city').value, 
+        addressState: this.customerInfoForm.get('address_state').value, 
+        addressZipCode: this.customerInfoForm.get('address_zipcode').value, 
         actionButtonText: "Confirm",   
         numberOfButton: "2"         
       }
-    const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+    const modalDialog = this.matDialog.open(CustomerModalDialogComponent, dialogConfig);
     modalDialog.afterClosed().subscribe(result =>{
         if(result == "Yes"){
             this.finishRegister()
