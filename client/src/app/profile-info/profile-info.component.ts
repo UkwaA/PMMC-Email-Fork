@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../services/customer.services';
+import { CustomerData } from '../data/customer-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
@@ -13,11 +14,23 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 
   export class ProfileInfo implements OnInit {
     submitted = false
-    currentCustomerPK: number
-    customerDetails: any
+    currentCustomerPK: number    
     isDisabled: boolean
     customerInfoForm: FormGroup
     subscribeChecked: boolean
+    customerDetails:CustomerData = {
+      CustomerPK: 0,
+      FirstName: '',
+      LastName: '',
+      PhoneNo: '',
+      StreetAddress: '',
+      StreetAddress2: '',
+      City: '',
+      State: '',
+      Zipcode: '',
+      Subscribe: 0,
+    }
+
 
     constructor(private route:ActivatedRoute, 
       private router: Router,
@@ -30,8 +43,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
       this.route.params.subscribe(val =>{
         this.currentCustomerPK = val.id
         this.customer.getCustomerInfoByID(this.currentCustomerPK).subscribe(cus =>{
-          this.customerDetails = cus
-          console.log(this.customerDetails)
+          this.customerDetails = cus          
           if(cus.Subscribe == 0){
             this.subscribeChecked = false
           }            
@@ -55,6 +67,15 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
     }
 
     get f() { return this.customerInfoForm.controls; }
+
+    viewOrEditMode(){
+      if(this.isDisabled){
+        this.isDisabled = false
+      }
+      else{
+        this.isDisabled = true
+      }
+    }
 
     //Configure Modal Dialog
     openModal(){ 
@@ -98,9 +119,6 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
       else{
         this.customerDetails.Subscribe = 0
       }
-      console.log(this.customerDetails)
-      // stop here if form is invalid
-      
 
       this.customer.updateCustomerInfo(this.currentCustomerPK, this.customerDetails).subscribe(res => {
         console.log(res.message)
