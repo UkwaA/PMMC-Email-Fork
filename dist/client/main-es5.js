@@ -85,7 +85,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row text-left\">\r\n            <h1>{{programDetails.Name}}</h1>\r\n    </div>\r\n    <hr>\r\n    <div class=\"row\">\r\n      <div [innerHTML]=\"programDetails.Description\"></div>\r\n    </div>\r\n    <hr>\r\n    <!-- <div class=\"row text-left\" style=\"font-weight: bold;\">\r\n      <p>${{programDetails.FullAmount}}</p>\r\n    </div>\r\n    <hr> -->\r\n  \r\n    <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\r\n      <!-- Adult Quantity -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.AdultQuantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"AldultQuantity\">Adult Quantity: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"AldultQuantity\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.AldultQuantity.errors }\">\r\n            <div *ngIf=\"submitted && f.AldultQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AldultQuantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.AldultQuantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 5-7 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age57Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age57Quantity\">Children Age 5-7: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age57Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age57Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age57Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age57Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age57Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 8-10 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age810Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age810Quantity\">Children Age 8-10: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age810Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age810Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age810Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age810Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 11-12 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1112Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1112Quantity\">Children Age 11-12: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1112Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1112Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1112Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1112Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 13-14 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1314Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1314Quantity\">Children Age 13-14: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1314Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1314Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1314Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1314Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 14-15 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1415Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1415Quantity\">Children Age 14-15: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1415Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1415Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1415Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1415Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 15-17 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1517Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1517Quantity\">Children Age 15-17: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1517Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1517Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1517Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1517Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Organization Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.OrganizationName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"OrganizationName\">School Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"OrganizationName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.OrganizationName.errors }\">\r\n            <div *ngIf=\"submitted && f.OrganizationName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.OrganizationName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.OrganizationName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherName\">Teacher Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TeacherName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.TeacherName.errors }\">\r\n            <div *ngIf=\"submitted && f.TeacherName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Email -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherEmail\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherEmail\">Teacher Email: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TeacherEmail\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherEmail.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherEmail.errors\" class=\"invalid-feedback\">\r\n                <div *ngIf=\"f.TeacherEmail.errors.required\">Email is required</div>\r\n                <div *ngIf=\"f.TeacherEmail.errors.email\">Email must be a valid email address</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Phone Number -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherPhoneNo\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherPhoneNo\">Teacher Phone Number: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"TeacherPhoneNo\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherPhoneNo.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherPhoneNo.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.minlength\">Please enter correct phone number</div>\r\n              <!-- <div *ngIf=\"f.TeacherPhoneNo.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Grade Level  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.GradeLevel\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"GradeLevel\">Grade Level </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"GradeLevel\" [ngClass]=\"{ 'is-invalid': submitted && f.GradeLevel.errors }\">\r\n              <option>Kindergarten </option>\r\n              <option>1st</option>\r\n              <option>2nd</option>\r\n              <option>3rd</option>\r\n              <option>4th</option>\r\n              <option>5th</option>\r\n              <option>6th</option>\r\n              <option>7th</option>\r\n              <option>8th</option>\r\n              <option>9th</option>\r\n              <option>10th</option>\r\n              <option>11th</option>\r\n              <option>12th</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.GradeLevel.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.GradeLevel.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Total Quantity   -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TotalQuantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TotalQuantity\">Number of Participating Students: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TotalQuantity\" \r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TotalQuantity.errors }\">\r\n            <div *ngIf=\"submitted && f.TotalQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TotalQuantity.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Program Restriction  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.ProgramRestriction\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"ProgramRestriction\">Are you a Title One School? </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"ProgramRestriction\" [ngClass]=\"{ 'is-invalid': submitted && f.ProgramRestriction.errors }\">\r\n              <option>No </option>\r\n              <option>Yes</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.ProgramRestriction.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.ProgramRestriction.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.MaximumParticipant\">\r\n        <label for=\"MaximumParticipant\">There is a restriction on the maximum participants.</label>\r\n      </div>\r\n      <!-- Deposit  -->\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Deposit\">\r\n        <label for=\"Deposit\">This program requires deposit. </label>\r\n      </div>\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.DepositAmount\">\r\n        <label for=\"DepositAmount\">Deposit Amount: $$$$ </label>\r\n      </div>\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.FullAmount\">\r\n        <label for=\"FullAmount\">This program requires you to pay full amount. </label>\r\n      </div>\r\n      <button type=\"submit\" class=\"btn btn-info\">Submit</button>\r\n    </form>\r\n  </div>";
+    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row text-left\">\r\n            <h1>{{programDetails.Name}}</h1>\r\n    </div>\r\n    <hr>\r\n    <div class=\"row\">\r\n      <div [innerHTML]=\"programDetails.Description\"></div>\r\n    </div>\r\n    <hr>\r\n    <!-- <div class=\"row text-left\" style=\"font-weight: bold;\">\r\n      <p>${{programDetails.FullAmount}}</p>\r\n    </div>\r\n    <hr> -->\r\n  \r\n    <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\r\n      <!-- Adult Quantity -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.AdultQuantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"AldultQuantity\">Adult Quantity: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"AldultQuantity\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.AldultQuantity.errors }\">\r\n            <div *ngIf=\"submitted && f.AldultQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AldultQuantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.AldultQuantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 5-7 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age57Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age57Quantity\">Children Age 5-7: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age57Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age57Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age57Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age57Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age57Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 8-10 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age810Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age810Quantity\">Children Age 8-10: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age810Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age810Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age810Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age810Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Age 11-12 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1112Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1112Quantity\">Children Age 11-12: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1112Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1112Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1112Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1112Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 13-14 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1314Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1314Quantity\">Children Age 13-14: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1314Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1314Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1314Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1314Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 14-15 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1415Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1415Quantity\">Children Age 14-15: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1415Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1415Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1415Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1415Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Age 15-17 -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.Age1517Quantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"Age1517Quantity\">Children Age 15-17: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" min = \"0\" max = \"35\" placeholder=\"\" formControlName=\"Age810Quantity\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Age1517Quantity.errors }\">\r\n            <div *ngIf=\"submitted && f.Age1517Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1517Quantity.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.Age1517Quantity.errors.max\">Maximum for a group is 35</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Organization Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.OrganizationName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"OrganizationName\">School Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"OrganizationName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.OrganizationName.errors }\">\r\n            <div *ngIf=\"submitted && f.OrganizationName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.OrganizationName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.OrganizationName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherName\">Teacher Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TeacherName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.TeacherName.errors }\">\r\n            <div *ngIf=\"submitted && f.TeacherName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Email -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherEmail\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherEmail\">Teacher Email: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TeacherEmail\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherEmail.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherEmail.errors\" class=\"invalid-feedback\">\r\n                <div *ngIf=\"f.TeacherEmail.errors.required\">Email is required</div>\r\n                <div *ngIf=\"f.TeacherEmail.errors.email\">Email must be a valid email address</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Phone Number -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherPhoneNo\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TeacherPhoneNo\">Teacher Phone Number: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"TeacherPhoneNo\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherPhoneNo.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherPhoneNo.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.minlength\">Please enter correct phone number</div>\r\n              <!-- <div *ngIf=\"f.TeacherPhoneNo.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Grade Level  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.GradeLevel\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"GradeLevel\">Grade Level </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"GradeLevel\" [ngClass]=\"{ 'is-invalid': submitted && f.GradeLevel.errors }\">\r\n              <option>Kindergarten </option>\r\n              <option>1st</option>\r\n              <option>2nd</option>\r\n              <option>3rd</option>\r\n              <option>4th</option>\r\n              <option>5th</option>\r\n              <option>6th</option>\r\n              <option>7th</option>\r\n              <option>8th</option>\r\n              <option>9th</option>\r\n              <option>10th</option>\r\n              <option>11th</option>\r\n              <option>12th</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.GradeLevel.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.GradeLevel.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Total Quantity   -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TotalQuantity\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"TotalQuantity\">Number of Participating Students: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TotalQuantity\" \r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TotalQuantity.errors }\">\r\n            <div *ngIf=\"submitted && f.TotalQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TotalQuantity.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Program Restriction  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.ProgramRestriction\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2 pt-0 pl-0\" for=\"ProgramRestriction\">Are you a Title One School? </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"ProgramRestriction\" [ngClass]=\"{ 'is-invalid': submitted && f.ProgramRestriction.errors }\">\r\n              <option>No </option>\r\n              <option>Yes</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.ProgramRestriction.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.ProgramRestriction.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <button type=\"submit\" class=\"btn btn-info\">Submit</button>\r\n    </form>\r\n  </div>";
     /***/
   },
 
@@ -425,7 +425,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<mat-sidenav-container class=\"sidenav-container\">\r\n    <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\r\n        [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n        [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n        [opened]=\"(isHandset$ | async) === false\">\r\n      <mat-toolbar> \r\n        <a class=\"navbar-brand\" href=\"#\">\r\n          <img src = \"https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png\" width=\"120\" height=\"60\"> </a>\r\n      </mat-toolbar>\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Program </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]='selected' matListIcon>add_circle</mat-icon> New Program</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/program-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>edit</mat-icon> Program Management</a>\r\n      </mat-nav-list>\r\n      <section *ngIf = \"role == '3'\"> Account</section>\r\n      <mat-divider *ngIf = \"role == '3'\"></mat-divider>\r\n      <mat-nav-list *ngIf = \"role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/set-user-role']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>\r\n      </mat-nav-list>\r\n      <!-- <mat-nav-list>\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>account_circle</mat-icon>Your Account</a>\r\n      </mat-nav-list>\r\n      <section> Others </section>\r\n      <mat-divider></mat-divider>\r\n      <mat-nav-list>\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>settings</mat-icon>Setting</a>\r\n      </mat-nav-list> -->\r\n    </mat-sidenav>\r\n    <mat-sidenav-content>\r\n      <mat-toolbar color=\"primary\">\r\n        <button\r\n          type=\"button\"\r\n          aria-label=\"Toggle sidenav\"\r\n          mat-icon-button\r\n          (click)=\"drawer.toggle()\"\r\n          *ngIf=\"isHandset$ | async\">\r\n          <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n        </button>\r\n        <h1>PACIFIC MARINE MAMMAL CENTER</h1>\r\n        <!-- User Information -->\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\">\r\n          <span>{{userName}} </span>\r\n          <!-- <img class=\"img-profile rounded-circle\" src=\"https://source.unsplash.com/QAB-WJcbgJk/60x60\"> -->\r\n          <mat-icon matListIcon>account_circle</mat-icon>\r\n        </a>\r\n        <!-- Dropdown - User Information -->\r\n        <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\" aria-labelledby=\"userDropdown\">\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'profile-info', id]\">\r\n            <mat-icon>info</mat-icon>\r\n            Profile\r\n          </a>\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'account-setting', id]\">\r\n            <mat-icon>settings</mat-icon>\r\n            Account Setting\r\n          </a>\r\n          <div class=\"dropdown-divider\"></div>\r\n          <a class=\"dropdown-item\" href=\"#\" (click)='auth.logout()'>\r\n            <mat-icon>exit_to_app</mat-icon>\r\n            Logout\r\n          </a>\r\n        </div>\r\n      </mat-toolbar>\r\n      <!-- Add Content Here --> \r\n      <router-outlet></router-outlet>\r\n    </mat-sidenav-content>\r\n  </mat-sidenav-container>\r\n  ";
+    __webpack_exports__["default"] = "<mat-sidenav-container class=\"sidenav-container\">\r\n    <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\r\n        [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n        [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n        [opened]=\"(isHandset$ | async) === false\">\r\n      <mat-toolbar> \r\n        <a class=\"navbar-brand\" href=\"#\">\r\n          <img src = \"https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png\" width=\"120\" height=\"60\"> </a>\r\n      </mat-toolbar>\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Program </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]=\"selected\" matListIcon>add_circle</mat-icon> New Program</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/program-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>edit</mat-icon> Program Management</a>\r\n      </mat-nav-list>\r\n      <section *ngIf = \"role == '3'\"> Account</section>\r\n      <mat-divider *ngIf = \"role == '3'\"></mat-divider>\r\n      <mat-nav-list *ngIf = \"role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/user-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>\r\n      </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content>\r\n      <mat-toolbar color=\"primary\">\r\n        <button\r\n          type=\"button\"\r\n          aria-label=\"Toggle sidenav\"\r\n          mat-icon-button\r\n          (click)=\"drawer.toggle()\"\r\n          *ngIf=\"isHandset$ | async\">\r\n          <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n        </button>\r\n        <h1>PACIFIC MARINE MAMMAL CENTER</h1>\r\n        <!-- User Information -->\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\">\r\n          <span>{{userName}} </span>\r\n          <!-- <img class=\"img-profile rounded-circle\" src=\"https://source.unsplash.com/QAB-WJcbgJk/60x60\"> -->\r\n          <mat-icon matListIcon>account_circle</mat-icon>\r\n        </a>\r\n        <!-- Dropdown - User Information -->\r\n        <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\" aria-labelledby=\"userDropdown\">\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'profile-info', id]\">\r\n            <mat-icon>info</mat-icon>\r\n            Profile\r\n          </a>\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'account-setting', id]\">\r\n            <mat-icon>settings</mat-icon>\r\n            Account Setting\r\n          </a>\r\n          <div class=\"dropdown-divider\"></div>\r\n          <a class=\"dropdown-item\" href=\"#\" (click)=\"auth.logout()\">\r\n            <mat-icon>exit_to_app</mat-icon>\r\n            Logout\r\n          </a>\r\n        </div>\r\n      </mat-toolbar>\r\n      <!-- Add Content Here --> \r\n      <router-outlet></router-outlet>\r\n    </mat-sidenav-content>\r\n  </mat-sidenav-container>\r\n  ";
     /***/
   },
 
@@ -445,7 +445,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mt-4 mb-5 mx-auto\">\r\n            <!-- <section class=\"readonly\">\r\n                <mat-checkbox [(ngModel)]=\"isDisabled\"> Read Only </mat-checkbox>\r\n              </section> -->\r\n            <form>\r\n                <fieldset [disabled]=\"isDisabled\">\r\n                <h1 class=\"text-center\">Program Requirement</h1>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Program Name</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"name\" [(ngModel)]=\"programData.Name\" readonly>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group \">\r\n                    <label class=\"font-weight-bold\">Description</label>\r\n                    <ckeditor [editor]=\"Editor\" [disabled]=\"isDisabled\" (ready)=\"onReady($event)\" name=\"editor\" [(ngModel)]=\"programData.Description\" name=\"description\"></ckeditor>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Deposit Amount</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"deposit\"\r\n                                [(ngModel)]=\"programData.DepositAmount\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Price Per Participant</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"price\"\r\n                                [(ngModel)]=\"programData.PricePerParticipant\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Maximum Number of Participant</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"participant\"\r\n                                [(ngModel)]=\"programData.MaximumParticipant\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <img class=\"card-img flex-fill\" [src]=\"viewImgHref\" alt=\"Card image cap\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"col-md-4\">\r\n                        <label>Image</label>\r\n                    </div>\r\n                    <div class=\"col-md-8\">\r\n                        <input type=\"file\" (change)=\"onFileChange($event)\" [disabled]=\"isDisabled\" accept=\"image/x-png,image/gif,image/jpeg\" />\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Program Type</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"ProgramType\"\r\n                            [(ngModel)]=\"ProgramTypeText\" readonly>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- Binding i and g-program Component -->\r\n                <div *ngIf = \"programData.ProgramType=='1'\" ><i-program [ProgramPK]=\"ProgramPK\" [formData]=\"formData\" (dataChange)=\"dataChangedHandler($event)\"></i-program></div>\r\n                <div *ngIf = \"programData.ProgramType=='0'\" ><g-program [ProgramPK]=\"ProgramPK\" [formData]=\"formData\" (dataChange)=\"dataChangedHandler($event)\"></g-program></div>\r\n                <div *ngIf='PageMode == \"edit\"' class=\"button pt-5 pb-5\">\r\n                    <button class=\"btn btn-lg btn-info btn-block \" type=\"submit\" (click)=\"openModal()\">Update Program Requirements</button>\r\n                </div>\r\n            </fieldset>\r\n            </form>\r\n\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mt-4 mb-5 mx-auto\">\r\n            <!-- <section class=\"readonly\">\r\n                <mat-checkbox [(ngModel)]=\"isDisabled\"> Read Only </mat-checkbox>\r\n              </section> -->\r\n            <form>\r\n                <fieldset [disabled]=\"isDisabled\">\r\n                <h1 class=\"text-center\">Program Requirement</h1>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Program Name</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"name\" [(ngModel)]=\"programData.Name\" readonly>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group \">\r\n                    <label class=\"font-weight-bold\">Description</label>\r\n                    <ckeditor [editor]=\"Editor\" [disabled]=\"isDisabled\" (ready)=\"onReady($event)\" name=\"editor\" [(ngModel)]=\"programData.Description\" name=\"description\"></ckeditor>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Deposit Amount</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"deposit\"\r\n                                [(ngModel)]=\"programData.DepositAmount\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Price Per Participant</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"price\"\r\n                                [(ngModel)]=\"programData.PricePerParticipant\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Maximum Number of Participant</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"number\" class=\"form-control\" name=\"participant\"\r\n                                [(ngModel)]=\"programData.MaximumParticipant\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <img class=\"card-img flex-fill\" [src]=\"viewImgHref\" alt=\"Card image cap\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"col-md-4\">\r\n                        <label>Image</label>\r\n                    </div>\r\n                    <div class=\"col-md-8\">\r\n                        <input type=\"file\" (change)=\"onFileChange($event)\" [disabled]=\"isDisabled\" accept=\"image/x-png,image/gif,image/jpeg\" />\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group font-weight-bold\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Program Type</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"ProgramType\"\r\n                            [(ngModel)]=\"ProgramTypeText\" readonly>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <!-- Binding i and g-program Component -->\r\n                <div [ngSwitch]=\"programData.ProgramType\">\r\n                    <div *ngSwitchCase=\"0\" ><g-program [ProgramPK]=\"ProgramPK\" [formData]=\"formData\" (dataChange)=\"dataChangedHandler($event)\"></g-program></div>\r\n                    <div *ngSwitchCase=\"1\" ><i-program [ProgramPK]=\"ProgramPK\" [formData]=\"formData\" (dataChange)=\"dataChangedHandler($event)\"></i-program></div>\r\n                </div>\r\n                <div *ngIf='PageMode == \"edit\"' class=\"button pt-5 pb-5\">\r\n                    <button class=\"btn btn-lg btn-info btn-block \" type=\"submit\" (click)=\"openModal()\">Update Program Requirements</button>\r\n                </div>\r\n            </fieldset>\r\n            </form>\r\n\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -490,26 +490,6 @@
   },
 
   /***/
-  "./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/set-user-role/set-user-role.component.html":
-  /*!*************************************************************************************************************************!*\
-    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/set-user-role/set-user-role.component.html ***!
-    \*************************************************************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function node_modulesRawLoaderDistCjsJsSrcAppSystemAdminDashboardSetUserRoleSetUserRoleComponentHtml(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>User Management</h1>\r\n        </div>\r\n    </div>      \r\n    <div class=\"row filter\">        \r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Username or Keywords to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\">Clear Search</button>\r\n        </div>\r\n    </div>  \r\n    \r\n    <div class=\"table-responsive-sm\">\r\n        <table class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:35%\"> User Name </th>\r\n                    <th style=\"width:35%\"> Email </th>\r\n                    <th style=\"width:30%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody *ngFor = 'let user of listOfUsers | filter:searchText'>\r\n                <tr *ngIf =\"user.UserPK != currentUserID\">\r\n                    <td class=\"name\"> {{user.Username}} </td>\r\n                    <td> {{user.Email}} </td>\r\n                    <td><button [routerLink]=\"['/profile', 'user-details', user.UserPK]\" class=\"btn btn-warning\"> <mat-icon matListIcon>edit</mat-icon> Edit</button>\r\n                        <button *ngIf = \"!user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            Activate Account  \r\n                        </button>\r\n                        <button *ngIf = \"user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            Deactivate Account\r\n                        </button>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>";
-    /***/
-  },
-
-  /***/
   "./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/user-details/user-details.component.html":
   /*!***********************************************************************************************************************!*\
     !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/user-details/user-details.component.html ***!
@@ -526,6 +506,26 @@
 
 
     __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-8 mt-12 mx-auto\">\r\n            <div class=\"row text-center text-white mb-5\">\r\n                <div class=\"col-lg-12 mx-auto\">\r\n                    <h1>User Detail</h1>\r\n                </div>\r\n            </div>\r\n            <form>                \r\n                <div class=\"form-group\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>UserName</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"name\" [(ngModel)]=\"userDetails.Username\" readonly>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Password</label>\r\n                        </div>\r\n                        <div class=\"col-md-3\">•••••••••••••                     \r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-md btn-warning col-md-4\" \r\n                            (click)=\"openModalResetPassword()\">\r\n                            Reset Password</button>                            \r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Email</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" name=\"email\" [(ngModel)]=\"userDetails.Email\">\r\n                        </div>\r\n                    </div>\r\n                </div>     \r\n                <div class=\"form-group\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>Current Role</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <div *ngIf = \"userDetails.Role_FK == 1\">Customer</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == 2\">Manager</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == 3\">System Admin</div>\r\n                        </div>\r\n                    </div>\r\n                </div>   \r\n                <div class=\"form-group\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label>New Role</label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <select id=\"roleSelection\">                                \r\n                            </select>\r\n                        </div>\r\n                    </div> \r\n                </div>\r\n                <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\" (click)=\"openModalUpdateUserDetail()\">Update User Details</button>\r\n            </form>\r\n         \r\n        </div>\r\n    </div>\r\n</div>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/user-management/user-management.component.html":
+  /*!*****************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/user-management/user-management.component.html ***!
+    \*****************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppSystemAdminDashboardUserManagementUserManagementComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>User Management</h1>\r\n        </div>\r\n    </div>      \r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style = \"font-weight: bold\" id=\"userStatus\" (change)=\"selectChangeHandler($event)\" >\r\n            </select>\r\n        </div>     \r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Username or Keywords to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\">Clear Search</button>\r\n        </div>\r\n    </div>  \r\n    \r\n    <div class=\"table-responsive-sm\">\r\n        <table class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:25%\"> User Name </th>\r\n                    <th style=\"width:20%\"> Current Role </th>\r\n                    <th style=\"width:25%\"> Email </th>\r\n                    <th style=\"width:30%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody *ngFor = 'let user of listOfUsers | filter:searchText'>\r\n                <tr *ngIf =\"user.UserPK != currentUserID\">\r\n                    <td class=\"name\"> {{user.Username}} </td>\r\n                    <td *ngIf=\"user.Role_FK == 1\">Customer</td>\r\n                    <td *ngIf=\"user.Role_FK == 2\">Manager</td>\r\n                    <td *ngIf=\"user.Role_FK == 3\">System Admin</td>\r\n                    \r\n                    <td> {{user.Email}} </td>\r\n                    <td><button [routerLink]=\"['/profile', 'user-details', user.UserPK]\" class=\"btn btn-warning\"> <mat-icon matListIcon>edit</mat-icon> Edit</button>\r\n                        <button *ngIf = \"!user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            Activate Account  \r\n                        </button>\r\n                        <button *ngIf = \"user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            Deactivate Account\r\n                        </button>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1600,9 +1600,9 @@
     /* harmony import */
 
 
-    var _system_admin_dashboard_set_user_role_set_user_role_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
-    /*! ./system-admin-dashboard/set-user-role/set-user-role.component */
-    "./src/app/system-admin-dashboard/set-user-role/set-user-role.component.ts");
+    var _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(
+    /*! ./system-admin-dashboard/user-management/user-management.component */
+    "./src/app/system-admin-dashboard/user-management/user-management.component.ts");
     /* harmony import */
 
 
@@ -1722,10 +1722,6 @@
       path: 'register',
       component: _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"]
     }, {
-      path: 'user-details/:id',
-      component: _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_34__["UserDetailsComponent"],
-      canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]]
-    }, {
       path: 'customer-register/:id',
       component: _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_12__["CustomerRegisterComponent"],
       canActivate: [_auth_customer_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthCustomerGuardService"]]
@@ -1745,9 +1741,6 @@
       path: 'booking-group-program/:id',
       component: _booking_group_program_booking_group_program_component__WEBPACK_IMPORTED_MODULE_27__["BookingGroupProgramComponent"]
     }, {
-      path: 'customer-register/:id',
-      component: _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_12__["CustomerRegisterComponent"]
-    }, {
       path: 'login/forgot-password',
       component: _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_37__["ForgotPasswordComponent"]
     }, {
@@ -1759,8 +1752,7 @@
       canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthGuardService"]],
       children: [{
         path: '',
-        component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_50__["DashboardComponent"],
-        canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthRoleGuardService"]]
+        component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_50__["DashboardComponent"]
       }, {
         path: 'createprogram',
         component: _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_14__["CreateProgramComponent"],
@@ -1774,13 +1766,13 @@
         component: _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_32__["ProgramDetailsComponent"],
         canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthRoleGuardService"]]
       }, {
-        path: 'set-user-role',
-        component: _system_admin_dashboard_set_user_role_set_user_role_component__WEBPACK_IMPORTED_MODULE_33__["SetUserRoleComponent"],
+        path: 'user-management',
+        component: _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_33__["UserManagementComponent"],
         canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]]
       }, {
         path: 'user-details/:id',
         component: _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_34__["UserDetailsComponent"],
-        canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthRoleGuardService"]]
+        canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]]
       }, {
         path: 'profile-info/:id',
         component: _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_41__["ProfileInfo"],
@@ -1797,7 +1789,7 @@
     }];
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _profile_profile_component__WEBPACK_IMPORTED_MODULE_9__["ProfileComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_13__["HomeComponent"], _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_14__["CreateProgramComponent"], _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_23__["GroupProgramComponent"], _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_24__["IndividualProgramComponent"], _contact_contact_component__WEBPACK_IMPORTED_MODULE_25__["Contact"], _booking_individual_program_booking_individual_program_component__WEBPACK_IMPORTED_MODULE_26__["BookingIndividualProgramComponent"], _booking_group_program_booking_group_program_component__WEBPACK_IMPORTED_MODULE_27__["BookingGroupProgramComponent"], _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_31__["ProgramManagementComponent"], _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_32__["ProgramDetailsComponent"], _system_admin_dashboard_set_user_role_set_user_role_component__WEBPACK_IMPORTED_MODULE_33__["SetUserRoleComponent"], _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_34__["UserDetailsComponent"], _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_35__["IProgramComponent"], _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_36__["GProgramComponent"], _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_12__["CustomerRegisterComponent"], _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_37__["ForgotPasswordComponent"], _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_38__["ResetPasswordComponent"], _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_39__["ChangeCurrentPasswordComponent"], _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_50__["DashboardComponent"], _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_51__["ModalDialogComponent"], _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_40__["AccountSetting"], _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_41__["ProfileInfo"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _profile_profile_component__WEBPACK_IMPORTED_MODULE_9__["ProfileComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"], _register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_13__["HomeComponent"], _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_14__["CreateProgramComponent"], _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_23__["GroupProgramComponent"], _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_24__["IndividualProgramComponent"], _contact_contact_component__WEBPACK_IMPORTED_MODULE_25__["Contact"], _booking_individual_program_booking_individual_program_component__WEBPACK_IMPORTED_MODULE_26__["BookingIndividualProgramComponent"], _booking_group_program_booking_group_program_component__WEBPACK_IMPORTED_MODULE_27__["BookingGroupProgramComponent"], _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_31__["ProgramManagementComponent"], _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_32__["ProgramDetailsComponent"], _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_33__["UserManagementComponent"], _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_34__["UserDetailsComponent"], _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_35__["IProgramComponent"], _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_36__["GProgramComponent"], _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_12__["CustomerRegisterComponent"], _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_37__["ForgotPasswordComponent"], _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_38__["ResetPasswordComponent"], _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_39__["ChangeCurrentPasswordComponent"], _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_50__["DashboardComponent"], _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_51__["ModalDialogComponent"], _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_40__["AccountSetting"], _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_41__["ProfileInfo"]],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"], ng2_search_filter__WEBPACK_IMPORTED_MODULE_7__["Ng2SearchPipeModule"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(routes, {
         scrollPositionRestoration: 'enabled'
       }), _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_28__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"], _angular_material__WEBPACK_IMPORTED_MODULE_29__["MatFormFieldModule"], _angular_material__WEBPACK_IMPORTED_MODULE_29__["MatInputModule"], _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_30__["CKEditorModule"], _angular_material__WEBPACK_IMPORTED_MODULE_29__["MatListModule"], _angular_material_radio__WEBPACK_IMPORTED_MODULE_42__["MatRadioModule"], _angular_material__WEBPACK_IMPORTED_MODULE_29__["MatSidenavModule"], _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_43__["LayoutModule"], _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_44__["MatToolbarModule"], _angular_material_button__WEBPACK_IMPORTED_MODULE_45__["MatButtonModule"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_46__["MatIconModule"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_47__["MatCheckboxModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_48__["MatDialogModule"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_49__["MatProgressSpinnerModule"]],
@@ -2654,25 +2646,31 @@
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var src_app_data_booking_group_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/data/booking-group-data */
+    "./src/app/data/booking-group-data.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _authentication_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../authentication.service */
     "./src/app/authentication.service.ts");
     /* harmony import */
 
 
-    var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/material/dialog */
     "./node_modules/@angular/material/esm2015/dialog.js");
     /* harmony import */
 
 
-    var _modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../modal-dialog/modal-dialog.component */
     "./src/app/components/modal-dialog/modal-dialog.component.ts");
 
@@ -2683,6 +2681,7 @@
         this.router = router;
         this.matDialog = matDialog;
         this.dataChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.bookingGroup = new src_app_data_booking_group_data__WEBPACK_IMPORTED_MODULE_3__["BookingGroupData"]();
       }
 
       ngOnInit() {
@@ -2755,7 +2754,7 @@
 
       openModal() {
         //Configure Modal Dialog
-        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
+        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
 
         dialogConfig.disableClose = true;
         dialogConfig.id = "modal-component";
@@ -2770,7 +2769,7 @@
         }; // https://material.angular.io/components/dialog/overview
         // https://material.angular.io/components/dialog/overview
 
-        const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__["ModalDialogComponent"], dialogConfig);
+        const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
           if (result == "Yes") {
             //call register function                
@@ -2790,13 +2789,13 @@
     };
 
     GProgramComponent.ctorParameters = () => [{
-      type: _authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]
+      type: _authentication_service__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"]
     }, {
       type: src_app_services_program_services__WEBPACK_IMPORTED_MODULE_2__["ProgramServices"]
     }, {
-      type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
     }, {
-      type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]
+      type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"]
     }];
 
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], GProgramComponent.prototype, "ProgramPK", void 0);
@@ -2874,25 +2873,31 @@
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var src_app_data_booking_individual_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/data/booking-individual-data */
+    "./src/app/data/booking-individual-data.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
-    var _authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _authentication_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../authentication.service */
     "./src/app/authentication.service.ts");
     /* harmony import */
 
 
-    var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/material/dialog */
     "./node_modules/@angular/material/esm2015/dialog.js");
     /* harmony import */
 
 
-    var _modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../modal-dialog/modal-dialog.component */
     "./src/app/components/modal-dialog/modal-dialog.component.ts");
 
@@ -2903,6 +2908,7 @@
         this.router = router;
         this.matDialog = matDialog;
         this.dataChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.bookingIndividual = new src_app_data_booking_individual_data__WEBPACK_IMPORTED_MODULE_3__["BookingIndividualData"]();
       }
 
       ngOnInit() {
@@ -2981,7 +2987,7 @@
 
       openModal() {
         //Configure Modal Dialog
-        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
+        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
 
         dialogConfig.disableClose = true;
         dialogConfig.id = "modal-component";
@@ -2996,7 +3002,7 @@
         }; // https://material.angular.io/components/dialog/overview
         // https://material.angular.io/components/dialog/overview
 
-        const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__["ModalDialogComponent"], dialogConfig);
+        const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
           if (result == "Yes") {
             //call register function                
@@ -3016,13 +3022,13 @@
     };
 
     IProgramComponent.ctorParameters = () => [{
-      type: _authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]
+      type: _authentication_service__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"]
     }, {
       type: src_app_services_program_services__WEBPACK_IMPORTED_MODULE_2__["ProgramServices"]
     }, {
-      type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
     }, {
-      type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]
+      type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"]
     }];
 
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()], IProgramComponent.prototype, "ProgramPK", void 0);
@@ -3171,7 +3177,9 @@
       }
 
       static get EXPRESS_SERVER_URL() {
-        return window.location.origin.toString() + "/";
+        // return (window.location.origin.toString() + "/"); 
+        // return "http://localhost:3000/";
+        return "http://ec2-35-161-182-188.us-west-2.compute.amazonaws.com:3000/";
       }
 
       static get ERR_USER_NOT_FOUND() {
@@ -3862,6 +3870,117 @@
   },
 
   /***/
+  "./src/app/data/booking-group-data.ts":
+  /*!********************************************!*\
+    !*** ./src/app/data/booking-group-data.ts ***!
+    \********************************************/
+
+  /*! exports provided: BookingGroupData */
+
+  /***/
+  function srcAppDataBookingGroupDataTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BookingGroupData", function () {
+      return BookingGroupData;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    class BookingGroupData {
+      constructor() {
+        this.GroupProgramPK = 0;
+        this.AdultQuantity = true;
+        this.Age57Quantity = true;
+        this.Age810Quantity = true;
+        this.Age1112Quantity = true;
+        this.Age1314Quantity = true;
+        this.Age1415Quantity = true;
+        this.Age1517Quantity = true;
+        this.TotalQuantity = true;
+        this.ProgramRestriction = true;
+        this.OrganizationName = true;
+        this.GradeLevel = true;
+        this.TeacherName = true;
+        this.TeacherEmail = true;
+        this.TeacherPhoneNo = true;
+        this.AlternativeDate = true;
+        this.EducationPurpose = true;
+        this.CreatedBy = 0;
+        this.CreatedDate = new Date();
+      }
+
+    }
+    /***/
+
+  },
+
+  /***/
+  "./src/app/data/booking-individual-data.ts":
+  /*!*************************************************!*\
+    !*** ./src/app/data/booking-individual-data.ts ***!
+    \*************************************************/
+
+  /*! exports provided: BookingIndividualData */
+
+  /***/
+  function srcAppDataBookingIndividualDataTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BookingIndividualData", function () {
+      return BookingIndividualData;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+
+    class BookingIndividualData {
+      constructor() {
+        this.IndividualProgramPK = 0;
+        this.ParticipantName = true;
+        this.ParticipantAge = true;
+        this.Gender = true;
+        this.MerchSize = true;
+        this.AllergyInfo = true;
+        this.SpecialInfo = true;
+        this.InsureProviderName = true;
+        this.InsureRecipientName = true;
+        this.InsurePolicyNo = true;
+        this.InsurePhoneNo = true;
+        this.AuthorizedPickupName1 = true;
+        this.AuthorizedPickupPhone1 = true;
+        this.AuthorizedPickupName2 = true;
+        this.AuthorizedPickupPhone2 = true;
+        this.EarlyDropOff = true;
+        this.LatePickup = true;
+        this.MediaRelease = true;
+        this.EmergencyMedicalRelease = true;
+        this.LiabilityAgreement = true;
+        this.CreatedBy = 0;
+        this.CreatedDate = new Date();
+      }
+
+    }
+    /***/
+
+  },
+
+  /***/
   "./src/app/group-program/group-program.component.css":
   /*!***********************************************************!*\
     !*** ./src/app/group-program/group-program.component.css ***!
@@ -4189,7 +4308,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".banner{\r\n    background-image: url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    height: 100%;\r\n    font-family: 'Numans', sans-serif;\r\n    padding-top: 100px;\r\n    padding-bottom: 100px;\r\n    }\r\n    \r\n    .container{\r\n    height: 100%;\r\n    align-content: center;\r\n    }\r\n    \r\n    .card{\r\n    height:430px;\r\n    margin-top: auto;\r\n    margin-bottom: auto;\r\n    width: 400px;\r\n    background-color: rgba(0, 0, 0, 0.5) !important;\r\n    }\r\n    \r\n    .card-header h3{\r\n    color: white;\r\n    }\r\n    \r\n    .input-group-prepend span{\r\n    width: 50px;\r\n    background-color: #FFC312;\r\n    color: black;\r\n    border:0 !important;\r\n    }\r\n    \r\n    input:focus{\r\n    outline: 0 0 0 0  !important;\r\n    box-shadow: 0 0 0 0 !important;\r\n    \r\n    }\r\n    \r\n    .remember{\r\n    color: white;\r\n    }\r\n    \r\n    .remember input\r\n    {\r\n    width: 20px;\r\n    height: 20px;\r\n    margin-left: 15px;\r\n    margin-right: 5px;\r\n    }\r\n    \r\n    .login_btn{\r\n    color: black;\r\n    background-color: #FFC312;\r\n    width: 100px;\r\n    }\r\n    \r\n    .login_btn:hover{\r\n    color: black;\r\n    background-color: white;\r\n    }\r\n    \r\n    .links{\r\n    color: white;\r\n    }\r\n    \r\n    .links a{\r\n    margin-left: 4px;\r\n    }\r\n    \r\n    .error{\r\n        color: rgb(211, 23, 23);\r\n        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n        font-size: 16px;\r\n    }\r\n\r\n    \r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLCtIQUErSDtJQUMvSCxzQkFBc0I7SUFDdEIsNEJBQTRCO0lBQzVCLFlBQVk7SUFDWixpQ0FBaUM7SUFDakMsa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQjs7SUFFQTtJQUNBLFlBQVk7SUFDWixxQkFBcUI7SUFDckI7O0lBRUE7SUFDQSxZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLG1CQUFtQjtJQUNuQixZQUFZO0lBQ1osK0NBQStDO0lBQy9DOztJQUVBO0lBQ0EsWUFBWTtJQUNaOztJQUVBO0lBQ0EsV0FBVztJQUNYLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1osbUJBQW1CO0lBQ25COztJQUVBO0lBQ0EsNEJBQTRCO0lBQzVCLDhCQUE4Qjs7SUFFOUI7O0lBRUE7SUFDQSxZQUFZO0lBQ1o7O0lBRUE7O0lBRUEsV0FBVztJQUNYLFlBQVk7SUFDWixpQkFBaUI7SUFDakIsaUJBQWlCO0lBQ2pCOztJQUVBO0lBQ0EsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1o7O0lBRUE7SUFDQSxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCOztJQUVBO0lBQ0EsWUFBWTtJQUNaOztJQUVBO0lBQ0EsZ0JBQWdCO0lBQ2hCOztJQUVBO1FBQ0ksdUJBQXVCO1FBQ3ZCLDZFQUE2RTtRQUM3RSxlQUFlO0lBQ25CIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYW5uZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJ2h0dHBzOi8vYy53YWxsaGVyZS5jb20vcGhvdG9zLzgzL2U4L2xham9sbGFfc3Vuc2V0X2JlYWNoX3NlYWxpb25fc2VhX2xpb25fc2FuZGllZ29fY2xvdWRzLTg3MjQ1MS5qcGchZCcpO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBmb250LWZhbWlseTogJ051bWFucycsIHNhbnMtc2VyaWY7XHJcbiAgICBwYWRkaW5nLXRvcDogMTAwcHg7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTAwcHg7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb250YWluZXJ7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jYXJke1xyXG4gICAgaGVpZ2h0OjQzMHB4O1xyXG4gICAgbWFyZ2luLXRvcDogYXV0bztcclxuICAgIG1hcmdpbi1ib3R0b206IGF1dG87XHJcbiAgICB3aWR0aDogNDAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmNhcmQtaGVhZGVyIGgze1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAuaW5wdXQtZ3JvdXAtcHJlcGVuZCBzcGFue1xyXG4gICAgd2lkdGg6IDUwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkZDMzEyO1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYm9yZGVyOjAgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgaW5wdXQ6Zm9jdXN7XHJcbiAgICBvdXRsaW5lOiAwIDAgMCAwICAhaW1wb3J0YW50O1xyXG4gICAgYm94LXNoYWRvdzogMCAwIDAgMCAhaW1wb3J0YW50O1xyXG4gICAgXHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5yZW1lbWJlcntcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLnJlbWVtYmVyIGlucHV0XHJcbiAgICB7XHJcbiAgICB3aWR0aDogMjBweDtcclxuICAgIGhlaWdodDogMjBweDtcclxuICAgIG1hcmdpbi1sZWZ0OiAxNXB4O1xyXG4gICAgbWFyZ2luLXJpZ2h0OiA1cHg7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5sb2dpbl9idG57XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkZDMzEyO1xyXG4gICAgd2lkdGg6IDEwMHB4O1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAubG9naW5fYnRuOmhvdmVye1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5saW5rc3tcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmxpbmtzIGF7XHJcbiAgICBtYXJnaW4tbGVmdDogNHB4O1xyXG4gICAgfVxyXG5cclxuICAgIC5lcnJvcntcclxuICAgICAgICBjb2xvcjogcmdiKDIxMSwgMjMsIDIzKTtcclxuICAgICAgICBmb250LWZhbWlseTogJ0dpbGwgU2FucycsICdHaWxsIFNhbnMgTVQnLCBDYWxpYnJpLCAnVHJlYnVjaGV0IE1TJywgc2Fucy1zZXJpZjtcclxuICAgICAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICB9XHJcblxyXG4gICAgXHJcbiJdfQ== */";
+    __webpack_exports__["default"] = ".banner{\r\n    background-image: url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    height: 100%;\r\n    font-family: 'Numans', sans-serif;\r\n    padding-top: 100px;\r\n    padding-bottom: 100px;\r\n    }\r\n    \r\n    .container{\r\n    height: 700px;\r\n    align-content: center;\r\n    }\r\n    \r\n    .card{\r\n    height:430px;\r\n    margin-top: auto;\r\n    margin-bottom: auto;\r\n    width: 400px;\r\n    background-color: rgba(0, 0, 0, 0.5) !important;\r\n    }\r\n    \r\n    .card-header h3{\r\n    color: white;\r\n    }\r\n    \r\n    .input-group-prepend span{\r\n    width: 50px;\r\n    background-color: #FFC312;\r\n    color: black;\r\n    border:0 !important;\r\n    }\r\n    \r\n    input:focus{\r\n    outline: 0 0 0 0  !important;\r\n    box-shadow: 0 0 0 0 !important;\r\n    \r\n    }\r\n    \r\n    .remember{\r\n    color: white;\r\n    }\r\n    \r\n    .remember input\r\n    {\r\n    width: 20px;\r\n    height: 20px;\r\n    margin-left: 15px;\r\n    margin-right: 5px;\r\n    }\r\n    \r\n    .login_btn{\r\n    color: black;\r\n    background-color: #FFC312;\r\n    width: 100px;\r\n    }\r\n    \r\n    .login_btn:hover{\r\n    color: black;\r\n    background-color: white;\r\n    }\r\n    \r\n    .links{\r\n    color: white;\r\n    }\r\n    \r\n    .links a{\r\n    margin-left: 4px;\r\n    }\r\n    \r\n    .error{\r\n        color: rgb(211, 23, 23);\r\n        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n        font-size: 16px;\r\n    }\r\n\r\n    \r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLCtIQUErSDtJQUMvSCxzQkFBc0I7SUFDdEIsNEJBQTRCO0lBQzVCLFlBQVk7SUFDWixpQ0FBaUM7SUFDakMsa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQjs7SUFFQTtJQUNBLGFBQWE7SUFDYixxQkFBcUI7SUFDckI7O0lBRUE7SUFDQSxZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLG1CQUFtQjtJQUNuQixZQUFZO0lBQ1osK0NBQStDO0lBQy9DOztJQUVBO0lBQ0EsWUFBWTtJQUNaOztJQUVBO0lBQ0EsV0FBVztJQUNYLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1osbUJBQW1CO0lBQ25COztJQUVBO0lBQ0EsNEJBQTRCO0lBQzVCLDhCQUE4Qjs7SUFFOUI7O0lBRUE7SUFDQSxZQUFZO0lBQ1o7O0lBRUE7O0lBRUEsV0FBVztJQUNYLFlBQVk7SUFDWixpQkFBaUI7SUFDakIsaUJBQWlCO0lBQ2pCOztJQUVBO0lBQ0EsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1o7O0lBRUE7SUFDQSxZQUFZO0lBQ1osdUJBQXVCO0lBQ3ZCOztJQUVBO0lBQ0EsWUFBWTtJQUNaOztJQUVBO0lBQ0EsZ0JBQWdCO0lBQ2hCOztJQUVBO1FBQ0ksdUJBQXVCO1FBQ3ZCLDZFQUE2RTtRQUM3RSxlQUFlO0lBQ25CIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYW5uZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJ2h0dHBzOi8vYy53YWxsaGVyZS5jb20vcGhvdG9zLzgzL2U4L2xham9sbGFfc3Vuc2V0X2JlYWNoX3NlYWxpb25fc2VhX2xpb25fc2FuZGllZ29fY2xvdWRzLTg3MjQ1MS5qcGchZCcpO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBmb250LWZhbWlseTogJ051bWFucycsIHNhbnMtc2VyaWY7XHJcbiAgICBwYWRkaW5nLXRvcDogMTAwcHg7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTAwcHg7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jb250YWluZXJ7XHJcbiAgICBoZWlnaHQ6IDcwMHB4O1xyXG4gICAgYWxpZ24tY29udGVudDogY2VudGVyO1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAuY2FyZHtcclxuICAgIGhlaWdodDo0MzBweDtcclxuICAgIG1hcmdpbi10b3A6IGF1dG87XHJcbiAgICBtYXJnaW4tYm90dG9tOiBhdXRvO1xyXG4gICAgd2lkdGg6IDQwMHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwLjUpICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jYXJkLWhlYWRlciBoM3tcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmlucHV0LWdyb3VwLXByZXBlbmQgc3BhbntcclxuICAgIHdpZHRoOiA1MHB4O1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0ZGQzMxMjtcclxuICAgIGNvbG9yOiBibGFjaztcclxuICAgIGJvcmRlcjowICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIGlucHV0OmZvY3Vze1xyXG4gICAgb3V0bGluZTogMCAwIDAgMCAgIWltcG9ydGFudDtcclxuICAgIGJveC1zaGFkb3c6IDAgMCAwIDAgIWltcG9ydGFudDtcclxuICAgIFxyXG4gICAgfVxyXG4gICAgXHJcbiAgICAucmVtZW1iZXJ7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5yZW1lbWJlciBpbnB1dFxyXG4gICAge1xyXG4gICAgd2lkdGg6IDIwcHg7XHJcbiAgICBoZWlnaHQ6IDIwcHg7XHJcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcclxuICAgIG1hcmdpbi1yaWdodDogNXB4O1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAubG9naW5fYnRue1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0ZGQzMxMjtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmxvZ2luX2J0bjpob3ZlcntcclxuICAgIGNvbG9yOiBibGFjaztcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAubGlua3N7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5saW5rcyBhe1xyXG4gICAgbWFyZ2luLWxlZnQ6IDRweDtcclxuICAgIH1cclxuXHJcbiAgICAuZXJyb3J7XHJcbiAgICAgICAgY29sb3I6IHJnYigyMTEsIDIzLCAyMyk7XHJcbiAgICAgICAgZm9udC1mYW1pbHk6ICdHaWxsIFNhbnMnLCAnR2lsbCBTYW5zIE1UJywgQ2FsaWJyaSwgJ1RyZWJ1Y2hldCBNUycsIHNhbnMtc2VyaWY7XHJcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgfVxyXG5cclxuICAgIFxyXG4iXX0= */";
     /***/
   },
 
@@ -4290,12 +4409,11 @@
           return;
         }
 
-        this.auth.login(this.credentials).subscribe(() => {
-          this.router.navigateByUrl('/profile');
+        this.auth.login(this.credentials).subscribe(res => {
+          if (res.user.Role_FK == "1") this.router.navigateByUrl('/');else this.router.navigateByUrl('/profile');
         }, err => {
           //alert('Username and password do not match')            
           this.errorMessage = '*Username and password do not match';
-          console.error(err);
           return;
         });
       }
@@ -6420,165 +6538,6 @@
   },
 
   /***/
-  "./src/app/system-admin-dashboard/set-user-role/set-user-role.component.css":
-  /*!**********************************************************************************!*\
-    !*** ./src/app/system-admin-dashboard/set-user-role/set-user-role.component.css ***!
-    \**********************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcAppSystemAdminDashboardSetUserRoleSetUserRoleComponentCss(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = ".mat-button, .mat-raised-button:hover{\r\n  background-color: rgb(6, 3, 189);\r\n} \r\n\r\n  .row-header {\r\n      font-weight: bold;\r\n  } \r\n\r\n  .col-lg-2{\r\n  padding-bottom: 25px;\r\n} \r\n\r\n  h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 50px;\r\n    font-weight: bold;\r\n    /* padding-top: 20px; */\r\n    color: #08b2b8; \r\n} \r\n\r\n  thead{\r\n  background-color:  rgba(0, 0, 0, 0.658);\r\n  color: white;\r\n} \r\n\r\n  th, td {\r\n  padding: 15px;\r\n  text-align: left;\r\n} \r\n\r\n  td {\r\n  font-size: 18px;\r\n} \r\n\r\n  td.name{\r\n  color:  #08b2b8;\r\n} \r\n\r\n  th {\r\n  font-family: 'Source Sans Pro', sans-serif; \r\n  font-size: 22px;\r\n  font-weight: bold;\r\n} \r\n\r\n  .btn{\r\n  margin-right: 20px;\r\n} \r\n\r\n  .filter{\r\n  padding-bottom: 30px;\r\n  padding-left: 30px;\r\n  font-weight: bold;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3lzdGVtLWFkbWluLWRhc2hib2FyZC9zZXQtdXNlci1yb2xlL3NldC11c2VyLXJvbGUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGdDQUFnQztBQUNsQzs7RUFFRTtNQUNJLGlCQUFpQjtFQUNyQjs7RUFFRjtFQUNFLG9CQUFvQjtBQUN0Qjs7RUFFQTtJQUNJLDBDQUEwQztJQUMxQyxlQUFlO0lBQ2YsaUJBQWlCO0lBQ2pCLHVCQUF1QjtJQUN2QixjQUFjO0FBQ2xCOztFQUVBO0VBQ0UsdUNBQXVDO0VBQ3ZDLFlBQVk7QUFDZDs7RUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7QUFDbEI7O0VBRUE7RUFDRSxlQUFlO0FBQ2pCOztFQUVBO0VBQ0UsZUFBZTtBQUNqQjs7RUFFQTtFQUNFLDBDQUEwQztFQUMxQyxlQUFlO0VBQ2YsaUJBQWlCO0FBQ25COztFQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCOztFQUVBO0VBQ0Usb0JBQW9CO0VBQ3BCLGtCQUFrQjtFQUNsQixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9zeXN0ZW0tYWRtaW4tZGFzaGJvYXJkL3NldC11c2VyLXJvbGUvc2V0LXVzZXItcm9sZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm1hdC1idXR0b24sIC5tYXQtcmFpc2VkLWJ1dHRvbjpob3ZlcntcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNiwgMywgMTg5KTtcclxufSBcclxuXHJcbiAgLnJvdy1oZWFkZXIge1xyXG4gICAgICBmb250LXdlaWdodDogYm9sZDtcclxuICB9XHJcblxyXG4uY29sLWxnLTJ7XHJcbiAgcGFkZGluZy1ib3R0b206IDI1cHg7XHJcbn1cclxuICBcclxuaDEge1xyXG4gICAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmOyBcclxuICAgIGZvbnQtc2l6ZTogNTBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgLyogcGFkZGluZy10b3A6IDIwcHg7ICovXHJcbiAgICBjb2xvcjogIzA4YjJiODsgXHJcbn1cclxuXHJcbnRoZWFke1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICByZ2JhKDAsIDAsIDAsIDAuNjU4KTtcclxuICBjb2xvcjogd2hpdGU7XHJcbn1cclxuXHJcbnRoLCB0ZCB7XHJcbiAgcGFkZGluZzogMTVweDtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG59XHJcblxyXG50ZCB7XHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG59XHJcblxyXG50ZC5uYW1le1xyXG4gIGNvbG9yOiAgIzA4YjJiODtcclxufVxyXG5cclxudGgge1xyXG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgZm9udC1zaXplOiAyMnB4O1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcblxyXG4uYnRue1xyXG4gIG1hcmdpbi1yaWdodDogMjBweDtcclxufVxyXG5cclxuLmZpbHRlcntcclxuICBwYWRkaW5nLWJvdHRvbTogMzBweDtcclxuICBwYWRkaW5nLWxlZnQ6IDMwcHg7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn1cclxuIl19 */";
-    /***/
-  },
-
-  /***/
-  "./src/app/system-admin-dashboard/set-user-role/set-user-role.component.ts":
-  /*!*********************************************************************************!*\
-    !*** ./src/app/system-admin-dashboard/set-user-role/set-user-role.component.ts ***!
-    \*********************************************************************************/
-
-  /*! exports provided: SetUserRoleComponent */
-
-  /***/
-  function srcAppSystemAdminDashboardSetUserRoleSetUserRoleComponentTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "SetUserRoleComponent", function () {
-      return SetUserRoleComponent;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! ../../authentication.service */
-    "./src/app/authentication.service.ts");
-    /* harmony import */
-
-
-    var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! @angular/material */
-    "./node_modules/@angular/material/esm2015/material.js");
-    /* harmony import */
-
-
-    var src_app_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-    /*! src/app/components/modal-dialog/modal-dialog.component */
-    "./src/app/components/modal-dialog/modal-dialog.component.ts");
-
-    let SetUserRoleComponent = class SetUserRoleComponent {
-      constructor(auth, matDialog) {
-        this.auth = auth;
-        this.matDialog = matDialog;
-      }
-
-      ngOnInit() {
-        this.userRoles = ['Customer', 'Manager', 'System Admin'];
-        this.auth.getAllUser().subscribe(result => {
-          this.listOfUsers = result;
-        });
-        this.currentUserID = this.auth.getUserDetails().UserPK;
-      }
-
-      clearSearch() {
-        this.searchText = "";
-      } //open Modal when switching Activate/Deactivate button
-
-
-      openModalSwitch(userPK, status) {
-        this.IsActive = status; //Configure Modal Dialog
-
-        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
-
-        dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
-
-        if (!this.IsActive) {
-          dialogConfig.data = {
-            title: "Activate Account",
-            description: "This account is deactivated. Are you sure to activate this account?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
-          };
-        } else {
-          dialogConfig.data = {
-            title: "Deactivate Account",
-            description: "This account is actived. Are you sure to deactivate this activate?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
-          };
-        }
-
-        const modalDialog = this.matDialog.open(src_app_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_4__["ModalDialogComponent"], dialogConfig);
-        modalDialog.afterClosed().subscribe(result => {
-          if (result == "Yes") {
-            //deactivate or activate the account here
-            if (this.IsActive) {
-              //deactivate account here
-              this.auth.setUserActiveStatus(userPK, false).subscribe(res => {
-                window.location.reload();
-              });
-            } else {
-              //activate account here
-              this.auth.setUserActiveStatus(userPK, true).subscribe(res => {
-                window.location.reload();
-              });
-            } //switch the button
-
-
-            this.IsActive = !this.IsActive;
-          } else {//otherwise, do nothing            
-          }
-        });
-      }
-
-    };
-
-    SetUserRoleComponent.ctorParameters = () => [{
-      type: _authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"]
-    }, {
-      type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]
-    }];
-
-    SetUserRoleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-      selector: 'app-set-user-role',
-      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! raw-loader!./set-user-role.component.html */
-      "./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/set-user-role/set-user-role.component.html")).default,
-      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! ./set-user-role.component.css */
-      "./src/app/system-admin-dashboard/set-user-role/set-user-role.component.css")).default]
-    })], SetUserRoleComponent);
-    /***/
-  },
-
-  /***/
   "./src/app/system-admin-dashboard/user-details/user-details.component.css":
   /*!********************************************************************************!*\
     !*** ./src/app/system-admin-dashboard/user-details/user-details.component.css ***!
@@ -6734,7 +6693,7 @@
         this.auth.updateUserDetail(this.UserPK, this.userDetails).subscribe(response => {
           console.log(response);
           this.message = "User was updated sucessfully";
-          const url = "/profile/set-user-role";
+          const url = "/profile/user-management";
           this.router.navigateByUrl(url);
         }, error => {
           console.log(error);
@@ -6807,6 +6766,210 @@
       /*! ./user-details.component.css */
       "./src/app/system-admin-dashboard/user-details/user-details.component.css")).default]
     })], UserDetailsComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/system-admin-dashboard/user-management/user-management.component.css":
+  /*!**************************************************************************************!*\
+    !*** ./src/app/system-admin-dashboard/user-management/user-management.component.css ***!
+    \**************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppSystemAdminDashboardUserManagementUserManagementComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = ".mat-button, .mat-raised-button:hover{\r\n  background-color: rgb(6, 3, 189);\r\n} \r\n\r\n  .row-header {\r\n      font-weight: bold;\r\n  } \r\n\r\n  h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 50px;\r\n    font-weight: bold;\r\n    /* padding-top: 20px; */\r\n    color: #08b2b8; \r\n} \r\n\r\n  thead{\r\n  background-color:  rgba(0, 0, 0, 0.658);\r\n  color: white;\r\n} \r\n\r\n  th, td {\r\n  padding: 15px;\r\n  text-align: left;\r\n} \r\n\r\n  td {\r\n  font-size: 18px;\r\n} \r\n\r\n  td.name{\r\n  color:  #08b2b8;\r\n} \r\n\r\n  th {\r\n  font-family: 'Source Sans Pro', sans-serif; \r\n  font-size: 22px;\r\n  font-weight: bold;\r\n} \r\n\r\n  .btn{\r\n  margin-right: 20px;\r\n} \r\n\r\n  .filter{\r\n  padding-bottom: 30px;\r\n  padding-left: 30px;\r\n  font-weight: bold;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc3lzdGVtLWFkbWluLWRhc2hib2FyZC91c2VyLW1hbmFnZW1lbnQvdXNlci1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQ0FBZ0M7QUFDbEM7O0VBRUU7TUFDSSxpQkFBaUI7RUFDckI7O0VBR0Y7SUFDSSwwQ0FBMEM7SUFDMUMsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQix1QkFBdUI7SUFDdkIsY0FBYztBQUNsQjs7RUFFQTtFQUNFLHVDQUF1QztFQUN2QyxZQUFZO0FBQ2Q7O0VBRUE7RUFDRSxhQUFhO0VBQ2IsZ0JBQWdCO0FBQ2xCOztFQUVBO0VBQ0UsZUFBZTtBQUNqQjs7RUFFQTtFQUNFLGVBQWU7QUFDakI7O0VBRUE7RUFDRSwwQ0FBMEM7RUFDMUMsZUFBZTtFQUNmLGlCQUFpQjtBQUNuQjs7RUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7RUFFQTtFQUNFLG9CQUFvQjtFQUNwQixrQkFBa0I7RUFDbEIsaUJBQWlCO0FBQ25CIiwiZmlsZSI6InNyYy9hcHAvc3lzdGVtLWFkbWluLWRhc2hib2FyZC91c2VyLW1hbmFnZW1lbnQvdXNlci1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWF0LWJ1dHRvbiwgLm1hdC1yYWlzZWQtYnV0dG9uOmhvdmVye1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHJnYig2LCAzLCAxODkpO1xyXG59IFxyXG5cclxuICAucm93LWhlYWRlciB7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIH1cclxuXHJcbiAgXHJcbmgxIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICBmb250LXNpemU6IDUwcHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIC8qIHBhZGRpbmctdG9wOiAyMHB4OyAqL1xyXG4gICAgY29sb3I6ICMwOGIyYjg7IFxyXG59XHJcblxyXG50aGVhZHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAgcmdiYSgwLCAwLCAwLCAwLjY1OCk7XHJcbiAgY29sb3I6IHdoaXRlO1xyXG59XHJcblxyXG50aCwgdGQge1xyXG4gIHBhZGRpbmc6IDE1cHg7XHJcbiAgdGV4dC1hbGlnbjogbGVmdDtcclxufVxyXG5cclxudGQge1xyXG4gIGZvbnQtc2l6ZTogMThweDtcclxufVxyXG5cclxudGQubmFtZXtcclxuICBjb2xvcjogICMwOGIyYjg7XHJcbn1cclxuXHJcbnRoIHtcclxuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gIGZvbnQtc2l6ZTogMjJweDtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxuLmJ0bntcclxuICBtYXJnaW4tcmlnaHQ6IDIwcHg7XHJcbn1cclxuXHJcbi5maWx0ZXJ7XHJcbiAgcGFkZGluZy1ib3R0b206IDMwcHg7XHJcbiAgcGFkZGluZy1sZWZ0OiAzMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcbiJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/system-admin-dashboard/user-management/user-management.component.ts":
+  /*!*************************************************************************************!*\
+    !*** ./src/app/system-admin-dashboard/user-management/user-management.component.ts ***!
+    \*************************************************************************************/
+
+  /*! exports provided: UserManagementComponent */
+
+  /***/
+  function srcAppSystemAdminDashboardUserManagementUserManagementComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "UserManagementComponent", function () {
+      return UserManagementComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../../authentication.service */
+    "./src/app/authentication.service.ts");
+    /* harmony import */
+
+
+    var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/material */
+    "./node_modules/@angular/material/esm2015/material.js");
+    /* harmony import */
+
+
+    var src_app_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/components/modal-dialog/modal-dialog.component */
+    "./src/app/components/modal-dialog/modal-dialog.component.ts");
+
+    let UserManagementComponent = class UserManagementComponent {
+      constructor(auth, matDialog) {
+        this.auth = auth;
+        this.matDialog = matDialog;
+        this.allUsers = [];
+        this.activeUsers = [];
+        this.inactiveUsers = []; // Dropdown Meny Option
+
+        this.userStatus = [{
+          id: 0,
+          name: "All Users"
+        }, {
+          id: 1,
+          name: "Active Users"
+        }, {
+          id: 2,
+          name: "Inactive Users"
+        }];
+      }
+
+      ngOnInit() {
+        // Add option for the dropdown menu
+        this.userStatus.forEach(e => {
+          $("#userStatus").append(new Option(e['name'], e['id']));
+        });
+        this.userRoles = ['Customer', 'Manager', 'System Admin'];
+        this.auth.getAllUser().subscribe(result => {
+          this.listOfUsers = result;
+          this.allUsers = result;
+          this.listOfUsers.forEach(e => {
+            if (e.IsActive) {
+              this.activeUsers.push(e);
+            } else {
+              this.inactiveUsers.push(e);
+            }
+          });
+        });
+        this.currentUserID = this.auth.getUserDetails().UserPK;
+      }
+
+      clearSearch() {
+        this.searchText = "";
+      } // Catch the event dropdown menu
+
+
+      selectChangeHandler(event) {
+        let choice = event.target.value; // Update the data of table
+
+        switch (choice) {
+          case '0':
+            this.listOfUsers = this.allUsers;
+            break;
+
+          case '1':
+            this.listOfUsers = this.activeUsers;
+            break;
+
+          case '2':
+            this.listOfUsers = this.inactiveUsers;
+            break;
+        }
+      } //open Modal when switching Activate/Deactivate button
+
+
+      openModalSwitch(userPK, status) {
+        this.IsActive = status; //Configure Modal Dialog
+
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"](); // The user can't close the dialog by clicking outside its body
+
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+
+        if (!this.IsActive) {
+          dialogConfig.data = {
+            title: "Activate Account",
+            description: "This account is deactivated. Are you sure to activate this account?",
+            actionButtonText: "Confirm",
+            numberOfButton: "2"
+          };
+        } else {
+          dialogConfig.data = {
+            title: "Deactivate Account",
+            description: "This account is actived. Are you sure to deactivate this activate?",
+            actionButtonText: "Confirm",
+            numberOfButton: "2"
+          };
+        }
+
+        const modalDialog = this.matDialog.open(src_app_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_4__["ModalDialogComponent"], dialogConfig);
+        modalDialog.afterClosed().subscribe(result => {
+          if (result == "Yes") {
+            //deactivate or activate the account here
+            if (this.IsActive) {
+              //deactivate account here
+              this.auth.setUserActiveStatus(userPK, false).subscribe(res => {
+                window.location.reload();
+              });
+            } else {
+              //activate account here
+              this.auth.setUserActiveStatus(userPK, true).subscribe(res => {
+                window.location.reload();
+              });
+            } //switch the button
+
+
+            this.IsActive = !this.IsActive;
+          } else {//otherwise, do nothing            
+          }
+        });
+      }
+
+    };
+
+    UserManagementComponent.ctorParameters = () => [{
+      type: _authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"]
+    }, {
+      type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]
+    }];
+
+    UserManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-user-management',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./user-management.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/system-admin-dashboard/user-management/user-management.component.html")).default,
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./user-management.component.css */
+      "./src/app/system-admin-dashboard/user-management/user-management.component.css")).default]
+    })], UserManagementComponent);
     /***/
   },
 
