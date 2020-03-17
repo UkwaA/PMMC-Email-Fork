@@ -8,10 +8,6 @@
     <div [innerHTML]="programDetails.Description"></div>
   </div>
   <hr>
- <!--  <div class="row text-left" style="font-weight: bold;">
-    <p>${{programDetails.FullAmount}}</p>
-  </div>
-  <hr> -->
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
       <div class="row">

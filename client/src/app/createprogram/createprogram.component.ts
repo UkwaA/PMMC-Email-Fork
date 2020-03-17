@@ -1,119 +1,177 @@
-import { Component } from '@angular/core'
-import { AuthenticationService, UserDetails } from '../authentication.service'
-import { Router } from '@angular/router'
-import { ProgramData } from '../data/program-data';
-import { ProgramServices } from '../services/program.services'
+import { Component, OnInit } from "@angular/core";
+import { AuthenticationService, UserDetails } from "../authentication.service";
+import { Router } from "@angular/router";
+import { ProgramData } from "../data/program-data";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ProgramServices } from "../services/program.services";
 //import { AppConstants } from '../constants'
-import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import * as DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
+import { MatDialogConfig, MatDialog } from "@angular/material";
+
 declare var $: any;
 
 @Component({
-    templateUrl: './createprogram.component.html',
-    styleUrls: ['./createprogram.component.css'],
-    providers: [ProgramServices]
+  templateUrl: "./createprogram.component.html",
+  styleUrls: ["./createprogram.component.css"],
+  providers: [ProgramServices]
 })
+export class CreateProgramComponent implements OnInit {
+  file: File;
+  createProgramForm: FormGroup;
+  submitted = false;
+  Editor = DecoupledEditor;
+  selectedProgramType = 0;
+  selectedSubType = 0;
+  DepositAmount = 0;
+  programData: ProgramData = {
+    ProgramPk: 0,
+    Name: "",
+    Description: "",
+    DepositAmount: 0,
+    PricePerParticipant: null,
+    MaximumParticipant: null,
+    ImgData: "",
+    ProgramType: 0,
+    CreatedDate: "",
+    CreatedBy: 0,
+    IsActive: false,
+    SubProgramPk: 0
+  };
 
-export class CreateProgramComponent {
-    file: File
-    Editor = DecoupledEditor;
-    selectedValue = 0;
-    selectedSubType = 0;
-    programData: ProgramData = {
-        ProgramPk: 0,
-        Name: '',
-        Description: '',
-        DepositAmount: null,
-        PricePerParticipant: null,
-        MaximumParticipant: null,
-        ImgData: '',
-        ProgramType: 0,
-        CreatedDate: '',
-        CreatedBy: 0,
-        IsActive: false,
-        SubProgramPk: 0
+  // Initialize Dropdown List for Program Type
+  programs = [
+    {name: "Group Program"},
+    {name: "Individual Program"}
+  ];
+  programCategories = [
+    { id: 0, name: "Group Program" },
+    { id: 1, name: "Individual Program" }
+  ];
+
+  // Initialize Dropdown List for Sub Type of Group Program
+  programSubCategories = [
+    { id: 0, name: "None" },
+    { id: 1, name: "Scout Program" },
+    { id: 2, name: "Field Trip" }
+  ];
+
+  constructor(
+    private services: ProgramServices,
+    private fb: FormBuilder,
+    private auth: AuthenticationService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    // this.programSubCategories.forEach(e => {
+    //   $("#programSubCategories").append(new Option(e["name"], e["id"]));
+    // });
+
+    // this.programCategories.forEach(e => {
+    //   $("#programCat").append(new Option(e["name"], e["id"]));
+    // });
+
+    this.createProgramForm = this.fb.group({
+      Name: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100)
+        ]
+      ],
+      programType: ['', Validators.required],
+      subProgramType: ['', Validators.required],
+      DepositAmount: ["", [Validators.required, Validators.min(0)]],
+      PricePerParticipant: ["", [Validators.required, Validators.min(0)]],
+      MaximumParticipant: ["", [Validators.required, Validators.min(1)]]
+   //   ImgData: ["", [Validators.required]]
+    });
+  }
+
+  get f() {
+    return this.createProgramForm.controls;
+  }
+
+  // EventHandler for drop down list of Program Type
+  selectChangeHandler(event: any) {
+    // Update the variable
+    this.selectedProgramType = event.target.value;
+    
+    // Reset value of Deposit when user change value of Program Type
+    if( this.selectedProgramType == 1)
+    {
+      this.createProgramForm.controls["DepositAmount"].patchValue(0);
+    }
+  }
+
+  // EventHandler for drop down list Sub Type of Group Program
+  selectSubTypeChangeHandler(event: any) {
+    // Update the variable
+    this.selectedSubType = event.target.value;
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+    }
+  }
+
+  createProgram() {
+    this.submitted = true;
+    if (this.createProgramForm.invalid) {
+      console.log("invalid");
+      return;
     }
 
-    // Initialize Dropdown List for Program Type
-    programCategories: Array<Object> = [
-        { id: 0, name: "Group Program" },
-        { id: 1, name: "Individual Program" }
-    ]
+    this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
+    this.programData.ImgData = "";
+    this.programData.ProgramType = this.selectedProgramType;
+    this.programData.SubProgramPk = this.selectedSubType;
 
-    // Initialize Dropdown List for Sub Type of Group Program
-    programSubCategories: Array<Object> = [
-        { id: 0, name: "None" },
-        { id: 1, name: "Scout Program" },
-        { id: 2, name: "Field Trip" }
-    ]
+    // Call Programs Service to send request to server
+    this.services.addNewProgram(this.getFormData()).subscribe(response => {
+      console.log(response);
+      this.router.navigateByUrl(
+        "/profile/program-details/" + response + "/edit"
+      );
+    });
+  }
 
-    constructor(private services: ProgramServices,
-        private auth: AuthenticationService,
-        private router: Router) { }
+  // Initialize CkEditor
+  onReady(editor: any) {
+    editor.ui
+      .getEditableElement()
+      .parentElement.insertBefore(
+        editor.ui.view.toolbar.element,
+        editor.ui.getEditableElement()
+      );
+  }
 
-    ngOnInit() {
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        });
-        this.programSubCategories.forEach(e => {
-            $("#programSubCategories").append(new Option(e['name'], e['id']));
-        });
+  // Clear data when click on input field
+  onFocus(event) {
+    event.target.value = "";
+  }
+
+  // Restore data when lose focus on input field
+  lostFocus(event) {
+    if(event.target.value === 0 ||   event.target.value === "")
+    {
+      event.target.value = 0;
+    }
+  }
+
+  getFormData() {
+    // Use FormData to pass file data to server.
+    // Without FormData, the file data will be empty.
+    const formData = new FormData();
+    formData.append("file", this.file, this.file.name);
+    for (const key of Object.keys(this.programData)) {
+      const value = this.programData[key];
+      formData.append(key, value);
     }
 
-    // EventHandler for drop down list of Program Type
-    selectChangeHandler(event: any) {
-        // Update the variable
-        this.selectedValue = event.target.value;
-    }
-
-    // EventHandler for drop down list Sub Type of Group Program
-    selectSubTypeChangeHandler(event: any) {
-        // Update the variable
-        this.selectedSubType = event.target.value;
-    }
-
-    onFileChange(event) {
-        if (event.target.files.length > 0) {
-            this.file = event.target.files[0]
-        }
-    }
-
-    createProgram() {
-        this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
-        this.programData.ImgData = "";
-        this.programData.ProgramType = this.selectedValue;
-        this.programData.SubProgramPk = this.selectedSubType;
-
-        // Call Programs Service to send request to server
-        this.services.addNewProgram(this.getFormData())
-            .subscribe((response) => {
-                console.log(response)
-                this.router.navigateByUrl("/profile/program-details/" + response + "/edit")
-            })
-    }
-
-    onReady(editor:any) {
-        editor.ui.getEditableElement().parentElement.insertBefore(
-            editor.ui.view.toolbar.element,
-            editor.ui.getEditableElement()
-        );
-    }
-    getFormData() {
-        // Use FormData to pass file data to server.
-        // Without FormData, the file data will be empty.
-        const formData = new FormData();
-        formData.append('file', this.file, this.file.name);
-        for (const key of Object.keys(this.programData)) {
-            const value = this.programData[key];
-            formData.append(key, value);
-
-        }
-
-        return formData;
-
-    }
-
-
-
+    return formData;
+  }
 }

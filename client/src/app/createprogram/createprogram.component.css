@@ -2,7 +2,7 @@
 
 /* Change height of ckeditor */
 :host ::ng-deep .ck-editor__editable_inline {
-    min-height: 300px !important;
+    min-height: 500px !important;
     border-color: gray;
 }
 

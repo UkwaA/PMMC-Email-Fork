@@ -38,8 +38,6 @@ export class BookingIndividualProgramComponent implements OnInit {
       })
     })
 
-
-    // this.bookingIndividual = new BookingIndividualData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true,true, true);
     this.registerForm = this.fb.group({
       ParticipateName: ['', [Validators.required, Validators.minLength(3)]],
       ParticipateAge: ['', Validators.required],

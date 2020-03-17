@@ -112,7 +112,7 @@ program.get('/get-individual-program-requirement/:id', (req, res) => {
     })
 })
 
-// Create New Program Header
+// Create New Program Header and Initial the Program Details.
 program.post('/add-program', (req, res) => {
   const today = new Date()
   var programPK = 0
@@ -162,22 +162,22 @@ program.post('/add-program', (req, res) => {
           var groupDetail = {
             GroupProgramPK: programPK,
             SubProgramPk: req.body.SubProgramPk,
-            AdultQuantity: true,
-            Age57Quantity: true,
-            Age810Quantity: true,
-            Age1112Quantity: true,
-            Age1314Quantity: true,
-            Age1415Quantity: true,
-            Age1517Quantity: true,
-            TotalQuantity: true,
-            ProgramRestriction: true,
-            OrganizationName: true,
-            GradeLevel: true,
-            TeacherName: true,
-            TeacherEmail: true,
-            TeacherPhoneNo: true,
-            AlternativeDate: true,
-            EducationPurpose: true,            
+            // AdultQuantity: true,
+            // Age57Quantity: true,
+            // Age810Quantity: true,
+            // Age1112Quantity: true,
+            // Age1314Quantity: true,
+            // Age1415Quantity: true,
+            // Age1517Quantity: true,
+            // TotalQuantity: true,
+            // ProgramRestriction: true,
+            // OrganizationName: true,
+            // GradeLevel: true,
+            // TeacherName: true,
+            // TeacherEmail: true,
+            // TeacherPhoneNo: true,
+            // AlternativeDate: true,
+            // EducationPurpose: true,            
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
@@ -189,25 +189,25 @@ program.post('/add-program', (req, res) => {
         case '1':
           var individualDetail = {
             IndividualProgramPK: programPK,
-            ParticipantName: true,
-            ParticipantAge: true,
-            Gender: true,
-            MerchSize: true,
-            AllergyInfo: true,
-            SpecialInfo: true,
-            InsureProviderName: true,
-            InsureRecipientName: true,
-            InsurePolicyNo: true,
-            InsurePhoneNo: true,
-            AuthorizedPickupName1: true,
-            AuthorizedPickupPhone1: true,
-            AuthorizedPickupName2: true,
-            AuthorizedPickupPhone2: true,
-            EarlyDropOff: true,
-            LatePickup: true,
-            MediaRelease: true,
-            EmergencyMedicalRelease: true,
-            LiabilityAgreement: true,
+            // ParticipantName: true,
+            // ParticipantAge: true,
+            // Gender: true,
+            // MerchSize: true,
+            // AllergyInfo: true,
+            // SpecialInfo: true,
+            // InsureProviderName: true,
+            // InsureRecipientName: true,
+            // InsurePolicyNo: true,
+            // InsurePhoneNo: true,
+            // AuthorizedPickupName1: true,
+            // AuthorizedPickupPhone1: true,
+            // AuthorizedPickupName2: true,
+            // AuthorizedPickupPhone2: true,
+            // EarlyDropOff: true,
+            // LatePickup: true,
+            // MediaRelease: true,
+            // EmergencyMedicalRelease: true,
+            // LiabilityAgreement: true,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy,
           }
@@ -217,7 +217,7 @@ program.post('/add-program', (req, res) => {
             })
           break;
       }
-
+      // Response the ProgramPK to the client
       res.json(programPK)
     })
     .catch(err => {
