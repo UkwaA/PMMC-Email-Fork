@@ -103,6 +103,7 @@ export class CreateProgramComponent implements OnInit {
     if( this.selectedProgramType == 1)
     {
       this.createProgramForm.controls["DepositAmount"].patchValue(0);
+      this.selectedSubType = 0;
     }
   }
 
