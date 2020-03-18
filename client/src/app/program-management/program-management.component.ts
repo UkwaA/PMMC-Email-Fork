@@ -3,6 +3,8 @@ import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 declare var $: any;
 
 @Component({
@@ -20,14 +22,8 @@ export class ProgramManagementComponent {
     searchText: string;
     selectedValue = 0;
     isDisabled= true; //temporary variabe to hold the value for enable/disable button of program
-
-    // searchCategories: Array<Object> = [
-    //     { id: 0, name: "Any" },
-    //     { id: 1, name: "Program Name" },
-    //     { id: 3, name: "Program Type" }
-    // ]
   
-    // Dropdown Meny Option
+    // Dropdown Menu Option
     programCategories: Array<Object> = [
         { id: 0, name: "All Program" },
         { id: 1, name: "Group Program" },
@@ -35,10 +31,6 @@ export class ProgramManagementComponent {
     ]
 
     constructor(private programService: ProgramServices,
-                // private http: HttpClient,
-                // private services: ProgramServices, 
-                // private auth: AuthenticationService, 
-                // private router: Router,
                 public matDialog: MatDialog) { }
 
     ngOnInit() {
@@ -111,8 +103,7 @@ export class ProgramManagementComponent {
                 numberOfButton: "2"         
             }
         }
-            // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
+
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
@@ -53,6 +54,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
+import { ScheduleManagementComponent } from './schedule-management/schedule-management.component'
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -78,6 +80,7 @@ const routes : Routes = [
       {path: '', component: DashboardComponent},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
         path: 'program-details/:id/:mode', 
         component: ProgramDetailsComponent,
@@ -139,6 +142,7 @@ const routes : Routes = [
     ModalDialogComponent,
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
+    ScheduleManagementComponent,
     AccountSetting,
     ProfileInfo
   ],
@@ -147,6 +151,7 @@ const routes : Routes = [
     FormsModule,
     HttpClientModule,
     Ng2SearchPipeModule,
+    NgxPaginationModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled'
     }),
