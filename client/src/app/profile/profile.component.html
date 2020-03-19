@@ -13,9 +13,10 @@
         <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]="selected" matListIcon>add_circle</mat-icon> New Program</a>
         <a mat-list-item [routerLink]="['/profile/program-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>edit</mat-icon> Program Management</a>
       </mat-nav-list>
-      <section *ngIf = "role == '3'"> Account</section>
+      <section *ngIf = "role == '3'"> User</section>
       <mat-divider *ngIf = "role == '3'"></mat-divider>
       <mat-nav-list *ngIf = "role == '3'">
+        <a mat-list-item [routerLink]="['/profile/create-new-user']" [routerLinkActive]="['active']"> <mat-icon [class.active]="selected" matListIcon>add_circle</mat-icon>Create New User</a>
         <a mat-list-item [routerLink]="['/profile/user-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>
       </mat-nav-list>
     </mat-sidenav>

@@ -85,11 +85,11 @@ users.post('/register', (req, res) => {
 *        LOG IN
 ***************************/
 users.post('/login', (req, res) => {
-  //res.send('error: ' + req.body.Password + "--" + req.body.Username)
   User.findOne({
     where: {
-      Username: req.body.Username
-      // Password: req.body.Password
+      //Check if username is match and account is active
+      Username: req.body.Username,
+      IsActive: true
     }
   })
     .then(user => {

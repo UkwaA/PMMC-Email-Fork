@@ -11,6 +11,7 @@ const app = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
 
+//TO DO: need to update to sponsor's email server
 let emailServer = {
   host: "email-smtp.us-west-2.amazonaws.com",
   port: 587,

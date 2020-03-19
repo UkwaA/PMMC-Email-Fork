@@ -33,6 +33,7 @@ import { ProgramManagementComponent } from './program-management/program-managem
 import { ProgramDetailsComponent } from './program-details/program-details.component';
 import { UserManagementComponent } from './system-admin-dashboard/user-management/user-management.component';
 import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
+import { CreateNewUserComponent } from './system-admin-dashboard/create-new-user/create-new-user.component';
 import { IProgramComponent } from './components/i-program/i-program.component'; 
 import { GProgramComponent } from './components/g-program/g-program.component';
 import { ForgotPasswordComponent} from './password-service/forgot-password/forgot-password.component';
@@ -94,6 +95,11 @@ const routes : Routes = [
         canActivate: [AuthSystemRoleGuardService], 
       },
       { 
+        path: 'create-new-user', 
+        component: CreateNewUserComponent,
+        canActivate: [AuthSystemRoleGuardService], 
+      },
+      { 
         path: 'profile-info/:id', 
         component: ProfileInfo,
         canActivate: [AuthGuardService], 
@@ -140,7 +146,8 @@ const routes : Routes = [
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
     AccountSetting,
-    ProfileInfo
+    ProfileInfo,
+    CreateNewUserComponent
   ],
   imports: [
     BrowserModule,
