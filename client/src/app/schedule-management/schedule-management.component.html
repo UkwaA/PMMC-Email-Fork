@@ -1,18 +1,16 @@
 <div class="container">
     <div class="row text-center text-white mb-5 mt-4">
         <div class="col-lg-7 mx-auto">
-            <h1>Program Management</h1>
+            <h1>Schedule Management</h1>
         </div>
     </div>
     <div class="row filter">
         <div class="col-lg-2 col-md-2 col-sm-3 p-0">
-            <select class="form-control" style="font-weight: bold" id="programCat"
-                (change)="selectChangeHandler($event)">
+            <select class="form-control" style = "font-weight: bold" id="programCat" (change)="selectChangeHandler($event)" >
             </select>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
-            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
-                [(ngModel)]="searchText">
+            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search" [(ngModel)]="searchText">
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
             <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
@@ -29,41 +27,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
-                    <td class="name"> {{program.Name}}
+                <tr *ngFor="let program of programs | filter:searchText">
+                    <td class="name"> {{program.Name}} 
                         <div class="errorMessage" *ngIf="!program.IsActive">
-                            <mat-icon color="red">error</mat-icon>
+                            <mat-icon color="red">error</mat-icon> 
                             <label>Need Requirement</label>
                         </div>
                     </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
-                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']"
-                            class="btn btn-info">
+                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']" class="btn btn-info">
                             <mat-icon matListIcon>visibility</mat-icon> View
                         </button>
                         <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
                             class="btn btn-warning">
                             <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
-                        <button *ngIf="!program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
-                            class="btn btn-success">
-                            <mat-icon matListIcon> visibility </mat-icon> Enable
-                        </button>
-                        <button *ngIf="program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
-                            class="btn btn-danger">
-                            <mat-icon matListIcon> visibility_off </mat-icon> Disable
-                        </button>
                 </tr>
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8">
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
-                </pagination-controls>
-            </div>
-        </div>
     </div>
 </div>

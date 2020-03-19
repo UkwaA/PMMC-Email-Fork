@@ -1,30 +1,92 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6 mt-4 mb-5 mx-auto">
-            <form (submit)="createProgram()" enctype="multipart/form-data">
+        <div class="col-lg-9 mt-4 mb-5 mx-auto">
+            <form [formGroup]="createProgramForm" (submit)="createProgram()" enctype="multipart/form-data">
                 <h1 class="text-center">Create Program Information</h1>
                 <div class="form-group font-weight-bold">
                     <label>Program Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter Program Name"
-                        [(ngModel)]="programData.Name" required>
+                    <input type="text" class="form-control" placeholder="Enter Program Name" formControlName="Name"
+                        [(ngModel)]="programData.Name" [ngClass]="{'is-invalid': submitted && f.Name.errors }">
+                    <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                        <div *ngIf="f.Name.errors.required">Program Name is required</div>
+                        <div *ngIf="f.Name.errors.minlength">Must be at least 5 characters long.</div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="des font-weight-bold">
                         <label>Description</label>
                     </div>
-                    <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)" name="editor" [(ngModel)]="programData.Description"></ckeditor>
+                    <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)"
+                        name="editor" [(ngModel)]="programData.Description" [ngModelOptions]="{standalone: true}">
+                    </ckeditor>
                 </div>
                 <div class="form-group font-weight-bold">
-                    <label>Deposit Amount</label>
-                    <input type="number" class="form-control" name="deposit" placeholder="Enter Program Deposit Require" [(ngModel)]="programData.DepositAmount" required>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label>Program Type</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" formControlName="programType" (change)="selectChangeHandler($event)" [ngClass]="{ 'is-invalid': submitted && f.programType.errors }">
+                                <option *ngFor="let type of programCategories; let i = index"
+                                    [value]="programCategories[i].id">
+                                    {{programCategories[i].name}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f.programType.errors" class="invalid-feedback">
+                                <div *ngIf="f.programType.errors.required">Program Type is required</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <span *ngIf="selectedProgramType == 0">
+                    <div class="form-group font-weight-bold">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Sub Type Of Group Program</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select  class="form-control"  formControlName="subProgramType" (change)="selectSubTypeChangeHandler($event)"  [ngClass]="{ 'is-invalid': submitted && f.subProgramType.errors }">
+                                    <option *ngFor="let subType of programSubCategories; let i = index"
+                                        [value]="programSubCategories[i].id">
+                                        {{programSubCategories[i].name}}
+                                    </option>
+                                </select>
+                                <div *ngIf="submitted && f.subProgramType.errors" class="invalid-feedback">
+                                    <div *ngIf="f.subProgramType.errors.required">Sub Program Type is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group font-weight-bold">
+                        <label>Deposit Amount</label>
+                        <input type="number" class="form-control" formControlName="DepositAmount"
+                            placeholder="Enter Program Deposit Require" [(ngModel)]="programData.DepositAmount"
+                            [ngClass]="{'is-invalid': submitted && f.DepositAmount.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
+                        <div *ngIf="submitted && f.DepositAmount.errors" class="invalid-feedback">
+                            <div *ngIf="f.DepositAmount.errors.required">Deposit Amount is required.</div>
+                            <div *ngIf="f.DepositAmount.errors.min">Deposit Amount must be from 0 and up.</div>
+                        </div>
+                    </div>
+                </span>
                 <div class="form-group font-weight-bold">
                     <label>Price Per Participant</label>
-                    <input type="number" class="form-control" name="fullamount" placeholder="Enter Price for 1 Participant" [(ngModel)]="programData.PricePerParticipant" required>
+                    <input type="number" class="form-control" formControlName="PricePerParticipant"
+                        placeholder="Enter Price for 1 Participant" [(ngModel)]="programData.PricePerParticipant"
+                        [ngClass]="{'is-invalid': submitted && f.PricePerParticipant.errors }">
+                    <div *ngIf="submitted && f.PricePerParticipant.errors" class="invalid-feedback">
+                        <div *ngIf="f.PricePerParticipant.errors.required">Price Per Participant is required</div>
+                        <div *ngIf="f.PricePerParticipant.errors.min">Price Per Participant must be from 0 and up.</div>
+                    </div>
                 </div>
                 <div class="form-group font-weight-bold">
                     <label>Maximum Number of Participant</label>
-                    <input type="number" class="form-control" name="numerofParticipant" placeholder="Enter Number of Participant" [(ngModel)]="programData.MaximumParticipant" required>
+                    <input type="number" class="form-control" formControlName="MaximumParticipant"
+                        placeholder="Enter Number of Participant" [(ngModel)]="programData.MaximumParticipant"
+                        [ngClass]="{'is-invalid': submitted && f.MaximumParticipant.errors }">
+                    <div *ngIf="submitted && f.MaximumParticipant.errors" class="invalid-feedback">
+                        <div *ngIf="f.MaximumParticipant.errors.required">Participant Number is required</div>
+                        <div *ngIf="f.MaximumParticipant.errors.min">Participant Number must be greater than 0.</div>
+                    </div>
                 </div>
                 <div class="form-group font-weight-bold">
                     <div class="row">
@@ -32,37 +94,17 @@
                             <label>Image</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="file" (change)="onFileChange($event)" accept="image/x-png,image/gif,image/jpeg" />
+                            <input type="file" (change)="onFileChange($event)"
+                                accept="image/x-png,image/gif,image/jpeg" />
                         </div>
                     </div>
                 </div>
-                <div class="form-group font-weight-bold">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Program Type</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="programCat" (change)="selectChangeHandler($event)" >
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group font-weight-bold">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Sub Type Of Group Program</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select id="programSubCategories" (change)="selectSubTypeChangeHandler($event)" >
-                            </select>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="button pt-5 pb-5">
                     <button class="btn btn-lg btn-info btn-block" type="submit">Create Program</button>
-                </div>  
+                </div>
             </form>
-               
+
         </div>
     </div>
 </div>

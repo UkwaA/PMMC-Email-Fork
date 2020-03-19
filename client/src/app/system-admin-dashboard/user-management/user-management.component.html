@@ -27,7 +27,7 @@
                     <th style="width:30%"> Actions</th>
                 </tr>
             </thead>
-            <tbody *ngFor = 'let user of listOfUsers | filter:searchText'>
+            <tbody *ngFor = "let user of listOfUsers | filter:searchText  | paginate:{itemsPerPage: 7, currentPage:p}">
                 <tr *ngIf ="user.UserPK != currentUserID">
                     <td class="name"> {{user.Username}} </td>
                     <td *ngIf="user.Role_FK == 1">Customer</td>
@@ -47,5 +47,13 @@
                 </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
+                </pagination-controls>
+            </div>
+        </div>
     </div>
 </div>

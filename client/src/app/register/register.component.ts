@@ -101,11 +101,6 @@ export class RegisterComponent {
             actionButtonText: "Confirm",   
             numberOfButton: "2"         
           }
-          // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
-        // const modalDialog = this.matDialog.open(ModalDialogComponent, {width: "350px", data: {title: "Registration Confirmation", 
-        // username: this.registerForm.get('username').value,
-        // email: this.registerForm.get('email').value, actionButtonText: "Confirm", numberOfButton: "2"}});
         const modalDialog = this.matDialog.open(RegisterModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
