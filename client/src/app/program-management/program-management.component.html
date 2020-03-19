@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 8, currentPage:p}">
+                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                     <td class="name"> {{program.Name}}
                         <div class="errorMessage" *ngIf="!program.IsActive">
                             <mat-icon color="red">error</mat-icon>

@@ -3,6 +3,7 @@ import {UserData} from '../../data/user-data';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from 'src/app/components/modal-dialog/modal-dialog.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 declare var $: any;
 
 @Component({

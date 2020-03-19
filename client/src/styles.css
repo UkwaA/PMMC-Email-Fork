@@ -10,10 +10,6 @@ h1 {
     color: #08b2b8; 
 }
 
-.my-pagination /deep/ .ngx-pagination .current {
-    background: red;
-}
-
 /* Overwrite the styles of the mat-dialog-container element globally, but only for those
 that have an id of `modal-component` */
 /* https://stackoverflow.com/a/48689004/9263761 */
