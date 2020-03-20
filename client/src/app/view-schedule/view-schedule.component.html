@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row text-center text-white mb-5 mt-4">
+        <div class="col-lg-7 mx-auto">
+            <h1>View Schedule</h1>
+        </div>
+    </div>
+    <div class="row filter">
+        <kendo-scheduler
+                [kendoSchedulerBinding]="events"
+                [selectedDate]="selectedDate"
+                style="height: 700px; width: 1500px">
+        <kendo-scheduler-day-view [startTime]="startTime">
+        </kendo-scheduler-day-view>
+        <kendo-scheduler-week-view [startTime]="startTime">
+        </kendo-scheduler-week-view>
+        <kendo-scheduler-month-view> </kendo-scheduler-month-view>
+        <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
+        <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
+      </kendo-scheduler>
+    </div>
+</div>
