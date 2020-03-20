@@ -25,4 +25,8 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-password-confirmation-email/', body);
   }
 
+  public CreateNewUserConfirmationEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/create-new-user-confirmation-email/', body);
+  }
+
 }

@@ -14,3 +14,7 @@ h5{
 color: #545757;
 font-size: 15pt;
 }
+
+.errorMessage{
+  color: red;
+}

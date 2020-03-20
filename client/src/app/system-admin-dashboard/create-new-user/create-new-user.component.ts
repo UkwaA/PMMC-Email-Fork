@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core'
 import { AuthenticationService, TokenPayload } from '../../authentication.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faUser, faKey, faEnvelope, faCheckDouble} from '@fortawesome/free-solid-svg-icons';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { EmailService } from 'src/app/services/email.services';
@@ -19,7 +18,7 @@ declare var $: any;
 
 export class CreateNewUserComponent {
     createNewUserForm: FormGroup
-    message = ''
+    errorMessage = ''
     submitted = false
     subscribeChecked: boolean
     NewRole = ''
@@ -51,18 +50,18 @@ export class CreateNewUserComponent {
         private router: Router, public emailService:EmailService, public matDialog: MatDialog, private customer: CustomerService,) { }
 
     ngOnInit(){
+        this.errorMessage = ''
         this.createNewUserForm = this.fb.group({    
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            FirstName: ['', Validators.required],
-            LastName: ['', Validators.required],
-            PhoneNo: ['', Validators.required],
-            Address: ['', Validators.required],
-            Address2: [],
-            City: ['', Validators.required],
-            State: ['', [Validators.required, Validators.maxLength(2)]],
-            Zipcode:['', Validators.required],
+            FirstName: [],
+            LastName: [],
+            PhoneNo: [],
+            Address: [],
+            City: [],
+            State: [],
+            Zipcode:[],
             Subscribe: []
           })
         
@@ -128,5 +127,40 @@ export class CreateNewUserComponent {
 
         console.log(this.userDetails)
         console.log(this.customerDetails)
+        this.auth.register(this.userDetails).subscribe((res)=> {
+            if(res.error)
+            {
+                console.log(res)
+                this.errorMessage = "*" + res.error
+                return
+            }
+            else{                
+                this.customerDetails.CustomerPK = res.UserPK
+                this.userDetails.UserPK = res.UserPK
+                this.customer.finishRegister(this.customerDetails).subscribe((res)=>{
+                    console.log(res.message)
+                    //Send confirmation email confirmation and change password for the first time
+                    this.emailService.CreateNewUserConfirmationEmail(this.userDetails).subscribe(
+                        (res) => {
+                            if(res.error){
+                                console.log(res.error)                                     
+                            }
+                            else{                    
+                                console.log("Reset Email has been sent to " + this.userDetails.Email)
+                            }
+                        },
+                        err => {
+                            console.log(err)
+                        })
+                    //Navigate back to User Management Page
+                    this.router.navigateByUrl("/profile/user-management")
+                })
+            }
+        },
+            err => {
+                console.error(err);
+                return
+            }
+        )
     }
 }

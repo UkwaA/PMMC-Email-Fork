@@ -146,7 +146,7 @@ export class ChangeCurrentPasswordComponent{
         this.emailService.sendPasswordConfirmationEmail(this.credentials).subscribe(
             (res) => {
                 if(res.error){
-                    console.log("fotgot ts file: " + res.error)                                     
+                    console.log(res.error)                                     
                 }
                 else{                    
                     console.log("Reset Email has been sent to " + this.credentials.Email)

@@ -8,12 +8,13 @@
             </div>        
             <div><h3>Account Info</h3></div>
             <hr>
+            <div class="errorMessage" *ngIf="errorMessage">{{errorMessage}}</div>
             <form [formGroup]="createNewUserForm" (ngSubmit)="openModalCreateNewUser()"> 
-                    <div class="row">
+                    <div class="row">                        
                         <div class="col-md-4">
                             <label><h5>Username</h5></label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8">                            
                             <input type="text" class="form-control" formControlName="username" placeholder="Username"
                             [(ngModel)]="userDetails.Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -80,9 +81,9 @@
                     <label><h5>First name</h5></label>
                     <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName" 
                     [ngClass]="{'is-invalid': submitted && f.FirstName.errors }">
-                    <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
                         <div *ngIf="f.FirstName.errors.required">First Name is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
                 
@@ -90,9 +91,9 @@
                 <label><h5>Last name</h5></label>
                     <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName" 
                     [ngClass]="{'is-invalid': submitted && f.LastName.errors }">
-                    <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
                         <div *ngIf="f.LastName.errors.required">Last Name is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
     
@@ -100,9 +101,9 @@
                     <label><h5>Phone Number</h5></label>
                     <input type="number" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
                     [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
-                    <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
                         <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
     
@@ -110,12 +111,12 @@
                     <label><h5>Address</h5></label>
                     <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" 
                     [ngClass]="{'is-invalid': submitted && f.Address.errors }" >
-                    <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
                         <div *ngIf="f.Address.errors.required">Street Address is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
-<!-- 
+                <!-- 
                 <div class="col-xs-6">
                     <label><h5>Address #2</h5></label>
                     <input type="text" class="form-control" formControlName="Address2" placeholder="enter address (optional)">
@@ -126,9 +127,9 @@
                     <label for="email"><h5>City</h5></label>
                     <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" 
                     [ngClass]="{'is-invalid': submitted && f.City.errors }" >
-                    <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
                         <div *ngIf="f.City.errors.required">City is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
 
@@ -136,9 +137,9 @@
                     <label><h5>State</h5></label>
                     <input type="text" class="form-control" formControlName="State"placeholder="enter state" [(ngModel)]="customerDetails.State" 
                     [ngClass]="{'is-invalid': submitted && f.State.errors }" maxlength = "2" >
-                    <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
                         <div *ngIf="f.State.errors.required">State is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
 
@@ -146,9 +147,9 @@
                     <label><h5>Zipcode</h5></label>
                     <input type="number" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
                     [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
-                    <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
                         <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
-                      </div>
+                      </div> -->
                 </div>
                 <br/>
                 <div>
@@ -161,7 +162,7 @@
 
 
                 <div class="col-xs-12 form-group ">                    
-                    <button class="btn btn-lg btn-info btn-block" type="submit">Update User Details</button>
+                    <button class="btn btn-lg btn-info btn-block" type="submit">Create New User</button>
                 </div>
             </form>
         </div>
