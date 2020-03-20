@@ -55,6 +55,11 @@ import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.com
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 import { ScheduleManagementComponent } from './schedule-management/schedule-management.component'
+import { ViewScheduleComponent } from './view-schedule/view-schedule.component'
+import { SchedulerModule } from '@progress/kendo-angular-scheduler';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+
+
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -80,6 +85,7 @@ const routes : Routes = [
       {path: '', component: DashboardComponent},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'view-schedule', component: ViewScheduleComponent, canActivate: [AuthRoleGuardService]},
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
       { 
         path: 'program-details/:id/:mode', 
@@ -143,6 +149,7 @@ const routes : Routes = [
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
     ScheduleManagementComponent,
+    ViewScheduleComponent,
     AccountSetting,
     ProfileInfo
   ],
@@ -170,7 +177,9 @@ const routes : Routes = [
     MatIconModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatProgressSpinnerModule    
+    MatProgressSpinnerModule,
+    SchedulerModule,
+    DateInputsModule    
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthCustomerGuardService, AuthenticationService],
   bootstrap: [AppComponent],
