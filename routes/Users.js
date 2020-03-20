@@ -24,7 +24,6 @@ users.post('/register', (req, res) => {
     CreatedDate: today,
     IsActive: true
   }
-
   
   User.findOne({
     where: {
@@ -44,28 +43,23 @@ users.post('/register', (req, res) => {
             let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
               expiresIn: 1440
             })
-            res.json({ UserPK: user.UserPK })
-          
-          //Create new customer entry in Customer table
-          Customer.findOne({
-            where: {
-              CustomerPK: user.UserPK
-            }
-          })
-          .then(customer =>{
-            //If customer does not exist, create new one
-            if(!customer){
-              Customer.create({CustomerPK: user.UserPK})
-              .catch(err => {
-                res.send('errorExpressErr: ' + err)
-              })
-            }
-            else{
-              res.json({ error: 'Customer already exists' })
-            }
-          })
-
-
+            
+            const customerData = {
+              CustomerPK: user.UserPK,      
+              FirstName: '',
+              LastName: '',
+              PhoneNo: '',
+              Address: '',
+              City: '',
+              State: '',
+              Zipcode: '',
+              Subscribe: 0
+            }          
+            Customer.create(customerData)
+            .then(()=>{
+              //Send userPK back to Register Page for routing
+              res.json({ UserPK: user.UserPK })
+            })
           })
           .catch(err => {
             res.send('errorExpressErr: ' + err)

@@ -51,19 +51,19 @@
                     </div>
                     <input type = "string" class = "form-control" placeholder = "Street Address"
                     formControlName="address_street" 
-                    [(ngModel)]="credentials.StreetAddress" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
+                    [(ngModel)]="credentials.Address" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}">
                     <div *ngIf="submitted && !customerInfoForm.get('address_street').valid" 
                     class = "warning col-12 pl-0"> <small>Street Address is required </small></div>
                 </div>
 
-                <div class = "input-group form-group">
+                <!-- <div class = "input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><fa-icon [icon]="faHome"></fa-icon></span>
                     </div>
                     <input type = "string" class = "form-control" placeholder = "Line 2" 
                     formControlName="address_unit" 
                     [(ngModel)]="credentials.StreetAddress2">
-                </div> 
+                </div>  -->
 
                 <div class = "input-group form-group">
                     <div class="input-group-prepend">

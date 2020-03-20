@@ -18,7 +18,7 @@ customers.post('/customer-register', (req, res) => {
       FirstName: req.body.FirstName,
       LastName: req.body.LastName,
       PhoneNo: req.body.PhoneNo,
-      Address: req.body.StreetAddress,
+      Address: req.body.Address,
       City: req.body.City,
       State: req.body.State,
       Zipcode: req.body.Zipcode,
