@@ -90,6 +90,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
       dialogConfig.height = "auto";
       dialogConfig.maxHeight = "500px";
       dialogConfig.width = "350px";
+      dialogConfig.autoFocus = false;
       dialogConfig.data = {
           title: "Update Personal Info",
           description: "All information is correct?",            

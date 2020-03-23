@@ -85,6 +85,7 @@ selectChangeHandler(event: any) {
     dialogConfig.height = "auto";
     dialogConfig.maxHeight = "500px";
     dialogConfig.width = "350px";
+    dialogConfig.autoFocus = false;
     if (!this.IsActive){
         dialogConfig.data = {
             title: "Activate Account",

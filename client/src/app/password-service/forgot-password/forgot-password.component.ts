@@ -73,6 +73,7 @@ export class ForgotPasswordComponent{
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Forgot Password",
             description: "Reset Password Email has been sent to " + this.userInfo.Email 

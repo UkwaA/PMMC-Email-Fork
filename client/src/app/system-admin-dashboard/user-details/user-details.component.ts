@@ -115,6 +115,7 @@ openModalUpdateUserDetail(){
   dialogConfig.height = "auto";
   dialogConfig.maxHeight = "500px";
   dialogConfig.width = "350px";
+  dialogConfig.autoFocus = false;
   dialogConfig.data = {
       title: "Update User detail",
       description: "All information is correct?",            
@@ -183,6 +184,7 @@ openModalResetPassword(){
   dialogConfig.height = "auto";
   dialogConfig.maxHeight = "500px";
   dialogConfig.width = "350px";
+  dialogConfig.autoFocus = false;
   dialogConfig.data = {
       title: "Reset Password",
       description: "Are you sure to reset the password?",            

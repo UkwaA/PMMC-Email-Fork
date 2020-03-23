@@ -87,6 +87,7 @@ export class CreateNewUserComponent {
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Create New User",
             description: "All information is correct?",            
