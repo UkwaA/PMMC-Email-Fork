@@ -14,7 +14,7 @@
           <input matInput type="text" formControlName = "fullName" placeholder = "Full Name" >
         </mat-form-field>
         <mat-form-field class="inputField">
-          <input matInput type="email" formControlName = "email" placeholder = "Email">
+          <input matInput type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" formControlName = "email" placeholder = "Email">
           <!-- <mat-placeholder style="color:white">Email</mat-placeholder> -->
           <mat-error *ngIf = "email.invalid && email.touched">
             Email is invalid

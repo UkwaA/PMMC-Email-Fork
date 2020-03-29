@@ -52,7 +52,7 @@ export class BookingGroupProgramComponent implements OnInit {
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherEmail: ['', [Validators.required, Validators.email]],
+      TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
       TeacherPhoneNo: ['', [Validators.required, Validators.minLength(10)]],
       TotalQuantity: ['', Validators.required]
 
