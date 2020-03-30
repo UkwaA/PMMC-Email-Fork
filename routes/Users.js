@@ -23,13 +23,8 @@ users.post("/register", (req, res) => {
     Email: req.body.Email,
     CreatedDate: today,
     IsActive: true
-<<<<<<< HEAD
   };
 
-=======
-  }
-  
->>>>>>> 47e7d8111bde485d895269eb7341a1748745e651
   User.findOne({
     where: {
       //check if the username exists
@@ -70,16 +65,10 @@ users.post("/register", (req, res) => {
 });
 
 /**************************
-<<<<<<< HEAD
  *        LOG IN
  ***************************/
 users.post("/login", (req, res) => {
   //res.send('error: ' + req.body.Password + "--" + req.body.Username)
-=======
-*        LOG IN
-***************************/
-users.post('/login', (req, res) => {
->>>>>>> 47e7d8111bde485d895269eb7341a1748745e651
   User.findOne({
     where: {
       //Check if username is match and account is active
