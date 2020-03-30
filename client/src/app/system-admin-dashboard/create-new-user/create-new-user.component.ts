@@ -4,10 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
-import { EmailService } from 'src/app/services/email.services';
-import { CustomerService } from 'src/app/services/customer.services';
-import { UserData } from 'src/app/data/user-data';
-import { CustomerData } from 'src/app/data/customer-data';
+import { EmailService } from '../../../app/services/email.services';
+import { CustomerService } from '../../../app/services/customer.services';
+import { UserData } from '../../../app/data/user-data';
+import { CustomerData } from '../../../app/data/customer-data';
 declare var $: any;
 
 @Component({
@@ -35,7 +35,7 @@ export class CreateNewUserComponent {
     }
   
     customerDetails:CustomerData = {
-      CustomerPK: 0,
+      UserPK: 0,
       FirstName: '',
       LastName: '',
       PhoneNo: '',
@@ -136,7 +136,7 @@ export class CreateNewUserComponent {
                 return
             }
             else{                
-                this.customerDetails.CustomerPK = res.UserPK
+                this.customerDetails.UserPK = res.UserPK
                 this.userDetails.UserPK = res.UserPK
                 this.customer.finishRegister(this.customerDetails).subscribe((res)=>{
                     console.log(res.message)
