@@ -1,9 +1,8 @@
-
 h1 {
   font-family: 'Source Sans Pro', sans-serif; 
   font-size: 50px;
   font-weight: bold;
-  padding-top: 90px;
+  padding-top: 80px;
   color: #08b2b8; 
 }
 
@@ -14,23 +13,6 @@ h1 {
 .full-width {
   color: black;
 }
-
-/*change color of label*/
-/* ::ng-deep .mat-focused .mat-form-field-label {
-  color: black !important;
- }
-
-
- /*change color of underline*/
- /*::ng-deep.mat-form-field-underline {
-  background-color: black !important;
-}/*
-
-/*change color of underline when focused*/
-/*::ng-deep.mat-form-field-ripple {
- background-color: black !important;;
-}*/
-
 
 hr {
   margin-top: 4rem;
