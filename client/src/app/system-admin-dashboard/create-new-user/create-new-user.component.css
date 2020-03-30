@@ -1,0 +1,20 @@
+.row-header {
+    font-weight: bold;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 50px;
+  font-weight: bold;
+  padding-top: 20px;
+  color: #08b2b8; 
+}
+
+h5{
+color: #545757;
+font-size: 15pt;
+}
+
+.errorMessage{
+  color: red;
+}

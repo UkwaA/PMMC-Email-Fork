@@ -85,6 +85,7 @@ export class ChangeCurrentPasswordComponent{
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Change Password",
             description: "Password has been successfully updated. You are now redirecting to Dashboard" ,
@@ -134,19 +135,22 @@ export class ChangeCurrentPasswordComponent{
                     return
                 }
                 else{                    
-                    this.openModal()                    
+                    this.openModal()     
+                    this.sendPasswordConfirmationEmail()               
                 }                
         },
         err => {
             console.log(err)
             return
         })
+    }
 
+    sendPasswordConfirmationEmail(){
         //Send confirmation email about changing password
         this.emailService.sendPasswordConfirmationEmail(this.credentials).subscribe(
             (res) => {
                 if(res.error){
-                    console.log("fotgot ts file: " + res.error)                                     
+                    console.log(res.error)                                     
                 }
                 else{                    
                     console.log("Reset Email has been sent to " + this.credentials.Email)

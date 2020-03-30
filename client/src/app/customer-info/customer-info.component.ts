@@ -34,8 +34,7 @@ export class CustomerRegisterComponent implements OnInit {
     FirstName: '',
     LastName: '',
     PhoneNo: '',
-    StreetAddress: '',
-    StreetAddress2: '',
+    Address: '',
     City: '',
     State: '',
     Zipcode: '',
@@ -46,12 +45,12 @@ export class CustomerRegisterComponent implements OnInit {
     this.customerInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phoneNum: ['', [Validators.required, Validators.minLength(9)]],
+      phoneNum: ['', [Validators.required, Validators.min(1000000000)]],
       address_street: ['', Validators.required],
-      address_unit: [''],
+      //address_unit: [''],
       address_city: ['', Validators.required],
       address_state: ['', [Validators.required, Validators.minLength(2)]],
-      address_zipcode: ['', [Validators.required, Validators.minLength(5)]],
+      address_zipcode: ['', [Validators.required, Validators.min(10000)]],
       subscribe: [0]
     })
     this.route.params.subscribe(val => {
@@ -89,7 +88,7 @@ export class CustomerRegisterComponent implements OnInit {
         lastName: this.customerInfoForm.get('lastName').value,
         phoneNo: this.customerInfoForm.get('phoneNum').value,
         streetAddress: this.customerInfoForm.get('address_street').value,  
-        streetAddress2: '',
+        // streetAddress2: '',
         addressCity: this.customerInfoForm.get('address_city').value, 
         addressState: this.customerInfoForm.get('address_state').value, 
         addressZipCode: this.customerInfoForm.get('address_zipcode').value, 

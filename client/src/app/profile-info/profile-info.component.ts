@@ -23,8 +23,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
       FirstName: '',
       LastName: '',
       PhoneNo: '',
-      StreetAddress: '',
-      StreetAddress2: '',
+      Address: '',
       City: '',
       State: '',
       Zipcode: '',
@@ -58,7 +57,6 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
         LastName: ['', Validators.required],
         PhoneNo: ['', Validators.required],
         Address: ['', Validators.required],
-        Address2: [],
         City: ['', Validators.required],
         State: ['', [Validators.required, Validators.maxLength(2)]],
         Zipcode:['', Validators.required],
@@ -92,6 +90,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
       dialogConfig.height = "auto";
       dialogConfig.maxHeight = "500px";
       dialogConfig.width = "350px";
+      dialogConfig.autoFocus = false;
       dialogConfig.data = {
           title: "Update Personal Info",
           description: "All information is correct?",            

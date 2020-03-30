@@ -87,6 +87,7 @@ export class ProgramManagementComponent {
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         if (this.isDisabled){
             dialogConfig.data = {
                 title: "Disable Program",

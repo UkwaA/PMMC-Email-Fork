@@ -41,8 +41,7 @@ export class UserDetailsComponent implements OnInit {
     FirstName: '',
     LastName: '',
     PhoneNo: '',
-    StreetAddress: '',
-    StreetAddress2: '',
+    Address: '',
     City: '',
     State: '',
     Zipcode: '',
@@ -60,7 +59,6 @@ export class UserDetailsComponent implements OnInit {
       LastName: ['', Validators.required],
       PhoneNo: ['', Validators.required],
       Address: ['', Validators.required],
-      Address2: [],
       City: ['', Validators.required],
       State: ['', [Validators.required, Validators.maxLength(2)]],
       Zipcode:['', Validators.required],
@@ -117,14 +115,13 @@ openModalUpdateUserDetail(){
   dialogConfig.height = "auto";
   dialogConfig.maxHeight = "500px";
   dialogConfig.width = "350px";
+  dialogConfig.autoFocus = false;
   dialogConfig.data = {
       title: "Update User detail",
       description: "All information is correct?",            
       actionButtonText: "Confirm",   
       numberOfButton: "2"         
     }
-    // https://material.angular.io/components/dialog/overview
-  // https://material.angular.io/components/dialog/overview
   const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
   modalDialog.afterClosed().subscribe(result =>{
       if(result == "Yes"){
@@ -187,6 +184,7 @@ openModalResetPassword(){
   dialogConfig.height = "auto";
   dialogConfig.maxHeight = "500px";
   dialogConfig.width = "350px";
+  dialogConfig.autoFocus = false;
   dialogConfig.data = {
       title: "Reset Password",
       description: "Are you sure to reset the password?",            
@@ -214,10 +212,5 @@ openModalResetPassword(){
         console.log("Reset Email has been sent to " + this.userDetails.Email)                            
     }
     });
-  }
-
-  //TO-DO:
-  disableUser(){
-
   }
 }

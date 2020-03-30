@@ -33,7 +33,8 @@ export class ForgotPasswordComponent{
         this.myForm = this.fb.group({            
             email: ['', [
                 Validators.required,
-                Validators.email
+                Validators.email,
+                Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")
             ]]
         })
     }
@@ -73,6 +74,7 @@ export class ForgotPasswordComponent{
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Forgot Password",
             description: "Reset Password Email has been sent to " + this.userInfo.Email 

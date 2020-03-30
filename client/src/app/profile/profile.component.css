@@ -1,4 +1,6 @@
-
+.mat-drawer-container{
+  background-color: white;
+}
   .sidenav-container {
     height: 100%;  
   }

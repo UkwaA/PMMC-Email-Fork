@@ -17,6 +17,7 @@ export class BookingGroupProgramComponent implements OnInit {
   submitted = false;
   ProgramPK: number;
   programDetails: ProgramData;
+  total: number;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -41,22 +42,29 @@ export class BookingGroupProgramComponent implements OnInit {
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
-      AldultQuantity: ['',[Validators.required, Validators.max(35)]],
-      Age57Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age810Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age1112Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age1314Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age1415Quantity: ['', [Validators.required, Validators.max(35)]],
-      Age1517Quantity: ['', [Validators.required, Validators.max(35)]],
+      AldultQuantity: [0,[Validators.required, Validators.min(1), Validators.max(35)]],
+      Age57Quantity: [0, [Validators.required, Validators.max(35)]],
+      Age810Quantity: [0, [Validators.required, Validators.max(35)]],
+      Age1112Quantity: [0, [Validators.required, Validators.max(35)]],
+      Age1314Quantity: [0, [Validators.required, Validators.max(35)]],
+      Age1415Quantity: [0, [Validators.required, Validators.max(35)]],
+      Age1517Quantity: [0, [Validators.required, Validators.max(35)]],
       ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherEmail: ['', [Validators.required, Validators.email]],
-      TeacherPhoneNo: ['', [Validators.required, Validators.minLength(10)]],
+      TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
+      TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
       TotalQuantity: ['', Validators.required]
 
     });
+  }
+
+  onNumberChange(){
+    this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
+     + this.registerForm.get('Age1112Quantity').value + this.registerForm.get('Age1314Quantity').value
+     + this.registerForm.get('Age1517Quantity').value;
+     console.log("New total" + this.total + ".");
   }
 
   get f() { return this.registerForm.controls; }
@@ -64,6 +72,7 @@ export class BookingGroupProgramComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     console.log("submitted");
+    this.registerForm.get('TotalQuantity').setValue(this.total);
 
     // Stop here if form is invalid
     if (this.registerForm.invalid) {

@@ -18,7 +18,17 @@ export class HomeComponent implements OnInit{
     constructor( private programService: ProgramServices){   }
     ngOnInit(){
         this.programService.getAllPrograms().then((result) =>{
-            for(var i = 0; i < 6; i++) {
+            var count = 0;
+            if (result.length < 4){
+                count = result.length;
+            } 
+            else if (result.length < 8){
+                count = 4;
+            }
+            else {
+                count = 8;
+            }
+            for(var i = 0; i < count; i++) {
                 this.programs.push(result[i]);
                 this.programs[i].ImgData = AppConstants.EXPRESS_SERVER_URL + result[i].ImgData
             }
