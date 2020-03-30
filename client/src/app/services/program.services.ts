@@ -8,8 +8,6 @@ import { AppConstants } from '../constants'
 
 @Injectable()
 export class ProgramServices {
-  private expressBaseUrl: string = "http://localhost:3000/"
-
   constructor(private http: HttpClient, private router: Router) { }
 
   public sendRequestToExpress(endpoint: string): Promise<any> {

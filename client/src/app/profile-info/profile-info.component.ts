@@ -19,7 +19,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
     customerInfoForm: FormGroup
     subscribeChecked: boolean
     customerDetails:CustomerData = {
-      CustomerPK: 0,
+      UserPK: 0,
       FirstName: '',
       LastName: '',
       PhoneNo: '',

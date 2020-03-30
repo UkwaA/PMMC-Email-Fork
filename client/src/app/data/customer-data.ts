@@ -1,5 +1,5 @@
 export class CustomerData {
-    CustomerPK: number
+    UserPK: number
     FirstName: string
     LastName: string
     PhoneNo: string
@@ -14,7 +14,7 @@ export class CustomerData {
         nStreet_Address: string, nStreet_Address2: string, nCity: string, nState: string, 
         nZipcode: string, nSubscribe: number){
         
-        this.CustomerPK = nUserPK;
+        this.UserPK = nUserPK;
         this.FirstName = nFirstName;
         this.LastName = nLastName;
         this.PhoneNo = nPhone_No;

@@ -12,7 +12,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    CustomerPK: {
+    UserPK: {
       type: Sequelize.INTEGER,
       primaryKey: true
     },

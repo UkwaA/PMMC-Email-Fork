@@ -5,6 +5,8 @@ const app = express()
 const serveStatic = require('serve-static')
 const port = process.env.PORT || 3000
 const path = require('path');
+const fs = require('fs');
+const https = require('https');
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -36,6 +38,12 @@ app.get('/*', function(req, res) {
 });
 
 /**************************************************/
+// https.createServer({
+//   key: fs.readFileSync('./key.pem'),
+//   cert: fs.readFileSync('./cert.pem'),
+//   passphrase: '123456pmmc'
+// }, app)
+// .listen(3000);
 
 app.listen(port , () =>{
   console.log("Server started on port 3000");

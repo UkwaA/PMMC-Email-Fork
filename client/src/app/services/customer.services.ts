@@ -12,11 +12,11 @@ export class CustomerService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "customers/customer-register", customer);
     }
 
-    public getCustomerInfoByID(CustomerPK: number):Observable<any>{
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "customers/profile-info/" + CustomerPK);
+    public getCustomerInfoByID(UserPK: number):Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "customers/profile-info/" + UserPK);
     }
 
-    public updateCustomerInfo(CustomerPK: number, customer: CustomerData):Observable<any>{
-        return this.http.put(AppConstants.EXPRESS_SERVER_URL + "customers/update-customer-info/" + CustomerPK, customer);
+    public updateCustomerInfo(UserPK: number, customer: CustomerData):Observable<any>{
+        return this.http.put(AppConstants.EXPRESS_SERVER_URL + "customers/update-customer-info/" + UserPK, customer);
     }
 }

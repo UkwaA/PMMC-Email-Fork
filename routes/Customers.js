@@ -5,14 +5,14 @@ const jwt = require('jsonwebtoken')
 const customers = express.Router()
 const bcrypt = require('bcryptjs')
 
-const Customer = require('../models/Customer')
+const Customer = require('../models/UserDetails')
 customers.use(cors())
 
 /******************************************
 *  PROVIDE CUSTOMER INFO FOR REGISTRATION
 *******************************************/
 customers.post('/customer-register', (req, res) => {
-    const customerID = req.body.CustomerPK
+    const customerID = req.body.UserPK
     const customer = {
       //CustomerPK: req.body.CustomerPK,      
       FirstName: req.body.FirstName,
@@ -27,7 +27,7 @@ customers.post('/customer-register', (req, res) => {
   
     Customer.update(customer, {
       where: {
-        CustomerPK: customerID
+        UserPK: customerID
       }
     })
       .then(result => {
@@ -57,7 +57,7 @@ customers.post('/customer-register', (req, res) => {
 customers.get('/profile-info/:id', (req, res) => {
     Customer.findOne({
         where: {
-            CustomerPK: req.params.id
+          UserPK: req.params.id
         }
     })
     .then(customer => {
@@ -79,7 +79,7 @@ customers.get('/profile-info/:id', (req, res) => {
 customers.put('/update-customer-info/:id', (req,res) =>{
     const customerID = req.params.id
     Customer.update(req.body, {
-        where: {CustomerPK: customerID}
+        where: {UserPK: customerID}
     })
     .then(result => {
         if (result == 1) {

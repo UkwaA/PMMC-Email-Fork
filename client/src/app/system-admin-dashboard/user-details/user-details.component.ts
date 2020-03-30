@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   customerDetails:CustomerData = {
-    CustomerPK: 0,
+    UserPK: 0,
     FirstName: '',
     LastName: '',
     PhoneNo: '',

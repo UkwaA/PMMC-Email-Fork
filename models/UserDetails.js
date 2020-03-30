@@ -2,9 +2,9 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'customer',
+  'userdetails',
   {
-    CustomerPK: {
+    UserPK: {
       type:Sequelize.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -21,9 +21,6 @@ module.exports = db.sequelize.define(
     Address: {
       type: Sequelize.TEXT
     },
-    // Address2: {
-    //   type: Sequelize.TEXT
-    // },
     City: {
         type: Sequelize.TEXT
     },

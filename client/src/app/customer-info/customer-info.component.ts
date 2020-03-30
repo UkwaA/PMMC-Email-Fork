@@ -17,8 +17,6 @@ export class CustomerRegisterComponent implements OnInit {
   customerInfoForm: FormGroup;
   submitted = false;
   errorMessage = '';
-
-
   
   constructor(private auth: AuthenticationService, private router: Router, private route:ActivatedRoute,
     private formBuilder: FormBuilder, public customerService:CustomerService,
@@ -32,7 +30,7 @@ export class CustomerRegisterComponent implements OnInit {
     faMap = faMap;
 
   credentials: CustomerData = {
-    CustomerPK: 0,
+    UserPK: 0,
     FirstName: '',
     LastName: '',
     PhoneNo: '',
@@ -57,7 +55,7 @@ export class CustomerRegisterComponent implements OnInit {
       subscribe: [0]
     })
     this.route.params.subscribe(val => {
-      this.credentials.CustomerPK = val.id
+      this.credentials.UserPK = val.id
     })
 
   }
