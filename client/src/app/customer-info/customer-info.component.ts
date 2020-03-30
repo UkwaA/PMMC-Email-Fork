@@ -47,12 +47,12 @@ export class CustomerRegisterComponent implements OnInit {
     this.customerInfoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phoneNum: ['', [Validators.required, Validators.minLength(9)]],
+      phoneNum: ['', [Validators.required, Validators.min(1000000000)]],
       address_street: ['', Validators.required],
       //address_unit: [''],
       address_city: ['', Validators.required],
       address_state: ['', [Validators.required, Validators.minLength(2)]],
-      address_zipcode: ['', [Validators.required, Validators.minLength(5)]],
+      address_zipcode: ['', [Validators.required, Validators.min(10000)]],
       subscribe: [0]
     })
     this.route.params.subscribe(val => {
