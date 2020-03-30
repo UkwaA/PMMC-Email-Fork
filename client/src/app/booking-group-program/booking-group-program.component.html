@@ -18,10 +18,11 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="AldultQuantity">Adult Quantity: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="AldultQuantity" 
+            <input class="form-control" type="number" min = "0" max = "35" formControlName="AldultQuantity"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" 
                   [ngClass]="{'is-invalid': submitted && f.AldultQuantity.errors }">
             <div *ngIf="submitted && f.AldultQuantity.errors" class="invalid-feedback">
-              <div *ngIf="f.AldultQuantity.errors.required">This is required</div>
+              <div *ngIf="f.AldultQuantity.errors.min">There must be at least 1 adult</div>
               <div *ngIf="f.AldultQuantity.errors.max">Maximum for a group is 35</div>
             </div>
           </div>
@@ -32,7 +33,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age57Quantity">Children Age 5-7: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age57Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age57Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age57Quantity.errors }">
             <div *ngIf="submitted && f.Age57Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age57Quantity.errors.required">This is required</div>
@@ -46,7 +48,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age810Quantity">Children Age 8-10: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age810Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }">
             <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age810Quantity.errors.required">This is required</div>
@@ -60,7 +63,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1112Quantity">Children Age 11-12: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age1112Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age1112Quantity.errors }">
             <div *ngIf="submitted && f.Age1112Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age1112Quantity.errors.required">This is required</div>
@@ -74,7 +78,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1314Quantity">Children Age 13-14: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+          onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age1314Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age1314Quantity.errors }">
             <div *ngIf="submitted && f.Age1314Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age1314Quantity.errors.required">This is required</div>
@@ -88,7 +93,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1415Quantity">Children Age 14-15: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age1415Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age1415Quantity.errors }">
             <div *ngIf="submitted && f.Age1415Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age1415Quantity.errors.required">This is required</div>
@@ -102,7 +108,8 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age1517Quantity">Children Age 15-17: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" placeholder="" formControlName="Age810Quantity" 
+            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age1517Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age1517Quantity.errors }">
             <div *ngIf="submitted && f.Age1517Quantity.errors" class="invalid-feedback">
               <div *ngIf="f.Age1517Quantity.errors.required">This is required</div>
@@ -200,7 +207,7 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="TotalQuantity">Number of Participating Students: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="text" placeholder="" formControlName="TotalQuantity" 
+            <input class="form-control" type="number" [(ngModel)] = "total" placeholder="" formControlName="TotalQuantity" 
                   [ngClass]="{ 'is-invalid': submitted && f.TotalQuantity.errors }">
             <div *ngIf="submitted && f.TotalQuantity.errors" class="invalid-feedback">
               <div *ngIf="f.TotalQuantity.errors.required">This is required</div>
