@@ -25,6 +25,7 @@ export class BookingGroupProgramComponent implements OnInit {
     private service: ProgramServices) { }
 
   ngOnInit() {
+    this.bookingGroup= <any>{};
     // Get Group Program Requirement
     this.route.params.subscribe(val => {
       this.ProgramPK = val.id
@@ -37,12 +38,17 @@ export class BookingGroupProgramComponent implements OnInit {
     this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe(details => {
         this.programDetails = details;
+        document.getElementById("program_name").innerHTML = this.programDetails.Name;
+        document.getElementById("program_desc").innerHTML = this.programDetails.Description;
         console.log(this.programDetails);
       })
 
+    // document.getElementById("program_name").innerHTML = this.programDetails.Name;
+
+
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
-      AldultQuantity: [0,[Validators.required, Validators.min(1), Validators.max(35)]],
+      AdultQuantity: [0,[Validators.required, Validators.min(1), Validators.max(35)]],
       Age57Quantity: [0, [Validators.required, Validators.max(35)]],
       Age810Quantity: [0, [Validators.required, Validators.max(35)]],
       Age1112Quantity: [0, [Validators.required, Validators.max(35)]],
@@ -63,7 +69,7 @@ export class BookingGroupProgramComponent implements OnInit {
   onNumberChange(){
     this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
      + this.registerForm.get('Age1112Quantity').value + this.registerForm.get('Age1314Quantity').value
-     + this.registerForm.get('Age1517Quantity').value;
+     + this.registerForm.get('Age1415Quantity').value + this.registerForm.get('Age1517Quantity').value;
      console.log("New total" + this.total + ".");
   }
 
