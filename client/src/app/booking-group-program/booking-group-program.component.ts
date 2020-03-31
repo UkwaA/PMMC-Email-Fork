@@ -26,6 +26,7 @@ export class BookingGroupProgramComponent implements OnInit {
 
   ngOnInit() {
     this.bookingGroup= <any>{};
+    this.total = 0;
     // Get Group Program Requirement
     this.route.params.subscribe(val => {
       this.ProgramPK = val.id
@@ -59,7 +60,7 @@ export class BookingGroupProgramComponent implements OnInit {
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
       TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
-      TotalQuantity: ['', Validators.required]
+      TotalQuantity: [0, [Validators.required, Validators.max(35)]]
 
     });
   }
