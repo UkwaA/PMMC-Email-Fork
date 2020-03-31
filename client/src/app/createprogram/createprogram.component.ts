@@ -53,8 +53,8 @@ export class CreateProgramComponent implements OnInit {
   // Initialize Dropdown List for Sub Type of Group Program
   programSubCategories = [
     { id: 0, name: "None" },
-    { id: 1, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM },
-    { id: 2, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.FIELD_TRIP }
+    { id: 1, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.FIELD_TRIP },
+    { id: 2, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM }
   ];
 
   constructor(
