@@ -73,6 +73,10 @@ h5{
   padding-bottom: 15px;
 }
 
+.card-body-btn{
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
 
 .card {
   margin: 5% 0%;
