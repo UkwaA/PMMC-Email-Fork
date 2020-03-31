@@ -113,16 +113,16 @@ program.get("/get-sub-group-program-type/:id", (req, res) => {
     where: {
       GroupProgramPK: req.params.id
     }
-    }) 
+  })
     .then(program => {
       if (program) {
-        res.json(program.SubProgramPK)
+        res.json(program.SubProgramPK);
       } else {
-        res.send('There is no sub program type available.')
+        res.send("There is no sub program type available.");
       }
     })
     .catch(err => {
-      res.send('error: ' + err)
+      res.send("error: " + err);
     });
 });
 
@@ -130,8 +130,6 @@ program.get("/get-sub-group-program-type/:id", (req, res) => {
 program.post("/add-program", (req, res) => {
   const today = new Date();
   var programPK = 0;
-  var subProgramPk = req.body.SubProgramPk;
-  console.log(subProgramPk);
 
   const programData = {
     Name: req.body.Name,
@@ -177,62 +175,33 @@ program.post("/add-program", (req, res) => {
         case "0":
           var groupDetail = {
             GroupProgramPK: programPK,
-            SubProgramPK: subProgramPk,
-            // AdultQuantity: true,
-            // Age57Quantity: true,
-            // Age810Quantity: true,
-            // Age1112Quantity: true,
-            // Age1314Quantity: true,
-            // Age1415Quantity: true,
-            // Age1517Quantity: true,
-            // TotalQuantity: true,
-            // ProgramRestriction: true,
-            // OrganizationName: true,
-            // GradeLevel: true,
-            // TeacherName: true,
-            // TeacherEmail: true,
-            // TeacherPhoneNo: true,
-            // AlternativeDate: true,
-            // EducationPurpose: true,
+            SubProgramPK: req.body.SubProgramPK,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy
           };
-          GroupProgramRequirement.create(groupDetail).catch(err => {
+          GroupProgramRequirement.create(groupDetail).then(program => {
+            res.json(programPK);
+          })
+          .catch(err => {
             res.send("err Insert Group Requirement" + err);
           });
           break;
         case "1":
           var individualDetail = {
             IndividualProgramPK: programPK,
-            // ParticipantName: true,
-            // ParticipantAge: true,
-            // Gender: true,
-            // MerchSize: true,
-            // AllergyInfo: true,
-            // SpecialInfo: true,
-            // InsureProviderName: true,
-            // InsureRecipientName: true,
-            // InsurePolicyNo: true,
-            // InsurePhoneNo: true,
-            // AuthorizedPickupName1: true,
-            // AuthorizedPickupPhone1: true,
-            // AuthorizedPickupName2: true,
-            // AuthorizedPickupPhone2: true,
-            // EarlyDropOff: true,
-            // LatePickup: true,
-            // MediaRelease: true,
-            // EmergencyMedicalRelease: true,
-            // LiabilityAgreement: true,
             CreatedDate: today,
             CreatedBy: req.body.CreatedBy
           };
-          IndividualProgramRequirement.create(individualDetail).catch(err => {
+          IndividualProgramRequirement.create(individualDetail).then(program => {
+            res.json(programPK);
+          })
+          .catch(err => {
             res.send("err Insert Individual Requirement" + err);
           });
           break;
       }
       // Response the ProgramPK to the client
-      res.json(programPK);
+    
     })
     .catch(err => {
       res.send("errorResponse" + err);

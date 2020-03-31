@@ -10,8 +10,8 @@ export class AppConstants {
     public static get ERR_WRONG_PASSWORD(): string { return "http://localhost:4200/api"; }
     
     public static PROGRAM_TYPE_CODE = {
-        GROUP_PROGRAM: "0",
-        INDIVIDUAL_PROGRAM: "1"
+        GROUP_PROGRAM: 0,
+        INDIVIDUAL_PROGRAM: 1
     }
 
     public static PROGRAM_TEXT = {
@@ -20,19 +20,19 @@ export class AppConstants {
     }
   
     public static USER_ROLE = {
-        CUSTOMER: "1",
-        MANAGER: "2",
-        SYSTEM: "3"
+        CUSTOMER: 1,
+        MANAGER: 2,
+        SYSTEM: 3
     }
     
     public static SUB_GROUP_PROGRAM_TEXT = {
-        SCOUT_PROGRAM:  "Scout Program",
-        FIELD_TRIP: "Field Trip"
+        FIELD_TRIP: "Field Trip",
+        SCOUT_PROGRAM:  "Scout Program"
     }
 
     public static SUB_PROGRAM_CODE = {
-        FIELD_TRIP: "1",
-        SCOUT_PROGRAM: "2"
+        FIELD_TRIP: 1,
+        SCOUT_PROGRAM: 2
     }
 
 }

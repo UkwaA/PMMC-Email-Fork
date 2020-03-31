@@ -118,6 +118,19 @@
           </div>
         </div>
       </fieldset>
+      <!-- Total Quantity   -->
+      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TotalQuantity">
+        <div class="row">
+          <label class="col-form-label col-sm-2 pt-0 pl-0" for="TotalQuantity">Number of Participating Students: </label>
+          <div class="col-sm-10">
+            <input class="form-control" readonly="true" type="number" [(ngModel)] = "total" placeholder="" formControlName="TotalQuantity" 
+                  [ngClass]="{ 'is-invalid': submitted && f.TotalQuantity.errors }">
+            <div *ngIf="f.TotalQuantity.errors" class="invalid-feedback">
+              <div *ngIf="f.TotalQuantity.errors.max">The maximum number of allowed students is 35</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
       <!-- Organization Name -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.OrganizationName">
         <div class="row">
@@ -198,19 +211,6 @@
             </select>
             <div *ngIf="submitted && f.GradeLevel.errors" class="invalid-feedback">
               <div *ngIf="f.GradeLevel.errors.required">This is required</div>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-      <!-- Total Quantity   -->
-      <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TotalQuantity">
-        <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="TotalQuantity">Number of Participating Students: </label>
-          <div class="col-sm-10">
-            <input class="form-control" type="number" [(ngModel)] = "total" placeholder="" formControlName="TotalQuantity" 
-                  [ngClass]="{ 'is-invalid': submitted && f.TotalQuantity.errors }">
-            <div *ngIf="submitted && f.TotalQuantity.errors" class="invalid-feedback">
-              <div *ngIf="f.TotalQuantity.errors.required">This is required</div>
             </div>
           </div>
         </div>

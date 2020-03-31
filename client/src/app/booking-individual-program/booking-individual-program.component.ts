@@ -54,11 +54,11 @@ export class BookingIndividualProgramComponent implements OnInit {
       InsureProviderName: ['', [Validators.required, Validators.minLength(3)]],
       InsureRecipientName: ['', [Validators.required, Validators.minLength(3)]],
       InsurePolicyNo: ['',[Validators.required, Validators.minLength(5)]],
-      InsurePhoneNo: ['',[Validators.required, Validators.minLength(10)]],
+      InsurePhoneNo: ['',[Validators.required, Validators.min(1000000000)]],
       AuthorizedPickupName1: ['', [Validators.required, Validators.minLength(3)]],
-      AuthorizedPickupPhone1: ['',[Validators.required, Validators.minLength(10)]],
+      AuthorizedPickupPhone1: ['',[Validators.required, Validators.min(1000000000)]],
       AuthorizedPickupName2: ['', [Validators.required, Validators.minLength(3)]],
-      AuthorizedPickupPhone2: ['',[Validators.required, Validators.minLength(10)]],
+      AuthorizedPickupPhone2: ['',[Validators.required, Validators.min(1000000000)]],
       EarlyDropOff: ['', Validators.required],
       LatePickup: ['', Validators.required]
 
