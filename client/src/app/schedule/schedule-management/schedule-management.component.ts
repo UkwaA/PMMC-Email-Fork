@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { ProgramData } from '../data/program-data';
-import { ProgramServices } from '../services/program.services'
+import { ProgramData } from '../../data/program-data';
+import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 
 @Component({
     templateUrl: './schedule-management.component.html',
