@@ -1,11 +1,11 @@
 
 <div class="container">
   <div class="row text-left">
-    <h1>{{programDetails.Name}}</h1>
+    <h1 id="program_name"></h1>
   </div>
   <hr>
   <div class="row">
-    <div [innerHTML]="programDetails.Description"></div>
+    <div id="program_desc"></div>
   </div>
   <hr>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
