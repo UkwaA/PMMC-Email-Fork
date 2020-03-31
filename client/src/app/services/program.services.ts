@@ -53,6 +53,9 @@ export class ProgramServices {
     }
   }
 
+  public getSubGroupProgramType(ProgramPK: number): Observable<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'program/get-sub-group-program-type/' + ProgramPK);
+  }
   public getProgramRequirementDetails(programType: string, ProgramPK: number): Observable<any> {
     switch (programType) {
       case 'g':

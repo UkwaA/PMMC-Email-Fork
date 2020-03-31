@@ -4,12 +4,12 @@ import { Router } from "@angular/router";
 import { ProgramData } from "../data/program-data";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ProgramServices } from "../services/program.services";
-//import { AppConstants } from '../constants'
+import { AppConstants } from '../constants'
 import * as DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
 import { MatDialogConfig, MatDialog } from "@angular/material";
 
-declare var $: any;
+// declare var $: any;
 
 @Component({
   templateUrl: "./createprogram.component.html",
@@ -24,11 +24,12 @@ export class CreateProgramComponent implements OnInit {
   selectedProgramType = 0;
   selectedSubType = 0;
   DepositAmount = 0;
+
   programData: ProgramData = {
-    ProgramPk: 0,
+    ProgramPK: 0,
     Name: "",
     Description: "",
-    DepositAmount: 0,
+    DepositAmount: null,
     PricePerParticipant: null,
     MaximumParticipant: null,
     ImgData: "",
@@ -36,24 +37,24 @@ export class CreateProgramComponent implements OnInit {
     CreatedDate: "",
     CreatedBy: 0,
     IsActive: false,
-    SubProgramPk: 0
+    SubProgramPK: 0
   };
 
   // Initialize Dropdown List for Program Type
-  programs = [
-    {name: "Group Program"},
-    {name: "Individual Program"}
-  ];
+  // programs = [
+  //   {name: AppConstants.PROGRAM_TYPE_TEXT.GROUP_PROGRAM},
+  //   {name: AppConstants.PROGRAM_TYPE_TEXT.INDIVIDUAL_PROGRAM}
+  // ];
   programCategories = [
-    { id: 0, name: "Group Program" },
-    { id: 1, name: "Individual Program" }
+    { id: AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM, name: AppConstants.PROGRAM_TEXT.GROUP_PROGRAM },
+    { id: AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM, name: AppConstants.PROGRAM_TEXT.INDIVIDUAL_PROGRAM }
   ];
 
   // Initialize Dropdown List for Sub Type of Group Program
   programSubCategories = [
     { id: 0, name: "None" },
-    { id: 1, name: "Scout Program" },
-    { id: 2, name: "Field Trip" }
+    { id: 1, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM },
+    { id: 2, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.FIELD_TRIP }
   ];
 
   constructor(
@@ -64,14 +65,6 @@ export class CreateProgramComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.programSubCategories.forEach(e => {
-    //   $("#programSubCategories").append(new Option(e["name"], e["id"]));
-    // });
-
-    // this.programCategories.forEach(e => {
-    //   $("#programCat").append(new Option(e["name"], e["id"]));
-    // });
-
     this.createProgramForm = this.fb.group({
       Name: [
         "",
@@ -85,7 +78,7 @@ export class CreateProgramComponent implements OnInit {
       subProgramType: ['', Validators.required],
       DepositAmount: ["", [Validators.required, Validators.min(0)]],
       PricePerParticipant: ["", [Validators.required, Validators.min(0)]],
-      MaximumParticipant: ["", [Validators.required, Validators.min(1)]]
+      MaximumParticipant: ["", [Validators.required, Validators.min(10)]]
    //   ImgData: ["", [Validators.required]]
     });
   }
@@ -129,7 +122,7 @@ export class CreateProgramComponent implements OnInit {
     this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
     this.programData.ImgData = "";
     this.programData.ProgramType = this.selectedProgramType;
-    this.programData.SubProgramPk = this.selectedSubType;
+    this.programData.SubProgramPK = this.selectedSubType;
 
     // Call Programs Service to send request to server
     this.services.addNewProgram(this.getFormData()).subscribe(response => {
@@ -138,6 +131,7 @@ export class CreateProgramComponent implements OnInit {
         "/profile/program-details/" + response + "/edit"
       );
     });
+    
   }
 
   // Initialize CkEditor
@@ -152,7 +146,8 @@ export class CreateProgramComponent implements OnInit {
 
   // Clear data when click on input field
   onFocus(event) {
-    event.target.value = "";
+    if(event.target.value == 0)
+      event.target.value = "";
   }
 
   // Restore data when lose focus on input field
