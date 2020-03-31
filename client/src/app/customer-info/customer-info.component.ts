@@ -82,6 +82,7 @@ export class CustomerRegisterComponent implements OnInit {
     dialogConfig.height = "auto";
     dialogConfig.maxHeight = "500px";
     dialogConfig.width = "350px";
+    dialogConfig.autoFocus = false;
     dialogConfig.data = {
         title: "Register Confirmation",
         firstName: this.customerInfoForm.get('firstName').value,

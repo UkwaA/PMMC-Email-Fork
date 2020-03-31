@@ -161,6 +161,7 @@ export class ResetPasswordComponent{
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Set New Password",
             description: "Password has been successfully updated. You are now redirecting to Login Page" ,

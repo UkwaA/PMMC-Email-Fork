@@ -39,18 +39,26 @@ users.post("/register", (req, res) => {
         userData.Password = hash;
 
         User.create(userData)
-          .then(user => {
-            let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-              expiresIn: 1440
-            });
-
-            Customer.create({ UserPK: user.UserPK })
-                .catch(err => {
-                  res.send("errorExpressErr: " + err);
-                });
-
-            res.json({ UserPK: user.UserPK });
-           
+          .then(user => {            
+            const customerData = {
+              UserPK: user.UserPK,      
+              FirstName: '',
+              LastName: '',
+              PhoneNo: '',
+              Address: '',
+              City: '',
+              State: '',
+              Zipcode: '',
+              Subscribe: 0
+            }      
+            Customer.create(customerData)
+              .then(()=>{
+                //Send userPK back to Register Page for routing
+                res.json({ UserPK: user.UserPK })
+              })            
+              .catch(err => {
+                res.send("errorExpressErr: " + err);
+              });
           })
           .catch(err => {
             res.send("errorExpressErr: " + err);

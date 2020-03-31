@@ -57,9 +57,9 @@
               <div [innerHTML]="program.Description"></div>
             </div>
             <h4> ... </h4>
-            <div class="text-right pt-1">
-              <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
-              <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="btn btn-outline-info">Find Out More!</a>
+            <div class="card-body d-flex flex-column mt-5">
+              <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
+              <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
             </div>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">

@@ -93,6 +93,7 @@ export class RegisterComponent {
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Register Confirmation",
             username: this.registerForm.get('username').value,
