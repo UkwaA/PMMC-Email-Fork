@@ -1,0 +1,11 @@
+.col-lg-12{
+    padding-bottom: 25px;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 20px;
+    color:  #08b2b8;;
+}
