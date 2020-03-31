@@ -115,7 +115,9 @@ program.get('/get-individual-program-requirement/:id', (req, res) => {
 program.post('/add-program', (req, res) => {
   const today = new Date()
   var programPK = 0
-
+  var subProgramPk = req.body.SubProgramPk
+  console.log(subProgramPk)
+  
   const programData = {
     Name: req.body.Name,
     Description: req.body.Description,
@@ -160,7 +162,7 @@ program.post('/add-program', (req, res) => {
         case '0':
           var groupDetail = {
             GroupProgramPK: programPK,
-            SubProgramPk: req.body.SubProgramPk,
+            SubProgramPK: subProgramPk,
             // AdultQuantity: true,
             // Age57Quantity: true,
             // Age810Quantity: true,

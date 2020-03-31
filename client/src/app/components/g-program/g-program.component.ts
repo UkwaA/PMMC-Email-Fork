@@ -5,6 +5,7 @@ import { Router } from '@angular/router'
 import { AuthenticationService } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
+
 declare var $: any;
 
 @Component({

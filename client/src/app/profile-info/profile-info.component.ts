@@ -18,6 +18,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
     isDisabled: boolean
     customerInfoForm: FormGroup
     subscribeChecked: boolean
+    
     customerDetails:CustomerData = {
       UserPK: 0,
       FirstName: '',

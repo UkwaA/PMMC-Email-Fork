@@ -72,7 +72,7 @@
                     <label>Price Per Participant</label>
                     <input type="number" class="form-control" formControlName="PricePerParticipant"
                         placeholder="Enter Price for 1 Participant" [(ngModel)]="programData.PricePerParticipant"
-                        [ngClass]="{'is-invalid': submitted && f.PricePerParticipant.errors }">
+                        [ngClass]="{'is-invalid': submitted && f.PricePerParticipant.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                     <div *ngIf="submitted && f.PricePerParticipant.errors" class="invalid-feedback">
                         <div *ngIf="f.PricePerParticipant.errors.required">Price Per Participant is required</div>
                         <div *ngIf="f.PricePerParticipant.errors.min">Price Per Participant must be from 0 and up.</div>
@@ -82,7 +82,7 @@
                     <label>Maximum Number of Participant</label>
                     <input type="number" class="form-control" formControlName="MaximumParticipant"
                         placeholder="Enter Number of Participant" [(ngModel)]="programData.MaximumParticipant"
-                        [ngClass]="{'is-invalid': submitted && f.MaximumParticipant.errors }">
+                        [ngClass]="{'is-invalid': submitted && f.MaximumParticipant.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                     <div *ngIf="submitted && f.MaximumParticipant.errors" class="invalid-feedback">
                         <div *ngIf="f.MaximumParticipant.errors.required">Participant Number is required</div>
                         <div *ngIf="f.MaximumParticipant.errors.min">Participant Number must be greater than 0.</div>
