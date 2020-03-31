@@ -184,11 +184,11 @@
         <div class="row">
           <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsurePhoneNo">Insurance Phone Number:  </label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+            <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
                 [ngClass]="{ 'is-invalid': submitted && f.InsurePhoneNo.errors }">
             <div *ngIf="submitted && f.InsurePhoneNo.errors" class="invalid-feedback">
               <div *ngIf="f.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
-              <div *ngIf="f.InsurePhoneNo.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.InsurePhoneNo.errors.min">Please enter a valid phone number</div>
               <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
@@ -213,11 +213,11 @@
         <div class="row">
           <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
+            <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
             <div *ngIf="submitted && f.AuthorizedPickupPhone1.errors" class="invalid-feedback">
               <div *ngIf="f.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
-              <div *ngIf="f.AuthorizedPickupPhone1.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.AuthorizedPickupPhone1.errors.min">Please enter a valid phone number</div>
               <!-- <div *ngIf="f.AuthorizedPickupPhone1.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
@@ -231,7 +231,7 @@
             <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
             <div *ngIf="submitted && f.AuthorizedPickupName2.errors" class="invalid-feedback">
-              <div *ngIf="f.AuthorizedPickupName2.errors.required">Authorized Pickup Name is required</div>
+              <div *ngIf="f.AuthorizedPickupName2.errors.required">2nd Authorized Pickup Name is required</div>
               <div *ngIf="f.AuthorizedPickupName2.errors.minlength">Must be at least 3 characters long.</div>
             </div>
           </div>
@@ -242,11 +242,11 @@
         <div class="row">
           <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
+            <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }">
             <div *ngIf="submitted && f.AuthorizedPickupPhone2.errors" class="invalid-feedback">
-              <div *ngIf="f.AuthorizedPickupPhone2.errors.required">Authorized Pickup Phone is required</div>
-              <div *ngIf="f.AuthorizedPickupPhone2.errors.minlength">Please enter correct phone number</div>
+              <div *ngIf="f.AuthorizedPickupPhone2.errors.required">2nd Authorized Pickup Phone is required</div>
+              <div *ngIf="f.AuthorizedPickupPhone2.errors.min">Please enter a valid phone number</div>
               <!-- <div *ngIf="f.AuthorizedPickupPhone2.errors.pattern">Invalid Phone Number</div> -->
             </div>
           </div>
@@ -266,7 +266,7 @@
               <option>Thursday Early Drop Off (+$7)</option>
             </select>
             <div *ngIf="submitted && f.EarlyDropOff.errors" class="invalid-feedback">
-              <div *ngIf="f.EarlyDropOff.errors.required">This is required</div>
+              <div *ngIf="f.EarlyDropOff.errors.required">This selection is required</div>
             </div>
           </div>
         </div>
@@ -285,7 +285,7 @@
               <option>Thursday Late Pick-Up  (+$7)</option>
             </select>
             <div *ngIf="submitted && f.LatePickup.errors" class="invalid-feedback">
-              <div *ngIf="f.LatePickup.errors.required">This is required</div>
+              <div *ngIf="f.LatePickup.errors.required">This selection is required</div>
             </div>
           </div>
         </div>

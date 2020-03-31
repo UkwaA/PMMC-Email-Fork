@@ -43,8 +43,6 @@ export class BookingGroupProgramComponent implements OnInit {
         console.log(this.programDetails);
       })
 
-    // document.getElementById("program_name").innerHTML = this.programDetails.Name;
-
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
