@@ -2,6 +2,86 @@
     <div class="row text-center text-white mb-5 mt-4">
         <div class="col-lg-7 mx-auto">
             <h1>Set Program Schedule</h1>
+            
         </div>
     </div>
+    <form [formGroup]="SetProgramScheduleForm" (ngSubmit)="openModal()">
+        <div class="form-group font-weight-bold">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Program Name</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" formControlName="programName" [(ngModel)]="programData.Name" readonly>
+                </div>
+            </div>
+        <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Pick Start & End date</label>
+                </div>
+                <div class="col-md-4">                    
+                    <mat-form-field>
+                        <mat-label>Pick a Start Date</mat-label>
+                        <input class="form-control" matInput [matDatepicker]="StartDatePicker" 
+                            formControlName="startDate"  placeholder="date" (dateChange)="updateStartDate($event)" >
+                        <mat-datepicker-toggle  matSuffix [for]="StartDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #StartDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">                    
+                    <mat-form-field>
+                        <mat-label>Pick an End Date</mat-label>
+                        <input class="form-control" [min]="startDate" matInput [matDatepicker]="EndDatePicker" 
+                            formControlName="endDate"  placeholder="date" (dateChange)="updateEndDate($event)" >
+                        <mat-datepicker-toggle  matSuffix [for]="EndDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #EndDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Pick Start & End time</label>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <label>Start time</label>
+                     </div>
+                    <kendo-timepicker                        
+                        (valueChange)="updateStartTime($event)"
+                        [value]="startTime">
+                    </kendo-timepicker>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                        <label>End time</label>
+                     </div>
+                    <kendo-timepicker                        
+                        (valueChange)="updateEndTime($event)"
+                        [value]="endTime">
+                    </kendo-timepicker>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Select Session Day</label>
+                </div>                
+                <div class="col-md-4" >               
+                    <mat-error *ngIf="submitted && f.dayCheck.errors" class="invalid-feedback">
+                        <div *ngIf="f.dayCheck.errors.required">Must check at least one box</div>
+                    </mat-error> 
+                    <section class="options-section" *ngFor= 'let day of repeatDay'>
+                        <mat-checkbox class="options-margin" formControlName="dayCheck" 
+                        [(ngModel)]="day.value" required>{{day.day}}</mat-checkbox>                                                
+                    </section>              
+                </div>                
+            </div>
+            <br/>
+            <div class="col-xs-12 form-group">                    
+                <button class="btn btn-lg btn-info btn-block" type="submit">Set Schedule</button>
+            </div>
+        </div>
+    </form>    
 </div>

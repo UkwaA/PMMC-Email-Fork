@@ -6,20 +6,21 @@ module.exports = db.sequelize.define(
   {
     SchedulePK: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     ProgramPK: {
       type: Sequelize.INTEGER,
       primaryKey: true
     },
     Date: {
-      type: Sequelize.DATE
+      type: Sequelize.TEXT
     },
     StartTime: {
-      type: Sequelize.TIME
+      type: Sequelize.TEXT
     },
     EndTime: {
-      type: Sequelize.TIME
+      type: Sequelize.TEXT
     },
     MaximumParticipant: {
       type: Sequelize.INTEGER
@@ -28,7 +29,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER
     },
     CreatedBy: {
-      type: Sequelize.TIME
+      type: Sequelize.INTEGER
     },
     CreatedDate: {
         type: Sequelize.DATE,

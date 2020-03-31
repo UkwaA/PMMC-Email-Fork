@@ -6,7 +6,8 @@ module.exports = db.sequelize.define(
   {
     ReservationPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     SchedulePK: {
       type: Sequelize.INTEGER,

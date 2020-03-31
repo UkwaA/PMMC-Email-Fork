@@ -28,6 +28,9 @@ app.use('/service', Email)
 var Customer = require('./routes/Customers')
 app.use('/customers', Customer)
 
+var Schedule = require('./routes/Schedule')
+app.use('/schedule', Schedule)
+
 // Folder for photo
 app.use(express.static('public'));
 

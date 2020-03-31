@@ -22,6 +22,7 @@ import { AuthCustomerGuardService } from './auth-customer-guard.service'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
+import { ProgramScheduleService } from './services/schedule.services'
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
@@ -44,6 +45,9 @@ import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
 
 import { MatRadioModule } from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
+import {MatNativeDateModule} from '@angular/material/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -89,7 +93,11 @@ const routes : Routes = [
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {path: 'view-schedule', component: ViewScheduleComponent, canActivate: [AuthRoleGuardService]},
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
-      {path: 'set-program-schedule', component: SetProgramScheduleComponent, canActivate: [AuthRoleGuardService]},
+      {
+        path: 'program-details/:id/set-program-schedule', 
+        component: SetProgramScheduleComponent, 
+        canActivate: [AuthRoleGuardService]
+      },
       { 
         path: 'program-details/:id/:mode', 
         component: ProgramDetailsComponent,
@@ -177,6 +185,8 @@ const routes : Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
     CKEditorModule,
     MatListModule,
     MatRadioModule,
@@ -189,9 +199,11 @@ const routes : Routes = [
     MatDialogModule,
     MatProgressSpinnerModule,
     SchedulerModule,
-    DateInputsModule    
+    DateInputsModule,
+    MatNativeDateModule    
   ],
-  providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, AuthCustomerGuardService, AuthenticationService],
+  providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
+    AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent]
 })
