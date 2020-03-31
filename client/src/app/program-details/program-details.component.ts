@@ -36,7 +36,7 @@ export class ProgramDetailsComponent {
     ProgramTypeText: string         // For display on the HTML
     programTypeShortText: string     // For service call selection
     programData: ProgramData = {
-        ProgramPk: 0,
+        ProgramPK: 0,
         Name: '',
         Description: '',
         DepositAmount: 0,
@@ -47,7 +47,7 @@ export class ProgramDetailsComponent {
         CreatedDate: '',
         CreatedBy: 0,
         IsActive: true,
-        SubProgramPk: 0
+        SubProgramPK: 0
     }
     selectedValue: any
     files: File;

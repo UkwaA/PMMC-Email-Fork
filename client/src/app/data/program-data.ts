@@ -1,5 +1,5 @@
 export class ProgramData {
-    ProgramPk: number
+    ProgramPK: number
     Name: string
     Description: string
     DepositAmount: number
@@ -10,7 +10,7 @@ export class ProgramData {
     CreatedDate: string
     CreatedBy: number
     IsActive: boolean
-    SubProgramPk: number
+    SubProgramPK: number
 
     constructor(nTitle:string,
                 nDescription:string, 
@@ -18,7 +18,7 @@ export class ProgramData {
                 deposit: number,
                 price:number,
                 participant: number){
-        this.ProgramPk = 0;
+        this.ProgramPK = 0;
         this.Name = nTitle;
         this.Description = nDescription;
         this.DepositAmount = deposit;

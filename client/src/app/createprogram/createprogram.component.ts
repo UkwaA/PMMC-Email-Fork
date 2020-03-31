@@ -26,7 +26,7 @@ export class CreateProgramComponent implements OnInit {
   DepositAmount = 0;
 
   programData: ProgramData = {
-    ProgramPk: 0,
+    ProgramPK: 0,
     Name: "",
     Description: "",
     DepositAmount: null,
@@ -37,7 +37,7 @@ export class CreateProgramComponent implements OnInit {
     CreatedDate: "",
     CreatedBy: 0,
     IsActive: false,
-    SubProgramPk: 0
+    SubProgramPK: 0
   };
 
   // Initialize Dropdown List for Program Type
@@ -122,7 +122,7 @@ export class CreateProgramComponent implements OnInit {
     this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
     this.programData.ImgData = "";
     this.programData.ProgramType = this.selectedProgramType;
-    this.programData.SubProgramPk = this.selectedSubType;
+    this.programData.SubProgramPK = this.selectedSubType;
 
     // Call Programs Service to send request to server
     this.services.addNewProgram(this.getFormData()).subscribe(response => {

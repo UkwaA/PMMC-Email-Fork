@@ -1,7 +1,6 @@
 export class AppConstants {
     public static get BASE_URL(): string { return "http://localhost:4200/"; }
     public static get EXPRESS_SERVER_URL(): string { 
-       // return (window.location.origin.toString() + "/"); 
         return "http://localhost:3000/";
         //return "http://ec2-54-219-216-92.us-west-1.compute.amazonaws.com:3000/";
     }

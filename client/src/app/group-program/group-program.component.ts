@@ -17,9 +17,14 @@ export class GroupProgramComponent implements OnInit{
     ngOnInit(){
         this.programService.getActivePrograms().then((result) =>{
             this.programs = result;
+            
             this.programs.forEach(e => {
-                e.ImgData = AppConstants.EXPRESS_SERVER_URL + e.ImgData
+                e.ImgData = AppConstants.EXPRESS_SERVER_URL + e.ImgData;
+                this.programService.getSubGroupProgramType(e.ProgramPK).subscribe(result =>{
+                    e.SubProgramPK = result
+                })
             });
+            console.log(this.programs)
         })
     }
 
