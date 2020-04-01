@@ -40,7 +40,7 @@
                 </div>
             </div>
             <br/>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4">
                     <label>Pick Start & End time</label>
                 </div>
@@ -63,20 +63,61 @@
                     </kendo-timepicker>
                 </div>
             </div>
-            <br/>
+            <br/> -->
             <div class="row">
                 <div class="col-md-4">
-                    <label>Select Session Day</label>
+                    <label>Select Session Day & Time</label>
                 </div>                
-                <div class="col-md-4" >               
+                <div class="col-md-8" >
+                    <mat-card>
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <label>Day</label>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <label>Start time</label>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <label>End time</label>
+                            </div> 
+                        </div>      
+                    </mat-card>
+                    <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">                    
+                </div>                
+                <div class="col-md-8" >
                     <mat-error *ngIf="submitted && f.dayCheck.errors" class="invalid-feedback">
                         <div *ngIf="f.dayCheck.errors.required">Must check at least one box</div>
                     </mat-error> 
-                    <section class="options-section" *ngFor= 'let day of repeatDay'>
-                        <mat-checkbox class="options-margin" formControlName="dayCheck" 
-                        [(ngModel)]="day.value" required>{{day.day}}</mat-checkbox>                                                
+                    <section class="options-section" *ngFor= 'let day of repeatDay, let i = index'>
+                        <mat-card>
+                            <div class = "row">
+                                <div class="col-md-3">
+                                    <mat-checkbox class="options-margin" formControlName="dayCheck" 
+                                    (change)=updateCheckBox($event,i) [(ngModel)]="day.value" required>{{day.day}}</mat-checkbox>
+                                </div>
+                                <div class="col-md-3">                                    
+                                    <kendo-timepicker                        
+                                        (valueChange)="updateStartTime($event,i)"
+                                        [value]="day.start"
+                                        [disabled]="!day.value">
+                                    </kendo-timepicker>
+                                </div>
+                                <div class="col-md-3">                                   
+                                    <kendo-timepicker                        
+                                        (valueChange)="updateEndTime($event,i)"
+                                        [value]="day.end"
+                                        [disabled]="!day.value">
+                                    </kendo-timepicker>
+                                </div>
+                            </div>
+                        </mat-card>   
+                        <br/>                 
                     </section>              
-                </div>                
+                </div>
             </div>
             <br/>
             <div class="col-xs-12 form-group">                    
