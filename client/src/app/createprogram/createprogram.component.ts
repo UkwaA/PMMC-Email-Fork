@@ -78,7 +78,7 @@ export class CreateProgramComponent implements OnInit {
       subProgramType: ['', Validators.required],
       DepositAmount: ["", [Validators.required, Validators.min(0)]],
       PricePerParticipant: ["", [Validators.required, Validators.min(0)]],
-      MaximumParticipant: ["", [Validators.required, Validators.min(10)]]
+      MaximumParticipant: ["", [Validators.required, Validators.min(1)]]
    //   ImgData: ["", [Validators.required]]
     });
   }
