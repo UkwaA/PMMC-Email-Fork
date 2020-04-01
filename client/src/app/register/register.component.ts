@@ -29,7 +29,7 @@ export class RegisterComponent {
         UserPK: 0,
         Username: '',
         Password: '',
-        Role_FK: '',
+        Role_FK: '1',
         Email: ''
     }
 

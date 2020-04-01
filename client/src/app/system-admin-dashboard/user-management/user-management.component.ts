@@ -97,7 +97,7 @@ selectChangeHandler(event: any) {
     else {
         dialogConfig.data = {
             title: "Deactivate Account",
-            description: "This account is actived. Are you sure to deactivate this activate?",            
+            description: "This account is actived. Are you sure to deactivate this account?",            
             actionButtonText: "Confirm",   
             numberOfButton: "2"
         }
