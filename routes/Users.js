@@ -19,7 +19,7 @@ users.post("/register", (req, res) => {
   const userData = {
     Username: req.body.Username,
     Password: req.body.Password,
-    Role_FK: 1,
+    Role_FK: req.body.Role_FK,
     Email: req.body.Email,
     CreatedDate: today,
     IsActive: true
