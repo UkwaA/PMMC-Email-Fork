@@ -38,9 +38,13 @@
                     </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
-                    <td><button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']"
+                        <!-- <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']"
                             class="btn btn-info">
                             <mat-icon matListIcon>visibility</mat-icon> View
+                        </button> -->
+                        <button [routerLink]="['/profile','program-details', program.ProgramPK, 'set-program-schedule']"
+                            class="btn btn-info">
+                            <mat-icon matListIcon>calendar_today</mat-icon>Set schedule
                         </button>
                         <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
                             class="btn btn-warning">

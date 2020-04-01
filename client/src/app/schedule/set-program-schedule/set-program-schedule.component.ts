@@ -30,14 +30,15 @@ export class SetProgramScheduleComponent {
         SubProgramPK: 0        
     }
 
+    //WARNING: DO NOT CHANGE THE ORDER OF DAY
     repeatDay = [
+        {day: "Sunday", value: false},
         {day: "Monday", value: false},
         {day: "Tuesday", value: false},
         {day: "Wednesday", value: false},
         {day: "Thursday", value: false},
         {day: "Friday", value: false},
-        {day: "Saturday", value: false},
-        {day: "Sunday", value: false},
+        {day: "Saturday", value: false},        
     ]
 
     currentSession: ProgramScheduleData = {
@@ -143,20 +144,29 @@ export class SetProgramScheduleComponent {
     }
 
     setSchedule(){
-        //Get Datetime as this format YYYY-MM-DD HH:MM:SS
-        var formatDate = this.startDate.toISOString().slice(0,10)        
-        var formatStartTime = this.startTime.toTimeString().slice(0,8)
-        var formatEndTime = this.endTime.toTimeString().slice(0,8)
+        //Get Datetime as this format YYYY-MM-DD HH:MM:SS     
+        var formatStartTime = this.startTime.toTimeString().slice(0,5) + ":00"
+        var formatEndTime = this.endTime.toTimeString().slice(0,5) + ":00"
 
         //Re-initialize currentSession before send to back-end
-        this.currentSession.ProgramPK = this.ProgramPK
-        this.currentSession.Date = formatDate
-        this.currentSession.StartTime = formatStartTime
-        this.currentSession.EndTime = formatEndTime        
+        this.currentSession.ProgramPK = this.ProgramPK                
         this.currentSession.MaximumParticipant = this.programData.MaximumParticipant
-
-        this.programScheduleServices.addNewProgramSchedule(this.currentSession).subscribe(res =>{
-            console.log(res)
-        })
+        this.currentSession.StartTime = formatStartTime
+        this.currentSession.EndTime = formatEndTime
+        //Loop through all day from StartDate to EndDate, if the day is selected to repeat 
+        // AND if that day is not a Blackout-day ==> add to Schedule table in database
+        var dayIndex = 0;
+        for (var d = this.startDate; d <= this.endDate; d.setDate(d.getDate() + 1)) {
+            dayIndex = d.getDay()
+            //TO-DO: need to check if it's not in black out dates
+            if(this.repeatDay[dayIndex].value){
+                this.currentSession.Date = d.toISOString().slice(0,10)                
+                this.programScheduleServices.addNewProgramSchedule(this.currentSession).subscribe(res =>{
+                    console.log(res)
+                })
+            }
+        }
+        
+        this.router.navigateByUrl("/profile/program-management")
     }
 }
