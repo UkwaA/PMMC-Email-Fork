@@ -1,7 +1,7 @@
 import { Component, EventEmitter } from '@angular/core'
 import { ProgramData } from '../../data/program-data';
 import { ProgramServices } from '../../services/program.services'
-import { MatDialogConfig, MatDialog, MatDatepicker, MatSelect, MatDatepickerInputEvent } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatCard, MatSelect, MatDatepickerInputEvent, MatCheckboxChange } from '@angular/material';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -30,17 +30,6 @@ export class SetProgramScheduleComponent {
         SubProgramPK: 0        
     }
 
-    //WARNING: DO NOT CHANGE THE ORDER OF DAY
-    repeatDay = [
-        {day: "Sunday", value: false},
-        {day: "Monday", value: false},
-        {day: "Tuesday", value: false},
-        {day: "Wednesday", value: false},
-        {day: "Thursday", value: false},
-        {day: "Friday", value: false},
-        {day: "Saturday", value: false},        
-    ]
-
     currentSession: ProgramScheduleData = {
         SchedulePK: 0,
         ProgramPK: 0,
@@ -54,13 +43,26 @@ export class SetProgramScheduleComponent {
     }
     SetProgramScheduleForm: FormGroup;
     submitted = false;
-    startDate: any;
-    endDate: any
-    startTime = new Date();
-    endTime = new Date();
     dataChange: EventEmitter<any> = new EventEmitter();
     isChecked = false;
     errorMessage = '';
+
+    startDate: any;
+    endDate: any
+    startTime = new Date('2020-04-01T09:00:00');
+    endTime = new Date('2020-04-01T10:00:00');
+
+    //WARNING: DO NOT CHANGE THE ORDER OF DAY
+    repeatDay = [
+        {day: "Sunday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Monday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Tuesday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Wednesday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Thursday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Friday", value: false, start: this.startTime, end: this.endTime },
+        {day: "Saturday", value: false, start: this.startTime, end: this.endTime },
+    ]
+    
     
     constructor (private formBuilder: FormBuilder, public matDialog: MatDialog, private fb: FormBuilder,
         private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
@@ -99,12 +101,20 @@ export class SetProgramScheduleComponent {
         this.endDate = event.value
     }
 
-    updateStartTime(value: Date){
-        this.startTime = value
+    //Update Start Time of a specific day
+    updateStartTime(value: Date, day:number){
+        this.repeatDay[day].start = value    
     }
 
-    updateEndTime(value: Date){
-        this.endTime = value
+    //Update End Time of a specific day
+    updateEndTime(value: Date, day:number){
+        this.repeatDay[day].end = value
+    }
+
+    //If checkbox is checked, the timepicker will be enabled
+    updateCheckBox(event: MatCheckboxChange, day:number){
+        this.isChecked = event.checked
+        this.repeatDay[day].value = event.checked
     }
 
     openModal(){
@@ -144,15 +154,9 @@ export class SetProgramScheduleComponent {
     }
 
     setSchedule(){
-        //Get Datetime as this format YYYY-MM-DD HH:MM:SS     
-        var formatStartTime = this.startTime.toTimeString().slice(0,5) + ":00"
-        var formatEndTime = this.endTime.toTimeString().slice(0,5) + ":00"
-
         //Re-initialize currentSession before send to back-end
         this.currentSession.ProgramPK = this.ProgramPK                
         this.currentSession.MaximumParticipant = this.programData.MaximumParticipant
-        this.currentSession.StartTime = formatStartTime
-        this.currentSession.EndTime = formatEndTime
         //Loop through all day from StartDate to EndDate, if the day is selected to repeat 
         // AND if that day is not a Blackout-day ==> add to Schedule table in database
         var dayIndex = 0;
@@ -160,13 +164,17 @@ export class SetProgramScheduleComponent {
             dayIndex = d.getDay()
             //TO-DO: need to check if it's not in black out dates
             if(this.repeatDay[dayIndex].value){
-                this.currentSession.Date = d.toISOString().slice(0,10)                
+                //Get the date format "YYYY-MM-DD" of the full date
+                this.currentSession.Date = d.toISOString().slice(0,10)
+                //Get Datetime as this format YYYY-MM-DD HH:MM:SS     
+                this.currentSession.StartTime = this.repeatDay[dayIndex].start.toTimeString().slice(0,5) + ":00"
+                this.currentSession.EndTime = this.repeatDay[dayIndex].end.toTimeString().slice(0,5) + ":00"
+                
                 this.programScheduleServices.addNewProgramSchedule(this.currentSession).subscribe(res =>{
-                    console.log(res)
                 })
             }
         }
         
-        this.router.navigateByUrl("/profile/program-management")
+        this.router.navigateByUrl("/profile/schedule-management")
     }
 }

@@ -47,7 +47,6 @@ export class CustomerRegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       phoneNum: ['', [Validators.required, Validators.min(1000000000)]],
       address_street: ['', Validators.required],
-      //address_unit: [''],
       address_city: ['', Validators.required],
       address_state: ['', [Validators.required, Validators.minLength(2)]],
       address_zipcode: ['', [Validators.required, Validators.min(10000)]],

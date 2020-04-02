@@ -50,7 +50,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatNativeDateModule} from '@angular/material/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonModule, MatCardModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -200,7 +200,8 @@ const routes : Routes = [
     MatProgressSpinnerModule,
     SchedulerModule,
     DateInputsModule,
-    MatNativeDateModule    
+    MatNativeDateModule,
+    MatCardModule    
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
     AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],

@@ -1,10 +1,6 @@
 <h1> Profile Information Page </h1>
 <hr>
 <div class="container bootstrap snippet">
-    <!-- <div class="row"> -->
-  		<!-- <div class="col-sm-10"><h2>User name</h2></div> -->
-    <!-- 	<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div> -->
-        <!-- </div> -->
     <div class="row">
   		<div class="col-sm-3 col-md-5"><!--left col-->
             <div class="text-center">
@@ -16,7 +12,6 @@
         </div><!--/col-3-->
     	<div class="col-sm-9 col-md-7">
             <section class="readonly">
-                <!-- <mat-checkbox [(ngModel)]="isDisabled"> Read Only </mat-checkbox> -->
                 <button *ngIf="isDisabled" class="btn btn-sm btn-warning" type="submit" (click)="viewOrEditMode()">
                     <mat-icon matListIcon>edit</mat-icon>Edit
                 </button>
@@ -49,10 +44,11 @@
             
                         <div class="col-xs-6">
                             <label><h4>Phone Number</h4></label>
-                            <input type="number" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
+                            <input type="text" pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
                             [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
                             <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
                                 <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
+                                <div *ngIf="f.PhoneNo.errors.pattern"> Please enter a valid Phone Number (10 digits)</div>
                               </div>
                         </div>
                         <br/>
@@ -67,14 +63,8 @@
                         </div>
                         <br/>
 
-                        <!-- <div class="col-xs-6">
-                            <label><h4>Address #2</h4></label>
-                            <input type="text" class="form-control" formControlName="Address2" placeholder="enter address (optional)">
-                        </div>
-                        <br/> -->
-
                         <div class="col-xs-6">
-                            <label for="email"><h4>City</h4></label>
+                            <label><h4>City</h4></label>
                             <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" 
                             [ngClass]="{'is-invalid': submitted && f.City.errors }" >
                             <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
@@ -85,29 +75,26 @@
 
                         <div class="col-xs-6">
                             <label><h4>State</h4></label>
-                            <input type="text" class="form-control" formControlName="State"placeholder="enter state" [(ngModel)]="customerDetails.State" 
-                            [ngClass]="{'is-invalid': submitted && f.State.errors }" maxlength = "2" >
+                            <input type="text" pattern="[a-zA-Z]{2}" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State" 
+                            [ngClass]="{'is-invalid': submitted && f.State.errors }">
                             <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
                                 <div *ngIf="f.State.errors.required">State is required</div>
+                                <div *ngIf="f.State.errors.pattern"> Please enter a valid State</div>
                               </div>
                         </div>
                         <br/>
 
                         <div class="col-xs-6">
                             <label><h4>Zipcode</h4></label>
-                            <input type="number" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
+                            <input type="text" pattern="[0-9]{5}" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
                             [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
                             <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
+                                <div *ngIf="f.Zipcode.errors.pattern"> Please enter a valid Zipcode (5 digits)</div>
                               </div>
                         </div>
                         <br/>
 
-                        <!-- <div class="col-xs-6">
-                            <label class="checkbox-inline"></label>
-                                <input type="checkbox" title="Subscribe" [(ngModel)]="customerDetails.Subscribe" value="">Subscribe                          
-                        </div>
-                        <br/> -->
                         <div>
                             <section class="options-section">
                                 <mat-checkbox class="options-margin" formControlName="Subscribe"
