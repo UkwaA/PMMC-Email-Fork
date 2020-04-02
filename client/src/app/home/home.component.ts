@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
 
     constructor( private programService: ProgramServices){   }
     ngOnInit(){
-        this.programService.getAllPrograms().then((result) =>{
+        this.programService.getActivePrograms().then((result) =>{
             var count = 0;
             if (result.length < 4){
                 count = result.length;
