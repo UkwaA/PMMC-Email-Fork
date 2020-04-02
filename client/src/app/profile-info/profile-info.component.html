@@ -44,7 +44,7 @@
             
                         <div class="col-xs-6">
                             <label><h4>Phone Number</h4></label>
-                            <input type="text" required pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
+                            <input type="text" pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
                             [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
                             <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
                                 <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
@@ -64,7 +64,7 @@
                         <br/>
 
                         <div class="col-xs-6">
-                            <label for="email"><h4>City</h4></label>
+                            <label><h4>City</h4></label>
                             <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" 
                             [ngClass]="{'is-invalid': submitted && f.City.errors }" >
                             <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
@@ -75,7 +75,7 @@
 
                         <div class="col-xs-6">
                             <label><h4>State</h4></label>
-                            <input type="text" required pattern="[a-zA-Z]{2}" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State" 
+                            <input type="text" pattern="[a-zA-Z]{2}" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State" 
                             [ngClass]="{'is-invalid': submitted && f.State.errors }">
                             <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
                                 <div *ngIf="f.State.errors.required">State is required</div>
@@ -86,7 +86,7 @@
 
                         <div class="col-xs-6">
                             <label><h4>Zipcode</h4></label>
-                            <input type="text" required pattern="[0-9]{5}" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
+                            <input type="text" pattern="[0-9]{5}" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
                             [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
                             <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
