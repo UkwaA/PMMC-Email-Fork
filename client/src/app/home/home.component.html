@@ -50,8 +50,9 @@
             <img class="image_div card-img flex-fill p-1" src={{program.ImgData}} alt="Card image cap" width="270" height="260">
           </div>
           <div class="card-body d-flex flex-column">
-            <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
-            <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
+            <!-- <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
+            <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a> -->
+            <a [routerLink] = "['/program-schedule', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
             <hr class="card__item card__divider">
             <div class="block-with-text">
               <div [innerHTML]="program.Description"></div>
@@ -59,8 +60,9 @@
             <h4> ... </h4>
           </div>
           <div class="card-body-btn d-flex flex-column">
-            <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
-            <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
+           <!--  <a *ngIf = "program.ProgramType" [routerLink] = "['/booking-individual-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
+            <a *ngIf = "!program.ProgramType" [routerLink] = "['/booking-group-program', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a> -->
+            <a [routerLink] = "['/program-schedule', program.ProgramPK]" class="align-self-end btn btn-outline-info">Find Out More!</a>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-light border-light">
             <a style = "color: #5077a9;" ><fa-icon [icon]="faClock"></fa-icon> 1h45 </a>

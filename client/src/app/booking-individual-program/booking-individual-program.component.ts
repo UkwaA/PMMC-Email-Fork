@@ -37,7 +37,7 @@ export class BookingIndividualProgramComponent implements OnInit {
       .subscribe(details =>{
         this.programDetails = details;
         document.getElementById("program_name").innerHTML = this.programDetails.Name;
-        document.getElementById("program_desc").innerHTML = this.programDetails.Description;
+        /* document.getElementById("program_desc").innerHTML = this.programDetails.Description; */
       })
     })
 

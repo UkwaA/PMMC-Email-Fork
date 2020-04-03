@@ -43,6 +43,7 @@ import { ResetPasswordComponent} from './password-service/reset-password/reset-p
 import { ChangeCurrentPasswordComponent} from './password-service/change-current-password/change-current-password.component';
 import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
+import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
 
 import { MatRadioModule } from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -81,6 +82,7 @@ const routes : Routes = [
   {path: 'contact', component: Contact},
   {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
+  {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
@@ -169,7 +171,8 @@ const routes : Routes = [
     AccountSetting,
     ProfileInfo,
     CreateNewUserComponent,
-    SetProgramScheduleComponent
+    SetProgramScheduleComponent,
+    ProgramScheduleComponent
   ],
   imports: [
     BrowserModule,

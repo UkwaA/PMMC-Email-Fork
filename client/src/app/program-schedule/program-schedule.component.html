@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row text-left">
+            <h1 id="program_name"></h1>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div id="program_desc"></div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <h3> Schedule </h3>
+    </div>
+
+    <div class="row">
+        <a *ngIf = "ProgramType" [routerLink] = "['/booking-individual-program', ProgramPK]" class="align-self-end btn btn-outline-info">Book Now!</a>
+        <a *ngIf = "!ProgramType" [routerLink] = "['/booking-group-program', ProgramPK]" class="align-self-end btn btn-outline-info">Book Now!</a>
+    </div>
+
+</div>
