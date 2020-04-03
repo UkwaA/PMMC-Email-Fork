@@ -4,6 +4,7 @@ import { ProgramServices } from '../services/program.services';
 import { ProgramData } from '../data/program-data';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { SchedulerEvent } from '@progress/kendo-angular-scheduler';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
     templateUrl: './program-schedule.component.html',
@@ -15,14 +16,18 @@ export class ProgramScheduleComponent implements OnInit{
     ProgramType: number;
     programDetails: ProgramData;
     public selectedDate: Date = new Date();
-    public allEvents: SchedulerEvent[]
-    allSchedules: any = []
+    public allEvents: SchedulerEvent[];
+    allSchedules: any = [];
+    createProgramForm: FormGroup;
+    submitted = false;
+    
     
     constructor(private route: ActivatedRoute,
         private service: ProgramServices,
-        private programScheduleServices: ProgramScheduleService){
+        private programScheduleServices: ProgramScheduleService,
+        private fb: FormBuilder,
+        ){}
 
-    }
     ngOnInit(){
         this.route.params.subscribe(val => {
             this.ProgramPK = val.id
@@ -33,7 +38,7 @@ export class ProgramScheduleComponent implements OnInit{
             this.ProgramType = details.ProgramType;
             document.getElementById("program_name").innerHTML = this.programDetails.Name;
             document.getElementById("program_desc").innerHTML = this.programDetails.Description;
-      })
+        })
 
         this.programScheduleServices.getScheduleById(this.ProgramPK).subscribe(schedules =>{
             schedules.forEach(element =>{
@@ -48,5 +53,42 @@ export class ProgramScheduleComponent implements OnInit{
             )                
         })        
         this.allEvents = this.allSchedules
+
+        this.createProgramForm = this.fb.group({
+            AdultQuantity: ["", [Validators.required, Validators.min(0)]],
+            Age57Quantity: ["", [Validators.required, Validators.min(0)]],
+            Age810Quantity: ["", [Validators.required, Validators.min(0)]],
+            Age1112Quantity: ["", [Validators.required, Validators.min(0)]],
+            Age1314Quantity: ["", [Validators.required, Validators.min(0)]],
+            Age1415Quantity: ["", [Validators.required, Validators.min(0)]],
+            Age1517Quantity: ["", [Validators.required, Validators.min(0)]],
+            TotalQuantity: ["", [Validators.required, Validators.min(1)]]
+        });
+    }
+
+    get f() {
+        return this.createProgramForm.controls;
+    }
+
+    // Clear data when click on input field
+    onFocus(event) {
+        if(event.target.value == 0)
+        event.target.value = "";
+    }
+
+    // Restore data when lose focus on input field
+    lostFocus(event) {
+        if(event.target.value === 0 ||   event.target.value === "")
+        {
+        event.target.value = 0;
+        }
+    }
+
+    enterQuantity() {
+        this.submitted = true;
+        if (this.createProgramForm.invalid) {
+          console.log("invalid");
+          return;
+        }  
     }
 }
