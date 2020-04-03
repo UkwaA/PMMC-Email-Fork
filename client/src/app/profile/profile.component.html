@@ -7,6 +7,13 @@
         <a class="navbar-brand" href="#">
           <img src = "https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png" width="120" height="60"> </a>
       </mat-toolbar>
+      
+      <section > General </section>
+      <mat-divider> </mat-divider>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="['/profile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>
+      </mat-nav-list>
+
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
       <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
       <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
@@ -15,6 +22,7 @@
         <a mat-list-item [routerLink]="['/profile/view-schedule']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_today</mat-icon> View Schedule</a>
         <a mat-list-item [routerLink]="['/profile/schedule-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_today</mat-icon> Schedule Management</a>
       </mat-nav-list>
+
       <section *ngIf = "role == '3'"> User</section>
       <mat-divider *ngIf = "role == '3'"></mat-divider>
       <mat-nav-list *ngIf = "role == '3'">
