@@ -90,7 +90,7 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: DashboardComponent},
+      {path: '', component: DashboardComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {path: 'view-schedule', component: ViewScheduleComponent, canActivate: [AuthRoleGuardService]},
