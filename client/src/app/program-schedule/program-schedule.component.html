@@ -9,8 +9,22 @@
     </div>
     <hr>
 
-    <div class="row">
+    <div class="row mb-3 mt-4">
         <h3> Schedule </h3>
+    </div>
+    <div class="row filter mb-5">
+        <kendo-scheduler
+                [kendoSchedulerBinding]="allEvents"
+                [selectedDate]="selectedDate"
+                style="height: 500px; width: 1500px">
+        <kendo-scheduler-day-view [startTime]="startTime">
+        </kendo-scheduler-day-view>
+        <kendo-scheduler-week-view [startTime]="startTime">
+        </kendo-scheduler-week-view>
+        <kendo-scheduler-month-view> </kendo-scheduler-month-view>
+        <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
+        <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
+      </kendo-scheduler>
     </div>
 
     <div class="row">
