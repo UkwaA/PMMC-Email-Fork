@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 
+declare var $: any;
+
 @Component({
   selector: 'app-booking-group-program',
   templateUrl: './booking-group-program.component.html',
@@ -18,6 +20,8 @@ export class BookingGroupProgramComponent implements OnInit {
   ProgramPK: number;
   programDetails: ProgramData;
   total: number;
+  num_submits: number;
+  edit_clicked:boolean;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -27,6 +31,7 @@ export class BookingGroupProgramComponent implements OnInit {
   ngOnInit() {
     this.bookingGroup= <any>{};
     this.total = 0;
+    this.num_submits = 0;
     // Get Group Program Requirement
     this.route.params.subscribe(val => {
       this.ProgramPK = val.id
@@ -43,6 +48,8 @@ export class BookingGroupProgramComponent implements OnInit {
        /*  document.getElementById("program_desc").innerHTML = this.programDetails.Description;
         console.log(this.programDetails); */
       })
+
+      document.getElementById("edit_btn").style.visibility="hidden";
 
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
@@ -63,7 +70,22 @@ export class BookingGroupProgramComponent implements OnInit {
       TotalQuantity: [0, [Validators.required, Validators.max(35)]]
 
     });
+
+    // $('#edit_btn').on('click', function(event) {
+    // this.num_submits = 0;
+    // $(document).ready(function(){
+    //   $("#registerForm :input").prop("disabled", false);
+    //   $('body,html').animate({ scrollTop: 0}, 800);
+    //   $(this.num_submits = 0);
+    // });
+    // document.getElementById("final_warning").innerHTML = ""
+    // });
   }
+
+  // editClicked(event){
+  //   this.num_submits=0;
+  //   console.log("Edit clicked");
+  // }
 
   onNumberChange(){
     this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
@@ -74,9 +96,21 @@ export class BookingGroupProgramComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
+  editClicked(event){
+    console.log("Edit Clicked");
+    document.getElementById("edit_btn").style.visibility="hidden";
+    this.num_submits = 0;
+    $(document).ready(function(){
+      $("#registerForm :input").prop("disabled", false);
+      $('body,html').animate({
+        scrollTop: 0
+    }, 800);
+    });
+    document.getElementById("final_warning").innerHTML = ""
+  }
+
   onSubmit() {
     this.submitted = true;
-    console.log("submitted");
     this.registerForm.get('TotalQuantity').setValue(this.total);
 
     // Stop here if form is invalid
@@ -84,9 +118,29 @@ export class BookingGroupProgramComponent implements OnInit {
       console.log("invalid");
       return;
     }
+    ++this.num_submits;
+    console.log(this.num_submits);
+
+    if (this.num_submits==1){
+      $(document).ready(function(){
+        $("#registerForm :input").prop("disabled", true);
+        $("#registerForm :button").prop("disabled", false);
+        $('body,html').animate({
+          scrollTop: 0
+      }, 800);
+      });
+      document.getElementById("edit_btn").style.visibility="visible";
+      document.getElementById("final_warning").innerHTML = "<p color='red'>*Please confirm that the following information is correct.</p>"
+    }
+    else if (this.num_submits==2){
+      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    }
+
+    console.log("submitted");
+    
 
     console.log("valid");
     // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
   }
 }

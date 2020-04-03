@@ -7,6 +7,14 @@
 padding-top: 10px;
 }
 
+.final_warning{
+  color:red;
+}
+
+.btn_row{
+  justify-content: flex-end;
+}
+
 h1 {
   font-family: 'Source Sans Pro', sans-serif; 
   font-size: 50px;

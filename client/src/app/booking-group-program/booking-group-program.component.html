@@ -3,12 +3,14 @@
             <h1 id="program_name"></h1>
     </div>
     <hr>
+
+    <div id="final_warning"></div>
    <!--  <div class="row">
       <div id="program_desc"></div>
     </div>
     <hr> -->
   
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form id = "registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Adult Quantity -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.AdultQuantity">
         <div class="row">
@@ -44,7 +46,7 @@
         <div class="row">
           <label class="col-form-label col-sm-2 pt-0 pl-0" for="Age810Quantity">Children Age 8-10: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
+            <input class="form-control" ng-disabled="!f.Age18Quantity.errors" type="number" min = "0" max = "35" (keyup) = "onNumberChange()"
             onfocus="if(this.value==0){ this.value='';}" onblur="if(this.value==''){this.value=0;}" formControlName="Age810Quantity" 
                     [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }">
             <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
@@ -226,6 +228,9 @@
           </div>
         </div>
       </fieldset>
-      <button type="submit" class="btn btn-info">Submit</button>
+      <div class="btn_row row flex-end">
+        <button type="button" id="edit_btn" (click)="editClicked($event)" class="btn btn-info mr-2">Edit</button>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
     </form>
   </div>
