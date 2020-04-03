@@ -16,4 +16,8 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedules");
     }
 
+    public getScheduleById(ProgramPK: number): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + ProgramPK);
+    }
+
 }

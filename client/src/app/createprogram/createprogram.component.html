@@ -5,8 +5,10 @@
                 <h1 class="text-center">Create Program Information</h1>
                 <div class="form-group font-weight-bold">
                     <label>Program Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Program Name" formControlName="Name"
-                        [(ngModel)]="programData.Name" [ngClass]="{'is-invalid': submitted && f.Name.errors }">
+                    <!-- <input type="text" class="form-control" placeholder="Enter Program Name" formControlName="Name"
+                        [(ngModel)]="programData.Name" [ngClass]="{'is-invalid': submitted && f.Name.errors }"> -->
+                        <input type="text" class="form-control" placeholder="Enter Program Name" formControlName="Name"
+                        [ngClass]="{'is-invalid': submitted && f.Name.errors }">
                     <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
                         <div *ngIf="f.Name.errors.required">Program Name is required</div>
                         <div *ngIf="f.Name.errors.minlength">Must be at least 5 characters long.</div>
@@ -19,6 +21,7 @@
                     <ckeditor [editor]="Editor" style="box-shadow: black;" data="" (ready)="onReady($event)"
                         name="editor" [(ngModel)]="programData.Description" [ngModelOptions]="{standalone: true}">
                     </ckeditor>
+                    
                 </div>
                 <div class="form-group font-weight-bold">
                     <div class="form-row">
@@ -26,7 +29,8 @@
                             <label>Program Type</label>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-control" formControlName="programType" (change)="selectChangeHandler($event)" [ngClass]="{ 'is-invalid': submitted && f.programType.errors }">
+                            <select class="form-control" formControlName="programType" (change)="selectChangeHandler($event)" 
+                            [ngClass]="{ 'is-invalid': submitted && f.programType.errors }">
                                 <option *ngFor="let type of programCategories; let i = index"
                                     [value]="programCategories[i].id">
                                     {{programCategories[i].name}}
@@ -45,7 +49,8 @@
                                 <label>Sub Type Of Group Program</label>
                             </div>
                             <div class="col-md-4">
-                                <select  class="form-control"  formControlName="subProgramType" (change)="selectSubTypeChangeHandler($event)"  [ngClass]="{ 'is-invalid': submitted && f.subProgramType.errors }">
+                                <select  class="form-control" formControlName="subProgramType" (change)="selectSubTypeChangeHandler($event)"  
+                                [ngClass]="{ 'is-invalid': submitted && f.subProgramType.errors }">
                                     <option *ngFor="let subType of programSubCategories; let i = index"
                                         [value]="programSubCategories[i].id">
                                         {{programSubCategories[i].name}}
@@ -60,7 +65,7 @@
                     <div class="form-group font-weight-bold">
                         <label>Deposit Amount</label>
                         <input type="number" class="form-control" formControlName="DepositAmount"
-                            placeholder="Enter Program Deposit Require" [(ngModel)]="programData.DepositAmount"
+                            placeholder="Enter Program Deposit Require"
                             [ngClass]="{'is-invalid': submitted && f.DepositAmount.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                         <div *ngIf="submitted && f.DepositAmount.errors" class="invalid-feedback">
                             <div *ngIf="f.DepositAmount.errors.required">Deposit Amount is required.</div>
@@ -71,7 +76,7 @@
                 <div class="form-group font-weight-bold">
                     <label>Price Per Participant</label>
                     <input type="number" class="form-control" formControlName="PricePerParticipant"
-                        placeholder="Enter Price for 1 Participant" [(ngModel)]="programData.PricePerParticipant"
+                        placeholder="Enter Price for 1 Participant"
                         [ngClass]="{'is-invalid': submitted && f.PricePerParticipant.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                     <div *ngIf="submitted && f.PricePerParticipant.errors" class="invalid-feedback">
                         <div *ngIf="f.PricePerParticipant.errors.required">Price Per Participant is required</div>
@@ -81,7 +86,7 @@
                 <div class="form-group font-weight-bold">
                     <label>Maximum Number of Participant</label>
                     <input type="number" class="form-control" formControlName="MaximumParticipant"
-                        placeholder="Enter Number of Participant" [(ngModel)]="programData.MaximumParticipant"
+                        placeholder="Enter Number of Participant"
                         [ngClass]="{'is-invalid': submitted && f.MaximumParticipant.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                     <div *ngIf="submitted && f.MaximumParticipant.errors" class="invalid-feedback">
                         <div *ngIf="f.MaximumParticipant.errors.required">Participant Number is required</div>

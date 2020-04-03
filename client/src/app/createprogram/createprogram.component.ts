@@ -123,6 +123,10 @@ export class CreateProgramComponent implements OnInit {
     this.programData.ImgData = "";
     this.programData.ProgramType = this.selectedProgramType;
     this.programData.SubProgramPK = this.selectedSubType;
+    this.programData.Name = this.createProgramForm.get('Name').value;
+    this.programData.DepositAmount = this.createProgramForm.get('DepositAmount').value;
+    this.programData.PricePerParticipant = this.createProgramForm.get('PricePerParticipant').value;
+    this.programData.MaximumParticipant = this.createProgramForm.get('MaximumParticipant').value;
 
     // Call Programs Service to send request to server
     this.services.addNewProgram(this.getFormData()).subscribe(response => {

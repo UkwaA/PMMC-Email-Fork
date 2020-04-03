@@ -46,9 +46,9 @@ import { ProfileInfo } from './profile-info/profile-info.component';
 import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
 
 import { MatRadioModule } from '@angular/material/radio';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSelectModule} from '@angular/material/select';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatCardModule } from '@angular/material';
@@ -65,7 +65,7 @@ import { ViewScheduleComponent } from './schedule/view-schedule/view-schedule.co
 import { SetProgramScheduleComponent } from './schedule/set-program-schedule/set-program-schedule.component'
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-
+import { SafeHtmlPipe } from './services/SafeHtmlPipe';
 
 
 const routes : Routes = [
@@ -172,7 +172,8 @@ const routes : Routes = [
     ProfileInfo,
     CreateNewUserComponent,
     SetProgramScheduleComponent,
-    ProgramScheduleComponent
+    ProgramScheduleComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

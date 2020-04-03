@@ -34,19 +34,27 @@ app.use('/schedule', Schedule)
 // Folder for photo
 app.use(express.static('public'));
 
-/************** Use for deploy on AWS **************/
+/************** Set static folder for deploy folder **************/
 app.use(express.static(__dirname + '/dist/client'));
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/client/index.html'))
 });
 
-/**************************************************/
+/*****************************************************************/
+
+/************* HTTPS SERVER *************/
+// OPENSSL to create key 
+// openssl req -x509 -newkey rsa:4096 -keyout key.pem    -out cert.pem -days 365
 // https.createServer({
 //   key: fs.readFileSync('./key.pem'),
 //   cert: fs.readFileSync('./cert.pem'),
 //   passphrase: '123456pmmc'
 // }, app)
-// .listen(3000);
+// .listen(3000, function () {
+//  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+// })
+
+/**************************************/
 
 app.listen(port , () =>{
   console.log("Server started on port 3000");

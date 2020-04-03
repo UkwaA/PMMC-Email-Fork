@@ -55,7 +55,7 @@
             <a [routerLink] = "['/program-schedule', program.ProgramPK]"><h4 class="card-title">{{program.Name}}</h4></a>
             <hr class="card__item card__divider">
             <div class="block-with-text">
-              <div [innerHTML]="program.Description"></div>
+              <div [innerHTML]="program.Description | safeHtml"></div>
             </div>
             <h4> ... </h4>
           </div>
