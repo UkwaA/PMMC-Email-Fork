@@ -8,8 +8,9 @@
     <div id="program_desc"></div>
   </div>
   <hr> -->
+  <p id="final_warning"></p>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
       <div class="row">
         <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipantName">Participant Name:</label>
@@ -31,7 +32,7 @@
           <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
                 [ngClass]="{'is-invalid': submitted && f.ParticipantAge.errors }">
           <div *ngIf="submitted && f.ParticipantAge.errors" class="invalid-feedback">
-            <div *ngIf="f.ParticipantAge.errors.required">Paticipaant Age is required</div>
+            <div *ngIf="f.ParticipantAge.errors.required">Paticipant Age is required</div>
           </div>
         </div>
       </div>
@@ -295,6 +296,9 @@
       <!-- <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.FullAmount">
         <label for="FullAmount">This program requires you to pay full amount. </label>
       </div> -->
-      <button type="submit" class="btn btn-info">Submit</button>
+      <div class="btn_row row flex-end">
+        <button type="button" id="edit_btn" (click)="editClicked($event)" class="btn btn-info mr-2">Edit</button>
+        <button type="submit" class="submit_btn btn btn-info">Submit</button>
+      </div>
     </form>
 </div>
