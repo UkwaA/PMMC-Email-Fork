@@ -1,3 +1,90 @@
-<h1 *ngIf = "role == '3'"> Admin's Dashboard</h1>
-<h1 *ngIf = "role == '2'"> Program Manager's Dashboard</h1>
-<h1 *ngIf = "role == '1'"> User's Dashboard</h1>
+
+<h1 *ngIf = "role == '2' || role == '3'"> Dashboard</h1>
+
+<div *ngIf = "role == '1'" class="container">
+    <div class="row text-center">
+        <div class="col-lg-7 mt-5 mx-auto">
+            <h1>User's Dashboard</h1>
+        </div>
+    </div> 
+    <h3 class = "text-muted"> All reservations</h3>
+    <div class="row pb-5">
+        <div class="col-lg-12 mx-auto p-3">
+            <!-- List group-->
+            <ul data-payment = "waiting" class="list-group shadow">
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <div class="row pt-3">
+                        <div class="col-lg-8">
+                            <h4> Change the Life of a Seal <sup class = "waiting"> Payment Not Completed </sup> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <button class="btn btn-outline-danger float-right mr-5" type="submit">Cancel Reservation</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive-sm">
+                        <table class="table table-borderless" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:23%"> Reservation Number </th>
+                                    <th style="width:18%"> Date </th>
+                                    <th style="width:18%"> Time </th>
+                                    <th style="width:18%"> Quantity </th>
+                                    <th style="width:23%"> Remaining Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> G2467 </td>
+                                    <td> April 20, 2020</td>
+                                    <td> 8:10 - 10:30</td>
+                                    <td> 10 </td>
+                                    <td> - $200  <button class="btn btn-warning ml-3" type="submit">Pay Now</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li> <!-- End -->
+            </ul> <!-- End -->
+        </div>
+
+        <div class="col-lg-12 mx-auto">
+            <!-- List group-->
+            <ul data-payment = "paid" class="list-group shadow">
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <div class="row pt-3">
+                        <div class="col-lg-8">
+                            <h4> Pinniped Pollution Project <sup class = "completed">Payment Completed </sup> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <button class="btn btn-outline-danger float-right mr-5" type="submit">Cancel Reservation</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive-sm">
+                        <table class="table table-borderless" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:23%"> Reservation Number </th>
+                                    <th style="width:18%"> Date </th>
+                                    <th style="width:18%"> Time </th>
+                                    <th style="width:18%"> Quantity </th>
+                                    <th style="width:23%"> Remaining Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> I1256 </td>
+                                    <td> June 22, 2020</td>
+                                    <td> 8:10 - 17:30</td>
+                                    <td> 1  </td>
+                                    <td> $0  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li> <!-- End -->
+            </ul> <!-- End -->
+        </div>
+    </div>
+</div>
