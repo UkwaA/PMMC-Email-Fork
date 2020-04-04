@@ -54,13 +54,6 @@ export class BookingGroupProgramComponent implements OnInit {
 
     // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
     this.registerForm = this.fb.group({
-      AdultQuantity: [0,[Validators.required, Validators.min(1), Validators.max(35)]],
-      Age57Quantity: [0, [Validators.required, Validators.max(35)]],
-      Age810Quantity: [0, [Validators.required, Validators.max(35)]],
-      Age1112Quantity: [0, [Validators.required, Validators.max(35)]],
-      Age1314Quantity: [0, [Validators.required, Validators.max(35)]],
-      Age1415Quantity: [0, [Validators.required, Validators.max(35)]],
-      Age1517Quantity: [0, [Validators.required, Validators.max(35)]],
       ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
@@ -71,21 +64,7 @@ export class BookingGroupProgramComponent implements OnInit {
 
     });
 
-    // $('#edit_btn').on('click', function(event) {
-    // this.num_submits = 0;
-    // $(document).ready(function(){
-    //   $("#registerForm :input").prop("disabled", false);
-    //   $('body,html').animate({ scrollTop: 0}, 800);
-    //   $(this.num_submits = 0);
-    // });
-    // document.getElementById("final_warning").innerHTML = ""
-    // });
   }
-
-  // editClicked(event){
-  //   this.num_submits=0;
-  //   console.log("Edit clicked");
-  // }
 
   onNumberChange(){
     this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
@@ -127,10 +106,12 @@ export class BookingGroupProgramComponent implements OnInit {
         $("#registerForm :button").prop("disabled", false);
         $('body,html').animate({
           scrollTop: 0
-      }, 800);
+        }, 800);
+        $('#submit_btn').text('Confirm');
       });
+      // document.getElementById("submit_btn").innerHTML="Confirm";
       document.getElementById("edit_btn").style.visibility="visible";
-      document.getElementById("final_warning").innerHTML = "<p color='red'>*Please confirm that the following information is correct.</p>"
+      document.getElementById("final_warning").innerHTML = "*Please confirm that the following information is correct.".fontcolor("orange");
     }
     else if (this.num_submits==2){
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
