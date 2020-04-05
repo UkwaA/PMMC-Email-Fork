@@ -32,6 +32,10 @@
   padding-left: 7px;
 }
 
+.btn_row{
+  justify-content: flex-end;
+}
+
 label{
   padding-bottom: 10px;
 }

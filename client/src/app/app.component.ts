@@ -48,14 +48,7 @@ export class AppComponent implements OnInit{
     var pattern = /^http:\/\/.+((\/$)|(\/#$)|(\/group-program$)|(\/booking-group-program.+)|(\/individual-program$)|(\/booking-individual-program.+)|(\/contact$)|(\/register$)|(\/customer-register)|(\/login))|(\/program-schedule)/
     this.location.onPopState(() => {
       this.loadingURL = this.location.href;
-      /* if (this.loadingURL == "http://localhost:4200/" || this.loadingURL == "http://localhost:4200/group-program"
-      || this.loadingURL == "http://localhost:4200/individual-program" || this.loadingURL == "http://localhost:4200/contact"
-      || this.loadingURL == "http://localhost:4200/customer-register" || this.loadingURL == "http://localhost:4200/login" ) {
-        this.hf.visible = true;
-      }
-      else {
-        this.hf.visible = false;
-      } */
+
       if(pattern.test(this.loadingURL)){
         this.visible = true;
       }
@@ -75,17 +68,8 @@ export class AppComponent implements OnInit{
           this.visible = false;
        }
     }
- });
-  /* if (this.URL == "http://localhost:4200/" || this.URL == "http://localhost:4200/group-program"
-  || this.URL == "http://localhost:4200/individual-program" || this.URL == "http://localhost:4200/contact"
-  || this.URL == "http://localhost:4200/customer-register" || this.URL == "http://localhost:4200/login" ) {
-    this.hf.visible = true;
-  }
-  else {
-    this.hf.visible = false;
-  } */
-   /*  this.hf.visible = true; */
-
+  });
+  
     this.registerForm = this.fb.group({
       subscribeEmail: ['', [Validators.required, Validators.email]]
     });

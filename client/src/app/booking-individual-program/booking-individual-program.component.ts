@@ -6,6 +6,8 @@ import { Router } from '@angular/router'
 import { ProgramServices } from 'src/app/services/program.services';
 import { ProgramData } from '../data/program-data';
 
+declare var $: any;
+
 @Component({
   selector: 'app-booking-individual-program',
   templateUrl: './booking-individual-program.component.html',
@@ -18,6 +20,7 @@ export class BookingIndividualProgramComponent implements OnInit {
   submitted = false;
   ProgramPK: number;
   programDetails: ProgramData;
+  num_submits: number;
   
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -26,6 +29,7 @@ export class BookingIndividualProgramComponent implements OnInit {
 
   ngOnInit() {
     this.bookingIndividual= <any>{};
+    this.num_submits = 0;
     // Get Individual Program Requirement
     this.route.params.subscribe(val => { 
       this.ProgramPK = val.id 
@@ -40,10 +44,11 @@ export class BookingIndividualProgramComponent implements OnInit {
         /* document.getElementById("program_desc").innerHTML = this.programDetails.Description; */
       })
     })
+    document.getElementById("edit_btn").style.visibility="hidden";
 
     this.registerForm = this.fb.group({
-      ParticipateName: ['', [Validators.required, Validators.minLength(3)]],
-      ParticipateAge: ['', Validators.required],
+      ParticipantName: ['', [Validators.required, Validators.minLength(3)]],
+      ParticipantAge: ['', Validators.required],
       Gender: ['', Validators.required],
       MerchSize: ['', Validators.required],
       //AllergyInfo: ['', Validators.required],
@@ -63,9 +68,23 @@ export class BookingIndividualProgramComponent implements OnInit {
       LatePickup: ['', Validators.required]
 
     });
+    
   }
 
   get f() { return this.registerForm.controls;}
+
+  editClicked(event){
+    console.log("Edit Clicked");
+    document.getElementById("edit_btn").style.visibility="hidden";
+    this.num_submits = 0;
+    $(document).ready(function(){
+      $("#registerForm :input").prop("disabled", false);
+      $('body,html').animate({
+        scrollTop: 0
+    }, 800);
+    });
+    document.getElementById("final_warning").innerHTML = ""
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -77,7 +96,25 @@ export class BookingIndividualProgramComponent implements OnInit {
       return;
     }
 
+    ++this.num_submits;
+    if (this.num_submits==1){
+      $(document).ready(function(){
+        $("#registerForm :input").prop("disabled", true);
+        $("#registerForm :button").prop("disabled", false);
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        $('#submit_btn').text('Confirm');
+      });
+      // document.getElementById("submit_btn").innerHTML="Confirm";
+      document.getElementById("edit_btn").style.visibility="visible";
+      document.getElementById("final_warning").innerHTML = "*Please confirm that the following information is correct.".fontcolor("orange");
+    }
+    else if (this.num_submits==2){
+      alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    }
+
     // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
 }

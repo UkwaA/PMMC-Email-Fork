@@ -1,0 +1,29 @@
+h1 {
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 10px;
+    color: #08b2b8; 
+}
+
+.list-group[data-payment = "paid"]{
+    border-width: 5px;
+    border-left-style: solid;
+    border-left-color:  rgb(14, 161, 14);
+}
+
+.list-group[data-payment = "waiting"]{
+    border-width: 5px;
+    border-left-style: solid;
+    border-left-color:  #ffc107;
+}
+
+.waiting{
+    background-color: #ffc107;
+    color: white;
+}
+
+.completed{
+    background-color: rgb(14, 161, 14);
+    color: white;
+}
