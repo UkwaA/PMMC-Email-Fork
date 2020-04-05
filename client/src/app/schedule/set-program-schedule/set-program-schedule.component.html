@@ -1,11 +1,10 @@
 <div class="container">
     <div class="row text-center text-white mb-5 mt-4">
         <div class="col-lg-7 mx-auto">
-            <h1>Set Program Schedule</h1>
-            
+            <h1>Set Program Schedule</h1>            
         </div>
     </div>
-    <form [formGroup]="SetProgramScheduleForm" (ngSubmit)="openModal()">
+    <form [formGroup]="SetProgramScheduleForm" >
         <div class="form-group font-weight-bold">
             <div class="row">
                 <div class="col-md-4">
@@ -15,113 +14,147 @@
                     <input type="text" class="form-control" formControlName="programName" [(ngModel)]="programData.Name" readonly>
                 </div>
             </div>
-        <br/>
+            <br/>
             <div class="row">
                 <div class="col-md-4">
-                    <label>Pick Start & End date</label>
+                    <label>Start Date & Time</label>
+                </div>                
+                <div class="col-md-3">
+                    <kendo-datepicker 
+                        [(value)]="startDate">
+                    </kendo-datepicker>
                 </div>
-                <div class="col-md-4">                    
-                    <mat-form-field>
-                        <mat-label>Pick a Start Date</mat-label>
-                        <input class="form-control" matInput [matDatepicker]="StartDatePicker" 
-                            formControlName="startDate"  placeholder="date" (dateChange)="updateStartDate($event)" >
-                        <mat-datepicker-toggle  matSuffix [for]="StartDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #StartDatePicker></mat-datepicker>
-                    </mat-form-field>
+                <div class="col-md-3">                                
+                    <kendo-timepicker
+                        [(value)]="startTime">
+                    </kendo-timepicker>
+                </div>                        
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>End Date & Time</label>
+                </div>                
+                <div class="col-md-3">
+                    <kendo-datepicker 
+                        [(value)]="endDate" 
+                        [min] = "startDate">
+                    </kendo-datepicker>
                 </div>
-                <div class="col-md-4">                    
-                    <mat-form-field>
-                        <mat-label>Pick an End Date</mat-label>
-                        <input class="form-control" [min]="startDate" matInput [matDatepicker]="EndDatePicker" 
-                            formControlName="endDate"  placeholder="date" (dateChange)="updateEndDate($event)" >
-                        <mat-datepicker-toggle  matSuffix [for]="EndDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #EndDatePicker></mat-datepicker>
-                    </mat-form-field>
+                <div class="col-md-3">
+                    <kendo-timepicker
+                        [(value)]="endTime"
+                        [min]="startTime">
+                    </kendo-timepicker>
+                </div>                        
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Repeat</label>
+                </div>
+                <div class="col-md-8">
+                    <kendo-buttongroup [selection]="'single'">
+                        <button 
+                            *ngFor="let type of recurrenceTypeArr"
+                            kendoButton
+                            [toggleable]="true"
+                            (selectedChange)=" onChangeRecurrentType($event, type)"
+                        >
+                            {{ type.type }}
+                        </button>
+                        </kendo-buttongroup>
                 </div>
             </div>
             <br/>
-            <!-- <div class="row">
+            <div class="row" *ngIf="seletedRecurrenceType!='Never'">
                 <div class="col-md-4">
-                    <label>Pick Start & End time</label>
+                    <label>Repeat every</label>
                 </div>
-                <div class="col-md-4">
-                    <div>
-                        <label>Start time</label>
-                     </div>
-                    <kendo-timepicker                        
-                        (valueChange)="updateStartTime($event)"
-                        [value]="startTime">
-                    </kendo-timepicker>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        <label>End time</label>
-                     </div>
-                    <kendo-timepicker                        
-                        (valueChange)="updateEndTime($event)"
-                        [value]="endTime">
-                    </kendo-timepicker>
-                </div>
-            </div>
-            <br/> -->
-            <div class="row">
-                <div class="col-md-4">
-                    <label>Select Session Day & Time</label>
-                </div>                
-                <div class="col-md-8" >
-                    <mat-card>
-                        <div class="row">
-                            <div class="col-md-3 text-center">
-                                <label>Day</label>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <label>Start time</label>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <label>End time</label>
-                            </div> 
-                        </div>      
-                    </mat-card>
-                    <br/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">                    
-                </div>                
-                <div class="col-md-8" >
-                    <mat-error *ngIf="submitted && f.dayCheck.errors" class="invalid-feedback">
-                        <div *ngIf="f.dayCheck.errors.required">Must check at least one box</div>
-                    </mat-error> 
-                    <section class="options-section" *ngFor= 'let day of repeatDay, let i = index'>
-                        <mat-card>
-                            <div class = "row">
-                                <div class="col-md-3">
-                                    <mat-checkbox class="options-margin" formControlName="dayCheck" 
-                                    (change)=updateCheckBox($event,i) [(ngModel)]="day.value" required>{{day.day}}</mat-checkbox>
-                                </div>
-                                <div class="col-md-3">                                    
-                                    <kendo-timepicker                        
-                                        (valueChange)="updateStartTime($event,i)"
-                                        [value]="day.start"
-                                        [disabled]="!day.value">
-                                    </kendo-timepicker>
-                                </div>
-                                <div class="col-md-3">                                   
-                                    <kendo-timepicker                        
-                                        (valueChange)="updateEndTime($event,i)"
-                                        [value]="day.end"
-                                        [disabled]="!day.value">
-                                    </kendo-timepicker>
-                                </div>
-                            </div>
-                        </mat-card>   
-                        <br/>                 
-                    </section>              
+                <div class="col-md-8">
+                    <kendo-numerictextbox
+                        [(value)]="interval" [min]="0" [format]="'n0'">                        
+                    </kendo-numerictextbox>   
+                    {{displayedInterval}}
                 </div>
             </div>
             <br/>
+            <div class="row" *ngIf="seletedRecurrenceType!='Never' && seletedRecurrenceType!='Daily'">
+                <div class="col-md-4">
+                    <label>Repeat on</label>
+                </div>
+                <div class="col-md-8">
+                    <kendo-buttongroup [selection]="'multiple'">
+                        <button 
+                            *ngFor="let day of dayArr"
+                            kendoButton
+                            [toggleable]="true"
+                            (selectedChange)="onChangeRepeatOnDay($event, day)"
+                        >
+                            {{ day.day }}
+                        </button>
+                    </kendo-buttongroup>
+                </div>                
+            </div>
+            <br/>            
+            <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
+                <div class="col-md-4">
+                    <label>End Repeat</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input type="radio" formControlName="endrepeat" value="Never"
+                                 [(ngModel)]="endRepeatArr.type"  kendoRadioButton />
+                        </div>
+                        <div class="col-md-1">
+                            <label>Never</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input type="radio" formControlName="endrepeat"
+                                value="After" [(ngModel)]="endRepeatArr.type"  kendoRadioButton />
+                        </div>
+                        <div class="col-md-1">
+                            <label>After</label>
+                        </div>
+                        <div class="col-md-6">
+                            <kendo-numerictextbox
+                                [(value)]="endRepeatAfterNoOccurence" [min]="0" [format]="'n0'">                        
+                            </kendo-numerictextbox>occurence(s)
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input type="radio" formControlName="endrepeat"
+                                value="On" [(ngModel)]="endRepeatArr.type"  kendoRadioButton />
+                        </div>
+                        <div class="col-md-1">
+                            <label>On</label>
+                        </div>
+                        <div class="col-md-6">
+                            <kendo-datepicker 
+                                [(value)]="endDate" 
+                                [min] = "endDate">
+                            </kendo-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>         
             <div class="col-xs-12 form-group">                    
-                <button class="btn btn-lg btn-info btn-block" type="submit">Set Schedule</button>
+                <button class="btn btn-lg btn-info btn-block" type="submit" (click)="openModal()">Set Schedule</button>
             </div>
         </div>
     </form>    

@@ -51,3 +51,5 @@
   .errorMessage{
     color: red;
   }
+
+  :host >>> .selected::before { display: none; }

@@ -7,8 +7,15 @@
     <div class="row filter">
         <kendo-scheduler
                 [kendoSchedulerBinding]="allEvents"
+                
+                (eventClick)="eventClick($event)"
+                [modelFields]="eventFields"
                 [selectedDate]="selectedDate"
                 style="height: 700px; width: 1500px">
+        <ng-template kendoSchedulerEventTemplate let-event>
+            {{ event.dataItem.Title }} (ProgramPK: {{ event.dataItem.ProgramPK }}) 
+            (SchedulePK: {{event.dataItem.SchedulePK}})
+        </ng-template>
         <kendo-scheduler-day-view [startTime]="startTime">
         </kendo-scheduler-day-view>
         <kendo-scheduler-week-view [startTime]="startTime">
