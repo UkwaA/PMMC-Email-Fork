@@ -8,6 +8,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CustomerModalDialogComponent } from '../components/customer-modal-dialog/customer-modal-dialog.component';
 import { faAddressBook, faPhoneSquare, faHome, faMapMarker,faMapPin, faMap} from '@fortawesome/free-solid-svg-icons';
 
+declare var $: any;
+
 @Component({
   selector: 'app-customer-info',
   templateUrl: './customer-info.component.html',
@@ -56,6 +58,12 @@ export class CustomerRegisterComponent implements OnInit {
       this.credentials.UserPK = val.id
     })
 
+    $('.state').bind('keydown keyup blur',function(){ 
+      var node = $(this);
+      node.val(node.val().replace(/[^A-Z]/g,'') ); }
+    );
+
+
   }
 
   checkSubmission(): any {
@@ -101,6 +109,7 @@ export class CustomerRegisterComponent implements OnInit {
             this.finishRegister()
         }
     })
+
 }
 
   checkBoxClicked(): any {
@@ -110,6 +119,13 @@ export class CustomerRegisterComponent implements OnInit {
       this.customerInfoForm.get('subscribe').setValue(0)
     this.credentials.Subscribe = this.customerInfoForm.get('subscribe').value
   }
+
+  letterOnly(event) {
+    console.log(key);
+    console.log("Pressed");
+    var key = event.keyCode;
+    return (key >= 65 && key <= 90);// 8 for backspace and 32 for space
+  }; 
 
   finishRegister() {
     this.submitted = true;
