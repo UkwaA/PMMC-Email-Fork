@@ -49,6 +49,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatCardModule } from '@angular/material';
@@ -66,6 +67,8 @@ import { SetProgramScheduleComponent } from './schedule/set-program-schedule/set
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { SafeHtmlPipe } from './services/SafeHtmlPipe';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 
 const routes : Routes = [
@@ -205,7 +208,10 @@ const routes : Routes = [
     SchedulerModule,
     DateInputsModule,
     MatNativeDateModule,
-    MatCardModule    
+    MatCardModule,
+    MatButtonToggleModule,
+    InputsModule,
+    ButtonsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
     AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],

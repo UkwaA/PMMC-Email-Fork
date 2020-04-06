@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { AuthenticationService, UserDetails } from "../authentication.service";
 import { Router } from "@angular/router";
 import { ProgramData } from "../data/program-data";
@@ -17,6 +17,8 @@ import { MatDialogConfig, MatDialog } from "@angular/material";
   providers: [ProgramServices]
 })
 export class CreateProgramComponent implements OnInit {
+  @ViewChild('editor', { static: false }) inputElement:ElementRef; 
+
   file: File;
   createProgramForm: FormGroup;
   submitted = false;
@@ -65,6 +67,7 @@ export class CreateProgramComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.inputElement)
     this.createProgramForm = this.fb.group({
       Name: [
         "",
@@ -74,12 +77,12 @@ export class CreateProgramComponent implements OnInit {
           Validators.maxLength(100)
         ]
       ],
-      programType: ['', Validators.required],
-      subProgramType: ['', Validators.required],
-      DepositAmount: ["", [Validators.required, Validators.min(0)]],
-      PricePerParticipant: ["", [Validators.required, Validators.min(0)]],
-      MaximumParticipant: ["", [Validators.required, Validators.min(1)]]
-   //   ImgData: ["", [Validators.required]]
+      programType: [0, Validators.required],
+      subProgramType: [0, Validators.required],
+      DepositAmount: ["0", [Validators.required, Validators.min(0)]],
+      PricePerParticipant: ["0", [Validators.required, Validators.min(0)]],
+      MaximumParticipant: ["0", [Validators.required, Validators.min(1)]],
+      ImgData: ["", [Validators.required]]
     });
   }
 
@@ -109,6 +112,7 @@ export class CreateProgramComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
+      this.createProgramForm.get('ImgData').setValue(this.file ? this.file.name : '');
     }
   }
 
@@ -120,7 +124,6 @@ export class CreateProgramComponent implements OnInit {
     }
 
     this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
-    this.programData.ImgData = "";
     this.programData.ProgramType = this.selectedProgramType;
     this.programData.SubProgramPK = this.selectedSubType;
     this.programData.Name = this.createProgramForm.get('Name').value;

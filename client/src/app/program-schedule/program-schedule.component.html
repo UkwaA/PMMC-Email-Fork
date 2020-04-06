@@ -11,13 +11,24 @@
 
     <div  *ngIf = "!ProgramType" class="row mt-4 mb-5">
       <div class="col-lg-3 col-md-4 col-sm-12">
+        <div>
+          <div class="form-group font-weight-bold">
+            <label>Current Selected Program</label>
+            <input type="text" class="form-control" name="SelectedProgramName" disabled>
+          </div>
+        </div>
+        <div>
+          <div class="form-group font-weight-bold">
+            <label>Availability </label>
+            <input type="number" class="form-control" name="Availability" disabled>
+          </div>
+        </div>
         <form [formGroup]="createProgramForm" (submit)="enterQuantity()" enctype="multipart/form-data">
           <h3>Enter Quantity</h3>
 
           <div class="form-group font-weight-bold">
             <label>Adult Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="AdultQuantity"
-                placeholder="Enter number of adults"
+            <input type="number" min="0" class="form-control" formControlName="AdultQuantity"  value="0"
                 [ngClass]="{'is-invalid': submitted && f.AdultQuantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.AdultQuantity.errors" class="invalid-feedback">
                 <div *ngIf="f.AdultQuantity.errors.required">Adult Quantity is required</div>
@@ -27,8 +38,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 5-7 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age57Quantity"
-                placeholder="Enter Age 5-7 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age57Quantity" value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age57Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age57Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age57Quantity.errors.required">Age 5-7 Quantity is required</div>
@@ -38,8 +48,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 8-10 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age810Quantity"
-                placeholder="Enter Age 8-10 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age810Quantity"  value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age810Quantity.errors.required">Age 8-10 Quantity is required</div>
@@ -49,8 +58,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 11-12 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age1112Quantity"
-                placeholder="Enter Age 11-12 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age1112Quantity"  value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age1112Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age1112Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age1112Quantity.errors.required">Age 11-12 Quantity is required</div>
@@ -60,8 +68,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 13-14 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age1314Quantity"
-                placeholder="Enter Age 13-14 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age1314Quantity"  value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age1314Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age1314Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age1314Quantity.errors.required">Age 13-14 Quantity is required</div>
@@ -71,8 +78,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 14-15 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age1415Quantity"
-                placeholder="Enter Age 14-15 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age1415Quantity" value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age1415Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age1415Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age1415Quantity.errors.required">Age 14-15 Quantity is required</div>
@@ -82,8 +88,7 @@
 
           <div class="form-group font-weight-bold">
             <label>Age 15-17 Quantity</label>
-            <input type="number" min="0" class="form-control" formControlName="Age1517Quantity"
-                placeholder="Enter Age 15-17 Quantity"
+            <input type="number" min="0" class="form-control" formControlName="Age1517Quantity" value="0"
                 [ngClass]="{'is-invalid': submitted && f.Age1517Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
             <div *ngIf="submitted && f.Age1517Quantity.errors" class="invalid-feedback">
                 <div *ngIf="f.Age1517Quantity.errors.required">Age 15-17 Quantity is required</div>
@@ -103,23 +108,25 @@
         <h3> Schedule </h3>
         <div class="row filter mb-5">
             <kendo-scheduler
-                    [kendoSchedulerBinding]="allEvents"
-                    [selectedDate]="selectedDate"
-                    style="height: 700px; width: 1500px">
-            <kendo-scheduler-day-view [startTime]="startTime">
-            </kendo-scheduler-day-view>
+              [kendoSchedulerBinding]="allEvents"
+              [eventClass]="getEventClass"
+              (eventClick)="eventClick($event)"
+              [modelFields]="eventFields"
+              [selectedDate]="selectedDate"
+              style="height: 700px; width: 1500px">            
             <kendo-scheduler-week-view [startTime]="startTime">
+            <ng-template kendoSchedulerEventTemplate let-event>
+              {{ event.dataItem.Title }} 
+            </ng-template>
             </kendo-scheduler-week-view>
-            <kendo-scheduler-month-view> </kendo-scheduler-month-view>
-            <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
-            <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
+            <kendo-scheduler-month-view> </kendo-scheduler-month-view>                        
           </kendo-scheduler>
         </div>
       </div>
       
     </div>
 
-    <div *ngIf = "ProgramType" class="row mb-3 mt-4">
+    <!-- <div *ngIf = "ProgramType" class="row mb-3 mt-4">
         <h3 class = "mb-5"> Schedule </h3>
         <kendo-scheduler
                 [kendoSchedulerBinding]="allEvents"
@@ -133,7 +140,7 @@
         <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
         <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
       </kendo-scheduler>
-    </div>
+    </div> -->
 
     <div class="row">
         <a *ngIf = "ProgramType" [routerLink] = "['/booking-individual-program', ProgramPK]" class="align-self-end btn btn-outline-info">Book Now!</a>
