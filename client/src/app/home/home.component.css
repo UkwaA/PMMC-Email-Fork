@@ -1,6 +1,11 @@
 
 .container {
     padding: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
   }
 
   h1 {
@@ -36,15 +41,13 @@ h5{
 }
 
 .banner{
-  /* background: url("https://wallpaperheart.com/wp-content/uploads/2018/04/windows-beach-of-windowsnatural-dock-free-high-resolution-scenery-landscape-natural-beautiful-scenery-wallpapers.jpg"); */
-  /* background: url("http://www.metricenv.com/wp-content/uploads/2016/04/home-page-background.png"); */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url("https://lajollamom.com/wp-content/uploads/2009/11/la-jolla-cove-seal.jpg");
   background-size: 100% 100%;
   padding: 120px;
 }
 
 .text {
-  color: white; font-size: 60px; margin-top: 20 px; padding-bottom: 15px; text-shadow: 1px 1px 2px #00000080;
+  color: white; font-size: 50px; margin-top: 20px; padding-bottom: 15px; text-shadow: 1px 1px 2px #00000080;
 
 }
 
