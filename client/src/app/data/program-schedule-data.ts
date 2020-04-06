@@ -1,21 +1,19 @@
 export class ProgramScheduleData {
     SchedulePK: number
-    ProgramPK: number
-    Date: string    
-    StartTime: string
-    EndTime: string
+    ProgramPK: number    
+    Start: string
+    End: string
     MaximumParticipant: number
     CurrentNumberParticipant: number
-    IsActive: boolean
     CreatedBy: number
+    IsActive: boolean
 
-    constructor(nSchedulePK: number, nProgramPK: number, nDate: string, nStartTime: string,
-        nEndTime: string, nMaximumParticipant: number, ncurrentNumberParticipant: number, nIsActive: boolean, nCreatedby: number){
+    constructor(nSchedulePK: number, nProgramPK: number, nStartTime: string,
+        nEndTime: string, nMaximumParticipant: number, ncurrentNumberParticipant: number, nIsActive: boolean, nCreatedby: number, nCreatedDate: string){
             this.SchedulePK = nSchedulePK
             this.ProgramPK = nProgramPK
-            this.Date = nDate
-            this.StartTime = nStartTime
-            this.EndTime = nEndTime
+            this.Start = nStartTime
+            this.End = nEndTime
             this.MaximumParticipant = nMaximumParticipant
             this.CurrentNumberParticipant = ncurrentNumberParticipant
             this.IsActive = nIsActive

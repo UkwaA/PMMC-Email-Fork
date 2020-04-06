@@ -33,13 +33,12 @@ export class SetProgramScheduleComponent {
     currentSession: ProgramScheduleData = {
         SchedulePK: 0,
         ProgramPK: 0,
-        Date: '',    
-        StartTime: '',
-        EndTime: '',
+        Start: '',
+        End: '',
         MaximumParticipant: 0,
-        CurrentNumberParticipant: 0,
-        IsActive: true,
-        CreatedBy: 0
+        CurrentNumberParticipant: 0,        
+        CreatedBy: 0,
+        IsActive: true
     }
 
     SetProgramScheduleForm: FormGroup;

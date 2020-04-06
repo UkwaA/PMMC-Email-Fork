@@ -12,12 +12,21 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-program-schedule", programSchedule);
     }
 
-    public getAllSchedules(): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedules");
+    public getAllScheduleOverview(): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-overview");
+    }
+
+    public getScheduleOverviewById(ProgramPK: number): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-overview-by-id/" + ProgramPK);
     }
 
     public getScheduleById(ProgramPK: number): Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + ProgramPK);
+    }
+    
+    public getScheduleByIdStartEnd(ProgramPK: number, eventStart: string,eventEnd: string): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-overview-by-id-start-end/" + ProgramPK 
+                + "/" + eventStart + "/" + eventEnd);
     }
 
 }
