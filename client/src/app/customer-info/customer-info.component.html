@@ -85,8 +85,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><fa-icon [icon]="faMap"></fa-icon></span>
                     </div>
-                    <input type = "string" class = "form-control" maxlength = "2" placeholder = "State"
-                    formControlName="address_state" 
+                    <input type = "string" class = "state form-control" maxlength = "2" placeholder = "State"
+                    ng-keypressed="letterOnly(event)" formControlName="address_state"
                     [(ngModel)]="credentials.State" [ngClass]="{ 'is-invalid': submitted && !customerInfoForm.get('address_state').valid}">
                     <div *ngIf="submitted && f.address_state.errors" class = "invalid-feedback"> 
                         <div *ngIf="f.address_state.errors.required">State is required </div>
