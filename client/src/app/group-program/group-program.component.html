@@ -20,8 +20,8 @@
                 <li class="list-group-item">
                     <div class="image-wrapper p-3">
                         <img src={{program.ImgData}} class="float-left p-3" alt="Generic placeholder image" width="350" height="280">
-                        <h4 *ngIf = 'program.SubProgramPK == 1' class = 'text-muted float-right'><mat-icon>stars</mat-icon> Scout Program </h4>
-                        <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted float-right'><mat-icon>stars</mat-icon> Field Trip </h4>
+                        <h4 *ngIf = 'program.SubProgramPK == 1' class = 'text-muted'><mat-icon>stars</mat-icon> Scout Program </h4>
+                        <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted'><mat-icon>stars</mat-icon> Field Trip </h4>
                         <a  [routerLink]="['/program-schedule', program.ProgramPK]"><h5 class="mt-0 m-3">{{program.Name}}</h5></a>
                         <div class="text-break" [innerHTML]="program.Description | safeHtml"></div>
                         <div class="d-flex align-items-center justify-content-between mt-1">
