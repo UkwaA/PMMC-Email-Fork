@@ -1,10 +1,116 @@
-
-<h1 *ngIf = "role == '2' || role == '3'"> Dashboard</h1>
+<div *ngIf = "role == '2' || role == '3'" class="container">
+    <div class="row text-center">
+        <div class="col-lg-7 mt-5 mb-5 mx-auto">
+            <h1>Dashboard</h1>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4">
+            <div class="card bg-c-blue order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Completed Reservations</h6>
+                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
+                    <!-- <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> -->
+                </div>
+                <div class="card-footer bg-b-white">
+                    View Completed Reservations
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="col-sm-12 col-md-6 col-xl-3">
+            <div class="card bg-c-green order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Pending Reservations</h6>
+                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
+                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                </div>
+                <div class="card-footer bg-g-white">
+                    View Pending Reservations
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="col-sm-12 col-md-4 col-xl-4">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20">Pending Reservations</h6>
+                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>512</span></h2>
+                   <!--  <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> -->
+                </div>
+                <div class="card-footer bg-y-white">
+                    View Pending Reservations
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-12 col-md-4 col-xl-4">
+            <div class="card bg-c-pink order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20"> Requests </h6>
+                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>121</span></h2>
+                    <!-- <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> -->
+                </div>
+                <div class="card-footer bg-p-white">
+                    View Requests
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class = "text-muted"> Lastest Reservations </h3>
+    <div class="table-responsive-sm">
+        <table class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:10%"> Reservation Number </th>
+                    <th style="width:15%"> Program Name </th>
+                    <th style="width:12.5%"> Date </th>
+                    <th style="width:12.5%"> Status </th>
+                    <th style="width:12.5%"> First Name </th>
+                    <th style="width:12.5%"> Last Name </th>
+                    <th style="width:12.5%"> Email </th>
+                    <th style="width:12.5%"> Phone </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> G2467 </td>
+                    <td> Change the Life of a Seal </td>
+                    <td> April 20, 2020</td>
+                    <td> Pending </td>
+                    <td> Alice </td>
+                    <td> Nguyen </td>
+                    <td> alice@gmail.com </td>
+                    <td> 7149999999 </td>
+                </tr>
+                <tr>
+                    <td> I1234 </td>
+                    <td> Camp Pinniped </td>
+                    <td> June 20, 2020</td>
+                    <td> Completed </td>
+                    <td> Brian </td>
+                    <td> Pham </td>
+                    <td> brian@gmail.com </td>
+                    <td> 7141111111 </td>
+                </tr>
+                <tr>
+                    <td> R1234 </td>
+                    <td> Pinniped Pollution Project </td>
+                    <td> May 10, 2020</td>
+                    <td> Request </td>
+                    <td> Anna </td>
+                    <td> Tran </td>
+                    <td> anna@gmail.com </td>
+                    <td> 714222222 </td>
+                </tr>
+            </tbody>
+        </table>
+</div>
 
 <div *ngIf = "role == '1'" class="container">
     <div class="row text-center">
         <div class="col-lg-7 mt-5 mx-auto">
-            <h1>User's Dashboard</h1>
+            <h1> Dashboard </h1>
         </div>
     </div> 
     <h3 class = "text-muted"> All reservations</h3>
