@@ -13,7 +13,7 @@
   <form id="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
       <div class="row">
-        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipantName">Participant Name:</label>
+        <label class="col-form-label col-sm-2" for="ParticipantName">Participant Name:</label>
         <div class="col-sm-10">
           <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName" 
           [ngClass]="{'is-invalid': submitted && f.ParticipantName.errors }">
@@ -27,7 +27,7 @@
     <!-- Participant Age -->
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantAge">
       <div class="row">
-        <label class="col-form-label col-sm-2 pt-0 pl-0" for="ParticipantAge">Participant Age: </label>
+        <label class="col-form-label col-sm-2" for="ParticipantAge">Participant Age: </label>
         <div class="col-sm-10">
           <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
                 [ngClass]="{'is-invalid': submitted && f.ParticipantAge.errors }">
@@ -40,7 +40,7 @@
     <!-- Gender -->
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.Gender">
       <div class="row">
-        <label class="col-form-label col-sm-2 pt-0 pl-0" for="Gender">Gender: </label>
+        <label class="col-form-label col-sm-2" for="Gender">Gender: </label>
         <div class="col-sm-10">
           <select class="form-control" formControlName="Gender"
                   [ngClass]="{ 'is-invalid': submitted && f.Gender.errors }">
@@ -56,7 +56,7 @@
     <!-- T-Shirt Size -->
     <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.MerchSize">
       <div class="row">
-        <label class="col-form-label col-sm-2 pt-0 pl-0" for="MerchSize">T-Shirt Size: </label>
+        <label class="col-form-label col-sm-2" for="MerchSize">T-Shirt Size: </label>
         <div class="col-sm-10">
           <select class="form-control" formControlName="MerchSize"
                   [ngClass]="{ 'is-invalid': submitted && f.MerchSize.errors }">
@@ -140,7 +140,7 @@
       <!-- Name of Insurance Carrier -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureProviderName">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsureProviderName">Name of Insurance Carrier: </label>
+          <label class="col-form-label col-sm-3" for="InsureProviderName">Name of Insurance Carrier: </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
                 [ngClass]="{ 'is-invalid': submitted && f.InsureProviderName.errors }">
@@ -154,7 +154,7 @@
       <!-- Name of Insured Child -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureRecipientName">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsureRecipientName">Name of Insured Child:  </label>
+          <label class="col-form-label col-sm-3" for="InsureRecipientName">Name of Insured Child:  </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
                 [ngClass]="{ 'is-invalid': submitted && f.InsureRecipientName.errors }">
@@ -169,7 +169,7 @@
       <!-- Insurance Policy Number -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePolicyNo">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsurePolicyNo">Insurance Policy Number:  </label>
+          <label class="col-form-label col-sm-3" for="InsurePolicyNo">Insurance Policy Number:  </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
                 [ngClass]="{ 'is-invalid': submitted && f.InsurePolicyNo.errors }">
@@ -184,7 +184,7 @@
       <!-- Insurance Phone Number -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePhoneNo">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="InsurePhoneNo">Insurance Phone Number:  </label>
+          <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number:  </label>
           <div class="col-sm-9">
             <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
                 [ngClass]="{ 'is-invalid': submitted && f.InsurePhoneNo.errors }">
@@ -199,7 +199,7 @@
       <!-- Authorized Pickup Name 1 -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName1">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
+          <label class="col-form-label col-sm-3" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName1.errors }">
@@ -213,7 +213,7 @@
       <!-- Authorized Pickup Phone 1 -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
+          <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
           <div class="col-sm-9">
             <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }">
@@ -228,7 +228,7 @@
       <!-- Authorized Pickup Name 2 -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName2">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
+          <label class="col-form-label col-sm-3" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
           <div class="col-sm-9">
             <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }">
@@ -242,7 +242,7 @@
       <!-- Authorized Pickup Phone 2 -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
+          <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
           <div class="col-sm-9">
             <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
                 [ngClass]="{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }">
@@ -257,7 +257,7 @@
       <!-- Early Dropoff -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.EarlyDropOff">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="EarlyDropOff">Early Drop Off: </label>
+          <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
           <div class="col-sm-9">
             <select class="form-control" formControlName="EarlyDropOff" 
                   [ngClass]="{ 'is-invalid': submitted && f.EarlyDropOff.errors }">
@@ -276,7 +276,7 @@
       <!-- Late Pickup -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.LatePickup">
         <div class="row">
-          <label class="col-form-label col-sm-3 pt-0 pl-0" for="LatePickup">Late Pick Up: </label>
+          <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
           <div class="col-sm-9">
             <select class="form-control" formControlName="LatePickup"
                   [ngClass]="{ 'is-invalid': submitted && f.LatePickup.errors }">

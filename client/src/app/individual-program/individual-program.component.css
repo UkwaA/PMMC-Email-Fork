@@ -8,6 +8,10 @@ h1 {
 
 }
 
+p {
+  word-wrap: break-word;
+}
+
 h5 {
   color: #08b2b8 !important;
   font-weight: bold;
@@ -42,6 +46,6 @@ a:hover {
 
 .filter{
   padding: 20px;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   font-weight: bold;
 }

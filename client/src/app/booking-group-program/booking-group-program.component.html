@@ -15,7 +15,7 @@
       <!-- Organization Name -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.OrganizationName">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="OrganizationName">School Name: </label>
+          <label class="col-form-label col-sm-2" for="OrganizationName">School Name: </label>
           <div class="col-sm-10">
             <input class="form-control" type="text" placeholder="" formControlName="OrganizationName" 
                   [ngClass]="{'is-invalid': submitted && f.OrganizationName.errors }">
@@ -29,7 +29,7 @@
       <!-- Teacher Name -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherName">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="TeacherName">Teacher Name: </label>
+          <label class="col-form-label col-sm-2" for="TeacherName">Teacher Name: </label>
           <div class="col-sm-10">
             <input class="form-control" type="text" placeholder="" formControlName="TeacherName" 
                   [ngClass]="{'is-invalid': submitted && f.TeacherName.errors }">
@@ -43,7 +43,7 @@
       <!-- Teacher Email -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherEmail">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="TeacherEmail">Teacher Email: </label>
+          <label class="col-form-label col-sm-2" for="TeacherEmail">Teacher Email: </label>
           <div class="col-sm-10">
             <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="" formControlName="TeacherEmail"
                   [ngClass]="{ 'is-invalid': submitted && f.TeacherEmail.errors }" />
@@ -58,7 +58,7 @@
       <!-- Teacher Phone Number -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherPhoneNo">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="TeacherPhoneNo">Teacher Phone Number: </label>
+          <label class="col-form-label col-sm-2" for="TeacherPhoneNo">Teacher Phone Number: </label>
           <div class="col-sm-10">
             <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="TeacherPhoneNo"
                   [ngClass]="{ 'is-invalid': submitted && f.TeacherPhoneNo.errors }" />
@@ -73,7 +73,7 @@
       <!-- Grade Level  -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.GradeLevel">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="GradeLevel">Grade Level </label>
+          <label class="col-form-label col-sm-2" for="GradeLevel">Grade Level: </label>
           <div class="col-sm-10">
             <select class="form-control" formControlName="GradeLevel" [ngClass]="{ 'is-invalid': submitted && f.GradeLevel.errors }">
               <option>Kindergarten </option>
@@ -99,7 +99,7 @@
       <!-- Program Restriction  -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.ProgramRestriction">
         <div class="row">
-          <label class="col-form-label col-sm-2 pt-0 pl-0" for="ProgramRestriction">Are you a Title One School? </label>
+          <label class="col-form-label col-sm-2" for="ProgramRestriction">Are you a Title One School? </label>
           <div class="col-sm-10">
             <select class="form-control" formControlName="ProgramRestriction" [ngClass]="{ 'is-invalid': submitted && f.ProgramRestriction.errors }">
               <option>No </option>
