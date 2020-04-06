@@ -7,5 +7,36 @@ h1 {
     font-size: 50px;
     font-weight: bold;
     padding-top: 20px;
-    color:  #08b2b8;;
+    color:  #08b2b8;
 }
+/* 
+mat-button-toggle-group {
+  box-shadow: none;
+}
+
+mat-button-toggle {
+    border: 2px rgba(0,0,0,0) solid !important;
+    margin-top: 5px !important;
+    padding: 0 5px !important;
+    z-index: 3 !important;
+    font-weight: normal;
+}
+
+mat-button-toggle:hover {
+    border: 1px #000 solid !important;
+    background-color: #FFF !important;
+    border-radius: 5px !important;
+}
+
+.mat-button-toggle-checked {
+    border: 1px #08b2b8 solid ;  
+    border-radius: 5px;
+    background-color:#08b2b8;
+    color: white;
+    font-weight: bold;
+}
+
+.mat-button-toggle-input {
+    background-color: none !important;
+    padding-left: 32px !important;
+} */
