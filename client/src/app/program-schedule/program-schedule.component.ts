@@ -55,14 +55,14 @@ export class ProgramScheduleComponent implements OnInit{
         this.allEvents = this.allSchedules
 
         this.createProgramForm = this.fb.group({
-            AdultQuantity: ["", [Validators.required, Validators.min(0)]],
-            Age57Quantity: ["", [Validators.required, Validators.min(0)]],
-            Age810Quantity: ["", [Validators.required, Validators.min(0)]],
-            Age1112Quantity: ["", [Validators.required, Validators.min(0)]],
-            Age1314Quantity: ["", [Validators.required, Validators.min(0)]],
-            Age1415Quantity: ["", [Validators.required, Validators.min(0)]],
-            Age1517Quantity: ["", [Validators.required, Validators.min(0)]],
-            TotalQuantity: ["", [Validators.required, Validators.min(1)]]
+            AdultQuantity: ["0", [Validators.required, Validators.min(0)]],
+            Age57Quantity: ["0", [Validators.required, Validators.min(0)]],
+            Age810Quantity: ["0", [Validators.required, Validators.min(0)]],
+            Age1112Quantity: ["0", [Validators.required, Validators.min(0)]],
+            Age1314Quantity: ["0", [Validators.required, Validators.min(0)]],
+            Age1415Quantity: ["0", [Validators.required, Validators.min(0)]],
+            Age1517Quantity: ["0", [Validators.required, Validators.min(0)]],
+            TotalQuantity: ["0", [Validators.required, Validators.min(1)]]
         });
     }
 
