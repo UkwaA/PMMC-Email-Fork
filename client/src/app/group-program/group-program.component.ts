@@ -24,7 +24,6 @@ export class GroupProgramComponent implements OnInit{
                     e.SubProgramPK = result
                 })
             });
-            console.log(this.programs)
         })
     }
 
