@@ -12,6 +12,10 @@ h5 {
   text-decoration: underline;
 }
 
+.price{
+  text-decoration: none;
+}
+
 hr{
   margin-top: 2em;
   margin-bottom:-1em;
