@@ -17,7 +17,14 @@ export class ProgramScheduleComponent implements OnInit{
     ProgramType: number;
     programDetails: ProgramData;
     public selectedDate: Date = new Date();
-    customerSelectDate: Date;
+    customerSelectDate: string;
+    customerSelectTime: string;
+    tempDate: Date;
+    options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      };
     public allEvents: SchedulerEvent[];
     quantityForm: FormGroup;
     currTotalQuantity = 0;
@@ -64,19 +71,6 @@ export class ProgramScheduleComponent implements OnInit{
             document.getElementById("program_desc").innerHTML = this.programDetails.Description;
         })
 
-        // this.programScheduleServices.getScheduleById(this.ProgramPK).subscribe(schedules =>{
-        //     schedules.forEach(element =>{
-        //             var event = {
-        //                 id : element.SchedulePK,
-        //                 title : this.programDetails.Name,                            
-        //                 start : new Date(element.Date + 'T' + element.StartTime),
-        //                 end : new Date(element.Date + 'T' + element.EndTime)                        
-        //             }
-        //             this.allSchedules.push(event)
-        //         }                    
-        //     )                
-        // })
-
         //Define and create to get schedule by ProgramPk
         const currentYear = new Date().getFullYear();
         const parseAdjust = (eventDate: string): Date => {
@@ -97,8 +91,8 @@ export class ProgramScheduleComponent implements OnInit{
                     Start: parseAdjust(dataItem.Start),
                     End: parseAdjust(dataItem.End),   
                     EndTimezone: dataItem.EndTimezone,
-                    MaximumParticipant: dataItem.MaximumParticipant,
-                    CurrentParticipant: dataItem.CurrentParticipant,
+                    MaximumParticipant: this.programDetails.MaximumParticipant,
+                    CurrentParticipant: 0,
                     RecurrenceRule: dataItem.RecurrenceRule,
                     RecurrenceID: dataItem.RecurrenceID,
                     RecurrenceException: dataItem.RecurrenceException,
@@ -159,18 +153,6 @@ export class ProgramScheduleComponent implements OnInit{
 
     }
 
-    //Define this function used for Kendo scheduler
-    getEventClass(args: EventStyleArgs ){
-        //Define the item to update and get the time by format "YYYY-MM-DD HH:MM:SS"
-        var timezoneOffset = args.event.start.getTimezoneOffset()*60000
-        var programPK = args.event.dataItem.ProgramPK
-        var eventStart = (new Date(args.event.dataItem.Start - timezoneOffset)).toISOString().slice(0,19)
-        var eventEnd = (new Date(args.event.dataItem.End - timezoneOffset)).toISOString().slice(0,19)
-
-        return args.event.dataItem.type;
-        
-      }
-
     //This function to capture and get the info of selected event
     public eventClick = (e) => {
         var timezoneOffset = e.event.start.getTimezoneOffset()*60000
@@ -181,12 +163,15 @@ export class ProgramScheduleComponent implements OnInit{
         this.programScheduleServices.getScheduleByIdStartEnd(programPK, eventStart, eventEnd).subscribe(res=>{
             if(res){
                // console.log(res)          
-                this.customerSelectDate = res.Start
+                this.tempDate = new Date(res.Start);
+                this.customerSelectDate = this.tempDate.toDateString();
+                this.customerSelectTime = this.tempDate.toLocaleString('en-US', this.options);
                 this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
             }
             else{
-              //  console.log(e.event)
-                this.customerSelectDate = e.event.dataItem.Start
+                //console.log(e.event)
+                this.customerSelectDate = (e.event.dataItem.Start).toDateString();
+                this.customerSelectTime = (e.event.dataItem.Start).toLocaleString('en-US', this.options);
                 this.availability = e.event.dataItem.MaximumParticipant;
             }            
         })  
