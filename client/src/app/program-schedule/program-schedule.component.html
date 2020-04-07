@@ -44,7 +44,7 @@
           </div>
         </div>
 
-        <form *ngIf = "!ProgramType" [formGroup]="createProgramForm" (submit)="enterQuantity()" enctype="multipart/form-data">
+        <form *ngIf = "!ProgramType" [formGroup]="quantityForm" (submit)="enterQuantity()" enctype="multipart/form-data">
           <h3>Enter Quantity</h3>
 
           <div class="form-group font-weight-bold row">

@@ -19,7 +19,7 @@ export class ProgramScheduleComponent implements OnInit{
     public selectedDate: Date = new Date();
     customerSelectDate: Date;
     public allEvents: SchedulerEvent[];
-    createProgramForm: FormGroup;
+    quantityForm: FormGroup;
     currTotalQuantity = 0;
     availability: number;
     submitted = false;
@@ -29,6 +29,8 @@ export class ProgramScheduleComponent implements OnInit{
         Start: "",
         End: ""
     };
+    totalQuantity: number;
+
     //Define Schedule Module for Kendo schedule
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -108,7 +110,7 @@ export class ProgramScheduleComponent implements OnInit{
             this.allEvents = sampleDataWithCustomSchema
         })
 
-        this.createProgramForm = this.fb.group({
+        this.quantityForm = this.fb.group({
             AdultQuantity: ["0", [Validators.required, Validators.min(0)]],
             Age57Quantity: ["0", [Validators.required, Validators.min(0)]],
             Age810Quantity: ["0", [Validators.required, Validators.min(0)]],
@@ -121,7 +123,7 @@ export class ProgramScheduleComponent implements OnInit{
     }
 
     get f() {
-        return this.createProgramForm.controls;
+        return this.quantityForm.controls;
     }
 
     // Clear data when click on input field
@@ -140,19 +142,21 @@ export class ProgramScheduleComponent implements OnInit{
     }
     
     calculateTotalQuantity() {
-        this.currTotalQuantity = parseInt(this.createProgramForm.get('AdultQuantity').value) + parseInt(this.createProgramForm.get('Age57Quantity').value) +
-                                 parseInt(this.createProgramForm.get('Age810Quantity').value) + parseInt(this.createProgramForm.get('Age1112Quantity').value) +
-                                 parseInt(this.createProgramForm.get('Age1314Quantity').value) + parseInt(this.createProgramForm.get('Age1415Quantity').value) +
-                                 parseInt(this.createProgramForm.get('Age1517Quantity').value);
-        this.createProgramForm.get('TotalQuantity').setValue(this.currTotalQuantity);
+        this.currTotalQuantity = parseInt(this.quantityForm.get('AdultQuantity').value) + parseInt(this.quantityForm.get('Age57Quantity').value) +
+                                 parseInt(this.quantityForm.get('Age810Quantity').value) + parseInt(this.quantityForm.get('Age1112Quantity').value) +
+                                 parseInt(this.quantityForm.get('Age1314Quantity').value) + parseInt(this.quantityForm.get('Age1415Quantity').value) +
+                                 parseInt(this.quantityForm.get('Age1517Quantity').value);
+        this.quantityForm.get('TotalQuantity').setValue(this.currTotalQuantity);
     }
 
     enterQuantity() {
         this.submitted = true;
-        if (this.createProgramForm.invalid) {
+        if (this.quantityForm.invalid) {
           console.log("invalid");
           return;
         }  
+        console.log("valid");
+
     }
 
     //Define this function used for Kendo scheduler
