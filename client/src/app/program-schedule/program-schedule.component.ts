@@ -18,7 +18,7 @@ export class ProgramScheduleComponent implements OnInit{
     programDetails: ProgramData;
     public selectedDate: Date = new Date();
     public allEvents: SchedulerEvent[];
-    createProgramForm: FormGroup;
+    quantityForm: FormGroup;
     submitted = false;
     scheduleItem:any = { 
         SchedulePK: 0,
@@ -26,6 +26,8 @@ export class ProgramScheduleComponent implements OnInit{
         Start: "",
         End: ""
     };
+    totalQuantity: number;
+
     //Define Schedule Module for Kendo schedule
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -105,7 +107,7 @@ export class ProgramScheduleComponent implements OnInit{
             this.allEvents = sampleDataWithCustomSchema
         })
 
-        this.createProgramForm = this.fb.group({
+        this.quantityForm = this.fb.group({
             AdultQuantity: ["0", [Validators.required, Validators.min(0)]],
             Age57Quantity: ["0", [Validators.required, Validators.min(0)]],
             Age810Quantity: ["0", [Validators.required, Validators.min(0)]],
@@ -113,12 +115,12 @@ export class ProgramScheduleComponent implements OnInit{
             Age1314Quantity: ["0", [Validators.required, Validators.min(0)]],
             Age1415Quantity: ["0", [Validators.required, Validators.min(0)]],
             Age1517Quantity: ["0", [Validators.required, Validators.min(0)]],
-            TotalQuantity: ["0", [Validators.required, Validators.min(1)]]
+            //TotalQuantity: ["0", [Validators.required, Validators.min(1)]]
         });
     }
 
     get f() {
-        return this.createProgramForm.controls;
+        return this.quantityForm.controls;
     }
 
     // Clear data when click on input field
@@ -137,10 +139,12 @@ export class ProgramScheduleComponent implements OnInit{
 
     enterQuantity() {
         this.submitted = true;
-        if (this.createProgramForm.invalid) {
+        if (this.quantityForm.invalid) {
           console.log("invalid");
           return;
         }  
+        console.log("valid");
+
     }
 
     //Define this function used for Kendo scheduler
