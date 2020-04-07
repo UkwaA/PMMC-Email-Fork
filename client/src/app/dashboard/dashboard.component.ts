@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
     this.auth.profile().subscribe(
       user => {
           this.role = user.Role_FK;
+          console.log(this.role)
       },
       err => {
           console.error(err)

@@ -6,15 +6,15 @@
     </div>
     <div class="row filter">
         <kendo-scheduler
-                [kendoSchedulerBinding]="allEvents"
-                [eventClass]="getEventClass"
+                [kendoSchedulerBinding]="allEvents"                
                 (eventClick)="eventClick($event)"
                 [modelFields]="eventFields"
                 [selectedDate]="selectedDate"
+                [showWorkHours] = "true"
                 style="height: 700px; width: 1500px">
         <ng-template kendoSchedulerEventTemplate let-event>
             {{ event.dataItem.Title }} (ProgramPK: {{ event.dataItem.ProgramPK }}) 
-            (SchedulePK: {{event.dataItem.ScheduleOverviewPK}})
+            (SchedulePK: {{event.dataItem.ScheduleSettingPK}})
         </ng-template>
         <kendo-scheduler-day-view [startTime]="startTime">
         </kendo-scheduler-day-view>

@@ -2,9 +2,9 @@ const Sequelize = require("sequelize");
 const db = require("../db.js");
 
 module.exports = db.sequelize.define(
-  "scheduleoverview",
+  "schedulesetting",
   {
-    ScheduleOverviewPK: {
+    ScheduleSettingPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
@@ -30,12 +30,6 @@ module.exports = db.sequelize.define(
     },
     EndTimezone: {
         type: Sequelize.TEXT
-    },
-    MaximumParticipant: {
-      type: Sequelize.INTEGER
-    },
-    CurrentNumberParticipant: {
-      type: Sequelize.INTEGER
     },
     RecurrenceRule:{
         type: Sequelize.TEXT

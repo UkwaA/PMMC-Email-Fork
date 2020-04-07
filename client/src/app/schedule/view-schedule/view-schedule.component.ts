@@ -73,7 +73,7 @@ export class ViewScheduleComponent {
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
-                    ScheduleOverviewPK: dataItem.ScheduleOverviewPK,
+                    ScheduleSettingPK: dataItem.ScheduleSettingPK,
                     ProgramPK: dataItem.ProgramPK,
                     Title: dataItem.Title,
                     Description: dataItem.Description,
@@ -107,7 +107,7 @@ export class ViewScheduleComponent {
 
     //get all events in a selected view
     public getEventClass(args: EventStyleArgs ){        
-        console.log(args.event.start)
         return args.event.dataItem.type;
+        //need to included this [eventClass]="getEventClass" in html kendo
       }
 }

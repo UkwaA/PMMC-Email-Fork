@@ -84,7 +84,7 @@ export class ProgramScheduleComponent implements OnInit{
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
-                    ScheduleOverviewPK: dataItem.ScheduleOverviewPK,
+                    ScheduleSettingPK: dataItem.ScheduleSettingPK,
                     ProgramPK: dataItem.ProgramPK,
                     Title: dataItem.Title,
                     Description: dataItem.Description,

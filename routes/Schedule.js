@@ -7,7 +7,7 @@ const ReservationGroupProgram = require("../models/ReservationGroupDetails");
 const ReservationIndividualProgram = require("../models/ReservationIndividualDetails");
 const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
-const ScheduleOverview = require("../models/ScheduleOverview");
+const ScheduleSetting = require("../models/ScheduleSetting");
 
 schedule.use(bodyParser.json());
 schedule.use(cors());
@@ -29,7 +29,7 @@ schedule.post("/add-new-program-schedule", (req, res) => {
   GET ALL PROGRAM SCHEDULES OVERVIEW
  *************************************/
 schedule.get("/get-all-schedule-overview", (req, res) => {
-  ScheduleOverview.findAll()
+  ScheduleSetting.findAll()
     .then(overview => {      
       res.json(overview);
     })
@@ -42,7 +42,7 @@ schedule.get("/get-all-schedule-overview", (req, res) => {
   GET PROGRAM SCHEDULE OVERVIEW BY ID
  **************************************/
 schedule.get("/get-schedule-overview-by-id/:id", (req, res) => {
-  ScheduleOverview.findAll({
+  ScheduleSetting.findAll({
     where: {
       ProgramPK: req.params.id,
       IsActive: true
