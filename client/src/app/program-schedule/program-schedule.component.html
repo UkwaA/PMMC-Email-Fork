@@ -19,7 +19,7 @@
               (eventClick)="eventClick($event)"
               [modelFields]="eventFields"
               [selectedDate]="selectedDate"
-              style="height: 700px; width: 1500px">            
+              style="height: 850px; width: 1500px">            
             <kendo-scheduler-week-view [startTime]="startTime">
             <ng-template kendoSchedulerEventTemplate let-event>
               {{ event.dataItem.Title }} 
@@ -33,14 +33,14 @@
       <div class="col-lg-4 col-md-5 col-sm-12">
         <div>
           <div class="form-group font-weight-bold ">
-            <label>Current Selected Program</label>
-            <input type="text" class="form-control" name="SelectedProgramName" disabled>
+            <label>Selected Date Program</label>
+            <input type="text" class="form-control" [(ngModel)]="customerSelectDate" readonly>
           </div>
         </div>
         <div>
           <div class="form-group font-weight-bold">
             <label>Availability </label>
-            <input type="number" class="form-control" name="Availability" disabled>
+            <input type="number" class="form-control" [(ngModel)]="availability" readonly>
           </div>
         </div>
 
@@ -130,7 +130,12 @@
               </div>
             </div>
           </div> 
-
+          <div class="form-group font-weight-bold row">
+            <label class="col-sm-7 col-form-label">Total Quantity</label>
+            <div class="col-sm-5">
+              <input type="number" min="0" class="form-control" formControlName="TotalQuantity" value="0" readonly>
+            </div>
+          </div> 
           <div class="button pt-1 pb-1">
             <button class="btn btn-lg btn-info btn-block" type="submit"> Book </button>
           </div>

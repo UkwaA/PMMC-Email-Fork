@@ -17,8 +17,11 @@ export class ProgramScheduleComponent implements OnInit{
     ProgramType: number;
     programDetails: ProgramData;
     public selectedDate: Date = new Date();
+    customerSelectDate: Date;
     public allEvents: SchedulerEvent[];
     createProgramForm: FormGroup;
+    currTotalQuantity = 0;
+    availability: number;
     submitted = false;
     scheduleItem:any = { 
         SchedulePK: 0,
@@ -131,8 +134,17 @@ export class ProgramScheduleComponent implements OnInit{
     lostFocus(event) {
         if(event.target.value === 0 ||   event.target.value === "")
         {
-        event.target.value = 0;
+            event.target.value = 0;
         }
+        this.calculateTotalQuantity();
+    }
+    
+    calculateTotalQuantity() {
+        this.currTotalQuantity = parseInt(this.createProgramForm.get('AdultQuantity').value) + parseInt(this.createProgramForm.get('Age57Quantity').value) +
+                                 parseInt(this.createProgramForm.get('Age810Quantity').value) + parseInt(this.createProgramForm.get('Age1112Quantity').value) +
+                                 parseInt(this.createProgramForm.get('Age1314Quantity').value) + parseInt(this.createProgramForm.get('Age1415Quantity').value) +
+                                 parseInt(this.createProgramForm.get('Age1517Quantity').value);
+        this.createProgramForm.get('TotalQuantity').setValue(this.currTotalQuantity);
     }
 
     enterQuantity() {
@@ -164,10 +176,14 @@ export class ProgramScheduleComponent implements OnInit{
 
         this.programScheduleServices.getScheduleByIdStartEnd(programPK, eventStart, eventEnd).subscribe(res=>{
             if(res){
-                console.log(res)               
+               // console.log(res)          
+                this.customerSelectDate = res.Start
+                this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
             }
             else{
-                console.log(e.event)
+              //  console.log(e.event)
+                this.customerSelectDate = e.event.dataItem.Start
+                this.availability = e.event.dataItem.MaximumParticipant;
             }            
         })  
         
