@@ -250,14 +250,14 @@ program.post("/update-g-program-requirement", (req, res) => {
     .then(program => {
       if (program) {
         program.update({
-          AdultQuantity: req.body.AdultQuantity,
-          Age57Quantity: req.body.Age57Quantity,
-          Age810Quantity: req.body.Age810Quantity,
-          Age1112Quantity: req.body.Age1112Quantity,
-          Age1314Quantity: req.body.Age1314Quantity,
-          Age1415Quantity: req.body.Age1415Quantity,
-          Age1517Quantity: req.body.Age1517Quantity,
-          TotalQuantity: req.body.TotalQuantity,
+          // AdultQuantity: req.body.AdultQuantity,
+          // Age57Quantity: req.body.Age57Quantity,
+          // Age810Quantity: req.body.Age810Quantity,
+          // Age1112Quantity: req.body.Age1112Quantity,
+          // Age1314Quantity: req.body.Age1314Quantity,
+          // Age1415Quantity: req.body.Age1415Quantity,
+          // Age1517Quantity: req.body.Age1517Quantity,
+          // TotalQuantity: req.body.TotalQuantity,
           ProgramRestriction: req.body.ProgramRestriction,
           OrganizationName: req.body.OrganizationName,
           GradeLevel: req.body.GradeLevel,

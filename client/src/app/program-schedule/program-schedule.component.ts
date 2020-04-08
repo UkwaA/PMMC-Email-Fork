@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { ProgramServices } from '../services/program.services';
 import { ProgramData } from '../data/program-data';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { SchedulerEvent, SchedulerModelFields, EventStyleArgs } from '@progress/kendo-angular-scheduler';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ReservationHeaderData } from '../data/reservation-header-data';
+import { QuantiyFormData } from '../data/quantity-form-data';
 import { ProgramScheduleData } from '../data/program-schedule-data';
+import { AuthenticationService} from '../authentication.service';
 
 @Component({
     templateUrl: './program-schedule.component.html',
@@ -15,6 +18,7 @@ import { ProgramScheduleData } from '../data/program-schedule-data';
 export class ProgramScheduleComponent implements OnInit{
     ProgramPK: number;
     ProgramType: number;
+    isDisable = true;
     programDetails: ProgramData;
     public selectedDate: Date = new Date();
     customerSelectDate: string;
@@ -26,6 +30,7 @@ export class ProgramScheduleComponent implements OnInit{
         hour12: true
       };
     public allEvents: SchedulerEvent[];
+    quantityData : QuantiyFormData;
     quantityForm: FormGroup;
     currTotalQuantity = 0;
     availability: number;
@@ -37,6 +42,17 @@ export class ProgramScheduleComponent implements OnInit{
         End: ""
     };
     totalQuantity: number;
+
+    currentSession: ProgramScheduleData = {
+        SchedulePK: 0,
+        ProgramPK: 0,
+        Start: '',
+        End: '',
+        MaximumParticipant: 0,
+        CurrentNumberParticipant: 0,        
+        CreatedBy: 0,
+        IsActive: true
+    }
 
     //Define Schedule Module for Kendo schedule
     public eventFields: SchedulerModelFields = {
@@ -54,12 +70,16 @@ export class ProgramScheduleComponent implements OnInit{
     };
 
     constructor(private route: ActivatedRoute,
-        private service: ProgramServices,
-        private programScheduleServices: ProgramScheduleService,
-        private fb: FormBuilder,
-        ){}
+                private auth: AuthenticationService,
+                private service: ProgramServices,
+                private programScheduleServices: ProgramScheduleService,
+                private fb: FormBuilder,
+                private router: Router ){}
 
     ngOnInit(){
+
+        this.currentSession.CreatedBy
+      
         this.route.params.subscribe(val => {
             this.ProgramPK = val.id
         })
@@ -105,14 +125,14 @@ export class ProgramScheduleComponent implements OnInit{
         })
 
         this.quantityForm = this.fb.group({
-            AdultQuantity: ["0", [Validators.required, Validators.min(0)]],
-            Age57Quantity: ["0", [Validators.required, Validators.min(0)]],
-            Age810Quantity: ["0", [Validators.required, Validators.min(0)]],
-            Age1112Quantity: ["0", [Validators.required, Validators.min(0)]],
-            Age1314Quantity: ["0", [Validators.required, Validators.min(0)]],
-            Age1415Quantity: ["0", [Validators.required, Validators.min(0)]],
-            Age1517Quantity: ["0", [Validators.required, Validators.min(0)]],
-            TotalQuantity: ["0", [Validators.required, Validators.min(1)]]
+            AdultQuantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age57Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age810Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age1112Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age1314Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age1415Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            Age1517Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
+            TotalQuantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(1)]]
         });
     }
 
@@ -140,6 +160,7 @@ export class ProgramScheduleComponent implements OnInit{
                                  parseInt(this.quantityForm.get('Age810Quantity').value) + parseInt(this.quantityForm.get('Age1112Quantity').value) +
                                  parseInt(this.quantityForm.get('Age1314Quantity').value) + parseInt(this.quantityForm.get('Age1415Quantity').value) +
                                  parseInt(this.quantityForm.get('Age1517Quantity').value);
+
         this.quantityForm.get('TotalQuantity').setValue(this.currTotalQuantity);
     }
 
@@ -149,12 +170,48 @@ export class ProgramScheduleComponent implements OnInit{
           console.log("invalid");
           return;
         }  
+
+        this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
+        // Create a schedule record in MySQL then return the schedule ID
+        // navigate to booking-group or booking-individual
+        // //Re-initialize currentSession before send to back-end
+        // this.currentSession.ProgramPK = this.ProgramPK                
+        // this.currentSession.MaximumParticipant = this.programData.MaximumParticipant
+        // //Loop through all day from StartDate to EndDate, if the day is selected to repeat 
+        // // AND if that day is not a Blackout-day ==> add to Schedule table in database
+        // var dayIndex = 0;
+        // for (var d = this.startDate; d <= this.endDate; d.setDate(d.getDate() + 1)) {
+        //     dayIndex = d.getDay()
+        //     //TO-DO: need to check if it's not in black out dates
+        //     if(this.repeatDay[dayIndex].value){
+        //         //Get the date format "YYYY-MM-DD" of the full date
+        //         this.currentSession.Date = d.toISOString().slice(0,10)
+        //         //Get Datetime as this format YYYY-MM-DD HH:MM:SS     
+        //         this.currentSession.StartTime = this.repeatDay[dayIndex0"
+        //         this.currentSession.EndTime = this.repeatDay[dayIndex].end.toTimeString().slice(0,5) + ":00"
+                
+        //         this.programScheduleServices.addNewProgramSchedule(this.currentSession).subscribe(res =>{
+        //         })
+        //     }
+        // }
+        
+        // this.router.navigateByUrl("/profile/schedule-management")
+        
         console.log("valid");
 
     }
 
     //This function to capture and get the info of selected event
     public eventClick = (e) => {
+        this.isDisable = false;
+        this.quantityForm.get('AdultQuantity').enable();
+        this.quantityForm.get('Age57Quantity').enable();
+        this.quantityForm.get('Age810Quantity').enable();
+        this.quantityForm.get('Age1112Quantity').enable();
+        this.quantityForm.get('Age1314Quantity').enable();
+        this.quantityForm.get('Age1415Quantity').enable();
+        this.quantityForm.get('Age1517Quantity').enable();
+
         var timezoneOffset = e.event.start.getTimezoneOffset()*60000
         var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
         var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
@@ -162,14 +219,14 @@ export class ProgramScheduleComponent implements OnInit{
 
         this.programScheduleServices.getScheduleByIdStartEnd(programPK, eventStart, eventEnd).subscribe(res=>{
             if(res){
-               // console.log(res)          
+                console.log(res)          
                 this.tempDate = new Date(res.Start);
                 this.customerSelectDate = this.tempDate.toDateString();
                 this.customerSelectTime = this.tempDate.toLocaleString('en-US', this.options);
                 this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
             }
             else{
-                //console.log(e.event)
+                console.log(e.event)
                 this.customerSelectDate = (e.event.dataItem.Start).toDateString();
                 this.customerSelectTime = (e.event.dataItem.Start).toLocaleString('en-US', this.options);
                 this.availability = e.event.dataItem.MaximumParticipant;

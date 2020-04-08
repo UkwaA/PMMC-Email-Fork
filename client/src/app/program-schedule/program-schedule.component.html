@@ -1,160 +1,161 @@
 <div class="container">
-    <div class="row text-left">
-            <h1 id="program_name"></h1>
-    </div>
-    <hr>
+  <div class="row text-left">
+    <h1 id="program_name"></h1>
+  </div>
+  <hr>
 
-    <div class="row">
-      <div id="program_desc"></div>
-    </div>
-    <hr>
+  <div class="row">
+    <div id="program_desc"></div>
+  </div>
+  <hr>
 
-    <div class="row mt-4 mb-5">
-      <div class="col-lg-8 col-md-7 col-sm-12 pr-5">
-        <h3> Schedule </h3>
-        <div class="row filter mb-5">
-            <kendo-scheduler
-              [kendoSchedulerBinding]="allEvents"
-              [eventClass]="getEventClass"
-              (eventClick)="eventClick($event)"
-              [modelFields]="eventFields"
-              [showWorkHours] = "true"
-              [selectedDate]="selectedDate"
-              style="height: 850px; width: 1500px">            
-            <kendo-scheduler-week-view [startTime]="startTime">
+  <div class="row mt-4 mb-5">
+    <div class="col-lg-8 col-md-7 col-sm-12 pr-5">
+      <h3> Schedule </h3>
+      <div class="row filter mb-5">
+        <kendo-scheduler [kendoSchedulerBinding]="allEvents" [eventClass]="getEventClass"
+          (eventClick)="eventClick($event)" [modelFields]="eventFields" [showWorkHours]="true"
+          [selectedDate]="selectedDate" style="height: 850px; width: 1500px">
+          <kendo-scheduler-week-view [startTime]="startTime">
             <ng-template kendoSchedulerEventTemplate let-event>
-              {{ event.dataItem.Title }} 
+              {{ event.dataItem.Title }}
             </ng-template>
-            </kendo-scheduler-week-view>
-            <kendo-scheduler-month-view> </kendo-scheduler-month-view>                        
-          </kendo-scheduler>
+          </kendo-scheduler-week-view>
+          <kendo-scheduler-month-view> </kendo-scheduler-month-view>
+        </kendo-scheduler>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-5 col-sm-12">
+      <div>
+        <div class="form-group font-weight-bold ">
+          <label>Selected Date</label>
+          <input type="text" class="form-control" [(ngModel)]="customerSelectDate" readonly>
+        </div>
+      </div>
+      <div>
+        <div class="form-group font-weight-bold ">
+          <label>Selected Time</label>
+          <input type="text" class="form-control" [(ngModel)]="customerSelectTime" readonly>
+        </div>
+      </div>
+      <div>
+        <div class="form-group font-weight-bold">
+          <label>Availability </label>
+          <input type="number" class="form-control" [(ngModel)]="availability" readonly>
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-5 col-sm-12">
-        <div>
-          <div class="form-group font-weight-bold ">
-            <label>Selected Date</label>
-            <input type="text" class="form-control" [(ngModel)]="customerSelectDate" readonly>
-          </div>
-        </div>
-        <div>
-          <div class="form-group font-weight-bold ">
-            <label>Selected Time</label>
-            <input type="text" class="form-control" [(ngModel)]="customerSelectTime" readonly>
-          </div>
-        </div>
-        <div>
-          <div class="form-group font-weight-bold">
-            <label>Availability </label>
-            <input type="number" class="form-control" [(ngModel)]="availability" readonly>
+      <form *ngIf="!ProgramType" [formGroup]="quantityForm" (submit)="enterQuantity()" enctype="multipart/form-data">
+        <h3>Enter Quantity</h3>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Adult Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="AdultQuantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.AdultQuantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.AdultQuantity.errors" class="invalid-feedback">
+              <div *ngIf="f.AdultQuantity.errors.required">It's required</div>
+              <div *ngIf="f.AdultQuantity.errors.min">From 0 and up.</div>
+            </div>
           </div>
         </div>
 
-        <form *ngIf = "!ProgramType" [formGroup]="quantityForm" (submit)="enterQuantity()" enctype="multipart/form-data">
-          <h3>Enter Quantity</h3>
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Adult Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="AdultQuantity"  value="0"
-                  [ngClass]="{'is-invalid': submitted && f.AdultQuantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.AdultQuantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.AdultQuantity.errors.required">It's required</div>
-                  <div *ngIf="f.AdultQuantity.errors.min">From 0 and up.</div>
-              </div>
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 5-7 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age57Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age57Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age57Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age57Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age57Quantity.errors.min">From 0 and up.</div>
             </div>
-          </div> 
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 5-7 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age57Quantity" value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age57Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age57Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age57Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age57Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
- 
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 8-10 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age810Quantity"  value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age810Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age810Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 11-12 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age1112Quantity"  value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age1112Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age1112Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age1112Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age1112Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 13-14 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age1314Quantity"  value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age1314Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age1314Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age1314Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age1314Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 14-15 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age1415Quantity" value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age1415Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age1415Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age1415Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age1415Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
-
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Age 15-17 Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="Age1517Quantity" value="0"
-                  [ngClass]="{'is-invalid': submitted && f.Age1517Quantity.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
-              <div *ngIf="submitted && f.Age1517Quantity.errors" class="invalid-feedback">
-                  <div *ngIf="f.Age1517Quantity.errors.required">It's required</div>
-                  <div *ngIf="f.Age1517Quantity.errors.min">From 0 and up.</div>
-              </div>
-            </div>
-          </div> 
-          <div class="form-group font-weight-bold row">
-            <label class="col-sm-7 col-form-label">Total Quantity</label>
-            <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="TotalQuantity" value="0" readonly>
-            </div>
-          </div> 
-          <div class="button pt-1 pb-1">
-            <button class="btn btn-lg btn-info btn-block" type="submit"> Book </button>
           </div>
-        </form>
-      </div>
-      
+        </div>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 8-10 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age810Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age810Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age810Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age810Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age810Quantity.errors.min">From 0 and up.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 11-12 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age1112Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age1112Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age1112Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1112Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age1112Quantity.errors.min">From 0 and up.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 13-14 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age1314Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age1314Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age1314Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1314Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age1314Quantity.errors.min">From 0 and up.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 14-15 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age1415Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age1415Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age1415Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1415Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age1415Quantity.errors.min">From 0 and up.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Age 15-17 Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="Age1517Quantity" value="0"
+              [ngClass]="{'is-invalid': submitted && f.Age1517Quantity.errors }" (focus)="onFocus($event)"
+              (blur)="lostFocus($event)">
+            <div *ngIf="submitted && f.Age1517Quantity.errors" class="invalid-feedback">
+              <div *ngIf="f.Age1517Quantity.errors.required">It's required</div>
+              <div *ngIf="f.Age1517Quantity.errors.min">From 0 and up.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group font-weight-bold row">
+          <label class="col-sm-7 col-form-label">Total Quantity</label>
+          <div class="col-sm-5">
+            <input type="number" min="0" class="form-control" formControlName="TotalQuantity" value="0" readonly>
+          </div>
+        </div>
+        <div class="button pt-1 pb-1">
+          <button class="btn btn-lg btn-info btn-block" type="submit" [disabled]="isDisable"> Book </button>
+        </div>
+      </form>
     </div>
-    
-
-    <div class="row">
-        <a *ngIf = "ProgramType" [routerLink] = "['/booking-individual-program', ProgramPK]" class="align-self-end btn btn-outline-info">Book Now!</a>
-        <a *ngIf = "!ProgramType" [routerLink] = "['/booking-group-program', ProgramPK]" class="align-self-end btn btn-outline-info">Book Now!</a>
-    </div>
+  </div>
+  <div class="row">
+    <a *ngIf="ProgramType" [routerLink]="['/booking-individual-program', ProgramPK]"
+      class="align-self-end btn btn-outline-info">Book Now!</a>
+    <a *ngIf="!ProgramType" [routerLink]="['/booking-group-program', ProgramPK]"
+      class="align-self-end btn btn-outline-info">Book Now!</a>
+  </div>
 
 </div>

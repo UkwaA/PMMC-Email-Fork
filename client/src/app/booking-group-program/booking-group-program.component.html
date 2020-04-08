@@ -111,6 +111,14 @@
           </div>
         </div>
       </fieldset>
+
+      <div *ngIf="auth.isLoggedIn(); else elseBlock">
+        <h1>USER LOGGED IN!</h1>
+      </div>
+      <ng-template #elseBlock><h1>NEED TO CREATE ACCOUNT!</h1></ng-template>
+      <!--
+        ADD A SECTION FOR CUSTOMER TO REGISTER INFORMATION. CAN FOLLOW THE LAYOUT OF OUT REGISTRATION PAGE OR BOOKEO
+      -->
       <div class="btn_row row flex-end">
         <button type="button" id="edit_btn" (click)="editClicked($event)" class="btn btn-info mr-2">Edit</button>
         <button type="submit" class="submit_btn btn btn-info">Submit</button>

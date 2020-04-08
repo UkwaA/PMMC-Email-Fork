@@ -7,6 +7,7 @@ import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArg
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { AuthenticationService } from '../../authentication.service';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
 
 @Component({
@@ -57,7 +58,8 @@ export class ViewScheduleComponent {
         recurrenceExceptions : 'RecurrenceException'
     };
 
-    constructor (private program : ProgramServices, private programScheduleServices: ProgramScheduleService,
+    constructor ( private auth: AuthenticationService,
+        private program : ProgramServices, private programScheduleServices: ProgramScheduleService,
         private formBuilder: FormBuilder) {           
         }
     
