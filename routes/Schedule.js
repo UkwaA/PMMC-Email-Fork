@@ -28,7 +28,7 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
 /*************************************
   GET ALL PROGRAM SCHEDULES OVERVIEW
  *************************************/
-schedule.get("/get-all-schedule-overview", (req, res) => {
+schedule.get("/get-all-schedule-setting", (req, res) => {
   ScheduleSetting.findAll()
     .then(overview => {      
       res.json(overview);
@@ -60,7 +60,7 @@ schedule.get("/get-schedule-setting-by-id/:id", (req, res) => {
   GET ALL PROGRAM SCHEDULES BY ID,
   START AND END TIME
  ***********************************/
-schedule.get("/get-schedule-setting-by-id-start-end/:id/:start/:end",(req,res) => {
+schedule.get("/get-schedule-by-id-start-end/:id/:start/:end",(req,res) => {
   Schedule.findOne({
     where: {
       ProgramPK: req.params.id,

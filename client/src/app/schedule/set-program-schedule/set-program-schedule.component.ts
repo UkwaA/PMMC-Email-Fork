@@ -141,7 +141,7 @@ export class SetProgramScheduleComponent {
             startDate: [],
             endDate: [],
             endrepeat: [],            
-            dayOfMonthOfYear: ["", [Validators.min(1)]],
+            dayOfMonthOfYear: [1, [Validators.min(1)]],
             description:[]
           })
         
@@ -242,6 +242,16 @@ export class SetProgramScheduleComponent {
         //validate input form
         if (this.SetProgramScheduleForm.invalid) {
             return;
+        }
+
+        if(this.frequency == "MONTHLY" && (this.selectedDayOfMonthArr.length == 0 
+                    || this.selectedDay < 1 || this.selectedDay > 31)){
+            return
+        }
+
+        if(this.frequency == "YEARLY" && (this.selectedDayOfMonth > this.selectedMonthOfYear.max 
+                    || this.selectedDayOfMonth < 1)){
+            return
         }
         
         //Configure Modal Dialog

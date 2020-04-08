@@ -8,6 +8,7 @@ import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
+declare var $: any;
 
 @Component({
     templateUrl: './view-schedule.component.html',
@@ -15,33 +16,29 @@ import '@progress/kendo-date-math/tz/America/Los_Angeles';
 })
 
 export class ViewScheduleComponent {
-    public selectedDate: Date = new Date();    
-    public allEvents: SchedulerEvent[]
+    selectedDate: Date = new Date();    
+    events: any[] = []
+    allEvents: SchedulerEvent[] = []
+    individualEvent: SchedulerEvent[] = []
+    groupEvent: SchedulerEvent[] = []
+
+    selectedProgramPK: number = 0
+    programs : any[] = [];
+    allPrograms : any[] = [];
+    individualProgram: any[] = [];
+    groupProgram: any[] = [];
+    
+    programCategories: Array<Object> = [
+        { id: 0, name: "All Program" },
+        { id: 1, name: "Group Program" },
+        { id: 2, name: "Individual Program" }
+    ]
 
     d1 = new Date('2020-04-09T09:00:00')
     d2 = new Date('2020-04-16T09:00:00')
-    exceptionDate: Date[] = []
-
-    // baseData: any[] = []
-    // {
-    //     ScheduleOverviewPK: 4,
-    //     ProgramPK: 2,
-    //     Title: "Bowling tournament",
-    //     Description: "",
-    //     StartTimezone: null,
-    //     Start: "2020-04-02T09:00:00",
-    //     End: "2020-04-02T10:00:00",
-    //     EndTimezone: null,
-    //     MaximumParticipant : 50,
-    //     //repeat weekly on Monday, end after 2 occurent
-    //     RecurrenceRule: "FREQ=WEEKLY;BYDAY=MO,TH;COUNT=2",
-    //     RecurrenceID: null,
-    //     RecurrenceException: null,
-    //     CreatedBy: 0,
-    //     CreatedDate: null,
-    //     IsAllDay: "0"
-    // }
-
+    exceptionDate: Date[] = []    
+    isDisabled = false
+    choice:any = 0
 
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -57,11 +54,29 @@ export class ViewScheduleComponent {
         recurrenceExceptions : 'RecurrenceException'
     };
 
-    constructor (private program : ProgramServices, private programScheduleServices: ProgramScheduleService,
+    constructor (private programService : ProgramServices, private programScheduleServices: ProgramScheduleService,
         private formBuilder: FormBuilder) {           
         }
     
     ngOnInit(){
+        this.programCategories.forEach(e => {
+            $("#programCat").append(new Option(e['name'], e['id']));
+        });
+        // Service call to get data from server
+        this.programService.getAllPrograms().then((result) =>{
+            this.programs = result;
+            this.allPrograms = result
+
+            // Filter program into Group and Individual
+            this.programs.forEach(e => {
+                if(e.ProgramType == 0) {
+                    this.groupProgram.push(e);
+                } else {
+                    this.individualProgram.push(e);
+                }
+            });
+        })
+
         const currentYear = new Date().getFullYear();
         const parseAdjust = (eventDate: string): Date => {
             const date = new Date(eventDate);
@@ -69,7 +84,7 @@ export class ViewScheduleComponent {
             return date;
         };       
 
-        this.programScheduleServices.getAllScheduleOverview().subscribe((schedules) =>{            
+        this.programScheduleServices.getAllScheduleSetting().subscribe((schedules) =>{            
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
@@ -89,9 +104,60 @@ export class ViewScheduleComponent {
                     IsActive: dataItem.IsActive                 
                 }
             ));
+            this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
-            console.log(this.allEvents)
-        })  
+
+            //Loop through all events
+            this.events.forEach(event =>{
+                //for each event, loop through all programs and compare ProgramPK
+                this.allPrograms.forEach(program =>{
+                    if(event.ProgramPK == program.ProgramPK){
+                        if(program.ProgramType == 0){
+                            this.groupEvent.push(event)
+                        }
+                        else{
+                            this.individualEvent.push(event)
+                        }
+                        //Create new eventList record in program object
+                        if(!program.eventList){
+                            program.eventList = []
+                        }
+                        program.eventList.push(event)
+                    }
+                })                
+            })            
+        }) 
+    }
+
+    //Capture the filter option
+    selectChangeHandler(event: any) {
+        this.choice = event.target.value;
+        // Update the data of table
+        switch(this.choice) {
+            case '0':
+                this.events = this.allEvents
+                this.programs = this.allPrograms
+                break;
+            case '1':
+                this.events = this.groupEvent
+                this.programs = this.groupProgram
+                break;
+            case '2':
+                this.events = this.individualEvent
+                this.programs = this.individualProgram
+                break;
+       }
+       this.isDisabled = false
+    }
+
+    onChangeSelectedProgram(program: any){
+        this.selectedProgramPK = program.target.value
+        this.programs.forEach(program =>{
+            if(program.ProgramPK == this.selectedProgramPK){
+                this.events = program.eventList
+            }
+        })
+        this.isDisabled = true
     }
 
     public eventClick = (e) => {
@@ -100,7 +166,7 @@ export class ViewScheduleComponent {
         var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
         var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
         var programPK = e.event.dataItem.ProgramPK
-        console.log(eventStart + " - " + programPK)        
+        
       }
 
     //get all events in a selected view

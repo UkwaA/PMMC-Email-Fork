@@ -40,8 +40,12 @@
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
                     <td>
                         <button [routerLink]="['/profile','program-details', program.ProgramPK, 'set-program-schedule']"
+                            class="btn btn-warning">
+                            <mat-icon matListIcon>add</mat-icon>Add Schedule
+                       </button>                       
+                       <button [routerLink]="['/profile','view-schedule']"
                             class="btn btn-info">
-                            <mat-icon matListIcon>calendar_today</mat-icon>Set schedule
+                            <mat-icon matListIcon>calendar_today</mat-icon>View Schedule
                        </button>
                     </td>
                 </tr>
