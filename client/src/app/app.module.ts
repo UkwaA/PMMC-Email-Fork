@@ -97,7 +97,11 @@ const routes : Routes = [
       {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
-      {path: 'view-schedule', component: ViewScheduleComponent, canActivate: [AuthRoleGuardService]},
+      {
+        path: 'view-schedule/:mode', 
+        component: ViewScheduleComponent, 
+        canActivate: [AuthRoleGuardService]
+      },
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule', 

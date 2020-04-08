@@ -9,6 +9,7 @@ import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { AuthenticationService } from '../../authentication.service';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -30,16 +31,17 @@ export class ViewScheduleComponent {
     groupProgram: any[] = [];
     
     programCategories: Array<Object> = [
-        { id: 0, name: "All Program" },
-        { id: 1, name: "Group Program" },
-        { id: 2, name: "Individual Program" }
+        { id: 0, name: "All Programs" },
+        { id: 1, name: "Group Programs" },
+        { id: 2, name: "Individual Programs" }
     ]
 
     d1 = new Date('2020-04-09T09:00:00')
     d2 = new Date('2020-04-16T09:00:00')
     exceptionDate: Date[] = []    
-    isDisabled = false
     choice:any = 0
+    currentMode = ""
+    startTime: Date = new Date()
 
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -56,7 +58,7 @@ export class ViewScheduleComponent {
     };
 
     constructor (private programService : ProgramServices, private programScheduleServices: ProgramScheduleService,
-        private formBuilder: FormBuilder) {           
+        private formBuilder: FormBuilder, private route: ActivatedRoute) {           
         }
     
     ngOnInit(){
@@ -77,6 +79,13 @@ export class ViewScheduleComponent {
                 }
             });
         })
+
+        this.route.params.subscribe(val => {
+            this.currentMode = val.mode 
+            if(this.currentMode != "viewAllSchedule"){
+                this.selectedProgramPK = val.mode
+            }
+         }) 
 
         const currentYear = new Date().getFullYear();
         const parseAdjust = (eventDate: string): Date => {
@@ -126,8 +135,15 @@ export class ViewScheduleComponent {
                         program.eventList.push(event)
                     }
                 })                
-            })            
-        }) 
+            }) 
+            if(this.currentMode != "viewAllSchedule"){
+                this.programs.forEach(program =>{
+                    if(program.ProgramPK == this.selectedProgramPK){
+                        this.events = program.eventList
+                    }
+                })
+            }
+        })
     }
 
     //Capture the filter option
@@ -148,17 +164,25 @@ export class ViewScheduleComponent {
                 this.programs = this.individualProgram
                 break;
        }
-       this.isDisabled = false
     }
 
     onChangeSelectedProgram(program: any){
         this.selectedProgramPK = program.target.value
-        this.programs.forEach(program =>{
-            if(program.ProgramPK == this.selectedProgramPK){
-                this.events = program.eventList
+        if(this.selectedProgramPK != 0){
+            this.programs.forEach(program =>{
+                if(program.ProgramPK == this.selectedProgramPK){
+                    this.events = program.eventList
+                }
+            })
+        }
+        else{
+            if(this.choice == "1"){
+                this.events = this.groupEvent
             }
-        })
-        this.isDisabled = true
+            else{
+                this.events = this.individualEvent
+            }
+        }        
     }
 
     public eventClick = (e) => {

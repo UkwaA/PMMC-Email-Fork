@@ -16,10 +16,10 @@
         <kendo-scheduler [kendoSchedulerBinding]="allEvents" [eventClass]="getEventClass"
           (eventClick)="eventClick($event)" [modelFields]="eventFields" [showWorkHours]="true"
           [selectedDate]="selectedDate" style="height: 850px; width: 1500px">
-          <kendo-scheduler-week-view [startTime]="startTime">
-            <ng-template kendoSchedulerEventTemplate let-event>
-              {{ event.dataItem.Title }}
-            </ng-template>
+          <ng-template kendoSchedulerEventTemplate let-event>
+            {{ event.dataItem.Title }}</ng-template>
+            <kendo-scheduler-week-view >            
+            
           </kendo-scheduler-week-view>
           <kendo-scheduler-month-view> </kendo-scheduler-month-view>
         </kendo-scheduler>
