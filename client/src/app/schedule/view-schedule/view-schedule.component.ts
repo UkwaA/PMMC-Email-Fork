@@ -7,6 +7,7 @@ import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArg
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { AuthenticationService } from '../../authentication.service';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
 declare var $: any;
 

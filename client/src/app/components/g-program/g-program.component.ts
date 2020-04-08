@@ -13,6 +13,7 @@ declare var $: any;
   templateUrl: './g-program.component.html',
   styleUrls: ['./g-program.component.css']
 })
+
 export class GProgramComponent implements OnInit {
   @Input() ProgramPK: number;
   @Input() formData: FormData;
@@ -34,14 +35,14 @@ export class GProgramComponent implements OnInit {
       })
 
     this.varLabels = [
-      { var: "AdultQuantity", label: "Adult Quantity" },
-      { var: "Age57Quantity", label: "Age 5-7 Quantity" },
-      { var: "Age810Quantity", label: "Age 8-10 Quantity" },
-      { var: "Age1112Quantity", label: "Age 11-12 Quantity" },
-      { var: "Age1314Quantity", label: "Age 13-14 Quantity" },
-      { var: "Age1415Quantity", label: "Age 14-15 Quantity" },
-      { var: "Age1517Quantity", label: "Age 15-17 Quantity" },
-      { var: "TotalQuantity", label: "Total Quantity" },
+      // { var: "AdultQuantity", label: "Adult Quantity" },
+      // { var: "Age57Quantity", label: "Age 5-7 Quantity" },
+      // { var: "Age810Quantity", label: "Age 8-10 Quantity" },
+      // { var: "Age1112Quantity", label: "Age 11-12 Quantity" },
+      // { var: "Age1314Quantity", label: "Age 13-14 Quantity" },
+      // { var: "Age1415Quantity", label: "Age 14-15 Quantity" },
+      // { var: "Age1517Quantity", label: "Age 15-17 Quantity" },
+      // { var: "TotalQuantity", label: "Total Quantity" },
       { var: "ProgramRestriction", label: "Program Restriction" },
       { var: "OrganizationName", label: "Organization Name" },
       { var: "GradeLevel", label: "Grade Level" },

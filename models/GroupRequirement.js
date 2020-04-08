@@ -11,30 +11,30 @@ module.exports = db.sequelize.define(
     SubProgramPK:{
         type: Sequelize.INTEGER
     }, 
-    AdultQuantity:{
-        type: Sequelize.BOOLEAN
-    }, 
-    Age57Quantity:{
-        type: Sequelize.BOOLEAN
-    }, 
-    Age810Quantity:{
-        type: Sequelize.BOOLEAN
-    },
-    Age1112Quantity:{
-        type: Sequelize.BOOLEAN
-    },
-    Age1314Quantity:{
-        type: Sequelize.BOOLEAN
-    },
-    Age1415Quantity:{
-        type: Sequelize.BOOLEAN
-    },
-    Age1517Quantity:{
-        type: Sequelize.BOOLEAN
-    },
-    TotalQuantity:{
-        type: Sequelize.BOOLEAN
-    },
+    // AdultQuantity:{
+    //     type: Sequelize.BOOLEAN
+    // }, 
+    // Age57Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // }, 
+    // Age810Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
+    // Age1112Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
+    // Age1314Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
+    // Age1415Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
+    // Age1517Quantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
+    // TotalQuantity:{
+    //     type: Sequelize.BOOLEAN
+    // },
     ProgramRestriction:{
         type: Sequelize.BOOLEAN
     },

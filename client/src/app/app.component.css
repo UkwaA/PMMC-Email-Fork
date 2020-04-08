@@ -82,9 +82,58 @@ body {
 }*/
 
 
+/* Footer */
 .mainfooter {
     background: #16222A; 
     background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
     background: linear-gradient(59deg, #3A6073, #16222A);
     color: white; padding-top:50px; padding-bottom:50px;
+}
+
+@media (max-width: 768px) {
+    .subscribe-form{
+        display : none;
+        visibility : hidden;
+    }
+
+    .useful{
+        display : none;
+        visibility : hidden; 
+    }
+}
+
+@media (max-width: 600px) {
+    .subscribe-form{
+        display : none;
+        visibility : hidden;
+    }
+
+    .footer-pad{
+        display : none;
+        visibility : hidden; 
+    }
+}
+
+@media (max-width: 480px) {
+    .subscribe-form{
+        display : none;
+        visibility : hidden;
+    }
+
+    .footer-pad{
+        display : none;
+        visibility : hidden; 
+    }
+}
+
+@media (max-width: 320px) {
+   .subscribe-form{
+        display : none !important;
+        visibility : hidden !important;
+    }
+
+   .footer-pad{
+        display : none !important;
+        visibility : hidden !important; 
+    }
 }

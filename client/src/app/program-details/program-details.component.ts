@@ -9,7 +9,7 @@ import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { AppConstants } from '../constants';
-import { BookingGroupData } from 'src/app/data/booking-group-data';
+// import { BookingGroupData } from 'src/app/data/booking-group-data';
 import { BookingIndividualData } from 'src/app/data/booking-individual-data';
 import { GProgramComponent } from '../components/g-program/g-program.component'
 import { IProgramComponent } from '../components/i-program/i-program.component';
@@ -28,7 +28,7 @@ export class ProgramDetailsComponent {
 
     viewImgHref: string
     formData = new FormData()
-    bookingGroupData: BookingGroupData
+    // bookingGroupData: BookingGroupData
     bookingIndividualData: BookingIndividualData
     bookingRequirementData: any
     ProgramPK: number

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { BookingGroupData } from '../data/booking-group-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgramServices } from 'src/app/services/program.services';
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
+import { ReservationHeaderData } from '../data/reservation-header-data';
+import { AuthenticationService } from '../authentication.service';
 
 declare var $: any;
 
@@ -13,7 +15,9 @@ declare var $: any;
   templateUrl: './booking-group-program.component.html',
   styleUrls: ['./booking-group-program.component.css']
 })
+
 export class BookingGroupProgramComponent implements OnInit {
+  @Input() quantityForm: ReservationHeaderData;
   bookingGroup: BookingGroupData;
   registerForm: FormGroup;
   submitted = false;
@@ -24,9 +28,10 @@ export class BookingGroupProgramComponent implements OnInit {
   edit_clicked:boolean;
 
   constructor(private route: ActivatedRoute,
-    private router: Router,
-    private fb: FormBuilder,
-    private service: ProgramServices) { }
+              private router: Router,
+              private fb: FormBuilder,
+              private auth: AuthenticationService,
+              private service: ProgramServices) { }
 
   ngOnInit() {
     this.bookingGroup= <any>{};
