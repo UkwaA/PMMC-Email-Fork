@@ -45,6 +45,9 @@
           <input type="number" class="form-control" [(ngModel)]="availability" readonly>
         </div>
       </div>
+      <div *ngIf="ProgramType" class="button pt-1 pb-1">
+        <button class="btn btn-lg btn-info btn-block" [disabled]="isDisable" (click) = "individualSchedule()"> Book </button>
+      </div>
 
       <form *ngIf="!ProgramType" [formGroup]="quantityForm" (submit)="enterQuantity()" enctype="multipart/form-data">
         <h3>Enter Quantity</h3>
@@ -142,7 +145,11 @@
         <div class="form-group font-weight-bold row">
           <label class="col-sm-7 col-form-label">Total Quantity</label>
           <div class="col-sm-5">
-            <input type="number" min="0" class="form-control" formControlName="TotalQuantity" value="0" readonly>
+            <input type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
+              [ngClass]="{'is-invalid': submitted && f.TotalQuantity.errors }">
+            <div *ngIf="submitted && f.TotalQuantity.errors" class="invalid-feedback">
+              <div *ngIf="f.TotalQuantity.errors.min">Must be at least 1 person.</div>
+            </div>
           </div>
         </div>
         <div class="button pt-1 pb-1">
@@ -151,11 +158,4 @@
       </form>
     </div>
   </div>
-  <div class="row">
-    <a *ngIf="ProgramType" [routerLink]="['/booking-individual-program', ProgramPK]"
-      class="align-self-end btn btn-outline-info">Book Now!</a>
-    <a *ngIf="!ProgramType" [routerLink]="['/booking-group-program', ProgramPK]"
-      class="align-self-end btn btn-outline-info">Book Now!</a>
-  </div>
-
 </div>

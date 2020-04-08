@@ -135,7 +135,7 @@ export class ProgramScheduleComponent implements OnInit{
             Age1314Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
             Age1415Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
             Age1517Quantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(0)]],
-            TotalQuantity: [{value: '0', disabled: true}, [Validators.required, Validators.min(1)]]
+            TotalQuantity: ["0", [Validators.required, Validators.min(1)]]
         });
     }
 
@@ -169,12 +169,13 @@ export class ProgramScheduleComponent implements OnInit{
 
     enterQuantity() {
         this.submitted = true;
+        console.log(this.currTotalQuantity);
         if (this.quantityForm.invalid) {
           console.log("invalid");
           return;
         }  
 
-        this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
+        //this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
         // Create a schedule record in MySQL then return the schedule ID
         // navigate to booking-group or booking-individual
         // //Re-initialize currentSession before send to back-end
@@ -201,6 +202,7 @@ export class ProgramScheduleComponent implements OnInit{
         // this.router.navigateByUrl("/profile/schedule-management")
         
         console.log("valid");
+
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
@@ -210,15 +212,7 @@ export class ProgramScheduleComponent implements OnInit{
         dialogConfig.maxHeight = "500px";
         dialogConfig.width = "350px";
         dialogConfig.autoFocus = false;
-        if (this.availability == null){
-            dialogConfig.data = {
-                title: "Warning!",
-                description: "You haven't chosen any program. Please choose one program first!",            
-                actionButtonText: "Try again",   
-                numberOfButton: "1"
-            }
-        }
-        else if (this.currTotalQuantity > this.availability){
+        if (this.currTotalQuantity > this.availability){
             dialogConfig.data = {
                 title: "Warning!",
                 description: "The total quantity exceeds the availability of this program. Please try again!",            
@@ -239,23 +233,49 @@ export class ProgramScheduleComponent implements OnInit{
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
                 //if exceed 
-                if ((this.currTotalQuantity > this.availability) || (this.availability == null)){ 
+                if (this.currTotalQuantity > this.availability){ 
                     // if exceed, do nothing
                 }
                 else {
-                    //route to the booking page
-                    if (this.ProgramType){
-                        this.router.navigateByUrl('/booking-individual-program/' + this.ProgramPK)
-                    }
-                    else{
-                        this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
-                    }
+                    //route to the booking group program page
+                    this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
                 }
             }
             else{
                 //otherwise, do nothing            
             }
         })
+    }
+
+    individualSchedule(){
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+
+        dialogConfig.data = {
+            title: "Confirmation",
+            description: "Are you sure to book this program ?",            
+            actionButtonText: "Confirm",   
+            numberOfButton: "2"
+        }
+        
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //route to the booking group program page
+                this.router.navigateByUrl('/booking-individual-program/' + this.ProgramPK)
+            }
+            else{
+                //otherwise, do nothing            
+            }
+        })
+
     }
 
     //This function to capture and get the info of selected event
@@ -287,7 +307,7 @@ export class ProgramScheduleComponent implements OnInit{
                 console.log(e.event)
                 this.customerSelectDate = (e.event.dataItem.Start).toDateString();
                 this.customerSelectTime = (e.event.dataItem.Start).toLocaleString('en-US', this.options).concat(" - ", (e.event.dataItem.End).toLocaleString('en-US', this.options));
-                this.availability = e.event.dataItem.MaximumParticipant;
+                this.availability = e.event.dataItem.MaximumParticipant - e.event.dataItem.CurrentParticipant;
             }            
         })  
         
