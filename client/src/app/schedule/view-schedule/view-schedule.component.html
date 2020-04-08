@@ -13,7 +13,7 @@
                 [showWorkHours] = "true"
                 style="height: 700px; width: 1500px">
         <ng-template kendoSchedulerEventTemplate let-event>
-            {{ event.dataItem.Title }} (ProgramPK: {{ event.dataItem.ProgramPK }}) 
+            {{ event.dataItem.Title }} 
             (SchedulePK: {{event.dataItem.ScheduleSettingPK}})
         </ng-template>
         <kendo-scheduler-day-view [startTime]="startTime">

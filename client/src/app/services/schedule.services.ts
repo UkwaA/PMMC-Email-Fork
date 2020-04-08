@@ -8,16 +8,16 @@ import { AppConstants } from '../constants'
 export class ProgramScheduleService{
     constructor(private http: HttpClient) {}
 
-    public addNewProgramSchedule(programSchedule: ProgramScheduleData): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-program-schedule", programSchedule);
+    public addNewScheduleSetting(scheduleSetting: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
     }
 
     public getAllScheduleOverview(): Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-overview");
     }
 
-    public getScheduleOverviewById(ProgramPK: number): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-overview-by-id/" + ProgramPK);
+    public getScheduleSettingById(ProgramPK: number): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-setting-by-id/" + ProgramPK);
     }
 
     public getScheduleById(ProgramPK: number): Observable<any> {
@@ -25,7 +25,7 @@ export class ProgramScheduleService{
     }
     
     public getScheduleByIdStartEnd(ProgramPK: number, eventStart: string,eventEnd: string): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-overview-by-id-start-end/" + ProgramPK 
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-setting-by-id-start-end/" + ProgramPK 
                 + "/" + eventStart + "/" + eventEnd);
     }
 
