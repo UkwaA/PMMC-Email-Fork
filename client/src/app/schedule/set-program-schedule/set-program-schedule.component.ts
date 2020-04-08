@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { AuthenticationService} from '../../authentication.service';
+
 @Component({
     templateUrl: './set-program-schedule.component.html',
     styleUrls: ['./set-program-schedule.component.css']
@@ -15,6 +16,7 @@ import { AuthenticationService} from '../../authentication.service';
 
 export class SetProgramScheduleComponent {
     ProgramPK = 0;
+    currentUserPK = 0;
     programData: ProgramData = {
         ProgramPK: 0,
         Name: "",
@@ -30,15 +32,21 @@ export class SetProgramScheduleComponent {
         SubProgramPK: 0        
     }
 
-    currentSession: ProgramScheduleData = {
-        SchedulePK: 0,
+    currentScheduleSetting = {
+        ScheduleSettingPK: 0,
         ProgramPK: 0,
-        Start: '',
-        End: '',
-        MaximumParticipant: 0,
-        CurrentNumberParticipant: 0,        
-        CreatedBy: 0,
-        IsActive: true
+        Title: "",
+        Description: "",
+        StartTimezone: "",
+        Start: "",
+        End: "",   
+        EndTimezone: "",        
+        RecurrenceRule: "",
+        RecurrenceID: "",
+        RecurrenceException: "",
+        CreatedBy: 0,        
+        IsActive: true,
+        IsAllDay: false
     }
 
     SetProgramScheduleForm: FormGroup;
@@ -52,31 +60,68 @@ export class SetProgramScheduleComponent {
     //Define variable for Repeat on day
     seletedRecurrenceType:string = "Never"
     recurrenceTypeArr:any = [
-        {type:"Never", freq: "", value:"" },
-        {type: "Daily", freq: "DAILY", value: "day(s)"},
-        {type: "Weekly", freq: "WEEKLY", value: "week(s)"},
-        {type: "Monthly", freq: "MONTHLY", value: "month(s)"},
-        {type: "Yearly", freq: "YEARLY", value: "year(s)"}];
+        {type:"Never", freq: "NEVER", value:"" , selected: true},
+        {type: "Weekly", freq: "WEEKLY", value: "week(s)", selected: false},
+        {type: "Monthly", freq: "MONTHLY", value: "month(s)", selected: false},
+        {type: "Yearly", freq: "YEARLY", value: "year(s)", selected: false}
+    ];
     displayedInterval: String;
-    startDate:Date = new Date();
-    endDate:Date = new Date();
-    startTime:Date = new Date('2020-04-01T09:00:00');
-    endTime:Date = new Date('2020-04-01T10:00:00');
-    
+    startDate:any = new Date();
+    endDate:any = new Date();
+    startTime:any = new Date('2020-04-01T09:00:00');
+    endTime:any = new Date('2020-04-01T10:00:00');
+    timeFormatOptions = {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false
+      };
+
+    //Define variable needed for MONTHLY repeat    
+    selectedDayOfMonthArr = [];
+    selectedDay:number = 1
+
+    //Define variable needed for YEARLY repeat
+    selectedDayOfMonth:number = 1
+    selectedMonthOfYear:any = {
+        month: "January",
+        value: 1,
+        max: 31
+    };
+    monthsOfYearArr = [
+        {month:"January", value: 1, max: 31 },
+        {month:"February", value: 2, max: 29 },
+        {month:"March", value: 3, max: 31 },
+        {month:"April", value: 4, max: 30 },
+        {month:"May", value: 5, max: 31 },
+        {month:"June", value: 6, max: 30 },
+        {month:"July", value: 7, max: 31 },
+        {month:"August", value: 8, max: 31 },
+        {month:"September", value: 9, max: 30 },
+        {month:"October", value: 10, max: 31 },
+        {month:"November", value: 11, max: 30 },
+        {month:"December", value: 12, max: 31 }
+    ]
+
     //Define variable needed for event creation
     interval:number = 1
-    intervalType:String = ""
-    repeatOnDay:String[] = []
-    endRepeatAfterNoOccurence:number = 0;
+    frequency = "NEVER"
+    weeklyRepeatOnDayArr:String[] = []
+    endRepeatAfterNoOccurence:number = 1;
+    endRepeatOnDate:any = new Date();
+    eventDescription = "";
+    recurrenceRule = "";
+    monthlyRepeatOnDayArr:String[] = []
+
     //WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
-        {day: "Sunday", value: "SU"},
-        {day: "Monday", value: "MO"},
-        {day: "Tuesday", value: "TU"},
-        {day: "Wednesday", value: "WE"},
-        {day: "Thursday", value: "TH"},
-        {day: "Friday", value: "FR"},
-        {day: "Saturday", value: "SA"},
+        {day: "Sunday", value: "SU", selected: false},
+        {day: "Monday", value: "MO", selected: true},
+        {day: "Tuesday", value: "TU", selected: false},
+        {day: "Wednesday", value: "WE", selected: false},
+        {day: "Thursday", value: "TH", selected: false},
+        {day: "Friday", value: "FR", selected: false},
+        {day: "Saturday", value: "SA", selected: false},
     ]
         
     constructor (private formBuilder: FormBuilder, public matDialog: MatDialog, private fb: FormBuilder,
@@ -84,18 +129,25 @@ export class SetProgramScheduleComponent {
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
     ngOnInit(){ 
-        this.errorMessage = ''    
+        this.errorMessage = ''
+        this.dayArr.forEach(day =>{
+            if(day.selected){
+                this.weeklyRepeatOnDayArr.push(day.value)
+            }
+        })
+        
         this.SetProgramScheduleForm = this.fb.group({    
             programName: [],
-            startDate: ['', [Validators.required]],
-            endDate: ['', [Validators.required]],
-            dayCheck:['', [Validators.required]],
-            endrepeat:[]         
+            startDate: [],
+            endDate: [],
+            endrepeat: [],            
+            dayOfMonthOfYear: ["", [Validators.min(1)]],
+            description:[]
           })
         
         //Get current user info
         this.auth.profile().subscribe(user =>{
-            this.currentSession.CreatedBy = user.UserPK
+            this.currentUserPK = user.UserPK
         })
 
         //Get current program header info
@@ -116,7 +168,7 @@ export class SetProgramScheduleComponent {
         this.seletedRecurrenceType = type.type
         this.recurrenceTypeArr.forEach(element => {
             if(element.type == this.seletedRecurrenceType){
-                this.intervalType = element.freq
+                this.frequency = element.freq
                 this.displayedInterval = element.value
             }
         });
@@ -125,28 +177,72 @@ export class SetProgramScheduleComponent {
     //Get value for repeat on day for Weekly recurrence
     onChangeRepeatOnDay(event, day){
         if(event){
-            if(this.repeatOnDay.indexOf(day.value) < 0){
-                this.repeatOnDay.push(day.value)
+            if(this.weeklyRepeatOnDayArr.indexOf(day.value) < 0){
+                this.weeklyRepeatOnDayArr.push(day.value)
             }
         }
         else{
-            var tempIndex =this.repeatOnDay.indexOf(day.value)
+            var tempIndex =this.weeklyRepeatOnDayArr.indexOf(day.value)
             if(tempIndex > -1){
-                this.repeatOnDay.splice(tempIndex,1)
+                this.weeklyRepeatOnDayArr.splice(tempIndex,1)
             }
         }
     }
 
-    
+    //Define this function to remove the Selected Day from the list
+    removeSelectedDayOfMonth(e: any): void {
+        const index = this.selectedDayOfMonthArr.findIndex(c => c.label === e.sender.label);
+        this.selectedDayOfMonthArr.splice(index, 1);
+    }
+
+    //Define this function to add days to selectedDayOfMonthArr
+    addDays(day:number){
+        //check if duplicate => true
+        if(day > 0 && day <= 31){
+            if(this.selectedDayOfMonthArr.some(item => item.label === day)){}            
+            else{
+                //not found
+                var tempDayObj = {
+                    label: day,
+                    selected: false,
+                    removable: true
+                }
+                this.selectedDayOfMonthArr.push(tempDayObj)
+            }
+
+            //Sort the selectedDayOfMonthArr to display in order
+            this.selectedDayOfMonthArr.sort(function(a, b) {            
+                if (a < b) {
+                return -1;
+                }
+                if (a > b) {
+                return 1;
+                }                      
+                return 0;
+            });
+
+            this.selectedDayOfMonthArr.sort(function (a, b) {
+                return a.label - b.label;
+            });
+        }
+    }
+
+    //Define the change of Selected Month Of Year
+    onChangeSelectedMonthOfYear(e: any){
+        this.selectedMonthOfYear = e
+        if(this.selectedDayOfMonth > this.selectedMonthOfYear.max){
+            this.selectedDayOfMonth = 1
+        }
+    }
 
     openModal(){
-        // //Form validation
-        // this.submitted = true;      
+        //Form validation
+        this.submitted = true;      
 
-        // //validate input form
-        // if (this.SetProgramScheduleForm.invalid) {
-        //     return;
-        // }
+        //validate input form
+        if (this.SetProgramScheduleForm.invalid) {
+            return;
+        }
         
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
@@ -175,31 +271,71 @@ export class SetProgramScheduleComponent {
         })
     }
 
-    setSchedule(){
-        // //Re-initialize currentSession before send to back-end
-        // this.currentSession.ProgramPK = this.ProgramPK                
-        // this.currentSession.MaximumParticipant = this.programData.MaximumParticipant
-        // //Loop through all day from StartDate to EndDate, if the day is selected to repeat 
-        // // AND if that day is not a Blackout-day ==> add to Schedule table in database
-        // var dayIndex = 0;
-        // for (var d = this.startDate; d <= this.endDate; d.setDate(d.getDate() + 1)) {
-        //     dayIndex = d.getDay()
-        //     //TO-DO: need to check if it's not in black out dates
-        //     if(this.repeatDay[dayIndex].value){
-        //         //Get the date format "YYYY-MM-DD" of the full date
-        //         this.currentSession.Date = d.toISOString().slice(0,10)
-        //         //Get Datetime as this format YYYY-MM-DD HH:MM:SS     
-        //         this.currentSession.StartTime = this.repeatDay[dayIndex0"
-        //         this.currentSession.EndTime = this.repeatDay[dayIndex].end.toTimeString().slice(0,5) + ":00"
-                
-        //         this.programScheduleServices.addNewProgramSchedule(this.currentSession).subscribe(res =>{
-        //         })
-        //     }
-        // }
+    setSchedule(){               
+        //Get Start Date Time and End Date Time
+        var timezoneOffset = this.startDate.getTimezoneOffset()*60000        
+        var eventStartDate = (new Date(this.startDate - timezoneOffset)).toISOString().slice(0,10)
+        var eventEndDate = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)        
+        var eventStartTime = this.startTime.toLocaleString('en-US', this.timeFormatOptions);
+        var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
+        var dateEndRepeat = (new Date(this.endRepeatOnDate - timezoneOffset)).toISOString().slice(0,19)
         
-        // this.router.navigateByUrl("/profile/schedule-management")
-        console.log(this.repeatOnDay)
-        console.log(this.intervalType)
-        console.log(this.endRepeatArr)
+        //Set up the recurrent rule for event
+        if(this.frequency != "NEVER")
+        {
+            this.recurrenceRule = "FREQ=" + this.frequency + ";INTERVAL=" + this.interval
+            if(this.frequency == "WEEKLY"){
+                //BYDAY
+                this.recurrenceRule += ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",")
+            }
+            else if(this.frequency == "MONTHLY"){
+                //BYMONTHDAY
+                if(this.selectedDayOfMonthArr.length > 0){
+                    this.recurrenceRule += ";BYMONTHDAY="
+                    for(var i = 0; i < this.selectedDayOfMonthArr.length; i++){
+                        if(i != this.selectedDayOfMonthArr.length - 1){
+                            this.recurrenceRule += this.selectedDayOfMonthArr[i].label + ",";
+                        }
+                        else{
+                            this.recurrenceRule += this.selectedDayOfMonthArr[i].label
+                        }
+                    }                    
+                }
+            }
+            else if(this.frequency == "YEARLY"){
+                this.recurrenceRule += ";BYMONTH=" + this.selectedMonthOfYear.value 
+                            + ";BYMONTHDAY=" + this.selectedDayOfMonth
+            }
+            //COUNT
+            if(this.endRepeatArr.type == "After" && this.endRepeatAfterNoOccurence > 0){
+                this.recurrenceRule += ";COUNT=" + this.endRepeatAfterNoOccurence;
+            }
+            //UNTIL
+            else if(this.endRepeatArr.type == "On"){
+                this.recurrenceRule += ";UNTIL=" + dateEndRepeat;
+            }
+        }         
+
+        this.currentScheduleSetting = {
+            ScheduleSettingPK: 0,
+            ProgramPK: this.programData.ProgramPK,
+            Title: this.programData.Name,
+            Description: this.eventDescription,
+            StartTimezone: "",
+            Start: eventStartDate + "T" + eventStartTime,
+            End: eventEndDate + "T" + eventEndTime,   
+            EndTimezone: "",            
+            RecurrenceRule: this.recurrenceRule,
+            RecurrenceID: "",
+            RecurrenceException: "",
+            CreatedBy: this.currentUserPK,        
+            IsActive: true,
+            IsAllDay: false
+        };
+        
+        this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res=>{
+            this.router.navigateByUrl("/profile/schedule-management")
+        })
+        
     }
 }

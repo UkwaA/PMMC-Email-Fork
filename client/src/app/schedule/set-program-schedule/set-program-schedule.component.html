@@ -59,11 +59,22 @@
                             *ngFor="let type of recurrenceTypeArr"
                             kendoButton
                             [toggleable]="true"
+                            [selected]="type.selected"
                             (selectedChange)=" onChangeRecurrentType($event, type)"
                         >
                             {{ type.type }}
                         </button>
                         </kendo-buttongroup>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Event Note</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea kendoTextArea class="form-control" 
+                        formControlName="description" [(ngModel)]="eventDescription"></textarea>
                 </div>
             </div>
             <br/>
@@ -79,16 +90,19 @@
                 </div>
             </div>
             <br/>
-            <div class="row" *ngIf="seletedRecurrenceType!='Never' && seletedRecurrenceType!='Daily'">
+            <div class="row" *ngIf="seletedRecurrenceType =='Weekly'">
                 <div class="col-md-4">
+                    <hr>
                     <label>Repeat on</label>
                 </div>
                 <div class="col-md-8">
+                    <hr>
                     <kendo-buttongroup [selection]="'multiple'">
                         <button 
                             *ngFor="let day of dayArr"
                             kendoButton
                             [toggleable]="true"
+                            [selected]="day.selected"
                             (selectedChange)="onChangeRepeatOnDay($event, day)"
                         >
                             {{ day.day }}
@@ -96,12 +110,92 @@
                     </kendo-buttongroup>
                 </div>                
             </div>
-            <br/>            
+            
+            <div class="row" *ngIf="seletedRecurrenceType =='Monthly'">                
+                <div class="col-md-4">       
+                    <hr>             
+                    <label>Repeat on</label>
+                </div>
+                <div class="col-md-8">                                        
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Day of Month</label>
+                        </div>
+                        <div class="col-md-4">
+                            <kendo-numerictextbox class="form-control" formControlName="dayOfMonthOfYear"
+                                [(value)]="selectedDay" [min]="1" [max]="31" [format]="'n0'">                        
+                            </kendo-numerictextbox>
+                            <div class="error-message" *ngIf="(selectedDay > 31 || selectedDay < 1) && submitted">
+                                *From 1 to 31.
+                            </div>                             
+                        </div>
+                        <div class="col-md-1">
+                            <button mat-mini-fab color="warn" (click)="addDays(selectedDay)">
+                                <mat-icon matListIcon>add</mat-icon>                                
+                            </button>                                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Selected Day</label>
+                        </div>
+                        <div class="col-md-8">                            
+                            <div class="chipBox">
+                                <kendo-chip 
+                                *ngFor="let selectedDay of selectedDayOfMonthArr"
+                                [label]="selectedDay.label"
+                                [removable]="selectedDay.removable"
+                                (remove)="removeSelectedDayOfMonth($event)"
+                            >
+                            </kendo-chip> 
+                            </div>                       
+                        </div>
+                        <div class="error-message" *ngIf="selectedDayOfMonthArr.length == 0 && submitted">
+                            *Select day of month and hit "+" to add.
+                        </div>
+                    </div>                    
+                </div>
+            </div>            
+
+            <div class="row" *ngIf="seletedRecurrenceType =='Yearly'">                
+                <div class="col-md-4">       
+                    <hr>             
+                    <label>Repeat on</label>
+                </div>
+                <div class="col-md-8">                                        
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <kendo-dropdownlist
+                                (valueChange)="onChangeSelectedMonthOfYear($event)"
+                                [data]="monthsOfYearArr"
+                                textField="month"
+                                valueField="value"
+                                [defaultItem]="selectedMonthOfYear"
+                            >
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="col-md-4">
+                            <kendo-numerictextbox class="form-control" formControlName="dayOfMonthOfYear"
+                                [min]="1" [max]="selectedMonthOfYear.max" 
+                                [(value)]="selectedDayOfMonth" [format]="'n0'">                        
+                            </kendo-numerictextbox>                              
+                            <div class="error-message" *ngIf="(selectedDayOfMonth > selectedMonthOfYear.max || selectedDayOfMonth < 1) && submitted">
+                                *From 1 to {{selectedMonthOfYear.max}}.
+                            </div>                                                      
+                        </div>                        
+                    </div>                    
+                </div>
+            </div>  
+
             <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
                 <div class="col-md-4">
+                    <hr>
                     <label>End Repeat</label>
-                </div>
-                <div class="col-md-8">
+                </div>                
+                <div class="col-md-8">  
+                    <hr>                  
                     <div class="row">
                         <div class="col-md-1">
                             <input type="radio" formControlName="endrepeat" value="Never"
@@ -126,7 +220,7 @@
                         </div>
                         <div class="col-md-6">
                             <kendo-numerictextbox
-                                [(value)]="endRepeatAfterNoOccurence" [min]="0" [format]="'n0'">                        
+                                [(value)]="endRepeatAfterNoOccurence" [min]="1" [format]="'n0'">                        
                             </kendo-numerictextbox>occurence(s)
                         </div>                        
                     </div>
@@ -145,15 +239,16 @@
                         </div>
                         <div class="col-md-6">
                             <kendo-datepicker 
-                                [(value)]="endDate" 
-                                [min] = "endDate">
+                                [(value)]="endRepeatOnDate" 
+                                [min] = "endRepeatOnDate">
                             </kendo-datepicker>
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
-            <br/>         
-            <div class="col-xs-12 form-group">                    
+                     
+            <div class="col-xs-12 form-group">
+                <br/>
                 <button class="btn btn-lg btn-info btn-block" type="submit" (click)="openModal()">Set Schedule</button>
             </div>
         </div>

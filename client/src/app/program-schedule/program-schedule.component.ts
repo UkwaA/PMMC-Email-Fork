@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProgramServices } from '../services/program.services';
 import { ProgramData } from '../data/program-data';
 import { ProgramScheduleService } from '../services/schedule.services';
@@ -8,7 +8,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ReservationHeaderData } from '../data/reservation-header-data';
 import { QuantiyFormData } from '../data/quantity-form-data';
 import { ProgramScheduleData } from '../data/program-schedule-data';
-import { AuthenticationService} from '../authentication.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
     templateUrl: './program-schedule.component.html',
@@ -41,7 +43,6 @@ export class ProgramScheduleComponent implements OnInit{
         Start: "",
         End: ""
     };
-    totalQuantity: number;
 
     currentSession: ProgramScheduleData = {
         SchedulePK: 0,
@@ -70,11 +71,13 @@ export class ProgramScheduleComponent implements OnInit{
     };
 
     constructor(private route: ActivatedRoute,
-                private auth: AuthenticationService,
-                private service: ProgramServices,
-                private programScheduleServices: ProgramScheduleService,
-                private fb: FormBuilder,
-                private router: Router ){}
+        private service: ProgramServices,
+        private programScheduleServices: ProgramScheduleService,
+        private fb: FormBuilder,
+        public matDialog: MatDialog,
+        private auth: AuthenticationService,
+        private router: Router
+        ){}
 
     ngOnInit(){
 
@@ -99,7 +102,7 @@ export class ProgramScheduleComponent implements OnInit{
             return date;
         };
 
-        this.programScheduleServices.getScheduleOverviewById(this.ProgramPK).subscribe((schedules) =>{            
+        this.programScheduleServices.getScheduleSettingById(this.ProgramPK).subscribe((schedules) =>{            
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
@@ -198,7 +201,61 @@ export class ProgramScheduleComponent implements OnInit{
         // this.router.navigateByUrl("/profile/schedule-management")
         
         console.log("valid");
-
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        if (this.availability == null){
+            dialogConfig.data = {
+                title: "Warning!",
+                description: "You haven't chosen any program. Please choose one program first!",            
+                actionButtonText: "Try again",   
+                numberOfButton: "1"
+            }
+        }
+        else if (this.currTotalQuantity > this.availability){
+            dialogConfig.data = {
+                title: "Warning!",
+                description: "The total quantity exceeds the availability of this program. Please try again!",            
+                actionButtonText: "Try again",   
+                numberOfButton: "1"
+            }
+        }
+        else {
+            dialogConfig.data = {
+                title: "Confirmation",
+                description: "Are you sure to book this program for " + this.currTotalQuantity + " attendees?",            
+                actionButtonText: "Confirm",   
+                numberOfButton: "2"
+            }
+        }
+        
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //if exceed 
+                if ((this.currTotalQuantity > this.availability) || (this.availability == null)){ 
+                    // if exceed, do nothing
+                }
+                else {
+                    //route to the booking page
+                    if (this.ProgramType){
+                        this.router.navigateByUrl('/booking-individual-program/' + this.ProgramPK)
+                    }
+                    else{
+                        this.router.navigateByUrl('/booking-group-program/' + this.ProgramPK)
+                    }
+                }
+            }
+            else{
+                //otherwise, do nothing            
+            }
+        })
     }
 
     //This function to capture and get the info of selected event
@@ -213,7 +270,7 @@ export class ProgramScheduleComponent implements OnInit{
         this.quantityForm.get('Age1517Quantity').enable();
 
         var timezoneOffset = e.event.start.getTimezoneOffset()*60000
-        var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
+        var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)        
         var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
         var programPK = e.event.dataItem.ProgramPK
 
@@ -221,14 +278,15 @@ export class ProgramScheduleComponent implements OnInit{
             if(res){
                 console.log(res)          
                 this.tempDate = new Date(res.Start);
+                let end = new Date(res.End);
                 this.customerSelectDate = this.tempDate.toDateString();
-                this.customerSelectTime = this.tempDate.toLocaleString('en-US', this.options);
+                this.customerSelectTime = this.tempDate.toLocaleString('en-US', this.options).concat(" - ", end.toLocaleString('en-US', this.options));
                 this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
             }
             else{
                 console.log(e.event)
                 this.customerSelectDate = (e.event.dataItem.Start).toDateString();
-                this.customerSelectTime = (e.event.dataItem.Start).toLocaleString('en-US', this.options);
+                this.customerSelectTime = (e.event.dataItem.Start).toLocaleString('en-US', this.options).concat(" - ", (e.event.dataItem.End).toLocaleString('en-US', this.options));
                 this.availability = e.event.dataItem.MaximumParticipant;
             }            
         })  
