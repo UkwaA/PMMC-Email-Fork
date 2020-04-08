@@ -84,7 +84,7 @@ export class ProgramScheduleComponent implements OnInit{
             return date;
         };
 
-        this.programScheduleServices.getScheduleOverviewById(this.ProgramPK).subscribe((schedules) =>{            
+        this.programScheduleServices.getScheduleSettingById(this.ProgramPK).subscribe((schedules) =>{            
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
@@ -215,7 +215,7 @@ export class ProgramScheduleComponent implements OnInit{
     //This function to capture and get the info of selected event
     public eventClick = (e) => {
         var timezoneOffset = e.event.start.getTimezoneOffset()*60000
-        var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
+        var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)        
         var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
         var programPK = e.event.dataItem.ProgramPK
 

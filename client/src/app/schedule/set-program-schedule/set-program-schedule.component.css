@@ -9,6 +9,23 @@ h1 {
     padding-top: 20px;
     color:  #08b2b8;
 }
+
+.chipBox{
+  border-radius: 25px;
+  border: 1.5px solid rgb(126, 125, 125);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 2px 0px 5px;
+  width: auto;
+  height: 100%;
+  max-height: 200px;
+}
+
+.error-message{
+  color: red;
+  font-weight: normal;
+  padding-top: 2px;
+}
 /* 
 mat-button-toggle-group {
   box-shadow: none;

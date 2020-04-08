@@ -12,13 +12,13 @@ const ScheduleSetting = require("../models/ScheduleSetting");
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
-/*******************************
-   ADD NEW PROGRAM SCHEDULE
- *******************************/
-schedule.post("/add-new-program-schedule", (req, res) => {
-  Schedule.create(req.body)
-    .then(schedule => {
-      res.json(schedule);
+/************************************
+   ADD NEW PROGRAM SCHEDULE SETTING
+ ************************************/
+schedule.post("/add-new-schedule-setting", (req, res) => {
+  ScheduleSetting.create(req.body)
+    .then(setting => {
+      res.json(setting);
     })
     .catch(err => {
       res.send("errorExpressErr: " + err);
@@ -39,9 +39,9 @@ schedule.get("/get-all-schedule-overview", (req, res) => {
 });
 
 /**************************************
-  GET PROGRAM SCHEDULE OVERVIEW BY ID
+  GET PROGRAM SCHEDULE SETTING BY ID
  **************************************/
-schedule.get("/get-schedule-overview-by-id/:id", (req, res) => {
+schedule.get("/get-schedule-setting-by-id/:id", (req, res) => {
   ScheduleSetting.findAll({
     where: {
       ProgramPK: req.params.id,
@@ -60,7 +60,7 @@ schedule.get("/get-schedule-overview-by-id/:id", (req, res) => {
   GET ALL PROGRAM SCHEDULES BY ID,
   START AND END TIME
  ***********************************/
-schedule.get("/get-schedule-overview-by-id-start-end/:id/:start/:end",(req,res) => {
+schedule.get("/get-schedule-setting-by-id-start-end/:id/:start/:end",(req,res) => {
   Schedule.findOne({
     where: {
       ProgramPK: req.params.id,
