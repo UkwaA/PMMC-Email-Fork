@@ -140,9 +140,15 @@
           <div class="form-group font-weight-bold row">
             <label class="col-sm-7 col-form-label">Total Quantity</label>
             <div class="col-sm-5">
-              <input type="number" min="0" class="form-control" formControlName="TotalQuantity" value="0" readonly>
+              <input type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
+              [ngClass]="{'is-invalid': submitted && f.TotalQuantity.errors }">
+              <div *ngIf="submitted && f.TotalQuantity.errors" class="invalid-feedback">
+                <div *ngIf="f.TotalQuantity.errors.required">It's required</div>
+                <div *ngIf="f.TotalQuantity.errors.min">Must be at least 1 person.</div>
+              </div>
             </div>
           </div> 
+
           <div class="button pt-1 pb-1">
             <button class="btn btn-lg btn-info btn-block" type="submit"> Book </button>
           </div>
