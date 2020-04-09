@@ -112,8 +112,8 @@
         </div>
       </fieldset>
 
-      <div *ngIf="auth.isLoggedIn(); else elseBlock">
-        <h1>USER LOGGED IN!</h1>
+      <!-- <div *ngIf="auth.isLoggedIn(); else elseBlock">
+        <h1>USER LOGGED IN! Load Payment Section</h1>
       </div>
       <ng-template #elseBlock><h1>NEED TO CREATE ACCOUNT!</h1></ng-template>
       <!--
