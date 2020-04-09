@@ -44,6 +44,7 @@ import { ChangeCurrentPasswordComponent} from './password-service/change-current
 import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
 import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
+import { PaymentComponent } from './payment/payment.component';
 
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -87,6 +88,7 @@ const routes : Routes = [
   {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
   {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
   {path: 'program-schedule/:id', component: ProgramScheduleComponent},
+  {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
@@ -94,10 +96,14 @@ const routes : Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuardService], 
     children: [
-      {path: '', component: DashboardComponent, canActivate: [AuthRoleGuardService]},
+      {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
-      {path: 'view-schedule', component: ViewScheduleComponent, canActivate: [AuthRoleGuardService]},
+      {
+        path: 'view-schedule/:mode', 
+        component: ViewScheduleComponent, 
+        canActivate: [AuthRoleGuardService]
+      },
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule', 
@@ -177,6 +183,7 @@ const routes : Routes = [
     CreateNewUserComponent,
     SetProgramScheduleComponent,
     ProgramScheduleComponent,
+    PaymentComponent,
     SafeHtmlPipe
   ],
   imports: [

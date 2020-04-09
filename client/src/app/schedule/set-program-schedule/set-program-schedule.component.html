@@ -17,30 +17,34 @@
             <br/>
             <div class="row">
                 <div class="col-md-4">
-                    <label>Start Date & Time</label>
+                    <label>Start & End Date</label>
                 </div>                
                 <div class="col-md-3">
                     <kendo-datepicker 
-                        [(value)]="startDate">
+                        [(value)]="startDate"
+                        (valueChange)="onChangeStartDate($event)"
+                        >                        
                     </kendo-datepicker>
                 </div>
-                <div class="col-md-3">                                
-                    <kendo-timepicker
-                        [(value)]="startTime">
-                    </kendo-timepicker>
-                </div>                        
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-4">
-                    <label>End Date & Time</label>
-                </div>                
                 <div class="col-md-3">
                     <kendo-datepicker 
                         [(value)]="endDate" 
                         [min] = "startDate">
                     </kendo-datepicker>
-                </div>
+                </div>                                      
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Start & End Time</label>
+                </div>                
+                <div class="col-md-3">                                
+                    <kendo-timepicker
+                        [(value)]="startTime"
+                        (valueChange)="onChangeStartTime($event)"
+                        >
+                    </kendo-timepicker>
+                </div>  
                 <div class="col-md-3">
                     <kendo-timepicker
                         [(value)]="endTime"
@@ -49,7 +53,7 @@
                 </div>                        
             </div>
             <br/>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4">
                     <label>Repeat</label>
                 </div>
@@ -66,37 +70,12 @@
                         </button>
                         </kendo-buttongroup>
                 </div>
-            </div>
-            <br/>
+            </div> -->
             <div class="row">
                 <div class="col-md-4">
-                    <label>Event Note</label>
-                </div>
-                <div class="col-md-8">
-                    <textarea kendoTextArea class="form-control" 
-                        formControlName="description" [(ngModel)]="eventDescription"></textarea>
-                </div>
-            </div>
-            <br/>
-            <div class="row" *ngIf="seletedRecurrenceType!='Never'">
-                <div class="col-md-4">
-                    <label>Repeat every</label>
-                </div>
-                <div class="col-md-8">
-                    <kendo-numerictextbox
-                        [(value)]="interval" [min]="0" [format]="'n0'">                        
-                    </kendo-numerictextbox>   
-                    {{displayedInterval}}
-                </div>
-            </div>
-            <br/>
-            <div class="row" *ngIf="seletedRecurrenceType =='Weekly'">
-                <div class="col-md-4">
-                    <hr>
                     <label>Repeat on</label>
                 </div>
                 <div class="col-md-8">
-                    <hr>
                     <kendo-buttongroup [selection]="'multiple'">
                         <button 
                             *ngFor="let day of dayArr"
@@ -110,8 +89,31 @@
                     </kendo-buttongroup>
                 </div>                
             </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Event Note</label>
+                </div>
+                <div class="col-md-8">
+                    <textarea kendoTextArea class="form-control" 
+                        formControlName="description" [(ngModel)]="eventDescription"></textarea>
+                </div>
+            </div>
+            <br/>
+            <!-- <div class="row" *ngIf="seletedRecurrenceType!='Never'">
+                <div class="col-md-4">
+                    <label>Repeat every</label>
+                </div>
+                <div class="col-md-8">
+                    <kendo-numerictextbox
+                        [(value)]="interval" [min]="0" [format]="'n0'">                        
+                    </kendo-numerictextbox>   
+                    {{displayedInterval}}
+                </div>
+            </div> -->
             
-            <div class="row" *ngIf="seletedRecurrenceType =='Monthly'">                
+            
+            <!-- <div class="row" *ngIf="seletedRecurrenceType =='Monthly'">                
                 <div class="col-md-4">       
                     <hr>             
                     <label>Repeat on</label>
@@ -156,9 +158,9 @@
                         </div>
                     </div>                    
                 </div>
-            </div>            
+            </div>             -->
 
-            <div class="row" *ngIf="seletedRecurrenceType =='Yearly'">                
+            <!-- <div class="row" *ngIf="seletedRecurrenceType =='Yearly'">                
                 <div class="col-md-4">       
                     <hr>             
                     <label>Repeat on</label>
@@ -187,9 +189,9 @@
                         </div>                        
                     </div>                    
                 </div>
-            </div>  
+            </div>   -->
 
-            <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
+            <!-- <div class="row form-group" *ngIf="seletedRecurrenceType!='Never'">
                 <div class="col-md-4">
                     <hr>
                     <label>End Repeat</label>
@@ -245,7 +247,7 @@
                         </div>
                     </div>
                 </div>                
-            </div>
+            </div> -->
                      
             <div class="col-xs-12 form-group">
                 <br/>

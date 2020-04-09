@@ -126,7 +126,8 @@ export class BookingGroupProgramComponent implements OnInit {
     
 
     console.log("valid");
-    // display form values on success
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+
+    //route to the payment page
+    this.router.navigateByUrl("/payment/" + this.ProgramPK );
   }
 }

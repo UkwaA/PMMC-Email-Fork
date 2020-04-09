@@ -25,6 +25,20 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
     });
 });
 
+/**********************************************
+   ADD NEW SCHEDULE RECORD TO SCHEDULE TABLE
+ **********************************************/
+schedule.post("/add-new-schedule", (req, res) => {
+  Schedule.create(req.body)
+    .then(schedule => {
+      res.json(schedule.SchedulePK);
+    })
+    .catch(err => {
+      res.send("errorExpressErr: " + err);
+    });
+});
+
+
 /*************************************
   GET ALL PROGRAM SCHEDULES OVERVIEW
  *************************************/

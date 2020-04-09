@@ -112,8 +112,8 @@
         </div>
       </fieldset>
 
-      <div *ngIf="auth.isLoggedIn(); else elseBlock">
-        <h1>USER LOGGED IN!</h1>
+      <!-- <div *ngIf="auth.isLoggedIn(); else elseBlock">
+        <h1>USER LOGGED IN! Load Payment Section</h1>
       </div>
       <ng-template #elseBlock><h1>NEED TO CREATE ACCOUNT!</h1></ng-template>
       <!--
@@ -124,4 +124,7 @@
         <button type="submit" class="submit_btn btn btn-info">Submit</button>
       </div>
     </form>
+    <div>
+      <a [routerLink]="['/payment', ProgramPK]" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Temporary!</a>
+    </div>
   </div>

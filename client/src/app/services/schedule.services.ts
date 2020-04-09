@@ -12,6 +12,10 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
     }
 
+    public addNewSchedule(schedule: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule", schedule);
+    }
+
     public getAllScheduleSetting(): Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-setting");
     }
