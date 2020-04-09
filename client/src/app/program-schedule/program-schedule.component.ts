@@ -263,12 +263,12 @@ export class ProgramScheduleComponent implements OnInit {
               this.router.navigateByUrl("/booking-individual-program/" + this.ProgramPK );
 
               break;
-            case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-                this.router.navigateByUrl("/booking-group-program/" + this.ProgramPK)
+            case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:              
               this.programScheduleServices.addNewSchedule(this.currentSession)
                 .subscribe((res) => {
                   console.log(res);
                 });
+              this.router.navigateByUrl("/booking-group-program/" + this.ProgramPK)
               break;
           }
         }
@@ -289,9 +289,8 @@ export class ProgramScheduleComponent implements OnInit {
     this.quantityForm.get("Age1415Quantity").enable();
     this.quantityForm.get("Age1517Quantity").enable();
 
-    var timezoneOffset = e.event.start.getTimezoneOffset() * 60000;
-    var eventStart = new Date(e.event.start - timezoneOffset).toISOString().slice(0, 19);
-    var eventEnd = new Date(e.event.end - timezoneOffset).toISOString().slice(0, 19);
+    var eventStart = e.event.dataItem.Start.toString()
+    var eventEnd = e.event.dataItem.End.toString()
     var programPK = e.event.dataItem.ProgramPK;
 
     this.programScheduleServices
@@ -316,13 +315,12 @@ export class ProgramScheduleComponent implements OnInit {
 
           this.currentSession.SchedulePK = 0;
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
-          this.currentSession.Start = e.event.dataItem.Start;
-          this.currentSession.End = e.event.dataItem.End;
+          this.currentSession.Start = e.event.dataItem.Start.toString();
+          this.currentSession.End = e.event.dataItem.End.toString();
           this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;
           this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK;
-
           console.log(e.event)
         }
       });

@@ -104,7 +104,7 @@ export class ViewScheduleComponent {
                     Description: dataItem.Description,
                     StartTimezone: dataItem.StartTimezone,
                     Start: parseAdjust(dataItem.Start),
-                    End: parseAdjust(dataItem.End),   
+                    End: parseAdjust(dataItem.End),
                     EndTimezone: dataItem.EndTimezone,                    
                     RecurrenceRule: dataItem.RecurrenceRule,
                     RecurrenceID: dataItem.RecurrenceID,
@@ -116,7 +116,7 @@ export class ViewScheduleComponent {
             ));
             this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
-
+            console.log(this.events)
             //Loop through all events
             this.events.forEach(event =>{
                 //for each event, loop through all programs and compare ProgramPK
@@ -187,10 +187,10 @@ export class ViewScheduleComponent {
 
     public eventClick = (e) => {
         console.log(e.event)             
-        var timezoneOffset = e.event.start.getTimezoneOffset()*60000
-        var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
-        var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
-        var programPK = e.event.dataItem.ProgramPK
+        // var timezoneOffset = e.event.start.getTimezoneOffset()*60000
+        // var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
+        // var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
+        // var programPK = e.event.dataItem.ProgramPK
         
       }
 
