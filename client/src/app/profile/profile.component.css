@@ -2,11 +2,20 @@
   background-color: white;
 }
   .sidenav-container {
-    height: 100%;  
+    height: 100vh;   
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media screen and (max-width: 400px){
+    .sidenav-container{
+      position: absolute;
+    }
   }
   
   .sidenav {
-    width: 250px;
+    /* width: 250px; */
+    width:auto;
   }
   
   .sidenav .mat-toolbar {

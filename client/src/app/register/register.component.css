@@ -9,11 +9,12 @@
     padding-bottom: 100px;
     }
     
+  
     .container{
-    height: 650px;
-    align-content: center;
+        height: 100vh;
+        align-content: center;
     }
-    
+
     .card{
     height: 600px;
     margin-top: auto;
