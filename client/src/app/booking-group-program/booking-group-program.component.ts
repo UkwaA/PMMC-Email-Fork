@@ -7,6 +7,7 @@ import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 import { ReservationHeaderData } from '../data/reservation-header-data';
 import { AuthenticationService } from '../authentication.service';
+import { ValidationErrors } from '@angular/forms';
 
 declare var $: any;
 
@@ -45,6 +46,7 @@ export class BookingGroupProgramComponent implements OnInit {
       .subscribe(program => {
         this.bookingGroup = program
         console.log(this.bookingGroup)
+        this.setRegisterFormValidators()
       })
     this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe(details => {
@@ -61,11 +63,10 @@ export class BookingGroupProgramComponent implements OnInit {
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
+      TeacherEmail: [''],
       TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
     });
 
-    this.setRegisterFormValidators()
 
   }
 
@@ -78,17 +79,29 @@ export class BookingGroupProgramComponent implements OnInit {
     const TeacherPhoneNoControl = this.registerForm.get('TeacherPhoneNo');
 
     if (this.bookingGroup.ProgramRestriction != true)
-      ProgRestrictionControl.setValidators(null);
-    if (this.bookingGroup.OrganizationName != true)
-      OrgNameControl.setValidators(null);
+      ProgRestrictionControl.clearValidators();
+    if (this.bookingGroup.OrganizationName != true){
+      OrgNameControl.clearValidators();
+    }
     if (this.bookingGroup.GradeLevel != true)
-      GradeLevelControl.setValidators(null);
+      GradeLevelControl.clearValidators();
     if (this.bookingGroup.TeacherName != true)
-      TeacherNameControl.setValidators(null);
-    if (this.bookingGroup.TeacherEmail != true)
-      TeacherEmailControl.setValidators(null);
+      TeacherNameControl.clearValidators();
+    if (this.bookingGroup.TeacherEmail == true){
+      console.log("TeacherEmail");
+      // TeacherEmailControl.clearValidators();
+      TeacherEmailControl.setValidators([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]);
+    }
     if (this.bookingGroup.TeacherPhoneNo != true)
-      TeacherPhoneNoControl.setValidators(null);
+      TeacherPhoneNoControl.clearValidators();
+
+    ProgRestrictionControl.updateValueAndValidity();
+    OrgNameControl.updateValueAndValidity();
+    GradeLevelControl.updateValueAndValidity();
+    TeacherNameControl.updateValueAndValidity();
+    TeacherEmailControl.updateValueAndValidity;
+    TeacherPhoneNoControl.updateValueAndValidity();
+
   }
 
   get f() { return this.registerForm.controls; }
@@ -106,12 +119,25 @@ export class BookingGroupProgramComponent implements OnInit {
     document.getElementById("final_warning").innerHTML = ""
   }
 
+  getFormValidationErrors() {
+    Object.keys(this.registerForm.controls).forEach(key => {
+  
+    const controlErrors: ValidationErrors = this.registerForm.get(key).errors;
+    if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          });
+        }
+      });
+    }
+
   onSubmit() {
     this.submitted = true;
 
     // Stop here if form is invalid
     if (this.registerForm.invalid) {
       console.log("invalid");
+      this.getFormValidationErrors();
       return;
     }
     ++this.num_submits;
