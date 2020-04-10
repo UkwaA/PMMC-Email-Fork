@@ -34,7 +34,7 @@
                 </li> -->
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
-                    <strong>$57</strong>
+                    <strong>$52</strong>
                 </li>
             </ul>
            <!--  <form class="card p-2">
@@ -150,38 +150,39 @@
                 <div class="form-group font-weight-bold row">
                     <div class="col-md-6 mb-3">
                         <label>Name on card</label>
-                        <input type="text" class="form-control" formControlName="NameOnCard" value="" 
+                        <input type="text" class="form-control" formControlName="NameOnCard" value="" placeholder="Full name as displayed on card"
                         [ngClass]="{'is-invalid': submitted && f.NameOnCard.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                         <div *ngIf="submitted && f.NameOnCard.errors" class="invalid-feedback">
                           <div *ngIf="f.NameOnCard.errors.required">It's required</div>
                         </div>
-                        <small class="text-muted">Full name as displayed on card</small>
-            
                     </div>
                     <div class="col-md-6 mb-3">
                         <label>Credit card number</label>
-                        <input type="text" class="form-control" formControlName="CardNumber" value="" 
+                        <input type="text" pattern="[0-9]{13,16}" class="form-control" formControlName="CardNumber" value="" 
                         [ngClass]="{'is-invalid': submitted && f.CardNumber.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                         <div *ngIf="submitted && f.CardNumber.errors" class="invalid-feedback">
                           <div *ngIf="f.CardNumber.errors.required">It's required</div>
+                          <div *ngIf="f.CardNumber.errors.pattern"> Please enter a valid card number</div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group font-weight-bold row">
                     <div class="col-md-3 mb-3">
                         <label>Expiration</label>
-                        <input type="text" class="form-control" formControlName="Expiration" value="" 
+                        <input type="text" pattern="(0[1-9]|1[0-2])/(2[0-9]|3[0-9])"class="form-control" formControlName="Expiration" value="" placeholder="mm/yy"
                         [ngClass]="{'is-invalid': submitted && f.Expiration.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                         <div *ngIf="submitted && f.Expiration.errors" class="invalid-feedback">
                           <div *ngIf="f.Expiration.errors.required">It's required</div>
+                          <div *ngIf="f.Expiration.errors.pattern"> Please enter a valid expiration</div>
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>CVV</label>
-                        <input type="text" class="form-control" formControlName="CVV" value="" 
+                        <input type="text" pattern="[0-9]{3,4}" class="form-control" formControlName="CVV" value="" 
                         [ngClass]="{'is-invalid': submitted && f.CVV.errors }" (focus)="onFocus($event)" (blur)="lostFocus($event)">
                         <div *ngIf="submitted && f.CVV.errors" class="invalid-feedback">
                           <div *ngIf="f.CVV.errors.required">It's required</div>
+                          <div *ngIf="f.CVV.errors.pattern"> Please enter a valid CVV</div>
                         </div>
                     </div>
                 </div>
