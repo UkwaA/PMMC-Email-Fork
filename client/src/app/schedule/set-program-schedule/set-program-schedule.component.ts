@@ -44,6 +44,7 @@ export class SetProgramScheduleComponent {
         RecurrenceRule: "",
         RecurrenceID: "",
         RecurrenceException: "",
+        Color: "",
         CreatedBy: 0,        
         IsActive: true,
         IsAllDay: false
@@ -358,14 +359,15 @@ export class SetProgramScheduleComponent {
             RecurrenceRule: this.recurrenceRule,
             RecurrenceID: "",
             RecurrenceException: "",
+            Color: "",
             CreatedBy: this.currentUserPK,        
             IsActive: true,
             IsAllDay: false
         };
         console.log(this.currentScheduleSetting)
-        this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res=>{
-            this.router.navigateByUrl("/profile/schedule-management")
-        })
+        // this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res=>{
+        //     this.router.navigateByUrl("/profile/schedule-management")
+        // })
         
     }
 }
