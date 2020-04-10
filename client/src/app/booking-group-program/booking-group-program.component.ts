@@ -50,8 +50,6 @@ export class BookingGroupProgramComponent implements OnInit {
       .subscribe(details => {
         this.programDetails = details;
         document.getElementById("program_name").innerHTML = this.programDetails.Name;
-       /*  document.getElementById("program_desc").innerHTML = this.programDetails.Description;
-        console.log(this.programDetails); */
       })
 
       document.getElementById("edit_btn").style.visibility="hidden";
@@ -65,17 +63,32 @@ export class BookingGroupProgramComponent implements OnInit {
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
       TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
-      TotalQuantity: [0, [Validators.required, Validators.max(35)]]
-
     });
+
+    this.setRegisterFormValidators()
 
   }
 
-  onNumberChange(){
-    this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
-     + this.registerForm.get('Age1112Quantity').value + this.registerForm.get('Age1314Quantity').value
-     + this.registerForm.get('Age1415Quantity').value + this.registerForm.get('Age1517Quantity').value;
-     console.log("New total" + this.total + ".");
+  setRegisterFormValidators(){
+    const ProgRestrictionControl = this.registerForm.get('ProgramRestriction');
+    const OrgNameControl = this.registerForm.get('OrganizationName');
+    const GradeLevelControl = this.registerForm.get('GradeLevel');
+    const TeacherNameControl = this.registerForm.get('TeacherName');
+    const TeacherEmailControl = this.registerForm.get('TeacherEmail');
+    const TeacherPhoneNoControl = this.registerForm.get('TeacherPhoneNo');
+
+    if (this.bookingGroup.ProgramRestriction != true)
+      ProgRestrictionControl.setValidators(null);
+    if (this.bookingGroup.OrganizationName != true)
+      OrgNameControl.setValidators(null);
+    if (this.bookingGroup.GradeLevel != true)
+      GradeLevelControl.setValidators(null);
+    if (this.bookingGroup.TeacherName != true)
+      TeacherNameControl.setValidators(null);
+    if (this.bookingGroup.TeacherEmail != true)
+      TeacherEmailControl.setValidators(null);
+    if (this.bookingGroup.TeacherPhoneNo != true)
+      TeacherPhoneNoControl.setValidators(null);
   }
 
   get f() { return this.registerForm.controls; }
@@ -95,7 +108,6 @@ export class BookingGroupProgramComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.registerForm.get('TotalQuantity').setValue(this.total);
 
     // Stop here if form is invalid
     if (this.registerForm.invalid) {
@@ -120,6 +132,8 @@ export class BookingGroupProgramComponent implements OnInit {
     }
     else if (this.num_submits==2){
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      //route to the payment page
+    this.router.navigateByUrl("/payment/" + this.ProgramPK );
     }
 
     console.log("submitted");
@@ -127,7 +141,5 @@ export class BookingGroupProgramComponent implements OnInit {
 
     console.log("valid");
 
-    //route to the payment page
-    this.router.navigateByUrl("/payment/" + this.ProgramPK );
   }
 }
