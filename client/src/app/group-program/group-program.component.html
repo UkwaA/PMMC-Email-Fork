@@ -19,7 +19,7 @@
                 <!-- list group item-->
                 <li class="list-group-item">
                     <div class="image-wrapper p-3">
-                        <img src={{program.ImgData}} class="float-left p-3 col-sm-12 col-md-5" alt="Generic placeholder image" width="350" height="280">
+                        <img src={{program.ImgData}} class="float-left p-3 col-sm-12 col-md-5" alt="Generic placeholder image">
                         <h4 *ngIf = 'program.SubProgramPK == 1' class = 'text-muted'><mat-icon>stars</mat-icon> Field Trip </h4>
                         <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted'><mat-icon>stars</mat-icon> Scout Program </h4>
                         <div class="row">
@@ -35,7 +35,7 @@
                             <div class="col-sm-12">
                             <!-- <h6 class="font-weight-bold my-2">${{program.PricePerParticipant}}</h6> -->
                             <!-- <a [routerLink]="['/booking-group-program', program.ProgramPK]" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Book now!</a> -->
-                                <a [routerLink]="['/program-schedule', program.ProgramPK]" class="btn btn-info btn-lg active float-right" role="button" aria-pressed="true">Book now!</a>
+                                <a [routerLink]="['/program-schedule', program.ProgramPK]" [fragment]="schedule" class="btn btn-info btn-lg active float-right" role="button" aria-pressed="true">Book now!</a>
                             </div>
                         </div>
                     </div>
