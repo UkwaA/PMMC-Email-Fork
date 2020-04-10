@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit{
             FirstName: ["", [Validators.required]],
             LastName: ["", [Validators.required]],
             Address: ["", [Validators.required]],
+            City: ["", [Validators.required]],
             State: ["", [Validators.required]],
             Zipcode: ["", [Validators.required]],
             NameOnCard: ["", [Validators.required]],
