@@ -60,6 +60,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 import { AddScheduleModalDialogComponent } from './components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
@@ -86,8 +87,16 @@ const routes : Routes = [
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
-  {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
+  {
+    path: 'booking-individual-program/:id', 
+    component: BookingIndividualProgramComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'booking-group-program/:id', 
+    component: BookingGroupProgramComponent,
+    canActivate: [AuthGuardService]
+  },
   {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
@@ -178,6 +187,7 @@ const routes : Routes = [
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
     AddScheduleModalDialogComponent,
+    LoginPromptModal,
     ScheduleManagementComponent,
     ViewScheduleComponent,
     AccountSetting,
@@ -227,6 +237,7 @@ const routes : Routes = [
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
     AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,AddScheduleModalDialogComponent]
+  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
+    AddScheduleModalDialogComponent, LoginPromptModal]
 })
 export class AppModule { }
