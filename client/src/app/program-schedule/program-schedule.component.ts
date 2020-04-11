@@ -14,8 +14,10 @@ import { QuantiyFormData } from "../data/quantity-form-data";
 import { ProgramScheduleData } from "../data/program-schedule-data";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
+import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
+
 @Component({
   templateUrl: "./program-schedule.component.html",
   styleUrls: ["./program-schedule.component.css"],
@@ -163,9 +165,7 @@ export class ProgramScheduleComponent implements OnInit {
         { value: "0", disabled: true },
         [Validators.required, Validators.min(0)],
       ],
-      TotalQuantity: [
-        "0", [Validators.required, Validators.min(1)],
-      ],
+      TotalQuantity: ["0", [Validators.required, Validators.min(1)]],
     });
   }
 
@@ -202,80 +202,136 @@ export class ProgramScheduleComponent implements OnInit {
   enterQuantity() {
     this.submitted = true;
     if (this.quantityForm.invalid) {
-      console.log("invalid");
+      // console.log("invalid");
       return;
     }
 
-    console.log("valid");
+    // console.log("valid");
 
     //Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "auto";
-    dialogConfig.maxHeight = "500px";
-    dialogConfig.width = "350px";
-    dialogConfig.autoFocus = false;
-    if (this.availability == null) {
-      dialogConfig.data = {
-        title: "Warning!",
-        description:
-          "You haven't chosen any program. Please choose one program first!",
-        actionButtonText: "Try again",
-        numberOfButton: "1",
+
+    // Check if user is logged in
+    //
+    if (!this.auth.getUserDetails()) {
+      // //Configure Modal Dialog For Login Prompt
+      // dialogConfig.disableClose = true;
+      // dialogConfig.id = "modal-component";
+      // dialogConfig.height = "600px";
+      // dialogConfig.maxHeight = "600px";
+      // dialogConfig.width = "500px";
+      // dialogConfig.autoFocus = false;
+
+      // dialogConfig.data = {
+      //     title: "Log In",
+      //     description:
+      //       "You haven't chosen any program. Please choose one program first!",
+      //     actionButtonText: "Try again",
+      //     numberOfButton: "1",
+      //   };
+      const loginDialogConfig = new MatDialogConfig();
+      loginDialogConfig.id = "modal-component";
+      loginDialogConfig.height = "600px";
+      loginDialogConfig.maxHeight = "600px";
+      loginDialogConfig.width = "500px";
+      loginDialogConfig.autoFocus = false;
+      loginDialogConfig.data = {
+        // title: "Register Confirmation",
+        // firstName: this.customerInfoForm.get('firstName').value,
+        // lastName: this.customerInfoForm.get('lastName').value,
+        // phoneNo: this.customerInfoForm.get('phoneNum').value,
+        // streetAddress: this.customerInfoForm.get('address_street').value,
+        // // streetAddress2: '',
+        // addressCity: this.customerInfoForm.get('address_city').value,
+        // addressState: this.customerInfoForm.get('address_state').value,
+        // addressZipCode: this.customerInfoForm.get('address_zipcode').value,
+        // actionButtonText: "Confirm",
+        // numberOfButton: "2"
       };
-    } else if (this.currTotalQuantity > this.availability) {
-      dialogConfig.data = {
-        title: "Warning!",
-        description:
-          "The total quantity exceeds the availability of this program. Please try again!",
-        actionButtonText: "Try again",
-        numberOfButton: "1",
-      };
-    } else {
-      dialogConfig.data = {
-        title: "Confirmation",
-        description:
-          "Are you sure to book this program for " +
-          this.currTotalQuantity +
-          " attendees?",
-        actionButtonText: "Confirm",
-        numberOfButton: "2",
-      };
-    }
-
-    const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-    modalDialog.afterClosed().subscribe((result) => {
-      if (result == "Yes") {
-        //if exceed
-        if (
-          this.currTotalQuantity > this.availability ||
-          this.availability == null
-        ) {
-          // if exceed, do nothing
-
-
-        } else {
-          //route to the booking page
-          switch (this.ProgramType) {
-            case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-              this.router.navigateByUrl("/booking-individual-program/" + this.ProgramPK );
-
-              break;
-            case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:              
-              this.programScheduleServices.addNewSchedule(this.currentSession)
-                .subscribe((res) => {
-                  console.log(res);
-                });
-              this.router.navigateByUrl("/booking-group-program/" + this.ProgramPK)
-              break;
-          }
+      const loginModal = this.matDialog.open(LoginPromptModal, loginDialogConfig);
+      loginModal.afterClosed().subscribe((result) => {
+        if (result == "Yes") {
+          console.log("Login Modal");
         }
+      });
+    } else {
+      // Proceed to next step
+      // The user can't close the dialog by clicking outside its body
+      dialogConfig.disableClose = true;
+      dialogConfig.id = "modal-component";
+      dialogConfig.height = "auto";
+      dialogConfig.maxHeight = "600px";
+      dialogConfig.width = "430px";
+      dialogConfig.autoFocus = false;
+
+      if (this.availability == null) {
+        dialogConfig.data = {
+          title: "Warning!",
+          description:
+            "You haven't chosen any program. Please choose one program first!",
+          actionButtonText: "Try again",
+          numberOfButton: "1",
+        };
+      } else if (this.currTotalQuantity > this.availability) {
+        dialogConfig.data = {
+          title: "Warning!",
+          description:
+            "The total quantity exceeds the availability of this program. Please try again!",
+          actionButtonText: "Try again",
+          numberOfButton: "1",
+        };
       } else {
-        //otherwise, do nothing
+        dialogConfig.data = {
+          title: "Confirmation",
+          description:
+            "Are you sure to book this program for " +
+            this.currTotalQuantity +
+            " attendees?",
+          actionButtonText: "Confirm",
+          numberOfButton: "2",
+        };
       }
-    });
+
+      const modalDialog = this.matDialog.open(
+        ModalDialogComponent,
+        dialogConfig
+      );
+      modalDialog.afterClosed().subscribe((result) => {
+        if (result == "Yes") {
+          //if exceed
+          if (
+            this.currTotalQuantity > this.availability ||
+            this.availability == null
+          ) {
+            // if exceed, do nothing
+          } else {
+            //route to the booking page
+            switch (this.ProgramType) {
+              case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+                this.router.navigateByUrl(
+                  "/booking-individual-program/" + this.ProgramPK
+                );
+
+                break;
+              case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+                // if(this.currentSession.SchedulePK == 0) {
+                //     this.programScheduleServices.addNewSchedule(this.currentSession)
+                //     .subscribe((res) => {
+                //       console.log(res);
+                //     });
+                // }
+
+                this.router.navigateByUrl(
+                  "/booking-group-program/" + this.ProgramPK
+                );
+                break;
+            }
+          }
+        } else {
+          //otherwise, do nothing
+        }
+      });
+    }
   }
 
   //This function to capture and get the info of selected event
@@ -289,8 +345,8 @@ export class ProgramScheduleComponent implements OnInit {
     this.quantityForm.get("Age1415Quantity").enable();
     this.quantityForm.get("Age1517Quantity").enable();
 
-    var eventStart = e.event.dataItem.Start.toString()
-    var eventEnd = e.event.dataItem.End.toString()
+    var eventStart = e.event.dataItem.Start.toString();
+    var eventEnd = e.event.dataItem.End.toString();
     var programPK = e.event.dataItem.ProgramPK;
 
     this.programScheduleServices
@@ -302,14 +358,23 @@ export class ProgramScheduleComponent implements OnInit {
           let end = new Date(res.End);
           this.currentSession = res;
           this.customerSelectDate = this.tempDate.toDateString();
-          this.customerSelectTime = this.tempDate.toLocaleString("en-US", this.options).concat(" - ", end.toLocaleString("en-US", this.options));
-          this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
+          this.customerSelectTime = this.tempDate
+            .toLocaleString("en-US", this.options)
+            .concat(" - ", end.toLocaleString("en-US", this.options));
+          this.availability =
+            res.MaximumParticipant - res.CurrentNumberParticipant;
 
-          console.log(res)
+          console.log(res);
         } else {
           // Create new schedule record and insert into the databse
           this.customerSelectDate = e.event.dataItem.Start.toDateString();
-          this.customerSelectTime = e.event.dataItem.Start.toLocaleString("en-US",this.options ).concat( " - ", e.event.dataItem.End.toLocaleString("en-US", this.options));
+          this.customerSelectTime = e.event.dataItem.Start.toLocaleString(
+            "en-US",
+            this.options
+          ).concat(
+            " - ",
+            e.event.dataItem.End.toLocaleString("en-US", this.options)
+          );
 
           this.availability = e.event.dataItem.MaximumParticipant;
 
@@ -317,11 +382,12 @@ export class ProgramScheduleComponent implements OnInit {
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
           this.currentSession.Start = e.event.dataItem.Start.toString();
           this.currentSession.End = e.event.dataItem.End.toString();
-          this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
+          this.currentSession.MaximumParticipant =
+            e.event.dataItem.MaximumParticipant;
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;
           this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK;
-          console.log(e.event)
+          console.log(e.event);
         }
       });
   };

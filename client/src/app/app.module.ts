@@ -60,6 +60,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 import { ScheduleManagementComponent } from './schedule/schedule-management/schedule-management.component'
@@ -176,6 +177,7 @@ const routes : Routes = [
     ModalDialogComponent,
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
+    LoginPromptModal,
     ScheduleManagementComponent,
     ViewScheduleComponent,
     AccountSetting,
@@ -225,6 +227,6 @@ const routes : Routes = [
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
     AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent]
+  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent, LoginPromptModal]
 })
 export class AppModule { }

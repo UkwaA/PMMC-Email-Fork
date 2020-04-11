@@ -1,0 +1,44 @@
+<div id="modal-content-wrapper" style="text-align: center;">
+    <header id="modal-header">
+        <h1 id="modal-title">Log In</h1>
+    </header>
+
+
+    <mat-divider></mat-divider>
+    <mat-dialog-content [formGroup]="loginForm">
+        <p>
+            <mat-form-field appearance="standard">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username" [errorStateMatcher]="errorMatcher" required>
+                <mat-error *ngIf="errorHandling('username', 'required')">Name is required</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="standard">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" formControlName="password" type="password"  [errorStateMatcher]="errorMatcher" required>
+                <mat-error *ngIf="errorHandling('password', 'required')">Password is required</mat-error>
+                <mat-error *ngIf="errorHandling('password', 'minLength')">You have less than 6 characters</mat-error>
+            </mat-form-field>
+        </p>
+    </mat-dialog-content>
+    <p>
+    <button mat-raised-button class="mat-primary" (click)="signIn()" >
+        Sign in
+    </button>
+    </p>
+    <mat-divider></mat-divider>
+    <h2> OR </h2>
+
+    <button mat-raised-button (click)="createNew()">
+        Click here to create new account.
+    </button>
+        <!-- <button class="mat-raised-button" (click)="close()">
+        Close
+    </button>
+    <button class="mat-raised-button mat-primary" (click)="save()">
+        Save
+    </button> -->
+
+
+</div>
