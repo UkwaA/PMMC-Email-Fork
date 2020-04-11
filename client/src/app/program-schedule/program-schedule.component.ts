@@ -129,6 +129,7 @@ export class ProgramScheduleComponent implements OnInit {
           RecurrenceRule: dataItem.RecurrenceRule,
           RecurrenceID: dataItem.RecurrenceID,
           RecurrenceException: dataItem.RecurrenceException,
+          Color: dataItem.Color,
           CreatedBy: dataItem.CreatedBy,
           CreatedDate: dataItem.CreatedDate,
           IsActive: dataItem.IsActive,

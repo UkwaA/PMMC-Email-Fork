@@ -1,33 +1,35 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 mt-12 mx-auto">
-            <div class="row text-center text-white mb-5">
-                <div class="col-lg-12 mx-auto">
-                    <h1>Create New User</h1>
+    <div class="row ml-2 mr-2">
+        <!-- <div class="col-md-8 mt-12 mx-auto"> -->
+            <!-- <div class="row text-center text-white mb-2"> -->
+                <div class="col-lg-12 mb-2">
+                    <h1 class="text-center">Create New User</h1>
                 </div>
-            </div>        
-            <div><h3>Account Info</h3></div>
-            <hr>
+            <!-- </div>         -->
             <div class="errorMessage" *ngIf="errorMessage">{{errorMessage}}</div>
-            <form [formGroup]="createNewUserForm" (ngSubmit)="openModalCreateNewUser()"> 
+            <form [formGroup]="createNewUserForm" (ngSubmit)="openModalCreateNewUser()">
+                <div class="row flex-fill">
+                <div class="col-md-5 pr-5">
+                    <div><h3>Account Info</h3></div>
+                    <hr>
                     <div class="row">                        
-                        <div class="col-md-4">
-                            <label><h5>Username</h5></label>
+                        <div class="col-md-12">
+                            <label class="mb-0"><h5>Username</h5></label>
                         </div>
-                        <div class="col-md-8">                            
+                        <div class="col-md-12 mb-2">                            
                             <input type="text" class="form-control" formControlName="username" placeholder="Username"
                             [(ngModel)]="userDetails.Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                                 <div *ngIf="f.username.errors.required">Username is required</div>
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label><h5>Password</h5></label>
+                    <!-- </div> -->
+                    <!-- <br/> -->
+                    <!-- <div class="row"> -->
+                        <div class="col-md-12">
+                            <label class="mb-0"><h5>Password</h5></label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12 mb-2">
                             <input type="password" class="form-control" formControlName="password" placeholder="Password" 
                                     [(ngModel)]="userDetails.Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -38,13 +40,13 @@
                         <!-- <button type="button" class="btn btn-md btn-warning col-md-4" 
                             (click)="openModalResetPassword()">
                             Reset Password</button>                             -->
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label><h5>Email</h5></label>
+                    <!-- </div> -->
+                    <!-- <br/> -->
+                    <!-- <div class="row"> -->
+                        <div class="col-md-12">
+                            <label class="mb-0"><h5>Email</h5></label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12 mb-2">
                             <input type="text" class="form-control" formControlName="email" placeholder="Email" 
                             [(ngModel)]="userDetails.Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -52,7 +54,7 @@
                                 <div *ngIf="f.email.errors.email">Must be a valid email address</div>
                             </div>                                                        
                         </div>
-                    </div>
+                    <!-- </div> -->
                     <br/>
                     <!-- <div class="row">
                         <div class="col-md-4">
@@ -65,93 +67,96 @@
                         </div>
                     </div>
                     <br/> -->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label><h5>Role</h5></label>
+                    <!-- <div class="row"> -->
+                        <div class="col-md-12">
+                            <label><h5 class="mb-0">Role</h5></label>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <select id="roleSelection">                                
                             </select>
                         </div>
                     </div>
-                    <br/>
+                    <!-- <br/> -->
+                </div> 
+                <div class="col-md-7">
                 <div><h3>Personal Info</h3></div>
                 <hr>
-                <div class="col-xs-6">
-                    <label><h5>First name</h5></label>
-                    <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName" 
-                    [ngClass]="{'is-invalid': submitted && f.FirstName.errors }">
-                    <!-- <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
-                        <div *ngIf="f.FirstName.errors.required">First Name is required</div>
-                      </div> -->
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <label class="mb-0"><h5>First name</h5></label>
+                        <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName" 
+                        [ngClass]="{'is-invalid': submitted && f.FirstName.errors }">
+                        <!-- <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.FirstName.errors.required">First Name is required</div>
+                        </div> -->
+                    </div>
+                    
+                    <div class="col-sm-6">
+                    <label class="mb-0"><h5>Last name</h5></label>
+                        <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName" 
+                        [ngClass]="{'is-invalid': submitted && f.LastName.errors }">
+                        <!-- <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.LastName.errors.required">Last Name is required</div>
+                        </div> -->
+                    </div>
                 </div>
-                <br/>
-                
-                <div class="col-xs-6">
-                <label><h5>Last name</h5></label>
-                    <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName" 
-                    [ngClass]="{'is-invalid': submitted && f.LastName.errors }">
-                    <!-- <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
-                        <div *ngIf="f.LastName.errors.required">Last Name is required</div>
-                      </div> -->
-                </div>
-                <br/>
     
-                <div class="col-xs-6">
-                    <label><h5>Phone Number</h5></label>
-                    <input type="number" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
-                    [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
-                    <!-- <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
-                        <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
-                      </div> -->
-                </div>
-                <br/>
+                <div class="row mb-2">
+                    <div class="col-sm-8 mb-2">
+                        <label class="mb-0"><h5>Phone Number</h5></label>
+                        <input type="number" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
+                        [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
+                        <!-- <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
+                            <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
+                        </div> -->
+                    </div>
+                <!-- </div> -->
     
-                <div class="col-xs-6">
-                    <label><h5>Address</h5></label>
-                    <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" 
-                    [ngClass]="{'is-invalid': submitted && f.Address.errors }" >
-                    <!-- <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
-                        <div *ngIf="f.Address.errors.required">Street Address is required</div>
-                      </div> -->
+                    <div class="col-sm-12">
+                        <label class="mb-0"><h5>Address</h5></label>
+                        <input type="text" class="form-control" formControlName="Address"placeholder="Address" [(ngModel)]="customerDetails.Address" 
+                        [ngClass]="{'is-invalid': submitted && f.Address.errors }" >
+                        <!-- <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                            <div *ngIf="f.Address.errors.required">Street Address is required</div>
+                        </div> -->
+                    </div>
                 </div>
-                <br/>
                 <!-- 
                 <div class="col-xs-6">
                     <label><h5>Address #2</h5></label>
                     <input type="text" class="form-control" formControlName="Address2" placeholder="enter address (optional)">
                 </div>
                 <br/> -->
+                
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label class="mb-0" for="city"><h5>City</h5></label>
+                        <input type="text" class="form-control" formControlName="City" placeholder="City" [(ngModel)]="customerDetails.City" 
+                        [ngClass]="{'is-invalid': submitted && f.City.errors }" >
+                        <!-- <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
+                            <div *ngIf="f.City.errors.required">City is required</div>
+                        </div> -->
+                    </div>
 
-                <div class="col-xs-6">
-                    <label for="email"><h5>City</h5></label>
-                    <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" 
-                    [ngClass]="{'is-invalid': submitted && f.City.errors }" >
-                    <!-- <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
-                        <div *ngIf="f.City.errors.required">City is required</div>
-                      </div> -->
-                </div>
-                <br/>
+                    <div class="col-sm-2">
+                        <label class="mb-0"><h5>State</h5></label>
+                        <input type="text" class="form-control" formControlName="State" placeholder="State" [(ngModel)]="customerDetails.State" 
+                        [ngClass]="{'is-invalid': submitted && f.State.errors }" maxlength = "2" >
+                        <!-- <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
+                            <div *ngIf="f.State.errors.required">State is required</div>
+                        </div> -->
+                    </div>
+                    <!-- <br/> -->
 
-                <div class="col-xs-6">
-                    <label><h5>State</h5></label>
-                    <input type="text" class="form-control" formControlName="State"placeholder="enter state" [(ngModel)]="customerDetails.State" 
-                    [ngClass]="{'is-invalid': submitted && f.State.errors }" maxlength = "2" >
-                    <!-- <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
-                        <div *ngIf="f.State.errors.required">State is required</div>
-                      </div> -->
+                    <div class="col-sm-4">
+                        <label class="mb-0"><h5>Zipcode</h5></label>
+                        <input type="number" class="form-control" formControlName="Zipcode" placeholder="Zip Code" [(ngModel)]="customerDetails.Zipcode"
+                        [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
+                        <!-- <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
+                            <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
+                        </div> -->
+                    </div>
                 </div>
-                <br/>
-
-                <div class="col-xs-6">
-                    <label><h5>Zipcode</h5></label>
-                    <input type="number" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
-                    [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
-                    <!-- <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
-                        <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
-                      </div> -->
-                </div>
-                <br/>
                 <div>
                     <section class="options-section">
                         <mat-checkbox class="options-margin" formControlName="Subscribe"
@@ -161,10 +166,12 @@
                 <br>
 
 
-                <div class="col-xs-12 form-group ">                    
-                    <button class="btn btn-lg btn-info btn-block" type="submit">Create New User</button>
-                </div>
+            </div>
+            <div class="col-sm-12 form-group ">                    
+                <button class="btn btn-lg btn-info btn-block" type="submit">Create New User</button>
+            </div>
+            </div>
             </form>
-        </div>
+        <!-- </div> -->
     </div>
 </div>

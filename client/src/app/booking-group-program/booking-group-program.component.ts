@@ -7,6 +7,7 @@ import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
 import { ReservationHeaderData } from '../data/reservation-header-data';
 import { AuthenticationService } from '../authentication.service';
+import { ValidationErrors } from '@angular/forms';
 
 declare var $: any;
 
@@ -45,13 +46,12 @@ export class BookingGroupProgramComponent implements OnInit {
       .subscribe(program => {
         this.bookingGroup = program
         console.log(this.bookingGroup)
+        this.setRegisterFormValidators()
       })
     this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe(details => {
         this.programDetails = details;
         document.getElementById("program_name").innerHTML = this.programDetails.Name;
-       /*  document.getElementById("program_desc").innerHTML = this.programDetails.Description;
-        console.log(this.programDetails); */
       })
 
       document.getElementById("edit_btn").style.visibility="hidden";
@@ -63,19 +63,45 @@ export class BookingGroupProgramComponent implements OnInit {
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherEmail: ['', [Validators.required, Validators.email, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
+      TeacherEmail: [''],
       TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
-      TotalQuantity: [0, [Validators.required, Validators.max(35)]]
-
     });
+
 
   }
 
-  onNumberChange(){
-    this.total = this.registerForm.get('Age57Quantity').value + this.registerForm.get('Age810Quantity').value
-     + this.registerForm.get('Age1112Quantity').value + this.registerForm.get('Age1314Quantity').value
-     + this.registerForm.get('Age1415Quantity').value + this.registerForm.get('Age1517Quantity').value;
-     console.log("New total" + this.total + ".");
+  setRegisterFormValidators(){
+    const ProgRestrictionControl = this.registerForm.get('ProgramRestriction');
+    const OrgNameControl = this.registerForm.get('OrganizationName');
+    const GradeLevelControl = this.registerForm.get('GradeLevel');
+    const TeacherNameControl = this.registerForm.get('TeacherName');
+    const TeacherEmailControl = this.registerForm.get('TeacherEmail');
+    const TeacherPhoneNoControl = this.registerForm.get('TeacherPhoneNo');
+
+    if (this.bookingGroup.ProgramRestriction != true)
+      ProgRestrictionControl.clearValidators();
+    if (this.bookingGroup.OrganizationName != true){
+      OrgNameControl.clearValidators();
+    }
+    if (this.bookingGroup.GradeLevel != true)
+      GradeLevelControl.clearValidators();
+    if (this.bookingGroup.TeacherName != true)
+      TeacherNameControl.clearValidators();
+    if (this.bookingGroup.TeacherEmail == true){
+      console.log("TeacherEmail");
+      // TeacherEmailControl.clearValidators();
+      TeacherEmailControl.setValidators([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]);
+    }
+    if (this.bookingGroup.TeacherPhoneNo != true)
+      TeacherPhoneNoControl.clearValidators();
+
+    ProgRestrictionControl.updateValueAndValidity();
+    OrgNameControl.updateValueAndValidity();
+    GradeLevelControl.updateValueAndValidity();
+    TeacherNameControl.updateValueAndValidity();
+    TeacherEmailControl.updateValueAndValidity;
+    TeacherPhoneNoControl.updateValueAndValidity();
+
   }
 
   get f() { return this.registerForm.controls; }
@@ -93,13 +119,25 @@ export class BookingGroupProgramComponent implements OnInit {
     document.getElementById("final_warning").innerHTML = ""
   }
 
+  getFormValidationErrors() {
+    Object.keys(this.registerForm.controls).forEach(key => {
+  
+    const controlErrors: ValidationErrors = this.registerForm.get(key).errors;
+    if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          });
+        }
+      });
+    }
+
   onSubmit() {
     this.submitted = true;
-    this.registerForm.get('TotalQuantity').setValue(this.total);
 
     // Stop here if form is invalid
     if (this.registerForm.invalid) {
       console.log("invalid");
+      this.getFormValidationErrors();
       return;
     }
     ++this.num_submits;
@@ -120,6 +158,8 @@ export class BookingGroupProgramComponent implements OnInit {
     }
     else if (this.num_submits==2){
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+      //route to the payment page
+    this.router.navigateByUrl("/payment/" + this.ProgramPK );
     }
 
     console.log("submitted");
@@ -127,7 +167,5 @@ export class BookingGroupProgramComponent implements OnInit {
 
     console.log("valid");
 
-    //route to the payment page
-    this.router.navigateByUrl("/payment/" + this.ProgramPK );
   }
 }

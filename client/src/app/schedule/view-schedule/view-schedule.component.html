@@ -31,7 +31,7 @@
                 [modelFields]="eventFields"
                 [selectedDate]="selectedDate"
                 [showWorkHours] = "true"
-                selectedView="month"
+                [eventStyles]="getEventStyles"
                 style="height: 700px; width: 1500px">
         <ng-template kendoSchedulerEventTemplate let-event>
             {{ event.dataItem.Title }} 

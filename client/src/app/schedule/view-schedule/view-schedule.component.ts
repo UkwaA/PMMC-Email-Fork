@@ -109,6 +109,7 @@ export class ViewScheduleComponent {
                     RecurrenceRule: dataItem.RecurrenceRule,
                     RecurrenceID: dataItem.RecurrenceID,
                     RecurrenceException: dataItem.RecurrenceException,
+                    Color: dataItem.Color,
                     CreatedBy: dataItem.CreatedBy,
                     CreatedDate: dataItem.CreatedDate,
                     IsActive: dataItem.IsActive                 
@@ -199,4 +200,8 @@ export class ViewScheduleComponent {
         return args.event.dataItem.type;
         //need to included this [eventClass]="getEventClass" in html kendo
       }
+
+    getEventStyles(args: EventStyleArgs){
+        return { backgroundColor: args.event.dataItem.Color };
+    }
 }

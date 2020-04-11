@@ -5,10 +5,6 @@
     <hr>
 
     <p id="final_warning"></p>
-   <!--  <div class="row">
-      <div id="program_desc"></div>
-    </div>
-    <hr> -->
   
     <form id = "registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   
@@ -45,11 +41,10 @@
         <div class="row">
           <label class="col-form-label col-sm-2" for="TeacherEmail">Teacher Email: </label>
           <div class="col-sm-10">
-            <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" placeholder="" formControlName="TeacherEmail"
+            <input class="form-control" type="email" formControlName="TeacherEmail"
                   [ngClass]="{ 'is-invalid': submitted && f.TeacherEmail.errors }" />
             <div *ngIf="submitted && f.TeacherEmail.errors" class="invalid-feedback">
                 <div *ngIf="f.TeacherEmail.errors.required">Email is required</div>
-                <!-- <div *ngIf="f.TeacherEmail.errors.email">Email must be a valid email address</div> -->
                 <div *ngIf="f.TeacherEmail.errors.pattern">Email must be a valid email address</div>
             </div>
           </div>
