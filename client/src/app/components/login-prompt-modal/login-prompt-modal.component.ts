@@ -2,13 +2,7 @@ import { Component, OnInit, Input, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import {ErrorStateMatcher} from '@angular/material';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        return control.dirty && form.invalid;
-    }
-  }
+import { AuthenticationService, TokenPayload } from "../../authentication.service";
 
 @Component({
   selector: "login-prompt-modal.component",
@@ -16,14 +10,23 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   // styleUrls: ['./modal-dialog.component.css']
 })
 export class LoginPromptModal implements OnInit {
-  errorMatcher = new MyErrorStateMatcher();
   modalHeader: String;
   modalContent: String;
   loginForm: FormGroup;
   returnUrl: string;
+  
+  credentials: TokenPayload = {
+    UserPK: 0,
+    Username: "",
+    Password: "",
+    Role_FK: "",
+    Email: "",
+  };
 
   constructor(
+    private auth: AuthenticationService,
     public dialogRef: MatDialogRef<LoginPromptModal>,
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private modalData: any
@@ -51,14 +54,28 @@ export class LoginPromptModal implements OnInit {
     //this.closeModal();
     this.dialogRef.close("Yes");
   }
-
+  
   createNew() {
-    this.dialogRef.close("CreateNew");
+
   }
 
   signIn() {
     if (this.loginForm.valid) {
-        //this.dialogRef.close("Signin");
+        //;
+        this.credentials.Username = this.loginForm.get('username').value;
+        this.credentials.Password = this.loginForm.get('password').value;
+
+        this.auth.login(this.credentials).subscribe(
+            (res) => {
+               // this.router.navigateByUrl(this.returnUrl);
+                this.dialogRef.close("Success");
+            },
+            (err) => {
+              //alert('Username and password do not match')
+              console.log("*Username and password do not match");
+              return;
+            }
+          );
         console.log("Sign In");
     }
   

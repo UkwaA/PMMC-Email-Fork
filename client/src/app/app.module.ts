@@ -86,8 +86,16 @@ const routes : Routes = [
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  {path: 'booking-individual-program/:id', component: BookingIndividualProgramComponent},
-  {path: 'booking-group-program/:id', component: BookingGroupProgramComponent},
+  {
+    path: 'booking-individual-program/:id', 
+    component: BookingIndividualProgramComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'booking-group-program/:id', 
+    component: BookingGroupProgramComponent,
+    canActivate: [AuthGuardService]
+  },
   {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
