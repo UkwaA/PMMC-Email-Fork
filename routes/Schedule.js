@@ -16,10 +16,25 @@ schedule.use(cors());
    ADD NEW PROGRAM SCHEDULE SETTING
  ************************************/
 schedule.post("/add-new-schedule-setting", (req, res) => {
-  ScheduleSetting.create(req.body)
-    .then(setting => {
-      res.json(setting);
-    })
+  ScheduleSetting.findOne({
+    where: {
+      ProgramPK: req.params.id,
+      Start: req.params.start,
+      End: req.params.end,
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting){
+      res.json({message: "There exists another session at this time. Please select another time."})
+    }
+    else{
+      ScheduleSetting.create(req.body)
+      .then(newSetting => {
+        res.json(newSetting)
+      })
+    }
+  })
     .catch(err => {
       res.send("errorExpressErr: " + err);
     });

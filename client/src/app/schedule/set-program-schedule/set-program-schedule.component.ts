@@ -2,7 +2,7 @@ import { Component, EventEmitter } from '@angular/core'
 import { ProgramData } from '../../data/program-data';
 import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog, MatCard, MatSelect, MatDatepickerInputEvent, MatCheckboxChange } from '@angular/material';
-import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
+import { AddScheduleModalDialogComponent } from '../../components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProgramScheduleData } from '../../data/program-schedule-data';
@@ -201,93 +201,33 @@ export class SetProgramScheduleComponent {
         if(event > this.endTime){
             this.endTime = event
         }
-    }
+    }    
 
-    //Define this function to remove the Selected Day from the list
-    // removeSelectedDayOfMonth(e: any): void {
-    //     const index = this.selectedDayOfMonthArr.findIndex(c => c.label === e.sender.label);
-    //     this.selectedDayOfMonthArr.splice(index, 1);
-    // }
-
-    //Define this function to add days to selectedDayOfMonthArr
-    // addDays(day:number){
-    //     //check if duplicate => true
-    //     if(day > 0 && day <= 31){
-    //         if(this.selectedDayOfMonthArr.some(item => item.label === day)){}            
-    //         else{
-    //             //not found
-    //             var tempDayObj = {
-    //                 label: day,
-    //                 selected: false,
-    //                 removable: true
-    //             }
-    //             this.selectedDayOfMonthArr.push(tempDayObj)
-    //         }
-
-    //         //Sort the selectedDayOfMonthArr to display in order
-    //         this.selectedDayOfMonthArr.sort(function(a, b) {            
-    //             if (a < b) {
-    //             return -1;
-    //             }
-    //             if (a > b) {
-    //             return 1;
-    //             }                      
-    //             return 0;
-    //         });
-
-    //         this.selectedDayOfMonthArr.sort(function (a, b) {
-    //             return a.label - b.label;
-    //         });
-    //     }
-    // }
-
-    //Define the change of Selected Month Of Year
-    // onChangeSelectedMonthOfYear(e: any){
-    //     this.selectedMonthOfYear = e
-    //     if(this.selectedDayOfMonth > this.selectedMonthOfYear.max){
-    //         this.selectedDayOfMonth = 1
-    //     }
-    // }
-
-    openModal(){
-        //Form validation
-        this.submitted = true;      
-
-        //validate input form
-        if (this.SetProgramScheduleForm.invalid) {
-            return;
-        }
-
-        // if(this.frequency == "MONTHLY" && (this.selectedDayOfMonthArr.length == 0 
-        //             || this.selectedDay < 1 || this.selectedDay > 31)){
-        //     return
-        // }
-
-        // if(this.frequency == "YEARLY" && (this.selectedDayOfMonth > this.selectedMonthOfYear.max 
-        //             || this.selectedDayOfMonth < 1)){
-        //     return
-        // }
-        
+    addNewScheduleModal(){
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose =true;
+        dialogConfig.disableClose = true;
         dialogConfig.id = "modal-component";
         dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "auto";
+        dialogConfig.maxWidth = "2000px";
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Set Program Schedule",
-            description: "All information is correct?",            
-            actionButtonText: "Confirm",   
+            title: "Add new schedule",
+            description: "",
+            programPK: this.ProgramPK,
+            name: this.programData.Name,
+            userPK: this.currentUserPK,
+            actionButtonText: "Save",   
             numberOfButton: "2"         
             }
-        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-        modalDialog.afterClosed().subscribe(result =>{
+        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
                 //call register function                
-                this.setSchedule()
+                //this.setSchedule()
             }
             else{
                 console.log("stop")                
@@ -305,43 +245,7 @@ export class SetProgramScheduleComponent {
         var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,19)
         
         var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toString()
-        var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toString()
-
-        //Set up the recurrent rule for event
-        // if(this.frequency != "NEVER")
-        // {
-        //     this.recurrenceRule = "FREQ=" + this.frequency + ";INTERVAL=" + this.interval
-        //     if(this.frequency == "WEEKLY"){
-        //         //BYDAY
-        //         this.recurrenceRule += ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",")
-        //     }
-        //     else if(this.frequency == "MONTHLY"){
-        //         //BYMONTHDAY
-        //         if(this.selectedDayOfMonthArr.length > 0){
-        //             this.recurrenceRule += ";BYMONTHDAY="
-        //             for(var i = 0; i < this.selectedDayOfMonthArr.length; i++){
-        //                 if(i != this.selectedDayOfMonthArr.length - 1){
-        //                     this.recurrenceRule += this.selectedDayOfMonthArr[i].label + ",";
-        //                 }
-        //                 else{
-        //                     this.recurrenceRule += this.selectedDayOfMonthArr[i].label
-        //                 }
-        //             }                    
-        //         }
-        //     }
-        //     else if(this.frequency == "YEARLY"){
-        //         this.recurrenceRule += ";BYMONTH=" + this.selectedMonthOfYear.value 
-        //                     + ";BYMONTHDAY=" + this.selectedDayOfMonth
-        //     }
-        //     //COUNT
-        //     if(this.endRepeatArr.type == "After" && this.endRepeatAfterNoOccurence > 0){
-        //         this.recurrenceRule += ";COUNT=" + this.endRepeatAfterNoOccurence;
-        //     }
-        //     //UNTIL
-        //     else if(this.endRepeatArr.type == "On"){
-        //         this.recurrenceRule += ";UNTIL=" + dateEndRepeat;
-        //     }
-        // }         
+        var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toString()   
 
         //Set up recurrence rule
         this.recurrenceRule += "FREQ=WEEKLY" + ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",") 

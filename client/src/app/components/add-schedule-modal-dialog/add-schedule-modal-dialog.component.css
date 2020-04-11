@@ -1,0 +1,44 @@
+#modal-content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    color: white;    
+}
+
+#modal-title {
+    font-size: 22px;
+    color: black;
+}
+
+#modal-footer {
+    justify-self: right;
+    align-self: center;
+    padding-top: 10px;
+}
+
+#modal-body{
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#modal-action-button {
+    margin-right: 30px;
+    background-color:#f0ad4e;
+    color: white;
+}
+
+#modal-cancel-button {
+    background-color: #4e4e4e;
+    color: white;
+}
+
+.errorMessage{
+    font-weight: lighter;
+    color: red;
+    font-size: 10pt;
+}
+
+label{
+    font-size: 11pt;
+}

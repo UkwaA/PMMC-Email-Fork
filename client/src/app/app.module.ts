@@ -62,6 +62,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
+import { AddScheduleModalDialogComponent } from './components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
 import { ScheduleManagementComponent } from './schedule/schedule-management/schedule-management.component'
 import { ViewScheduleComponent } from './schedule/view-schedule/view-schedule.component'
 import { SetProgramScheduleComponent } from './schedule/set-program-schedule/set-program-schedule.component'
@@ -176,6 +177,7 @@ const routes : Routes = [
     ModalDialogComponent,
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
+    AddScheduleModalDialogComponent,
     ScheduleManagementComponent,
     ViewScheduleComponent,
     AccountSetting,
@@ -225,6 +227,6 @@ const routes : Routes = [
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
     AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent]
+  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,AddScheduleModalDialogComponent]
 })
 export class AppModule { }
