@@ -107,6 +107,8 @@ export class ViewScheduleComponent {
                     End: parseAdjust(dataItem.End),
                     EndTimezone: dataItem.EndTimezone,                    
                     RecurrenceRule: dataItem.RecurrenceRule,
+                    EndRepeatDate: dataItem.EndRepeatDate,
+                    RepeatDay: dataItem.RepeatDay,
                     RecurrenceID: dataItem.RecurrenceID,
                     RecurrenceException: dataItem.RecurrenceException,
                     Color: dataItem.Color,

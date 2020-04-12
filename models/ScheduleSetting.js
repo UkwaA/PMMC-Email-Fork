@@ -34,6 +34,12 @@ module.exports = db.sequelize.define(
     RecurrenceRule:{
         type: Sequelize.TEXT
     },
+    EndRepeatDate:{
+      type: Sequelize.DATE
+    },
+    RepeatDay:{
+      type: Sequelize.TEXT
+    },
     RecurrenceID:{
         type: Sequelize.TEXT
     },

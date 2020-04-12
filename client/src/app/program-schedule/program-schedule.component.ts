@@ -127,6 +127,7 @@ export class ProgramScheduleComponent implements OnInit {
           MaximumParticipant: this.programDetails.MaximumParticipant,
           CurrentParticipant: 0,
           RecurrenceRule: dataItem.RecurrenceRule,
+          EndRepeatDate: dataItem.EndRepeatDate,
           RecurrenceID: dataItem.RecurrenceID,
           RecurrenceException: dataItem.RecurrenceException,
           Color: dataItem.Color,

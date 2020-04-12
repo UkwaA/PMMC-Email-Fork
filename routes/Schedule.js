@@ -9,6 +9,9 @@ const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
 const ScheduleSetting = require("../models/ScheduleSetting");
 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
@@ -16,19 +19,37 @@ schedule.use(cors());
    ADD NEW PROGRAM SCHEDULE SETTING
  ************************************/
 schedule.post("/add-new-schedule-setting", (req, res) => {
-  ScheduleSetting.findOne({
+  timeFormatOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false
+  }; 
+
+  startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
+  endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
+  
+  ScheduleSetting.findAll({
     where: {
-      ProgramPK: req.params.id,
-      Start: req.params.start,
-      End: req.params.end,
+      ProgramPK: req.body.ProgramPK,
+      Start: {
+        [Op.like]: '%'+startTime+'%'
+      },
+      End: {
+        [Op.like]: '%'+endTime+'%'
+      },
       IsActive: true
     }
   })
   .then(scheduleSetting =>{
-    if(scheduleSetting){
-      res.json({message: "There exists another session at this time. Please select another time."})
+    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+      res.json(
+        {error:"There exists sessions in this time frame" 
+          + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+        )
     }
     else{
+      //If there's no events having the same start and end time => create new
       ScheduleSetting.create(req.body)
       .then(newSetting => {
         res.json(newSetting)
@@ -38,6 +59,73 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
     .catch(err => {
       res.send("errorExpressErr: " + err);
     });
+});
+
+/************************************
+  UPDATE PROGRAM SCHEDULE SETTING
+ ************************************/
+schedule.post("/update-schedule-setting", (req, res) => {
+  timeFormatOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false
+  }; 
+
+  startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
+  endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
+  
+  ScheduleSetting.findAll({
+    where: {
+      ScheduleSettingPK: {
+        [Op.ne]: req.body.ScheduleSettingPK
+      },
+      ProgramPK: req.body.ProgramPK,
+      Start: {
+        [Op.like]: '%'+startTime+'%'
+      },
+      End: {
+        [Op.like]: '%'+endTime+'%'
+      },
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+        res.json(
+          {error:"There exists sessions in this time frame" 
+            + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+          )
+    }
+    else{
+      //If there's no events having the same start and end time => update the current
+      //###### Update #######
+        ScheduleSetting.update(req.body, {
+          where: {
+            ScheduleSettingPK: req.body.ScheduleSettingPK
+          }
+        })
+        .then(result => {
+          if (result == 1) {
+            res.send({
+              message: "Schedule setting was updated successfully."
+            });
+          }
+          else {
+            res.send({
+              error: "Cannot update schedule setting"
+            });
+          }
+        })
+        .catch(err => {
+          res.send('error: ' + err)
+        })
+        //###### End Update #######
+    }
+  })
+    .catch(err => {
+      res.send("errorExpressErr: " + err);
+    });    
 });
 
 /**********************************************

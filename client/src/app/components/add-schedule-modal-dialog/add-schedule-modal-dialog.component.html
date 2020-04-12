@@ -9,6 +9,15 @@
                 <div class="form-group font-weight-bold">                    
                     <div class="row">
                         <div class="col-md-2">
+                            <label>Program Name</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" formControlName="programName" [(ngModel)]="modalData.name" readonly>
+                        </div> 
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-2">
                             <label>Date</label>
                         </div>                
                         <div class="col-md-1">
@@ -60,10 +69,15 @@
                             <div class="errorMessage" *ngIf="endTimeErrorMessage">
                                 <mat-icon matListIcon>error</mat-icon>{{endTimeErrorMessage}}
                             </div>
-                        </div>    
-                        <div class="errorMessage" *ngIf="errorMessage">
-                            <mat-icon matListIcon>error</mat-icon>{{errorMessage}}
-                        </div>    
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="errorMessage" *ngIf="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{errorMessage}}
+                            </div>  
+                        </div>
                     </div>
                     <br/>            
                     <div class="row">
@@ -84,23 +98,15 @@
                             </kendo-buttongroup>
                         </div>                
                     </div>
-                    <br/>
                     <div class="row">
-                        <div class="col-md-2">
-                            <label>Event Color:</label>
-                        </div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <kendo-colorpicker 
-                                #picker
-                                [view]="'palette'"
-                                [format]="'hex'"
-                                [paletteSettings]="settings"
-                                [(value)]="selectedColor"
-                            >
-                            </kendo-colorpicker>
+                            <div class="errorMessage" *ngIf="repeatOnErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{repeatOnErrorMessage}}
+                            </div>  
                         </div>
                     </div>
-                    <br/>
+                    <br/>                    
                     <div class="row">
                         <div class="col-md-2">
                             <label>Event Note</label>

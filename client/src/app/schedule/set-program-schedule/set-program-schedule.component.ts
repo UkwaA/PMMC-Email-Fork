@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { AuthenticationService} from '../../authentication.service';
+import { PaletteSettings } from '@progress/kendo-angular-inputs';
+import { SchedulerModelFields } from '@progress/kendo-angular-scheduler';
 
 @Component({
     templateUrl: './set-program-schedule.component.html',
@@ -17,6 +19,7 @@ import { AuthenticationService} from '../../authentication.service';
 export class SetProgramScheduleComponent {
     ProgramPK = 0;
     currentUserPK = 0;
+    events: any[] = [];
     programData: ProgramData = {
         ProgramPK: 0,
         Name: "",
@@ -52,91 +55,60 @@ export class SetProgramScheduleComponent {
 
     SetProgramScheduleForm: FormGroup;
     submitted = false;
-    errorMessage = '';
-
-    //Define variable for End Repeat on
-    //endRepeatArr:any = {type: "Never"}
-    //isRadioChecked:boolean = true
-
-    //Define variable for Repeat on day
-    // seletedRecurrenceType:string = "Never"
-    // recurrenceTypeArr:any = [
-    //     {type:"Never", freq: "NEVER", value:"" , selected: true},
-    //     {type: "Weekly", freq: "WEEKLY", value: "week(s)", selected: false},
-    //     {type: "Monthly", freq: "MONTHLY", value: "month(s)", selected: false},
-    //     {type: "Yearly", freq: "YEARLY", value: "year(s)", selected: false}
-    // ];
-    //displayedInterval: String;
-    startDate:any = new Date();
-    endDate:any = new Date();
-    startTime:any = new Date('2020-04-01T09:00:00');
-    endTime:any = new Date('2020-04-01T10:00:00');
-    timeFormatOptions = {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false
-      };
-
-    //Define variable needed for MONTHLY repeat    
-    // selectedDayOfMonthArr = [];
-    // selectedDay:number = 1
-
-    // //Define variable needed for YEARLY repeat
-    // selectedDayOfMonth:number = 1
-    // selectedMonthOfYear:any = {
-    //     month: "January",
-    //     value: 1,
-    //     max: 31
-    // };
-    // monthsOfYearArr = [
-    //     {month:"January", value: 1, max: 31 },
-    //     {month:"February", value: 2, max: 29 },
-    //     {month:"March", value: 3, max: 31 },
-    //     {month:"April", value: 4, max: 30 },
-    //     {month:"May", value: 5, max: 31 },
-    //     {month:"June", value: 6, max: 30 },
-    //     {month:"July", value: 7, max: 31 },
-    //     {month:"August", value: 8, max: 31 },
-    //     {month:"September", value: 9, max: 30 },
-    //     {month:"October", value: 10, max: 31 },
-    //     {month:"November", value: 11, max: 30 },
-    //     {month:"December", value: 12, max: 31 }
-    // ]
-
-    //Define variable needed for event creation
-    interval:number = 1
-    // frequency = "NEVER"
-    weeklyRepeatOnDayArr:String[] = []
-    // endRepeatAfterNoOccurence:number = 1;
-    // endRepeatOnDate:any = new Date();
-    eventDescription = "";
-    recurrenceRule = "";
-    //monthlyRepeatOnDayArr:String[] = []
+    errorMessage = ''; 
 
     //WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
-        {day: "Sunday", value: "SU", selected: false},
-        {day: "Monday", value: "MO", selected: true},
-        {day: "Tuesday", value: "TU", selected: false},
-        {day: "Wednesday", value: "WE", selected: false},
-        {day: "Thursday", value: "TH", selected: false},
-        {day: "Friday", value: "FR", selected: false},
-        {day: "Saturday", value: "SA", selected: false},
+        {day: "Sunday", value: "SU", eventList:[]},
+        {day: "Monday", value: "MO", eventList:[]},
+        {day: "Tuesday", value: "TU", eventList:[]},
+        {day: "Wednesday", value: "WE", eventList:[]},
+        {day: "Thursday", value: "TH", eventList:[]},
+        {day: "Friday", value: "FR", eventList:[]},
+        {day: "Saturday", value: "SA", eventList:[]},
     ]
         
+    timeFormatOptions = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+      };
+
+    selectedColor: string = "";
+
+    public settings: PaletteSettings = {
+        palette: [
+          "#e76c36", "#ffbc00", "#edafb7", "#a18aab",
+          "#f9d9ab", "#c87d0e", "#c6d9f0", "#8db3e2", 
+          "#548dd4", "#a29a36"
+        ],
+        columns: 5,
+        tileSize: 30
+    }
+    
+    public eventFields: SchedulerModelFields = {
+        id: "CreatedBy", //point id to dummy to avoid bug 
+        title: 'Title',
+        description: 'Description',
+        startTimezone: 'StartTimezone',
+        start: 'Start',
+        end: 'End',
+        endTimezone: 'EndTimezone',
+        isAllDay: 'IsAllDay',
+        recurrenceRule: 'RecurrenceRule',
+        recurrenceId: 'RecurrenceID',
+        recurrenceExceptions : 'RecurrenceException'
+    };
+
+    tempStart = ""
+    tempEnd = ""
     constructor (private formBuilder: FormBuilder, public matDialog: MatDialog, private fb: FormBuilder,
         private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
     ngOnInit(){ 
-        this.errorMessage = ''
-        this.dayArr.forEach(day =>{
-            if(day.selected){
-                this.weeklyRepeatOnDayArr.push(day.value)
-            }
-        })
-        
+        this.errorMessage = '' 
+
         this.SetProgramScheduleForm = this.fb.group({    
             programName: [],
             startDate: [],
@@ -150,11 +122,53 @@ export class SetProgramScheduleComponent {
         this.auth.profile().subscribe(user =>{
             this.currentUserPK = user.UserPK
             this.currentScheduleSetting.CreatedBy = user.UserPK
-        })
+        })        
 
         //Get current program header info
         this.route.params.subscribe(val =>{
             this.ProgramPK = val.id
+            this.programScheduleServices.getScheduleSettingById(this.ProgramPK).subscribe((schedules) =>{
+                const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
+                    {
+                        ...dataItem,
+                        ScheduleSettingPK: dataItem.ScheduleSettingPK,
+                        ProgramPK: dataItem.ProgramPK,
+                        Title: dataItem.Title,
+                        Description: dataItem.Description,
+                        StartTimezone: dataItem.StartTimezone,
+                        Start: dataItem.Start,
+                        End: dataItem.End,
+                        EndTimezone: dataItem.EndTimezone,                    
+                        RecurrenceRule: dataItem.RecurrenceRule,
+                        EndRepeatDate: dataItem.EndRepeatDate,
+                        RepeatDay: dataItem.RepeatDay,
+                        RecurrenceID: dataItem.RecurrenceID,
+                        RecurrenceException: dataItem.RecurrenceException,
+                        Color: dataItem.Color,
+                        CreatedBy: dataItem.CreatedBy,
+                        CreatedDate: dataItem.CreatedDate,
+                        IsActive: dataItem.IsActive,
+                        tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.timeFormatOptions),
+                        tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.timeFormatOptions)
+                    }
+                ));
+                this.events = sampleDataWithCustomSchema
+                if(this.events.length > 0){
+                    this.selectedColor = this.events[0].Color
+                }
+                var newLength = 0
+                //Loop through all events
+                this.events.forEach(event =>{
+                    //for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
+                    this.dayArr.forEach(day =>{
+                        if(event.RepeatDay.indexOf(day.value) >= 0){
+                            day.eventList.push(event)
+                        }                        
+                    })
+                })
+                console.log(this.dayArr)
+
+            })
             
             this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program =>{
                 this.programData = program;                
@@ -164,45 +178,7 @@ export class SetProgramScheduleComponent {
 
     // convenience getter for easy access to form fields
     get f() { return this.SetProgramScheduleForm.controls; }
-
-    //Get value for recurrence type
-    // onChangeRecurrentType(event,type){        
-    //     this.seletedRecurrenceType = type.type
-    //     this.recurrenceTypeArr.forEach(element => {
-    //         if(element.type == this.seletedRecurrenceType){
-    //             this.frequency = element.freq
-    //             this.displayedInterval = element.value
-    //         }
-    //     });
-    // }
-
-    //Get value for repeat on day for Weekly recurrence
-    onChangeRepeatOnDay(event, day){
-        if(event){
-            if(this.weeklyRepeatOnDayArr.indexOf(day.value) < 0){
-                this.weeklyRepeatOnDayArr.push(day.value)
-            }
-        }
-        else{
-            var tempIndex =this.weeklyRepeatOnDayArr.indexOf(day.value)
-            if(tempIndex > -1){
-                this.weeklyRepeatOnDayArr.splice(tempIndex,1)
-            }
-        }
-    }
-
-    onChangeStartDate(event){
-        if(event > this.endDate){
-            this.endDate = event
-        }        
-    }
-
-    onChangeStartTime(event){
-        if(event > this.endTime){
-            this.endTime = event
-        }
-    }    
-
+    
     addNewScheduleModal(){
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
@@ -211,23 +187,23 @@ export class SetProgramScheduleComponent {
         dialogConfig.id = "modal-component";
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "600px";
-        dialogConfig.width = "auto";
-        dialogConfig.maxWidth = "2000px";
+        dialogConfig.width = "700px";
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Add new schedule",
+            mode: "add",
             description: "",
             programPK: this.ProgramPK,
             name: this.programData.Name,
             userPK: this.currentUserPK,
+            color: this.selectedColor,            
             actionButtonText: "Save",   
             numberOfButton: "2"         
             }
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                //call register function                
-                //this.setSchedule()
+                window.location.reload();
             }
             else{
                 console.log("stop")                
@@ -235,43 +211,42 @@ export class SetProgramScheduleComponent {
         })
     }
 
-    setSchedule(){               
-        //Get Start Date Time and End Date Time
-        var timezoneOffset = this.startDate.getTimezoneOffset()*60000        
-        var eventStartDate = (new Date(this.startDate - timezoneOffset)).toISOString().slice(0,10)
-        //var eventEndDate = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)        
-        var eventStartTime = this.startTime.toLocaleString('en-US', this.timeFormatOptions);
-        var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
-        var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,19)
-        
-        var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toString()
-        var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toString()   
+    updateScheduleModal(item){
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "700px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Edit schedule",
+            mode: "edit",
+            description: "",
+            programPK: this.ProgramPK,
+            name: this.programData.Name,
+            userPK: this.currentUserPK,
+            color: this.selectedColor,            
+            actionButtonText: "Save",   
+            numberOfButton: "2",
+            //Add this for Editing
+            event: item  
+            }
+        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                window.location.reload();
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+    }
 
-        //Set up recurrence rule
-        this.recurrenceRule += "FREQ=WEEKLY" + ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",") 
-                                + ";UNTIL=" + dateEndRepeat
-
-        this.currentScheduleSetting = {
-            ScheduleSettingPK: 0,
-            ProgramPK: this.programData.ProgramPK,
-            Title: this.programData.Name,
-            Description: this.eventDescription,
-            StartTimezone: "",
-            Start: eventStartDateTime,
-            End: eventEndDateTime,   
-            EndTimezone: "",            
-            RecurrenceRule: this.recurrenceRule,
-            RecurrenceID: "",
-            RecurrenceException: "",
-            Color: "",
-            CreatedBy: this.currentUserPK,        
-            IsActive: true,
-            IsAllDay: false
-        };
-        console.log(this.currentScheduleSetting)
-        // this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res=>{
-        //     this.router.navigateByUrl("/profile/schedule-management")
-        // })
-        
+    setSchedule(){      
+        //save new color in schedulesetting table
+        console.log(this.selectedColor)
     }
 }
