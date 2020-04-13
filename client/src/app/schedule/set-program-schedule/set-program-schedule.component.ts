@@ -184,7 +184,7 @@ export class SetProgramScheduleComponent {
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
+        dialogConfig.id = "add-schedule-modal-component";
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "600px";
         dialogConfig.width = "700px";
@@ -216,7 +216,7 @@ export class SetProgramScheduleComponent {
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
+        dialogConfig.id = "update-schedule-modal-component";
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "600px";
         dialogConfig.width = "700px";

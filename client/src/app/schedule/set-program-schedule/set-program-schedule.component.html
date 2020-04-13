@@ -39,7 +39,7 @@
                     <!--  Create table -->
                     <div class="row">
                         <div class="col-md-3">
-                            <button mat-raised-button onclick="this.blur()" id="addButton" (click)="addNewScheduleModal()">
+                            <button mat-raised-button onclick="this.blur()" color="primary" (click)="addNewScheduleModal()">
                                 <mat-icon matListIcon>add</mat-icon> New Schedule                                
                             </button>                                
                         </div>
@@ -57,7 +57,8 @@
                                         <tr *ngFor="let item of day.eventList">
                                             <td>
                                                 {{item.tempStart}} <br/>to {{item.tempEnd}}
-                                                <button mat-icon-button aria-label="Edit" onclick="this.blur()" (click)="updateScheduleModal(item)" >
+                                                <button mat-icon-button onclick="this.blur()" matTooltip="Edit"
+                                                    (click)="updateScheduleModal(item)" >
                                                     <mat-icon>edit</mat-icon>
                                                 </button>
                                             </td>
@@ -77,7 +78,7 @@
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-3">
-                            <button mat-raised-button id="addButton" onclick="this.blur()" (click)="addNewScheduleModal()">
+                            <button mat-raised-button color="primary" onclick="this.blur()" (click)="addNewScheduleModal()">
                                 <mat-icon matListIcon>add</mat-icon> New Black-out date                                
                             </button>                                
                         </div>

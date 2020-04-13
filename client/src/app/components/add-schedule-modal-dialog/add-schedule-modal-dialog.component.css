@@ -33,6 +33,10 @@
     color: white;
 }
 
+#removeButton{
+    margin-bottom: 15px;
+}
+
 .errorMessage{
     font-weight: lighter;
     color: red;

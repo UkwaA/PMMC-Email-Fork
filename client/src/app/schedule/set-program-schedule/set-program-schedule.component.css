@@ -58,11 +58,15 @@ table.table-hover > tbody > tr > td{
   border:1px solid black;
 }
 
-#addButton {
+.mat-button, .mat-raised-button:hover{
+  background-color: rgb(6, 3, 189);
+} 
+
+/* #addButton {
   margin-right: 30px;
   background-color:#f0ad4e;
   color: white;
-}
+} */
 
 button:focus, button:active:focus, button.active:focus {
   outline: none !important;

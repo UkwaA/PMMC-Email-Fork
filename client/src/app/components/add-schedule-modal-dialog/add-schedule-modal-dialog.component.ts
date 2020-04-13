@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { PaletteSettings } from '@progress/kendo-angular-inputs';
 import { ProgramScheduleService } from 'src/app/services/schedule.services';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 
 @Component({
     selector: 'add-schedule-modal-dialog',
@@ -69,7 +71,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
     constructor(public dialogRef: MatDialogRef<AddScheduleModalDialogComponent>,
         private fb: FormBuilder, private programScheduleServices: ProgramScheduleService,
-        private router: Router,
+        private router: Router, public matDialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) private modalData: any){}
 
     ngOnInit(){
@@ -182,6 +184,47 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
     closeModal() {
       this.dialogRef.close("No");
+    }
+
+    removeSchedule(){
+      //Configure Modal Dialog
+      const dialogConfig = new MatDialogConfig();
+      // The user can't close the dialog by clicking outside its body
+      dialogConfig.disableClose =true;
+      dialogConfig.id = "modal-component";
+      dialogConfig.height = "auto";
+      dialogConfig.maxHeight = "500px";
+      dialogConfig.width = "350px";
+      dialogConfig.autoFocus = false;
+      dialogConfig.data = {
+          title: "Delete schedule",
+          description: "Are you sure to delete this schedule?",            
+          actionButtonText: "Confirm",   
+          numberOfButton: "2"         
+          }
+      const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+      modalDialog.afterClosed().subscribe(result =>{
+          if(result == "Yes"){
+            //TODO:
+            //1. Set IsActive in schedulesetting to 0 (false)
+            //2. Set IsActive in schedule to 0 (how to get all entries in schedule? maybe add ScheduleSettingPK to schedule table)
+            //3. Send email to all customer that currently are in the reservation relating this schedule
+            let scheduleToDeactivate = {
+              ScheduleSettingPK: this.modalData.event.ScheduleSettingPK
+            }
+            console.log(scheduleToDeactivate)
+            this.programScheduleServices.deactivateScheduleSetting(scheduleToDeactivate).subscribe(res=>{
+              console.log(res)
+            })
+            this.isDisabled = false
+            if(!this.isDisabled){
+              this.dialogRef.close("Yes")
+            }
+          }
+          else{
+              console.log("stop")                
+          }
+      })      
     }
 
     setSchedule(){               

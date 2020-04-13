@@ -128,6 +128,33 @@ schedule.post("/update-schedule-setting", (req, res) => {
     });    
 });
 
+/************************************
+   DEACTIVATE PROGRAM SCHEDULE SETTING
+ ************************************/
+schedule.post("/deactivate-schedule-setting", (req, res) => {
+  ScheduleSetting.findOne({
+    where: {
+      ScheduleSettingPK: req.body.ScheduleSettingPK
+    }
+  })
+  .then(scheduleSetting =>{
+    //res.json(req.body)
+    if(scheduleSetting){
+      scheduleSetting.update({
+        IsActive: false
+      });
+      res.json("Program Schedule setting has been deactivated")
+    }
+    else{
+      res.json("Cannot deactivate schedule setting")
+    }    
+  })
+  .catch(err => {
+    res.send("error: " + err + "   " + req.body.ProgramPK);
+  })
+});
+
+
 /**********************************************
    ADD NEW SCHEDULE RECORD TO SCHEDULE TABLE
  **********************************************/
@@ -146,7 +173,11 @@ schedule.post("/add-new-schedule", (req, res) => {
   GET ALL PROGRAM SCHEDULES OVERVIEW
  *************************************/
 schedule.get("/get-all-schedule-setting", (req, res) => {
-  ScheduleSetting.findAll()
+  ScheduleSetting.findAll({
+    where: {
+      IsActive: true
+    }
+  })
     .then(overview => {      
       res.json(overview);
     })

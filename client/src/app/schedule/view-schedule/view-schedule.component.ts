@@ -119,14 +119,14 @@ export class ViewScheduleComponent {
             ));
             this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
-            console.log(this.events)
+            console.log((new Date()).toISOString())
             //Loop through all events
             this.events.forEach(event =>{
                 //for each event, loop through all programs and compare ProgramPK
                 this.allPrograms.forEach(program =>{
                     if(event.ProgramPK == program.ProgramPK){
                         if(program.ProgramType == 0){
-                            this.groupEvent.push(event)
+                            this.groupEvent.push(event)                            
                         }
                         else{
                             this.individualEvent.push(event)
@@ -137,7 +137,9 @@ export class ViewScheduleComponent {
                         }
                         program.eventList.push(event)
                     }
-                })                
+                })
+                //generate exception rule
+
             }) 
             if(this.currentMode != "viewAllSchedule"){
                 this.programs.forEach(program =>{
