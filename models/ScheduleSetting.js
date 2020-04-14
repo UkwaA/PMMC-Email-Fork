@@ -46,9 +46,9 @@ module.exports = db.sequelize.define(
     RecurrenceException:{
         type: Sequelize.TEXT
     },
-    Color:{
-        type: Sequelize.TEXT
-    },
+    // Color:{
+    //     type: Sequelize.TEXT
+    // },
     CreatedBy: {
       type: Sequelize.INTEGER
     },
