@@ -64,7 +64,7 @@ users.post("/register", (req, res) => {
             res.send("errorExpressErr: " + err);
           });
       } else {
-        res.json({ error: "User already exists" });
+        res.json({ error: "This username is taken" });
       }
     })
     .catch(err => {

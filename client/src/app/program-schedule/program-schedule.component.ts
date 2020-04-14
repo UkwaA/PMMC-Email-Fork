@@ -216,7 +216,9 @@ export class ProgramScheduleComponent implements OnInit {
       loginDialogConfig.maxHeight = "600px";
       loginDialogConfig.width = "500px";
       loginDialogConfig.autoFocus = false;
-      loginDialogConfig.data = { };
+      loginDialogConfig.data = {
+        routerURL: "/booking-group-program/" + this.ProgramPK
+       };
       const loginModal = this.matDialog.open(LoginPromptModal, loginDialogConfig);
       loginModal.afterClosed().subscribe((result) => {
         if (result == "Yes") {

@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService} from '../../authentication.service'
 import { CustomerService } from '../../services/customer.services'
+import { Router } from "@angular/router";
+
 
 
 import { UserData } from '../../../app/data/user-data';
@@ -46,7 +48,7 @@ export class RegisterModalDialogComponent implements OnInit{
 
     constructor(public dialogRef: MatDialogRef<RegisterModalDialogComponent>,
       private fb:FormBuilder, private auth:AuthenticationService, 
-      private custService:CustomerService,
+      private custService:CustomerService, private router:Router,
         @Inject(MAT_DIALOG_DATA) private modalData: any){}
 
     ngOnInit(){
@@ -103,21 +105,23 @@ export class RegisterModalDialogComponent implements OnInit{
         this.loadUserDetails();
         this.loadCustomerDetails();
         this.auth.register(this.userDetails).subscribe((res) => {
-          if (res.error)
-          {
+          if (res.error){
             console.log(res)
             this.errorMessage = "*"+res.error;
             return;
           }
-          else
-          {
+          else{
             this.customerDetails.UserPK = res.UserPK;
             this.custService.finishRegister(this.customerDetails).subscribe((res) => {
-              if (res.error)
-              {
+              if (res.error){
                 console.log(res)
                 this.errorMessage = "*"+res.error;
                 return;
+              }
+              else{
+                console.log(this.modalData.routerURL);
+                this.actionFunction();
+                this.router.navigateByUrl(this.modalData.routerURL);
               }
             })
           }

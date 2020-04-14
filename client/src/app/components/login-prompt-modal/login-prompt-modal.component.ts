@@ -8,6 +8,8 @@ import { RegisterModalDialogComponent } from "../register-modal-dialog/register-
 
 import { ModalDialogComponent } from "../modal-dialog/modal-dialog.component";
 
+declare var $:any
+
 @Component({
   selector: "login-prompt-modal.component",
   templateUrl: "./login-prompt-modal.component.html",
@@ -67,6 +69,7 @@ export class LoginPromptModal implements OnInit {
       registerDialogConfig.autoFocus = false;
       registerDialogConfig.data = {
         title: "Register New User",
+        routerURL: this.modalData.routerURL,
         // firstName: this.customerInfoForm.get('firstName').value,
         // lastName: this.customerInfoForm.get('lastName').value,
         // phoneNo: this.customerInfoForm.get('phoneNum').value,
@@ -90,6 +93,8 @@ export class LoginPromptModal implements OnInit {
         this.auth.login(this.credentials).subscribe(
             (res) => {
                 this.dialogRef.close("Success");
+                this.actionFunction();
+                this.router.navigateByUrl(this.modalData.routerURL);
             },
             (err) => {
               //alert('Username and password do not match')
