@@ -1,6 +1,10 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService} from '../../authentication.service'
+import { CustomerService } from '../../services/customer.services'
+
+
 import { UserData } from '../../../app/data/user-data';
 import { CustomerData } from '../../../app/data/customer-data';
 
@@ -15,6 +19,8 @@ export class RegisterModalDialogComponent implements OnInit{
     modalHeader: String
     modalContent: String
     submitted = false;
+    errorMessage = '';
+    currentUserPK: number;
 
     userDetails: UserData = {
       UserPK: 0,
@@ -39,7 +45,8 @@ export class RegisterModalDialogComponent implements OnInit{
   }
 
     constructor(public dialogRef: MatDialogRef<RegisterModalDialogComponent>,
-      private fb:FormBuilder,
+      private fb:FormBuilder, private auth:AuthenticationService, 
+      private custService:CustomerService,
         @Inject(MAT_DIALOG_DATA) private modalData: any){}
 
     ngOnInit(){
@@ -52,8 +59,8 @@ export class RegisterModalDialogComponent implements OnInit{
         PhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
         Address: ['', Validators.required],
         City: ['', Validators.required],
-        State: ['', Validators.required],
-        Zipcode:['', Validators.required],
+        State: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
+        Zipcode:['', [Validators.required, Validators.min(10000)]],
         Subscribe: [0]
       })
     }
@@ -69,11 +76,57 @@ export class RegisterModalDialogComponent implements OnInit{
 
     get f() { return this.newUserForm.controls; }  
 
+    loadUserDetails(){
+      this.userDetails.Username = this.newUserForm.get('username').value
+      this.userDetails.Email = this.newUserForm.get('email').value
+      this.userDetails.Password = this.newUserForm.get('password').value
+      this.userDetails.Role_FK = '1';
+    }
+
+    loadCustomerDetails(){
+      this.customerDetails.FirstName = this.newUserForm.get('FirstName').value;
+      this.customerDetails.LastName = this.newUserForm.get('LastName').value;
+      this.customerDetails.PhoneNo = this.newUserForm.get('PhoneNo').value;
+      this.customerDetails.Address = this.newUserForm.get('Address').value;
+      this.customerDetails.City = this.newUserForm.get('City').value;
+      this.customerDetails.State = this.newUserForm.get('State').value;
+      this.customerDetails.Zipcode = this.newUserForm.get('Zipcode').value;
+      this.customerDetails.Subscribe = this.newUserForm.get('Subscribe').value;
+    }
+
     onSubmit(){
       this.submitted = true;
       if (this.newUserForm.invalid)
         console.log("Invalid")
-      console.log(this.newUserForm)
+      else{
+        console.log(this.newUserForm)
+        this.loadUserDetails();
+        this.loadCustomerDetails();
+        this.auth.register(this.userDetails).subscribe((res) => {
+          if (res.error)
+          {
+            console.log(res)
+            this.errorMessage = "*"+res.error;
+            return;
+          }
+          else
+          {
+            this.customerDetails.UserPK = res.UserPK;
+            this.custService.finishRegister(this.customerDetails).subscribe((res) => {
+              if (res.error)
+              {
+                console.log(res)
+                this.errorMessage = "*"+res.error;
+                return;
+              }
+            })
+          }
+          err => {
+            console.error(err);
+            return;
+          }
+        })
+      }
     }
     
 }

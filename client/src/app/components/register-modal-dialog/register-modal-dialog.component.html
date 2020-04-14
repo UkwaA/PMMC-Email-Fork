@@ -1,12 +1,12 @@
 <div id="modal-content-wrapper">
     <header id="modal-header">
-        <h1 id="modal-title">New User</h1>
+        <h1 id="modal-title">{{modalData.title}}</h1>
     </header>
     <mat-divider></mat-divider>
     <section id="modal-body" style="padding-bottom:0px">
-        <div class="formerrors"></div>
+        <div class="formerrors">{{errorMessage}}</div>
         <form>
-        <div class="registration row" [formGroup]="newUserForm" (ngSubmit)="onSubmit()">
+        <div class="registration row" [formGroup]="newUserForm">
             <div class="col-sm-5">
                 <h5>Account Info</h5>
                 <hr>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="formPhoneNo">Phone Number</label>
-                    <input type="text" class="form-control" id="formPhoneNo" formControlName="PhoneNo"
+                    <input type="number" class="form-control" id="formPhoneNo" formControlName="PhoneNo"
                     [ngClass]="{ 'is-invalid': submitted && f.PhoneNo.errors }">
                     <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
                         <div *ngIf="submitted && f.PhoneNo.errors.required">Phone Number is required</div>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-sm-3">
                         <label for="formZipCode">Zip Code</label>
-                        <input type="text" class="form-control" id="formZipCode" formControlName="Zipcode"
+                        <input type="number" class="form-control" id="formZipCode" formControlName="Zipcode"
                         [ngClass]="{ 'is-invalid': submitted && f.Zipcode.errors }">
                         <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
                             Please enter a valid zip code

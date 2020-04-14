@@ -18,11 +18,6 @@ export class AuthCustomerGuardService implements CanActivate {
         console.log("User PK: " + this.auth.registeredPK)
         if (this.URL_ID == 'register')
             return true;
-        // if (this.auth.registeredPK != this.URL_ID)
-        // {
-        //     this.router.navigateByUrl('/')
-        //     return false
-        // }
         return false;
     }
 }

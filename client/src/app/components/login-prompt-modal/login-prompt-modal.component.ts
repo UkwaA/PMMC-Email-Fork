@@ -66,7 +66,7 @@ export class LoginPromptModal implements OnInit {
       registerDialogConfig.width = "700px";
       registerDialogConfig.autoFocus = false;
       registerDialogConfig.data = {
-        // title: "Register Confirmation",
+        title: "Register New User",
         // firstName: this.customerInfoForm.get('firstName').value,
         // lastName: this.customerInfoForm.get('lastName').value,
         // phoneNo: this.customerInfoForm.get('phoneNum').value,
@@ -76,7 +76,7 @@ export class LoginPromptModal implements OnInit {
         // addressState: this.customerInfoForm.get('address_state').value,
         // addressZipCode: this.customerInfoForm.get('address_zipcode').value,
         // actionButtonText: "Confirm",
-        // numberOfButton: "2"
+        numberOfButton: "2"
       };
       const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);
   }
