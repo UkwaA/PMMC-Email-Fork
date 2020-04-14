@@ -1,0 +1,143 @@
+<div id="modal-content-wrapper">
+    <header id="modal-header">
+        <div class="row">
+            <div class="col-md-4">
+                <h1 id="modal-title">{{modalData.title}}</h1>
+            </div>
+            <div class="col md-4"></div>
+            <div class="col-md-2" *ngIf="modalData.mode == 'edit'">
+                <button mat-raised-button color="warn" id="removeButton" onclick="this.blur()"
+                    (click)="removeSchedule()" >
+                    <mat-icon>delete</mat-icon>Delete
+                </button>
+            </div>
+        </div>
+    </header>
+    <mat-divider></mat-divider>
+    <section id="modal-body">
+        <div class="container">
+            <form [formGroup]="SetProgramScheduleForm" >
+                <div class="form-group font-weight-bold">                    
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Program Name</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" formControlName="programName" [(ngModel)]="modalData.name" readonly>
+                        </div> 
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Date</label>
+                        </div>                
+                        <div class="col-md-1">
+                            <label>Start:</label>
+                        </div>                            
+                        <div class="col-md-4">
+                            <kendo-datepicker 
+                                [(value)]="startDate"
+                                (valueChange)="onChangeStartDate($event)"
+                                >                        
+                            </kendo-datepicker>
+                        </div>
+                        <div class="col-md-1">
+                            <label>End:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <kendo-datepicker 
+                                [(value)]="endDate" 
+                                [min] = "startDate">
+                            </kendo-datepicker>
+                        </div>                                      
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Time</label>
+                        </div>
+                        <div class="col-md-1">
+                            <label>Start:</label>
+                        </div>                
+                        <div class="col-md-4">                                
+                            <kendo-timepicker
+                                [(value)]="startTime"
+                                (valueChange)="onChangeStartTime($event)"
+                                >
+                            </kendo-timepicker>
+                            <div class="errorMessage" *ngIf="startTimeErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{startTimeErrorMessage}}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <label>End:</label>
+                        </div>  
+                        <div class="col-md-4">
+                            <kendo-timepicker
+                                [(value)]="endTime"                                
+                                (valueChange)="onChangeEndTime($event)">
+                            </kendo-timepicker>
+                            <div class="errorMessage" *ngIf="endTimeErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{endTimeErrorMessage}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="errorMessage" *ngIf="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{errorMessage}}
+                            </div>  
+                        </div>
+                    </div>
+                    <br/>            
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Repeat on</label>
+                        </div>
+                        <div class="col-md-10">
+                            <kendo-buttongroup [selection]="'multiple'">
+                                <button 
+                                    *ngFor="let day of dayArr"
+                                    kendoButton
+                                    [toggleable]="true"
+                                    [selected]="day.selected"
+                                    (selectedChange)="onChangeRepeatOnDay($event, day)"
+                                >
+                                    {{ day.day }}
+                                </button>
+                            </kendo-buttongroup>
+                        </div>                
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="errorMessage" *ngIf="repeatOnErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{repeatOnErrorMessage}}
+                            </div>  
+                        </div>
+                    </div>
+                    <br/>                    
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Event Note</label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea kendoTextArea class="form-control" 
+                                formControlName="description" [(ngModel)]="eventDescription"></textarea>
+                        </div>
+                    </div>                    
+                </div>
+            </form>
+        </div>
+    </section>
+    <mat-divider></mat-divider>
+    <footer id="modal-footer">
+        <button mat-raised-button id="modal-action-button" (click)="setSchedule()">
+            {{modalData.actionButtonText}}
+        </button>
+        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+            Cancel
+        </button>
+    </footer>
+</div>

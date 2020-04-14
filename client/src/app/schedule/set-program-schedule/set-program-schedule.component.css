@@ -10,22 +10,69 @@ h1 {
     color:  #08b2b8;
 }
 
-.chipBox{
-  border-radius: 25px;
-  border: 1.5px solid rgb(126, 125, 125);
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding: 5px 2px 0px 5px;
-  width: auto;
-  height: 100%;
-  max-height: 200px;
-}
-
 .error-message{
   color: red;
   font-weight: normal;
   padding-top: 2px;
 }
+
+thead{
+  background-color:  rgba(0, 0, 0, 0.658);
+  color: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+td {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+td.name{
+  color:  #08b2b8;
+}
+
+th {
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.padding-0{
+  padding-right:0;
+  padding-left:0;
+}
+
+/*Add table border */
+table.table-hover{
+  border:1px solid black;
+  margin-top:10px;
+}
+table.table-hover > thead > tr > th{
+  border:1px solid white;
+}
+table.table-hover > tbody > tr > td{
+  border:1px solid black;
+}
+
+.mat-button, .mat-raised-button:hover{
+  background-color: rgb(6, 3, 189);
+} 
+
+/* #addButton {
+  margin-right: 30px;
+  background-color:#f0ad4e;
+  color: white;
+} */
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+  }
+
 /* 
 mat-button-toggle-group {
   box-shadow: none;

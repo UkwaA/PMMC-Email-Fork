@@ -63,6 +63,7 @@ import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.com
 import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
+import { AddScheduleModalDialogComponent } from './components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
 import { ScheduleManagementComponent } from './schedule/schedule-management/schedule-management.component'
 import { ViewScheduleComponent } from './schedule/view-schedule/view-schedule.component'
 import { SetProgramScheduleComponent } from './schedule/set-program-schedule/set-program-schedule.component'
@@ -187,6 +188,7 @@ const routes : Routes = [
     ModalDialogComponent,
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
+    AddScheduleModalDialogComponent,
     LoginPromptModal,
     ScheduleManagementComponent,
     ViewScheduleComponent,
@@ -237,6 +239,7 @@ const routes : Routes = [
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
               AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent, LoginPromptModal]
+  entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
+    AddScheduleModalDialogComponent, LoginPromptModal]
 })
 export class AppModule { }
