@@ -4,23 +4,26 @@ export class ReservationHeaderData {
     UserPK: number;
     PaymentPK: number;
     MarketingPK: number;
-    Date: Date;
     PaymentStatus: boolean;
     ResevationStatus: boolean;
     NumberOfParticipant: number;
+    CreatedDate: Date;
     IsActive: boolean;
     
-
-    constructor() {
+    constructor( 
+                SchedulePK: number,
+                UserPK: number,
+                NumberOfParticipant: number) {
+                  
       this.ReservationPK = 0;
-      this.SchedulePK = 0;
-      this.UserPK = 0;
+      this.SchedulePK = SchedulePK;
+      this.UserPK = UserPK;
       this.PaymentPK = 0;
       this.MarketingPK = 0;
-      this.Date = new Date();
       this.PaymentStatus = false;
       this.ResevationStatus = false;
-      this.NumberOfParticipant = 0;
+      this.NumberOfParticipant = NumberOfParticipant;
+      this.CreatedDate = new Date();
       this.IsActive = true;
     }
   }

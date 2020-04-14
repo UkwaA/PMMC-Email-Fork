@@ -107,11 +107,7 @@ users.post("/login", (req, res) => {
  *    GET USER'S PROFILE
  ***************************/
 users.get("/profile", (req, res) => {
-  var decoded = jwt.verify(
-    req.headers["authorization"],
-    process.env.SECRET_KEY
-  );
-
+  var decoded = jwt.verify(req.headers["authorization"], process.env.SECRET_KEY);
   User.findOne({
     where: {
       Username: decoded.Username,

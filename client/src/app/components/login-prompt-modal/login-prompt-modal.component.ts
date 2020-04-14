@@ -13,8 +13,7 @@ export class LoginPromptModal implements OnInit {
   modalHeader: String;
   modalContent: String;
   loginForm: FormGroup;
-  returnUrl: string;
-  
+
   credentials: TokenPayload = {
     UserPK: 0,
     Username: "",
@@ -38,7 +37,6 @@ export class LoginPromptModal implements OnInit {
         password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       });
 
-      this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
   // convenience getter for easy access to form fields
@@ -54,7 +52,7 @@ export class LoginPromptModal implements OnInit {
     //this.closeModal();
     this.dialogRef.close("Yes");
   }
-  
+
   createNew() {
 
   }
@@ -67,7 +65,6 @@ export class LoginPromptModal implements OnInit {
 
         this.auth.login(this.credentials).subscribe(
             (res) => {
-               // this.router.navigateByUrl(this.returnUrl);
                 this.dialogRef.close("Success");
             },
             (err) => {

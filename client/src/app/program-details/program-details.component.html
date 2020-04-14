@@ -80,8 +80,12 @@
                 </div>
                 <!-- Binding i and g-program Component -->
                 <div [ngSwitch]="programData.ProgramType">
-                    <div *ngSwitchCase="0" ><g-program [ProgramPK]="ProgramPK" [formData]="formData" (dataChange)="dataChangedHandler($event)"></g-program></div>
-                    <div *ngSwitchCase="1" ><i-program [ProgramPK]="ProgramPK" [formData]="formData" (dataChange)="dataChangedHandler($event)"></i-program></div>
+                    <div *ngSwitchCase="0" >
+                        <g-program [ProgramPK]="ProgramPK" [formData]="formData" (dataChange)="dataChangedHandler($event)"></g-program>
+                    </div>
+                    <div *ngSwitchCase="1" >
+                        <i-program [ProgramPK]="ProgramPK" [formData]="formData" (dataChange)="dataChangedHandler($event)"></i-program>
+                    </div>
                 </div>
                 <div *ngIf='PageMode == "edit"' class="button pt-5 pb-5">
                     <button class="btn btn-lg btn-info btn-block " type="submit" (click)="openModal()">Update Program Requirements</button>
