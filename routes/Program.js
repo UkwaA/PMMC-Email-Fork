@@ -19,14 +19,14 @@ process.env.SECRET_KEY = "secret";
 // Get All Program Header Information
 program.get("/get-programs", (req, res) => {
   Program.findAll({})
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program);
       } else {
         res.send("There is no program available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err);
     });
 });
@@ -35,17 +35,17 @@ program.get("/get-programs", (req, res) => {
 program.get("/get-active-programs", (req, res) => {
   Program.findAll({
     where: {
-      IsActive: true
-    }
+      IsActive: true,
+    },
   })
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program);
       } else {
         res.send("There is no program available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err);
     });
 });
@@ -54,17 +54,17 @@ program.get("/get-active-programs", (req, res) => {
 program.get("/get-program-header/:id", (req, res) => {
   Program.findOne({
     where: {
-      ProgramPK: req.params.id
-    }
+      ProgramPK: req.params.id,
+    },
   })
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program);
       } else {
         res.send("There is no program available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err + "   " + req.body.ProgramPK);
     });
 });
@@ -73,17 +73,17 @@ program.get("/get-program-header/:id", (req, res) => {
 program.get("/get-group-program-requirement/:id", (req, res) => {
   GroupProgramRequirement.findOne({
     where: {
-      GroupProgramPK: req.params.id
-    }
+      GroupProgramPK: req.params.id,
+    },
   })
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program);
       } else {
         res.send("There is no program available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err + "   " + req.body.ProgramPK);
     });
 });
@@ -92,17 +92,17 @@ program.get("/get-group-program-requirement/:id", (req, res) => {
 program.get("/get-individual-program-requirement/:id", (req, res) => {
   IndividualProgramRequirement.findOne({
     where: {
-      IndividualProgramPK: req.params.id
-    }
+      IndividualProgramPK: req.params.id,
+    },
   })
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program);
       } else {
         res.send("There is no program available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err + "   " + req.body.ProgramPK);
     });
 });
@@ -111,17 +111,17 @@ program.get("/get-individual-program-requirement/:id", (req, res) => {
 program.get("/get-sub-group-program-type/:id", (req, res) => {
   GroupProgramRequirement.findOne({
     where: {
-      GroupProgramPK: req.params.id
-    }
+      GroupProgramPK: req.params.id,
+    },
   })
-    .then(program => {
+    .then((program) => {
       if (program) {
         res.json(program.SubProgramPK);
       } else {
         res.send("There is no sub program type available.");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err);
     });
 });
@@ -141,11 +141,11 @@ program.post("/add-program", (req, res) => {
     CreatedBy: req.body.CreatedBy,
     ImgData: "",
     ProgramType: req.body.ProgramType,
-    IsActive: req.body.IsActive
+    IsActive: req.body.IsActive,
   };
 
   Program.create(programData)
-    .then(program => {
+    .then((program) => {
       // After insert, return the PK
       programPK = program.ProgramPK;
 
@@ -163,7 +163,7 @@ program.post("/add-program", (req, res) => {
 
       // Update filePath of Image for program
       program.update({
-        ImgData: filePath.substring(8)
+        ImgData: filePath.substring(8),
       });
 
       // Create Program Requirement for layout: Insert data to GroupProgramRequirement or IndividualProgramRequirement
@@ -177,33 +177,34 @@ program.post("/add-program", (req, res) => {
             GroupProgramPK: programPK,
             SubProgramPK: req.body.SubProgramPK,
             CreatedDate: today,
-            CreatedBy: req.body.CreatedBy
+            CreatedBy: req.body.CreatedBy,
           };
-          GroupProgramRequirement.create(groupDetail).then(program => {
-            res.json(programPK);
-          })
-          .catch(err => {
-            res.send("err Insert Group Requirement" + err);
-          });
+          GroupProgramRequirement.create(groupDetail)
+            .then((program) => {
+              res.json(programPK);
+            })
+            .catch((err) => {
+              res.send("err Insert Group Requirement" + err);
+            });
           break;
         case "1":
           var individualDetail = {
             IndividualProgramPK: programPK,
             CreatedDate: today,
-            CreatedBy: req.body.CreatedBy
+            CreatedBy: req.body.CreatedBy,
           };
-          IndividualProgramRequirement.create(individualDetail).then(program => {
-            res.json(programPK);
-          })
-          .catch(err => {
-            res.send("err Insert Individual Requirement" + err);
-          });
+          IndividualProgramRequirement.create(individualDetail)
+            .then((program) => {
+              res.json(programPK);
+            })
+            .catch((err) => {
+              res.send("err Insert Individual Requirement" + err);
+            });
           break;
       }
       // Response the ProgramPK to the client
-    
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("errorResponse" + err);
     });
 });
@@ -212,24 +213,43 @@ program.post("/add-program", (req, res) => {
 program.post("/update-program-header", (req, res) => {
   Program.findOne({
     where: {
-      ProgramPK: req.body.ProgramPK
-    }
-  }).then(program => {
+      ProgramPK: req.body.ProgramPK,
+    },
+  }).then((program) => {
     if (program) {
+      // Get current ImgData to compare
+      var currImgData = program.ImgData;
+
+      // Check if there is an ImgData toupdate
+      if (req.files != null) {
+        // Delete the current file
+        fs.unlinkSync("public" + currImgData)
+
+        // Create folder to store image of the program
+        var tempDir = "./public/uploads/" + program.ProgramPK;
+        var file = req.files.file;
+
+        var filePath = tempDir + "/" + file.name;
+        file.mv(filePath);
+
+        // Update ImgData
+        currImgData = filePath.substring(8);
+      }
+
       program.update({
         Description: req.body.Description,
         DepositAmount: req.body.DepositAmount,
         PricePerParticipant: req.body.PricePerParticipant,
         MaximumParticipant: req.body.MaximumParticipant,
-        ImgData: req.body.ImgData
+        ImgData: currImgData,
       });
       res.status(200).send({
-        message: "Program Header Updated!"
+        message: "Program Header Updated!",
       });
       res;
     } else {
       res.status(400).send({
-        message: "Program is not found!"
+        message: "Program is not found!",
       });
     }
   });
@@ -243,21 +263,13 @@ program.post("/update-g-program-requirement", (req, res) => {
   // Select the Program Layout Details if available
   GroupProgramRequirement.findOne({
     where: {
-      GroupProgramPK: req.body.GroupProgramPK
-    }
+      GroupProgramPK: req.body.GroupProgramPK,
+    },
   })
     // Update the layout details
-    .then(program => {
+    .then((program) => {
       if (program) {
         program.update({
-          // AdultQuantity: req.body.AdultQuantity,
-          // Age57Quantity: req.body.Age57Quantity,
-          // Age810Quantity: req.body.Age810Quantity,
-          // Age1112Quantity: req.body.Age1112Quantity,
-          // Age1314Quantity: req.body.Age1314Quantity,
-          // Age1415Quantity: req.body.Age1415Quantity,
-          // Age1517Quantity: req.body.Age1517Quantity,
-          // TotalQuantity: req.body.TotalQuantity,
           ProgramRestriction: req.body.ProgramRestriction,
           OrganizationName: req.body.OrganizationName,
           GradeLevel: req.body.GradeLevel,
@@ -267,7 +279,7 @@ program.post("/update-g-program-requirement", (req, res) => {
           AlternativeDate: req.body.AlternativeDate,
           EducationPurpose: req.body.EducationPurpose,
           CreatedBy: req.body.CreatedBy,
-          CreatedDate: today
+          CreatedDate: today,
         });
       } else {
         res.send("There is no program available.");
@@ -277,16 +289,16 @@ program.post("/update-g-program-requirement", (req, res) => {
       // Update IsActive for Program header after insert Requirement for Program
       Program.findOne({
         where: {
-          ProgramPK: programPK
-        }
-      }).then(result => {
+          ProgramPK: programPK,
+        },
+      }).then((result) => {
         result.update({
-          IsActive: true
+          IsActive: true,
         });
       });
       res.json("Program Updated");
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err + "   " + req.body.ProgramPK);
     });
 });
@@ -299,11 +311,11 @@ program.post("/update-i-program-requirement", (req, res) => {
   // Select the Program Layout Details if available
   IndividualProgramRequirement.findOne({
     where: {
-      IndividualProgramPK: req.body.IndividualProgramPK
-    }
+      IndividualProgramPK: req.body.IndividualProgramPK,
+    },
   })
     // Update the layout details
-    .then(program => {
+    .then((program) => {
       if (program) {
         program.update({
           ParticipantName: req.body.ParticipantName,
@@ -326,7 +338,7 @@ program.post("/update-i-program-requirement", (req, res) => {
           EmergencyMedicalRelease: req.body.EmergencyMedicalRelease,
           LiabilityAgreement: req.body.LiabilityAgreement,
           CreatedBy: req.body.CreatedBy,
-          CreatedDate: today
+          CreatedDate: today,
         });
       } else {
         res.send("There is no program available.");
@@ -336,16 +348,16 @@ program.post("/update-i-program-requirement", (req, res) => {
       // Update IsActive for Program header after insert Requirement for Program
       Program.findOne({
         where: {
-          ProgramPK: programPK
-        }
-      }).then(result => {
+          ProgramPK: programPK,
+        },
+      }).then((result) => {
         result.update({
-          IsActive: true
+          IsActive: true,
         });
       });
       res.json("Program Updated");
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: " + err + "   " + req.body.ProgramPK);
     });
 });
@@ -356,23 +368,23 @@ program.get("/get-individual-requirement/:id", (req, res) => {
   Program.findOne({
     where: {
       ProgramPK: req.params.id,
-      IsActive: true
-    }
-  }).then(program => {
+      IsActive: true,
+    },
+  }).then((program) => {
     // Select active Program Requirement
     IndividualProgramRequirement.findOne({
       where: {
-        IndividualProgramPK: program.ProgramPK
-      }
+        IndividualProgramPK: program.ProgramPK,
+      },
     })
-      .then(program => {
+      .then((program) => {
         if (program) {
           res.json(program);
         } else {
           res.send("There is no program available.");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send("error: " + err + "   " + req.body.IndividualProgramPK);
       });
   });
@@ -384,23 +396,23 @@ program.get("/get-group-requirement/:id", (req, res) => {
   Program.findOne({
     where: {
       ProgramPK: req.params.id,
-      IsActive: true
-    }
-  }).then(program => {
+      IsActive: true,
+    },
+  }).then((program) => {
     // Select active Program Requirement
     GroupProgramRequirement.findOne({
       where: {
-        GroupProgramPK: program.ProgramPK
-      }
+        GroupProgramPK: program.ProgramPK,
+      },
     })
-      .then(program => {
+      .then((program) => {
         if (program) {
           res.json(program);
         } else {
           res.send("There is no program available.");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         res.send("error: " + err + "   " + req.body.IndividualProgramPK);
       });
   });
@@ -414,16 +426,16 @@ program.get("/set-program-status/:id/:status", (req, res) => {
   const status = req.params.status;
   Program.findOne({
     where: {
-      ProgramPK: id
-    }
+      ProgramPK: id,
+    },
   })
-    .then(program => {
+    .then((program) => {
       program.update({
-        IsActive: status
+        IsActive: status,
       });
       res.json({ message: "Program status has been changed" });
     })
-    .catch(err => {
+    .catch((err) => {
       res.send("error: Set Program Status " + err);
     });
 });
