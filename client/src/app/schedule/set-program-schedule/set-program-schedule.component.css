@@ -22,17 +22,13 @@ thead{
 }
 
 th, td {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 
 td {
   font-size: 14px;
   font-weight: normal;
-}
-
-td.name{
-  color:  #08b2b8;
 }
 
 th {
@@ -59,7 +55,7 @@ table.table-hover > tbody > tr > td{
 }
 
 .mat-button, .mat-raised-button:hover{
-  background-color: rgb(6, 3, 189);
+  background-color: rgb(6, 3, 189);  
 } 
 
 /* #addButton {

@@ -112,10 +112,11 @@ export class ProgramScheduleComponent implements OnInit {
     };
 
     this.programScheduleServices
-      .getScheduleSettingById(this.ProgramPK)
+      .getSessionDetailsById(this.ProgramPK)
       .subscribe((schedules) => {
         const sampleDataWithCustomSchema = schedules.map((dataItem) => ({
           ...dataItem,
+          SessionDetailsPK: dataItem.SessionDetailsPK,
           ScheduleSettingPK: dataItem.ScheduleSettingPK,
           ProgramPK: dataItem.ProgramPK,
           Title: dataItem.Title,

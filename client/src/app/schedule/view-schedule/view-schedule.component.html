@@ -12,10 +12,10 @@
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 p-0">            
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 p-0" *ngIf="choice != 0">            
+        <div class="col-lg-6 col-md-6 col-sm-6 p-0" >            
             <select class="form-control" style="font-weight: bold" id="listOfPrograms"
                 (change)="onChangeSelectedProgram($event)">
-                <option selected value="0"> --- Select All {{programCategories[choice].name}} --- </option>
+                <option selected value="0"> --- Select {{programCategories[choice].name}} --- </option>
                 <option *ngFor="let program of programs" [value]="program.ProgramPK">
                     {{program.Name}}
                 </option>
