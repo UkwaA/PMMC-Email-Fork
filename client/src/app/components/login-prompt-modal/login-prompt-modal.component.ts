@@ -3,6 +3,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService, TokenPayload } from "../../authentication.service";
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { RegisterModalDialogComponent } from "../register-modal-dialog/register-modal-dialog.component";
+
+import { ModalDialogComponent } from "../modal-dialog/modal-dialog.component";
+
+declare var $:any
 
 @Component({
   selector: "login-prompt-modal.component",
@@ -13,8 +19,7 @@ export class LoginPromptModal implements OnInit {
   modalHeader: String;
   modalContent: String;
   loginForm: FormGroup;
-  returnUrl: string;
-  
+
   credentials: TokenPayload = {
     UserPK: 0,
     Username: "",
@@ -29,6 +34,7 @@ export class LoginPromptModal implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    public matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) private modalData: any
   ) {}
 
@@ -38,7 +44,6 @@ export class LoginPromptModal implements OnInit {
         password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       });
 
-      this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
   // convenience getter for easy access to form fields
@@ -54,9 +59,29 @@ export class LoginPromptModal implements OnInit {
     //this.closeModal();
     this.dialogRef.close("Yes");
   }
-  
-  createNew() {
 
+  createNew() {
+    const registerDialogConfig = new MatDialogConfig();
+      registerDialogConfig.id = "register-modal-component";
+      registerDialogConfig.height = "600px";
+      registerDialogConfig.maxHeight = "600px";
+      registerDialogConfig.width = "700px";
+      registerDialogConfig.autoFocus = false;
+      registerDialogConfig.data = {
+        title: "Register New User",
+        routerURL: this.modalData.routerURL,
+        // firstName: this.customerInfoForm.get('firstName').value,
+        // lastName: this.customerInfoForm.get('lastName').value,
+        // phoneNo: this.customerInfoForm.get('phoneNum').value,
+        // streetAddress: this.customerInfoForm.get('address_street').value,
+        // // streetAddress2: '',
+        // addressCity: this.customerInfoForm.get('address_city').value,
+        // addressState: this.customerInfoForm.get('address_state').value,
+        // addressZipCode: this.customerInfoForm.get('address_zipcode').value,
+        // actionButtonText: "Confirm",
+        numberOfButton: "2"
+      };
+      const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);
   }
 
   signIn() {
@@ -67,8 +92,9 @@ export class LoginPromptModal implements OnInit {
 
         this.auth.login(this.credentials).subscribe(
             (res) => {
-               // this.router.navigateByUrl(this.returnUrl);
                 this.dialogRef.close("Success");
+                this.actionFunction();
+                this.router.navigateByUrl(this.modalData.routerURL);
             },
             (err) => {
               //alert('Username and password do not match')

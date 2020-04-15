@@ -9,7 +9,6 @@ import {
   EventStyleArgs,
 } from "@progress/kendo-angular-scheduler";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ReservationHeaderData } from "../data/reservation-header-data";
 import { QuantiyFormData } from "../data/quantity-form-data";
 import { ProgramScheduleData } from "../data/program-schedule-data";
 import { MatDialog, MatDialogConfig } from "@angular/material";
@@ -17,6 +16,7 @@ import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.co
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
+import { DataStorage } from "../services/dataProvider";
 
 @Component({
   templateUrl: "./program-schedule.component.html",
@@ -25,6 +25,7 @@ import { AppConstants } from "../constants";
 export class ProgramScheduleComponent implements OnInit {
   ProgramPK: number;
   ProgramType: number;
+  SchedulePK: number;
   isDisable = true;
   programDetails: ProgramData;
   public selectedDate: Date = new Date();
@@ -42,13 +43,7 @@ export class ProgramScheduleComponent implements OnInit {
   currTotalQuantity = 0;
   availability: number;
   submitted = false;
-  scheduleItem: any = {
-    SchedulePK: 0,
-    ProgramPK: 0,
-    Start: "",
-    End: "",
-  };
-
+  
   currentSession: ProgramScheduleData = {
     SchedulePK: 0,
     ProgramPK: 0,
@@ -82,7 +77,8 @@ export class ProgramScheduleComponent implements OnInit {
     private fb: FormBuilder,
     public matDialog: MatDialog,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private _data: DataStorage  // Use to store data cross component
   ) {}
 
   ngOnInit() {
@@ -189,6 +185,7 @@ export class ProgramScheduleComponent implements OnInit {
     this.calculateTotalQuantity();
   }
 
+  // Helper function to calculate total attendee
   calculateTotalQuantity() {
     this.currTotalQuantity =
       parseInt(this.quantityForm.get("AdultQuantity").value) +
@@ -205,33 +202,15 @@ export class ProgramScheduleComponent implements OnInit {
   enterQuantity() {
     this.submitted = true;
     if (this.quantityForm.invalid) {
-      // console.log("invalid");
       return;
     }
-
-    // console.log("valid");
-
     //Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
 
     // Check if user is logged in
-    //
-    if (!this.auth.getUserDetails()) {
+    if (!this.auth.isLoggedIn()) {
       // //Configure Modal Dialog For Login Prompt
-      // dialogConfig.disableClose = true;
-      // dialogConfig.id = "modal-component";
-      // dialogConfig.height = "600px";
-      // dialogConfig.maxHeight = "600px";
-      // dialogConfig.width = "500px";
-      // dialogConfig.autoFocus = false;
-
-      // dialogConfig.data = {
-      //     title: "Log In",
-      //     description:
-      //       "You haven't chosen any program. Please choose one program first!",
-      //     actionButtonText: "Try again",
-      //     numberOfButton: "1",
-      //   };
+    
       const loginDialogConfig = new MatDialogConfig();
       loginDialogConfig.id = "modal-component";
       loginDialogConfig.height = "600px";
@@ -239,18 +218,8 @@ export class ProgramScheduleComponent implements OnInit {
       loginDialogConfig.width = "500px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
-        // title: "Register Confirmation",
-        // firstName: this.customerInfoForm.get('firstName').value,
-        // lastName: this.customerInfoForm.get('lastName').value,
-        // phoneNo: this.customerInfoForm.get('phoneNum').value,
-        // streetAddress: this.customerInfoForm.get('address_street').value,
-        // // streetAddress2: '',
-        // addressCity: this.customerInfoForm.get('address_city').value,
-        // addressState: this.customerInfoForm.get('address_state').value,
-        // addressZipCode: this.customerInfoForm.get('address_zipcode').value,
-        // actionButtonText: "Confirm",
-        // numberOfButton: "2"
-      };
+        routerURL: "/booking-group-program/" + this.ProgramPK
+       };
       const loginModal = this.matDialog.open(LoginPromptModal, loginDialogConfig);
       loginModal.afterClosed().subscribe((result) => {
         if (result == "Yes") {
@@ -302,18 +271,13 @@ export class ProgramScheduleComponent implements OnInit {
       modalDialog.afterClosed().subscribe((result) => {
         if (result == "Yes") {
           //if exceed
-          if (
-            this.currTotalQuantity > this.availability ||
-            this.availability == null
-          ) {
+          if (this.currTotalQuantity > this.availability ||  this.availability == null) {
             // if exceed, do nothing
           } else {
             //route to the booking page
             switch (this.ProgramType) {
               case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-                this.router.navigateByUrl(
-                  "/booking-individual-program/" + this.ProgramPK
-                );
+                this.router.navigateByUrl("/booking-individual-program/" + this.ProgramPK);
 
                 break;
               case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
@@ -324,9 +288,17 @@ export class ProgramScheduleComponent implements OnInit {
                 //     });
                 // }
 
-                this.router.navigateByUrl(
-                  "/booking-group-program/" + this.ProgramPK
-                );
+                // Pass data of Quantity FormControl to the object
+                this.quantityData = new QuantiyFormData(this.quantityForm.value.AdultQuantity, this.quantityForm.value.Age57Quantity,
+                                                      this.quantityForm.value.Age810Quantity, this.quantityForm.value.Age1112Quantity,
+                                                      this.quantityForm.value.Age1314Quantity,this.quantityForm.value.Age1415Quantity,
+                                                      this.quantityForm.value.Age1517Quantity, this.quantityForm.value.TotalQuantity,
+                                                      this.SchedulePK)
+              
+                // Pass Quantity Form Data 
+                localStorage.setItem('quantityForm', JSON.stringify(this.quantityData));
+                this._data.data = this.quantityData
+                this.router.navigateByUrl( "/booking-group-program/" + this.ProgramPK);
                 break;
             }
           }
@@ -361,36 +333,36 @@ export class ProgramScheduleComponent implements OnInit {
           let end = new Date(res.End);
           this.currentSession = res;
           this.customerSelectDate = this.tempDate.toDateString();
-          this.customerSelectTime = this.tempDate
-            .toLocaleString("en-US", this.options)
-            .concat(" - ", end.toLocaleString("en-US", this.options));
-          this.availability =
-            res.MaximumParticipant - res.CurrentNumberParticipant;
-
-          console.log(res);
+          this.customerSelectTime = this.tempDate.toLocaleString("en-US", this.options)
+                                                 .concat(" - ", end.toLocaleString("en-US", this.options));
+            
+          this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
+          
+          // Pass SchedulePK for Booking Page
+          this.SchedulePK = res.SchedulePK
+          
+          //console.log(res);
         } else {
           // Create new schedule record and insert into the databse
           this.customerSelectDate = e.event.dataItem.Start.toDateString();
-          this.customerSelectTime = e.event.dataItem.Start.toLocaleString(
-            "en-US",
-            this.options
-          ).concat(
-            " - ",
-            e.event.dataItem.End.toLocaleString("en-US", this.options)
-          );
-
+          this.customerSelectTime = e.event.dataItem.Start.toLocaleString("en-US",this.options )
+                                                          .concat(" - ", e.event.dataItem.End.toLocaleString("en-US", this.options));
+          
           this.availability = e.event.dataItem.MaximumParticipant;
+          
+          // Pass SchedulePK for Booking Page
+          this.SchedulePK = e.event.dataItem.SchedulePK;       
 
           this.currentSession.SchedulePK = 0;
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
           this.currentSession.Start = e.event.dataItem.Start.toString();
           this.currentSession.End = e.event.dataItem.End.toString();
-          this.currentSession.MaximumParticipant =
-            e.event.dataItem.MaximumParticipant;
+          this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;
-          this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK;
-          console.log(e.event);
+          this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK;      // UserPk represent for System Auto Create Data
+          
+          //console.log(e.event);
         }
       });
   };

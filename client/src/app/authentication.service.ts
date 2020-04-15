@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import {UserData} from './data/user-data'
 import { AppConstants } from './constants'
 
@@ -41,18 +41,18 @@ export class AuthenticationService {
   private token: string
   public registeredPK: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   private saveToken(token: string): void {
     localStorage.setItem('usertoken', token)
     this.token = token
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem('usertoken')
+      this.token = localStorage.getItem('usertoken');
     }
-    return this.token
+    return this.token;
   }
 
   public getUserDetails(): UserDetails {
@@ -76,35 +76,43 @@ export class AuthenticationService {
     }
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.http.post(AppConstants.EXPRESS_SERVER_URL  + "users/register", user);
-  }
-
-  public login(user: TokenPayload): Observable<any> {
-    const base = this.http.post(AppConstants.EXPRESS_SERVER_URL  + "users/login", user)
-
+  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+    let base;
+  
+    if (method === 'post') {
+      base = this.http.post(AppConstants.EXPRESS_SERVER_URL  + "users" + `/${type}`, user);
+    } else {
+      base = this.http.get(AppConstants.EXPRESS_SERVER_URL  + "users" + `/${type}`, { headers: { Authorization: ` ${this.getToken()}` }});
+    }
+  
     const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
-          this.saveToken(data.token)
+          this.saveToken(data.token);
         }
-        return data
+        return data;
       })
-    )
+    );
+  
+    return request;
+  }
 
-    return request
+  public register(user: TokenPayload): Observable<any> {
+    return this.request('post', 'register', user);
+  }
+
+  public login(user: TokenPayload): Observable<any> {
+    return this.request('post', 'login', user);
   }
 
   public profile(): Observable<any> {
-    return this.http.get(AppConstants.EXPRESS_SERVER_URL  + "users/profile", {
-      headers: { Authorization: `${this.getToken()}` }
-    })
+    return this.request('get', 'profile');
   }
 
   public logout(): void {
-    this.token = '' 
-    window.localStorage.removeItem('usertoken')
-    /* this.router.navigateByUrl('/') */
+    this.token = '';
+    window.localStorage.removeItem('usertoken');
+    this.router.navigateByUrl('/')     
   }
 
   public getAllUser(): Observable<any> {

@@ -73,6 +73,8 @@ import { SafeHtmlPipe } from './services/SafeHtmlPipe';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { DataStorage } from "./services/dataProvider";
+// import { JwtInterceptor } from "./services/jwt.interceptor"
 
 
 const routes : Routes = [
@@ -235,7 +237,7 @@ const routes : Routes = [
     DropDownsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-    AuthCustomerGuardService, AuthenticationService, ProgramScheduleService],
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
     AddScheduleModalDialogComponent, LoginPromptModal]

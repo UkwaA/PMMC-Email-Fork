@@ -22,14 +22,6 @@ export class BookingGroupData {
 
   constructor() {
     this.GroupProgramPK = 0;
-    // this.AdultQuantity = true;
-    // this.Age57Quantity = true;
-    // this.Age810Quantity = true;
-    // this.Age1112Quantity = true;
-    // this.Age1314Quantity = true;
-    // this.Age1415Quantity = true;
-    // this.Age1517Quantity = true;
-    // this.TotalQuantity = true;
     this.ProgramRestriction = true;
     this.OrganizationName = true;
     this.GradeLevel = true;

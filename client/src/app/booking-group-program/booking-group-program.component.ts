@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookingGroupData } from '../data/booking-group-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgramServices } from 'src/app/services/program.services';
@@ -8,9 +8,18 @@ import { ProgramData } from '../data/program-data';
 import { ReservationHeaderData } from '../data/reservation-header-data';
 import { AuthenticationService } from '../authentication.service';
 import { ValidationErrors } from '@angular/forms';
+import { DataStorage } from "../services/dataProvider";
+import { ReservationGroupDetails } from "../data/reservation-group-details";
 
 declare var $: any;
 
+/**********************************************************
+ Booking a Group Program will associate below tables:
+  - ReservationHeader
+  - ReservationGroupDetails
+  - PaymentHeader 
+  - MarketingInformation                                    
+**********************************************************/
 @Component({
   selector: 'app-booking-group-program',
   templateUrl: './booking-group-program.component.html',
@@ -18,7 +27,8 @@ declare var $: any;
 })
 
 export class BookingGroupProgramComponent implements OnInit {
-  @Input() quantityForm: ReservationHeaderData;
+  reservationHeader : ReservationHeaderData;
+  reservationGroupDetails = new ReservationGroupDetails();
   bookingGroup: BookingGroupData;
   registerForm: FormGroup;
   submitted = false;
@@ -28,13 +38,32 @@ export class BookingGroupProgramComponent implements OnInit {
   num_submits: number;
   edit_clicked:boolean;
 
+  // Get QuantityForm from Local Storage
+  quantityForm = JSON.parse(localStorage.getItem('quantityForm'));
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder,
               private auth: AuthenticationService,
-              private service: ProgramServices) { }
+              private service: ProgramServices,
+              private _data: DataStorage) { }
 
   ngOnInit() {
+
+    this.registerForm = this.fb.group({
+      ProgramRestriction: ['', Validators.required],
+      OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
+      GradeLevel: ['', Validators.required],
+      TeacherName: ['', [Validators.required, Validators.minLength(3)]],
+      TeacherEmail: [''],
+      TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
+    });
+
+    // Process data for ReservationHeader
+    this.reservationHeader = new ReservationHeaderData(this.quantityForm.SchedulePK, 
+                                                        this.auth.getUserDetails().UserPK, 
+                                                        this.quantityForm.TotalQuantity)
+
     this.bookingGroup= <any>{};
     this.total = 0;
     this.num_submits = 0;
@@ -42,6 +71,7 @@ export class BookingGroupProgramComponent implements OnInit {
     this.route.params.subscribe(val => {
       this.ProgramPK = val.id
     })
+
     this.service.getProgramRequirementDetails('g', this.ProgramPK)
       .subscribe(program => {
         this.bookingGroup = program
@@ -55,19 +85,6 @@ export class BookingGroupProgramComponent implements OnInit {
       })
 
       document.getElementById("edit_btn").style.visibility="hidden";
-
-
-    // this.bookingGroup = new BookingGroupData(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
-    this.registerForm = this.fb.group({
-      ProgramRestriction: ['', Validators.required],
-      OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
-      GradeLevel: ['', Validators.required],
-      TeacherName: ['', [Validators.required, Validators.minLength(3)]],
-      TeacherEmail: [''],
-      TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
-    });
-
-
   }
 
   setRegisterFormValidators(){

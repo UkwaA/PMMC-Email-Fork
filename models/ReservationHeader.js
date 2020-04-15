@@ -24,9 +24,6 @@ module.exports = db.sequelize.define(
     MarketingPK: {
         type: Sequelize.INTEGER
     },
-    Date: {
-      type: Sequelize.DATEONLY
-    },
     PaymentStatus: {
       type: Sequelize.BOOLEAN
     },
@@ -35,6 +32,9 @@ module.exports = db.sequelize.define(
     },
     NumberOfParticipant: {
       type: Sequelize.INTEGER
+    },
+     CreatedDate: {
+      type: Sequelize.DATEONLY
     },
     IsActive: {
       type: Sequelize.BOOLEAN

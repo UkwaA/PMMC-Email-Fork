@@ -49,23 +49,20 @@ module.exports = db.sequelize.define(
     GradeLevel: {
       type: Sequelize.TEXT
     },
-    ScoutProgram: {
-      type: Sequelize.BOOLEAN
-    },
     TeacherName: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     TeacherEmail: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     TeacherPhoneNo: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AlternativeDate: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.DATE
     },
     EducationPurpose: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     CreatedBy: {
       type: Sequelize.INTEGER
