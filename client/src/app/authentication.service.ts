@@ -82,7 +82,7 @@ export class AuthenticationService {
     if (method === 'post') {
       base = this.http.post(AppConstants.EXPRESS_SERVER_URL  + "users" + `/${type}`, user);
     } else {
-      base = this.http.get(AppConstants.EXPRESS_SERVER_URL  + "users" + `/${type}`, { headers: { Authorization: ` ${this.getToken()}` }});
+      base = this.http.get(AppConstants.EXPRESS_SERVER_URL  + "users" + `/${type}`, { headers: { Authorization: `${this.getToken()}` }});
     }
   
     const request = base.pipe(

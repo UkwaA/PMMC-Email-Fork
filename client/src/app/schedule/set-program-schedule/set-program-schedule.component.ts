@@ -17,40 +17,55 @@ import { SchedulerModelFields } from '@progress/kendo-angular-scheduler';
 })
 
 export class SetProgramScheduleComponent {
-    ProgramPK = 0;
-    currentUserPK = 0;
-    events: any[] = [];
-    programData: ProgramData = {
-        ProgramPK: 0,
-        Name: "",
-        Description: "",
-        DepositAmount: 0,
-        PricePerParticipant: 0,
-        MaximumParticipant: 0,
-        ImgData: "",
-        ProgramType: 0,
-        CreatedDate: "",
-        CreatedBy: 0,
-        IsActive: true,
-        SubProgramPK: 0        
-    }
+	ProgramPK = 0;
+	currentUserPK = 0;
+	allSessions: any[] = [];
+	programData: ProgramData = {
+		ProgramPK: 0,
+		Name: "",
+		Description: "",
+		DepositAmount: 0,
+		PricePerParticipant: 0,
+		MaximumParticipant: 0,
+		ImgData: "",
+		ProgramType: 0,
+		CreatedDate: "",
+		CreatedBy: 0,
+		IsActive: true,
+		SubProgramPK: 0        
+	}
 
+    allScheduleSettings: any = []
     currentScheduleSetting = {
         ScheduleSettingPK: 0,
         ProgramPK: 0,
-        Title: "",
-        Description: "",
-        StartTimezone: "",
+        ScheduleSettingName: "",
         Start: "",
-        End: "",   
-        EndTimezone: "",        
-        RecurrenceRule: "",
-        RecurrenceID: "",
-        RecurrenceException: "",
-        Color: "",
-        CreatedBy: 0,        
+        End: "",
         IsActive: true,
-        IsAllDay: false
+        CreatedBy: 0,
+        tempStart: "",
+        tempEnd: "",
+        IsSelected: true
+    }
+
+	currentSessionDetails = {
+		SessionDetailsPK: 0,		
+		ProgramPK: 0,
+		ScheduleSettingPK: 0,
+		Title: "",
+		Description: "",
+		StartTimezone: "",
+		Start: "",
+		End: "",   
+		EndTimezone: "",        
+		RecurrenceRule: "",
+		RecurrenceID: "",
+		RecurrenceException: "",
+		Color: "",
+		CreatedBy: 0,        
+		IsActive: true,
+		IsAllDay: false
     }
 
     SetProgramScheduleForm: FormGroup;
@@ -73,8 +88,8 @@ export class SetProgramScheduleComponent {
         minute: 'numeric',
         hour12: true
       };
-
-    selectedColor: string = "";
+    
+    selectedColor: string = "#e76c36";
 
     public settings: PaletteSettings = {
         palette: [
@@ -106,79 +121,127 @@ export class SetProgramScheduleComponent {
         private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
-    ngOnInit(){ 
-        this.errorMessage = '' 
+	ngOnInit(){ 
+		this.errorMessage = '' 
 
-        this.SetProgramScheduleForm = this.fb.group({    
-            programName: [],
-            startDate: [],
-            endDate: [],
-            endrepeat: [],            
-            dayOfMonthOfYear: [1, [Validators.min(1)]],
-            description:[]
-          })
-        
-        //Get current user info
-        this.auth.profile().subscribe(user =>{
-            this.currentUserPK = user.UserPK
-            this.currentScheduleSetting.CreatedBy = user.UserPK
-        })        
+		this.SetProgramScheduleForm = this.fb.group({    
+			programName: [],
+			startDate: [],
+			endDate: [],
+			endrepeat: [],            
+			dayOfMonthOfYear: [1, [Validators.min(1)]],
+			description:[]
+			})
+		
+		//Get current user info
+		this.auth.profile().subscribe(user =>{
+			this.currentUserPK = user.UserPK
+			this.currentSessionDetails.CreatedBy = user.UserPK
+		})        
 
-        //Get current program header info
-        this.route.params.subscribe(val =>{
-            this.ProgramPK = val.id
-            this.programScheduleServices.getScheduleSettingById(this.ProgramPK).subscribe((schedules) =>{
-                const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
-                    {
-                        ...dataItem,
-                        ScheduleSettingPK: dataItem.ScheduleSettingPK,
-                        ProgramPK: dataItem.ProgramPK,
-                        Title: dataItem.Title,
-                        Description: dataItem.Description,
-                        StartTimezone: dataItem.StartTimezone,
-                        Start: dataItem.Start,
-                        End: dataItem.End,
-                        EndTimezone: dataItem.EndTimezone,                    
-                        RecurrenceRule: dataItem.RecurrenceRule,
-                        EndRepeatDate: dataItem.EndRepeatDate,
-                        RepeatDay: dataItem.RepeatDay,
-                        RecurrenceID: dataItem.RecurrenceID,
-                        RecurrenceException: dataItem.RecurrenceException,
-                        Color: dataItem.Color,
-                        CreatedBy: dataItem.CreatedBy,
-                        CreatedDate: dataItem.CreatedDate,
-                        IsActive: dataItem.IsActive,
-                        tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.timeFormatOptions),
-                        tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.timeFormatOptions)
-                    }
-                ));
-                this.events = sampleDataWithCustomSchema
-                if(this.events.length > 0){
-                    this.selectedColor = this.events[0].Color
-                }
-                var newLength = 0
-                //Loop through all events
-                this.events.forEach(event =>{
-                    //for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
-                    this.dayArr.forEach(day =>{
-                        if(event.RepeatDay.indexOf(day.value) >= 0){
-                            day.eventList.push(event)
-                        }                        
-                    })
-                })
-                console.log(this.dayArr)
+		//Get all current schedule settings
+		this.programScheduleServices.getAllScheduleSettings().subscribe(scheduleSettings =>{
+			this.allScheduleSettings = scheduleSettings
+			if(this.allScheduleSettings.length > 0){
+				this.allScheduleSettings.forEach(schedule => {
+						schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
+						schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
+						schedule.Start = new Date(schedule.Start)
+						schedule.End = new Date(schedule.End)
+				})
+				//Sort the allScheduleSettings array by Start date
+				this.allScheduleSettings.sort(function(a,b){
+					// Turn your strings into dates, and then subtract them
+					// to get a value that is either negative, positive, or zero.
+					return b.Start - a.Start;
+				});				
+				this.currentScheduleSetting = this.allScheduleSettings[0]
+				this.allScheduleSettings[0].IsSelected = true
+			}	
+		})
+		
+		//Get current program header info
+		this.route.params.subscribe(val =>{
+			this.ProgramPK = val.id
+			this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) =>{
+					const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
+						{
+							...dataItem,
+							SessionDetailsPK: dataItem.SessionDetailsPK,
+							ScheduleSettingPK: dataItem.ScheduleSettingPK,
+							ProgramPK: dataItem.ProgramPK,
+							Title: dataItem.Title,
+							Description: dataItem.Description,
+							StartTimezone: dataItem.StartTimezone,
+							Start: dataItem.Start,
+							End: dataItem.End,
+							EndTimezone: dataItem.EndTimezone,                    
+							RecurrenceRule: dataItem.RecurrenceRule,
+							EndRepeatDate: dataItem.EndRepeatDate,
+							RepeatDay: dataItem.RepeatDay,
+							RecurrenceID: dataItem.RecurrenceID,
+							RecurrenceException: dataItem.RecurrenceException,
+							Color: dataItem.Color,
+							CreatedBy: dataItem.CreatedBy,
+							CreatedDate: dataItem.CreatedDate,
+							IsActive: dataItem.IsActive,
+							tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.timeFormatOptions),
+							tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.timeFormatOptions)
+						}
+					));
+					this.allSessions = sampleDataWithCustomSchema
+					if(this.allSessions.length > 0){
+						this.selectedColor = this.allSessions[0].Color
+					}
 
-            })
-            
-            this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program =>{
-                this.programData = program;                
-            })
-        })
-    }
+					//Loop through all allSessions
+					this.allSessions.forEach(session =>{
+						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
+						this.dayArr.forEach(day =>{
+							if(session.RepeatDay.indexOf(day.value) >= 0 && session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
+									day.eventList.push(session)
+							}                        
+						})
+
+					})
+					//console.log(this.dayArr)
+
+			})
+			
+			this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program =>{
+					this.programData = program;                
+			})
+		})
+	}
 
     // convenience getter for easy access to form fields
-    get f() { return this.SetProgramScheduleForm.controls; }
+	get f() { return this.SetProgramScheduleForm.controls; }
     
+	viewSchedule(schedule){
+		console.log(schedule)        
+		this.allScheduleSettings.forEach(schedule => {
+			schedule.IsSelected = false
+		})
+		schedule.IsSelected = true
+		this.currentScheduleSetting = schedule
+		//Reload the session table with selected schedule
+		this.dayArr.forEach(day =>{
+			day.eventList = []
+		})
+		
+		this.allSessions.forEach(session =>{
+			if(session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
+			//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
+				this.dayArr.forEach(day =>{
+					if(session.RepeatDay.indexOf(day.value) >= 0){
+							day.eventList.push(session)
+					}                        
+				})
+			}
+		})
+		console.log(this.dayArr)
+	}
+
     addNewScheduleModal(){
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
@@ -191,19 +254,21 @@ export class SetProgramScheduleComponent {
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Add new schedule",
-            mode: "add",
+            mode: "newschedule",
             description: "",
             programPK: this.ProgramPK,
             name: this.programData.Name,
             userPK: this.currentUserPK,
-            color: this.selectedColor,            
+            color: this.selectedColor,
+            currentScheduleSetting: this.currentScheduleSetting,
+            allScheduleSetting: this.allScheduleSettings,            
             actionButtonText: "Save",   
             numberOfButton: "2"         
             }
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
-        addScheduleModalDialog.afterClosed().subscribe(result =>{
-            if(result == "Yes"){
-                window.location.reload();
+        addScheduleModalDialog.afterClosed().subscribe(newSchedule =>{
+            if(newSchedule.ScheduleSettingPK != 0){
+					window.location.reload();										
             }
             else{
                 console.log("stop")                
@@ -211,25 +276,91 @@ export class SetProgramScheduleComponent {
         })
     }
 
-    updateScheduleModal(item){
+	editScheduleModal(currentScheduleSetting){
+		//Configure Modal Dialog
+		const dialogConfig = new MatDialogConfig();
+		// The user can't close the dialog by clicking outside its body
+		dialogConfig.disableClose = true;
+		dialogConfig.id = "edit-schedule-modal-component";
+		dialogConfig.height = "auto";
+		dialogConfig.maxHeight = "600px";
+		dialogConfig.width = "700px";
+		dialogConfig.autoFocus = false;
+		dialogConfig.data = {
+			 title: "Edit schedule",
+			 mode: "editschedule",
+			 description: "",
+			 programPK: this.ProgramPK,
+			 name: this.programData.Name,
+			 userPK: this.currentUserPK,
+			 currentScheduleSetting: currentScheduleSetting,
+			 allScheduleSetting: this.allScheduleSettings,            
+			 actionButtonText: "Save",   
+			 numberOfButton: "2"         
+			 }
+		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+		addScheduleModalDialog.afterClosed().subscribe(res =>{
+			 if(res == "Yes"){
+				 window.location.reload();										
+			 }
+			 else{
+				  console.log("stop")                
+			 }
+		})
+	}
+
+	addNewSessionDetailsModal(){
+		//Configure Modal Dialog
+		const dialogConfig = new MatDialogConfig();
+		// The user can't close the dialog by clicking outside its body
+		dialogConfig.disableClose = true;
+		dialogConfig.id = "add-session-modal-component";
+		dialogConfig.height = "auto";
+		dialogConfig.maxHeight = "600px";
+		dialogConfig.width = "700px";
+		dialogConfig.autoFocus = false;
+		dialogConfig.data = {
+			title: "Add new session",
+			mode: "addsession",
+			description: "",
+			programPK: this.ProgramPK,
+			name: this.programData.Name,
+			userPK: this.currentUserPK,
+			color: this.selectedColor,
+			currentScheduleSetting: this.currentScheduleSetting,
+			actionButtonText: "Save",   
+			numberOfButton: "2"         
+			}
+		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+		addScheduleModalDialog.afterClosed().subscribe(result =>{
+			if(result == "Yes"){
+					window.location.reload();
+			}
+			else{
+					console.log("stop")                
+			}
+		})
+    }
+
+    updateSessionDetailsModal(item){
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "update-schedule-modal-component";
+        dialogConfig.id = "update-session-modal-component";
         dialogConfig.height = "auto";
         dialogConfig.maxHeight = "600px";
         dialogConfig.width = "700px";
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Edit schedule",
-            mode: "edit",
+            title: "Edit session",
+            mode: "editsession",
             description: "",
             programPK: this.ProgramPK,
             name: this.programData.Name,
             userPK: this.currentUserPK,
             color: this.selectedColor,            
-            actionButtonText: "Save",   
+            actionButtonText: "Update",   
             numberOfButton: "2",
             //Add this for Editing
             event: item  

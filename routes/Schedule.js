@@ -7,6 +7,7 @@ const ReservationGroupProgram = require("../models/ReservationGroupDetails");
 const ReservationIndividualProgram = require("../models/ReservationIndividualDetails");
 const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
+const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
 
 const Sequelize = require('sequelize');
@@ -15,10 +16,94 @@ const Op = Sequelize.Op;
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
-/************************************
-   ADD NEW PROGRAM SCHEDULE SETTING
- ************************************/
+/**************************************
+   GET ALL CURRENT PROGRAM SCHEDULES
+ **************************************/
+schedule.get("/get-all-schedule-settings", (req, res) => {
+  ScheduleSetting.findAll({
+    where : {
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting.length > 0){
+      res.json(scheduleSetting)
+    }
+    else{
+      res.json("There're no available schedules.")
+    }
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  });
+});
+
+/**************************************
+   ADD NEW SCHEDULE SETTING
+ **************************************/
 schedule.post("/add-new-schedule-setting", (req, res) => {
+  ScheduleSetting.create(req.body)
+  .then(newScheduleSetting =>{
+    res.json(newScheduleSetting.ScheduleSettingPK)
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  })
+});
+
+/**************************************
+   UPDATE SCHEDULE SETTING
+ **************************************/
+schedule.post("/update-schedule-setting", (req, res) => {
+	ScheduleSetting.update(req.body, {
+		where: {
+		  ScheduleSettingPK: req.body.ScheduleSettingPK
+		}
+	 })
+	 .then(result => {
+		if (result == 1) {
+		  res.send({
+			 message: "Schedule setting was updated successfully."
+		  });
+		}
+		else {
+		  res.send({
+			 error: "Cannot update schedule setting"
+		  });
+		}
+	 })
+	 .catch(err => {
+		res.send('error: ' + err)
+	 })
+});
+
+/***************************************************
+   GET ALL CURRENT PROGRAM SCHEDULES BY PROGRAMPK
+ ***************************************************/
+schedule.get("/get-all-schedule-settings-by-id/:id", (req, res) => {
+  ScheduleSetting.findAll({
+    where : {
+      ProgramPK: req.params.id,
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting.length > 0){
+      res.json(scheduleSetting)
+    }
+    else{
+      res.json("There're no available schedules for this program.")
+    }
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  });
+});
+
+/************************************
+   ADD NEW PROGRAM SESSION DETAILS
+ ************************************/
+schedule.post("/add-new-session-details", (req, res) => {
   timeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
@@ -29,9 +114,10 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
   startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
   endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
   
-  ScheduleSetting.findAll({
+  SessionDetails.findAll({
     where: {
-      ProgramPK: req.body.ProgramPK,
+		ProgramPK: req.body.ProgramPK,
+		ScheduleSettingPK: req.body.ScheduleSettingPK,
       Start: {
         [Op.like]: '%'+startTime+'%'
       },
@@ -50,9 +136,9 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
     }
     else{
       //If there's no events having the same start and end time => create new
-      ScheduleSetting.create(req.body)
-      .then(newSetting => {
-        res.json(newSetting)
+      SessionDetails.create(req.body)
+      .then(newSession => {
+        res.json(newSession)
       })
     }
   })
@@ -62,9 +148,9 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
 });
 
 /************************************
-  UPDATE PROGRAM SCHEDULE SETTING
+  UPDATE PROGRAM SESSION DETAILS
  ************************************/
-schedule.post("/update-schedule-setting", (req, res) => {
+schedule.post("/update-session-details", (req, res) => {
   timeFormatOptions = {
     hour: 'numeric',
     minute: 'numeric',
@@ -75,12 +161,12 @@ schedule.post("/update-schedule-setting", (req, res) => {
   startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
   endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
   
-  ScheduleSetting.findAll({
+  SessionDetails.findAll({
     where: {
-      ScheduleSettingPK: {
+      ScheduleSettingPK: { //FINDME
         [Op.ne]: req.body.ScheduleSettingPK
       },
-      ProgramPK: req.body.ProgramPK,
+      ProgramPK: req.body.ProgramPK, //FINDME
       Start: {
         [Op.like]: '%'+startTime+'%'
       },
@@ -100,9 +186,9 @@ schedule.post("/update-schedule-setting", (req, res) => {
     else{
       //If there's no events having the same start and end time => update the current
       //###### Update #######
-        ScheduleSetting.update(req.body, {
+        SessionDetails.update(req.body, {
           where: {
-            ScheduleSettingPK: req.body.ScheduleSettingPK
+            ScheduleSettingPK: req.body.ScheduleSettingPK //FINDME
           }
         })
         .then(result => {
@@ -128,13 +214,13 @@ schedule.post("/update-schedule-setting", (req, res) => {
     });    
 });
 
-/************************************
-   DEACTIVATE PROGRAM SCHEDULE SETTING
- ************************************/
-schedule.post("/deactivate-schedule-setting", (req, res) => {
-  ScheduleSetting.findOne({
+/***************************************
+   DEACTIVATE PROGRAM SESSION DETAILS
+ ***************************************/
+schedule.post("/deactivate-session-details", (req, res) => {
+  SessionDetails.findOne({
     where: {
-      ScheduleSettingPK: req.body.ScheduleSettingPK
+      ScheduleSettingPK: req.body.ScheduleSettingPK //FINDME
     }
   })
   .then(scheduleSetting =>{
@@ -170,16 +256,16 @@ schedule.post("/add-new-schedule", (req, res) => {
 
 
 /*************************************
-  GET ALL PROGRAM SCHEDULES OVERVIEW
+  GET ALL PROGRAM SESSIONS DETAILS
  *************************************/
-schedule.get("/get-all-schedule-setting", (req, res) => {
-  ScheduleSetting.findAll({
+schedule.get("/get-all-session-details", (req, res) => {
+  SessionDetails.findAll({
     where: {
       IsActive: true
     }
   })
-    .then(overview => {      
-      res.json(overview);
+    .then(sessions => {      
+      res.json(sessions);
     })
     .catch(err => {
       res.send("error: " + err);
@@ -187,17 +273,17 @@ schedule.get("/get-all-schedule-setting", (req, res) => {
 });
 
 /**************************************
-  GET PROGRAM SCHEDULE SETTING BY ID
+  GET PROGRAM SESSION DETAILS BY ID
  **************************************/
-schedule.get("/get-schedule-setting-by-id/:id", (req, res) => {
-  ScheduleSetting.findAll({
+schedule.get("/get-session-details-by-id/:id", (req, res) => {
+  SessionDetails.findAll({
     where: {
       ProgramPK: req.params.id,
       IsActive: true
     }
   })
-    .then(overview => {      
-      res.json(overview);
+    .then(sessions => {      
+      res.json(sessions);
     })
     .catch(err => {
       res.send("error: " + err);

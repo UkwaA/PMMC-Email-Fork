@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms'
 import { AuthenticationService } from '../../authentication.service';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
 import { ActivatedRoute } from '@angular/router';
+import { ActiveColorClickEvent } from '@progress/kendo-angular-inputs';
 declare var $: any;
 
 @Component({
@@ -36,7 +37,7 @@ export class ViewScheduleComponent {
         { id: 2, name: "Individual Programs" }
     ]
 
-    d1 = new Date('2020-04-09T09:00:00')
+    d1 = new Date('2020-04-20T09:00:00')
     d2 = new Date('2020-04-16T09:00:00')
     exceptionDate: Date[] = []    
     choice:any = 0
@@ -94,7 +95,7 @@ export class ViewScheduleComponent {
             return date;
         };       
 
-        this.programScheduleServices.getAllScheduleSetting().subscribe((schedules) =>{            
+        this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{            
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,

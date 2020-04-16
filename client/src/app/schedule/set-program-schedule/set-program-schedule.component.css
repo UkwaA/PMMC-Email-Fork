@@ -22,17 +22,13 @@ thead{
 }
 
 th, td {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 
 td {
   font-size: 14px;
   font-weight: normal;
-}
-
-td.name{
-  color:  #08b2b8;
 }
 
 th {
@@ -48,18 +44,18 @@ th {
 
 /*Add table border */
 table.table-hover{
-  border:1px solid black;
+  /* border:1px solid black; */
   margin-top:10px;
 }
 table.table-hover > thead > tr > th{
   border:1px solid white;
 }
 table.table-hover > tbody > tr > td{
-  border:1px solid black;
+  /* border:1px solid black; */
 }
 
 .mat-button, .mat-raised-button:hover{
-  background-color: rgb(6, 3, 189);
+  background-color: rgb(6, 3, 189);  
 } 
 
 /* #addButton {
