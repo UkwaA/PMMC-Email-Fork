@@ -212,8 +212,8 @@ export class ProgramScheduleComponent implements OnInit {
     
       const loginDialogConfig = new MatDialogConfig();
       loginDialogConfig.id = "modal-component";
-      loginDialogConfig.height = "600px";
-      loginDialogConfig.maxHeight = "600px";
+      loginDialogConfig.height = "500px";
+      // loginDialogConfig.maxHeight = "600px";
       loginDialogConfig.width = "500px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
