@@ -52,6 +52,7 @@
                                             <th style="width:15%">From</th>
                                             <th style="width:15%">To</th>
                                             <th style="width:40%">Schedule Name</th>
+                                            <th style="width:20%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -59,8 +60,9 @@
                                                 on-mouseover="hoveredIndex=index">
                                             <td class="scheduleTable">{{schedule.tempStart}}</td>
                                             <td class="scheduleTable">{{schedule.tempEnd}}</td>
-                                            <td class="scheduleTable"><div class="row">
-                                                    <div class="col-md-8">
+                                            <td class="scheduleTable">
+                                                <div class="row">
+                                                    <div class="col-md-7">
                                                         {{schedule.ScheduleSettingName}} 
                                                     </div>
                                                     <div class="col-md-4">
@@ -73,6 +75,16 @@
                                                         </button>
                                                     </div>
                                                 </div>                                                
+                                            </td>
+                                            <td>
+                                                <button mat-icon-button onclick="this.blur()" matTooltip="Edit"
+                                                    (click)="editScheduleModal(schedule)" >
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button color="warn" id="removeButton" onclick="this.blur()"
+                                                    (click)="removeSchedule()" >
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -104,7 +116,7 @@
                     <div class="row">
                         <div class="col padding-0" *ngFor="let day of dayArr">
                             <div class="table-responsive-sm">
-                                <table #datatable class="table table-hover" style="width:100%">
+                                <table #datatable class="table table-striped table-hover" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th style="width:100%">{{day.day}}</th>
@@ -113,11 +125,7 @@
                                     <tbody>
                                         <tr *ngFor="let item of day.eventList">
                                             <td>
-                                                {{item.tempStart}} <br/>to {{item.tempEnd}}
-                                                <button mat-icon-button onclick="this.blur()" matTooltip="Edit"
-                                                    (click)="updateScheduleModal(item)" >
-                                                    <mat-icon>edit</mat-icon>
-                                                </button>
+                                                {{item.tempStart}} <br/>to {{item.tempEnd}}                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -125,6 +133,47 @@
                             </div>
                         </div>                        
                     </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>List of current Sessions</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col padding-0">
+                            <div class="table-responsive-sm">
+                                <table #datatable class="table table-striped table-hover" on-mouseleave="hoveredIndex=null" style="width:70%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:20%">Session</th>
+                                            <th style="width:20%">Repeat on</th>
+                                            <th style="width:15%">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let session of allSessions">
+                                            <td *ngIf="session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK">
+                                                {{session.tempStart}} - {{session.tempEnd}}</td>
+                                            <td *ngIf="session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK" >
+                                                {{session.RepeatDay}}</td>
+                                            <td *ngIf="session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK">
+                                                <button mat-icon-button onclick="this.blur()" matTooltip="Edit"
+                                                    (click)="updateSessionDetailsModal(item)" >
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button color="warn" id="removeButton" onclick="this.blur()"
+                                                    (click)="removeSchedule()" >
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>                                            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>   
+                    </div>                     
                 </div>
             </div>
             <hr>

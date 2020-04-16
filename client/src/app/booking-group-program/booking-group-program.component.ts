@@ -37,9 +37,7 @@ export class BookingGroupProgramComponent implements OnInit {
   total: number;
   num_submits: number;
   edit_clicked:boolean;
-
-  // Get QuantityForm from Local Storage
-  quantityForm = JSON.parse(localStorage.getItem('quantityForm'));
+  quantityForm: any
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -49,7 +47,10 @@ export class BookingGroupProgramComponent implements OnInit {
               private _data: DataStorage) { }
 
   ngOnInit() {
-
+    // Get QuantityForm from Local Storage
+    // Clear the Local Storage after finish checking out
+    this.quantityForm = JSON.parse(localStorage.getItem('quantityForm'));
+    
     this.registerForm = this.fb.group({
       ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],

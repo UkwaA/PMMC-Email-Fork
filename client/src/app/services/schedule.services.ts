@@ -23,6 +23,9 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
     }
 
+    public updateScheduleSetting(scheduleSetting: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting", scheduleSetting);
+    }
     /*================================
             SESSION DETAILS
     ================================*/

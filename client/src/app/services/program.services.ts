@@ -46,10 +46,8 @@ export class ProgramServices {
     switch (programType) {
       case 'g':
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'program/update-g-program-requirement', programData)
-        break;
       case 'i':
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'program/update-i-program-requirement', programData)
-        break;
     }
   }
 

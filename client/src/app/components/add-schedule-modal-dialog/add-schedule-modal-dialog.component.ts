@@ -92,13 +92,19 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
     ngOnInit(){
       switch(this.modalData.mode){
-          case "newschedule":
+         case "newschedule":
             this.startDate = new Date()
             this.endDate = new Date()
             this.scheduleSettingName = ""
             break;
-          
-          case "editsession":
+			
+			case "editschedule":
+				this.startDate = new Date(this.modalData.currentScheduleSetting.Start)
+				this.endDate = new Date(this.modalData.currentScheduleSetting.End)
+				this.scheduleSettingName = this.modalData.currentScheduleSetting.ScheduleSettingName
+				break;
+			
+         case "editsession":
               this.startDate = new Date(this.modalData.event.Start)
               this.endDate = new Date(this.modalData.event.EndRepeatDate)
               this.startTime = new Date(this.modalData.event.Start)
@@ -308,27 +314,28 @@ export class AddScheduleModalDialogComponent implements OnInit{
         this.repeatOnErrorMessage = "Must select at least one day."
       }
       else{
+			this.currentScheduleSetting = {
+				ScheduleSettingPK: 0,
+				ProgramPK: this.modalData.programPK,
+				ScheduleSettingName: this.scheduleSettingName,
+				Start: this.startDate.toString(),
+				End: this.endDate.toString(),
+				IsActive: true,
+				CreatedBy: this.modalData.userPK
+			}
         	switch(this.modalData.mode){
-          	case "newschedule":
-					this.currentScheduleSetting = {
-							ScheduleSettingPK: 0,
-							ProgramPK: this.modalData.programPK,
-							ScheduleSettingName: this.scheduleSettingName,
-							Start: this.startDate.toString(),
-							End: this.endDate.toString(),
-							IsActive: true,
-							CreatedBy: this.modalData.userPK
-					}
-					//console.log(this.currentScheduleSetting)
+				//======= ADD NEW SCHEDULE ===========
+          	case "newschedule":				
 					if(this.currentScheduleSetting.ScheduleSettingName){
 						if(this.endDate < this.modalData.allScheduleSetting[this.modalData.allScheduleSetting.length - 1].Start
 							|| this.startDate > this.modalData.allScheduleSetting[0].End){                
 								this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
-									if(!res.message){
+									if(!res){
 										this.isDisabled = true
 									}
-									else{
+									else{										
 										this.isDisabled = false
+										this.currentScheduleSetting.ScheduleSettingPK = res
 										if(!this.isDisabled){
 											this.dialogRef.close("Yes")
 										}   
@@ -344,7 +351,26 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						this.scheduleNameErrorMessage = "Schedule Name is required."
 					}
 					break;
+			
+			//======= UPDATE CURRENT SCHEDULE ===========
+			case "editschedule":
+					this.currentScheduleSetting.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
+					console.log(this.currentScheduleSetting)
+					this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
+						if(res.error){
+							this.isDisabled = true
+							this.errorMessage = res.error            
+						}
+						else{
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close("Yes")
+							}              
+						} 
+					})
+					break;
 
+			//======= ADD NEW SESSION ===========
 			case "addsession":
 				this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
 					if(res.error){

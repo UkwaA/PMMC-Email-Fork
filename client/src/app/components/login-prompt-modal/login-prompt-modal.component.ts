@@ -63,9 +63,10 @@ export class LoginPromptModal implements OnInit {
   createNew() {
     const registerDialogConfig = new MatDialogConfig();
       registerDialogConfig.id = "register-modal-component";
-      registerDialogConfig.height = "600px";
-      registerDialogConfig.maxHeight = "600px";
-      registerDialogConfig.width = "700px";
+      registerDialogConfig.height = "auto";
+      registerDialogConfig.disableClose = true;
+      // registerDialogConfig.maxHeight = "600px";
+      registerDialogConfig.width = "auto";
       registerDialogConfig.autoFocus = false;
       registerDialogConfig.data = {
         title: "Register New User",

@@ -27,7 +27,6 @@ export class ProgramDetailsComponent {
     @ViewChild(IProgramComponent, { static: false }) iComponent: IProgramComponent;
 
     viewImgHref: string
-    formData = new FormData()
     // bookingGroupData: BookingGroupData
     bookingIndividualData: BookingIndividualData
     bookingRequirementData: any
@@ -50,12 +49,16 @@ export class ProgramDetailsComponent {
         SubProgramPK: 0
     }
     selectedValue: any
-    files: File;
+    file: File;
     isDisabled: boolean;
 
     // EventHandler for file upload
     onFileChange(event) {
-        this.files = event.target.files[0];
+        if (event.target.files.length > 0) {
+            this.file = event.target.files[0];
+            this.programData.ImgData = (this.file ? this.file.name : '');
+        } 
+        
     }
     Editor = DecoupledEditor
 
@@ -105,22 +108,9 @@ export class ProgramDetailsComponent {
         })
     }
 
-    // // EventHandler to capture data change from child component
+    // EventHandler to capture data change from child component
     dataChangedHandler(data: any) {
         this.bookingRequirementData = data
-        // switch (this.programData.ProgramType) {
-        //     case 0:
-        //         this.bookingGroupData = data
-        //         break;
-        //     case 1:
-        //         this.bookingIndividualData = data
-        //         break;
-        // }
-    }
-
-    upLoad() {
-        this.http.post("http://localhost:3000/program/add-image", this.programData).subscribe((program) => {
-        })
     }
 
     onReady(editor) {
@@ -131,12 +121,16 @@ export class ProgramDetailsComponent {
     }
 
     getFormData() {
-        this.formData.append('file', this.files, this.files.name);
+        const formData = new FormData();
+        if(this.file) {
+            formData.append('file', this.file, this.file.name);
+        }
+
         for (const key of Object.keys(this.programData)) {
             const value = this.programData[key];
-            this.formData.append(key, value);
+            formData.append(key, value);
         }
-        return this.formData;
+        return formData;
     }
 
     //Configure Modal Dialog
@@ -156,8 +150,6 @@ export class ProgramDetailsComponent {
             actionButtonText: "Confirm",
             numberOfButton: "2"
         }
-        // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
             if (result == "Yes") {
@@ -171,11 +163,7 @@ export class ProgramDetailsComponent {
     }
 
     submit() {
-        // this.services.updateProgramLayoutDetails(this.programTypeShortText, this.bookingRequirementData)
-        // .subscribe((response) => {
-        //   this.router.navigateByUrl("/profile/program-management")
-        // })
-
+    
         switch (this.programData.ProgramType) {
             case 0:
                 this.bookingRequirementData = this.gComponent.bookingGroup
@@ -184,12 +172,12 @@ export class ProgramDetailsComponent {
                 this.bookingRequirementData = this.iComponent.bookingIndividual
                 break;
         }
+        
         // Update Program Header Data
-        this.services.updateProgramHeader(this.programData)
+        this.services.updateProgramHeader(this.getFormData())
             .subscribe((result) => {
                 this.services.updateProgramLayoutDetails(this.programTypeShortText, this.bookingRequirementData)
                     .subscribe((res) => {
-                        console.log(res)
                         this.router.navigateByUrl("/profile/program-management")
                     })
             })

@@ -5,7 +5,7 @@ import { AuthenticationService} from '../../authentication.service'
 import { CustomerService } from '../../services/customer.services'
 import { Router } from "@angular/router";
 
-
+declare var $: any;
 
 import { UserData } from '../../../app/data/user-data';
 import { CustomerData } from '../../../app/data/customer-data';
@@ -65,6 +65,11 @@ export class RegisterModalDialogComponent implements OnInit{
         Zipcode:['', [Validators.required, Validators.min(10000)]],
         Subscribe: [0]
       })
+
+      $('.state').bind('keydown keyup blur',function(){ 
+        var node = $(this);
+        node.val(node.val().replace(/[^A-Z]/g,'') ); }
+      );
     }
 
     actionFunction() {        

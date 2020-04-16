@@ -4,13 +4,6 @@
             <div class="col-md-4">
                 <h1 id="modal-title">{{modalData.title}}</h1>
             </div>
-            <div class="col md-4"></div>
-            <div class="col-md-2" *ngIf="modalData.mode == 'editsession'">
-                <button mat-raised-button color="warn" id="removeButton" onclick="this.blur()"
-                    (click)="removeSchedule()" >
-                    <mat-icon>delete</mat-icon>Delete
-                </button>
-            </div>
         </div>
     </header>
     <mat-divider></mat-divider>
@@ -38,7 +31,7 @@
                             <kendo-datepicker 
                                 [(value)]="startDate"
                                 (valueChange)="onChangeStartDate($event)"
-                                [disabled]="modalData.mode != 'newschedule'"
+                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'"
                                 >                        
                             </kendo-datepicker>
                         </div>
@@ -50,7 +43,7 @@
                                 [(value)]="endDate" 
                                 [min] = "startDate"
                                 (valueChange)="onChangeEndDate($event)"
-                                [disabled]="modalData.mode != 'newschedule'"
+                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'"
                                 >
                             </kendo-datepicker>
                             <div class="errorMessage" *ngIf="endDateErrorMessage">
@@ -62,7 +55,7 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="row" *ngIf="modalData.mode == 'newschedule'">
+                    <div class="row" *ngIf="modalData.mode == 'newschedule' || modalData.mode == 'editschedule'">
                         <div class="col-md-2">
                             <label>Schedule Name*</label>
                         </div>
@@ -74,7 +67,7 @@
                             </div>
                         </div> 
                     </div>
-                    <div *ngIf="modalData.mode != 'newschedule'">
+                    <div *ngIf="modalData.mode == 'addsession' || modalData.mode == 'editsession'">
                         <div class="row" >
                             <div class="col-md-2">
                                 <label>Time</label>
