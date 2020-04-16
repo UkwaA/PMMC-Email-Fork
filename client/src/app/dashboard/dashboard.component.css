@@ -6,6 +6,10 @@ h1 {
     color: #08b2b8; 
 }
 
+.row{
+    padding-bottom: 20px;
+}
+
 .list-group[data-payment = "paid"]{
     border-width: 5px;
     border-left-style: solid;
@@ -33,12 +37,8 @@ h1 {
     color: #fff;
 }
 
-.bg-c-blue {
-    background: linear-gradient(45deg,#4099ff,#73b4ff);
-}
-
 .bg-c-green {
-    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+    background: #5cb85c;
 }
 
 .bg-c-yellow {
@@ -46,16 +46,16 @@ h1 {
 }
 
 .bg-c-pink {
-    background: linear-gradient(45deg,#FF5370,#ff869a);
+    background: #d9534f;
 }
 
 .bg-g-white {
-    color: #2ed8b6;
+    color: #5cb85c;
     background: white;
 }
 
 .bg-p-white {
-    color: #FF5370;
+    color: #d9534f;
     background: white;
 }
 
@@ -64,23 +64,15 @@ h1 {
     background: white;
 }
 
-.bg-b-white {
-    color: #4099ff;
-    background: white;
-}
 
 .card {
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
     box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
-}
-
-.card .card-block {
-    padding: 25px;
 }
 
 .order-card i {
@@ -101,4 +93,8 @@ h1 {
 
 @media (max-width: 768px) {
     .hide-with-small { display: none; }
+}
+
+.col-sm-12{
+    margin-bottom: 20px;
 }
