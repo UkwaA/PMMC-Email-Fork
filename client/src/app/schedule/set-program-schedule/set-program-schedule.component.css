@@ -44,14 +44,14 @@ th {
 
 /*Add table border */
 table.table-hover{
-  border:1px solid black;
+  /* border:1px solid black; */
   margin-top:10px;
 }
 table.table-hover > thead > tr > th{
   border:1px solid white;
 }
 table.table-hover > tbody > tr > td{
-  border:1px solid black;
+  /* border:1px solid black; */
 }
 
 .mat-button, .mat-raised-button:hover{

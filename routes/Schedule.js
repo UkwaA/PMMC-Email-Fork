@@ -44,11 +44,37 @@ schedule.get("/get-all-schedule-settings", (req, res) => {
 schedule.post("/add-new-schedule-setting", (req, res) => {
   ScheduleSetting.create(req.body)
   .then(newScheduleSetting =>{
-    res.json({message: "Schedule Setting has been created successfully."})
+    res.json(newScheduleSetting.ScheduleSettingPK)
   })
   .catch(err => {
     res.send("errorExpressErr: " + err);
   })
+});
+
+/**************************************
+   UPDATE SCHEDULE SETTING
+ **************************************/
+schedule.post("/update-schedule-setting", (req, res) => {
+	ScheduleSetting.update(req.body, {
+		where: {
+		  ScheduleSettingPK: req.body.ScheduleSettingPK
+		}
+	 })
+	 .then(result => {
+		if (result == 1) {
+		  res.send({
+			 message: "Schedule setting was updated successfully."
+		  });
+		}
+		else {
+		  res.send({
+			 error: "Cannot update schedule setting"
+		  });
+		}
+	 })
+	 .catch(err => {
+		res.send('error: ' + err)
+	 })
 });
 
 /***************************************************

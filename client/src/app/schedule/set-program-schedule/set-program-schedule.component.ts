@@ -154,8 +154,7 @@ export class SetProgramScheduleComponent {
 					// Turn your strings into dates, and then subtract them
 					// to get a value that is either negative, positive, or zero.
 					return b.Start - a.Start;
-				});
-				console.log(this.allScheduleSettings)
+				});				
 				this.currentScheduleSetting = this.allScheduleSettings[0]
 				this.allScheduleSettings[0].IsSelected = true
 			}	
@@ -261,15 +260,15 @@ export class SetProgramScheduleComponent {
             name: this.programData.Name,
             userPK: this.currentUserPK,
             color: this.selectedColor,
-            schedule: this.currentScheduleSetting,
+            currentScheduleSetting: this.currentScheduleSetting,
             allScheduleSetting: this.allScheduleSettings,            
             actionButtonText: "Save",   
             numberOfButton: "2"         
             }
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
-        addScheduleModalDialog.afterClosed().subscribe(result =>{
-            if(result == "Yes"){
-                window.location.reload();
+        addScheduleModalDialog.afterClosed().subscribe(newSchedule =>{
+            if(newSchedule.ScheduleSettingPK != 0){
+					window.location.reload();										
             }
             else{
                 console.log("stop")                
@@ -277,37 +276,70 @@ export class SetProgramScheduleComponent {
         })
     }
 
-    addNewSessionDetailsModal(){
-        //Configure Modal Dialog
-        const dialogConfig = new MatDialogConfig();
-        // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose = true;
-        dialogConfig.id = "add-session-modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "600px";
-        dialogConfig.width = "700px";
-        dialogConfig.autoFocus = false;
-        dialogConfig.data = {
-            title: "Add new session",
-            mode: "addsession",
-            description: "",
-            programPK: this.ProgramPK,
-            name: this.programData.Name,
-            userPK: this.currentUserPK,
-            color: this.selectedColor,
-				currentScheduleSetting: this.currentScheduleSetting,
-            actionButtonText: "Save",   
-            numberOfButton: "2"         
-            }
-        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
-        addScheduleModalDialog.afterClosed().subscribe(result =>{
-            if(result == "Yes"){
-                window.location.reload();
-            }
-            else{
-                console.log("stop")                
-            }
-        })
+	editScheduleModal(currentScheduleSetting){
+		//Configure Modal Dialog
+		const dialogConfig = new MatDialogConfig();
+		// The user can't close the dialog by clicking outside its body
+		dialogConfig.disableClose = true;
+		dialogConfig.id = "edit-schedule-modal-component";
+		dialogConfig.height = "auto";
+		dialogConfig.maxHeight = "600px";
+		dialogConfig.width = "700px";
+		dialogConfig.autoFocus = false;
+		dialogConfig.data = {
+			 title: "Edit schedule",
+			 mode: "editschedule",
+			 description: "",
+			 programPK: this.ProgramPK,
+			 name: this.programData.Name,
+			 userPK: this.currentUserPK,
+			 currentScheduleSetting: currentScheduleSetting,
+			 allScheduleSetting: this.allScheduleSettings,            
+			 actionButtonText: "Save",   
+			 numberOfButton: "2"         
+			 }
+		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+		addScheduleModalDialog.afterClosed().subscribe(res =>{
+			 if(res == "Yes"){
+				 window.location.reload();										
+			 }
+			 else{
+				  console.log("stop")                
+			 }
+		})
+	}
+
+	addNewSessionDetailsModal(){
+		//Configure Modal Dialog
+		const dialogConfig = new MatDialogConfig();
+		// The user can't close the dialog by clicking outside its body
+		dialogConfig.disableClose = true;
+		dialogConfig.id = "add-session-modal-component";
+		dialogConfig.height = "auto";
+		dialogConfig.maxHeight = "600px";
+		dialogConfig.width = "700px";
+		dialogConfig.autoFocus = false;
+		dialogConfig.data = {
+			title: "Add new session",
+			mode: "addsession",
+			description: "",
+			programPK: this.ProgramPK,
+			name: this.programData.Name,
+			userPK: this.currentUserPK,
+			color: this.selectedColor,
+			currentScheduleSetting: this.currentScheduleSetting,
+			actionButtonText: "Save",   
+			numberOfButton: "2"         
+			}
+		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+		addScheduleModalDialog.afterClosed().subscribe(result =>{
+			if(result == "Yes"){
+					window.location.reload();
+			}
+			else{
+					console.log("stop")                
+			}
+		})
     }
 
     updateSessionDetailsModal(item){
