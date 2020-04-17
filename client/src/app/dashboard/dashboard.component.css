@@ -98,3 +98,9 @@ h1 {
 .col-sm-12{
     margin-bottom: 20px;
 }
+
+.filter{
+    padding-bottom: 30px;
+    padding-left: 30px;
+    font-weight: bold;
+}

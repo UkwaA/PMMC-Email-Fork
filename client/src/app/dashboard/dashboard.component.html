@@ -57,8 +57,24 @@
         </div>
     </div>
     <h3 class = "text-muted"> Lastest Reservations </h3>
+    <!-- SEARCH BAR -->
+    <div class="row filter">
+        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+            <select class="form-control" style="font-weight: bold" id="programCat"
+                (change)="selectChangeHandler($event)">
+            </select>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
+            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
+                [(ngModel)]="searchText">
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
+        </div>
+    </div>
+    <!-- TABLE -->
     <div class="table-responsive-sm hide-with-small">
-        <table class="table table-hover" style="width:100%">
+        <table #datatable class="table table-hover" style="width:100%">
             <thead>
                 <tr>
                     <th style="width:10%"> Reservation Number </th>

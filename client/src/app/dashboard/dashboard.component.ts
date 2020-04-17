@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { ProgramData } from '../data/program-data';
+
+declare var $: any;
 
 @Component({
   selector: 'dashboard',
@@ -8,10 +11,22 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class DashboardComponent implements OnInit {
   role:string;
+  searchText: string;
+  
+
+  // Dropdown Menu Option
+  programCategories: Array<Object> = [
+    { id: 0, name: "All Reservations" },
+    { id: 1, name: "Group Reservations" },
+    { id: 2, name: "Individual Reservations" }
+  ]
 
   constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
+    // Add option for the dropdown menu(later)
+    
+
     this.auth.profile().subscribe(
       user => {
           this.role = user.Role_FK;
@@ -22,4 +37,10 @@ export class DashboardComponent implements OnInit {
       }
   )
   }
+  clearSearch() {
+    this.searchText = "";
+  }
+
+  // Catch the event dropdown menu (later)
+
 }
