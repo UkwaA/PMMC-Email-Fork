@@ -6,6 +6,7 @@ import { ProgramScheduleService } from 'src/app/services/schedule.services';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
+import { Session } from 'protractor';
 
 @Component({
     selector: 'add-schedule-modal-dialog',
@@ -26,6 +27,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 	scheduleNameErrorMessage = ""
 	isDisabled = false
 	submitted = false
+	allSessions: any = []
+	allEditedSessions: any = []
 
 	startDate:any = new Date();
 	endDate:any = new Date();
@@ -98,22 +101,28 @@ export class AddScheduleModalDialogComponent implements OnInit{
             this.scheduleSettingName = ""
             break;
 			
-			case "editschedule":
-				this.startDate = new Date(this.modalData.currentScheduleSetting.Start)
-				this.endDate = new Date(this.modalData.currentScheduleSetting.End)
-				this.scheduleSettingName = this.modalData.currentScheduleSetting.ScheduleSettingName
-				break;
+		case "editschedule":
+			this.startDate = new Date(this.modalData.currentScheduleSetting.Start)
+			this.endDate = new Date(this.modalData.currentScheduleSetting.End)
+			this.scheduleSettingName = this.modalData.currentScheduleSetting.ScheduleSettingName
+			this.allSessions = this.modalData.allSessions
+			this.allSessions.forEach(session =>{
+				if(session.ScheduleSettingPK == this.modalData.currentScheduleSetting.ScheduleSettingPK){
+					this.allEditedSessions.push(session)
+				}
+			})
+			break;
 			
          case "editsession":
-              this.startDate = new Date(this.modalData.event.Start)
-              this.endDate = new Date(this.modalData.event.EndRepeatDate)
-              this.startTime = new Date(this.modalData.event.Start)
-              this.endTime = new Date(this.modalData.event.End)
+              this.startDate = new Date(this.modalData.currentSession.Start)
+              this.endDate = new Date(this.modalData.currentSession.EndRepeatDate+"T23:00:00")
+              this.startTime = new Date(this.modalData.currentSession.Start)
+              this.endTime = new Date(this.modalData.currentSession.End)
               this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
               this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
-              this.eventDescription = this.modalData.event.Description
+              this.eventDescription = this.modalData.currentSession.Description
               this.dayArr.forEach(day =>{
-                if(this.modalData.event.RepeatDay.indexOf(day.value) >= 0){
+                if(this.modalData.currentSession.RepeatDay.indexOf(day.value) >= 0){
                   day.selected = true
                 }
                 else{
@@ -122,7 +131,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
               })
               break;
 
-          case "addsession":
+          case "newsession":
               this.startDate = this.modalData.currentScheduleSetting.Start;
               this.endDate = this.modalData.currentScheduleSetting.End;
               this.startTime = new Date('2020-04-01T09:00:00');
@@ -139,34 +148,34 @@ export class AddScheduleModalDialogComponent implements OnInit{
                 {day: "Saturday", value: "SA", selected: false},
 				  ]
               break;
-      }      
+      	}      
 
-      this.recurrenceRule = ""
-      this.endTimeErrorMessage = ""
-      this.startTimeErrorMessage = ""
-      this.repeatOnErrorMessage = ""
-      this.errorMessage = ""
-      this.endDateErrorMessage = ""
-		this.newScheduleErrorMessage = ""
-		this.scheduleNameErrorMessage = ""
-      this.isDisabled = false
-      this.weeklyRepeatOnDayArr = []      
+		this.recurrenceRule = ""
+		this.endTimeErrorMessage = ""
+		this.startTimeErrorMessage = ""
+		this.repeatOnErrorMessage = ""
+		this.errorMessage = ""
+		this.endDateErrorMessage = ""
+			this.newScheduleErrorMessage = ""
+			this.scheduleNameErrorMessage = ""
+		this.isDisabled = false
+		this.weeklyRepeatOnDayArr = []      
 
-      this.dayArr.forEach(day =>{
-        if(day.selected){
-            this.weeklyRepeatOnDayArr.push(day.value)
-        }
-    	})
+		this.dayArr.forEach(day =>{
+			if(day.selected){
+				this.weeklyRepeatOnDayArr.push(day.value)
+			}
+			})
 
-      this.SetProgramScheduleForm = this.fb.group({    
-        programName: [],
-        scheduleName: ['', Validators.required],
-        startDate: [],
-        endDate: [],
-        endrepeat: [],            
-        dayOfMonthOfYear: [1, [Validators.min(1)]],
-        description:[]
-      })      
+		this.SetProgramScheduleForm = this.fb.group({    
+			programName: [],
+			scheduleName: ['', Validators.required],
+			startDate: [],
+			endDate: [],
+			endrepeat: [],            
+			dayOfMonthOfYear: [1, [Validators.min(1)]],
+			description:[]
+			})      
     }
 
     get f() { return this.SetProgramScheduleForm.controls; }
@@ -251,7 +260,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
             //2. Set IsActive in schedule to 0 (how to get all entries in schedule? maybe add ScheduleSettingPK to schedule table)
             //3. Send email to all customer that currently are in the reservation relating this schedule
             let scheduleToDeactivate = {
-              ScheduleSettingPK: this.modalData.event.ScheduleSettingPK
+              ScheduleSettingPK: this.modalData.currentSession.ScheduleSettingPK
             }
             
             this.programScheduleServices.deactivateSessionDetails(scheduleToDeactivate).subscribe(res=>{
@@ -268,7 +277,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       })      
     }
 
-    setSchedule(){
+   setSchedule(){
       // this.submitted = true;
       //   if (this.SetProgramScheduleForm.invalid) {
       //       return;
@@ -279,7 +288,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       //var eventEndDate = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)        
       var eventStartTime = this.startTime.toLocaleString('en-US', this.timeFormatOptions);
       var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
-      var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,19)
+      var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)
       
       var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toString()
       var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toString()   
@@ -291,7 +300,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       this.currentSessionDetail = {
 			SessionDetailsPK: 0,			
 			ProgramPK: this.modalData.programPK,
-			ScheduleSettingPK: this.modalData.currentScheduleSetting.ScheduleSettingPK,
+			ScheduleSettingPK: 0,
 			Title: this.modalData.name,
 			Description: this.eventDescription,
 			StartTimezone: "",
@@ -310,7 +319,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       };
       
       if(this.weeklyRepeatOnDayArr.length == 0 && 
-          (this.modalData.mode == "addsession" || this.modalData.mode == "editsession")){        
+          (this.modalData.mode == "newsession" || this.modalData.mode == "editsession")){        
         this.repeatOnErrorMessage = "Must select at least one day."
       }
       else{
@@ -322,13 +331,13 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				End: this.endDate.toString(),
 				IsActive: true,
 				CreatedBy: this.modalData.userPK
-			}
+				}
         	switch(this.modalData.mode){
 				//======= ADD NEW SCHEDULE ===========
           	case "newschedule":				
-					if(this.currentScheduleSetting.ScheduleSettingName){
-						if(this.endDate < this.modalData.allScheduleSetting[this.modalData.allScheduleSetting.length - 1].Start
-							|| this.startDate > this.modalData.allScheduleSetting[0].End){                
+					if(this.currentScheduleSetting.ScheduleSettingName){												
+						if(this.checkStartEndDate(0,this.startDate, this.endDate, this.modalData.allScheduleSetting))
+							{                
 								this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
 									if(!res){
 										this.isDisabled = true
@@ -353,25 +362,61 @@ export class AddScheduleModalDialogComponent implements OnInit{
 					break;
 			
 			//======= UPDATE CURRENT SCHEDULE ===========
-			case "editschedule":
+			case "editschedule":			
 					this.currentScheduleSetting.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
-					console.log(this.currentScheduleSetting)
-					this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
-						if(res.error){
-							this.isDisabled = true
-							this.errorMessage = res.error            
+					//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
+					this.allEditedSessions.forEach(session =>{
+						var tempStartDate = this.startDate.toISOString().slice(0,10)
+						var tempEndDate = this.endDate.toISOString().slice(0,10) //End repeatdate
+						var tempStartTime = (new Date(session.Start)).toLocaleString('en-US', this.timeFormatOptions)
+						var tempEndTime = (new Date(session.End)).toLocaleString('en-US', this.timeFormatOptions)
+						
+						//Edit the Start, End, EndRepeatDate
+						session.Start = (new Date(tempStartDate + "T" + tempStartTime)).toString()
+						session.End = (new Date(tempStartDate + "T" + tempEndTime)).toString()
+						session.EndRepeatDate = tempEndDate
+						//Edit the RecurrenceRule
+						var tempIndex = session.RecurrenceRule.indexOf("UNTIL")
+						session.RecurrenceRule = session.RecurrenceRule.substring(0,tempIndex+6) + tempEndDate + "T23:00:00"
+
+					})					
+					
+					if(this.currentScheduleSetting.ScheduleSettingName){
+					//1. Check if the new Start/End Date are within any other schedule
+						if(this.checkStartEndDate(this.currentScheduleSetting.ScheduleSettingPK, this.startDate, this.endDate, this.modalData.allScheduleSetting)){
+							//2. Then update the record in schedulesetting table
+							this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
+								if(res.error){
+									this.isDisabled = true
+									this.errorMessage = res.error            
+								}
+								else{
+									this.isDisabled = false
+									if(!this.isDisabled){
+										this.dialogRef.close("Yes")
+									}              
+								} 
+							})
+
+							//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
+							this.programScheduleServices.updateScheduleSettingSessionDetails(this.allEditedSessions).subscribe(res =>{
+								console.log(res)
+							})
+
 						}
 						else{
-							this.isDisabled = false
-							if(!this.isDisabled){
-								this.dialogRef.close("Yes")
-							}              
-						} 
-					})
+							this.isDisabled = true
+							this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
+						}
+					}
+					else{
+						this.scheduleNameErrorMessage = "Schedule Name is required."
+					}
 					break;
 
 			//======= ADD NEW SESSION ===========
-			case "addsession":
+			case "newsession":
+				this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
 				this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
 					if(res.error){
 						this.isDisabled = true
@@ -387,24 +432,57 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				break;
 
 			case "editsession":
-				this.currentSessionDetail.ScheduleSettingPK = this.modalData.event.ScheduleSettingPK
+				this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentSession.ScheduleSettingPK
+				this.currentSessionDetail.SessionDetailsPK = this.modalData.currentSession.SessionDetailsPK
+				console.log(this.currentSessionDetail)
 				this.programScheduleServices.updateSessionDetails(this.currentSessionDetail).subscribe(res => {
-					console.log(res)
 					if(res.error){
-					this.isDisabled = true
-					this.errorMessage = res.error            
+						this.isDisabled = true
+						this.errorMessage = res.error            
 					}
 					//if there is no error
-					else{            
-					this.isDisabled = false
-					if(!this.isDisabled){
-						this.dialogRef.close("Yes")
-					}              
+					else{
+						//updateSessionDetails return array of schedules, 
+						//then call UpdateScheduleinBulks to update records in schedule table
+						this.programScheduleServices.updateSchedulesInBulk(res).subscribe(result =>{
+							if(!result.error)
+							{
+								this.isDisabled = false
+								if(!this.isDisabled){
+									this.dialogRef.close("Yes")
+								}
+							}
+						})						              
 					}  
 				})
 				break;
 			}         
       }        
-    }
+	}
+	
+	//this function is for Edit current schedule, to check if the new Start/End date fall in
+	// any existing schedule's time range
+	public checkStartEndDate(ScheduleSettingPK:number, Start: Date, End: Date, allScheduleSetting: any):boolean{
+		Start = new Date(Start.toISOString().slice(0,10) + "T00:00:00")
+		End = new Date(End.toISOString().slice(0,10) + "T23:00:00")
+
+		var found = true
+		if(allScheduleSetting.length > 1){
+			allScheduleSetting.forEach(schedule => {
+				if(ScheduleSettingPK != schedule.ScheduleSettingPK){
+					if((Start >= schedule.Start && Start <= schedule.End) 
+						|| (End >= schedule.Start && End <= schedule.End)){
+						found = false
+						return
+					}
+				}
+			})
+			if(Start <= allScheduleSetting[allScheduleSetting.length - 1].Start && 
+					End >= allScheduleSetting[0].End){
+						found = false
+				}			
+			}
+		return found
+	};
     
 }
