@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
 import { ProgramScheduleService } from "../services/schedule.services";
@@ -46,6 +46,7 @@ export class ProgramScheduleComponent implements OnInit {
   
   currentSession: ProgramScheduleData = {
     SchedulePK: 0,
+    SessionDetailsPK: 0,
     ProgramPK: 0,
     Start: "",
     End: "",
@@ -213,8 +214,8 @@ export class ProgramScheduleComponent implements OnInit {
     
       const loginDialogConfig = new MatDialogConfig();
       loginDialogConfig.id = "modal-component";
-      loginDialogConfig.height = "600px";
-      loginDialogConfig.maxHeight = "600px";
+      loginDialogConfig.height = "500px";
+      // loginDialogConfig.maxHeight = "600px";
       loginDialogConfig.width = "500px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
@@ -312,6 +313,7 @@ export class ProgramScheduleComponent implements OnInit {
 
   //This function to capture and get the info of selected event
   public eventClick = (e) => {
+    console.log(e)
     this.isDisable = false;
     this.quantityForm.get("AdultQuantity").enable();
     this.quantityForm.get("Age57Quantity").enable();
@@ -324,9 +326,10 @@ export class ProgramScheduleComponent implements OnInit {
     var eventStart = e.event.dataItem.Start.toString();
     var eventEnd = e.event.dataItem.End.toString();
     var programPK = e.event.dataItem.ProgramPK;
+    var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
 
     this.programScheduleServices
-      .getScheduleByIdStartEnd(programPK, eventStart, eventEnd)
+      .getScheduleByIdStartEnd(sessionDetailsPK, programPK, eventStart, eventEnd)
       .subscribe((res) => {
         if (res) {
           // There is a schedule in the database
@@ -354,8 +357,9 @@ export class ProgramScheduleComponent implements OnInit {
           // Pass SchedulePK for Booking Page
           this.SchedulePK = e.event.dataItem.SchedulePK;       
 
-          this.currentSession.SchedulePK = 0;
+          this.currentSession.SchedulePK = 0;          
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
+          this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
           this.currentSession.Start = e.event.dataItem.Start.toString();
           this.currentSession.End = e.event.dataItem.End.toString();
           this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;

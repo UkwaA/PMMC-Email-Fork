@@ -43,6 +43,7 @@ export class LoginPromptModal implements OnInit {
         username: ["", [Validators.required]],
         password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       });
+      $(".alert").hide()
 
   }
 
@@ -56,16 +57,17 @@ export class LoginPromptModal implements OnInit {
   }
 
   actionFunction() {
-    //this.closeModal();
+    console.log("Modal closing");
     this.dialogRef.close("Yes");
   }
 
   createNew() {
     const registerDialogConfig = new MatDialogConfig();
       registerDialogConfig.id = "register-modal-component";
-      registerDialogConfig.height = "600px";
-      registerDialogConfig.maxHeight = "600px";
-      registerDialogConfig.width = "700px";
+      registerDialogConfig.height = "auto";
+      registerDialogConfig.disableClose = true;
+      // registerDialogConfig.maxHeight = "600px";
+      registerDialogConfig.width = "auto";
       registerDialogConfig.autoFocus = false;
       registerDialogConfig.data = {
         title: "Register New User",
@@ -82,6 +84,10 @@ export class LoginPromptModal implements OnInit {
         numberOfButton: "2"
       };
       const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);
+      registerModal.afterClosed().subscribe((result) => {
+        if (result == "Yes")
+        $(".alert").show()
+      })
   }
 
   signIn() {
@@ -92,7 +98,7 @@ export class LoginPromptModal implements OnInit {
 
         this.auth.login(this.credentials).subscribe(
             (res) => {
-                this.dialogRef.close("Success");
+                // this.dialogRef.close("Yes");
                 this.actionFunction();
                 this.router.navigateByUrl(this.modalData.routerURL);
             },

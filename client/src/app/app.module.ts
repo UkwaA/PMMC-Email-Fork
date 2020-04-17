@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts'
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
@@ -50,6 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -214,6 +216,7 @@ const routes : Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
     MatDatepickerModule,
     MatSelectModule,
     CKEditorModule,
@@ -234,7 +237,8 @@ const routes : Routes = [
     MatButtonToggleModule,
     InputsModule,
     ButtonsModule,
-    DropDownsModule
+    DropDownsModule,
+    ChartsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
               AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage],

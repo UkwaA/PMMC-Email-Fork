@@ -13,6 +13,10 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
+    SessionDetailsPK: {
+      type: Sequelize.INTEGER,
+      primaryKey: true
+    },
     Start: {
       type: Sequelize.TEXT
     },

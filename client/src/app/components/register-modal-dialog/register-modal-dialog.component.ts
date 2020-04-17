@@ -4,11 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService} from '../../authentication.service'
 import { CustomerService } from '../../services/customer.services'
 import { Router } from "@angular/router";
-
-
-
+import { ModalDialogComponent } from "../modal-dialog/modal-dialog.component";
+import { LoginPromptModal } from "../login-prompt-modal/login-prompt-modal.component";
 import { UserData } from '../../../app/data/user-data';
 import { CustomerData } from '../../../app/data/customer-data';
+
+declare var $: any;
+
 
 @Component({
     selector: 'register-modal-dialog',
@@ -46,9 +48,10 @@ export class RegisterModalDialogComponent implements OnInit{
     Subscribe: 0,
   }
 
-    constructor(public dialogRef: MatDialogRef<RegisterModalDialogComponent>,
+    constructor(public dialogRegisterRef: MatDialogRef<RegisterModalDialogComponent>,
       private fb:FormBuilder, private auth:AuthenticationService, 
       private custService:CustomerService, private router:Router,
+      public dialogLoginRef: MatDialogRef<LoginPromptModal>,
         @Inject(MAT_DIALOG_DATA) private modalData: any){}
 
     ngOnInit(){
@@ -65,15 +68,20 @@ export class RegisterModalDialogComponent implements OnInit{
         Zipcode:['', [Validators.required, Validators.min(10000)]],
         Subscribe: [0]
       })
+
+      $('.state').bind('keydown keyup blur',function(){ 
+        var node = $(this);
+        node.val(node.val().replace(/[^A-Z]/g,'') ); }
+      );
     }
 
     actionFunction() {        
         //this.closeModal();
-        this.dialogRef.close("Yes");
+        this.dialogRegisterRef.close("Yes");
       }
     
     closeModal() {
-      this.dialogRef.close("No");
+      this.dialogRegisterRef.close("No");
     }
 
     get f() { return this.newUserForm.controls; }  
@@ -119,9 +127,9 @@ export class RegisterModalDialogComponent implements OnInit{
                 return;
               }
               else{
-                console.log(this.modalData.routerURL);
+                // console.log(this.modalData.routerURL);
                 this.actionFunction();
-                this.router.navigateByUrl(this.modalData.routerURL);
+                // this.router.navigateByUrl(this.modalData.routerURL);
               }
             })
           }
