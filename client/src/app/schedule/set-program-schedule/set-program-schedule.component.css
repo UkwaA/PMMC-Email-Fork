@@ -47,12 +47,12 @@ table.table-hover{
   /* border:1px solid black; */
   margin-top:10px;
 }
-table.table-hover > thead > tr > th{
+/* table.table-hover > thead > tr > th{
   border:1px solid white;
 }
 table.table-hover > tbody > tr > td{
-  /* border:1px solid black; */
-}
+  border:1px solid black;
+} */
 
 .mat-button, .mat-raised-button:hover{
   background-color: rgb(6, 3, 189);  
@@ -68,6 +68,20 @@ button:focus, button:active:focus, button.active:focus {
   outline: none !important;
   outline-style: none !important;
   }
+
+#doneIcon{
+  color: green;
+}
+
+.programColorMessage{
+  color: green;
+  font-weight: normal;
+}
+
+p{
+  font-weight: normal;
+  padding: 5px;
+}
 
 /* 
 mat-button-toggle-group {

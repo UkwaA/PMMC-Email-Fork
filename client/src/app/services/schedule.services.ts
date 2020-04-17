@@ -73,5 +73,10 @@ export class ProgramScheduleService{
                 + "/" + ProgramPK + "/" + eventStart + "/" + eventEnd);
     }
 
-    
+    /*================================
+            OTHERS
+    ================================*/
+    public setProgramColor(programColor:any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/set-program-color", programColor);
+    }
 }

@@ -467,7 +467,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 		End = new Date(End.toISOString().slice(0,10) + "T23:00:00")
 
 		var found = true
-		if(allScheduleSetting.length != 1){
+		if(allScheduleSetting.length > 1){
 			allScheduleSetting.forEach(schedule => {
 				if(ScheduleSettingPK != schedule.ScheduleSettingPK){
 					if((Start >= schedule.Start && Start <= schedule.End) 

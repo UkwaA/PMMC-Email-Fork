@@ -70,7 +70,9 @@ export class SetProgramScheduleComponent {
 
     SetProgramScheduleForm: FormGroup;
     submitted = false;
-    errorMessage = ''; 
+	errorMessage = '';
+	hasSchedule = false;
+	hasSession = false; 
 
     //WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
@@ -89,8 +91,8 @@ export class SetProgramScheduleComponent {
         hour12: true
       };
     
-    selectedColor: string = "#e76c36";
-
+    selectedColor: string = "";
+	programColorMessage = ""
     public settings: PaletteSettings = {
         palette: [
           "#e76c36", "#ffbc00", "#edafb7", "#a18aab",
@@ -126,24 +128,32 @@ export class SetProgramScheduleComponent {
 			if(!res.error){
 				this.allScheduleSettings = res
 				if(this.allScheduleSettings.length > 0){
+					this.hasSchedule = true
 					this.allScheduleSettings.forEach(schedule => {
 							schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
 							schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
 							schedule.Start = new Date(schedule.Start)
 							schedule.End = new Date(schedule.End)
 					})
-					//IMPORTANT: Sort the allScheduleSettings array by Start date (DO NOT REMOVE)
-					this.allScheduleSettings.sort(function(a,b){
-						// Turn your strings into dates, and then subtract them
-						// to get a value that is either negative, positive, or zero.
-						return b.Start - a.Start;
-					});				
-					// this.currentScheduleSetting = this.allScheduleSettings[0]
-					this.allScheduleSettings.forEach(schedule =>{
-						if(schedule.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
-							schedule.IsSelected = true
-						}
-					})							
+					//Fix error when there's only 1 schedule setting
+					if(this.allScheduleSettings.length == 1){
+						this.currentScheduleSetting = this.allScheduleSettings[0]
+						this.currentScheduleSetting.IsSelected = true
+					}
+					else{
+						//IMPORTANT: Sort the allScheduleSettings array by Start date (DO NOT REMOVE)
+						this.allScheduleSettings.sort(function(a,b){
+							// Turn your strings into dates, and then subtract them
+							// to get a value that is either negative, positive, or zero.
+							return b.Start - a.Start;
+						});				
+						// this.currentScheduleSetting = this.allScheduleSettings[0]
+						this.allScheduleSettings.forEach(schedule =>{
+							if(schedule.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
+								schedule.IsSelected = true
+							}
+						})
+					}												
 				}
 			}	
 		})
@@ -177,6 +187,7 @@ export class SetProgramScheduleComponent {
 				}
 			));
 			this.allSessions = sampleDataWithCustomSchema
+			this.hasSession = true
 			//Reload the session table with selected schedule
 			this.dayArr.forEach(day =>{
 				day.eventList = []
@@ -225,6 +236,7 @@ export class SetProgramScheduleComponent {
 				if(!res.error){
 					this.allScheduleSettings = res
 					if(this.allScheduleSettings.length > 0){
+						this.hasSchedule = true
 						this.allScheduleSettings.forEach(schedule => {
 								schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
 								schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
@@ -270,6 +282,10 @@ export class SetProgramScheduleComponent {
 						}
 					));
 					this.allSessions = sampleDataWithCustomSchema
+					if(this.allSessions.length > 0){
+						this.selectedColor = this.allSessions[0].Color
+						this.hasSession = true
+					}
 					//Loop through all allSessions
 					this.allSessions.forEach(session =>{
 						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
@@ -448,9 +464,23 @@ export class SetProgramScheduleComponent {
         })
     }
 
-    setSchedule(){      
-        //save new color in schedulesetting table
-        console.log(this.selectedColor)
+    setProgramColor(){      
+		//save new color in schedulesetting table
+		const programColor = {
+			ProgramPK: this.ProgramPK,
+			selectedColor: this.selectedColor
+		}
+        this.programScheduleServices.setProgramColor(programColor).subscribe(res =>{
+			if(res.message){
+				this.programColorMessage = res.message
+			}
+			else{
+				this.programColorMessage = res.error
+			}
+			setTimeout(()=>{ 
+				this.programColorMessage = "";
+		   }, 3000);
+		})
 	}	
 	
 }

@@ -377,4 +377,37 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
     });
 });
 
+/*******************************
+  SET PROGRAM COLOR
+ *******************************/
+schedule.post("/set-program-color", (req,res) => {
+  SessionDetails.update({
+    Color: req.body.selectedColor
+  },
+  {
+    where : {
+      ProgramPK: req.body.ProgramPK
+    }
+  })
+  .then(result =>{
+    if (result) {
+		  res.send({
+			 message: "Program color has been changed."
+		  });
+		}
+		else {
+		  res.send({
+			 error: "Cannot update program color."
+		  });
+		}
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+});
+
+
+
+
+// ========================END=====================
 module.exports = schedule;
