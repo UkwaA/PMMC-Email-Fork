@@ -3,8 +3,8 @@
         <h1 id="modal-title">{{modalData.title}}</h1>
     </header>
     <mat-divider></mat-divider>
-    <section id="modal-body" style="padding-bottom:0px">
-        <div class="formerrors" style="color:red">{{errorMessage}}</div>
+    <section id="modal-body" style="padding-bottom:0px;overflow-y:auto!important; max-height:500px; max-width:700px;overflow-x:hidden">
+        <div class="formerrors" style="color:red;">{{errorMessage}}</div>
         <form>
         <div class="registration row" [formGroup]="newUserForm">
             <div class="col-sm-5">
