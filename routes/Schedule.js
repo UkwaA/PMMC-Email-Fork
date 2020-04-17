@@ -19,9 +19,10 @@ schedule.use(cors());
 /**************************************
    GET ALL CURRENT PROGRAM SCHEDULES
  **************************************/
-schedule.get("/get-all-schedule-settings", (req, res) => {
+schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
   ScheduleSetting.findAll({
     where : {
+		ProgramPK: req.params.id,
       IsActive: true
     }
   })
@@ -30,7 +31,7 @@ schedule.get("/get-all-schedule-settings", (req, res) => {
       res.json(scheduleSetting)
     }
     else{
-      res.json("There're no available schedules.")
+      res.json({err:"There're no available schedules."})
     }
   })
   .catch(err => {
@@ -51,9 +52,10 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
   })
 });
 
-/**************************************
-   UPDATE SCHEDULE SETTING
- **************************************/
+/*********************************************
+   UPDATE SCHEDULE SETTING & SESSION DETAILS
+ **********************************************/
+//1. Update Schedule Setting
 schedule.post("/update-schedule-setting", (req, res) => {
 	ScheduleSetting.update(req.body, {
 		where: {
@@ -75,6 +77,20 @@ schedule.post("/update-schedule-setting", (req, res) => {
 	 .catch(err => {
 		res.send('error: ' + err)
 	 })
+});
+
+//2. Update all SessionDetails associated with the ScheduleSetting
+schedule.post("/update-schedule-setting-session-details", (req, res) => {
+  SessionDetails.bulkCreate(req.body, {
+    updateOnDuplicate: ["Start", "End","RecurrenceRule", "EndRepeatDate"],
+    returning: true
+  })
+  .then(result =>{
+    res.json(result)
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  })
 });
 
 /***************************************************
@@ -163,10 +179,8 @@ schedule.post("/update-session-details", (req, res) => {
   
   SessionDetails.findAll({
     where: {
-      ScheduleSettingPK: { //FINDME
-        [Op.ne]: req.body.ScheduleSettingPK
-      },
-      ProgramPK: req.body.ProgramPK, //FINDME
+      ScheduleSettingPK: req.body.ScheduleSettingPK,
+      ProgramPK: req.body.ProgramPK, 
       Start: {
         [Op.like]: '%'+startTime+'%'
       },
@@ -176,8 +190,8 @@ schedule.post("/update-session-details", (req, res) => {
       IsActive: true
     }
   })
-  .then(scheduleSetting =>{
-    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+  .then(sessions =>{
+    if(sessions.length > 0){ //if there exists session in selected time frame      
         res.json(
           {error:"There exists sessions in this time frame" 
             + ". Please edit the existing session that is in this time frame OR choose another time frame"}
@@ -185,33 +199,66 @@ schedule.post("/update-session-details", (req, res) => {
     }
     else{
       //If there's no events having the same start and end time => update the current
-      //###### Update #######
+      //###### Update in sessiondetails table #######
         SessionDetails.update(req.body, {
           where: {
-            ScheduleSettingPK: req.body.ScheduleSettingPK //FINDME
+            SessionDetailsPK: req.body.SessionDetailsPK
           }
         })
         .then(result => {
           if (result == 1) {
-            res.send({
-              message: "Schedule setting was updated successfully."
-            });
+          //###### Update in schedule table #######
+          //1. Get all Schedules from schedule table
+            Schedule.findAll({
+              where:{
+                ProgramPK: req.body.ProgramPK,
+                SessionDetailsPK: req.body.SessionDetailsPK
+              }
+            })
+            .then(schedules =>{
+              if(schedules){
+                //2.Update in bulk these schedules
+                schedules.forEach(schedule =>{
+                  tempStartDate = (new Date(schedule.Start)).toISOString().slice(0,10)                  
+                  schedule.Start = (new Date(tempStartDate + "T" + startTime)).toString()
+                  schedule.End = (new Date(tempStartDate + "T" + endTime)).toString()
+                })
+                res.json(schedules)                                  
+              }
+            })
           }
           else {
             res.send({
-              error: "Cannot update schedule setting"
+              error: "Cannot update session detail"
             });
           }
         })
         .catch(err => {
           res.send('error: ' + err)
-        })
-        //###### End Update #######
+        })    
     }
   })
     .catch(err => {
       res.send("errorExpressErr: " + err);
     });    
+});
+
+/*********************************************************
+  UPDATE PROGRAM SESSION DETAILS - THEN UPDATE SCHEDULES
+  IN BULK
+ *********************************************************/
+schedule.post("/update-schedules-in-bulk", (req, res) => {
+    //Update in schedule table
+    Schedule.bulkCreate(req.body, {
+      updateOnDuplicate: ["Start", "End"],
+      returning: true
+    })
+    .then(result =>{
+      res.json(result)
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    }) 
 });
 
 /***************************************
@@ -280,7 +327,8 @@ schedule.get("/get-session-details-by-id/:id", (req, res) => {
     where: {
       ProgramPK: req.params.id,
       IsActive: true
-    }
+    },
+    order: [['Start', 'ASC']]
   })
     .then(sessions => {      
       res.json(sessions);
@@ -294,9 +342,10 @@ schedule.get("/get-session-details-by-id/:id", (req, res) => {
   GET ALL PROGRAM SCHEDULES BY ID,
   START AND END TIME
  ***********************************/
-schedule.get("/get-schedule-by-id-start-end/:id/:start/:end",(req,res) => {
+schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) => {
   Schedule.findOne({
     where: {
+      SessionDetailsPK: req.params.session,
       ProgramPK: req.params.id,
       Start: req.params.start,
       End: req.params.end

@@ -46,6 +46,7 @@ export class ProgramScheduleComponent implements OnInit {
   
   currentSession: ProgramScheduleData = {
     SchedulePK: 0,
+    SessionDetailsPK: 0,
     ProgramPK: 0,
     Start: "",
     End: "",
@@ -311,6 +312,7 @@ export class ProgramScheduleComponent implements OnInit {
 
   //This function to capture and get the info of selected event
   public eventClick = (e) => {
+    console.log(e)
     this.isDisable = false;
     this.quantityForm.get("AdultQuantity").enable();
     this.quantityForm.get("Age57Quantity").enable();
@@ -323,9 +325,10 @@ export class ProgramScheduleComponent implements OnInit {
     var eventStart = e.event.dataItem.Start.toString();
     var eventEnd = e.event.dataItem.End.toString();
     var programPK = e.event.dataItem.ProgramPK;
+    var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
 
     this.programScheduleServices
-      .getScheduleByIdStartEnd(programPK, eventStart, eventEnd)
+      .getScheduleByIdStartEnd(sessionDetailsPK, programPK, eventStart, eventEnd)
       .subscribe((res) => {
         if (res) {
           // There is a schedule in the database
@@ -353,8 +356,9 @@ export class ProgramScheduleComponent implements OnInit {
           // Pass SchedulePK for Booking Page
           this.SchedulePK = e.event.dataItem.SchedulePK;       
 
-          this.currentSession.SchedulePK = 0;
+          this.currentSession.SchedulePK = 0;          
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
+          this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
           this.currentSession.Start = e.event.dataItem.Start.toString();
           this.currentSession.End = e.event.dataItem.End.toString();
           this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;

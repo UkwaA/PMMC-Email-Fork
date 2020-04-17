@@ -11,8 +11,8 @@ export class ProgramScheduleService{
     /*================================
             SCHEDULE SETTING
     ================================*/
-    public getAllScheduleSettings(): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-settings");
+    public getAllScheduleSettingsByProgram(ProgramPK: any): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-settings-by-program/" + ProgramPK);
     }
 
     // public getScheduleSettingsByID(ProgramPK: any): Observable<any> {
@@ -26,6 +26,11 @@ export class ProgramScheduleService{
     public updateScheduleSetting(scheduleSetting: any): Observable<any>{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting", scheduleSetting);
     }
+
+    public updateScheduleSettingSessionDetails(sessions: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting-session-details", sessions);
+    }
+
     /*================================
             SESSION DETAILS
     ================================*/
@@ -49,6 +54,9 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-session-details-by-id/" + ProgramPK);
     }
 
+    public updateSchedulesInBulk(schedules: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedules-in-bulk", schedules);
+    }
     /*================================
             SCHEDULE
     ================================*/
@@ -60,9 +68,10 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + ProgramPK);
     }
     
-    public getScheduleByIdStartEnd(ProgramPK: number, eventStart: string,eventEnd: string): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-by-id-start-end/" + ProgramPK 
-                + "/" + eventStart + "/" + eventEnd);
+    public getScheduleByIdStartEnd(SessionDetailsPK:number, ProgramPK: number, eventStart: string,eventEnd: string): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-by-id-start-end/" + SessionDetailsPK
+                + "/" + ProgramPK + "/" + eventStart + "/" + eventEnd);
     }
 
+    
 }
