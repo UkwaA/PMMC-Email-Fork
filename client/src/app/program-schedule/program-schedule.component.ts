@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
 import { ProgramScheduleService } from "../services/schedule.services";
