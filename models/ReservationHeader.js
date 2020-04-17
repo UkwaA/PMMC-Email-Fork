@@ -21,19 +21,16 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    MarketingPK: {
-        type: Sequelize.INTEGER
-    },
-    PaymentStatus: {
-      type: Sequelize.BOOLEAN
-    },
     ResevationStatus: {
       type: Sequelize.BOOLEAN
     },
     NumberOfParticipant: {
       type: Sequelize.INTEGER
     },
-     CreatedDate: {
+    Total: {
+      type: Sequelize.INTEGER
+    },
+    CreatedDate: {
       type: Sequelize.DATEONLY
     },
     IsActive: {

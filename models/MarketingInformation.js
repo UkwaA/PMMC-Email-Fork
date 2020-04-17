@@ -2,18 +2,24 @@ const Sequelize = require('sequelize')
 const db = require('../db.js')
 
 module.exports = db.sequelize.define(
-  'paymentheader',
+  'marketinginformation',
   {
-    PaymentPK: {
+    MarketingPK: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    ReservationPK: {
+    ProgramPK: {
       type: Sequelize.INTEGER
     },
     UserPK: {
       type: Sequelize.INTEGER
+    },
+    MarketingContentPK: {
+      type: Sequelize.INTEGER
+    },
+    Memo: {
+      type: Sequelize.TEXT
     }
   },
   {

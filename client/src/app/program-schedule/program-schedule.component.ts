@@ -281,12 +281,13 @@ export class ProgramScheduleComponent implements OnInit {
 
                 break;
               case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-                // if(this.currentSession.SchedulePK == 0) {
-                //     this.programScheduleServices.addNewSchedule(this.currentSession)
-                //     .subscribe((res) => {
-                //       console.log(res);
-                //     });
-                // }
+                // SchedulePK == 0 when there is no current schedule in Database
+                if(this.currentSession.SchedulePK == 0) {
+                    this.programScheduleServices.addNewSchedule(this.currentSession)
+                    .subscribe((res) => {
+                      console.log(res);
+                    });
+                }
 
                 // Pass data of Quantity FormControl to the object
                 this.quantityData = new QuantiyFormData(this.quantityForm.value.AdultQuantity, this.quantityForm.value.Age57Quantity,

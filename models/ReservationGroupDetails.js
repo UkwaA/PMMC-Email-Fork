@@ -9,10 +9,6 @@ module.exports = db.sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    ProgramPK: {
-      type: Sequelize.INTEGER,
-      primaryKey: true
-    },
     AdultQuantity: {
       type: Sequelize.INTEGER
     },
@@ -35,9 +31,6 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER
     },
     TotalQuantity: {
-      type: Sequelize.INTEGER
-    },
-    FullAmount: {
       type: Sequelize.INTEGER
     },
     ProgramRestriction: {
@@ -63,13 +56,6 @@ module.exports = db.sequelize.define(
     },
     EducationPurpose: {
       type: Sequelize.TEXT
-    },
-    CreatedBy: {
-      type: Sequelize.INTEGER
-    },
-    CreatedDate: {
-      type: Sequelize.DATEONLY,
-      defaultValue: Sequelize.NOW
     }
   },
   {
