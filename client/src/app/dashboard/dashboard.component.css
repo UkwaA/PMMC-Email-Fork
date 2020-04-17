@@ -104,3 +104,28 @@ h1 {
     padding-left: 30px;
     font-weight: bold;
 }
+
+/* TABLE */
+thead{
+    background-color:  rgba(0, 0, 0, 0.658);
+    color: white;
+  }
+  
+  th, td {
+    text-align: left;
+  }
+  
+  td {
+    font-size: 15px;
+  }
+  
+  td.name{
+    color:  #08b2b8;
+  }
+  
+  th {
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
