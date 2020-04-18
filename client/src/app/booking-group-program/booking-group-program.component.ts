@@ -49,7 +49,7 @@ export class BookingGroupProgramComponent implements OnInit {
   ngOnInit() {
     $('body,html').animate({
       scrollTop: 0
-  }, 800);
+    }, 800);
     // Get QuantityForm from Local Storage
     // Clear the Local Storage after finish checking out
     this.quantityForm = JSON.parse(localStorage.getItem('quantityForm'));
