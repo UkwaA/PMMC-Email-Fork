@@ -3,9 +3,36 @@
             <h1 id="program_name"></h1>
     </div>
     <hr>
+    <!-- Quantity Part -->
+    <div class="row text-left">
+      <div class="col-md-12">
+        <h4> Quantity Information: </h4>
+      </div>
+    </div>
+    <div class="col-md-12">
+        <ul class="list row">
+          <li class="list-item col-md-6">Adult Quantity: {{quantityForm.AdultQuantity}}</li>
+          <li class="list-item col-md-6">Age 5-7 Quantity: {{quantityForm.Age57Quantity}}</li>
+          <li class="list-item col-md-6">Age 8-10 Quantity: {{quantityForm.Age810Quantity}}</li>
+          <li class="list-item col-md-6">Age 11-12 Quantity: {{quantityForm.Age1112Quantity}}</li>
+          <li class="list-item col-md-6">Age 13-14 Quantity: {{quantityForm.Age1314Quantity}}</li>
+          <li class="list-item col-md-6">Age 14-15 Quantity: {{quantityForm.Age1415Quantity}}</li>
+          <li class="list-item col-md-6">Age 15-17 Quantity: {{quantityForm.Age1517Quantity}}</li>
+        </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h6> Total Quantity : {{quantityForm.TotalQuantity}} </h6>
+      </div>
+    </div>
+    <hr>
 
+    <div class="row text-left">
+      <div class="col-md-12">
+        <h4> Please fill out the form: </h4>
+      </div>
+    </div>
     <p id="final_warning"></p>
-  
     <form id = "registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   
       <!-- Organization Name -->
@@ -111,7 +138,4 @@
         <button type="submit" class="submit_btn btn btn-info">Submit</button>
       </div>
     </form>
-    <div>
-      <a [routerLink]="['/payment', ProgramPK]" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Temporary!</a>
-    </div>
   </div>
