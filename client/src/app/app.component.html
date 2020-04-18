@@ -21,12 +21,8 @@
         <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
           <a class="nav-link" routerLink="/contact" routerLinkActive='active'>Contact</a>
         </li>
-        <!-- <li class = "nav-item" >
-          <a class = "nav-link" routerLink="/customer-register"> Register </a>
-        </li>
-         -->
         <li *ngIf="!auth.isLoggedIn()" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-          <a class="nav-link" [routerLink]="['/login']" routerLinkActive='active'>Login</a>
+          <a class="nav-link" (click)="openLoginModal()" routerLinkActive='active'>Login</a>
         </li>
         <li *ngIf="auth.isLoggedIn()" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -2,7 +2,8 @@
     width: 100%;
     height: 100%;
     display: grid;
-    color: white;    
+    color: white;  
+      
 }
 
 #modal-title {
@@ -47,3 +48,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+alert-danger{
+    padding-right: 2rem;
+}
+
+/* .modal-open .modal {
+    width: 300px;
+    margin: 0 auto;
+} */

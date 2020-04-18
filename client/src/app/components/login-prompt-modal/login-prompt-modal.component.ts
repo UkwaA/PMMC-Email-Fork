@@ -43,7 +43,8 @@ export class LoginPromptModal implements OnInit {
         username: ["", [Validators.required]],
         password: ["", [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       });
-      $(".alert").hide()
+      $(".alert-success").hide()
+      $(".alert-danger").hide()
 
   }
 
@@ -100,9 +101,11 @@ export class LoginPromptModal implements OnInit {
             (res) => {
                 // this.dialogRef.close("Yes");
                 this.actionFunction();
-                this.router.navigateByUrl(this.modalData.routerURL);
+                if (this.modalData.routerRedirect)
+                  this.router.navigateByUrl(this.modalData.routerURL);
             },
             (err) => {
+              $(".alert-danger").show()
               //alert('Username and password do not match')
               console.log("*Username and password do not match");
               return;
