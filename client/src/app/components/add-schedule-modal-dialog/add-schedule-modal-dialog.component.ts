@@ -320,7 +320,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       
       if(this.weeklyRepeatOnDayArr.length == 0 && 
           (this.modalData.mode == "newsession" || this.modalData.mode == "editsession")){        
-        this.repeatOnErrorMessage = "Must select at least one day."
+        	this.repeatOnErrorMessage = "Must select at least one day."
       }
       else{
 			this.currentScheduleSetting = {

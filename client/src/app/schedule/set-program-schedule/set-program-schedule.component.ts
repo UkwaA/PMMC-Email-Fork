@@ -3,6 +3,7 @@ import { ProgramData } from '../../data/program-data';
 import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog, MatCard, MatSelect, MatDatepickerInputEvent, MatCheckboxChange } from '@angular/material';
 import { AddScheduleModalDialogComponent } from '../../components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
+import { ModalDialogComponent } from "../../components/modal-dialog/modal-dialog.component";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProgramScheduleData } from '../../data/program-schedule-data';
@@ -124,6 +125,7 @@ export class SetProgramScheduleComponent {
 	 * FUNCTION DECLARATION
 	*********************************************/
 	reloadAllScheduleSettingsByProgramPK(){
+		this.hasSchedule = false
 		this.programScheduleServices.getAllScheduleSettingsByProgram(this.ProgramPK).subscribe(res =>{
 			if(!res.error){
 				this.allScheduleSettings = res
@@ -160,6 +162,7 @@ export class SetProgramScheduleComponent {
 	}
 
 	reloadAllSessions(){
+		this.hasSession = true
 		this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) =>{
 			const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
 				{
@@ -185,7 +188,7 @@ export class SetProgramScheduleComponent {
 					tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.timeFormatOptions),
 					tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.timeFormatOptions)
 				}
-			));
+			));			
 			this.allSessions = sampleDataWithCustomSchema
 			this.hasSession = true
 			//Reload the session table with selected schedule
@@ -399,6 +402,41 @@ export class SetProgramScheduleComponent {
 		})
 	}
 
+	removeScheduleSetting(scheduleSetting){
+		//Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "remove-schedule-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Remove schedule",
+            mode: "removeschedule",
+			description: "This action will also affect the sessions that are currently reserved by customers. "
+				+ "Customers will receive emails about this cancellation. Are you sure to remove this session?",
+            actionButtonText: "Remove",
+            numberOfButton: "2"            
+            }
+        const addScheduleModalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+				//Set IsActive to false in schedulesetting, sessiondetail, and schedule table
+				this.programScheduleServices.deactiveScheduleSetting(scheduleSetting).subscribe(res =>{
+					if(res.message){
+						this.reloadAllScheduleSettingsByProgramPK()
+						this.reloadAllSessions()
+					}					
+				})
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+	}
+
 	addNewSessionDetailsModal(){
 		//Configure Modal Dialog
 		const dialogConfig = new MatDialogConfig();
@@ -463,6 +501,43 @@ export class SetProgramScheduleComponent {
             }
         })
     }
+
+	//Set record in sessiondetails and schedule table that are associated to the SessionDetailsPK (IsActive: false)
+	removeSessionDetailsModal(session){
+		//Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "remove-session-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Remove session",
+            mode: "removesession",
+			description: "This action will also affect the sessions that are currently reserved by customers. "
+				+ "Customers will receive emails about this cancellation. Are you sure to remove this session?",
+            actionButtonText: "Remove",
+            numberOfButton: "2"            
+            }
+        const addScheduleModalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+				//Set IsActive to false in sessiondetail table
+				this.programScheduleServices.deactivateSessionDetails(session).subscribe(res =>{
+					console.log(res.message)
+					this.reloadAllSessions()
+				})
+                
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+	}
+
+
 
     setProgramColor(){      
 		//save new color in schedulesetting table

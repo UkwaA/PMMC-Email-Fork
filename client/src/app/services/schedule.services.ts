@@ -31,6 +31,10 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting-session-details", sessions);
     }
 
+    public deactiveScheduleSetting(scheduleSetting: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-schedule-setting", scheduleSetting);
+    }
+
     /*================================
             SESSION DETAILS
     ================================*/
@@ -42,8 +46,8 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-session-details", scheduleSetting);
     }
 
-    public deactivateSessionDetails(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", scheduleSetting);
+    public deactivateSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", sessionDetails);
     }
     
     public getAllSessionDetails(): Observable<any> {
