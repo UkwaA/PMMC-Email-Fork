@@ -267,7 +267,8 @@ schedule.post("/update-session-details", (req, res) => {
       //###### Update in sessiondetails table #######
         SessionDetails.update(req.body, {
           where: {
-            SessionDetailsPK: req.body.SessionDetailsPK
+            SessionDetailsPK: req.body.SessionDetailsPK,
+            IsActive: true
           }
         })
         .then(result => {
@@ -277,7 +278,8 @@ schedule.post("/update-session-details", (req, res) => {
             Schedule.findAll({
               where:{
                 ProgramPK: req.body.ProgramPK,
-                SessionDetailsPK: req.body.SessionDetailsPK
+                SessionDetailsPK: req.body.SessionDetailsPK,
+                IsActive: true
               }
             })
             .then(schedules =>{
@@ -334,7 +336,8 @@ schedule.post("/deactivate-session-details", (req, res) => {
     IsActive: false
   },{
     where: {
-      SessionDetailsPK: req.body.SessionDetailsPK
+      SessionDetailsPK: req.body.SessionDetailsPK,
+      IsActive: true
     }
   })
   .then(session =>{    
@@ -344,7 +347,8 @@ schedule.post("/deactivate-session-details", (req, res) => {
     },{
       where : {
         ProgramPK: req.body.ProgramPK,
-        SessionDetailsPK: req.body.SessionDetailsPK
+        SessionDetailsPK: req.body.SessionDetailsPK,
+        IsActive: true
       }
     })
     .then(schedule =>{
@@ -354,9 +358,99 @@ schedule.post("/deactivate-session-details", (req, res) => {
   .catch(err => {
     res.send("error: " + err + "   " + req.body.ProgramPK);
   })
+});
 
-  
+/************************************
+   ADD NEW ADDITIONAL SESSION DETAILS
+ ************************************/
+schedule.post("/add-new-additional-session-details", (req, res) => {
+  SessionDetails.findAll({
+    where: {
+      ProgramPK: req.body.ProgramPK,
+      ScheduleSettingPK: req.body.ScheduleSettingPK, 
+      Start: req.body.Start,
+      End: req.body.End,
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+      res.json(
+        {error:"There exists sessions in this time frame" 
+          + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+        )
+    }
+    else{
+      //If there's no events having the same start and end time => create new
+      SessionDetails.create(req.body)
+      .then(newSession => {
+        res.json(newSession)
+      })
+    }
+  })
+    .catch(err => {
+      res.send("errorExpressErr: " + err);
+    });
+});
 
+/************************************
+  UPDATE ADDITIONAL SESSION DETAILS
+ ************************************/
+schedule.post("/update-additional-session-details", (req, res) => {
+  SessionDetails.findAll({
+    where: {
+      SessionDetailsPK:{
+        [Op.ne]: req.body.SessionDetailsPK
+      },
+      ScheduleSettingPK: req.body.ScheduleSettingPK,
+      ProgramPK: req.body.ProgramPK, 
+      Start: req.body.Start,
+      End: req.body.End,
+      IsActive: true
+    }
+  })
+  .then(sessions =>{
+    if(sessions.length > 0){ //if there exists session in selected time frame      
+      res.json(
+        {error:"There exists sessions in this time frame" 
+          + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+        )
+    }
+    else{
+      //If there's no events having the same start and end time => update the current session detail
+      SessionDetails.update(req.body, {
+        where: {
+          SessionDetailsPK: req.body.SessionDetailsPK          
+        }
+      })
+      .then(result => {
+        if(result == 1){
+          //Update record in schedule table
+          Schedule.update({
+            Start: req.body.Start,
+            End: req.body.End
+          },{
+            where:{
+              ProgramPK: req.body.ProgramPK,
+              SessionDetailsPK: req.body.SessionDetailsPK
+            }
+          })
+          .then(result =>{
+            res.json({message: "Session and schedule have been updated successfully"})
+          })
+          .catch(err => {
+            res.send("errorExpressErr: " + err);
+          })
+        }
+      })
+      .catch(err => {
+        res.send("errorExpressErr: " + err);
+      })
+    }
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  });
 });
 
 

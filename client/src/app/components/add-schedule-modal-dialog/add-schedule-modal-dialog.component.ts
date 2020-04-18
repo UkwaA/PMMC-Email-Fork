@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { Session } from 'protractor';
+import { AppConstants } from "../../constants";
 
 @Component({
     selector: 'add-schedule-modal-dialog',
@@ -95,59 +96,78 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
     ngOnInit(){
       switch(this.modalData.mode){
-         case "newschedule":
-            this.startDate = new Date()
-            this.endDate = new Date()
-            this.scheduleSettingName = ""
-            break;
-			
-		case "editschedule":
-			this.startDate = new Date(this.modalData.currentScheduleSetting.Start)
-			this.endDate = new Date(this.modalData.currentScheduleSetting.End)
-			this.scheduleSettingName = this.modalData.currentScheduleSetting.ScheduleSettingName
-			this.allSessions = this.modalData.allSessions
-			this.allSessions.forEach(session =>{
-				if(session.ScheduleSettingPK == this.modalData.currentScheduleSetting.ScheduleSettingPK){
-					this.allEditedSessions.push(session)
-				}
-			})
-			break;
-			
-         case "editsession":
-              this.startDate = new Date(this.modalData.currentSession.Start)
-              this.endDate = new Date(this.modalData.currentSession.EndRepeatDate+"T23:00:00")
-              this.startTime = new Date(this.modalData.currentSession.Start)
-              this.endTime = new Date(this.modalData.currentSession.End)
-              this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
-              this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
-              this.eventDescription = this.modalData.currentSession.Description
-              this.dayArr.forEach(day =>{
-                if(this.modalData.currentSession.RepeatDay.indexOf(day.value) >= 0){
-                  day.selected = true
-                }
-                else{
-                  day.selected = false
-                }
-              })
-              break;
+			case "newschedule":
+				this.startDate = new Date()
+				this.endDate = new Date()
+				this.scheduleSettingName = ""
+				break;
+				
+			case "editschedule":
+				this.startDate = new Date(this.modalData.currentScheduleSetting.Start)
+				this.endDate = new Date(this.modalData.currentScheduleSetting.End)
+				this.scheduleSettingName = this.modalData.currentScheduleSetting.ScheduleSettingName
+				this.allSessions = this.modalData.allSessions
+				this.allSessions.forEach(session =>{
+					if(session.ScheduleSettingPK == this.modalData.currentScheduleSetting.ScheduleSettingPK){
+						this.allEditedSessions.push(session)
+					}
+				})
+				break;
+				
+			case "editsession":
+				this.startDate = new Date(this.modalData.currentSession.Start)
+				this.endDate = new Date(this.modalData.currentSession.EndRepeatDate+"T23:00:00")
+				this.startTime = new Date(this.modalData.currentSession.Start)
+				this.endTime = new Date(this.modalData.currentSession.End)
+				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
+				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
+				this.eventDescription = this.modalData.currentSession.Description
+				this.dayArr.forEach(day =>{
+					if(this.modalData.currentSession.RepeatDay.indexOf(day.value) >= 0){
+						day.selected = true
+					}
+					else{
+						day.selected = false
+					}
+				})
+				break;
 
-          case "newsession":
-              this.startDate = this.modalData.currentScheduleSetting.Start;
-              this.endDate = this.modalData.currentScheduleSetting.End;
-              this.startTime = new Date('2020-04-01T09:00:00');
-              this.endTime = new Date('2020-04-01T10:00:00');
-              this.minTime = new Date('2020-04-01T07:00:00');
-              this.maxTime = new Date('2020-04-01T18:00:00');
-              this.dayArr = [
-                {day: "Sunday", value: "SU", selected: false},
-                {day: "Monday", value: "MO", selected: true},
-                {day: "Tuesday", value: "TU", selected: false},
-                {day: "Wednesday", value: "WE", selected: false},
-                {day: "Thursday", value: "TH", selected: false},
-                {day: "Friday", value: "FR", selected: false},
-                {day: "Saturday", value: "SA", selected: false},
-				  ]
-              break;
+			case "newsession":
+				this.startDate = this.modalData.currentScheduleSetting.Start
+				this.endDate = this.modalData.currentScheduleSetting.End
+				this.startTime = new Date('2020-04-01T09:00:00')
+				this.endTime = new Date('2020-04-01T10:00:00')
+				this.minTime = new Date('2020-04-01T07:00:00')
+				this.maxTime = new Date('2020-04-01T18:00:00')
+				this.dayArr = [
+					{day: "Sunday", value: "SU", selected: false},
+					{day: "Monday", value: "MO", selected: true},
+					{day: "Tuesday", value: "TU", selected: false},
+					{day: "Wednesday", value: "WE", selected: false},
+					{day: "Thursday", value: "TH", selected: false},
+					{day: "Friday", value: "FR", selected: false},
+					{day: "Saturday", value: "SA", selected: false},
+				]
+				break;
+
+			case "newadditionalsession":
+				this.startDate = new Date()
+				this.startTime = new Date('2020-04-01T09:00:00')
+				this.endTime = new Date('2020-04-01T10:00:00')
+				this.minTime = new Date('2020-04-01T07:00:00')
+				this.maxTime = new Date('2020-04-01T18:00:00')
+				break;
+
+			case "editadditionalsession":
+				this.startDate = new Date(this.modalData.currentSession.Start)
+				this.startTime = new Date(this.modalData.currentSession.Start)
+				this.endTime = new Date(this.modalData.currentSession.End)
+				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
+				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
+				this.eventDescription = this.modalData.currentSession.Description
+
+				break;
+			
       	}      
 
 		this.recurrenceRule = ""
@@ -211,18 +231,25 @@ export class AddScheduleModalDialogComponent implements OnInit{
 }
 
   onChangeStartTime(event){    
-      if(event > this.endTime){
-          this.endTime = event
-      }
-      if(event < this.minTime || event > this.maxTime){
-        this.startTimeErrorMessage = "*From 7AM to 6PM"
-      }
-      else{
-        this.startTimeErrorMessage = ""
-      }
+	if(event > this.endTime){
+		this.endTime = event
+	}
+	if(event < this.minTime || event > this.maxTime){
+	this.startTimeErrorMessage = "*From 7AM to 6PM"
+	}
+	else{
+	this.startTimeErrorMessage = ""
+	}
   }
 
   onChangeEndTime(event){
+	if(event < this.startTime){
+		this.endTime = this.startTime
+		this.endTimeErrorMessage = "End Time must be after Start Time"
+	}
+	else{
+		this.endTimeErrorMessage = ""
+	}
     if(event < this.minTime || event > this.maxTime){
       this.endTimeErrorMessage = "*From 7AM to 6PM"
     }
@@ -300,7 +327,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       this.currentSessionDetail = {
 			SessionDetailsPK: 0,			
 			ProgramPK: this.modalData.programPK,
-			ScheduleSettingPK: 0,
+			ScheduleSettingPK: AppConstants.ADDITIONAL_SESSION_DETAIL,
 			Title: this.modalData.name,
 			Description: this.eventDescription,
 			StartTimezone: "",
@@ -334,128 +361,166 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				}
         	switch(this.modalData.mode){
 				//======= ADD NEW SCHEDULE ===========
-          	case "newschedule":				
-					if(this.currentScheduleSetting.ScheduleSettingName){												
-						if(this.checkStartEndDate(0,this.startDate, this.endDate, this.modalData.allScheduleSetting))
-							{                
-								this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
-									if(!res){
-										this.isDisabled = true
-									}
-									else{										
-										this.isDisabled = false
-										this.currentScheduleSetting.ScheduleSettingPK = res
-										if(!this.isDisabled){
-											this.dialogRef.close("Yes")
-										}   
-									}
-								})
+				case "newschedule":				
+						if(this.currentScheduleSetting.ScheduleSettingName){												
+							if(this.checkStartEndDate(0,this.startDate, this.endDate, this.modalData.allScheduleSetting))
+								{                
+									this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
+										if(!res){
+											this.isDisabled = true
+										}
+										else{										
+											this.isDisabled = false
+											this.currentScheduleSetting.ScheduleSettingPK = res
+											if(!this.isDisabled){
+												this.dialogRef.close("Yes")
+											}   
+										}
+									})
+							}
+							else{
+								this.isDisabled = true
+								this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
+							}
 						}
 						else{
-							this.isDisabled = true
-							this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
+							this.scheduleNameErrorMessage = "Schedule Name is required."
 						}
-					}
-					else{
-						this.scheduleNameErrorMessage = "Schedule Name is required."
-					}
-					break;
-			
-			//======= UPDATE CURRENT SCHEDULE ===========
-			case "editschedule":			
-					this.currentScheduleSetting.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
-					//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
-					this.allEditedSessions.forEach(session =>{
-						var tempStartDate = this.startDate.toISOString().slice(0,10)
-						var tempEndDate = this.endDate.toISOString().slice(0,10) //End repeatdate
-						var tempStartTime = (new Date(session.Start)).toLocaleString('en-US', this.timeFormatOptions)
-						var tempEndTime = (new Date(session.End)).toLocaleString('en-US', this.timeFormatOptions)
-						
-						//Edit the Start, End, EndRepeatDate
-						session.Start = (new Date(tempStartDate + "T" + tempStartTime)).toString()
-						session.End = (new Date(tempStartDate + "T" + tempEndTime)).toString()
-						session.EndRepeatDate = tempEndDate
-						//Edit the RecurrenceRule
-						var tempIndex = session.RecurrenceRule.indexOf("UNTIL")
-						session.RecurrenceRule = session.RecurrenceRule.substring(0,tempIndex+6) + tempEndDate + "T23:00:00"
+						break;
+				
+				//======= UPDATE CURRENT SCHEDULE ===========
+				case "editschedule":			
+						this.currentScheduleSetting.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
+						//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
+						this.allEditedSessions.forEach(session =>{
+							var tempStartDate = this.startDate.toISOString().slice(0,10)
+							var tempEndDate = this.endDate.toISOString().slice(0,10) //End repeatdate
+							var tempStartTime = (new Date(session.Start)).toLocaleString('en-US', this.timeFormatOptions)
+							var tempEndTime = (new Date(session.End)).toLocaleString('en-US', this.timeFormatOptions)
+							
+							//Edit the Start, End, EndRepeatDate
+							session.Start = (new Date(tempStartDate + "T" + tempStartTime)).toString()
+							session.End = (new Date(tempStartDate + "T" + tempEndTime)).toString()
+							session.EndRepeatDate = tempEndDate
+							//Edit the RecurrenceRule
+							var tempIndex = session.RecurrenceRule.indexOf("UNTIL")
+							session.RecurrenceRule = session.RecurrenceRule.substring(0,tempIndex+6) + tempEndDate + "T23:00:00"
 
-					})					
-					
-					if(this.currentScheduleSetting.ScheduleSettingName){
-					//1. Check if the new Start/End Date are within any other schedule
-						if(this.checkStartEndDate(this.currentScheduleSetting.ScheduleSettingPK, this.startDate, this.endDate, this.modalData.allScheduleSetting)){
-							//2. Then update the record in schedulesetting table
-							this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
-								if(res.error){
-									this.isDisabled = true
-									this.errorMessage = res.error            
-								}
-								else{
+						})					
+						
+						if(this.currentScheduleSetting.ScheduleSettingName){
+						//1. Check if the new Start/End Date are within any other schedule
+							if(this.checkStartEndDate(this.currentScheduleSetting.ScheduleSettingPK, this.startDate, this.endDate, this.modalData.allScheduleSetting)){
+								//2. Then update the record in schedulesetting table
+								this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
+									if(res.error){
+										this.isDisabled = true
+										this.errorMessage = res.error            
+									}
+									else{
+										this.isDisabled = false
+										if(!this.isDisabled){
+											this.dialogRef.close("Yes")
+										}              
+									} 
+								})
+
+								//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
+								this.programScheduleServices.updateScheduleSettingSessionDetails(this.allEditedSessions).subscribe(res =>{
+									console.log(res)
+								})
+
+							}
+							else{
+								this.isDisabled = true
+								this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
+							}
+						}
+						else{
+							this.scheduleNameErrorMessage = "Schedule Name is required."
+						}
+						break;
+
+				//======= ADD NEW SESSION ===========
+				case "newsession":
+					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
+					this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
+						if(res.error){
+							this.isDisabled = true
+							this.errorMessage = res.error            
+						}
+						else{
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close("Yes")
+							}              
+						}            
+					})
+					break;
+				//======= EDIT SESSION ===========
+				case "editsession":
+					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentSession.ScheduleSettingPK
+					this.currentSessionDetail.SessionDetailsPK = this.modalData.currentSession.SessionDetailsPK					
+					this.programScheduleServices.updateSessionDetails(this.currentSessionDetail).subscribe(res => {
+						if(res.error){
+							this.isDisabled = true
+							this.errorMessage = res.error            
+						}
+						//if there is no error
+						else{
+							//updateSessionDetails return array of schedules, 
+							//then call UpdateScheduleinBulks to update records in schedule table
+							this.programScheduleServices.updateSchedulesInBulk(res).subscribe(result =>{
+								if(!result.error)
+								{
 									this.isDisabled = false
 									if(!this.isDisabled){
 										this.dialogRef.close("Yes")
-									}              
-								} 
-							})
-
-							//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
-							this.programScheduleServices.updateScheduleSettingSessionDetails(this.allEditedSessions).subscribe(res =>{
-								console.log(res)
-							})
-
+									}
+								}
+							})						              
+						}  
+					})
+					break;
+				//======= ADD NEW ADDITIONAL SESSION ===========
+				case "newadditionalsession":
+					this.currentSessionDetail.RecurrenceRule = ""
+					this.currentSessionDetail.EndRepeatDate = null
+					this.currentSessionDetail.RepeatDay = ""					
+					this.programScheduleServices.addNewAdditionalSessionDetails(this.currentSessionDetail).subscribe(res=>{
+						if(res.error){
+							this.isDisabled = true
+							this.errorMessage = res.error            
 						}
 						else{
-							this.isDisabled = true
-							this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
-						}
-					}
-					else{
-						this.scheduleNameErrorMessage = "Schedule Name is required."
-					}
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close("Yes")
+							}              
+						}            
+					})
 					break;
-
-			//======= ADD NEW SESSION ===========
-			case "newsession":
-				this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
-				this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
-					if(res.error){
-						this.isDisabled = true
-						this.errorMessage = res.error            
-					}
-					else{
-						this.isDisabled = false
-						if(!this.isDisabled){
-							this.dialogRef.close("Yes")
-						}              
-					}            
-				})
-				break;
-
-			case "editsession":
-				this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentSession.ScheduleSettingPK
-				this.currentSessionDetail.SessionDetailsPK = this.modalData.currentSession.SessionDetailsPK
-				console.log(this.currentSessionDetail)
-				this.programScheduleServices.updateSessionDetails(this.currentSessionDetail).subscribe(res => {
-					if(res.error){
-						this.isDisabled = true
-						this.errorMessage = res.error            
-					}
-					//if there is no error
-					else{
-						//updateSessionDetails return array of schedules, 
-						//then call UpdateScheduleinBulks to update records in schedule table
-						this.programScheduleServices.updateSchedulesInBulk(res).subscribe(result =>{
-							if(!result.error)
-							{
-								this.isDisabled = false
-								if(!this.isDisabled){
-									this.dialogRef.close("Yes")
-								}
-							}
-						})						              
-					}  
-				})
-				break;
+				
+				//======= EDIT ADDITIONAL SESSION ===========
+				case "editadditionalsession":
+					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentSession.ScheduleSettingPK
+					this.currentSessionDetail.SessionDetailsPK = this.modalData.currentSession.SessionDetailsPK	
+					this.currentSessionDetail.RecurrenceRule = ""
+					this.currentSessionDetail.EndRepeatDate = null
+					this.currentSessionDetail.RepeatDay = ""
+					this.programScheduleServices.updateAdditionalSessionDetails(this.currentSessionDetail).subscribe(res =>{
+						if(res.error){
+							this.isDisabled = true
+							this.errorMessage = res.error            
+						}
+						else{
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close("Yes")
+							}              
+						} 
+					})
+					break;
 			}         
       }        
 	}

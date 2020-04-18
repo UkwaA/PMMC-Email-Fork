@@ -1,8 +1,8 @@
 <div id="modal-content-wrapper">
     <header id="modal-header">
-        <div class="row">
-            <div class="col-md-4">
-                <h1 id="modal-title">{{modalData.title}}</h1>
+        <div class="row">            
+            <div class="col-md-12">
+                <h1 id="modal-title">{{modalData.title}}</h1>            
             </div>
         </div>
     </header>
@@ -31,14 +31,15 @@
                             <kendo-datepicker 
                                 [(value)]="startDate"
                                 (valueChange)="onChangeStartDate($event)"
-                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'"
+                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
+                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'"
                                 >                        
                             </kendo-datepicker>
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <label>End:</label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <kendo-datepicker 
                                 [(value)]="endDate" 
                                 [min] = "startDate"
@@ -67,7 +68,8 @@
                             </div>
                         </div> 
                     </div>
-                    <div *ngIf="modalData.mode == 'newsession' || modalData.mode == 'editsession'">
+                    <div *ngIf="modalData.mode == 'newsession' || modalData.mode == 'editsession' 
+                            || modalData.mode == 'newadditionalsession' || modalData.mode == 'editadditionalsession'">
                         <div class="row" >
                             <div class="col-md-2">
                                 <label>Time</label>
@@ -107,7 +109,7 @@
                             </div>
                         </div>
                         <br/>            
-                        <div class="row">
+                        <div class="row" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <div class="col-md-2">
                                 <label>Repeat on</label>
                             </div>
@@ -125,7 +127,7 @@
                                 </kendo-buttongroup>
                             </div>                
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <div class="col-md-2"></div>
                             <div class="col-md-10">
                                 <div class="errorMessage" *ngIf="repeatOnErrorMessage">
@@ -136,7 +138,7 @@
                         <br/>                    
                         <div class="row">
                             <div class="col-md-2">
-                                <label>Event Note</label>
+                                <label>Note</label>
                             </div>
                             <div class="col-md-10">
                                 <textarea kendoTextArea class="form-control" 
@@ -153,6 +155,7 @@
         <button mat-raised-button id="modal-action-button" (click)="setSchedule()">
             {{modalData.actionButtonText}}
         </button>
+        
         <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">
             Cancel
         </button>

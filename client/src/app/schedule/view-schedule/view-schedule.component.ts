@@ -182,12 +182,17 @@ export class ViewScheduleComponent {
             })
         }
         else{
-            if(this.choice == "1"){
-                this.events = this.groupEvent
-            }
-            else{
-                this.events = this.individualEvent
-            }
+            switch(this.choice) {
+                case '0':
+                    this.events = this.allEvents                    
+                    break;
+                case '1':
+                    this.events = this.groupEvent                    
+                    break;
+                case '2':
+                    this.events = this.individualEvent                    
+                    break;   
+            }         
         }        
     }
 
