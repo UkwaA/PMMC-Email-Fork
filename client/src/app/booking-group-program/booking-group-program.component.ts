@@ -88,7 +88,6 @@ export class BookingGroupProgramComponent implements OnInit {
         document.getElementById("program_name").innerHTML = this.programDetails.Name;
       })
 
-      document.getElementById("edit_btn").style.visibility="hidden";
   }
 
   setRegisterFormValidators(){
