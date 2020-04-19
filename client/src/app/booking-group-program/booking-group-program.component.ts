@@ -5,7 +5,7 @@ import { ProgramServices } from 'src/app/services/program.services';
 import { ActivatedRoute } from '@angular/router'
 import { Router } from '@angular/router'
 import { ProgramData } from '../data/program-data';
-import { ReservationHeaderData } from '../data/reservation-header-data';
+import { ReservationHeader } from '../data/reservation-header';
 import { AuthenticationService } from '../authentication.service';
 import { ValidationErrors } from '@angular/forms';
 import { DataStorage } from "../services/dataProvider";
@@ -18,7 +18,9 @@ declare var $: any;
   - ReservationHeader
   - ReservationGroupDetails
   - PaymentHeader 
-  - MarketingInformation                                    
+  - PaymentDetails
+  - MarketingInformation     
+ Data will be stored in the LocalStorage and insert at the end                               
 **********************************************************/
 @Component({
   selector: 'app-booking-group-program',
@@ -27,7 +29,7 @@ declare var $: any;
 })
 
 export class BookingGroupProgramComponent implements OnInit {
-  reservationHeader : ReservationHeaderData;
+  reservationHeader : ReservationHeader;
   reservationGroupDetails = new ReservationGroupDetails();
   bookingGroup: BookingGroupData;
   registerForm: FormGroup;
@@ -43,8 +45,8 @@ export class BookingGroupProgramComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
               private auth: AuthenticationService,
-              private service: ProgramServices,
-              private _data: DataStorage) { }
+              private service: ProgramServices
+              ) { }
 
   ngOnInit() {
     $('body,html').animate({
@@ -52,21 +54,36 @@ export class BookingGroupProgramComponent implements OnInit {
   }, 800);
     // Get QuantityForm from Local Storage
     // Clear the Local Storage after finish checking out
-    this.quantityForm = JSON.parse(localStorage.getItem('quantityForm'));
+    this.quantityForm = JSON.parse(localStorage.getItem('QuantityFormLocal'));
     
+
+
     this.registerForm = this.fb.group({
       ProgramRestriction: ['', Validators.required],
       OrganizationName: ['', [Validators.required, Validators.minLength(3)]],
       GradeLevel: ['', Validators.required],
       TeacherName: ['', [Validators.required, Validators.minLength(3)]],
       TeacherEmail: [''],
+      AlternativeDate: ['', [Validators.required, Validators.minLength(5)]],
       TeacherPhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
+      EducationPurpose: ['', [Validators.required, Validators.minLength(5)]]
     });
 
     // Process data for ReservationHeader
-    this.reservationHeader = new ReservationHeaderData(this.quantityForm.SchedulePK, 
-                                                        this.auth.getUserDetails().UserPK, 
-                                                        this.quantityForm.TotalQuantity)
+    this.reservationHeader = new ReservationHeader(this.quantityForm.SchedulePK, 
+                                                  this.auth.getUserDetails().UserPK, 
+                                                  this.quantityForm.TotalQuantity);
+          
+    // Map data of QuantityForm to ReservationDetails                                              
+    this.reservationGroupDetails.AdultQuantity = this.quantityForm.AdultQuantity;
+    this.reservationGroupDetails.Age57Quantity = this.quantityForm.Age57Quantity;
+    this.reservationGroupDetails.Age810Quantity = this.quantityForm.Age810Quantity;
+    this.reservationGroupDetails.Age1112Quantity = this.quantityForm.Age1112Quantity;
+    this.reservationGroupDetails.Age1314Quantity = this.quantityForm.Age1314Quantity;
+    this.reservationGroupDetails.Age1415Quantity = this.quantityForm.Age1415Quantity;
+    this.reservationGroupDetails.Age1517Quantity = this.quantityForm.Age1517Quantity;
+    this.reservationGroupDetails.TotalQuantity = this.quantityForm.TotalQuantity;
+    
 
     this.bookingGroup= <any>{};
     this.total = 0;
@@ -79,7 +96,6 @@ export class BookingGroupProgramComponent implements OnInit {
     this.service.getProgramRequirementDetails('g', this.ProgramPK)
       .subscribe(program => {
         this.bookingGroup = program
-        console.log(this.bookingGroup)
         this.setRegisterFormValidators()
       })
     this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
@@ -109,8 +125,6 @@ export class BookingGroupProgramComponent implements OnInit {
     if (this.bookingGroup.TeacherName != true)
       TeacherNameControl.clearValidators();
     if (this.bookingGroup.TeacherEmail == true){
-      console.log("TeacherEmail");
-      // TeacherEmailControl.clearValidators();
       TeacherEmailControl.setValidators([Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]);
     }
     if (this.bookingGroup.TeacherPhoneNo != true)
@@ -157,12 +171,10 @@ export class BookingGroupProgramComponent implements OnInit {
 
     // Stop here if form is invalid
     if (this.registerForm.invalid) {
-      console.log("invalid");
       this.getFormValidationErrors();
       return;
     }
     ++this.num_submits;
-    console.log(this.num_submits);
 
     if (this.num_submits==1){
       $(document).ready(function(){
@@ -173,20 +185,35 @@ export class BookingGroupProgramComponent implements OnInit {
         }, 800);
         $('#submit_btn').text('Confirm');
       });
-      // document.getElementById("submit_btn").innerHTML="Confirm";
       document.getElementById("edit_btn").style.visibility="visible";
       document.getElementById("final_warning").innerHTML = "*Please confirm that the following information is correct.".fontcolor("orange");
     }
     else if (this.num_submits==2){
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+
+      // Add User Input data to ReservationGroupDetails
+      this.reservationGroupDetails.ProgramRestriction = this.registerForm.get('ProgramRestriction').value;
+      this.reservationGroupDetails.OrganizationName =  this.registerForm.get('OrganizationName').value;
+      this.reservationGroupDetails.GradeLevel =  this.registerForm.get('GradeLevel').value;
+      this.reservationGroupDetails.TeacherName = this.registerForm.get('TeacherName').value;
+      this.reservationGroupDetails.TeacherEmail = this.registerForm.get('TeacherEmail').value;
+      this.reservationGroupDetails.TeacherPhoneNo =  this.registerForm.get('TeacherPhoneNo').value;
+      this.reservationGroupDetails.AlternativeDate =  this.registerForm.get('AlternativeDate').value;
+      this.reservationGroupDetails.EducationPurpose =  this.registerForm.get('EducationPurpose').value;
+      
+      // Add ReservationGroupDetails to localStorage
+      localStorage.setItem('ReservationGroupLocal', JSON.stringify(this.reservationGroupDetails));
+      
       //route to the payment page
-    this.router.navigateByUrl("/payment/" + this.ProgramPK );
+      this.router.navigateByUrl("/payment/" + this.ProgramPK );
     }
 
     console.log("submitted");
     
 
     console.log("valid");
+
+ 
 
   }
 }

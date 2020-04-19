@@ -66,21 +66,11 @@ export class LoginPromptModal implements OnInit {
       registerDialogConfig.id = "register-modal-component";
       registerDialogConfig.height = "auto";
       registerDialogConfig.disableClose = true;
-      // registerDialogConfig.maxHeight = "600px";
       registerDialogConfig.width = "auto";
       registerDialogConfig.autoFocus = false;
       registerDialogConfig.data = {
         title: "Register New User",
         routerURL: this.modalData.routerURL,
-        // firstName: this.customerInfoForm.get('firstName').value,
-        // lastName: this.customerInfoForm.get('lastName').value,
-        // phoneNo: this.customerInfoForm.get('phoneNum').value,
-        // streetAddress: this.customerInfoForm.get('address_street').value,
-        // // streetAddress2: '',
-        // addressCity: this.customerInfoForm.get('address_city').value,
-        // addressState: this.customerInfoForm.get('address_state').value,
-        // addressZipCode: this.customerInfoForm.get('address_zipcode').value,
-        // actionButtonText: "Confirm",
         numberOfButton: "2"
       };
       const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);
@@ -100,7 +90,7 @@ export class LoginPromptModal implements OnInit {
             (res) => {
                 // this.dialogRef.close("Yes");
                 this.actionFunction();
-                this.router.navigateByUrl(this.modalData.routerURL);
+                //this.router.navigateByUrl(this.modalData.routerURL);
             },
             (err) => {
               //alert('Username and password do not match')

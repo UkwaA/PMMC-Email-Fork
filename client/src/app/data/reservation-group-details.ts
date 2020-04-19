@@ -1,6 +1,5 @@
 export class ReservationGroupDetails {
     ReservationPK: number;
-    ProgramPK: number;
     AdultQuantity: number;
     Age57Quantity: number;
     Age810Quantity: number;
@@ -16,13 +15,10 @@ export class ReservationGroupDetails {
     TeacherEmail: string;
     TeacherPhoneNo: string;
     AlternativeDate: Date;
-    EducationPurpose: string;
-    CreatedBy: number;
-    CreatedDate: Date;
+    EducationPurpose: string
   
     constructor() {
       this.ReservationPK = 0;
-      this.ProgramPK = 0;
       this.AdultQuantity = 0;
       this.Age57Quantity = 0;
       this.Age810Quantity = 0;
@@ -38,9 +34,7 @@ export class ReservationGroupDetails {
       this.TeacherEmail = "";
       this.TeacherPhoneNo = "";
       this.AlternativeDate = null;
-      this.EducationPurpose = "";
-      this.CreatedBy = 0;
-      this.CreatedDate = new Date();
+      this.EducationPurpose = ""
     }
   }
   

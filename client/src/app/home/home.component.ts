@@ -13,7 +13,7 @@ import { AppConstants } from '../constants';
 export class HomeComponent implements OnInit{
     faClock = faClock;
     faComment = faComment;
-    programs : ProgramData[] = [];
+    programs : ProgramData [];
 
     constructor( private programService: ProgramServices){   }
     ngOnInit(){
@@ -28,10 +28,12 @@ export class HomeComponent implements OnInit{
             else {
                 count = 8;
             }
-            for(var i = 0; i < count; i++) {
-                this.programs.push(result[i]);
-                this.programs[i].ImgData = AppConstants.EXPRESS_SERVER_URL + result[i].ImgData
-            }
+            
+            this.programs = result.map((prog: ProgramData) => {
+                prog.ImgData = AppConstants.EXPRESS_SERVER_URL +  prog.ImgData
+                return prog;
+            })
+       
         })
     }
 }

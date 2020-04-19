@@ -15,7 +15,6 @@ export class PaymentComponent implements OnInit{
         private fb: FormBuilder){}
 
     ngOnInit(){
-
         this.paymentForm = this.fb.group({
             FirstName: ["", [Validators.required]],
             LastName: ["", [Validators.required]],

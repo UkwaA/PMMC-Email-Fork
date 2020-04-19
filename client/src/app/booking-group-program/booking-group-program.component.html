@@ -92,6 +92,19 @@
           </div>
         </div>
       </fieldset>
+       <!-- Alternative Date -->
+       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.AlternativeDate">
+        <div class="row">
+          <label class="col-form-label col-sm-2" for="AlternativeDate">Alternative Date: </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" formControlName="AlternativeDate"
+                  [ngClass]="{ 'is-invalid': submitted && f.AlternativeDate.errors }" />
+            <div *ngIf="submitted && f.AlternativeDate.errors" class="invalid-feedback">
+                <div *ngIf="f.AlternativeDate.errors.required">Alternative Date is required</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
       <!-- Grade Level  -->
       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.GradeLevel">
         <div class="row">
@@ -129,6 +142,19 @@
             </select>
             <div *ngIf="submitted && f.ProgramRestriction.errors" class="invalid-feedback">
               <div *ngIf="f.ProgramRestriction.errors.required">This is required</div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+       <!-- Education Purpose  -->
+       <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.EducationPurpose">
+        <div class="row">
+          <label class="col-form-label col-sm-2" for="EducationPurpose">Education Purpose </label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" formControlName="EducationPurpose"
+                  [ngClass]="{ 'is-invalid': submitted && f.EducationPurpose.errors }" />
+            <div *ngIf="submitted && f.EducationPurpose.errors" class="invalid-feedback">
+                <div *ngIf="f.EducationPurpose.errors.required">Education Purpose is required</div>
             </div>
           </div>
         </div>

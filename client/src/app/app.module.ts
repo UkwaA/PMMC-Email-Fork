@@ -46,7 +46,7 @@ import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
 import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
 import { PaymentComponent } from './payment/payment.component';
-
+import {MatStepperModule} from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
@@ -216,6 +216,7 @@ const routes : Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatStepperModule,
     MatTooltipModule,
     MatDatepickerModule,
     MatSelectModule,

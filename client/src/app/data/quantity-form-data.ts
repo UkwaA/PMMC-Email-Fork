@@ -8,6 +8,9 @@ export class QuantiyFormData {
     Age1517Quantity: number;
     TotalQuantity: number;
     SchedulePK: number;
+    SelectedDateStr: string;
+    SelectedTimeStr: string;
+    Availability: number;
 
     constructor( AdultQuantity: number,
                 Age57Quantity: number,
@@ -17,7 +20,10 @@ export class QuantiyFormData {
                 Age1415Quantity: number,
                 Age1517Quantity: number,
                 TotalQuantity: number,
-                SchedulePK: number) {
+                SchedulePK: number,
+                SelectedDateStr: string,
+                SelectedTimeStr: string,
+                Availability: number) {
       this.AdultQuantity = AdultQuantity;
       this.Age57Quantity = Age57Quantity;
       this.Age810Quantity = Age810Quantity;
@@ -27,6 +33,9 @@ export class QuantiyFormData {
       this.Age1517Quantity = Age1517Quantity;
       this.TotalQuantity = TotalQuantity;
       this.SchedulePK = SchedulePK;
+      this.SelectedDateStr = SelectedDateStr;
+      this.SelectedTimeStr = SelectedTimeStr;
+      this.Availability = Availability;
     }
   }
   

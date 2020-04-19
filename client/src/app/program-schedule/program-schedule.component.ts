@@ -16,13 +16,15 @@ import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.co
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
-import { DataStorage } from "../services/dataProvider";
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
   templateUrl: "./program-schedule.component.html",
   styleUrls: ["./program-schedule.component.css"],
 })
 export class ProgramScheduleComponent implements OnInit {
+  programName: string;
+  programDesc: string;
   ProgramPK: number;
   ProgramType: number;
   SchedulePK: number;
@@ -40,6 +42,7 @@ export class ProgramScheduleComponent implements OnInit {
   public allEvents: SchedulerEvent[];
   quantityData: QuantiyFormData;
   quantityForm: FormGroup;
+  registerForm: FormGroup;
   currTotalQuantity = 0;
   availability: number;
   submitted = false;
@@ -55,6 +58,7 @@ export class ProgramScheduleComponent implements OnInit {
     CreatedBy: 0,
     IsActive: true,
   };
+
 
   //Define Schedule Module for Kendo schedule
   public eventFields: SchedulerModelFields = {
@@ -78,11 +82,12 @@ export class ProgramScheduleComponent implements OnInit {
     private fb: FormBuilder,
     public matDialog: MatDialog,
     private auth: AuthenticationService,
-    private router: Router,
-    private _data: DataStorage  // Use to store data cross component
+    private router: Router
+    //private _data: DataStorage  // Use to store data cross component
   ) {}
 
   ngOnInit() {
+    
     this.route.params.subscribe((val) => {
       this.ProgramPK = val.id;
     });
@@ -92,12 +97,8 @@ export class ProgramScheduleComponent implements OnInit {
       .subscribe((details) => {
         this.programDetails = details;
         this.ProgramType = details.ProgramType;
-        document.getElementById(
-          "program_name"
-        ).innerHTML = this.programDetails.Name;
-        document.getElementById(
-          "program_desc"
-        ).innerHTML = this.programDetails.Description;
+        this.programDesc = this.programDetails.Description;
+        this.programName = this.programDetails.Name;
       });
 
     //Define and create to get schedule by ProgramPk
@@ -166,7 +167,34 @@ export class ProgramScheduleComponent implements OnInit {
         [Validators.required, Validators.min(0)],
       ],
       TotalQuantity: ["0", [Validators.required, Validators.min(1)]],
+      CustomerSelectDate: [],
+      CustomerSelectTime: [],
+      Availability: []
     });
+    
+    // Reload the data when user go back to pick number of participant.
+    if(JSON.parse(localStorage.getItem('QuantityFormLocal'))) {
+      var tempObj = JSON.parse(localStorage.getItem('QuantityFormLocal'));
+
+      this.quantityForm.get("AdultQuantity").setValue(tempObj.AdultQuantity);
+      this.quantityForm.get("Age57Quantity").setValue(tempObj.Age57Quantity);
+      this.quantityForm.get("Age810Quantity").setValue(tempObj.Age810Quantity);
+      this.quantityForm.get("Age1112Quantity").setValue(tempObj.Age1112Quantity);
+      this.quantityForm.get("Age1314Quantity").setValue(tempObj.Age1314Quantity);
+      this.quantityForm.get("Age1415Quantity").setValue(tempObj.Age1415Quantity);
+      this.quantityForm.get("Age1517Quantity").setValue(tempObj.Age1517Quantity);
+      this.quantityForm.get("TotalQuantity").setValue(tempObj.TotalQuantity);
+
+      this.quantityForm.value.CustomerSelectDate.setValue(tempObj.SelectedDateStr);
+      this.quantityForm.value.CustomerSelectTime.setValue(tempObj.SelectedDateTime);
+      this.quantityForm.value.Availability.setValue(tempObj.Availability);
+
+      // this.customerSelectDate = tempObj.SelectedDateStr;
+      // this.customerSelectTime = tempObj.SelectedDateStr;
+      // this.availability = tempObj.Availability;
+      this.enableQuantityField();
+    }
+    
   }
 
   get f() {
@@ -198,6 +226,16 @@ export class ProgramScheduleComponent implements OnInit {
       parseInt(this.quantityForm.get("Age1517Quantity").value);
 
     this.quantityForm.get("TotalQuantity").setValue(this.currTotalQuantity);
+  }
+
+  enableQuantityField() {
+    this.quantityForm.get("AdultQuantity").enable();
+    this.quantityForm.get("Age57Quantity").enable();
+    this.quantityForm.get("Age810Quantity").enable();
+    this.quantityForm.get("Age1112Quantity").enable();
+    this.quantityForm.get("Age1314Quantity").enable();
+    this.quantityForm.get("Age1415Quantity").enable();
+    this.quantityForm.get("Age1517Quantity").enable();
   }
 
   enterQuantity() {
@@ -286,7 +324,6 @@ export class ProgramScheduleComponent implements OnInit {
                 if(this.currentSession.SchedulePK == 0) {
                     this.programScheduleServices.addNewSchedule(this.currentSession)
                     .subscribe((res) => {
-                      console.log(res);
                     });
                 }
 
@@ -295,11 +332,12 @@ export class ProgramScheduleComponent implements OnInit {
                                                       this.quantityForm.value.Age810Quantity, this.quantityForm.value.Age1112Quantity,
                                                       this.quantityForm.value.Age1314Quantity,this.quantityForm.value.Age1415Quantity,
                                                       this.quantityForm.value.Age1517Quantity, this.quantityForm.value.TotalQuantity,
-                                                      this.SchedulePK)
+                                                      this.SchedulePK, this.quantityForm.value.CustomerSelectDate, this.quantityForm.value.CustomerSelectTime,
+                                                      (this.currentSession.MaximumParticipant -  this.currentSession.CurrentNumberParticipant));
               
-                // Pass Quantity Form Data 
-                localStorage.setItem('quantityForm', JSON.stringify(this.quantityData));
-                this._data.data = this.quantityData
+                // Add QuantityForm Data to localStorage 
+                localStorage.setItem('QuantityFormLocal', JSON.stringify(this.quantityData));
+                //this._data.data = this.quantityData
                 this.router.navigateByUrl( "/booking-group-program/" + this.ProgramPK);
                 break;
             }
@@ -313,15 +351,8 @@ export class ProgramScheduleComponent implements OnInit {
 
   //This function to capture and get the info of selected event
   public eventClick = (e) => {
-    console.log(e)
     this.isDisable = false;
-    this.quantityForm.get("AdultQuantity").enable();
-    this.quantityForm.get("Age57Quantity").enable();
-    this.quantityForm.get("Age810Quantity").enable();
-    this.quantityForm.get("Age1112Quantity").enable();
-    this.quantityForm.get("Age1314Quantity").enable();
-    this.quantityForm.get("Age1415Quantity").enable();
-    this.quantityForm.get("Age1517Quantity").enable();
+    this.enableQuantityField();
 
     var eventStart = e.event.dataItem.Start.toString();
     var eventEnd = e.event.dataItem.End.toString();
@@ -341,11 +372,14 @@ export class ProgramScheduleComponent implements OnInit {
                                                  .concat(" - ", end.toLocaleString("en-US", this.options));
             
           this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
-          
+
+          this.quantityForm.get("CustomerSelectDate").setValue(this.customerSelectDate);
+          this.quantityForm.get("CustomerSelectTime").setValue(this.customerSelectTime);
+          this.quantityForm.get("Availability").setValue( this.availability);
+
           // Pass SchedulePK for Booking Page
           this.SchedulePK = res.SchedulePK
           
-          //console.log(res);
         } else {
           // Create new schedule record and insert into the databse
           this.customerSelectDate = e.event.dataItem.Start.toDateString();
@@ -354,7 +388,11 @@ export class ProgramScheduleComponent implements OnInit {
           
           this.availability = e.event.dataItem.MaximumParticipant;
           
-          // Pass SchedulePK for Booking Page
+          this.quantityForm.get("CustomerSelectDate").setValue(this.customerSelectDate);
+          this.quantityForm.get("CustomerSelectTime").setValue(this.customerSelectTime);
+          this.quantityForm.get("Availability").setValue( this.availability);
+
+           // Pass SchedulePK for Booking Page
           this.SchedulePK = e.event.dataItem.SchedulePK;       
 
           this.currentSession.SchedulePK = 0;          
@@ -367,7 +405,6 @@ export class ProgramScheduleComponent implements OnInit {
           this.currentSession.IsActive = true;
           this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK;      // UserPk represent for System Auto Create Data
           
-          //console.log(e.event);
         }
       });
   };

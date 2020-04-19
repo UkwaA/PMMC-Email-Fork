@@ -72,6 +72,8 @@ export class AuthenticationService {
     if (user) {
       return user.exp > Date.now() / 1000
     } else {
+      window.localStorage.removeItem('QuantityFormLocal');
+      window.localStorage.removeItem('ReservationGroupLocal');
       return false
     }
   }
@@ -112,6 +114,8 @@ export class AuthenticationService {
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('usertoken');
+    window.localStorage.removeItem('QuantityFormLocal');
+    window.localStorage.removeItem('ReservationGroupLocal');
     this.router.navigateByUrl('/')     
   }
 
