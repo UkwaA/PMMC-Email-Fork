@@ -29,6 +29,12 @@
     color: white;
 }
 
+#modal-warning-action-button {
+    margin-right: 30px;
+    background-color:rgb(230, 32, 32);
+    color: white;
+}
+
 #modal-cancel-button {
     background-color: #4e4e4e;
     color: white;

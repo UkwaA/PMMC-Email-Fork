@@ -69,14 +69,9 @@ export class RegisterModalDialogComponent implements OnInit{
         Subscribe: [0]
       })
 
-      // $('.state').bind('keydown keyup',function(){ 
-      //   var node = $(this);
-      //   node.val(node.val().replace(/[^a-zA-Z]/g,'') ); }
-      // );
     }
 
     actionFunction() {        
-        //this.closeModal();
         this.dialogRegisterRef.close("Yes");
       }
     

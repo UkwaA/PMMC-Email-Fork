@@ -120,7 +120,6 @@ export class ViewScheduleComponent {
             ));
             this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
-            console.log((new Date()).toISOString())
             //Loop through all events
             this.events.forEach(event =>{
                 //for each event, loop through all programs and compare ProgramPK
@@ -182,12 +181,17 @@ export class ViewScheduleComponent {
             })
         }
         else{
-            if(this.choice == "1"){
-                this.events = this.groupEvent
-            }
-            else{
-                this.events = this.individualEvent
-            }
+            switch(this.choice) {
+                case '0':
+                    this.events = this.allEvents                    
+                    break;
+                case '1':
+                    this.events = this.groupEvent                    
+                    break;
+                case '2':
+                    this.events = this.individualEvent                    
+                    break;   
+            }         
         }        
     }
 

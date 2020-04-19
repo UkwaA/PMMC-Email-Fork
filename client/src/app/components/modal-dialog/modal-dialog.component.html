@@ -8,7 +8,12 @@
     </section>
     <mat-divider></mat-divider>
     <footer id="modal-footer">
-        <button mat-raised-button id="modal-action-button" (click)="actionFunction()">
+        <button *ngIf="!modalData.mode"
+                mat-raised-button id="modal-action-button" (click)="actionFunction()">
+            {{modalData.actionButtonText}}
+        </button>
+        <button *ngIf="modalData.mode" 
+                mat-raised-button id="modal-warning-action-button" (click)="actionFunction()">
             {{modalData.actionButtonText}}
         </button>
         <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">

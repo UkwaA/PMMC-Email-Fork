@@ -17,8 +17,8 @@ h1 {
 }
 
 thead{
-  background-color:  rgba(0, 0, 0, 0.658);
-  color: white;
+  background-color:  rgba(126, 126, 126, 0.658);
+  color: black;
 }
 
 th, td {
@@ -33,7 +33,7 @@ td {
 
 th {
   font-family: 'Source Sans Pro', sans-serif; 
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 
