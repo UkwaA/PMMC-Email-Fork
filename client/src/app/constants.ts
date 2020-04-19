@@ -10,6 +10,8 @@ export class AppConstants {
     public static get ERR_WRONG_PASSWORD(): string { return "http://localhost:4200/api"; }
 
     public static get SYSTEM_USER_PK(): number { return 6868; }
+    //Set additional session's ScheduleSettingPK to 0
+    public static get ADDITIONAL_SESSION_DETAIL(): number { return 0; }
     
     public static PROGRAM_TYPE_CODE = {
         GROUP_PROGRAM: 0,

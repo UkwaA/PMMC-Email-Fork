@@ -1,6 +1,112 @@
 <div class="container">
-    <div class="row text-left m-0">
-        <h1> Confirmation </h1>
-      </div>
-      <hr>
+  <div class="row">
+    <div class="col-md-12 text-center m-0">
+      <h1> Confirmation </h1>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Program name  -->
+  <div class="row text-left m-0">
+    <div class="col-md-10">
+      <h4>Program Information</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-secondary btn-sm">Change</button>
+    </div>
+    <div class="col-md-12">
+      <ul class="list row">
+        <li *ngIf= "!programData.ProgramType" class="list-item col-md-12"><b>Type:</b> Group</li>
+        <li *ngIf= "programData.ProgramType" class="list-item col-md-12"><b>Type:</b> Individual</li>
+        <li class="list-item col-md-12"><b>Name:</b> {{programData.Name}} </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+
+  <!-- General Information -->
+  <div class="row text-left m-0">
+    <div class="col-md-10">
+      <h4>General Information</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-secondary btn-sm">Change</button>
+    </div>
+    <div class="col-md-12">
+      <ul class="list row">
+        <li class="list-item col-md-12"><b>Date:</b> </li>
+        <li class="list-item col-md-12"><b>Time:</b> </li>
+        <li class="list-item col-md-12"><b>Quantity:</b> </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row text-left m-0">
+    <div class="col-md-10">
+      <h4>Reservation Information</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-secondary btn-sm">Change</button>
+    </div>
+    <div class="col-md-12">
+      <ul class="list row" *ngIf= "!programData.ProgramType">
+        <li class="list-item col-md-12"><b>Participant Name:</b> </li>
+        <li class="list-item col-md-12"><b>Participant Age:</b> </li>
+        <li class="list-item col-md-12"><b>Gender:</b> </li>
+        <li class="list-item col-md-12"><b>T-Shirt Size:</b> </li>
+        <li class="list-item col-md-12"><b>Allergy Information:</b> </li>
+        <li class="list-item col-md-12"><b>Special Information:</b> </li>
+        <li class="list-item col-md-12"><b>Insurance Provider Name:</b> </li>
+        <li class="list-item col-md-12"><b>Insured Recipient Name:</b> </li>
+        <li class="list-item col-md-12"><b>Insurance Policy Number:</b> </li>
+        <li class="list-item col-md-12"><b>Insurance Phone Number:</b> </li>
+        <li class="list-item col-md-12"><b>Authorized Pickup Name 1:</b> </li>
+        <li class="list-item col-md-12"><b>Authorized Pickup Phone 1:</b> </li>
+        <li class="list-item col-md-12"><b>Authorized Pickup Name 2:</b> </li>
+        <li class="list-item col-md-12"><b>Authorized Pickup Phone 2:</b> </li>
+        <li class="list-item col-md-12"><b>Early Drop Off:</b> </li>
+        <li class="list-item col-md-12"><b>Late Pick-up:</b> </li>
+        <li class="list-item col-md-12"><b>Media Release:</b> </li>
+        <li class="list-item col-md-12"><b>Emergency Medical Release:</b> </li>
+        <li class="list-item col-md-12"><b>Liability Argreement:</b> </li>
+      </ul>
+      <ul class="list row" *ngIf= "programData.ProgramType">
+        <li class="list-item col-md-12"><b>Program Restriction:</b> </li>
+        <li class="list-item col-md-12"><b>Organization Name:</b> </li>
+        <li class="list-item col-md-12"><b>Grade Level:</b> </li>
+        <li class="list-item col-md-12"><b>Teacher Name:</b> </li>
+        <li class="list-item col-md-12"><b>Teacher Email:</b></li>
+        <li class="list-item col-md-12"><b>Teacher Phone Number:</b> </li>
+        <li class="list-item col-md-12"><b>Alternative Date:</b> </li>
+        <li class="list-item col-md-12"><b>Education Purpose:</b> </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row text-left m-0">
+    <div class="col-md-10">
+      <h4>Check-out Information</h4>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-secondary btn-sm">Change</button>
+    </div>
+    <div class="col-md-12">
+      <ul class="list row">
+        <li class="list-item col-md-12"><b>Billing Address:</b> </li>
+        <li class="list-item col-md-12"><b>Card Information:</b> </li>
+          <ul class="list row">
+            <li class="list-item col-md-12">Name on Card: </li>
+            <li class="list-item col-md-12">Card Number: </li>
+          </ul>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="row float-right">
+    <div class="col-md-12 pr-5">
+      <button type="button" class="btn btn-success btn-lg">Confirm</button>
+    </div>
+  </div>
 </div>
