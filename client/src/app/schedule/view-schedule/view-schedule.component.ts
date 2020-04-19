@@ -120,7 +120,6 @@ export class ViewScheduleComponent {
             ));
             this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
-            console.log((new Date()).toISOString())
             //Loop through all events
             this.events.forEach(event =>{
                 //for each event, loop through all programs and compare ProgramPK

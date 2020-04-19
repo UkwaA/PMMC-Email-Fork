@@ -55,7 +55,7 @@ export class SetProgramScheduleComponent {
 	currentSessionDetails = {
 		SessionDetailsPK: 0,		
 		ProgramPK: 0,
-		ScheduleSettingPK: -1,
+		ScheduleSettingPK: 0,
 		Title: "",
 		Description: "",
 		StartTimezone: "",
@@ -301,13 +301,13 @@ export class SetProgramScheduleComponent {
 					));
 					this.allSessions = sampleDataWithCustomSchema
 					if(this.allSessions.length > 0){
-						this.selectedColor = this.allSessions[0].Color						
+						this.selectedColor = this.allSessions[0].Color
+						this.hasSession = true
 					}
 					//Loop through all allSessions
 					this.allSessions.forEach(session =>{
 						if(session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
-						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
-							this.hasSession = true	
+						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList	
 							this.dayArr.forEach(day =>{
 								if(session.RepeatDay.indexOf(day.value) >= 0){
 										day.eventList.push(session)
@@ -318,6 +318,9 @@ export class SetProgramScheduleComponent {
 							this.allAdditionalSessions.push(session)
 						}
 					})
+					console.log(this.currentScheduleSetting)
+					console.log(this.allSessions)
+					console.log(this.allAdditionalSessions)
 
 					//Sort allAdditionalSessions array by date
 					this.allAdditionalSessions.sort(function(a,b){
