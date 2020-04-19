@@ -82,11 +82,73 @@ schedule.post("/update-schedule-setting", (req, res) => {
 //2. Update all SessionDetails associated with the ScheduleSetting
 schedule.post("/update-schedule-setting-session-details", (req, res) => {
   SessionDetails.bulkCreate(req.body, {
-    updateOnDuplicate: ["Start", "End","RecurrenceRule", "EndRepeatDate"],
-    returning: true
+    updateOnDuplicate: ["Start", "End","RecurrenceRule", "EndRepeatDate"]    
   })
   .then(result =>{
     res.json(result)
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  })
+});
+
+/*********************************************
+   DEACTIVATE SCHEDULE SETTING
+ **********************************************/
+schedule.post("/deactivate-schedule-setting", (req, res) => {
+  //1. Update in schedulesetting table
+  ScheduleSetting.update({
+    IsActive: false
+  },{    
+    where : {      
+      ScheduleSettingPK: req.body.ScheduleSettingPK
+    }
+  })
+  .then(scheduleSetting =>{
+    //=======2. Update in sessiondetails table    ==========
+    SessionDetails.findAll({
+      where:{
+        ScheduleSettingPK: req.body.ScheduleSettingPK,
+        IsActive: true
+      }
+    })
+    .then(sessions =>{
+      if(sessions.length > 0){      
+          //Update in session details table  
+          SessionDetails.update({
+            IsActive: false
+          },{
+            where : {      
+              ScheduleSettingPK: req.body.ScheduleSettingPK,
+              IsActive: true
+            } 
+          })
+          .then(() =>{
+              //Update in schedule table
+              sessions.forEach(session =>{
+                Schedule.update({
+                  IsActive: false
+                },{
+                  where :{
+                    ProgramPK: session.ProgramPK,
+                    SessionDetailsPK: session.SessionDetailsPK
+                  }
+                })
+                .catch(err => {
+                  res.send("errorExpressErr: " + err);
+                })
+              })
+              res.json({message:"Sessions and schedules were successfully updated."})
+          })    
+          .catch(err => {
+            res.send("errorExpressErr: " + err);
+        })
+      }
+      else{
+        res.json({message: "There is no session to remove."})
+      }
+    })    
+    //======= END UPDATE in sessiondetails table  ==========
   })
   .catch(err => {
     res.send("errorExpressErr: " + err);
@@ -179,6 +241,9 @@ schedule.post("/update-session-details", (req, res) => {
   
   SessionDetails.findAll({
     where: {
+      SessionDetailsPK:{
+        [Op.ne]: req.body.SessionDetailsPK
+      },
       ScheduleSettingPK: req.body.ScheduleSettingPK,
       ProgramPK: req.body.ProgramPK, 
       Start: {
@@ -202,7 +267,8 @@ schedule.post("/update-session-details", (req, res) => {
       //###### Update in sessiondetails table #######
         SessionDetails.update(req.body, {
           where: {
-            SessionDetailsPK: req.body.SessionDetailsPK
+            SessionDetailsPK: req.body.SessionDetailsPK,
+            IsActive: true
           }
         })
         .then(result => {
@@ -212,7 +278,8 @@ schedule.post("/update-session-details", (req, res) => {
             Schedule.findAll({
               where:{
                 ProgramPK: req.body.ProgramPK,
-                SessionDetailsPK: req.body.SessionDetailsPK
+                SessionDetailsPK: req.body.SessionDetailsPK,
+                IsActive: true
               }
             })
             .then(schedules =>{
@@ -250,8 +317,7 @@ schedule.post("/update-session-details", (req, res) => {
 schedule.post("/update-schedules-in-bulk", (req, res) => {
     //Update in schedule table
     Schedule.bulkCreate(req.body, {
-      updateOnDuplicate: ["Start", "End"],
-      returning: true
+      updateOnDuplicate: ["Start", "End"]      
     })
     .then(result =>{
       res.json(result)
@@ -264,27 +330,127 @@ schedule.post("/update-schedules-in-bulk", (req, res) => {
 /***************************************
    DEACTIVATE PROGRAM SESSION DETAILS
  ***************************************/
-schedule.post("/deactivate-session-details", (req, res) => {
-  SessionDetails.findOne({
+schedule.post("/deactivate-session-details", (req, res) => {  
+  //Set IsActive to false for record in sesisondetails table
+  SessionDetails.update({
+    IsActive: false
+  },{
     where: {
-      ScheduleSettingPK: req.body.ScheduleSettingPK //FINDME
+      SessionDetailsPK: req.body.SessionDetailsPK,
+      IsActive: true
     }
   })
-  .then(scheduleSetting =>{
-    //res.json(req.body)
-    if(scheduleSetting){
-      scheduleSetting.update({
-        IsActive: false
-      });
-      res.json("Program Schedule setting has been deactivated")
-    }
-    else{
-      res.json("Cannot deactivate schedule setting")
-    }    
+  .then(session =>{    
+    //Set IsActive to false for records in schedule table associated with the SessionDetailsPK
+    Schedule.update({
+      IsActive: false
+    },{
+      where : {
+        ProgramPK: req.body.ProgramPK,
+        SessionDetailsPK: req.body.SessionDetailsPK,
+        IsActive: true
+      }
+    })
+    .then(schedule =>{
+      res.json({message: "Session details and schedules have been deactivated"})
+    })    
   })
   .catch(err => {
     res.send("error: " + err + "   " + req.body.ProgramPK);
   })
+});
+
+/************************************
+   ADD NEW ADDITIONAL SESSION DETAILS
+ ************************************/
+schedule.post("/add-new-additional-session-details", (req, res) => {
+  SessionDetails.findAll({
+    where: {
+      ProgramPK: req.body.ProgramPK,
+      ScheduleSettingPK: req.body.ScheduleSettingPK, 
+      Start: req.body.Start,
+      End: req.body.End,
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting =>{
+    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+      res.json(
+        {error:"There exists sessions in this time frame" 
+          + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+        )
+    }
+    else{
+      //If there's no events having the same start and end time => create new
+      SessionDetails.create(req.body)
+      .then(newSession => {
+        res.json(newSession)
+      })
+    }
+  })
+    .catch(err => {
+      res.send("errorExpressErr: " + err);
+    });
+});
+
+/************************************
+  UPDATE ADDITIONAL SESSION DETAILS
+ ************************************/
+schedule.post("/update-additional-session-details", (req, res) => {
+  SessionDetails.findAll({
+    where: {
+      SessionDetailsPK:{
+        [Op.ne]: req.body.SessionDetailsPK
+      },
+      ScheduleSettingPK: req.body.ScheduleSettingPK,
+      ProgramPK: req.body.ProgramPK, 
+      Start: req.body.Start,
+      End: req.body.End,
+      IsActive: true
+    }
+  })
+  .then(sessions =>{
+    if(sessions.length > 0){ //if there exists session in selected time frame      
+      res.json(
+        {error:"There exists sessions in this time frame" 
+          + ". Please edit the existing session that is in this time frame OR choose another time frame"}
+        )
+    }
+    else{
+      //If there's no events having the same start and end time => update the current session detail
+      SessionDetails.update(req.body, {
+        where: {
+          SessionDetailsPK: req.body.SessionDetailsPK          
+        }
+      })
+      .then(result => {
+        if(result == 1){
+          //Update record in schedule table
+          Schedule.update({
+            Start: req.body.Start,
+            End: req.body.End
+          },{
+            where:{
+              ProgramPK: req.body.ProgramPK,
+              SessionDetailsPK: req.body.SessionDetailsPK
+            }
+          })
+          .then(result =>{
+            res.json({message: "Session and schedule have been updated successfully"})
+          })
+          .catch(err => {
+            res.send("errorExpressErr: " + err);
+          })
+        }
+      })
+      .catch(err => {
+        res.send("errorExpressErr: " + err);
+      })
+    }
+  })
+  .catch(err => {
+    res.send("errorExpressErr: " + err);
+  });
 });
 
 
@@ -348,7 +514,7 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
       SessionDetailsPK: req.params.session,
       ProgramPK: req.params.id,
       Start: req.params.start,
-      End: req.params.end
+      End: req.params.end      
     }
   })
   .then(schedule =>{

@@ -31,19 +31,23 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting-session-details", sessions);
     }
 
+    public deactiveScheduleSetting(scheduleSetting: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-schedule-setting", scheduleSetting);
+    }
+
     /*================================
             SESSION DETAILS
     ================================*/
-    public addNewSessionDetails(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-session-details", scheduleSetting);
+    public addNewSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-session-details", sessionDetails);
     }
 
-    public updateSessionDetails(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-session-details", scheduleSetting);
+    public updateSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-session-details", sessionDetails);
     }
 
-    public deactivateSessionDetails(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", scheduleSetting);
+    public deactivateSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", sessionDetails);
     }
     
     public getAllSessionDetails(): Observable<any> {
@@ -57,6 +61,15 @@ export class ProgramScheduleService{
     public updateSchedulesInBulk(schedules: any): Observable<any>{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedules-in-bulk", schedules);
     }
+
+    public addNewAdditionalSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-additional-session-details", sessionDetails);
+    }
+
+    public updateAdditionalSessionDetails(sessionDetails: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-additional-session-details", sessionDetails);
+    }
+
     /*================================
             SCHEDULE
     ================================*/

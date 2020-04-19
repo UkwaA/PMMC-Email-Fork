@@ -2,7 +2,8 @@
     width: 100%;
     height: 100%;
     display: grid;
-    color: white;    
+    color: white;  
+      
 }
 
 #modal-title {
@@ -28,6 +29,12 @@
     color: white;
 }
 
+#modal-warning-action-button {
+    margin-right: 30px;
+    background-color:rgb(230, 32, 32);
+    color: white;
+}
+
 #modal-cancel-button {
     background-color: #4e4e4e;
     color: white;
@@ -47,3 +54,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+alert-danger{
+    padding-right: 2rem;
+}
+
+/* .modal-open .modal {
+    width: 300px;
+    margin: 0 auto;
+} */

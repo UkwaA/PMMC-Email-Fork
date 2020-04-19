@@ -51,7 +51,7 @@ export class BookingGroupProgramComponent implements OnInit {
   ngOnInit() {
     $('body,html').animate({
       scrollTop: 0
-  }, 800);
+    }, 800);
     // Get QuantityForm from Local Storage
     // Clear the Local Storage after finish checking out
     this.quantityForm = JSON.parse(localStorage.getItem('QuantityFormLocal'));
@@ -141,19 +141,6 @@ export class BookingGroupProgramComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  editClicked(event){
-    console.log("Edit Clicked");
-    document.getElementById("edit_btn").style.visibility="hidden";
-    this.num_submits = 0;
-    $(document).ready(function(){
-      $("#registerForm :input").prop("disabled", false);
-      $('body,html').animate({
-        scrollTop: 0
-    }, 800);
-    });
-    document.getElementById("final_warning").innerHTML = ""
-  }
-
   getFormValidationErrors() {
     Object.keys(this.registerForm.controls).forEach(key => {
   
@@ -174,21 +161,7 @@ export class BookingGroupProgramComponent implements OnInit {
       this.getFormValidationErrors();
       return;
     }
-    ++this.num_submits;
-
-    if (this.num_submits==1){
-      $(document).ready(function(){
-        $("#registerForm :input").prop("disabled", true);
-        $("#registerForm :button").prop("disabled", false);
-        $('body,html').animate({
-          scrollTop: 0
-        }, 800);
-        $('#submit_btn').text('Confirm');
-      });
-      document.getElementById("edit_btn").style.visibility="visible";
-      document.getElementById("final_warning").innerHTML = "*Please confirm that the following information is correct.".fontcolor("orange");
-    }
-    else if (this.num_submits==2){
+    else{
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 
       // Add User Input data to ReservationGroupDetails

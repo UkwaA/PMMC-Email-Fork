@@ -11,13 +11,25 @@
     </div>
     <div class="col-md-12">
         <ul class="list row">
-          <li class="list-item col-md-6">Adult Quantity: {{quantityForm.AdultQuantity}}</li>
-          <li class="list-item col-md-6">Age 5-7 Quantity: {{quantityForm.Age57Quantity}}</li>
-          <li class="list-item col-md-6">Age 8-10 Quantity: {{quantityForm.Age810Quantity}}</li>
-          <li class="list-item col-md-6">Age 11-12 Quantity: {{quantityForm.Age1112Quantity}}</li>
-          <li class="list-item col-md-6">Age 13-14 Quantity: {{quantityForm.Age1314Quantity}}</li>
-          <li class="list-item col-md-6">Age 14-15 Quantity: {{quantityForm.Age1415Quantity}}</li>
-          <li class="list-item col-md-6">Age 15-17 Quantity: {{quantityForm.Age1517Quantity}}</li>
+          <li class="list-item col-md-6">Adults: {{quantityForm.AdultQuantity}}</li>
+          <div *ngIf="quantityForm.Age57Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 5-7: {{quantityForm.Age57Quantity}}</li>
+          </div>
+          <div *ngIf="quantityForm.Age810Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 8-10: {{quantityForm.Age810Quantity}}</li>
+          </div>
+          <div *ngIf="quantityForm.Age1112Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 11-12: {{quantityForm.Age1112Quantity}}</li>
+          </div>
+          <div *ngIf="quantityForm.Age1314Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 13-14: {{quantityForm.Age1314Quantity}}</li>
+          </div>
+          <div *ngIf="quantityForm.Age1415Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 14-15: {{quantityForm.Age1415Quantity}}</li>
+          </div>
+          <div *ngIf="quantityForm.Age1517Quantity > 0">
+          <li class="list-item col-md-6">Children Ages 15-17: {{quantityForm.Age1517Quantity}}</li>
+          </div>
         </ul>
     </div>
     <div class="row">
@@ -160,7 +172,6 @@
         </div>
       </fieldset>
       <div class="btn_row row flex-end">
-        <button type="button" id="edit_btn" (click)="editClicked($event)" class="btn btn-info mr-2">Edit</button>
         <button type="submit" class="submit_btn btn btn-info">Submit</button>
       </div>
     </form>
