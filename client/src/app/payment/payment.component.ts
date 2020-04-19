@@ -1,6 +1,9 @@
 import { OnInit, Component } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './payment.component.html',
@@ -10,9 +13,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaymentComponent implements OnInit{
     paymentForm: FormGroup;
     submitted = false;
+    ProgramPK: number;
 
     constructor(public auth: AuthenticationService,
-        private fb: FormBuilder){}
+        private fb: FormBuilder, public matDialog: MatDialog, 
+        private route: ActivatedRoute, private router: Router){}
 
     ngOnInit(){
 
@@ -27,6 +32,10 @@ export class PaymentComponent implements OnInit{
             CardNumber: ["", [Validators.required]],
             Expiration: ["", [Validators.required]],
             CVV: ["", [Validators.required]],
+        })
+         // Get Group Program Requirement
+        this.route.params.subscribe(val => {
+            this.ProgramPK = val.id
         })
 
     }
@@ -53,7 +62,33 @@ export class PaymentComponent implements OnInit{
             console.log("invalid");
             return;
         }
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Check out",
+            description: "Are you sure to check out?",            
+            actionButtonText: "Confirm",   
+            numberOfButton: "2"         
+        }
 
-        console.log("valid");
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+                //Save data here
+
+                //route to the confirmation page
+                this.router.navigateByUrl("/confirmation/" + this.ProgramPK);
+            }
+            else{
+                //otherwise, do nothing               
+            }
+        })
     }
 }

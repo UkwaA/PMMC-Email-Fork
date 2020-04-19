@@ -46,6 +46,7 @@ import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
 import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -103,6 +104,7 @@ const routes : Routes = [
   },
   {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
+  {path: 'confirmation/:id', component: ConfirmationComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
@@ -200,7 +202,8 @@ const routes : Routes = [
     SetProgramScheduleComponent,
     ProgramScheduleComponent,
     PaymentComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
