@@ -45,6 +45,32 @@ export class DashboardComponent implements OnInit {
   ]
    /* FINISH CHART USING NG2-CHARTS */
   
+   
+/* PIE CHART*/
+pieChartOptions = {
+  responsive: true,
+  legend: {
+    position: 'top',
+  },
+  plugins: {
+    datalabels: {
+      formatter: (value, ctx) => {
+        const label = ctx.chart.data.labels[ctx.dataIndex];
+        return label;
+      },
+    },
+  }
+};
+ pieChartLabels = [
+  ['Request Reservation', 'Cancel', 'Completed'],
+  ['Showed', 'No Showed'],
+  ['Group Programs', 'Individual Programs']];
+
+ pieChartData = [300,500,100];
+
+ pieChartPlugins = [];
+
+/* END PIE CHART*/
 
   // Dropdown Menu Option
   programCategories: Array<Object> = [

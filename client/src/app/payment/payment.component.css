@@ -5,3 +5,12 @@ h1 {
     padding-top: 50px;
     color: #08b2b8; 
 }
+
+.btn-checkout{
+    background-color: #08b2b8;
+    color:white;
+  }
+  
+  .btn-checkout:hover{
+    background-color: #075155;
+  }

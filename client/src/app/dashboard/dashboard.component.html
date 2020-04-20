@@ -71,6 +71,21 @@
         </canvas>
     </div>
     
+    <br/>
+
+    <div>
+        <h2>PIE CHART EXAMPLE</h2>
+        <canvas 
+            baseChart 
+            [data]="pieChartData" 
+            [labels]="pieChartLabels" 
+            [chartType]="'pie'"
+            [options]="pieChartOptions"
+            [legend]="true"
+            [plugins]= "pieChartPlugins">
+        </canvas>
+    </div>
+    
     <h3 class = "text-muted"> Lastest Reservations </h3>
     <!-- SEARCH BAR -->
     <div class="row filter">

@@ -101,8 +101,6 @@ export class LoginPromptModal implements OnInit {
             (res) => {
                 // this.dialogRef.close("Yes");
                 this.actionFunction();
-                if (this.modalData.routerRedirect)
-                  this.router.navigateByUrl(this.modalData.routerURL);
             },
             (err) => {
               $(".alert-danger").show()
