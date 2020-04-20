@@ -76,6 +76,7 @@ export class SetProgramScheduleComponent {
 	errorMessage = '';
 	hasSchedule = false;
 	hasSession = false; 
+	hasAdditionalSession = false;
 
     //WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
@@ -163,7 +164,8 @@ export class SetProgramScheduleComponent {
 	}
 
 	reloadAllSessions(){
-		this.hasSession = true
+		this.hasSession = false
+		this.hasAdditionalSession = false
 		this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) =>{
 			const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
 				{
@@ -211,6 +213,7 @@ export class SetProgramScheduleComponent {
 				}
 				else if(session.ScheduleSettingPK == AppConstants.ADDITIONAL_SESSION_DETAIL){
 					this.allAdditionalSessions.push(session)
+					this.hasAdditionalSession = true
 				}
 			})
 			//Sort allAdditionalSessions array by date
@@ -301,13 +304,13 @@ export class SetProgramScheduleComponent {
 					));
 					this.allSessions = sampleDataWithCustomSchema
 					if(this.allSessions.length > 0){
-						this.selectedColor = this.allSessions[0].Color
-						this.hasSession = true
+						this.selectedColor = this.allSessions[0].Color						
 					}
 					//Loop through all allSessions
 					this.allSessions.forEach(session =>{
 						if(session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
 						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList	
+							this.hasSession = true
 							this.dayArr.forEach(day =>{
 								if(session.RepeatDay.indexOf(day.value) >= 0){
 										day.eventList.push(session)
@@ -316,11 +319,9 @@ export class SetProgramScheduleComponent {
 						}
 						else if(session.ScheduleSettingPK == AppConstants.ADDITIONAL_SESSION_DETAIL){
 							this.allAdditionalSessions.push(session)
+							this.hasAdditionalSession = true
 						}
-					})
-					console.log(this.currentScheduleSetting)
-					console.log(this.allSessions)
-					console.log(this.allAdditionalSessions)
+					})				
 
 					//Sort allAdditionalSessions array by date
 					this.allAdditionalSessions.sort(function(a,b){
@@ -694,6 +695,10 @@ export class SetProgramScheduleComponent {
 				this.programColorMessage = "";
 		   }, 3000);
 		})
-	}	
+	}
+	
+	saveInfo(){
+		
+	}
 	
 }

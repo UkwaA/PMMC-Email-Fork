@@ -95,7 +95,8 @@ export class ViewScheduleComponent {
             return date;
         };       
 
-        this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{            
+        this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{
+            console.log(schedules)                        
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
                     ...dataItem,
