@@ -13,7 +13,7 @@ declare var $:any
 @Component({
   selector: "login-prompt-modal.component",
   templateUrl: "./login-prompt-modal.component.html",
-  // styleUrls: ['./modal-dialog.component.css']
+  styleUrls: ['./login-prompt-modal.component.css']
 })
 export class LoginPromptModal implements OnInit {
   modalHeader: String;

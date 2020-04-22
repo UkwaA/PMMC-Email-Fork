@@ -87,7 +87,7 @@ export class AppComponent implements OnInit{
       loginDialogConfig.id = "modal-component";
       loginDialogConfig.height = "450px";
       // loginDialogConfig.maxHeight = "600px";
-      loginDialogConfig.width = "500px";
+      loginDialogConfig.width = "400px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
         routerRedirect: false
