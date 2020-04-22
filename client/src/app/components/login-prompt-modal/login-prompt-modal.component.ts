@@ -87,7 +87,7 @@ export class LoginPromptModal implements OnInit {
       const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);
       registerModal.afterClosed().subscribe((result) => {
         if (result == "Yes")
-        $(".alert").show()
+        $(".alert-success").show()
       })
   }
 
