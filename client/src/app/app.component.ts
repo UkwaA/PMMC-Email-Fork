@@ -85,8 +85,7 @@ export class AppComponent implements OnInit{
   openLoginModal(){
     const loginDialogConfig = new MatDialogConfig();
       loginDialogConfig.id = "modal-component";
-      loginDialogConfig.height = "450px";
-      // loginDialogConfig.maxHeight = "600px";
+      loginDialogConfig.minHeight = "450px";
       loginDialogConfig.width = "400px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
