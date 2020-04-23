@@ -12,6 +12,7 @@
       <mat-divider> </mat-divider>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/profile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>
+        <a mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
       </mat-nav-list>
 
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
