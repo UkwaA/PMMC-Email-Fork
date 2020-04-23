@@ -28,11 +28,12 @@ export class HomeComponent implements OnInit{
             else {
                 count = 8;
             }
-            
             this.programs = result.map((prog: ProgramData) => {
                 prog.ImgData = AppConstants.EXPRESS_SERVER_URL +  prog.ImgData
                 return prog;
             })
+
+            this.programs = this.programs.slice(0, count);
        
         })
     }

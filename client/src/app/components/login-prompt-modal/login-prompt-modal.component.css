@@ -18,7 +18,7 @@ mat-form-field{
 }
 
 .mat-raised-button.signIn-btn{
-    width: 200px;
+    width: 150px;
     display: block;
     position: relative;
     z-index: 1;
@@ -42,7 +42,7 @@ button.link{
     border: none;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bold;
-    color: #16222A;
+    color: #08b2b8;
 }
 
 .sign-up{

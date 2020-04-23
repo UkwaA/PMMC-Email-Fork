@@ -12,6 +12,7 @@
       <mat-divider> </mat-divider>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/profile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>
+        <a mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
       </mat-nav-list>
 
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
@@ -19,8 +20,9 @@
       <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
         <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]="selected" matListIcon>add_circle</mat-icon> New Program</a>
         <a mat-list-item [routerLink]="['/profile/program-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>edit</mat-icon> Program Management</a>
-        <a mat-list-item [routerLink]="['/profile/view-schedule','viewAllSchedule']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_today</mat-icon> View Schedule</a>
+        <a mat-list-item [routerLink]="['/profile/view-schedule','viewAllSchedule']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_view_day</mat-icon> View Schedule</a>
         <a mat-list-item [routerLink]="['/profile/schedule-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_today</mat-icon> Schedule Management</a>
+        <a mat-list-item [routerLink]="['/profile/payment-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a>
       </mat-nav-list>
 
       <section *ngIf = "role == '3'"> User</section>
