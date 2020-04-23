@@ -13,13 +13,13 @@ export class AppConstants {
 
     public static get LOGIN_DIALOG_CONFIG(): MatDialogConfig {
         const loginDialogConfig = new MatDialogConfig();
-        loginDialogConfig.id = "login-modal-component";
-        loginDialogConfig.height = "600px";
-        loginDialogConfig.maxHeight = "600px";
-        loginDialogConfig.width = "500px";
+        loginDialogConfig.id = "modal-component";
+        loginDialogConfig.minHeight = "450px";
+        loginDialogConfig.width = "400px";
         loginDialogConfig.autoFocus = false;
-        loginDialogConfig.data = {};
-
+        loginDialogConfig.data = {
+          routerRedirect: false
+         };
         return loginDialogConfig;
     }
 
