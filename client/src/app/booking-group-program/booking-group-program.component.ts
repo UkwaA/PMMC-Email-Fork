@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BookingGroupData } from '../data/booking-group-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProgramServices } from 'src/app/services/program.services';
@@ -8,7 +8,6 @@ import { ProgramData } from '../data/program-data';
 import { ReservationHeader } from '../data/reservation-header';
 import { AuthenticationService } from '../authentication.service';
 import { ValidationErrors } from '@angular/forms';
-import { DataStorage } from "../services/dataProvider";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 
 declare var $: any;
@@ -29,12 +28,13 @@ declare var $: any;
 })
 
 export class BookingGroupProgramComponent implements OnInit {
+  @Input() ProgramPK: number;
+
   reservationHeader : ReservationHeader;
   reservationGroupDetails = new ReservationGroupDetails();
-  bookingGroup: BookingGroupData;
+  bookingGroup = new BookingGroupData();
   registerForm: FormGroup;
   submitted = false;
-  ProgramPK: number;
   programDetails: ProgramData;
   total: number;
   num_submits: number;
@@ -69,29 +69,29 @@ export class BookingGroupProgramComponent implements OnInit {
       EducationPurpose: ['', [Validators.required, Validators.minLength(5)]]
     });
 
-    // Process data for ReservationHeader
-    this.reservationHeader = new ReservationHeader(this.quantityForm.SchedulePK, 
-                                                  this.auth.getUserDetails().UserPK, 
-                                                  this.quantityForm.TotalQuantity);
+    // // Process data for ReservationHeader
+    // this.reservationHeader = new ReservationHeader(this.quantityForm.SchedulePK, 
+    //                                               this.auth.getUserDetails().UserPK, 
+    //                                               this.quantityForm.TotalQuantity);
           
     // Map data of QuantityForm to ReservationDetails                                              
-    this.reservationGroupDetails.AdultQuantity = this.quantityForm.AdultQuantity;
-    this.reservationGroupDetails.Age57Quantity = this.quantityForm.Age57Quantity;
-    this.reservationGroupDetails.Age810Quantity = this.quantityForm.Age810Quantity;
-    this.reservationGroupDetails.Age1112Quantity = this.quantityForm.Age1112Quantity;
-    this.reservationGroupDetails.Age1314Quantity = this.quantityForm.Age1314Quantity;
-    this.reservationGroupDetails.Age1415Quantity = this.quantityForm.Age1415Quantity;
-    this.reservationGroupDetails.Age1517Quantity = this.quantityForm.Age1517Quantity;
-    this.reservationGroupDetails.TotalQuantity = this.quantityForm.TotalQuantity;
+    // this.reservationGroupDetails.AdultQuantity = this.quantityForm.AdultQuantity;
+    // this.reservationGroupDetails.Age57Quantity = this.quantityForm.Age57Quantity;
+    // this.reservationGroupDetails.Age810Quantity = this.quantityForm.Age810Quantity;
+    // this.reservationGroupDetails.Age1112Quantity = this.quantityForm.Age1112Quantity;
+    // this.reservationGroupDetails.Age1314Quantity = this.quantityForm.Age1314Quantity;
+    // this.reservationGroupDetails.Age1415Quantity = this.quantityForm.Age1415Quantity;
+    // this.reservationGroupDetails.Age1517Quantity = this.quantityForm.Age1517Quantity;
+    // this.reservationGroupDetails.TotalQuantity = this.quantityForm.TotalQuantity;
     
 
-    this.bookingGroup= <any>{};
+
     this.total = 0;
     this.num_submits = 0;
-    // Get Group Program Requirement
-    this.route.params.subscribe(val => {
-      this.ProgramPK = val.id
-    })
+    // // Get Group Program Requirement
+    // this.route.params.subscribe(val => {
+    //   this.ProgramPK = val.id
+    // })
 
     this.service.getProgramRequirementDetails('g', this.ProgramPK)
       .subscribe(program => {
@@ -184,8 +184,5 @@ export class BookingGroupProgramComponent implements OnInit {
     
 
     console.log("valid");
-
- 
-
   }
 }

@@ -20,6 +20,7 @@ import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthCustomerGuardService } from './auth-customer-guard.service'
+import { StepperServices } from './services/stepper.services'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
@@ -45,6 +46,7 @@ import { ChangeCurrentPasswordComponent} from './password-service/change-current
 import { AccountSetting } from './account-setting/account-setting.component';
 import { ProfileInfo } from './profile-info/profile-info.component';
 import { ProgramScheduleComponent } from './program-schedule/program-schedule.component';
+import { ReservationComponent } from './reservation/reservation.component';
 import { PaymentComponent } from './payment/payment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ConfirmationComponent } from './confirmation/confirmation.component'
@@ -53,7 +55,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatCardModule } from '@angular/material';
@@ -77,8 +79,8 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DataStorage } from "./services/dataProvider";
-// import { JwtInterceptor } from "./services/jwt.interceptor"
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor'
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -97,12 +99,13 @@ const routes : Routes = [
     component: BookingIndividualProgramComponent,
     canActivate: [AuthGuardService]
   },
-  {
-    path: 'booking-group-program/:id', 
-    component: BookingGroupProgramComponent,
-    canActivate: [AuthGuardService]
-  },
-  {path: 'program-schedule/:id', component: ProgramScheduleComponent},
+  // {
+  //   path: 'booking-group-program/:id', 
+  //   component: BookingGroupProgramComponent,
+  //   canActivate: [AuthGuardService]
+  // },
+  // {path: 'program-schedule/:id', component: ProgramScheduleComponent},
+  {path: 'reservation/:id', component: ReservationComponent},
   {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
   {path: 'confirmation/:id', component: ConfirmationComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
@@ -184,6 +187,7 @@ const routes : Routes = [
     UserDetailsComponent, 
     IProgramComponent,
     GProgramComponent,
+    ReservationComponent,
     CustomerRegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent, 
@@ -245,7 +249,12 @@ const routes : Routes = [
     ChartsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage],
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage, StepperServices,
+              {
+                provide: HTTP_INTERCEPTORS,
+                useClass: AuthInterceptor,
+                multi: true,
+              }],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
     AddScheduleModalDialogComponent, LoginPromptModal]

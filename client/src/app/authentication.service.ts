@@ -68,12 +68,18 @@ export class AuthenticationService {
   }
 
   public isLoggedIn(): boolean {
-    const user = this.getUserDetails()
+    const user = this.getUserDetails();
     if (user) {
-      return user.exp > Date.now() / 1000
+      if(user.exp > Date.now() / 1000) {
+        return true;
+      } else {
+        this.token = '';
+        window.localStorage.removeItem('usertoken');
+        window.localStorage.removeItem('QuantityFormLocal');
+        window.localStorage.removeItem('ReservationGroupLocal');
+        return false;
+      }
     } else {
-      window.localStorage.removeItem('QuantityFormLocal');
-      window.localStorage.removeItem('ReservationGroupLocal');
       return false
     }
   }

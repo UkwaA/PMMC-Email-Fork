@@ -45,7 +45,6 @@ export class LoginPromptModal implements OnInit {
       });
       $(".alert-success").hide()
       $(".alert-danger").hide()
-
   }
 
   // convenience getter for easy access to form fields
@@ -89,11 +88,11 @@ export class LoginPromptModal implements OnInit {
 
         this.auth.login(this.credentials).subscribe(
             (res) => {
-                // this.dialogRef.close("Yes");
-                this.actionFunction();
+                this.dialogRef.close("Yes");
+                // this.actionFunction();
             },
             (err) => {
-              $(".alert-danger").show()
+              // $(".alert-danger").show()
               //alert('Username and password do not match')
               console.log("*Username and password do not match");
               return;

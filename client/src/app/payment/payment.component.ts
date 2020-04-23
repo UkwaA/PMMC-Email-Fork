@@ -6,6 +6,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
+    selector: 'payment',
     templateUrl: './payment.component.html',
     styleUrls: ['./payment.component.css']
 })

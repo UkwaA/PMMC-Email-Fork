@@ -10,7 +10,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.component";
-
+import { AppConstants } from './constants';
 
 declare const window: any;
 
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit{
   faLaughWink = faLaughWink;
 
   ngOnInit() {
-    var pattern = /^http:\/\/.+((\/$)|(\/#$)|(\/group-program$)|(\/booking-group-program.+)|(\/individual-program$)|(\/booking-individual-program.+)|(\/contact$)|(\/register$)|(\/customer-register)|(\/login))|(\/program-schedule)|(\/payment)|(\/confirmation)/
+    var pattern = /^http:\/\/.+((\/$)|(\/#$)|(\/group-program$)|(\/booking-group-program.+)|(\/individual-program$)|(\/booking-individual-program.+)|(\/contact$)|(\/register$)|(\/customer-register)|(\/login))|(\/reservation)|(\/program-schedule)|(\/payment)|(\/confirmation)/
     this.location.onPopState(() => {
       this.loadingURL = this.location.href;
 
@@ -83,22 +83,14 @@ export class AppComponent implements OnInit{
   get f() { return this.registerForm.controls;}
 
   openLoginModal(){
-    const loginDialogConfig = new MatDialogConfig();
-      loginDialogConfig.id = "modal-component";
-      loginDialogConfig.height = "450px";
-      // loginDialogConfig.maxHeight = "600px";
-      loginDialogConfig.width = "500px";
-      loginDialogConfig.autoFocus = false;
-      loginDialogConfig.data = {
-        routerRedirect: false
-       };
-      const loginModal = this.matDialog.open(LoginPromptModal, loginDialogConfig);
+  
+      const loginModal = this.matDialog.open(LoginPromptModal, AppConstants.LOGIN_DIALOG_CONFIG);
       loginModal.afterClosed().subscribe((result) => {
         if (result == "Yes") {
           console.log("Login Modal");
         }
       });
-    }
+  }
 
   onSubmit() {
     this.submitted = true;

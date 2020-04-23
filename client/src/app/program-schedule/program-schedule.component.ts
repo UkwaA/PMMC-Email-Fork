@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
@@ -17,15 +17,18 @@ import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
 import { MatStepperModule } from '@angular/material/stepper';
+import { StepperServices } from '../services/stepper.services';
 
 @Component({
+  selector: 'program-schedule',
   templateUrl: "./program-schedule.component.html",
   styleUrls: ["./program-schedule.component.css"],
 })
 export class ProgramScheduleComponent implements OnInit {
+  @Input() ProgramPK: number;
+  
   programName: string;
   programDesc: string;
-  ProgramPK: number;
   ProgramType: number;
   SchedulePK: number;
   isDisable = true;
@@ -42,7 +45,6 @@ export class ProgramScheduleComponent implements OnInit {
   public allEvents: SchedulerEvent[];
   quantityData: QuantiyFormData;
   quantityForm: FormGroup;
-  registerForm: FormGroup;
   currTotalQuantity = 0;
   availability: number;
   submitted = false;
@@ -248,7 +250,7 @@ export class ProgramScheduleComponent implements OnInit {
 
     // Check if user is logged in
     if (!this.auth.isLoggedIn()) {
-      // //Configure Modal Dialog For Login Prompt
+      // Configure Modal Dialog For Login Prompt
     
       const loginDialogConfig = new MatDialogConfig();
       loginDialogConfig.id = "modal-component";
@@ -257,7 +259,6 @@ export class ProgramScheduleComponent implements OnInit {
       loginDialogConfig.width = "500px";
       loginDialogConfig.autoFocus = false;
       loginDialogConfig.data = {
-        routerRedirect: true,
         routerURL: "/booking-group-program/" + this.ProgramPK
        };
       const loginModal = this.matDialog.open(LoginPromptModal, loginDialogConfig);
@@ -339,7 +340,7 @@ export class ProgramScheduleComponent implements OnInit {
                 // Add QuantityForm Data to localStorage 
                 localStorage.setItem('QuantityFormLocal', JSON.stringify(this.quantityData));
                 //this._data.data = this.quantityData
-                this.router.navigateByUrl( "/booking-group-program/" + this.ProgramPK);
+              //  this.router.navigateByUrl( "/booking-group-program/" + this.ProgramPK);
                 break;
             }
           }

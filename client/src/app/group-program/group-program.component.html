@@ -24,7 +24,7 @@
                         <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted'><mat-icon>stars</mat-icon> Scout Program </h4>
                         <div class="row">
                             <div class="col-sm-10">
-                                <a  [routerLink]="['/program-schedule', program.ProgramPK]"><h5 class="mb-3">{{program.Name}}</h5></a>
+                                <a  [routerLink]="['/reservation', program.ProgramPK]"><h5 class="mb-3">{{program.Name}}</h5></a>
                             </div>
                             <div class="col-sm-2">
                                 <h5 class="price">${{program.PricePerParticipant}}</h5>
@@ -36,7 +36,7 @@
                             <div class="col-sm-12">
                             <!-- <h6 class="font-weight-bold my-2">${{program.PricePerParticipant}}</h6> -->
                             <!-- <a [routerLink]="['/booking-group-program', program.ProgramPK]" class="btn btn-info btn-lg active" role="button" aria-pressed="true">Book now!</a> -->
-                                <a [routerLink]="['/program-schedule', program.ProgramPK]" [fragment]="schedule" class="btn btn-info btn-lg active float-right" role="button" aria-pressed="true">Book now!</a>
+                                <a [routerLink]="['/reservation', program.ProgramPK]" [fragment]="schedule" class="btn btn-info btn-lg active float-right" role="button" aria-pressed="true">Book now!</a>
                             </div>
                         </div>
                     </div>

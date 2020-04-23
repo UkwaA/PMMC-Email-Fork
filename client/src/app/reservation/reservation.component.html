@@ -1,0 +1,347 @@
+<div class="container">
+  <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
+    <mat-step [stepControl]="quantityForm" >
+      <ng-template matStepLabel>Pick The Schedule</ng-template>
+      <div class="row text-left m-0">
+        <h1>{{programName}}</h1>
+      </div>
+      <hr>
+      <div class="row m-0">
+        <div [innerHTML]="programDesc | safeHtml"></div>
+      </div>
+      <hr>
+      <form [formGroup]="quantityForm">
+        <div class="row mt-4 mb-5">
+          <div class="col-lg-8 col-md-7 col-sm-12 pr-5">
+            <h3> Schedule </h3>
+            <div class="row filter m-0 mb-5">
+              <kendo-scheduler [kendoSchedulerBinding]="allEvents" [eventClass]="getEventClass"
+                (eventClick)="eventClick($event)" [modelFields]="eventFields" [showWorkHours]="true"
+                [selectedDate]="selectedDate" style="height: 850px; width: 1500px">
+                <kendo-scheduler-week-view [startTime]="startTime">
+                  <ng-template kendoSchedulerEventTemplate let-event>
+                    {{ event.dataItem.Title }}
+                  </ng-template>
+                </kendo-scheduler-week-view>
+                <kendo-scheduler-month-view> </kendo-scheduler-month-view>
+              </kendo-scheduler>
+            </div>
+          </div>
+      
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <div>
+              <div class="form-group font-weight-bold ">
+                <label>Selected Date</label>
+                <input type="text" class="form-control" formControlName="CustomerSelectDate" readonly>
+              </div>
+            </div>
+            <div>
+              <div class="form-group font-weight-bold ">
+                <label>Selected Time</label>
+                <input type="text" class="form-control" formControlName="CustomerSelectTime" readonly>
+              </div>
+            </div>
+            <div>
+              <div class="form-group font-weight-bold">
+                <label>Availability </label>
+                <input type="number" class="form-control" formControlName="Availability" readonly>
+              </div>
+            </div>
+            <div *ngIf="ProgramType" class="button pt-1 pb-1">
+              <button class="btn btn-lg btn-info btn-block" [disabled]="isDisable" (click)="individualSchedule()"> Book
+              </button>
+            </div>
+      
+            <form *ngIf="!ProgramType" [formGroup]="quantityForm"  enctype="multipart/form-data">
+              <h3>Enter Quantity</h3>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Adult Quantity</label>
+                <div class="col-sm-5">
+                  <input type="number" min="0" class="form-control" formControlName="AdultQuantity" value="0"
+                    [ngClass]="{'is-invalid': f.AdultQuantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.AdultQuantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.AdultQuantity.errors.required">It's required</div>
+                    <div *ngIf="f.AdultQuantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 5-7 Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="0" class="form-control" formControlName="Age57Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age57Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age57Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age57Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age57Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 8-10 Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="0" class="form-control" formControlName="Age810Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age810Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age810Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age810Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age810Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 11-12 Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="0" class="form-control" formControlName="Age1112Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age1112Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age1112Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age1112Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age1112Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 13-14 Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="0" class="form-control" formControlName="Age1314Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age1314Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age1314Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age1314Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age1314Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 14-15 Quantity</label>
+                <div class="col-sm-5" >
+                  <input  type="number" min="0" class="form-control" formControlName="Age1415Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age1415Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age1415Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age1415Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age1415Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Age 15-17 Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="0" class="form-control" formControlName="Age1517Quantity" value="0"
+                    [ngClass]="{'is-invalid': f.Age1517Quantity.errors }" (focus)="onFocus($event)"
+                    (blur)="lostFocus($event)" required>
+                  <div *ngIf="f.Age1517Quantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.Age1517Quantity.errors.required">It's required</div>
+                    <div *ngIf="f.Age1517Quantity.errors.min">From 0 and up.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group font-weight-bold row">
+                <label class="col-sm-7 col-form-label">Total Quantity</label>
+                <div class="col-sm-5">
+                  <input  type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
+                    [ngClass]="{'is-invalid': f.TotalQuantity.errors }" required>
+                  <div *ngIf="f.TotalQuantity.errors" class="invalid-feedback">
+                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 1 person.</div>
+                    <div *ngIf="f.TotalQuantity.errors.max">Must be smaller than the Availability</div>
+                  </div>
+                </div>
+              </div>
+              <div class="button pt-1 pb-1">
+                  <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+                  <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" matStepperNext type="button"> Book</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="registerForm" >
+      <ng-template matStepLabel>Input The Information</ng-template>
+        <form id = "registerForm" [formGroup]="registerForm">
+          <div class="container">
+              <div class="row text-left">
+                      <h1>{{programName}}</h1>
+              </div>
+              <hr>
+              <!-- Quantity Part -->
+              <div class="row text-left">
+                <div class="col-md-12">
+                  <h4> Quantity Information: </h4>
+                </div>
+              </div>
+              <div class="col-md-12">
+                  <ul class="list row">
+                    <li class="list-item col-md-6">Adult Quantity: {{quantityForm.value.AdultQuantity}} </li>
+                    <li class="list-item col-md-6">Age 5-7 Quantity: {{quantityForm.value.Age57Quantity}}</li>
+                    <li class="list-item col-md-6">Age 8-10 Quantity: {{quantityForm.value.Age810Quantity}}</li>
+                    <li class="list-item col-md-6">Age 11-12 Quantity: {{quantityForm.value.Age1112Quantity}}</li>
+                    <li class="list-item col-md-6">Age 13-14 Quantity: {{quantityForm.value.Age1314Quantity}}</li>
+                    <li class="list-item col-md-6">Age 14-15 Quantity: {{quantityForm.value.Age1415Quantity}}</li>
+                    <li class="list-item col-md-6">Age 15-17 Quantity: {{quantityForm.value.Age1517Quantity}}</li>
+                  </ul>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <h6> Total Quantity : {{quantityForm.TotalQuantity}} </h6> -->
+                </div>
+              </div>
+              <hr>
+          
+              <div class="row text-left">
+                <div class="col-md-12">
+                  <h4> Please fill out the form: </h4>
+                </div>
+              </div>
+              <p id="final_warning"></p>
+                <!-- Organization Name -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.OrganizationName">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="OrganizationName">School Name: </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" placeholder="" formControlName="OrganizationName" 
+                            [ngClass]="{'is-invalid': g.OrganizationName.errors }">
+                      <div *ngIf="g.OrganizationName.errors" class="invalid-feedback">
+                        <div *ngIf="g.OrganizationName.errors.required">This is required</div>
+                        <div *ngIf="g.OrganizationName.errors.minlength">Must be at least 3 characters long.</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Teacher Name -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherName">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="TeacherName">Teacher Name: </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" placeholder="" formControlName="TeacherName" 
+                            [ngClass]="{'is-invalid': g.TeacherName.errors }">
+                      <div *ngIf="g.TeacherName.errors" class="invalid-feedback">
+                        <div *ngIf="g.TeacherName.errors.required">This is required</div>
+                        <div *ngIf="g.TeacherName.errors.minlength">Must be at least 3 characters long.</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Teacher Email -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherEmail">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="TeacherEmail">Teacher Email: </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="email" formControlName="TeacherEmail"
+                            [ngClass]="{ 'is-invalid': g.TeacherEmail.errors }" />
+                      <div *ngIf="g.TeacherEmail.errors" class="invalid-feedback">
+                          <div *ngIf="g.TeacherEmail.errors.required">Email is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Teacher Phone Number -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.TeacherPhoneNo">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="TeacherPhoneNo">Teacher Phone Number: </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="TeacherPhoneNo"
+                            [ngClass]="{ 'is-invalid': g.TeacherPhoneNo.errors }" />
+                      <div *ngIf="g.TeacherPhoneNo.errors" class="invalid-feedback">
+                        <div *ngIf="g.TeacherPhoneNo.errors.required">This is required</div>
+                        <div *ngIf="g.TeacherPhoneNo.errors.min">Please enter a valid phone number</div>
+                        <!-- <div *ngIf="f.TeacherPhoneNo.errors.pattern">Invalid Phone Number</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                 <!-- Alternative Date -->
+                 <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.AlternativeDate">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="AlternativeDate">Alternative Date: </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" formControlName="AlternativeDate"
+                            [ngClass]="{ 'is-invalid': g.AlternativeDate.errors }" />
+                      <div *ngIf="g.AlternativeDate.errors" class="invalid-feedback">
+                          <div *ngIf="g.AlternativeDate.errors.required">Alternative Date is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Grade Level  -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.GradeLevel">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="GradeLevel">Grade Level: </label>
+                    <div class="col-sm-10">
+                      <select class="form-control" formControlName="GradeLevel" [ngClass]="{ 'is-invalid': g.GradeLevel.errors }">
+                        <option>Kindergarten </option>
+                        <option>1st</option>
+                        <option>2nd</option>
+                        <option>3rd</option>
+                        <option>4th</option>
+                        <option>5th</option>
+                        <option>6th</option>
+                        <option>7th</option>
+                        <option>8th</option>
+                        <option>9th</option>
+                        <option>10th</option>
+                        <option>11th</option>
+                        <option>12th</option>
+                      </select>
+                      <div *ngIf="submitted && g.GradeLevel.errors" class="invalid-feedback">
+                        <div *ngIf="g.GradeLevel.errors.required">This is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Program Restriction  -->
+                <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.ProgramRestriction">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="ProgramRestriction">Are you a Title One School? </label>
+                    <div class="col-sm-10">
+                      <select class="form-control" formControlName="ProgramRestriction" [ngClass]="{ 'is-invalid': g.ProgramRestriction.errors }">
+                        <option>No </option>
+                        <option>Yes</option>
+                      </select>
+                      <div *ngIf="submitted && g.ProgramRestriction.errors" class="invalid-feedback">
+                        <div *ngIf="g.ProgramRestriction.errors.required">This is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                 <!-- Education Purpose  -->
+                 <fieldset class="form-group font-weight-bold" *ngIf = "bookingGroup.EducationPurpose">
+                  <div class="row">
+                    <label class="col-form-label col-sm-2" for="EducationPurpose">Education Purpose </label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" formControlName="EducationPurpose"
+                            [ngClass]="{ 'is-invalid': g.EducationPurpose.errors }" />
+                      <div *ngIf="g.EducationPurpose.errors" class="invalid-feedback">
+                          <div *ngIf="g.EducationPurpose.errors.required">Education Purpose is required</div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="btn_row row flex-end">
+                  <!-- <button type="button" id="edit_btn" (click)="editClicked($event)" class="btn btn-info mr-2">Edit</button>
+                  <button type="submit" class="submit_btn btn btn-info" >Submit</button> -->
+                  <button class="btn btn-lg btn-info btn-block" matStepperNext type="button">Next</button>
+                </div>
+            </div>
+          </form>
+        
+    </mat-step>
+    <mat-step [stepControl]="paymentForm">
+      <ng-template  matStepLabel>Payment Information</ng-template>
+     <payment></payment>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
