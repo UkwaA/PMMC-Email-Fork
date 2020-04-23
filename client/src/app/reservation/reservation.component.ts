@@ -16,7 +16,7 @@ import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.co
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
-import { MatStepperModule } from "@angular/material/stepper";
+import { MatStepperModule, MatStepper } from "@angular/material/stepper";
 import { StepperServices } from "../services/stepper.services";
 
 /*************  BOOKING GROUP PROGRAM  ******************* */
@@ -31,8 +31,11 @@ import { ReservationGroupDetails } from "../data/reservation-group-details";
   providers: [StepperServices],
 })
 export class ReservationComponent implements OnInit {
+  @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
+
   myForm: Array<string>;
   ProgramPK: number;
+  isCompleted = false;
 
   /*************  BOOKING GROUP PROGRAM  ******************* */
   reservationHeader: ReservationHeader;
@@ -460,12 +463,10 @@ export class ReservationComponent implements OnInit {
 
           this.currentSession.SchedulePK = 0;
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
-          this.currentSession.SessionDetailsPK =
-            e.event.dataItem.SessionDetailsPK;
+          this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
           this.currentSession.Start = e.event.dataItem.Start.toString();
           this.currentSession.End = e.event.dataItem.End.toString();
-          this.currentSession.MaximumParticipant =
-            e.event.dataItem.MaximumParticipant;
+          this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;
           this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK; // UserPk represent for System Auto Create Data
@@ -536,32 +537,8 @@ export class ReservationComponent implements OnInit {
         "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
       );
 
-      // Add User Input data to ReservationGroupDetails
-      this.reservationGroupDetails.ProgramRestriction = this.registerForm.get(
-        "ProgramRestriction"
-      ).value;
-      this.reservationGroupDetails.OrganizationName = this.registerForm.get(
-        "OrganizationName"
-      ).value;
-      this.reservationGroupDetails.GradeLevel = this.registerForm.get(
-        "GradeLevel"
-      ).value;
-      this.reservationGroupDetails.TeacherName = this.registerForm.get(
-        "TeacherName"
-      ).value;
-      this.reservationGroupDetails.TeacherEmail = this.registerForm.get(
-        "TeacherEmail"
-      ).value;
-      this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get(
-        "TeacherPhoneNo"
-      ).value;
-      this.reservationGroupDetails.AlternativeDate = this.registerForm.get(
-        "AlternativeDate"
-      ).value;
-      this.reservationGroupDetails.EducationPurpose = this.registerForm.get(
-        "EducationPurpose"
-      ).value;
-
+     
+     
       // Add ReservationGroupDetails to localStorage
       localStorage.setItem(
         "ReservationGroupLocal",
@@ -611,4 +588,29 @@ export class ReservationComponent implements OnInit {
   }
 
   /******************************************************************************/
+
+  quantityStepperNext(stepper: MatStepper) {
+    this.reservationGroupDetails.AdultQuantity =this.quantityForm.get("Age57Quantity").value;
+    this.reservationGroupDetails.Age810Quantity =this.quantityForm.get("Age810Quantity").value;
+    this.reservationGroupDetails.Age1112Quantity =this.quantityForm.get("Age1112Quantity").value;
+    this.reservationGroupDetails.Age1314Quantity =this.quantityForm.get("Age1314Quantity").value;
+    this.reservationGroupDetails.Age1415Quantity =this.quantityForm.get("Age1415Quantity").value;
+    this.reservationGroupDetails.Age1517Quantity =this.quantityForm.get("Age1517Quantity").value;
+    this.reservationGroupDetails.TotalQuantity =this.quantityForm.get("TotalQuantity").value;
+    stepper.next();
+  }
+
+  registerStepperNext(stepper: MatStepper) {
+     // Add User Input data to ReservationGroupDetails
+     this.reservationGroupDetails.ProgramRestriction = this.registerForm.get("ProgramRestriction").value;
+     this.reservationGroupDetails.OrganizationName = this.registerForm.get("OrganizationName").value;
+     this.reservationGroupDetails.GradeLevel = this.registerForm.get("GradeLevel").value;
+     this.reservationGroupDetails.TeacherName = this.registerForm.get("TeacherName" ).value;
+     this.reservationGroupDetails.TeacherEmail = this.registerForm.get("TeacherEmail" ).value;
+     this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get("TeacherPhoneNo" ).value;
+     this.reservationGroupDetails.AlternativeDate = this.registerForm.get("AlternativeDate").value;
+     this.reservationGroupDetails.EducationPurpose = this.registerForm.get("EducationPurpose").value;
+     this.isCompleted = true;
+      stepper.next();
+  }
 }
