@@ -13,8 +13,6 @@
     </div>
     <div class="col-md-12">
       <ul class="list row">
-        <li *ngIf= "!programData.ProgramType" class="list-item col-md-12"><b>Type:</b> Group</li>
-        <li *ngIf= "programData.ProgramType" class="list-item col-md-12"><b>Type:</b> Individual</li>
         <li class="list-item col-md-12"><b>Name:</b> {{programData.Name}} </li>
       </ul>
     </div>
@@ -41,7 +39,7 @@
       <h4>Reservation Information</h4>
     </div>
     <div class="col-md-12">
-      <ul class="list row" *ngIf= "!programData.ProgramType">
+      <!-- <ul class="list row" *ngIf= "programData.ProgramType == 1">
         <li class="list-item col-md-12"><b>Participant Name:</b> </li>
         <li class="list-item col-md-12"><b>Participant Age:</b> </li>
         <li class="list-item col-md-12"><b>Gender:</b> </li>
@@ -61,40 +59,18 @@
         <li class="list-item col-md-12"><b>Media Release:</b> </li>
         <li class="list-item col-md-12"><b>Emergency Medical Release:</b> </li>
         <li class="list-item col-md-12"><b>Liability Argreement:</b> </li>
-      </ul>
-      <ul class="list row" *ngIf= "programData.ProgramType">
-        <li class="list-item col-md-12"><b>Program Restriction:</b> </li>
-        <li class="list-item col-md-12"><b>Organization Name:</b> </li>
-        <li class="list-item col-md-12"><b>Grade Level:</b> </li>
-        <li class="list-item col-md-12"><b>Teacher Name:</b> </li>
-        <li class="list-item col-md-12"><b>Teacher Email:</b></li>
-        <li class="list-item col-md-12"><b>Teacher Phone Number:</b> </li>
-        <li class="list-item col-md-12"><b>Alternative Date:</b> </li>
-        <li class="list-item col-md-12"><b>Education Purpose:</b> </li>
-      </ul>
-    </div>
-  </div>
-  <hr>
-
-  <div class="row text-left m-0">
-    <div class="col-md-12">
-      <h4>Check-out Information</h4>
-    </div>
-    <div class="col-md-12">
-      <ul class="list row">
-        <li class="list-item col-md-12"><b>Billing Address:</b> </li>
-        <li class="list-item col-md-12"><b>Card Information:</b> </li>
-          <ul class="list row">
-            <li class="list-item col-md-12">Name on Card: </li>
-            <li class="list-item col-md-12">Card Number: </li>
-          </ul>
+      </ul> -->
+      <ul class="list row" >
+        <li class="list-item col-md-12"><b>Program Restriction:</b>{{reservationGroupDetails.ProgramRestriction}} </li>
+        <li class="list-item col-md-12"><b>Organization Name:</b> {{reservationGroupDetails.OrganizationName}}</li>
+        <li class="list-item col-md-12"><b>Grade Level:</b> {{reservationGroupDetails.GradeLevel}}</li>
+        <li class="list-item col-md-12"><b>Teacher Name:</b> {{reservationGroupDetails.TeacherName}}</li>
+        <li class="list-item col-md-12"><b>Teacher Email:</b>{{reservationGroupDetails.TeacherEmail}}</li>
+        <li class="list-item col-md-12"><b>Teacher Phone Number:</b>{{reservationGroupDetails.TeacherPhoneNo}} </li>
+        <li class="list-item col-md-12"><b>Alternative Date:</b> {{reservationGroupDetails.AlternativeDate}}</li>
+        <li class="list-item col-md-12"><b>Education Purpose:</b> {{reservationGroupDetails.EducationPurpose}}</li>
       </ul>
     </div>
   </div>
   <hr>
-  <div class="row ">
-    <div class="col-md-12 text-center">
-      <button type="button" class="btn btn-confirm btn-lg" (click)="confirm()">Confirm</button>
-    </div>
-  </div>
 </div>

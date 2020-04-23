@@ -329,18 +329,6 @@ export class ProgramScheduleComponent implements OnInit {
                     });
                 }
 
-                // Pass data of Quantity FormControl to the object
-                this.quantityData = new QuantiyFormData(this.quantityForm.value.AdultQuantity, this.quantityForm.value.Age57Quantity,
-                                                      this.quantityForm.value.Age810Quantity, this.quantityForm.value.Age1112Quantity,
-                                                      this.quantityForm.value.Age1314Quantity,this.quantityForm.value.Age1415Quantity,
-                                                      this.quantityForm.value.Age1517Quantity, this.quantityForm.value.TotalQuantity,
-                                                      this.SchedulePK, this.quantityForm.value.CustomerSelectDate, this.quantityForm.value.CustomerSelectTime,
-                                                      (this.currentSession.MaximumParticipant -  this.currentSession.CurrentNumberParticipant));
-              
-                // Add QuantityForm Data to localStorage 
-                localStorage.setItem('QuantityFormLocal', JSON.stringify(this.quantityData));
-                //this._data.data = this.quantityData
-              //  this.router.navigateByUrl( "/booking-group-program/" + this.ProgramPK);
                 break;
             }
           }
