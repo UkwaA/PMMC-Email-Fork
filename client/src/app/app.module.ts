@@ -80,7 +80,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DataStorage } from "./services/dataProvider";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor'
+import { AuthInterceptor } from './auth.interceptor';
+import { ReservationManagement } from './reservation-management/reservation-management.component'
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -116,6 +117,7 @@ const routes : Routes = [
     canActivate: [AuthGuardService], 
     children: [
       {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
+      {path: 'reservation-management', component: ReservationManagement, canActivate: [AuthGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {
@@ -207,7 +209,8 @@ const routes : Routes = [
     ProgramScheduleComponent,
     PaymentComponent,
     SafeHtmlPipe,
-    ConfirmationComponent
+    ConfirmationComponent, 
+    ReservationManagement
   ],
   imports: [
     BrowserModule,
