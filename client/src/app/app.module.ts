@@ -81,7 +81,8 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DataStorage } from "./services/dataProvider";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
-import { ReservationManagement } from './reservation-management/reservation-management.component'
+import { ReservationManagement } from './reservation-management/reservation-management.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -249,7 +250,8 @@ const routes : Routes = [
     InputsModule,
     ButtonsModule,
     DropDownsModule,
-    ChartsModule
+    ChartsModule,
+    MatTabsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
               AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage, StepperServices,
