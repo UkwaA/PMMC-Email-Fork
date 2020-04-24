@@ -1,14 +1,6 @@
 export class BookingGroupData {
   GroupProgramPK: number;
   SubProgramPK: number;
-  // AdultQuantity: boolean;
-  // Age57Quantity: boolean;
-  // Age810Quantity: boolean;
-  // Age1112Quantity: boolean;
-  // Age1314Quantity: boolean;
-  // Age1415Quantity: boolean;
-  // Age1517Quantity: boolean;
-  // TotalQuantity: boolean;
   ProgramRestriction: boolean;
   OrganizationName: boolean;
   GradeLevel: boolean;
