@@ -83,6 +83,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ReservationManagement } from './reservation-management/reservation-management.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { PaymentManagementComponent } from './payment-management/payment-management.component';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -125,6 +126,7 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService]
       },
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'payment-management', component: PaymentManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule', 
         component: SetProgramScheduleComponent, 
@@ -209,7 +211,8 @@ const routes : Routes = [
     PaymentComponent,
     SafeHtmlPipe,
     ConfirmationComponent, 
-    ReservationManagement
+    ReservationManagement,
+    PaymentManagementComponent,
   ],
   imports: [
     BrowserModule,
