@@ -9,6 +9,7 @@ const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
 const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
+const BlackoutDate = require("../models/ProgramBlackoutDate");
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -16,15 +17,16 @@ const Op = Sequelize.Op;
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
-/**************************************
-   GET ALL CURRENT PROGRAM SCHEDULES
- **************************************/
+/*********************************************
+   GET ALL CURRENT PROGRAM SCHEDULE SETTINGS
+ *********************************************/
 schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
   ScheduleSetting.findAll({
     where : {
 		ProgramPK: req.params.id,
       IsActive: true
-    }
+    },
+    order: [['Start', 'DESC']]
   })
   .then(scheduleSetting =>{
     if(scheduleSetting.length > 0){
@@ -43,9 +45,62 @@ schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
    ADD NEW SCHEDULE SETTING
  **************************************/
 schedule.post("/add-new-schedule-setting", (req, res) => {
-  ScheduleSetting.create(req.body)
-  .then(newScheduleSetting =>{
-    res.json(newScheduleSetting.ScheduleSettingPK)
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  ScheduleSetting.findAll({
+    where:{
+      //Check if there exists another schedule setting in this time range
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],      
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting => {
+    if(scheduleSetting.length > 0 || startDate == endDate){
+      res.json({error: "The Start/End date falls between existing schedules. Please select another Start/End Date."})
+    }
+    else{
+      ScheduleSetting.create(req.body)
+      .then(newScheduleSetting =>{
+        res.json(newScheduleSetting.ScheduleSettingPK)
+      })
+      .catch(err => {
+        res.send("errorExpressErr: " + err);
+      })
+    }
   })
   .catch(err => {
     res.send("errorExpressErr: " + err);
@@ -57,26 +112,83 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
  **********************************************/
 //1. Update Schedule Setting
 schedule.post("/update-schedule-setting", (req, res) => {
-	ScheduleSetting.update(req.body, {
-		where: {
-		  ScheduleSettingPK: req.body.ScheduleSettingPK
-		}
-	 })
-	 .then(result => {
-		if (result == 1) {
-		  res.send({
-			 message: "Schedule setting was updated successfully."
-		  });
-		}
-		else {
-		  res.send({
-			 error: "Cannot update schedule setting"
-		  });
-		}
-	 })
-	 .catch(err => {
-		res.send('error: ' + err)
-	 })
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  ScheduleSetting.findAll({
+    where:{
+      //Check if there exists another schedule setting in this time range
+      ScheduleSettingPK:{
+        [Op.ne]: req.body.ScheduleSettingPK
+      },
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],      
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting => {
+    //Does not allow schedule setting has the same Start and End date
+    if(scheduleSetting.length > 0 || startDate == endDate){
+      res.json({error: "The Start/End date falls between existing schedules. Please select another Start/End Date."})
+    }
+    else{
+      ScheduleSetting.update(req.body, {
+        where: {
+          ScheduleSettingPK: req.body.ScheduleSettingPK
+        }
+       })
+       .then(result => {
+        if (result == 1) {
+          res.json({
+           message: "Schedule setting was updated successfully."
+          });
+        }
+        else {
+          res.json({
+           error: "Cannot update schedule setting"
+          });
+        }
+       })
+       .catch(err => {
+        res.send('error: ' + err)
+       })
+    }
+  })	
+  .catch(err => {
+    res.send('error: ' + err)
+   })
 });
 
 //2. Update all SessionDetails associated with the ScheduleSetting
@@ -453,7 +565,6 @@ schedule.post("/update-additional-session-details", (req, res) => {
   });
 });
 
-
 /**********************************************
    ADD NEW SCHEDULE RECORD TO SCHEDULE TABLE
  **********************************************/
@@ -542,6 +653,145 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
       res.send("error: " + err);
     });
 });
+
+/**********************************************
+   GET ALL BLACKOUT DATE BY PROGRAM
+ **********************************************/
+schedule.get("/get-program-blackout-date-by-id/:id", (req,res) =>{
+  BlackoutDate.findAll({
+    where:{
+      ProgramPK: req.params.id,
+      IsActive: true,
+    },
+    order: [['Start', 'DESC']]
+  })
+  .then(blackoutDate =>{
+    res.json(blackoutDate)
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+})
+
+/**********************************************
+   ADD BLACKOUT DATE
+ **********************************************/
+schedule.post("/add-blackout-date", (req, res) => {
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  BlackoutDate.findAll({
+    where:{
+      //Check if there exists another blackout date in this time range
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],
+      IsActive: true
+    }
+  })
+  .then(blackoutDate =>{
+    if(blackoutDate.length > 0){
+      res.json({error:"There exists another blackout date in this date range. Please select another Start/End Date."})
+    }
+    else{
+      //Create new record in programblackoutdate table
+      BlackoutDate.create(req.body)
+      .then(newBlackoutDate =>{
+        res.json(newBlackoutDate)
+      })
+      .catch(err => {
+        res.send("error: " + err);
+      });
+    }
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });  
+})
+
+
+/**********************************************
+   EDIT BLACKOUT DATE
+ **********************************************/
+schedule.post("/edit-blackout-date", (req, res) => {
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  BlackoutDate.findAll({
+    where:{
+      //Check if there exists another blackout date in this time range
+      ProgramBlackoutDatePK: {
+        [Op.ne]: req.body.ProgramBlackoutDatePK
+      },
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],
+      IsActive: true
+    }
+  })
+})
 
 /*******************************
   SET PROGRAM COLOR

@@ -21,6 +21,7 @@ declare var $: any;
 export class SetProgramScheduleComponent {
 	ProgramPK = 0;
 	currentUserPK = 0;
+	allBlackoutDates: any[] = []
 	allSessions: any[] = [];
 	allAdditionalSessions:any[] = [];
 	programData: ProgramData = {
@@ -77,6 +78,7 @@ export class SetProgramScheduleComponent {
 	hasSchedule = false;
 	hasSession = false; 
 	hasAdditionalSession = false;
+	hasBlackoutDate = false;
 
     //WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
@@ -93,8 +95,7 @@ export class SetProgramScheduleComponent {
         hour: 'numeric',
         minute: 'numeric',
         hour12: true
-      };
-    
+	  };
     selectedColor: string = "";
 	programColorMessage = ""
     public settings: PaletteSettings = {
@@ -120,9 +121,6 @@ export class SetProgramScheduleComponent {
         recurrenceId: 'RecurrenceID',
         recurrenceExceptions : 'RecurrenceException'
     };
-
-    tempStart = ""
-	tempEnd = ""
 	
 	/********************************************
 	 * FUNCTION DECLARATION
@@ -145,18 +143,14 @@ export class SetProgramScheduleComponent {
 						this.currentScheduleSetting = this.allScheduleSettings[0]
 						this.currentScheduleSetting.IsSelected = true
 					}
-					else{
-						//IMPORTANT: Sort the allScheduleSettings array by Start date (DO NOT REMOVE)
-						this.allScheduleSettings.sort(function(a,b){
-							// Turn your strings into dates, and then subtract them
-							// to get a value that is either negative, positive, or zero.
-							return b.Start - a.Start;
-						});										
+					else if(this.allScheduleSettings.length > 1){																						
 						this.allScheduleSettings.forEach(schedule =>{
 							if(schedule.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
 								schedule.IsSelected = true
+								this.currentScheduleSetting = schedule
 							}
 						})
+
 					}												
 				}
 			}	
@@ -224,6 +218,20 @@ export class SetProgramScheduleComponent {
 			});					
 	})
 	}
+
+	reloadAllBlackoutDates(){
+		this.programScheduleServices.getAllBlackoutDatesByProgram(this.ProgramPK).subscribe(res =>{
+			this.allBlackoutDates = res
+			if(this.allBlackoutDates.length > 0)
+			{
+				this.hasBlackoutDate = true;
+				this.allBlackoutDates.forEach(date =>{
+				date.tempStart = (new Date(date.Start)).toLocaleDateString()
+				date.tempEnd = (new Date(date.End)).toLocaleDateString()
+				})
+			}
+		})
+	}
 	/*********************  END FUNCTION DECLARATION **********************/
 
     constructor (private formBuilder: FormBuilder, public matDialog: MatDialog, private fb: FormBuilder,
@@ -261,13 +269,7 @@ export class SetProgramScheduleComponent {
 								schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
 								schedule.Start = new Date(schedule.Start)
 								schedule.End = new Date(schedule.End)
-						})
-						//IMPORTANT: Sort the allScheduleSettings array by Start date (DO NOT REMOVE)
-						this.allScheduleSettings.sort(function(a,b){
-							// Turn your strings into dates, and then subtract them
-							// to get a value that is either negative, positive, or zero.
-							return b.Start - a.Start;
-						});				
+						})									
 						this.currentScheduleSetting = this.allScheduleSettings[0]
 						this.allScheduleSettings[0].IsSelected = true
 					}
@@ -333,7 +335,18 @@ export class SetProgramScheduleComponent {
 
 			this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(res =>{
 				this.programData = res
-			})			
+			})	
+			this.programScheduleServices.getAllBlackoutDatesByProgram(this.ProgramPK).subscribe(res =>{
+				this.allBlackoutDates = res
+				if(this.allBlackoutDates.length > 0)
+				{
+					this.hasBlackoutDate = true;
+					this.allBlackoutDates.forEach(date =>{
+						date.tempStart = (new Date(date.Start)).toLocaleDateString()
+						date.tempEnd = (new Date(date.End)).toLocaleDateString()
+					})
+				}
+			})		
 		})
 	}
 
@@ -525,7 +538,8 @@ export class SetProgramScheduleComponent {
             programPK: this.ProgramPK,
             name: this.programData.Name,
 			userPK: this.currentUserPK,			
-			currentSession: session,			
+			currentSession: session,
+			currentScheduleSetting: this.currentScheduleSetting,			
             actionButtonText: "Update",   
             numberOfButton: "2"            
             }
@@ -677,6 +691,41 @@ export class SetProgramScheduleComponent {
         })
 	}
 
+	/**********************************
+	 * BLACKOUT DATE
+	***********************************/
+	addBlackoutDateModal(){
+		//Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "add-black-out-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "700px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Add Blackout Date",
+            mode: "addblackoutdate",
+			description: "",
+			programPK: this.ProgramPK,
+			name: this.programData.Name,
+			userPK: this.currentUserPK,
+            actionButtonText: "Save",
+            numberOfButton: "2"            
+			}			
+
+        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+				this.reloadAllBlackoutDates()				
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+	}
+
 
     setProgramColor(){      
 		//save new color in schedulesetting table
@@ -698,7 +747,7 @@ export class SetProgramScheduleComponent {
 	}
 	
 	saveInfo(){
-		
+
 	}
 	
 }

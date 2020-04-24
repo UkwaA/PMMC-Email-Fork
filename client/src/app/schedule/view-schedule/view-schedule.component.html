@@ -32,15 +32,16 @@
                 [selectedDate]="selectedDate"
                 [showWorkHours] = "true"
                 [eventStyles]="getEventStyles"
+                [eventClass]="getEventClass" 
                 style="height: 700px; width: 1500px">
         <ng-template kendoSchedulerEventTemplate let-event>
             {{ event.dataItem.Title }} 
         </ng-template>
         <!-- <kendo-scheduler-day-view >
         </kendo-scheduler-day-view> -->
-        <kendo-scheduler-week-view>
+        <kendo-scheduler-week-view >
         </kendo-scheduler-week-view>
-        <kendo-scheduler-month-view> </kendo-scheduler-month-view>
+        <kendo-scheduler-month-view > </kendo-scheduler-month-view>
         <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
         <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
       </kendo-scheduler>

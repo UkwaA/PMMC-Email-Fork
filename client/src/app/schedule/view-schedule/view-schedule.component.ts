@@ -42,7 +42,7 @@ export class ViewScheduleComponent {
     exceptionDate: Date[] = []    
     choice:any = 0
     currentMode = ""
-    startTime: Date = new Date()
+    
 
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -113,6 +113,7 @@ export class ViewScheduleComponent {
                     RepeatDay: dataItem.RepeatDay,
                     RecurrenceID: dataItem.RecurrenceID,
                     RecurrenceException: dataItem.RecurrenceException,
+                    //RecurrenceException: [new Date("2020-04-21T09:00:00"), new Date("2020-04-21T10:00:00")],
                     Color: dataItem.Color,
                     CreatedBy: dataItem.CreatedBy,
                     CreatedDate: dataItem.CreatedDate,
@@ -197,20 +198,24 @@ export class ViewScheduleComponent {
     }
 
     public eventClick = (e) => {
-        console.log(e.event)             
-        // var timezoneOffset = e.event.start.getTimezoneOffset()*60000
-        // var eventStart = (new Date(e.event.start - timezoneOffset)).toISOString().slice(0,19)
-        // var eventEnd = (new Date(e.event.end - timezoneOffset)).toISOString().slice(0,19)
-        // var programPK = e.event.dataItem.ProgramPK
-        
+        console.log(e.event)
       }
 
     //get all events in a selected view
     public getEventClass(args: EventStyleArgs ){        
-        return args.event.dataItem.type;
+        
+        // var todayDate = (new Date()).toDateString();     
+        // var startDate = (new Date(args.event.start)).toDateString();
+        // if(startDate < todayDate){
+        //     console.log(startDate)
+        //     args.event.dataItem.RecurrenceException = [(new Date(startDate))]
+        //     args.event.recurrenceExceptions = [(new Date(startDate))]            
+        // }
+                
+        //return args.event.dataItem.type;        
         //need to included this [eventClass]="getEventClass" in html kendo
       }
-
+ 
     getEventStyles(args: EventStyleArgs){
         return { backgroundColor: args.event.dataItem.Color };
     }

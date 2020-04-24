@@ -87,6 +87,17 @@ export class ProgramScheduleService{
     }
 
     /*================================
+            BLACKOUT DATE
+    ================================*/
+    public addBlackoutDate(blackoutDate: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-blackout-date", blackoutDate);
+    }
+
+    public getAllBlackoutDatesByProgram(ProgramPK: number): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-blackout-date-by-id/" + ProgramPK);
+    }
+
+    /*================================
             OTHERS
     ================================*/
     public setProgramColor(programColor:any): Observable<any>{

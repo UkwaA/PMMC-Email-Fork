@@ -31,6 +31,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 	allSessions: any = []
 	allEditedSessions: any = []
 
+	todayDate:any = new Date();
 	startDate:any = new Date();
 	endDate:any = new Date();
 	startTime:any = new Date('2020-04-01T09:00:00');
@@ -115,7 +116,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				break;
 				
 			case "editsession":
-				this.startDate = new Date(this.modalData.currentSession.Start)
+				this.startDate = this.modalData.currentScheduleSetting.Start
 				this.endDate = new Date(this.modalData.currentSession.EndRepeatDate+"T23:00:00")
 				this.startTime = new Date(this.modalData.currentSession.Start)
 				this.endTime = new Date(this.modalData.currentSession.End)
@@ -165,7 +166,11 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
 				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
 				this.eventDescription = this.modalData.currentSession.Description
+				break;
 
+			case "addblackoutdate":
+				this.startDate = new Date()
+				this.endDate = new Date()				
 				break;
 			
       	}      
@@ -176,8 +181,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 		this.repeatOnErrorMessage = ""
 		this.errorMessage = ""
 		this.endDateErrorMessage = ""
-			this.newScheduleErrorMessage = ""
-			this.scheduleNameErrorMessage = ""
+		this.newScheduleErrorMessage = ""
+		this.scheduleNameErrorMessage = ""
 		this.isDisabled = false
 		this.weeklyRepeatOnDayArr = []      
 
@@ -214,94 +219,53 @@ export class AddScheduleModalDialogComponent implements OnInit{
       }
   }
 
-  onChangeStartDate(event){
-      if(event > this.endDate){
-          this.endDate = event
-      }        
-  }
+	onChangeStartDate(event){	
+		if(event > this.endDate){
+			this.endDate = event
+		}        
+	}
 
-  onChangeEndDate(event){
-    if(event < this.startDate){
-        this.endDate = this.startDate
-        this.endDateErrorMessage = "End Date must be after Start Date"
-    }      
-    else{
-        this.endDateErrorMessage = ""
-    }  
-}
+	onChangeEndDate(event){
+		if(event < this.startDate){
+			this.endDate = this.startDate
+			this.endDateErrorMessage = "End Date must be after Start Date"
+		}      
+		else{
+			this.endDateErrorMessage = ""
+		}  
+	}
 
-  onChangeStartTime(event){    
-	if(event > this.endTime){
-		this.endTime = event
+	onChangeStartTime(event){    
+		if(event > this.endTime){
+			this.endTime = event
+		}
+		if(event < this.minTime || event > this.maxTime){
+			this.startTimeErrorMessage = "*From 7AM to 6PM"
+		}
+		else{
+			this.startTimeErrorMessage = ""
+		}
 	}
-	if(event < this.minTime || event > this.maxTime){
-	this.startTimeErrorMessage = "*From 7AM to 6PM"
-	}
-	else{
-	this.startTimeErrorMessage = ""
-	}
-  }
 
-  onChangeEndTime(event){
-	if(event < this.startTime){
-		this.endTime = this.startTime
-		this.endTimeErrorMessage = "End Time must be after Start Time"
-	}
-	else{
-		this.endTimeErrorMessage = ""
-	}
-    if(event < this.minTime || event > this.maxTime){
-      this.endTimeErrorMessage = "*From 7AM to 6PM"
-    }
-    else{
-      this.endTimeErrorMessage = ""
-    }
+	onChangeEndTime(event){
+		if(event < this.startTime){
+			this.endTime = this.startTime
+			this.endTimeErrorMessage = "End Time must be after Start Time"
+		}
+		else{
+			this.endTimeErrorMessage = ""
+		}
+		if(event < this.minTime || event > this.maxTime){
+			this.endTimeErrorMessage = "*From 7AM to 6PM"
+		}
+		else{
+			this.endTimeErrorMessage = ""
+		}
 
-}
+	}
 
     closeModal() {
       this.dialogRef.close("No");
-    }
-
-    removeSchedule(){
-      //Configure Modal Dialog
-      const dialogConfig = new MatDialogConfig();
-      // The user can't close the dialog by clicking outside its body
-      dialogConfig.disableClose =true;
-      dialogConfig.id = "modal-component";
-      dialogConfig.height = "auto";
-      dialogConfig.maxHeight = "500px";
-      dialogConfig.width = "350px";
-      dialogConfig.autoFocus = false;
-      dialogConfig.data = {
-          title: "Delete schedule",
-          description: "Are you sure to delete this schedule?",            
-          actionButtonText: "Confirm",   
-          numberOfButton: "2"         
-          }
-      const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-      modalDialog.afterClosed().subscribe(result =>{
-          if(result == "Yes"){
-            //TODO:
-            //1. Set IsActive in schedulesetting to 0 (false)
-            //2. Set IsActive in schedule to 0 (how to get all entries in schedule? maybe add ScheduleSettingPK to schedule table)
-            //3. Send email to all customer that currently are in the reservation relating this schedule
-            let scheduleToDeactivate = {
-              ScheduleSettingPK: this.modalData.currentSession.ScheduleSettingPK
-            }
-            
-            this.programScheduleServices.deactivateSessionDetails(scheduleToDeactivate).subscribe(res=>{
-              console.log(res)
-            })
-            this.isDisabled = false
-            if(!this.isDisabled){
-              this.dialogRef.close("Yes")
-            }
-          }
-          else{
-              console.log("stop")                
-          }
-      })      
     }
 
    setSchedule(){
@@ -354,34 +318,28 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				ScheduleSettingPK: 0,
 				ProgramPK: this.modalData.programPK,
 				ScheduleSettingName: this.scheduleSettingName,
-				Start: this.startDate.toString(),
-				End: this.endDate.toString(),
+				Start: this.startDate.toISOString(),
+				End: this.endDate.toISOString(),
 				IsActive: true,
 				CreatedBy: this.modalData.userPK
 				}
         	switch(this.modalData.mode){
 				//======= ADD NEW SCHEDULE ===========
-				case "newschedule":				
-						if(this.currentScheduleSetting.ScheduleSettingName){												
-							if(this.checkStartEndDate(0,this.startDate, this.endDate, this.modalData.allScheduleSetting))
-								{                
-									this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
-										if(!res){
-											this.isDisabled = true
-										}
-										else{										
-											this.isDisabled = false
-											this.currentScheduleSetting.ScheduleSettingPK = res
-											if(!this.isDisabled){
-												this.dialogRef.close("Yes")
-											}   
-										}
-									})
-							}
-							else{
-								this.isDisabled = true
-								this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
-							}
+				case "newschedule":					
+						if(this.currentScheduleSetting.ScheduleSettingName){
+							this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
+								if(res.error){
+									this.isDisabled = true
+									this.newScheduleErrorMessage = res.error
+								}
+								else{										
+									this.isDisabled = false
+									this.currentScheduleSetting.ScheduleSettingPK = res
+									if(!this.isDisabled){
+										this.dialogRef.close("Yes")
+									}   
+								}
+							})			
 						}
 						else{
 							this.scheduleNameErrorMessage = "Schedule Name is required."
@@ -409,32 +367,25 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						})					
 						
 						if(this.currentScheduleSetting.ScheduleSettingName){
-						//1. Check if the new Start/End Date are within any other schedule
-							if(this.checkStartEndDate(this.currentScheduleSetting.ScheduleSettingPK, this.startDate, this.endDate, this.modalData.allScheduleSetting)){
-								//2. Then update the record in schedulesetting table
-								this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
-									if(res.error){
-										this.isDisabled = true
-										this.errorMessage = res.error            
-									}
-									else{
-										this.isDisabled = false
-										if(!this.isDisabled){
-											this.dialogRef.close("Yes")
-										}              
-									} 
-								})
+						//1. Check if the new Start/End Date are within any other schedule							
+							//2. Then update the record in schedulesetting table
+							this.programScheduleServices.updateScheduleSetting(this.currentScheduleSetting).subscribe(res =>{
+								if(res.error){
+									this.isDisabled = true
+									this.newScheduleErrorMessage = res.error        
+								}
+								else{
+									this.isDisabled = false
+									if(!this.isDisabled){
+										this.dialogRef.close("Yes")
+									}              
+								} 
+							})
 
-								//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
-								this.programScheduleServices.updateScheduleSettingSessionDetails(this.allEditedSessions).subscribe(res =>{
-									console.log(res)
-								})
-
-							}
-							else{
-								this.isDisabled = true
-								this.newScheduleErrorMessage = "The Start/End date falls between existing schedules. Please select another Start/End Date."
-							}
+							//3. Update all records in sessiondetails table associated with this ScheduleSettingPK
+							this.programScheduleServices.updateScheduleSettingSessionDetails(this.allEditedSessions).subscribe(res =>{
+								console.log(res)
+							})					
 						}
 						else{
 							this.scheduleNameErrorMessage = "Schedule Name is required."
@@ -521,6 +472,33 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						} 
 					})
 					break;
+				
+				//======= ADD BLACKOUT DATE ===========
+				case "addblackoutdate":
+					var currentBlackoutDate = {
+						ProgramBlackoutDatePK: 0,
+						ProgramPK: this.modalData.programPK,
+						Description: this.eventDescription,
+						Start: this.startDate.toISOString(),
+						End: this.endDate.toISOString(),
+						CreatedBy: this.modalData.userPK,
+						IsActive: true
+					}
+					this.programScheduleServices.addBlackoutDate(currentBlackoutDate).subscribe(res =>{
+						if(res.error){
+							this.isDisabled = true
+							this.newScheduleErrorMessage = res.error            
+						}
+						else{
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close("Yes")
+							}              
+						}
+					})
+				
+					break;
+
 			}         
       }        
 	}
