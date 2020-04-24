@@ -86,21 +86,21 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},  
-  {
-    path: 'customer-register/:id',
-    component:CustomerRegisterComponent,
-    canActivate: [AuthCustomerGuardService],
-  },
+  // {path: 'login', component: LoginComponent},
+  // {path: 'register', component: RegisterComponent},  
+  // {
+  //   path: 'customer-register/:id',
+  //   component:CustomerRegisterComponent,
+  //   canActivate: [AuthCustomerGuardService],
+  // },
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  {
-    path: 'booking-individual-program/:id', 
-    component: BookingIndividualProgramComponent,
-    canActivate: [AuthGuardService]
-  },
+  // {
+  //   path: 'booking-individual-program/:id', 
+  //   component: BookingIndividualProgramComponent,
+  //   canActivate: [AuthGuardService]
+  // },
   // {
   //   path: 'booking-group-program/:id', 
   //   component: BookingGroupProgramComponent,
@@ -108,8 +108,6 @@ const routes : Routes = [
   // },
   // {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'reservation/:id', component: ReservationComponent},
-  {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
-  {path: 'confirmation/:id', component: ConfirmationComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
