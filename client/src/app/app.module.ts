@@ -81,25 +81,27 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DataStorage } from "./services/dataProvider";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
-import { ReservationManagement } from './reservation-management/reservation-management.component'
+import { ReservationManagement } from './reservation-management/reservation-management.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PaymentManagementComponent } from './payment-management/payment-management.component';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},  
-  {
-    path: 'customer-register/:id',
-    component:CustomerRegisterComponent,
-    canActivate: [AuthCustomerGuardService],
-  },
+  // {path: 'login', component: LoginComponent},
+  // {path: 'register', component: RegisterComponent},  
+  // {
+  //   path: 'customer-register/:id',
+  //   component:CustomerRegisterComponent,
+  //   canActivate: [AuthCustomerGuardService],
+  // },
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  {
-    path: 'booking-individual-program/:id', 
-    component: BookingIndividualProgramComponent,
-    canActivate: [AuthGuardService]
-  },
+  // {
+  //   path: 'booking-individual-program/:id', 
+  //   component: BookingIndividualProgramComponent,
+  //   canActivate: [AuthGuardService]
+  // },
   // {
   //   path: 'booking-group-program/:id', 
   //   component: BookingGroupProgramComponent,
@@ -107,8 +109,6 @@ const routes : Routes = [
   // },
   // {path: 'program-schedule/:id', component: ProgramScheduleComponent},
   {path: 'reservation/:id', component: ReservationComponent},
-  {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthGuardService]},
-  {path: 'confirmation/:id', component: ConfirmationComponent, canActivate: [AuthGuardService]},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
   {
@@ -126,6 +126,7 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService]
       },
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'payment-management', component: PaymentManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule', 
         component: SetProgramScheduleComponent, 
@@ -210,7 +211,8 @@ const routes : Routes = [
     PaymentComponent,
     SafeHtmlPipe,
     ConfirmationComponent, 
-    ReservationManagement
+    ReservationManagement,
+    PaymentManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -249,7 +251,8 @@ const routes : Routes = [
     InputsModule,
     ButtonsModule,
     DropDownsModule,
-    ChartsModule
+    ChartsModule,
+    MatTabsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
               AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage, StepperServices,

@@ -37,6 +37,19 @@ export class AppConstants {
         INDIVIDUAL_PROGRAM: "Individual Program"
     }
   
+    public static RESERVATION_STATUS_CODE = {
+        ON_GOING: 1,
+        ATTENDED: 2,
+        COMPLETED: 3,
+        CANCELLED: 4
+    }
+
+    public static RESERVATION_STATUS_TEXT = {
+        ON_GOING: "On Going",
+        ATTENDED: "Attended",
+        COMPLETED: "Completed",
+        CANCELLED: "Cancelled"
+    }
     public static USER_ROLE = {
         CUSTOMER: 1,
         MANAGER: 2,

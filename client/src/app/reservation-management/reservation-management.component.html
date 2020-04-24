@@ -4,4 +4,181 @@
             <h1>Reservation Management</h1>
         </div>
     </div> 
+
+    <!-- SEARCH BAR -->
+    <div class="row filter">
+        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+            <select class="form-control" style="font-weight: bold" id="programCat"
+                (change)="selectChangeHandler($event)">
+            </select>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
+            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
+                [(ngModel)]="searchText">
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
+        </div>
+    </div>
+
+    <!-- ADMIN/PROGRAM MANAGER -->
+    <div  *ngIf = "role == '2' || role == '3'">
+        <mat-tab-group>
+            <!-- List of past reservations -->
+            <mat-tab label="Past Reservations"> 
+                <div class="table-responsive-sm hide-with-small">
+                    <table #datatable class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:10%"> #Res </th>
+                                <th style="width:25%"> Program Name </th>
+                                <th style="width:12.5%"> Date </th>
+                                <th style="width:12.5%"> Total </th>
+                                <th style="width:15%"> Name </th>
+                                <th style="width:12.5%"> Email </th>
+                                <th style="width:12.5%"> Phone </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> G2467 </td>
+                                <td> Change the Life of a Seal </td>
+                                <td> April 20, 2020</td>
+                                <td> $1000 </td>
+                                <td> Alice Nguyen </td>
+                                <td> alice@gmail.com </td>
+                                <td> 7149999999 </td>
+                            </tr>
+                            <tr>
+                                <td> I1234 </td>
+                                <td> Camp Pinniped </td>
+                                <td> June 20, 2020</td>
+                                <td> $120 </td>
+                                <td> Brian Pham</td>
+                                <td> brian@gmail.com </td>
+                                <td> 7141111111 </td>
+                            </tr>
+                            <tr>
+                                <td> R1234 </td>
+                                <td> Pinniped Pollution Project </td>
+                                <td> May 10, 2020</td>
+                                <td> $600 </td>
+                                <td> Anna Tran</td>
+                                <td> anna@gmail.com </td>
+                                <td> 714222222 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <!-- List of ongoing reservations -->
+            <mat-tab label="Ongoing Reservations">
+                <div class="table-responsive-sm hide-with-small">
+                    <table #datatable class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:10%"> #Res </th>
+                                <th style="width:25%"> Program Name </th>
+                                <th style="width:12.5%"> Date </th>
+                                <th style="width:12.5%"> Status </th>
+                                <th style="width:15%"> Name </th>
+                                <th style="width:12.5%"> Email </th>
+                                <th style="width:12.5%"> Phone </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> G2467 </td>
+                                <td> Change the Life of a Seal </td>
+                                <td> April 20, 2020</td>
+                                <td> Pending </td>
+                                <td> Alice Nguyen</td>
+                                <td> alice@gmail.com </td>
+                                <td> 7149999999 </td>
+                            </tr>
+                            <tr>
+                                <td> I1234 </td>
+                                <td> Camp Pinniped </td>
+                                <td> June 20, 2020</td>
+                                <td> Completed </td>
+                                <td> Brian Pham</td>
+                                <td> brian@gmail.com </td>
+                                <td> 7141111111 </td>
+                            </tr>
+                            <tr>
+                                <td> R1234 </td>
+                                <td> Pinniped Pollution Project </td>
+                                <td> May 10, 2020</td>
+                                <td> Request </td>
+                                <td> Anna Tran</td>
+                                <td> anna@gmail.com </td>
+                                <td> 714222222 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <div *ngIf = "role == '1'">
+        <mat-tab-group>
+            <!-- List of past reservations -->
+            <mat-tab label="Past Reservations"> 
+                <div class="table-responsive-sm hide-with-small">
+                    <table class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:10%"> #ID </th>
+                                <th style="width:20%"> Program Name </th>
+                                <th style="width:15%"> Date </th>
+                                <th style="width:15%"> Time </th>
+                                <th style="width:10%"> Quantity </th>
+                                <th style="width:10%"> Total Amount </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> G2467 </td>
+                                <td> Change the Life of Seal </td>
+                                <td> April 20, 2020</td>
+                                <td> 8:10 - 10:30</td>
+                                <td> 10 </td>
+                                <td> $1000 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+            <!-- List of ongoing reservations -->
+            <mat-tab label="Ongoing Reservations">
+                <div class="table-responsive-sm hide-with-small">
+                    <table class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:8%"> #ID </th>
+                                <th style="width:20%"> Program Name </th>
+                                <th style="width:15%"> Date </th>
+                                <th style="width:15%"> Time </th>
+                                <th style="width:6%"> Quantity </th>
+                                <th style="width:8%"> Total </th>
+                                <th style="width:8%"> Remaining </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> G2467 </td>
+                                <td> Change the Life of Seal </td>
+                                <td> April 20, 2020</td>
+                                <td> 8:10 - 10:30</td>
+                                <td> 10 </td>
+                                <td> $1000 </td>
+                                <td> $975 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
 </div>
