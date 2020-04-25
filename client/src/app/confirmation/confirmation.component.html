@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center m-0">
-      <h1> Confirmation </h1>
+      <h1> {{ProgramName}} </h1>
     </div>
   </div>
 
   <!-- Program name  -->
-  <div class="table-responsive-sm hide-with-small">
+ <!--  <div class="table-responsive-sm hide-with-small">
     <table class="table table-hover" style="width:100%">
         <thead>
             <tr>
@@ -21,10 +21,10 @@
             </tr>
         </tbody>
     </table>
-  </div>
+  </div> -->
 
   <!-- General Information -->
-  <div class="table-responsive-sm hide-with-small">
+  <div class="table-responsive-sm">
     <table class="table table-hover" style="width:100%">
         <thead>
             <tr>
@@ -41,11 +41,24 @@
               <td>Time</td>
               <td class="name">{{customerSelectTime}}</td>
             </tr>
+            <tr>
+              <td>Total Quantity</td>
+              <td class="name"></td>
+            </tr>
+            <tr>
+              <td>Total Amount</td>
+              <td class="name"></td>
+            </tr>
+            <!-- Deposit needs ngIf here for group program only -->
+            <tr>
+              <td>Deposit Amount</td>
+              <td class="name">$25</td>
+            </tr>
         </tbody>
     </table>
   </div>
 
-  <div class="table-responsive-sm hide-with-small">
+  <div class="table-responsive-sm">
     <table class="table table-hover" style="width:100%">
         <thead>
             <tr>

@@ -1,6 +1,6 @@
 h1 {
   font-family: 'Source Sans Pro', sans-serif; 
-  font-size: 50px;
+  font-size: 40px;
   font-weight: bold;
   color: #08b2b8; 
 }
@@ -12,6 +12,10 @@ h1 {
 
 .btn-confirm:hover{
   background-color: #075155;
+}
+
+.row{
+  padding-bottom: 20px;
 }
 
 /* TABLE */

@@ -49,8 +49,8 @@
               </div>
             </div>
             <div *ngIf="ProgramType" class="button pt-3 pb-1">
-              <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
-              <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'i')" type="button"> Next </button>
+              <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+              <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'i')" type="button"> Next </button>
             </div>
 
             <ng-container *ngIf="ProgramType == 0">
@@ -159,8 +159,8 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <button *ngIf="!auth.isLoggedIn()" class="btn  btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
-                  <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
+                  <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+                  <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
                 </div>
               </div>
               <!-- </form> -->
@@ -260,8 +260,10 @@
         <div class="col-md-12">
           <!-- <h6> Total Quantity : {{quantityForm.TotalQuantity}} </h6> -->
         </div>
-        <hr>
       </div>
+      <hr *ngIf="ProgramType == 0">
+
+      <!-- Information Form Part -->
       <div class="row text-left">
         <div class="col-md-12">
           <h4> Please fill out the form: </h4>
@@ -397,10 +399,10 @@
                 </div>
               </div>
             </fieldset>
-            <div class="row pt-5">
+            <div class="row pt-3">
               <div class="col-md-12">
-                <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-                <button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
+                <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
               </div>
             </div>
         </form>
@@ -683,8 +685,8 @@
               </fieldset>
             <div class="row pt-3">
               <div class="col-md-12">
-                <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-                <button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next </button>  
+                <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next </button>  
               </div>
             </div>
         </form>
@@ -703,8 +705,8 @@
       </ng-container>
       <div class="row pt-3">
         <div class="col-md-12">
-          <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-          <button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
+          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+          <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
         </div>
       </div>
     </mat-step>
@@ -713,7 +715,7 @@
       <payment></payment>
       <div class="row">
         <div class="col-md-12">
-          <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
         </div>
       </div>
     </mat-step>
