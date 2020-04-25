@@ -48,7 +48,7 @@
                 <input type="number" class="form-control" formControlName="Availability" readonly>
               </div>
             </div>
-            <div *ngIf="ProgramType" class="button pt-1 pb-1">
+            <div *ngIf="ProgramType" class="button pt-3 pb-1">
               <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
               <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'i')" type="button"> Next </button>
             </div>
@@ -157,10 +157,11 @@
                   </div>
                 </div>
               </div>
-              <div class="button pt-1 pb-1">
-                <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()">
-                  Book </button>
-                <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
+              <div class="row">
+                <div class="col-md-12">
+                  <button *ngIf="!auth.isLoggedIn()" class="btn  btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+                  <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
+                </div>
               </div>
               <!-- </form> -->
             </ng-container>
@@ -178,28 +179,89 @@
       </div>
       <hr>
       <!-- Quantity Part -->
-      <div class="row text-left">
+      <div class="row text-left" *ngIf="ProgramType == 0">
         <div class="col-md-12">
           <h4> Quantity Information: </h4>
         </div>
-      </div>
-      <div class="col-md-12">
-        <ul class="list row">
-          <li class="list-item col-md-6">Adult Quantity: {{quantityForm.value.AdultQuantity}} </li>
-          <li class="list-item col-md-6">Age 5-7 Quantity: {{quantityForm.value.Age57Quantity}}</li>
-          <li class="list-item col-md-6">Age 8-10 Quantity: {{quantityForm.value.Age810Quantity}}</li>
-          <li class="list-item col-md-6">Age 11-12 Quantity: {{quantityForm.value.Age1112Quantity}}</li>
-          <li class="list-item col-md-6">Age 13-14 Quantity: {{quantityForm.value.Age1314Quantity}}</li>
-          <li class="list-item col-md-6">Age 14-15 Quantity: {{quantityForm.value.Age1415Quantity}}</li>
-          <li class="list-item col-md-6">Age 15-17 Quantity: {{quantityForm.value.Age1517Quantity}}</li>
-        </ul>
-      </div>
-      <div class="row">
+        <div class="col-md-12">
+          <ul class="list row">
+            <li class="list-item col-12 col-sm-6 col-md-6" *ngIf="quantityForm.value.AdultQuantity != 0">
+              <div class="row">
+                <div class="col-7 col-sm-6 col-md-4">
+                  <h6>Adult Quantity:</h6>
+                </div>
+                <div class="col-5 col-sm-6 col-md-8">
+                  {{quantityForm.value.AdultQuantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-12 col-sm-6 col-md-6" *ngIf="quantityForm.value.Age57Quantity != 0">
+              <div class="row">
+                <div class="col-7 col-sm-6 col-md-4">
+                  <h6>Age 5-7 Quantity:</h6>
+                </div>
+                <div class="col-5 col-sm-6 col-md-8">
+                  {{quantityForm.value.Age57Quantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-sm-6 col-md-6" *ngIf="quantityForm.value.Age810Quantity != 0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h6>Age 8-10 Quantity:</h6>
+                </div>
+                <div class="col-sm-8">
+                  {{quantityForm.value.Age810Quantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-md-6" *ngIf="quantityForm.value.Age1112Quantity != 0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h6>Age 11-12 Quantity:</h6>
+                </div>
+                <div class="col-sm-8">
+                  {{quantityForm.value.Age1112Quantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-md-6" *ngIf="quantityForm.value.Age1314Quantity != 0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h6>Age 13-14 Quantity:</h6>
+                </div>
+                <div class="col-sm-8">
+                  {{quantityForm.value.Age1314Quantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-md-6" *ngIf="quantityForm.value.Age1415Quantity != 0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h6>Age 14-15 Quantity:</h6>
+                </div>
+                <div class="col-sm-8">
+                  {{quantityForm.value.Age1415Quantity}}
+                </div>
+              </div>
+            </li>
+            <li class="list-item col-md-6" *ngIf="quantityForm.value.Age1517Quantity != 0">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h6>Age 15-17 Quantity:</h6>
+                </div>
+                <div class="col-sm-8">
+                  {{quantityForm.value.Age1517Quantity}}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
         <div class="col-md-12">
           <!-- <h6> Total Quantity : {{quantityForm.TotalQuantity}} </h6> -->
         </div>
+        <hr>
       </div>
-      <hr>
       <div class="row text-left">
         <div class="col-md-12">
           <h4> Please fill out the form: </h4>
@@ -210,7 +272,6 @@
       <!-- GROUP PROGRAM SECTION -->
       <ng-container *ngIf="ProgramType == 0">
         <form id="registerForm" [formGroup]="registerForm">
-          <div class="container">
             <!-- Organization Name -->
             <fieldset class="form-group font-weight-bold" *ngIf="bookingGroup.OrganizationName">
               <div class="row">
@@ -336,13 +397,12 @@
                 </div>
               </div>
             </fieldset>
-            <div class="btn_row row flex-end">
-              <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-              <button class="btn btn-lg btn-info btn-block" (click)="registerStepperNext(stepper)" type="button"> Next
-              </button>
-
+            <div class="row pt-5">
+              <div class="col-md-12">
+                <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+                <button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
+              </div>
             </div>
-          </div>
         </form>
       </ng-container>
       <!-- END GROUP PROGRAM SECTION -->
@@ -350,7 +410,6 @@
       <!-- INDIVIDUAL PROGRAM SECTION -->
       <ng-container *ngIf="ProgramType == 1">
         <form id="registerForm" [formGroup]="registerForm">
-          <div class="container">
             <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantName">Participant Name:</label>
@@ -424,13 +483,13 @@
                 <label for="SpecialInfo">Special Information: </label>
                 <textarea class="form-control" formControlName="SpecialInfo" rows="3"></textarea>
               </div>
-              <div class="form-group card bg-light font-weight-bold pl-3" *ngIf = "bookingIndividual.MediaRelease">
+              <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.MediaRelease">
                 <label for="MediaRelease">Media Release: </label>
-                <div class="media_release row">
+                <div class="media_release row pl-5">
                   <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as advertising on our website at www.pacificmmc.org.</p>
                   <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</p>
                 </div>
-                <div class = "form_checkbox row">
+                <div class = "form_checkbox row pl-5">
                   <input class="form-check-input" type="checkbox" value="" formControlName="MediaRelease"
                           [ngClass]="{ 'is-invalid':g.MediaRelease.errors }">
                   <label class="form-check-label" for="MediaRelease">
@@ -441,7 +500,7 @@
               </div>
               <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.EmergencyMedicalRelease">
                 <label for="EmergencyMedicalRelease">Emergency Medical Release: </label>
-                <div class="row">
+                <div class="row pl-5">
                   <p>In case of emergency, the Pacific Marine Mammal Center will make every effort to contact the guardians of the child involved before any treatment has begun. However, in the event we are unable to contact you, the guardians, we require this medical release to be signed for all participants in the program.</p>
                   <h6>I HEREBY AUTHORIZE THE PHYSICIAN OR HOSPITAL SELECTED BY THE PACIFIC MARINE MAMMAL CENTER TO HOSPITILIZE, SECURE TREATMENT FOR, AND ORDER INJECTION, ANESTHESIA, OR SURGERY FOR MY CHILD.</h6>
                   <p>It is further understood that if you check this box, you will assume full responsibility for any such treatment, including the payment of all costs, and will hold the Pacific Marine Mammal Center, its representatives, directors, counselors and staff, harmless.</p>
@@ -450,7 +509,7 @@
                     24301 El Toro Rd, Laguna Woods, CA 92637</p>
                   <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH CHANGES.</h6>
                 </div>
-                <div class = "form_checkbox row">
+                <div class = "form_checkbox row pl-5">
                   <input class="form-check-input" type="checkbox" value="" formControlName="EmergencyMedicalRelease"
                           [ngClass]="{ 'is-invalid':g.EmergencyMedicalRelease.errors }">
                   <label class="form-check-label" for="EmergencyMedicalRelease">
@@ -461,14 +520,14 @@
               </div>
               <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.LiabilityAgreement">
                 <label for="LiabilityAgreement">Liability Agreement: </label>
-                <div class="row">
+                <div class="row pl-5">
                   <p>I hereby acknowledge that I am the parent or legal guardian of the child who I have registered to participate in services and programs offered by Pacific Marine Mammal Center.  I recognize that children at play may suffer injuries despite adequate supervision. I know of the risks involved, accept them, and I nonetheless have voluntarily enrolled my child at Pacific Marine Mammal Center.</p>
                   <p>I hereby grant the Pacific Marine Mammal Center (PMMC) and news media outlets permission to use my child’s photograph or video in any and all of their publications. I hereby irrevocably authorize them to edit, alter, copy, exhibit, publish or distribute the photo or video for any lawful purpose.</p>
                   <p>In consideration of the services rendered by Pacific Marine Mammal Center, I agree that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me will not make a claim against, sue, attach the property of, or prosecute Pacific Marine Mammal Center, its employees, officers, directors, agents, servants, or volunteers for injury or damage resulting from the negligence or other acts, howsoever caused, connected to, arising out of, or as a result of, the provision of its services and programs, or my child's receipt of said services or participation in said programs.</p>
                   <p>In addition, I hereby release and discharge Pacific Marine Mammal Center from all causes of action, claims, or demands that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me many now have or may hereafter have for injury or damage resulting from my child's participation in Pacific Marine Mammal Center’s programs and services.</p>
                   <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out of any claims and demands whether made by or on behalf of my child or any other per-son or entity for either injuries to my child's person or property, or arising out of claims that my child's actions caused injury or damage to another person or property, whether or not such claims, injuries and damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>
                 </div>
-                <div class = "form_checkbox row">
+                <div class = "form_checkbox row pl-5">
                   <input class="form-check-input" type="checkbox" value="" formControlName="LiabilityAgreement"
                           [ngClass]="{ 'is-invalid': g.LiabilityAgreement.errors }">
                   <label class="form-check-label" for="LiabilityAgreement">
@@ -622,11 +681,12 @@
                   </div>
                 </div>
               </fieldset>
-            <div class="btn_row row flex-end">
-              <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-              <button class="btn btn-lg btn-info btn-block" (click)="registerIndividualStepperNext(stepper)" type="button"> Next</button>
+            <div class="row pt-3">
+              <div class="col-md-12">
+                <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+                <button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next </button>  
+              </div>
             </div>
-          </div>
         </form>
       </ng-container>
 
@@ -641,16 +701,20 @@
       <ng-container *ngIf="isCompleted && ProgramType == 1">
         <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime] ="customerSelectTime"></confirmation>
       </ng-container>
-      <div>
-        <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-        <button class="btn btn-lg btn-info btn-block" matStepperNext type="button"> Next </button>
+      <div class="row pt-3">
+        <div class="col-md-12">
+          <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+          <button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
+        </div>
       </div>
     </mat-step>
     <mat-step [stepControl]="paymentForm">
       <ng-template matStepLabel>Payment</ng-template>
       <payment></payment>
-      <div>
-        <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+        </div>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

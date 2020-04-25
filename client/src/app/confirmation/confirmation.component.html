@@ -4,78 +4,167 @@
       <h1> Confirmation </h1>
     </div>
   </div>
-  <hr>
 
   <!-- Program name  -->
-  <div class="row text-left m-0">
-    <div class="col-md-12">
-      <h4>Program Information</h4>
-    </div>
-    <div class="col-md-12">
-      <ul class="list row">
-        <li class="list-item col-md-12"><b>Name:</b> {{ProgramName}} </li>
-      </ul>
-    </div>
+  <div class="table-responsive-sm hide-with-small">
+    <table class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:60%"> Program Information </th>
+                <th style="width:40%">  </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td class="name">{{ProgramName}}</td>
+            </tr>
+        </tbody>
+    </table>
   </div>
-  <hr>
 
   <!-- General Information -->
-  <div class="row text-left m-0">
-    <div class="col-md-12">
-      <h4>General Information</h4>
-    </div>
-    <div class="col-md-12">
-      <ul class="list row">
-        <li class="list-item col-md-12"><b>Date:</b>{{customerSelectDate}} </li>
-        <li class="list-item col-md-12"><b>Time:</b>{{customerSelectTime}}</li>
-        <!-- <li class="list-item col-md-12"><b>Quantity:</b> </li> -->
-      </ul>
-    </div>
+  <div class="table-responsive-sm hide-with-small">
+    <table class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:60%">General Information</th>
+                <th style="width:40%">  </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Date</td>
+                <td class="name">{{customerSelectDate}}</td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td class="name">{{customerSelectTime}}</td>
+            </tr>
+        </tbody>
+    </table>
   </div>
-  <hr>
 
-  <div class="row text-left m-0">
-    <div class="col-md-12">
-      <h4>Reservation Information</h4>
-    </div>
-    <div class="col-md-12">
-      <ng-container *ngIf= "ProgramType == 0">
-        <ul class="list row">
-          <li class="list-item col-md-12"><b>Program Restriction:</b>{{reservationDetails.ProgramRestriction}} </li>
-          <li class="list-item col-md-12"><b>Organization Name:</b> {{reservationDetails.OrganizationName}}</li>
-          <li class="list-item col-md-12"><b>Grade Level:</b> {{reservationDetails.GradeLevel}}</li>
-          <li class="list-item col-md-12"><b>Teacher Name:</b> {{reservationDetails.TeacherName}}</li>
-          <li class="list-item col-md-12"><b>Teacher Email:</b>{{reservationDetails.TeacherEmail}}</li>
-          <li class="list-item col-md-12"><b>Teacher Phone Number:</b>{{reservationDetails.TeacherPhoneNo}} </li>
-          <li class="list-item col-md-12"><b>Alternative Date:</b> {{reservationDetails.AlternativeDate}}</li>
-          <li class="list-item col-md-12"><b>Education Purpose:</b> {{reservationDetails.EducationPurpose}}</li>
-        </ul>
-        </ng-container>
-      <ng-container *ngIf= "ProgramType == 1">
-        <ul class="list row" >
-          <li class="list-item col-md-12"><b>Participant Name:</b>{{reservationDetails.ParticipantName}}  </li>
-          <li class="list-item col-md-12"><b>Participant Age:</b>{{reservationDetails.ParticipantAge}}  </li>
-          <li class="list-item col-md-12"><b>Gender:</b> {{reservationDetails.Gender}} </li>
-          <li class="list-item col-md-12"><b>T-Shirt Size:</b>{{reservationDetails.MerchSize}}  </li>
-          <li class="list-item col-md-12"><b>Allergy Information:</b>{{reservationDetails.AllergyInfo}}  </li>
-          <li class="list-item col-md-12"><b>Special Information:</b> {{reservationDetails.SpecialInfo}} </li>
-          <li class="list-item col-md-12"><b>Insurance Provider Name:</b> {{reservationDetails.InsureProviderName}} </li>
-          <li class="list-item col-md-12"><b>Insured Recipient Name:</b>{{reservationDetails.InsureRecipientName}}  </li>
-          <li class="list-item col-md-12"><b>Insurance Policy Number:</b> {{reservationDetails.InsurePolicyNo}} </li>
-          <li class="list-item col-md-12"><b>Insurance Phone Number:</b>{{reservationDetails.InsurePhoneNo}}  </li>
-          <li class="list-item col-md-12"><b>Authorized Pickup Name 1:</b> {{reservationDetails.AuthorizedPickupName1}} </li>
-          <li class="list-item col-md-12"><b>Authorized Pickup Phone 1:</b>{{reservationDetails.AuthorizedPickupPhone1}}  </li>
-          <li class="list-item col-md-12"><b>Authorized Pickup Name 2:</b>{{reservationDetails.AuthorizedPickupName2}}  </li>
-          <li class="list-item col-md-12"><b>Authorized Pickup Phone 2:</b> {{reservationDetails.AuthorizedPickupPhone2}} </li>
-          <li class="list-item col-md-12"><b>Early Drop Off:</b>{{reservationDetails.EarlyDropOff}}  </li>
-          <li class="list-item col-md-12"><b>Late Pick-up:</b>{{reservationDetails.LatePickup}}  </li>
-          <li class="list-item col-md-12"><b>Media Release:</b> {{reservationDetails.MediaRelease}} </li>
-          <li class="list-item col-md-12"><b>Emergency Medical Release:</b>{{reservationDetails.EmergencyMedicalRelease}}  </li>
-          <li class="list-item col-md-12"><b>Liability Argreement:</b>{{reservationDetails.LiabilityAgreement}}  </li>
-        </ul>
-      </ng-container>
-    
-    </div>
+  <div class="table-responsive-sm hide-with-small">
+    <table class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:60%">Reservation Information</th>
+                <th style="width:40%">  </th>
+            </tr>
+        </thead>
+        <tbody *ngIf= "ProgramType == 0">
+          <tr>
+              <td>Program Restriction</td>
+              <td class="name">{{reservationDetails.ProgramRestriction}}</td>
+          </tr>
+          <tr>
+            <td>Organization Name</td>
+            <td class="name">{{reservationDetails.OrganizationName}}</td>
+          </tr>
+          <tr>
+            <td>Grade Level</td>
+            <td class="name">{{reservationDetails.GradeLevel}}</td>
+          </tr>
+          <tr>
+            <td>Teacher Name</td>
+            <td class="name">{{reservationDetails.TeacherName}}</td>
+          </tr>
+          <tr>
+            <td>Teacher Email</td>
+            <td class="name">{{reservationDetails.TeacherEmail}}</td>
+          </tr>
+          <tr>
+            <td>Teacher Phone Number</td>
+            <td class="name">{{reservationDetails.TeacherPhoneNo}}</td>
+          </tr>
+          <tr>
+            <td>Alternative Date</td>
+            <td class="name">{{reservationDetails.AlternativeDate}}</td>
+          </tr>
+          <tr>
+            <td>Education Purpose</td>
+            <td class="name">{{reservationDetails.EducationPurpose}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf= "ProgramType == 1">
+          <tr>
+              <td>Participant Name</td>
+              <td class="name">{{reservationDetails.ParticipantName}}</td>
+          </tr>
+          <tr>
+            <td>Participant Age</td>
+            <td class="name">{{reservationDetails.ParticipantAge}}</td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td class="name">{{reservationDetails.Gender}}</td>
+          </tr>
+          <tr>
+            <td>T-Shirt Size</td>
+            <td class="name">{{reservationDetails.MerchSize}}</td>
+          </tr>
+          <tr>
+            <td>Allergy Information</td>
+            <td class="name">{{reservationDetails.AllergyInfo}}</td>
+          </tr>
+          <tr>
+            <td>Special Information</td>
+            <td class="name">{{reservationDetails.SpecialInfo}}</td>
+          </tr>
+          <tr>
+            <td>Insurance Provider Name</td>
+            <td class="name">{{reservationDetails.InsureProviderName}}</td>
+          </tr>
+          <tr>
+            <td>Insured Recipient Name</td>
+            <td class="name">{{reservationDetails.InsureRecipientName}}</td>
+          </tr>
+          <tr>
+            <td>Insurance Policy Number</td>
+            <td class="name">{{reservationDetails.InsurePolicyNo}}</td>
+          </tr>
+          <tr>
+            <td>Insurance Phone Number</td>
+            <td class="name">{{reservationDetails.InsurePhoneNo}}</td>
+          </tr>
+          <tr>
+            <td>Authorized Pickup Name 1</td>
+            <td class="name">{{reservationDetails.AuthorizedPickupName1}}</td>
+          </tr>
+          <tr>
+            <td>Authorized Pickup Phone 1</td>
+            <td class="name">{{reservationDetails.AuthorizedPickupPhone1}}</td>
+          </tr>
+          <tr>
+            <td>Authorized Pickup Name 2</td>
+            <td class="name">{{reservationDetails.AuthorizedPickupName2}}</td>
+          </tr>
+          <tr>
+            <td>Authorized Pickup Phone 2</td>
+            <td class="name">{{reservationDetails.AuthorizedPickupPhone2}}</td>
+          </tr>
+          <tr>
+            <td>Early Drop Off</td>
+            <td class="name">{{reservationDetails.EarlyDropOff}}</td>
+          </tr>
+          <tr>
+            <td>Late Pick-up</td>
+            <td class="name">{{reservationDetails.LatePickup}}</td>
+          </tr>
+          <tr>
+            <td>Media Release</td>
+            <td class="name">{{reservationDetails.MediaRelease}}</td>
+          </tr>
+          <tr>
+            <td>Emergency Medical Release</td>
+            <td class="name">{{reservationDetails.EmergencyMedicalRelease}}</td>
+          </tr>
+          <tr>
+            <td>Liability Argreement</td>
+            <td class="name">{{reservationDetails.LiabilityAgreement}}</td>
+          </tr>
+      </tbody>
+    </table>
   </div>
-  <hr>
 </div>
