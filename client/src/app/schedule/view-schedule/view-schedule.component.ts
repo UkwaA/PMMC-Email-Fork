@@ -26,6 +26,7 @@ export class ViewScheduleComponent {
     groupEvent: SchedulerEvent[] = []
 
     selectedProgramPK: number = 0
+    allBlackoutDateException:any = [];
     programs : any[] = [];
     allPrograms : any[] = [];
     individualProgram: any[] = [];
@@ -43,6 +44,12 @@ export class ViewScheduleComponent {
     choice:any = 0
     currentMode = ""
     
+    timeFormatOptions = {
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric',
+		hour12: false
+	};
 
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
@@ -95,61 +102,84 @@ export class ViewScheduleComponent {
             return date;
         };       
 
-        this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{
-            console.log(schedules)                        
-            const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
-                {
-                    ...dataItem,
-                    ScheduleSettingPK: dataItem.ScheduleSettingPK,
-                    ProgramPK: dataItem.ProgramPK,
-                    Title: dataItem.Title,
-                    Description: dataItem.Description,
-                    StartTimezone: dataItem.StartTimezone,
-                    Start: parseAdjust(dataItem.Start),
-                    End: parseAdjust(dataItem.End),
-                    EndTimezone: dataItem.EndTimezone,                    
-                    RecurrenceRule: dataItem.RecurrenceRule,
-                    EndRepeatDate: dataItem.EndRepeatDate,
-                    RepeatDay: dataItem.RepeatDay,
-                    RecurrenceID: dataItem.RecurrenceID,
-                    RecurrenceException: dataItem.RecurrenceException,
-                    //RecurrenceException: [new Date("2020-04-21T09:00:00"), new Date("2020-04-21T10:00:00")],
-                    Color: dataItem.Color,
-                    CreatedBy: dataItem.CreatedBy,
-                    CreatedDate: dataItem.CreatedDate,
-                    IsActive: dataItem.IsActive                 
-                }
-            ));
-            this.events = sampleDataWithCustomSchema
-            this.allEvents = sampleDataWithCustomSchema
-            //Loop through all events
-            this.events.forEach(event =>{
-                //for each event, loop through all programs and compare ProgramPK
-                this.allPrograms.forEach(program =>{
-                    if(event.ProgramPK == program.ProgramPK){
-                        if(program.ProgramType == 0){
-                            this.groupEvent.push(event)                            
-                        }
-                        else{
-                            this.individualEvent.push(event)
-                        }
-                        //Create new eventList record in program object
-                        if(!program.eventList){
-                            program.eventList = []
-                        }
-                        program.eventList.push(event)
-                    }
-                })
-                //generate exception rule
+        this.programScheduleServices.getAllBlackoutDateException().subscribe(res =>{
+            this.allBlackoutDateException = res      
+            console.log(res)  
 
-            }) 
-            if(this.currentMode != "viewAllSchedule"){
-                this.programs.forEach(program =>{
-                    if(program.ProgramPK == this.selectedProgramPK){
-                        this.events = program.eventList
+            this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{                
+                const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
+                    {
+                        ...dataItem,
+                        ScheduleSettingPK: dataItem.ScheduleSettingPK,
+                        ProgramPK: dataItem.ProgramPK,
+                        Title: dataItem.Title,
+                        Description: dataItem.Description,
+                        StartTimezone: dataItem.StartTimezone,
+                        Start: parseAdjust(dataItem.Start),
+                        End: parseAdjust(dataItem.End),
+                        EndTimezone: dataItem.EndTimezone,                    
+                        RecurrenceRule: dataItem.RecurrenceRule,
+                        EndRepeatDate: dataItem.EndRepeatDate,
+                        RepeatDay: dataItem.RepeatDay,
+                        RecurrenceID: dataItem.RecurrenceID,
+                        RecurrenceException: [], //Date object array
+                        //RecurrenceException: [new Date("2020-04-20T09:00:00"), new Date("2020-04-20T10:00:00")],
+                        Color: dataItem.Color,
+                        CreatedBy: dataItem.CreatedBy,
+                        CreatedDate: dataItem.CreatedDate,
+                        IsActive: dataItem.IsActive                 
+                    }
+                ));  
+                //Create Date array for each event in RecurrenceException
+                sampleDataWithCustomSchema.forEach(item =>{
+                    var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
+                    //Just check repeated sessions, skip additional sessions (since it happens once)
+                    if(result.length > 0 && item.ScheduleSettingPK != 0){
+                        //get the time of the session
+                        var timezoneOffset = (new Date(item.Start)).getTimezoneOffset()*60000
+                        var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
+                        var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0,10)
+                        
+                        //add the start date to the recurrence exception to avoid Kendo UI bug
+                        item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                        
+                        //add each of the date in exceptionDateArr to recurence exception                        
+                        result[0].exceptionDateArr.forEach(exceptionDate =>{
+                            item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                        })
                     }
                 })
-            }
+                
+                this.events = sampleDataWithCustomSchema
+                this.allEvents = sampleDataWithCustomSchema
+                //Loop through all events
+                this.events.forEach(event =>{
+                    //for each event, loop through all programs and compare ProgramPK
+                    this.allPrograms.forEach(program =>{
+                        if(event.ProgramPK == program.ProgramPK){
+                            if(program.ProgramType == 0){
+                                this.groupEvent.push(event)                            
+                            }
+                            else{
+                                this.individualEvent.push(event)
+                            }
+                            //Create new eventList record in program object
+                            if(!program.eventList){
+                                program.eventList = []
+                            }
+                            program.eventList.push(event)
+                        }
+                    })                
+
+                }) 
+                if(this.currentMode != "viewAllSchedule"){
+                    this.programs.forEach(program =>{
+                        if(program.ProgramPK == this.selectedProgramPK){
+                            this.events = program.eventList
+                        }
+                    })
+                }
+            })
         })
     }
 

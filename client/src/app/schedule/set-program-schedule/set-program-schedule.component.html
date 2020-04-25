@@ -53,6 +53,7 @@
             <mat-card>
                 <mat-card-header>                                  
                     <mat-card-title>Current Schedule </mat-card-title>
+                    <mat-card-subtitle>You can define a new schedule that will start on a specified date.</mat-card-subtitle>
                 </mat-card-header>
                 <mat-divider></mat-divider>
                 <mat-card-content>
@@ -125,6 +126,7 @@
             <mat-card>
                 <mat-card-header>                                  
                     <mat-card-title>Current Sessions</mat-card-title>
+                    <mat-card-subtitle>Display all available sessions in a schedule</mat-card-subtitle>
                 </mat-card-header>
                 <mat-divider></mat-divider>
                 <mat-card-content>
@@ -214,6 +216,7 @@
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Additional Sessions</mat-card-title>
+                    <mat-card-subtitle>You can add one-off Programs on specific dates and times.</mat-card-subtitle>
                 </mat-card-header>
                 <mat-divider></mat-divider>
                 <mat-card-content>
@@ -227,9 +230,6 @@
                                         <mat-icon matListIcon>add</mat-icon> New additional session                             
                                     </button>                                
                                 </div>
-                            </div>
-                            <div class="row">
-                                <p>In addition to the regular schedule, you can add one-off Programs on specific dates and times.</p>
                             </div>
                             <div class="row" *ngIf="hasAdditionalSession">
                                 <div class="col padding-0">
@@ -272,6 +272,7 @@
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Black-out Date</mat-card-title>
+                    <mat-card-subtitle>Program is NOT available during the following days/periods.</mat-card-subtitle>
                 </mat-card-header>
                 <mat-divider></mat-divider>
                 <mat-card-content>
@@ -281,15 +282,12 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <br/>
-                                    <button mat-raised-button color="primary" onclick="this.blur()" (click)="addBlackoutDateModal()">
+                                    <button mat-raised-button color="primary" onclick="this.blur()" (click)="addBlackoutDateModal()" >
                                         <mat-icon matListIcon>add</mat-icon> New Black-out date                                
                                     </button>                                
                                 </div>
                             </div>
-                            <div class="row">
-                                <p>Program is NOT available during the following days/periods.</p>
-                            </div>
-                            <div class="row" *ngIf="hasBlackoutDate && hasSchedule">
+                            <div class="row" *ngIf="hasBlackoutDate">
                                 <div class="col padding-0">
                                     <div class="table-responsive-sm">
                                         <table #datatable class="table table-hover" style="width:70%">

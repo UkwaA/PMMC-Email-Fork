@@ -97,6 +97,9 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-blackout-date-by-id/" + ProgramPK);
     }
 
+    public getAllBlackoutDateException(): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-blackout-date-exception/");
+    }
     /*================================
             OTHERS
     ================================*/

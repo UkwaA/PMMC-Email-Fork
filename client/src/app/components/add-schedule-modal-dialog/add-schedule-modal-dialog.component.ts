@@ -281,8 +281,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
       var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
       var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)
       
-      var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toString()
-      var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toString()   
+      var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toISOString()
+      var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toISOString()   
 
       //Set up recurrence rule
       this.recurrenceRule = "FREQ=WEEKLY" + ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",") 
@@ -479,8 +479,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						ProgramBlackoutDatePK: 0,
 						ProgramPK: this.modalData.programPK,
 						Description: this.eventDescription,
-						Start: this.startDate.toISOString(),
-						End: this.endDate.toISOString(),
+						Start: (new Date(eventStartDate + "T06:00:00")).toISOString(),
+						End: (new Date(dateEndRepeat + "T16:59:00")).toISOString(),
 						CreatedBy: this.modalData.userPK,
 						IsActive: true
 					}
@@ -492,6 +492,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						else{
 							this.isDisabled = false
 							if(!this.isDisabled){
+
 								this.dialogRef.close("Yes")
 							}              
 						}
@@ -501,31 +502,6 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
 			}         
       }        
-	}
-	
-	//this function is for Edit current schedule, to check if the new Start/End date fall in
-	// any existing schedule's time range
-	public checkStartEndDate(ScheduleSettingPK:number, Start: Date, End: Date, allScheduleSetting: any):boolean{
-		Start = new Date(Start.toISOString().slice(0,10) + "T00:00:00")
-		End = new Date(End.toISOString().slice(0,10) + "T23:00:00")
-
-		var found = true
-		if(allScheduleSetting.length > 1){
-			allScheduleSetting.forEach(schedule => {
-				if(ScheduleSettingPK != schedule.ScheduleSettingPK){
-					if((Start >= schedule.Start && Start <= schedule.End) 
-						|| (End >= schedule.Start && End <= schedule.End)){
-						found = false
-						return
-					}
-				}
-			})
-			if(Start <= allScheduleSetting[allScheduleSetting.length - 1].Start && 
-					End >= allScheduleSetting[0].End){
-						found = false
-				}			
-			}
-		return found
-	};
+	}	
     
 }

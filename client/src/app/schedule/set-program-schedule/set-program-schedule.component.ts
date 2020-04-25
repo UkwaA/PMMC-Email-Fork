@@ -239,6 +239,7 @@ export class SetProgramScheduleComponent {
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
 	ngOnInit(){ 
+		console.log("2020-04-04T16:00:00.000Z" <= "2020-04-04T16:00:00.000Z")
 		this.errorMessage = ''
 		this.SetProgramScheduleForm = this.fb.group({    
 			programName: [],
@@ -336,7 +337,7 @@ export class SetProgramScheduleComponent {
 			this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(res =>{
 				this.programData = res
 			})	
-			this.programScheduleServices.getAllBlackoutDatesByProgram(this.ProgramPK).subscribe(res =>{
+			this.programScheduleServices.getAllBlackoutDatesByProgram(this.ProgramPK).subscribe(res =>{				
 				this.allBlackoutDates = res
 				if(this.allBlackoutDates.length > 0)
 				{
@@ -345,8 +346,9 @@ export class SetProgramScheduleComponent {
 						date.tempStart = (new Date(date.Start)).toLocaleDateString()
 						date.tempEnd = (new Date(date.End)).toLocaleDateString()
 					})
-				}
-			})		
+				}				
+			})
+			
 		})
 	}
 
@@ -718,6 +720,7 @@ export class SetProgramScheduleComponent {
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
+				this.reloadAllSessions()
 				this.reloadAllBlackoutDates()				
             }
             else{
