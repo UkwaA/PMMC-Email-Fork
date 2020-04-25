@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { AuthenticationService, TokenPayload } from "../../authentication.service";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { RegisterModalDialogComponent } from "../register-modal-dialog/register-modal-dialog.component";
-
+import { ForgotPasswordComponent } from '../../password-service/forgot-password/forgot-password.component';
 import { ModalDialogComponent } from "../modal-dialog/modal-dialog.component";
 
 declare var $:any
@@ -56,6 +56,10 @@ export class LoginPromptModal implements OnInit {
     return this.loginForm.controls[control].hasError(error);
   }
 
+  closeModal(){
+    this.dialogRef.close("No");
+  }
+
   actionFunction() {
     console.log("Modal closing");
     this.dialogRef.close("Yes");
@@ -78,6 +82,26 @@ export class LoginPromptModal implements OnInit {
         if (result == "Yes")
         $(".alert-success").show()
       })
+  }
+
+  resetPassword(){
+    console.log("Reset Password called")
+    const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        // dialogConfig.disableClose =;
+        dialogConfig.id = "register-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Set New Password",
+            description: "Password has been successfully updated. You are now redirecting to Login Page" ,
+            actionButtonText: "Close",   
+            numberOfButton: "1"         
+          }
+    const resetModal = this.matDialog.open(ForgotPasswordComponent, dialogConfig);
+
   }
 
   signIn() {
