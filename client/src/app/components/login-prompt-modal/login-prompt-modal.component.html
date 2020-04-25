@@ -39,11 +39,16 @@
         </button>
     </p>
     <mat-divider></mat-divider>
-    <div class="sign-up">
-        <p>Don't have an account? 
+    <div class="d-flex justify-content-between sign-up">
+        <!-- <p>Don't have an account?  -->
             <button (click)="createNew()" class = "link">
                 Sign up
             </button>
-        </p>
+        <!-- </p> -->
+        <!-- <p>Forgot your password? -->
+            <button class="link" (click)="resetPassword()" style="color:#0886b8">
+                Reset password
+            </button>
+        <!-- </p> -->
     </div>
 </div>
