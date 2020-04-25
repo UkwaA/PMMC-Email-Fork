@@ -3,6 +3,7 @@ import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { AuthenticationService } from '../authentication.service';
 
 declare var $: any;
 
