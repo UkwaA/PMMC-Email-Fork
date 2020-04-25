@@ -1,6 +1,6 @@
 <div id="modal-content-wrapper">
     <header id="modal-header">
-        <button type="button" class="close" (click)="closeModal()">X</button>
+        <button type="button" class="close" (click)="closeModal()" onfocus="blur()">X</button>
         <h1 id="modal-title">{{modalData.title}}</h1>
     </header>
     <mat-divider></mat-divider>
@@ -113,10 +113,10 @@
     </section>
     <mat-divider></mat-divider>
     <footer id="modal-footer">
-        <button mat-raised-button id="modal-action-button" (click)="onSubmit()">
+        <button mat-raised-button id="modal-action-button" (click)="onSubmit()" onfocus="blur()">
             Sign Up
         </button>
-        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()" onfocus="blur()">
             Cancel
         </button>
     </footer>

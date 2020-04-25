@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ProgramData } from '../data/program-data';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-// import { PaynowModalDialog } from "../../components/paynow-modal-dialog/paynow-modal-dialog.component";
+import { PaynowModalDialog } from "../components/paynow-modal-dialog/paynow-modal-dialog.component";
 
 declare var $: any;
 
@@ -81,7 +81,7 @@ pieChartOptions = {
     { id: 2, name: "Individual Reservations" }
   ]
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, public matDialog:MatDialog) { }
 
   ngOnInit() {
     // Add option for the dropdown menu(later)
@@ -122,8 +122,13 @@ pieChartOptions = {
       mode: "paynow",
       description: "",
     }
-    // const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
+    const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
+    paynowModalDialog.afterClosed().subscribe((result) => {
+      if (result == "Yes") {
+        console.log("Paynow Modal");
+      }
 
+    });
   }
 
 }

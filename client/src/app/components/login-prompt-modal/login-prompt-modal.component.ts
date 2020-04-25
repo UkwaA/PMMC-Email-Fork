@@ -91,8 +91,8 @@ export class LoginPromptModal implements OnInit {
         // dialogConfig.disableClose =;
         dialogConfig.id = "register-modal-component";
         dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.maxHeight = "550px";
+        dialogConfig.width = "450px";
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Set New Password",
@@ -116,9 +116,9 @@ export class LoginPromptModal implements OnInit {
                 // this.actionFunction();
             },
             (err) => {
-              // $(".alert-danger").show()
-              //alert('Username and password do not match')
-              console.log("*Username and password do not match");
+              $(".alert-danger").show()
+              // alert('Username and password do not match')
+              // console.log("*Username and password do not match");
               return;
             }
           );
