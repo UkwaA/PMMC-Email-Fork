@@ -1,5 +1,13 @@
 .container {
     padding-top: 100px;
     padding-bottom: 56px;
-  }
-  
+}
+
+.width-btn{
+  width: 22%;
+  text-align: center;
+}
+
+h6{
+  font-weight: bold;
+}

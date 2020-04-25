@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ProgramData } from '../data/program-data';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+// import { PaynowModalDialog } from "../../components/paynow-modal-dialog/paynow-modal-dialog.component";
 
 declare var $: any;
 
@@ -105,5 +107,23 @@ pieChartOptions = {
   }
 
   // Catch the event dropdown menu (later)
+
+  // PaynowModal
+  openPaynowModal(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "paynow-modal-component";
+    dialogConfig.height = "auto";
+    dialogConfig.maxHeight = "600px";
+    dialogConfig.width = "700px";
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      title: "Pay Now",
+      mode: "paynow",
+      description: "",
+    }
+    // const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
+
+  }
 
 }
