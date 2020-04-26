@@ -14,8 +14,8 @@ export class AppConstants {
     public static get LOGIN_DIALOG_CONFIG(): MatDialogConfig {
         const loginDialogConfig = new MatDialogConfig();
         loginDialogConfig.id = "modal-component";
-        loginDialogConfig.minHeight = "450px";
-        loginDialogConfig.width = "400px";
+        loginDialogConfig.minHeight = "550px";
+        loginDialogConfig.width = "450px";
         loginDialogConfig.autoFocus = false;
         loginDialogConfig.data = {
           routerRedirect: false

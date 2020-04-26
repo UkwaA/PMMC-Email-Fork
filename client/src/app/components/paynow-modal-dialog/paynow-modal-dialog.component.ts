@@ -2,9 +2,9 @@ import { OnInit, Component, ViewEncapsulation } from '@angular/core';
 
 
 @Component ({
-    templateUrl: '/reservation-management.component.html',
-    styleUrls: ['./reservation-management.component.css'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: '/paynow-modal-dialog.component.html',
+    styleUrls: ['./paynow-modal-dialog.component.css'],
+    
 })
 
 export class PaynowModalDialog implements OnInit{

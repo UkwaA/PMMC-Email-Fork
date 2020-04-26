@@ -2,7 +2,7 @@
   <div class="container">  
   <a  class="navbar-brand" href="#">
     <img src = "https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png" width="120" height="60"> </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" onfocus="blur()">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -79,7 +79,7 @@
                       [ngClass]="{ 'is-invalid': submitted && f.subscribeEmail.errors }">
                     <button
                       style=" background: #ffff; border: none; border-radius: 30px; color: #4b5d73; display: inline-block; font-size: 15px;
-                            font-weight: 400; line-height: 1; padding: 12px 15px; transition: all 0.3s ease 0s;">Subscribe
+                            font-weight: 400; line-height: 1; padding: 12px 15px; transition: all 0.3s ease 0s;" onfocus="blur()">Subscribe
                       <i class="fas fa-long arrow-alt-right"></i>
                     </button>
                     <div *ngIf="submitted && f.subscribeEmail.errors" class="invalid-feedback">
