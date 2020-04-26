@@ -209,14 +209,8 @@ export class SetProgramScheduleComponent {
 					this.allAdditionalSessions.push(session)
 					this.hasAdditionalSession = true
 				}
-			})
-			//Sort allAdditionalSessions array by date
-			this.allAdditionalSessions.sort(function(a,b){
-				// Turn your strings into dates, and then subtract them
-				// to get a value that is either negative, positive, or zero.
-				return b.tempFullDate - a.tempFullDate;
-			});					
-	})
+			})							
+		})
 	}
 
 	reloadAllBlackoutDates(){
@@ -324,14 +318,7 @@ export class SetProgramScheduleComponent {
 							this.allAdditionalSessions.push(session)
 							this.hasAdditionalSession = true
 						}
-					})				
-
-					//Sort allAdditionalSessions array by date
-					this.allAdditionalSessions.sort(function(a,b){
-						// Turn your strings into dates, and then subtract them
-						// to get a value that is either negative, positive, or zero.
-						return b.tempFullDate - a.tempFullDate;
-					});					
+					})
 				})
 
 			this.programServices.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(res =>{
@@ -683,7 +670,6 @@ export class SetProgramScheduleComponent {
             if(result == "Yes"){
 				//Set IsActive to false in sessiondetail table
 				this.programScheduleServices.deactivateSessionDetails(session).subscribe(res =>{
-					console.log(res.message)
 					this.reloadAllSessions()
 				})                
             }
@@ -729,6 +715,70 @@ export class SetProgramScheduleComponent {
         })
 	}
 
+	updateBlackoutDateModal(currentBlackoutDate){
+		//Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "edit-black-out-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "700px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Edit Blackout Date",
+            mode: "editblackoutdate",
+			description: "",
+			programPK: this.ProgramPK,
+			name: this.programData.Name,
+			userPK: this.currentUserPK,
+			currentBlackoutDate : currentBlackoutDate,
+            actionButtonText: "Save",
+            numberOfButton: "2"            
+			}			
+
+        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+				this.reloadAllSessions()
+				this.reloadAllBlackoutDates()				
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+	}
+
+	removeBlackoutDateModal(blackoutDate){
+		//Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "remove-blackout-date-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Remove blackout date",
+            mode: "removeablackoutdate",
+			description: "Are you sure to remove this blackout date?",
+            actionButtonText: "Remove",
+            numberOfButton: "2"            
+            }
+        const addScheduleModalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result == "Yes"){
+				//Set IsActive to false in sessiondetail table
+				this.programScheduleServices.deactivateBlackoutDate(blackoutDate).subscribe(res =>{
+					this.reloadAllBlackoutDates()
+				})                
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+	}
 
     setProgramColor(){      
 		//save new color in schedulesetting table

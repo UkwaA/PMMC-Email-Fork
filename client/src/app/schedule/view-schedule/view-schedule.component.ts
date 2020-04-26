@@ -104,7 +104,6 @@ export class ViewScheduleComponent {
 
         this.programScheduleServices.getAllBlackoutDateException().subscribe(res =>{
             this.allBlackoutDateException = res      
-            console.log(res)  
 
             this.programScheduleServices.getAllSessionDetails().subscribe((schedules) =>{                
                 const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
@@ -132,21 +131,36 @@ export class ViewScheduleComponent {
                 ));  
                 //Create Date array for each event in RecurrenceException
                 sampleDataWithCustomSchema.forEach(item =>{
-                    var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
                     //Just check repeated sessions, skip additional sessions (since it happens once)
-                    if(result.length > 0 && item.ScheduleSettingPK != 0){
+                    if(item.ScheduleSettingPK != 0){
+                        var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
                         //get the time of the session
                         var timezoneOffset = (new Date(item.Start)).getTimezoneOffset()*60000
                         var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
                         var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0,10)
-                        
+                        //1. Add recurrence exception to each session based on Blackout Date
                         //add the start date to the recurrence exception to avoid Kendo UI bug
+                        let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
                         item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
-                        
-                        //add each of the date in exceptionDateArr to recurence exception                        
-                        result[0].exceptionDateArr.forEach(exceptionDate =>{
-                            item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
-                        })
+                        //if this session has blackout-date => add to recurenceException
+                        if(result.length > 0){ 
+                            //add each of the date in exceptionDateArr to recurence exception                        
+                            result[0].exceptionDateArr.forEach(exceptionDate =>{
+                                item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                            })
+                        }
+                        //2. If today's date passes session's startDate => add those past date to exceptionDateArr
+                        //check if start date pass today's date => generate date 
+                        let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T00:00:00"))
+                        if(newStartDateTime < todayDate){
+                            for(var d = newStartDateTime; d < todayDate; d.setDate(d.getDate() + 1)){
+                                //check if genererated date exists in exceptionDateArr => NO, add to exceptionDateArr
+                                var tempDate = d.toISOString().slice(0,10)
+                                if(!result[0].exceptionDateArr.includes(tempDate)){
+                                    item.RecurrenceException.push(new Date(tempDate+"T"+eventStartTime))
+                                }
+                            }                            
+                        }                        
                     }
                 })
                 
@@ -233,7 +247,7 @@ export class ViewScheduleComponent {
 
     //get all events in a selected view
     public getEventClass(args: EventStyleArgs ){        
-        
+        //console.log(args.event)
         // var todayDate = (new Date()).toDateString();     
         // var startDate = (new Date(args.event.start)).toDateString();
         // if(startDate < todayDate){

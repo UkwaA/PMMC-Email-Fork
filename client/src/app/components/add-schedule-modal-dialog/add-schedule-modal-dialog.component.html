@@ -33,7 +33,8 @@
                                 (valueChange)="onChangeStartDate($event)"
                                 [navigation]="false"
                                 [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
-                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession' && modalData.mode != 'addblackoutdate'"
+                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession' 
+                                        && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
                                 >                        
                             </kendo-datepicker>
                             <!-- <div class="errorMessage" *ngIf="startDateErrorMessage">
@@ -49,7 +50,8 @@
                                 [min] = "startDate"
                                 [navigation]="false"
                                 (valueChange)="onChangeEndDate($event)"
-                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' && modalData.mode != 'addblackoutdate'"
+                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
+                                        && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
                                 >
                             </kendo-datepicker>
                             <div class="errorMessage" *ngIf="endDateErrorMessage">

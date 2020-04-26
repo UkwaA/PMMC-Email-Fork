@@ -132,8 +132,7 @@
                 <mat-card-content>
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-10">
-                            <!--  Create table -->
+                        <div class="col-md-10">                            
                             <div class="row">
                                 <div class="col-md-3">
                                     <br/>
@@ -144,13 +143,19 @@
                             </div>
                             <div class="row" *ngIf="!hasSession && hasSchedule">
                                 <p>Please select "New Session" to create new session.</p>
-                            </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
                             <div class="row" *ngIf="hasSession && hasSchedule">
                                 <div class="col-md-12 text-center">
                                     <p>This <strong>{{currentScheduleSetting.ScheduleSettingName}}</strong> schedule is effective from 
                                         {{currentScheduleSetting.tempStart}} to {{currentScheduleSetting.tempEnd}}.
                                     </p>
                                 </div>
+                                <!--  Create table -->
                                 <div class="col padding-0" *ngFor="let day of dayArr">
                                     <div class="table-responsive-sm">
                                         <table #datatable class="table table-hover" style="width:100%">
@@ -306,11 +311,11 @@
                                                     <td>{{date.Description}}</td>
                                                     <td>
                                                         <button mat-icon-button onclick="this.blur()" matTooltip="Edit" 
-                                                            (click)="updateAdditionalSessionDetailsModal(session)" >
+                                                            (click)="updateBlackoutDateModal(date)" >
                                                             <mat-icon>edit</mat-icon>
                                                         </button>
                                                         <button mat-icon-button color="warn" id="removeButton" onclick="this.blur()"
-                                                            matTooltip="Remove" (click)="removeAdditionalSessionDetailsModal(session)" >
+                                                            matTooltip="Remove" (click)="removeBlackoutDateModal(date)" >
                                                             <mat-icon>delete</mat-icon>
                                                         </button>                                            
                                                     </td>

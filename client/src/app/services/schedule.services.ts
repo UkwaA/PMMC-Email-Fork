@@ -15,10 +15,6 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-settings-by-program/" + ProgramPK);
     }
 
-    // public getScheduleSettingsByID(ProgramPK: any): Observable<any> {
-    //     return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-schedule-settings-by-id/" + ProgramPK);
-    // }
-
     public addNewScheduleSetting(scheduleSetting: any): Observable<any>{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
     }
@@ -92,6 +88,15 @@ export class ProgramScheduleService{
     public addBlackoutDate(blackoutDate: any): Observable<any>{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-blackout-date", blackoutDate);
     }
+
+    public updateBlackoutDate(blackoutDate: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-blackout-date", blackoutDate);
+    }
+
+    public deactivateBlackoutDate(blackoutDate: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-blackout-date", blackoutDate);
+    }
+
 
     public getAllBlackoutDatesByProgram(ProgramPK: number): Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-blackout-date-by-id/" + ProgramPK);

@@ -90,6 +90,17 @@ export class AddScheduleModalDialogComponent implements OnInit{
 		{day: "Saturday", value: "SA", selected: false},
 	]
 
+	currentBlackoutDate = {
+		ProgramBlackoutDatePK: 0,
+		ProgramPK: 0,
+		Description: "",
+		Start: "",
+		End: "",
+		CreatedBy: 0,
+		IsActive: true
+	}
+
+
     constructor(public dialogRef: MatDialogRef<AddScheduleModalDialogComponent>,
         private fb: FormBuilder, private programScheduleServices: ProgramScheduleService,
         private router: Router, public matDialog: MatDialog,
@@ -171,6 +182,12 @@ export class AddScheduleModalDialogComponent implements OnInit{
 			case "addblackoutdate":
 				this.startDate = new Date()
 				this.endDate = new Date()				
+				break;
+			
+			case "editblackoutdate":
+				this.startDate = new Date(this.modalData.currentBlackoutDate.Start)
+				this.endDate = new Date(this.modalData.currentBlackoutDate.End)
+				this.eventDescription = this.modalData.currentBlackoutDate.Description
 				break;
 			
       	}      
@@ -323,6 +340,16 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				IsActive: true,
 				CreatedBy: this.modalData.userPK
 				}
+
+			this.currentBlackoutDate = {
+				ProgramBlackoutDatePK: 0,
+				ProgramPK: this.modalData.programPK,
+				Description: this.eventDescription,
+				Start: "",
+				End: "",
+				CreatedBy: this.modalData.userPK,
+				IsActive: true
+				}
         	switch(this.modalData.mode){
 				//======= ADD NEW SCHEDULE ===========
 				case "newschedule":					
@@ -357,8 +384,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 							var tempEndTime = (new Date(session.End)).toLocaleString('en-US', this.timeFormatOptions)
 							
 							//Edit the Start, End, EndRepeatDate
-							session.Start = (new Date(tempStartDate + "T" + tempStartTime)).toString()
-							session.End = (new Date(tempStartDate + "T" + tempEndTime)).toString()
+							session.Start = (new Date(tempStartDate + "T" + tempStartTime)).toISOString()
+							session.End = (new Date(tempStartDate + "T" + tempEndTime)).toISOString()
 							session.EndRepeatDate = tempEndDate
 							//Edit the RecurrenceRule
 							var tempIndex = session.RecurrenceRule.indexOf("UNTIL")
@@ -475,16 +502,30 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				
 				//======= ADD BLACKOUT DATE ===========
 				case "addblackoutdate":
-					var currentBlackoutDate = {
-						ProgramBlackoutDatePK: 0,
-						ProgramPK: this.modalData.programPK,
-						Description: this.eventDescription,
-						Start: (new Date(eventStartDate + "T06:00:00")).toISOString(),
-						End: (new Date(dateEndRepeat + "T16:59:00")).toISOString(),
-						CreatedBy: this.modalData.userPK,
-						IsActive: true
-					}
-					this.programScheduleServices.addBlackoutDate(currentBlackoutDate).subscribe(res =>{
+					this.currentBlackoutDate.Start = (new Date(eventStartDate + "T06:00:00")).toISOString()
+					this.currentBlackoutDate.End = (new Date(dateEndRepeat + "T16:59:00")).toISOString()
+					
+					this.programScheduleServices.addBlackoutDate(this.currentBlackoutDate).subscribe(res =>{
+						if(res.error){
+							this.isDisabled = true
+							this.newScheduleErrorMessage = res.error            
+						}
+						else{
+							this.isDisabled = false
+							if(!this.isDisabled){
+
+								this.dialogRef.close("Yes")
+							}              
+						}
+					})				
+					break;
+				
+				//======= EDIT BLACKOUT DATE ===========					
+				case "editblackoutdate":
+					this.currentBlackoutDate.ProgramBlackoutDatePK = this.modalData.currentBlackoutDate.ProgramBlackoutDatePK
+					this.currentBlackoutDate.Start = (new Date(eventStartDate + "T06:00:00")).toISOString()
+					this.currentBlackoutDate.End = (new Date(dateEndRepeat + "T16:59:00")).toISOString()
+					this.programScheduleServices.updateBlackoutDate(this.currentBlackoutDate).subscribe(res => {
 						if(res.error){
 							this.isDisabled = true
 							this.newScheduleErrorMessage = res.error            
@@ -497,8 +538,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 							}              
 						}
 					})
-				
 					break;
+				
 
 			}         
       }        
