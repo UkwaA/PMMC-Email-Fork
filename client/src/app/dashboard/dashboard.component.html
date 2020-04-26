@@ -99,7 +99,7 @@
                 [(ngModel)]="searchText">
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
-            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
+            <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
         </div>
     </div>
     <!-- TABLE -->
@@ -171,7 +171,7 @@
                             <h4> Change the Life of a Seal <sup class = "waiting"> Payment Not Completed </sup> </h4>
                         </div>
                         <div class="col-lg-4">
-                            <button class="btn btn-outline-danger float-right mr-5" type="submit">Cancel Reservation</button>
+                            <button class="btn btn-outline-danger float-right mr-5" type="submit" onfocus="blur()">Cancel Reservation</button>
                         </div>
                     </div>
                     <div class="table-responsive-sm hide-with-small">
@@ -191,7 +191,7 @@
                                     <td> April 20, 2020</td>
                                     <td> 8:10 - 10:30</td>
                                     <td> 10 </td>
-                                    <td> - $200  <button class="btn btn-warning ml-3" type="submit" (click)="openPaynowModal()">Pay Now</button></td>
+                                    <td> - $200  <button class="btn btn-warning ml-3" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -210,7 +210,7 @@
                             <h4> Pinniped Pollution Project <sup class = "completed">Payment Completed </sup> </h4>
                         </div>
                         <div class="col-lg-4">
-                            <button class="btn btn-outline-danger float-right mr-5" type="submit">Cancel Reservation</button>
+                            <button class="btn btn-outline-danger float-right mr-5" type="submit" onfocus="blur()">Cancel Reservation</button>
                         </div>
                     </div>
                     <div class="table-responsive-sm hide-with-small">
