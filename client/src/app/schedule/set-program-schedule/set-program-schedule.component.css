@@ -73,7 +73,7 @@ button:focus, button:active:focus, button.active:focus {
   color: green;
 }
 
-.programColorMessage{
+.successColorMessage{
   color: green;
   font-weight: normal;
 }

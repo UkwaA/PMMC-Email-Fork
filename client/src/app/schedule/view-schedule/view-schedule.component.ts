@@ -31,7 +31,8 @@ export class ViewScheduleComponent {
     allPrograms : any[] = [];
     individualProgram: any[] = [];
     groupProgram: any[] = [];
-    
+    currentSessionDetails:any;
+
     programCategories: Array<Object> = [
         { id: 0, name: "All Programs" },
         { id: 1, name: "Group Programs" },
@@ -51,6 +52,12 @@ export class ViewScheduleComponent {
 		hour12: false
 	};
 
+    displayTimeFormatOption ={
+        hour: 'numeric',
+		minute: 'numeric',
+		hour12: true
+    };
+
     public eventFields: SchedulerModelFields = {
         id: "CreatedBy", //point id to dummy to avoid bug 
         title: 'Title',
@@ -69,7 +76,7 @@ export class ViewScheduleComponent {
         private formBuilder: FormBuilder, private route: ActivatedRoute) {           
         }
     
-    ngOnInit(){
+    ngOnInit(){        
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
         });
@@ -126,7 +133,10 @@ export class ViewScheduleComponent {
                         Color: dataItem.Color,
                         CreatedBy: dataItem.CreatedBy,
                         CreatedDate: dataItem.CreatedDate,
-                        IsActive: dataItem.IsActive                 
+                        IsActive: dataItem.IsActive,
+                        tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.displayTimeFormatOption),
+                        tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption),
+                        tempDate: (new Date(dataItem.Start)).toLocaleDateString()
                     }
                 ));  
                 //Create Date array for each event in RecurrenceException
@@ -243,6 +253,7 @@ export class ViewScheduleComponent {
 
     public eventClick = (e) => {
         console.log(e.event)
+        this.currentSessionDetails = e.event.dataItem
       }
 
     //get all events in a selected view
