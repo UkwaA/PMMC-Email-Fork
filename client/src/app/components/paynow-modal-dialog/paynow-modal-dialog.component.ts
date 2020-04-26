@@ -2,7 +2,8 @@ import { OnInit, Component, ViewEncapsulation } from '@angular/core';
 
 
 @Component ({
-    templateUrl: '/paynow-modal-dialog.component.html',
+    selector: 'paynow-modal-dialog',
+    templateUrl: './paynow-modal-dialog.component.html',
     styleUrls: ['./paynow-modal-dialog.component.css'],
     
 })
