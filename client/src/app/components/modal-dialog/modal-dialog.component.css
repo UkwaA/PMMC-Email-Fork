@@ -8,7 +8,30 @@
 
 #modal-title {
     font-size: 22px;
-    color: black;
+    color: #333333;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: block;
+
+}
+
+.reset-btn{
+    width: 150px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+
+    background: #16222A; 
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white;
+}
+
+.reset-btn:hover{
+    text-decoration: underline;
+    text-shadow: whitesmoke;
 }
 
 #modal-footer {
