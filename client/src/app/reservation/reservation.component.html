@@ -163,7 +163,6 @@
                   <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
                 </div>
               </div>
-              <!-- </form> -->
             </ng-container>
           </div>
         </div>
@@ -414,7 +413,8 @@
       <!-- INDIVIDUAL PROGRAM SECTION -->
       <ng-container *ngIf="ProgramType == 1">
         <form id="registerForm" [formGroup]="registerForm">
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
+          <!-- <div class="container"> -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.ParticipantName">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantName">Participant Name:</label>
                 <div class="col-sm-10">
@@ -703,12 +703,12 @@
                     <div *ngIf="g.LatePickup.errors.required">This selection is required</div>
                   </div>
                 </div>
-              </fieldset>
-            <div class="row pt-3">
-              <div class="col-md-12">
-                <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next </button>  
               </div>
+            </fieldset>
+            <div class="btn_row row flex-end">
+              <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
+              <button class="btn btn-lg btn-info btn-block" (click)="registerIndividualStepperNext(stepper)"
+                type="button"> Next</button>
             </div>
         </form>
       </ng-container>
@@ -722,14 +722,11 @@
         <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails"
           [ProgramPK]="ProgramPK"></payment>
       </ng-container>
-      <!-- <ng-container *ngIf="isCompleted && ProgramType == 1">
-       
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails"
-        [ProgramPK]="ProgramPK"></payment>
-      </ng-container> -->
-      <div>
-        <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-        <button class="btn btn-lg btn-info btn-block" matStepperNext type="button"> Next </button>
+      <div class="row pt-3">
+        <div class="col-md-12">
+          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+          <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
+        </div>
       </div>
     </mat-step>
     <mat-step [stepControl]="paymentForm">
@@ -743,7 +740,7 @@
           [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <div>
-        <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
+        <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
