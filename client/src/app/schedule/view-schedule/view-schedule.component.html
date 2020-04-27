@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 p-0">            
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 p-0" >            
+        <div class="col-lg-6 col-md-6 col-sm-6 p-0" id="4">            
             <select class="form-control" style="font-weight: bold" id="listOfPrograms"
                 (change)="onChangeSelectedProgram($event)">
                 <option selected value="0"> --- Select {{programCategories[choice].name}} --- </option>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="col-md-4 pl-3">
-            <mat-card *ngIf="currentSessionDetails">
+            <mat-card *ngIf="currentSessionDetails.ProgramPK != 0">
                 <mat-card-header>
                     <div class="container p-0">
                         <mat-card-title>
@@ -64,7 +64,10 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-success btn-sm">Available</button>
+                                    <button type="button" class="btn btn-success btn-sm" *ngIf="currentSessionDetails.Availability != 0">
+                                        Available</button>
+                                    <button type="button" class="btn btn-danger btn-sm" *ngIf="currentSessionDetails.Availability == 0">
+                                        Full</button>
                                 </div>
                             </div>
                         </mat-card-subtitle>
@@ -80,18 +83,18 @@
                                 <div class="col-md-8">
                                     <h6>Instructor:</h6>
                                 </div>                       
-                                <div class="col-md-3 text-right"> Test</div>
+                                <div class="col-md-3 text-right">-</div>
                             </div>
                             <div class="row pb-1">
                                 <div class="col-md-8"><h6>Seats:</h6></div>
-                                <div class="col-md-3 text-right">40</div>
+                                <div class="col-md-3 text-right">{{currentSessionDetails.MaximumParticipant}}</div>
                             </div>
                             <div class="row pb-1">
                                 <div class="col-md-8"><h6>Available: </h6></div>
-                                <div class="col-md-3 text-right">40</div>
+                                <div class="col-md-3 text-right">{{currentSessionDetails.Availability}}</div>
                             </div>
                             <div class="row pb-1">
-                                <div class="col-md-8"><h6>Age range:     </h6></div>
+                                <div class="col-md-8"><h6>Age range:</h6></div>
                                 <div class="col-md-3 text-right">-</div>
                             </div>
                             <div class="row pb-1">

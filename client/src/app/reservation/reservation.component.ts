@@ -26,6 +26,7 @@ import { ReservationHeader } from "../data/reservation-header";
 import { ValidationErrors } from "@angular/forms";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from '../data/reservation-individual-details';
+import { addDays } from '@progress/kendo-date-math';
 
 @Component({
   templateUrl: "./reservation.component.html",
@@ -71,6 +72,9 @@ export class ReservationComponent implements OnInit {
     minute: "numeric",
     hour12: true,
   };
+
+  //Define this day arr to hide past event
+  dayOfWeekStr = ["SU","MO","TU","WE","TH","FR","SA"]
   //Define time format option for blackout date
   timeFormatOptions = {
 		hour: 'numeric',
@@ -321,11 +325,30 @@ export class ReservationComponent implements OnInit {
 
     //Define and create to get schedule by ProgramPk
     const currentYear = new Date().getFullYear();
-    const parseAdjust = (eventDate: string): Date => {
-      const date = new Date(eventDate);
+    const parseAdjust = (eventDateTime: string, RepeatDay: string): Date => {
+      var date = new Date(eventDateTime);
       date.setFullYear(currentYear);
+      //Set the event Start and End to today dates if the Start/End is before today date
+      var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
+      let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
+      let dayIndex = todayDate.getDay()
+      //If date is before today's date and today's day is in the repeat day of the session
+      if(date < todayDate){
+          if(RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0){
+              date = todayDate
+          }
+          else{
+              for(var d = addDays(todayDate,1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)){
+                  if(RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0){
+                      date = d;
+                      break;
+                  }
+              }
+              
+          }                
+      }
       return date;
-    };
+  }; 
 
     //GET ALL BLACK-OUT DATES
     this.programScheduleServices.getAllBlackoutDateException().subscribe(res =>{
@@ -341,8 +364,8 @@ export class ReservationComponent implements OnInit {
             Title: dataItem.Title,
             Description: dataItem.Description,
             StartTimezone: dataItem.StartTimezone,
-            Start: parseAdjust(dataItem.Start),
-            End: parseAdjust(dataItem.End),
+            Start: parseAdjust(dataItem.Start, dataItem.RepeatDay),
+            End: parseAdjust(dataItem.End, dataItem.RepeatDay),
             EndTimezone: dataItem.EndTimezone,
             MaximumParticipant: this.programDetails.MaximumParticipant,
             CurrentParticipant: 0,
@@ -376,19 +399,7 @@ export class ReservationComponent implements OnInit {
                     result[0].exceptionDateArr.forEach(exceptionDate =>{
                         item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
                     })
-                }
-                //2. If today's date passes session's startDate => add those past date to exceptionDateArr
-                //check if start date pass today's date => generate date 
-                let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T00:00:00"))
-                if(newStartDateTime < todayDate){
-                    for(var d = newStartDateTime; d < todayDate; d.setDate(d.getDate() + 1)){
-                        //check if genererated date exists in exceptionDateArr => NO, add to exceptionDateArr
-                        var tempDate = d.toISOString().slice(0,10)
-                        if(!result[0].exceptionDateArr.includes(tempDate)){
-                            item.RecurrenceException.push(new Date(tempDate+"T"+eventStartTime))
-                        }
-                    }                            
-                }                        
+                }                                        
             }
         })
           this.allEvents = sampleDataWithCustomSchema;
