@@ -24,6 +24,7 @@ import { ReservationHeader } from "../data/reservation-header";
 import { ValidationErrors } from "@angular/forms";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from '../data/reservation-individual-details';
+import { addDays } from '@progress/kendo-date-math';
 
 @Component({
   templateUrl: "./reservation.component.html",
@@ -62,17 +63,30 @@ export class ReservationComponent implements OnInit {
   customerSelectDate: string;
   customerSelectTime: string;
   tempDate: Date;
+  //This option for displaying the date to customer view
   options = {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
   };
+
+  //Define this day arr to hide past event
+  dayOfWeekStr = ["SU","MO","TU","WE","TH","FR","SA"]
+  //Define time format option for blackout date
+  timeFormatOptions = {
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric',
+		hour12: false
+  };
+
   public allEvents: SchedulerEvent[];
+  allBlackoutDateException:any = []
   quantityData: QuantiyFormData;
   quantityForm: FormGroup;
   currTotalQuantity = 0;
-  availability: number;
-
+  availability: number;  
+  
   currentSession: ProgramScheduleData = {
     SchedulePK: 0,
     SessionDetailsPK: 0,
@@ -304,42 +318,89 @@ export class ReservationComponent implements OnInit {
       }
   });   // End Select Program header and initialize FormGroup
 
-   
-
-    // INITIALIZE THE SCHEDULE
-     this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) => {
-      const sampleDataWithCustomSchema = schedules.map((dataItem) => ({
-        ...dataItem,
-        SessionDetailsPK: dataItem.SessionDetailsPK,
-        ScheduleSettingPK: dataItem.ScheduleSettingPK,
-        ProgramPK: dataItem.ProgramPK,
-        Title: dataItem.Title,
-        Description: dataItem.Description,
-        StartTimezone: dataItem.StartTimezone,
-        Start: parseAdjust(dataItem.Start),
-        End: parseAdjust(dataItem.End),
-        EndTimezone: dataItem.EndTimezone,
-        MaximumParticipant: this.programDetails.MaximumParticipant,
-        CurrentParticipant: 0,
-        RecurrenceRule: dataItem.RecurrenceRule,
-        EndRepeatDate: dataItem.EndRepeatDate,
-        RecurrenceID: dataItem.RecurrenceID,
-        RecurrenceException: dataItem.RecurrenceException,
-        Color: dataItem.Color,
-        CreatedBy: dataItem.CreatedBy,
-        CreatedDate: dataItem.CreatedDate,
-        IsActive: dataItem.IsActive,
-      }));
-      this.allEvents = sampleDataWithCustomSchema;
-    });
-
     //Define and create to get schedule by ProgramPk
     const currentYear = new Date().getFullYear();
-    const parseAdjust = (eventDate: string): Date => {
-      const date = new Date(eventDate);
+    const parseAdjust = (eventDateTime: string, RepeatDay: string): Date => {
+      var date = new Date(eventDateTime);
       date.setFullYear(currentYear);
+      //Set the event Start and End to today dates if the Start/End is before today date
+      var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
+      let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
+      let dayIndex = todayDate.getDay()
+      //If date is before today's date and today's day is in the repeat day of the session
+      if(date < todayDate){
+          if(RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0){
+              date = todayDate
+          }
+          else{
+              for(var d = addDays(todayDate,1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)){
+                  if(RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0){
+                      date = d;
+                      break;
+                  }
+              }
+              
+          }                
+      }
       return date;
-    };
+  }; 
+
+    //GET ALL BLACK-OUT DATES
+    this.programScheduleServices.getAllBlackoutDateException().subscribe(res =>{
+          this.allBlackoutDateException = res      
+          console.log(res)
+        // INITIALIZE THE SCHEDULE
+        this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) => {
+          const sampleDataWithCustomSchema = schedules.map((dataItem) => ({
+            ...dataItem,
+            SessionDetailsPK: dataItem.SessionDetailsPK,
+            ScheduleSettingPK: dataItem.ScheduleSettingPK,
+            ProgramPK: dataItem.ProgramPK,
+            Title: dataItem.Title,
+            Description: dataItem.Description,
+            StartTimezone: dataItem.StartTimezone,
+            Start: parseAdjust(dataItem.Start, dataItem.RepeatDay),
+            End: parseAdjust(dataItem.End, dataItem.RepeatDay),
+            EndTimezone: dataItem.EndTimezone,
+            MaximumParticipant: this.programDetails.MaximumParticipant,
+            CurrentParticipant: 0,
+            RecurrenceRule: dataItem.RecurrenceRule,
+            EndRepeatDate: dataItem.EndRepeatDate,
+            RecurrenceID: dataItem.RecurrenceID,
+            RecurrenceException: [],//Date object array
+            Color: dataItem.Color,
+            CreatedBy: dataItem.CreatedBy,
+            CreatedDate: dataItem.CreatedDate,
+            IsActive: dataItem.IsActive,
+            }
+          ));
+          
+          //Create Date array for each event in RecurrenceException
+          sampleDataWithCustomSchema.forEach(item =>{
+            //Just check repeated sessions, skip additional sessions (since it happens once)
+            if(item.ScheduleSettingPK != 0){
+                var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
+                //get the time of the session
+                var timezoneOffset = (new Date(item.Start)).getTimezoneOffset()*60000
+                var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
+                var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0,10)
+                //1. Add recurrence exception to each session based on Blackout Date
+                //add the start date to the recurrence exception to avoid Kendo UI bug
+                let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
+                item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                //if this session has blackout-date => add to recurenceException
+                if(result.length > 0){ 
+                    //add each of the date in exceptionDateArr to recurence exception                        
+                    result[0].exceptionDateArr.forEach(exceptionDate =>{
+                        item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                    })
+                }                                        
+            }
+        })
+          this.allEvents = sampleDataWithCustomSchema;
+        });
+      })
+    
   } // End NgOninit()
 
   // Helper Function for select FormGroup Control
@@ -390,8 +451,8 @@ export class ReservationComponent implements OnInit {
     // this.isDisable = false;
     this.enableQuantityField();
 
-    var eventStart = e.event.dataItem.Start.toString();
-    var eventEnd = e.event.dataItem.End.toString();
+    var eventStart = e.event.dataItem.Start.toISOString();
+    var eventEnd = e.event.dataItem.End.toISOString();
     var programPK = e.event.dataItem.ProgramPK;
     var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
 
@@ -451,8 +512,8 @@ export class ReservationComponent implements OnInit {
           this.currentSession.SchedulePK = 0;   // SchedulePK is AutoIncrement
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
           this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
-          this.currentSession.Start = e.event.dataItem.Start.toString();
-          this.currentSession.End = e.event.dataItem.End.toString();
+          this.currentSession.Start = e.event.dataItem.Start.toISOString();
+          this.currentSession.End = e.event.dataItem.End.toISOString();
           this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;

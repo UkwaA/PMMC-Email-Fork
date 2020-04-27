@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 p-0">            
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 p-0" >            
+        <div class="col-lg-6 col-md-6 col-sm-6 p-0" id="4">            
             <select class="form-control" style="font-weight: bold" id="listOfPrograms"
                 (change)="onChangeSelectedProgram($event)">
                 <option selected value="0"> --- Select {{programCategories[choice].name}} --- </option>
@@ -22,27 +22,98 @@
             </select>
             
         </div>
-    </div>
-    <br/>
-    <div class="row">
-        <kendo-scheduler
-                [kendoSchedulerBinding]="events"                
-                (eventClick)="eventClick($event)"
-                [modelFields]="eventFields"
-                [selectedDate]="selectedDate"
-                [showWorkHours] = "true"
-                [eventStyles]="getEventStyles"
-                style="height: 700px; width: 1500px">
-        <ng-template kendoSchedulerEventTemplate let-event>
-            {{ event.dataItem.Title }} 
-        </ng-template>
-        <!-- <kendo-scheduler-day-view >
-        </kendo-scheduler-day-view> -->
-        <kendo-scheduler-week-view>
-        </kendo-scheduler-week-view>
-        <kendo-scheduler-month-view> </kendo-scheduler-month-view>
-        <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view>
-        <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
-      </kendo-scheduler>
+    </div>    
+    <div class="row pt-3">
+        <div class="col-md-8 p-0">
+            <div class="row filter m-0 mb-5">
+                <kendo-scheduler
+                    [kendoSchedulerBinding]="events"                
+                    (eventClick)="eventClick($event)"
+                    [modelFields]="eventFields"
+                    [selectedDate]="selectedDate"
+                    [showWorkHours] = "true"
+                    [eventStyles]="getEventStyles"
+                    [eventClass]="getEventClass" 
+                    style="height: 850px; width: 1500px">
+                    <ng-template kendoSchedulerEventTemplate let-event>
+                        {{ event.dataItem.Title }} 
+                    </ng-template>
+                    <!-- <kendo-scheduler-day-view >
+                    </kendo-scheduler-day-view> -->
+                    <kendo-scheduler-week-view >
+                    </kendo-scheduler-week-view>
+                    <kendo-scheduler-month-view > </kendo-scheduler-month-view>
+                    <!-- <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view> -->
+                    <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>
+                </kendo-scheduler>
+            </div>
+        </div>
+        <div class="col-md-4 pl-3">
+            <mat-card *ngIf="currentSessionDetails.ProgramPK != 0">
+                <mat-card-header>
+                    <div class="container p-0">
+                        <mat-card-title>
+                            {{currentSessionDetails.Title}}
+                        </mat-card-title>  
+                        <mat-card-subtitle>                           
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{currentSessionDetails.tempDate}}, 
+                                    {{currentSessionDetails.tempStart}} - {{currentSessionDetails.tempEnd}}
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-success btn-sm" *ngIf="currentSessionDetails.Availability != 0">
+                                        Available</button>
+                                    <button type="button" class="btn btn-danger btn-sm" *ngIf="currentSessionDetails.Availability == 0">
+                                        Full</button>
+                                </div>
+                            </div>
+                        </mat-card-subtitle>
+                    </div> 
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="row pb-1">
+                                <div class="col-md-8">
+                                    <h6>Instructor:</h6>
+                                </div>                       
+                                <div class="col-md-3 text-right">-</div>
+                            </div>
+                            <div class="row pb-1">
+                                <div class="col-md-8"><h6>Seats:</h6></div>
+                                <div class="col-md-3 text-right">{{currentSessionDetails.MaximumParticipant}}</div>
+                            </div>
+                            <div class="row pb-1">
+                                <div class="col-md-8"><h6>Available: </h6></div>
+                                <div class="col-md-3 text-right">{{currentSessionDetails.Availability}}</div>
+                            </div>
+                            <div class="row pb-1">
+                                <div class="col-md-8"><h6>Age range:</h6></div>
+                                <div class="col-md-3 text-right">-</div>
+                            </div>
+                            <div class="row pb-1">
+                                <div class="col-md-8"><h6>No. of children: </h6></div>
+                                <div class="col-md-3 text-right">-</div>
+                            </div>
+                            <div class="row pb-1">
+                                <div class="col-md-8"><h6>No. of chaperones: </h6></div>
+                                <div class="col-md-3 text-right">-</div>
+                            </div>
+                        </div>
+                    </div>                    
+                </mat-card-content>
+                <mat-card-actions align="end">
+                    <button mat-button onclick="this.blur()" color="primary"
+                        [routerLink]="['/profile','program-details', currentSessionDetails.ProgramPK, 'set-program-schedule']">
+                        EDIT SESSION</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>        
     </div>
 </div>

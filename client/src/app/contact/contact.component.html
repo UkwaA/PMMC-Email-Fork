@@ -36,7 +36,7 @@
         </mat-form-field>
         <div class="text-right">
           <button mat-raised-button [disabled]="myForm.invalid" type="submit" 
-          class="btn btn-primary btn-lg active" aria-pressed="true" data-toggle="modal" data-target="#ModalCenter">
+          class="btn btn-primary btn-lg active" aria-pressed="true" data-toggle="modal" data-target="#ModalCenter" onfocus="blur()">
           Submit</button>
           
         </div>
@@ -55,7 +55,7 @@
                 {{modalContent}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "reset()">Close</button>                                  
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click) = "reset()" onfocus="blur()">Close</button>                                  
             </div>
             </div>
         </div>

@@ -31,10 +31,15 @@
                             <kendo-datepicker 
                                 [(value)]="startDate"
                                 (valueChange)="onChangeStartDate($event)"
+                                [navigation]="false"
                                 [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
-                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'"
+                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession' 
+                                        && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
                                 >                        
                             </kendo-datepicker>
+                            <!-- <div class="errorMessage" *ngIf="startDateErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{startDateErrorMessage}}
+                            </div> -->
                         </div>
                         <div class="col-md-1" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <label>End:</label>
@@ -43,8 +48,10 @@
                             <kendo-datepicker 
                                 [(value)]="endDate" 
                                 [min] = "startDate"
+                                [navigation]="false"
                                 (valueChange)="onChangeEndDate($event)"
-                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'"
+                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
+                                        && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
                                 >
                             </kendo-datepicker>
                             <div class="errorMessage" *ngIf="endDateErrorMessage">
@@ -135,17 +142,17 @@
                                 </div>  
                             </div>
                         </div>
-                        <br/>                    
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Note</label>
-                            </div>
-                            <div class="col-md-10">
-                                <textarea kendoTextArea class="form-control" 
-                                    formControlName="description" [(ngModel)]="eventDescription"></textarea>
-                            </div>
-                        </div>      
-                    </div>              
+                    </div>
+                    <br/> 
+                    <div class="row" *ngIf="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'">
+                        <div class="col-md-2">
+                            <label>Note</label>
+                        </div>
+                        <div class="col-md-10">
+                            <textarea kendoTextArea class="form-control" 
+                                formControlName="description" [(ngModel)]="eventDescription"></textarea>
+                        </div>
+                    </div>               
                 </div>
             </form>
         </div>
@@ -156,7 +163,7 @@
             {{modalData.actionButtonText}}
         </button>
         
-        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+        <button *ngIf = "modalData.numberOfButton == '2'" mat-raised-button id="modal-cancel-button" (click)="closeModal()" onfocus="blur()">
             Cancel
         </button>
     </footer>

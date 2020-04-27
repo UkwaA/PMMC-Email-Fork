@@ -4,17 +4,18 @@ import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmailService } from '../../services/email.services';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 
-
+declare var $: any;
 @Component({
     templateUrl: './forgot-password.component.html',
-    styleUrls: ['./forgot-password.component.css']
+    styleUrls: ['../../components/modal-dialog/modal-dialog.component.css']
 })
 
+
 export class ForgotPasswordComponent{
-    myForm: FormGroup
+    resetForm: FormGroup
     submitted = false
     userInfo = {
         UserPK: '',
@@ -25,12 +26,15 @@ export class ForgotPasswordComponent{
     }
 
     constructor(private fb: FormBuilder, private auth: AuthenticationService, public emailService:EmailService,
-        public matDialog: MatDialog, private router: Router){}
+        public dialogRef: MatDialogRef<ForgotPasswordComponent>, public matDialog:MatDialog,
+        private router: Router){}
 
     faEnvelope = faEnvelope;
 
     ngOnInit(){
-        this.myForm = this.fb.group({            
+        $(".alert-success").hide()
+        $(".alert-danger").hide()
+        this.resetForm = this.fb.group({            
             email: ['', [
                 Validators.required,
                 Validators.email,
@@ -39,14 +43,26 @@ export class ForgotPasswordComponent{
         })
     }
 
-    get f() { return this.myForm.controls; }
+    public errorHandling = (control: string, error: string) => {
+        return this.resetForm.controls[control].hasError(error);
+      }
+
+    closeModal(){
+        this.dialogRef.close("No");
+      }
+    
+      actionFunction() {
+        console.log("Modal closing");
+        this.dialogRef.close("Yes");
+      }
 
     resetPassword(){        
         this.submitted = true
-        if (this.myForm.invalid) {
+        if (this.resetForm.invalid) {
             return;
         }
         console.log(this.userInfo)
+        this.userInfo.Email = this.resetForm.get("email").value;
         
         this.emailService.sendResetPasswordEmail(this.userInfo).subscribe(
             (res) => {
@@ -55,6 +71,7 @@ export class ForgotPasswordComponent{
                 }
                 else{                    
                     console.log("Reset Email has been sent to " + this.userInfo.Email)
+                    this.closeModal();
                 }
                 this.openModal()
             },
@@ -69,29 +86,20 @@ export class ForgotPasswordComponent{
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose =true;
-        dialogConfig.id = "modal-component";
+        // dialogConfig.disableClose =true;
+        dialogConfig.id = "reset-modal-component";
         dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
+        dialogConfig.maxHeight = "400px";
         dialogConfig.width = "350px";
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: "Forgot Password",
-            description: "Reset Password Email has been sent to " + this.userInfo.Email 
-            + ". Please follow instructions in the email to reset your password. You are now redirecting to Login Page." ,
+            description: "A link to reset your password has been sent to " + this.userInfo.Email 
+            + ". Please follow the instructions in the email to continue the process." ,
             actionButtonText: "Close",   
             numberOfButton: "1"         
           }
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-        modalDialog.afterClosed().subscribe(result =>{
-            if(result == "Yes"){
-                //Redirect users to login page
-                this.router.navigateByUrl('/login')
-            }
-            else{
-                console.log("stop")                
-            }
-        })
     }
 }
 

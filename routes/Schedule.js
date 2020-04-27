@@ -3,12 +3,10 @@ const cors = require("cors");
 const schedule = express.Router();
 const bodyParser = require("body-parser");
 
-const ReservationGroupProgram = require("../models/ReservationGroupDetails");
-const ReservationIndividualProgram = require("../models/ReservationIndividualDetails");
-const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
 const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
+const BlackoutDate = require("../models/ProgramBlackoutDate");
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -16,15 +14,16 @@ const Op = Sequelize.Op;
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
-/**************************************
-   GET ALL CURRENT PROGRAM SCHEDULES
- **************************************/
+/*********************************************
+   GET ALL CURRENT PROGRAM SCHEDULE SETTINGS
+ *********************************************/
 schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
   ScheduleSetting.findAll({
     where : {
 		ProgramPK: req.params.id,
       IsActive: true
-    }
+    },
+    order: [['Start', 'DESC']]
   })
   .then(scheduleSetting =>{
     if(scheduleSetting.length > 0){
@@ -43,9 +42,62 @@ schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
    ADD NEW SCHEDULE SETTING
  **************************************/
 schedule.post("/add-new-schedule-setting", (req, res) => {
-  ScheduleSetting.create(req.body)
-  .then(newScheduleSetting =>{
-    res.json(newScheduleSetting.ScheduleSettingPK)
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  ScheduleSetting.findAll({
+    where:{
+      //Check if there exists another schedule setting in this time range
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],      
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting => {
+    if(scheduleSetting.length > 0 || startDate == endDate){
+      res.json({error: "The Start/End date falls between existing schedules. Please select another Start/End Date."})
+    }
+    else{
+      ScheduleSetting.create(req.body)
+      .then(newScheduleSetting =>{
+        res.json(newScheduleSetting.ScheduleSettingPK)
+      })
+      .catch(err => {
+        res.send("errorExpressErr: " + err);
+      })
+    }
   })
   .catch(err => {
     res.send("errorExpressErr: " + err);
@@ -57,26 +109,83 @@ schedule.post("/add-new-schedule-setting", (req, res) => {
  **********************************************/
 //1. Update Schedule Setting
 schedule.post("/update-schedule-setting", (req, res) => {
-	ScheduleSetting.update(req.body, {
-		where: {
-		  ScheduleSettingPK: req.body.ScheduleSettingPK
-		}
-	 })
-	 .then(result => {
-		if (result == 1) {
-		  res.send({
-			 message: "Schedule setting was updated successfully."
-		  });
-		}
-		else {
-		  res.send({
-			 error: "Cannot update schedule setting"
-		  });
-		}
-	 })
-	 .catch(err => {
-		res.send('error: ' + err)
-	 })
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  ScheduleSetting.findAll({
+    where:{
+      //Check if there exists another schedule setting in this time range
+      ScheduleSettingPK:{
+        [Op.ne]: req.body.ScheduleSettingPK
+      },
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],      
+      IsActive: true
+    }
+  })
+  .then(scheduleSetting => {
+    //Does not allow schedule setting has the same Start and End date
+    if(scheduleSetting.length > 0 || startDate == endDate){
+      res.json({error: "The Start/End date falls between existing schedules. Please select another Start/End Date."})
+    }
+    else{
+      ScheduleSetting.update(req.body, {
+        where: {
+          ScheduleSettingPK: req.body.ScheduleSettingPK
+        }
+       })
+       .then(result => {
+        if (result == 1) {
+          res.json({
+           message: "Schedule setting was updated successfully."
+          });
+        }
+        else {
+          res.json({
+           error: "Cannot update schedule setting"
+          });
+        }
+       })
+       .catch(err => {
+        res.send('error: ' + err)
+       })
+    }
+  })	
+  .catch(err => {
+    res.send('error: ' + err)
+   })
 });
 
 //2. Update all SessionDetails associated with the ScheduleSetting
@@ -153,29 +262,6 @@ schedule.post("/deactivate-schedule-setting", (req, res) => {
   .catch(err => {
     res.send("errorExpressErr: " + err);
   })
-});
-
-/***************************************************
-   GET ALL CURRENT PROGRAM SCHEDULES BY PROGRAMPK
- ***************************************************/
-schedule.get("/get-all-schedule-settings-by-id/:id", (req, res) => {
-  ScheduleSetting.findAll({
-    where : {
-      ProgramPK: req.params.id,
-      IsActive: true
-    }
-  })
-  .then(scheduleSetting =>{
-    if(scheduleSetting.length > 0){
-      res.json(scheduleSetting)
-    }
-    else{
-      res.json("There're no available schedules for this program.")
-    }
-  })
-  .catch(err => {
-    res.send("errorExpressErr: " + err);
-  });
 });
 
 /************************************
@@ -364,6 +450,8 @@ schedule.post("/deactivate-session-details", (req, res) => {
    ADD NEW ADDITIONAL SESSION DETAILS
  ************************************/
 schedule.post("/add-new-additional-session-details", (req, res) => {
+  var startDate = (new Date(req.body.Start)).toISOString()
+
   SessionDetails.findAll({
     where: {
       ProgramPK: req.body.ProgramPK,
@@ -381,10 +469,40 @@ schedule.post("/add-new-additional-session-details", (req, res) => {
         )
     }
     else{
-      //If there's no events having the same start and end time => create new
-      SessionDetails.create(req.body)
-      .then(newSession => {
-        res.json(newSession)
+      //If there's no events having the same start and end time => check if session falls in blackout date
+      BlackoutDate.findAll({
+        where: {
+          ProgramPK: req.body.ProgramPK,
+          [Op.or]:[
+            {
+              Start:{[Op.lte]: startDate},
+              End:{[Op.gte]: startDate}
+            },
+            {
+              [Op.or]:[
+                {
+                  Start:{[Op.like]: "%" + startDate.slice(0,10) + "%"}
+                },
+                {
+                  End:{[Op.like]: "%" + startDate.slice(0,10) + "%"}
+                }
+              ]
+            }
+          ],
+          IsActive: true
+        }
+      })
+      .then(blackoutDate =>{
+        if(blackoutDate.length > 0){
+          res.json({error:"This time falls into Blackout Dates. Please select another time."})
+        }
+        else{
+          //If additional session does not fall into any blackout date => create additional session
+            SessionDetails.create(req.body)
+            .then(newSession => {
+              res.json(newSession)
+            })
+        }
       })
     }
   })
@@ -397,6 +515,7 @@ schedule.post("/add-new-additional-session-details", (req, res) => {
   UPDATE ADDITIONAL SESSION DETAILS
  ************************************/
 schedule.post("/update-additional-session-details", (req, res) => {
+  var startDate = (new Date(req.body.Start)).toISOString()
   SessionDetails.findAll({
     where: {
       SessionDetailsPK:{
@@ -418,41 +537,69 @@ schedule.post("/update-additional-session-details", (req, res) => {
     }
     else{
       //If there's no events having the same start and end time => update the current session detail
-      SessionDetails.update(req.body, {
+      BlackoutDate.findAll({
         where: {
-          SessionDetailsPK: req.body.SessionDetailsPK          
-        }
-      })
-      .then(result => {
-        if(result == 1){
-          //Update record in schedule table
-          Schedule.update({
-            Start: req.body.Start,
-            End: req.body.End
-          },{
-            where:{
-              ProgramPK: req.body.ProgramPK,
-              SessionDetailsPK: req.body.SessionDetailsPK
+          ProgramPK: req.body.ProgramPK,
+          [Op.or]:[
+            {
+              Start:{[Op.lte]: startDate},
+              End:{[Op.gte]: startDate}
+            },
+            {
+              [Op.or]:[
+                {
+                  Start:{[Op.like]: "%" + startDate.slice(0,10) + "%"}
+                },
+                {
+                  End:{[Op.like]: "%" + startDate.slice(0,10) + "%"}
+                }
+              ]
             }
-          })
-          .then(result =>{
-            res.json({message: "Session and schedule have been updated successfully"})
-          })
-          .catch(err => {
-            res.send("errorExpressErr: " + err);
-          })
+          ],
+          IsActive: true
         }
       })
-      .catch(err => {
+      .then(blackoutDate =>{
+        if(blackoutDate.length > 0){
+          res.json({error:"This time falls into Blackout Dates. Please select another time."})
+        }
+        else{
+            SessionDetails.update(req.body, {
+              where: {
+                SessionDetailsPK: req.body.SessionDetailsPK          
+              }
+            })
+            .then(result => {
+              if(result == 1){
+                //Update record in schedule table
+                Schedule.update({
+                  Start: req.body.Start,
+                  End: req.body.End
+                },{
+                  where:{
+                    ProgramPK: req.body.ProgramPK,
+                    SessionDetailsPK: req.body.SessionDetailsPK
+                  }
+                })
+                .then(result =>{
+                  res.json({message: "Session and schedule have been updated successfully"})
+                })
+                .catch(err => {
+                  res.send("errorExpressErr: " + err);
+                })
+              }
+            })
+            .catch(err => {
+              res.send("errorExpressErr: " + err);
+            })
+          }          
+        })
+      }
+    })
+    .catch(err => {
         res.send("errorExpressErr: " + err);
-      })
-    }
-  })
-  .catch(err => {
-    res.send("errorExpressErr: " + err);
-  });
+      })    
 });
-
 
 /**********************************************
    ADD NEW SCHEDULE RECORD TO SCHEDULE TABLE
@@ -514,7 +661,8 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
       SessionDetailsPK: req.params.session,
       ProgramPK: req.params.id,
       Start: req.params.start,
-      End: req.params.end      
+      End: req.params.end,
+      IsActive: true
     }
   })
   .then(schedule =>{
@@ -542,6 +690,315 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
       res.send("error: " + err);
     });
 });
+
+/**********************************************
+   GET ALL BLACKOUT DATE EXCEPTION ARRAY 
+   Arr structure: {ProgramPK: "", exceptionDateArr: [each element is a datestring] }
+ **********************************************/
+schedule.get("/get-all-blackout-date-exception", (req,res) => {
+  BlackoutDate.findAll({
+    where:{      
+      IsActive: true,
+    },
+    order: [['Start', 'ASC']]
+  })
+  .then(blackoutDate =>{
+    var blackoutDateObj = []
+    var found = false;
+    //Loop througth blackoudate array to generate exception date string (used for View schedule)
+    blackoutDate.forEach(date =>{
+      var temp = {
+        ProgramPK: date.ProgramPK,
+        exceptionDateArr: []
+      }
+      found = false
+      blackoutDateObj.forEach(item =>{
+        if(item.ProgramPK === date.ProgramPK){
+          found = true
+          if(date.Start === date.End){            
+            item.exceptionDateArr.push(date.Start.slice(0,10))              
+          }
+          else{
+            for(var d = new Date(date.Start); d <= new Date(date.End); d.setDate(d.getDate() + 1)){
+                item.exceptionDateArr.push(d.toISOString().slice(0,10))
+            }
+          }
+        }
+      })
+      if(!found){
+        if(date.Start === date.End){            
+          temp.exceptionDateArr.push(date.Start.slice(0,10))              
+        }
+        else{
+          for(var d = new Date(date.Start); d <= new Date(date.End); d.setDate(d.getDate() + 1)){
+              temp.exceptionDateArr.push(d.toISOString().slice(0,10))
+          }
+        }
+        blackoutDateObj.push(temp)
+      }      
+    })
+    res.json(blackoutDateObj)
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+
+});
+
+/**********************************************
+   GET ALL BLACKOUT DATE BY PROGRAM
+ **********************************************/
+schedule.get("/get-program-blackout-date-by-id/:id", (req,res) =>{
+  BlackoutDate.findAll({
+    where:{
+      ProgramPK: req.params.id,
+      IsActive: true,
+    },
+    order: [['Start', 'DESC']]
+  })
+  .then(blackoutDate =>{
+    res.json(blackoutDate)
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+})
+
+/**********************************************
+   ADD BLACKOUT DATE
+ **********************************************/
+schedule.post("/add-blackout-date", (req, res) => {
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  BlackoutDate.findAll({
+    where:{
+      //Check if there exists another blackout date in this time range
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],
+      IsActive: true
+    }
+  })
+  .then(blackoutDate =>{
+    if(blackoutDate.length > 0){
+      res.json({error:"There exists another blackout date in this date range. Please select another Start/End Date."})
+    }
+    else{
+      //Create new record in programblackoutdate table
+      BlackoutDate.create(req.body)
+      .then(newBlackoutDate =>{
+          //Check in schedule table if there is any schedules fall into the blackout date => disable it
+          Schedule.update({
+            IsActive: false
+          },
+          {
+            where :{
+              ProgramPK: newBlackoutDate.ProgramPK,
+              Start: {
+                [Op.between]: [req.body.Start, req.body.End]
+              },
+              IsActive: true
+            }
+          })
+          .then(() =>{
+              //Check in sessiondetail table if there is any additional session (schedulesettingpK = 0) fall 
+              //into the blackout date => disable it
+              SessionDetails.update({
+                IsActive: false
+              },
+              {
+                where :{
+                  ProgramPK: newBlackoutDate.ProgramPK,
+                  ScheduleSettingPK: 0,
+                  Start: {
+                    [Op.between]: [req.body.Start, req.body.End]
+                  },
+                  IsActive: true
+                }
+              })
+              .then(() =>{
+                res.json(newBlackoutDate)
+              })
+              .catch(err => {
+                res.send("error: " + err);
+              });
+          })
+          .catch(err => {
+            res.send("error: " + err);
+          });
+      })
+      .catch(err => {
+        res.send("error: " + err);
+      });
+    }
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });  
+})
+
+
+/**********************************************
+   EDIT BLACKOUT DATE
+ **********************************************/
+schedule.post("/update-blackout-date", (req, res) => {
+  var startDate = req.body.Start.slice(0,10)
+  var endDate = req.body.End.slice(0,10)
+  BlackoutDate.findAll({
+    where:{
+      //Check if there exists another blackout date in this time range
+      ProgramBlackoutDatePK: {
+        [Op.ne]: req.body.ProgramBlackoutDatePK
+      },
+      ProgramPK: req.body.ProgramPK,
+      [Op.or]: [
+        {
+          Start:{[Op.lte]: req.body.Start},
+          End:{[Op.gte]: req.body.Start}
+        },
+        {
+          Start:{[Op.lte]: req.body.End},
+          End:{[Op.gte]: req.body.End}
+        },
+        {
+          Start:{[Op.gte]: req.body.Start},
+          End:{[Op.lte]: req.body.End}
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + startDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + startDate + "%"}
+            }
+          ]
+        },
+        {
+          [Op.or]:[
+            {
+              Start:{[Op.like]: "%" + endDate + "%"}
+            },
+            {
+              End:{[Op.like]: "%" + endDate + "%"}
+            }
+          ]
+        }
+      ],
+      IsActive: true
+    }
+  })
+  .then(blackoutDate => {
+    if(blackoutDate.length > 0){
+      res.json({error:"There exists another blackout date in this date range. Please select another Start/End Date."})
+    }
+    else{
+      //Update record in programblackoutdate table
+      BlackoutDate.update(req.body, {
+        where :{
+          ProgramBlackoutDatePK: req.body.ProgramBlackoutDatePK
+        }
+      })
+      .then(() =>{
+           //Check in schedule table if there is any schedules fall into the blackout date => disable it
+           Schedule.update({
+            IsActive: false
+          },
+          {
+            where :{
+              ProgramPK: req.body.ProgramPK,
+              Start: {
+                [Op.between]: [req.body.Start, req.body.End]
+              },
+              IsActive: true
+            }
+          })
+          .then(() =>{
+              //Check in sessiondetail table if there is any additional session (schedulesettingpK = 0) fall 
+              //into the blackout date => disable it
+              SessionDetails.update({
+                IsActive: false
+              },
+              {
+                where :{
+                  ProgramPK: req.body.ProgramPK,
+                  ScheduleSettingPK: 0,
+                  Start: {
+                    [Op.between]: [req.body.Start, req.body.End]
+                  },
+                  IsActive: true
+                }
+              })
+              .then(() =>{
+                res.json({message: "Blackout date, schedule, and session details have been updated"})
+              })
+              .catch(err => {
+                res.send("error: " + err);
+              });
+          })
+          .catch(err => {
+            res.send("error: " + err);
+          });
+      })
+    }
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });  
+})
+
+/**********************************************
+   DEACTIVATE BLACKOUT DATE
+ **********************************************/
+schedule.post("/deactivate-blackout-date", (req,res) => {
+  BlackoutDate.update({
+    IsActive: false
+  },{
+    where :{
+      ProgramBlackoutDatePK: req.body.ProgramBlackoutDatePK
+    }
+  })
+  .then(result =>{
+    if(result == 1){
+      res.json({message: "Blackout date has been deactivated."})
+    }
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+})
 
 /*******************************
   SET PROGRAM COLOR

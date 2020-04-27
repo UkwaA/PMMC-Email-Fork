@@ -1,5 +1,37 @@
 .container {
     padding-top: 100px;
     padding-bottom: 56px;
-  }
-  
+}
+
+.width-btn{
+  width: 22%;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 40px;
+  font-weight: bold;
+  color: #08b2b8; 
+}
+
+h6{
+  font-weight: bold;
+}
+
+/* ::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #08b2b8;
+}  */
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #08b2b8; 
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit{
+  background-color: #08b2b8;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-done{
+  background-color: #08b2b8;
+}
+

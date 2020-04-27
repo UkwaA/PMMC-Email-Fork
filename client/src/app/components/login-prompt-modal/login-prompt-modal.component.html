@@ -1,18 +1,27 @@
 <div id="modal-content-wrapper" style="text-align: center;">
     <header id="modal-header">
-        <button type="button" class="close" (click)="actionFunction()">X</button>
+        <button type="button" class="close" (click)="actionFunction()" onfocus="blur()">X</button>
         <div class="alert alert-success alert-dismissible fade show mb-0">
             <strong>Success!</strong> Your account has been registered.
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <button type="button" class="close" data-dismiss="alert" onfocus="blur()">&times;</button>
         </div>
         <div class="alert alert-danger alert-dismissible fade show mb-0">
             <strong>Error!</strong> The username and password did not match.
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <button type="button" class="close" data-dismiss="alert" onfocus="blur()">&times;</button>
         </div>
-        <h1 id="modal-title">LOGIN</h1>
-        <!-- <img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"> -->
-        <!-- <h2><img class="logo" src="https://i.imgur.com/onax09g.png" alt="" style="height:100px; width: 100px;"></h2> -->
-        <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="modal-title">LOGIN</h1>
+
+                </div>
+            </div>
+        </div>
     </header>
 
     <mat-divider></mat-divider>
@@ -34,16 +43,13 @@
         </p>
     </mat-dialog-content>
     <p>
-        <button mat-raised-button class="signIn-btn mb-1" (click)="signIn()">
+        <button mat-raised-button class="signIn-btn mb-1" (click)="signIn()" onfocus="blur()">
             Login
         </button>
     </p>
     <mat-divider></mat-divider>
-    <div class="sign-up">
-        <p>Don't have an account? 
-            <button (click)="createNew()" class = "link">
-                Sign up
-            </button>
-        </p>
+    <div class="d-flex justify-content-between sign-up">
+        <button class="link" (click)="resetPassword()"> Forgot password</button>
+        <button (click)="createNew()" class = "link"> Sign up</button>
     </div>
 </div>

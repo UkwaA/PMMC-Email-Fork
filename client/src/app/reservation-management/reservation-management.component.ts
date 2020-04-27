@@ -1,5 +1,6 @@
 import { OnInit, Component, ViewEncapsulation } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { ReservationHeader } from '../data/reservation-header';
 
 @Component ({
     templateUrl: '/reservation-management.component.html',
@@ -9,6 +10,8 @@ import { AuthenticationService } from '../authentication.service';
 
 export class ReservationManagement implements OnInit{
     role:string;
+    pastReservationArray: ReservationHeader[];
+    ongoingReservationArray: ReservationHeader[];
 
     constructor(private auth: AuthenticationService){}
     
