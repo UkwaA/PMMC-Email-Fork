@@ -110,25 +110,16 @@ pieChartOptions = {
 
   // PaynowModal
   openPaynowModal(){
+    console.log("Paynow Modal called")
     const dialogConfig = new MatDialogConfig();
+
     dialogConfig.disableClose = true;
     dialogConfig.id = "paynow-modal-component";
-    dialogConfig.height = "auto";
     dialogConfig.maxHeight = "600px";
-    dialogConfig.width = "700px";
+    dialogConfig.width = "570px";
     dialogConfig.autoFocus = false;
-    dialogConfig.data = {
-      title: "Pay Now",
-      mode: "paynow",
-      description: "",
-    }
+   
     const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
-    paynowModalDialog.afterClosed().subscribe((result) => {
-      if (result == "Yes") {
-        console.log("Paynow Modal");
-      }
-
-    });
   }
 
 }
