@@ -17,8 +17,8 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    ResevationStatus: {
-      type: Sequelize.BOOLEAN
+    ReservationStatus: {
+      type: Sequelize.INTEGER,
     },
     NumberOfParticipant: {
       type: Sequelize.INTEGER

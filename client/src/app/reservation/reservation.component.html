@@ -719,8 +719,10 @@
     <mat-step [stepControl]="confirmation">
       <ng-template matStepLabel>Payment</ng-template>
       <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails"
-          [ProgramPK]="ProgramPK"></payment>
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"></payment>
+      </ng-container>
+      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"></payment>
       </ng-container>
       <div class="row pt-3">
         <div class="col-md-12">
@@ -731,16 +733,16 @@
     </mat-step>
     <mat-step [stepControl]="paymentForm">
       <ng-template matStepLabel>Confirmation</ng-template>
+      
       <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"
-          [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
-        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"
-          [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+        <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button"> Submit </button>  
       </div>
     </mat-step>
   </mat-horizontal-stepper>

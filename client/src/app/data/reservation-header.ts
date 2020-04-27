@@ -4,6 +4,7 @@ export class ReservationHeader {
     UserPK: number;
     ReservationStatus: number;
     NumberOfParticipant: number;
+    Total:number;
     CreatedDate: Date;
     IsActive: boolean;
     RemainingBalance:number;
@@ -13,6 +14,7 @@ export class ReservationHeader {
       this.SchedulePK = 0;
       this.UserPK = 0;
       this.ReservationStatus = 0;
+      this.Total = 0;
       this.NumberOfParticipant = 0;
       this.CreatedDate = new Date();
       this.IsActive = true;

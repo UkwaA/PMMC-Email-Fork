@@ -11,59 +11,67 @@ reservation.use(bodyParser.json());
 reservation.use(cors());
 
 /******************************************
+ *       GET RESERVATION HEADER           *
+ ******************************************/
+reservation.get("/get-all-reservation", (req, res) => {
+  reservation
+    .findAll({
+      where: {
+        IsActive: true,
+      },
+    })
+    .then((result) => {
+      if (result) {
+        res.json(program);
+      } else {
+        res.send("There is no reservation available.");
+      }
+    })
+    .catch((err) => {
+      res.send("error: Get Reservation" + err);
+    });
+});
+
+/******************************************
  *       CREATE NEW RESERVATION HEADER    *
  ******************************************/
 reservation.post("/add-new-reservation", (req, res) => {
   const today = new Date();
-  var reservationPK = 0;
-
-//   const reservationHeader = {
-//     SchedulePK:             req.body.SchedulePK,
-//     UserPK:                 req.body.UserPK,
-//     ResevationStatus:       req.body.ResevationStatus,
-//     NumberOfParticipant:    req.body.NumberOfParticipant,
-//     Total:                  req.body.Total,
-//     CreatedDate:            today,
-//     IsActive:               req.body.IsActive,
-//     RemainingBalance:       req.body.RemainingBalance
-//   };
 
   ReservationHeader.create(req.body)
-  .then((result) => {
-    res.json(result.ReservationHeader);
-  })
-  .catch((err) => {
-    res.send("err Add reservation " + err);
-  });;
-});
-
-
-/******************************************
- *       CREATE NEW GROUP RESERVATION DETAILS    *
- ******************************************/
-reservation.post("/add-group-reservation-details", (req, res) => {
-    const today = new Date();
-    var reservationPK = 0;
-  
-    const reservationGroupDetails = {
-      SchedulePK:             req.body.SchedulePK,
-      UserPK:                 req.body.UserPK,
-      ResevationStatus:       req.body.ResevationStatus,
-      NumberOfParticipant:    req.body.NumberOfParticipant,
-      Total:                  req.body.Total,
-      CreatedDate:            today,
-      IsActive:               req.body.IsActive,
-      RemainingBalance:       req.body.RemainingBalance
-    };
-  
-    ReservationHeader.create(reservationHeader)
     .then((result) => {
-      res.json(result.ReservationHeader);
+      res.json(result.ReservationPK);
     })
     .catch((err) => {
       res.send("err Add reservation " + err);
-    });;
-  });
-  
+    });
+});
+
+/******************************************
+ *  CREATE NEW GROUP RESERVATION DETAILS  *
+ ******************************************/
+reservation.post("/add-group-reservation-details", (req, res) => {
+  ReservationGroupDetails.create(req.body)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send("err Add reservation " + err);
+    });
+});
+
+/*************************************************
+ *  CREATE NEW INDIVIDUAL RESERVATION DETAILS      *
+ **************************************************/
+reservation.post("/add-individual-reservation-details", (req, res) => {
+  ReservationIndividualDetails.create(req.body)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send("err Add reservation " + err);
+    });
+});
+
 // ========================END=====================
 module.exports = reservation;

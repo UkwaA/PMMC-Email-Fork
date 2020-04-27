@@ -665,10 +665,10 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
       IsActive: true
     }
   })
-  .then(schedule =>{
+  .then((schedule) =>{
     res.json(schedule);
   })
-  .catch(err => {
+  .catch((err) => {
     res.send("error: " + err);
   });
 });

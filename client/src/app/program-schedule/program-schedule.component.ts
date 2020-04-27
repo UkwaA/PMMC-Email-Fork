@@ -58,6 +58,7 @@ export class ProgramScheduleComponent implements OnInit {
     CurrentNumberParticipant: 0,
     CreatedBy: 0,
     IsActive: true,
+    IsFull: false
   };
 
 
