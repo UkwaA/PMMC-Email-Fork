@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
 import { ProgramScheduleService } from "../services/schedule.services";
@@ -8,16 +8,14 @@ import {
   SchedulerModelFields,
   EventStyleArgs,
 } from "@progress/kendo-angular-scheduler";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { QuantiyFormData } from "../data/quantity-form-data";
 import { ProgramScheduleData } from "../data/program-schedule-data";
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
+import { MatDialog } from "@angular/material";
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
-import { MatStepperModule, MatStepper } from "@angular/material/stepper";
-import { StepperServices } from "../services/stepper.services";
+import { MatStepper } from "@angular/material/stepper";
 
 /*************  BOOKING GROUP PROGRAM  ******************* */
 import { BookingGroupData } from "../data/booking-group-data";
@@ -30,16 +28,17 @@ import { ReservationIndividualDetails } from '../data/reservation-individual-det
 @Component({
   templateUrl: "./reservation.component.html",
   styleUrls: ["./reservation.component.css"],
-  providers: [StepperServices],
 })
 export class ReservationComponent implements OnInit {
   @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
 
   ProgramPK: number;
-  isCompleted = false;
+  stepOneIsCompleted = false;
+  stepTwoIsCompleted = false;
+  stepThreeIsCompleted = false;
 
   // Data Model to store User Input
-  reservationHeader: ReservationHeader;
+  reservationHeader = new ReservationHeader();
   reservationIndividualDetails = new ReservationIndividualDetails();
   reservationGroupDetails = new ReservationGroupDetails();
 
@@ -52,8 +51,6 @@ export class ReservationComponent implements OnInit {
   submitted = false;
 
   programDetails: ProgramData;
-  total: number;
-
   programName: string;
   programDesc: string;
   ProgramType: number;
@@ -104,21 +101,13 @@ export class ReservationComponent implements OnInit {
   };
 
   /**************************************************************/
-  constructor(
-    private route: ActivatedRoute,
-    private service: ProgramServices,
-    private programScheduleServices: ProgramScheduleService,
-    private fb: FormBuilder,
-    public matDialog: MatDialog,
-    private auth: AuthenticationService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.route.params.subscribe((val) => {
-      this.ProgramPK = val.id;
-    });
-
+  constructor(private route: ActivatedRoute,
+              private service: ProgramServices,
+              private programScheduleServices: ProgramScheduleService,
+              private fb: FormBuilder,
+              public matDialog: MatDialog,
+              private auth: AuthenticationService,
+              private router: Router) {
     this.quantityForm = this.fb.group({
       AdultQuantity: [
         { value: "0", disabled: true },
@@ -153,162 +142,169 @@ export class ReservationComponent implements OnInit {
       CustomerSelectTime: ["",[Validators.required]],
       Availability: ["",[Validators.required]],
     });
+  }
 
-    /******************PROGRAM SCHEDULE*************************/
-    this.service.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((details) => {
-        this.programDetails = details;
-        this.ProgramType = details.ProgramType;
-        this.programDesc = this.programDetails.Description;
-        this.programName = this.programDetails.Name;
+  ngOnInit() {
+    this.route.params.subscribe((val) => {
+      this.ProgramPK = val.id;
+    });
+
+     /******************PROGRAM SCHEDULE*************************/
+     this.service.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((details) => {
+      this.programDetails = details;
+      this.ProgramType = details.ProgramType;
+      this.programDesc = this.programDetails.Description;
+      this.programName = this.programDetails.Name;
 
 
-        switch(this.ProgramType) {
-          /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
-          case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-            this.service.getProgramRequirementDetails("g", this.ProgramPK).subscribe((program) => {
-                this.bookingGroup = program;
-                
-                this.registerForm = this.fb.group({
-                  ProgramRestriction: ["", Validators.required],
-                  OrganizationName: ["", [Validators.required, Validators.minLength(3)]],
-                  GradeLevel: ["", Validators.required],
-                  TeacherName: ["", [Validators.required, Validators.minLength(3)]],
-                  TeacherEmail: [""],
-                  AlternativeDate: ["", [Validators.required, Validators.minLength(5)]],
-                  TeacherPhoneNo: ["", [Validators.required, Validators.min(1000000000)]],
-                  EducationPurpose: ["", [Validators.required, Validators.minLength(5)]],
-                });
-    
-                //Clear the Validator for unavailable field
-                if(!this.bookingGroup.ProgramRestriction) {
-                  this.clearFormControlValidator(this.registerForm.get("ProgramRestriction"))
-                }
-                if(!this.bookingGroup.OrganizationName) {
-                  this.clearFormControlValidator(this.registerForm.get("OrganizationName"))
-                }
-                if(!this.bookingGroup.GradeLevel) {
-                  this.clearFormControlValidator(this.registerForm.get("ParticipantName"))
-                }
-                if(!this.bookingGroup.TeacherName) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherName"))
-                }
-                if(!this.bookingGroup.TeacherEmail) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherEmail"))
-                }
-                if(!this.bookingGroup.TeacherPhoneNo) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherPhoneNo"))
-                }
-                if(!this.bookingGroup.AlternativeDate) {
-                  this.clearFormControlValidator(this.registerForm.get("AlternativeDate"))
-                }
-                if(!this.bookingGroup.EducationPurpose) {
-                  this.clearFormControlValidator(this.registerForm.get("EducationPurpose"))
-                }
-               
-            });
-            
-            break;
+      switch(this.ProgramType) {
+        /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
+        case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+          this.service.getProgramRequirementDetails("g", this.ProgramPK).subscribe((program) => {
+              this.bookingGroup = program;
+              
+              this.registerForm = this.fb.group({
+                ProgramRestriction: ["", Validators.required],
+                OrganizationName: ["", [Validators.required, Validators.minLength(3)]],
+                GradeLevel: ["", Validators.required],
+                TeacherName: ["", [Validators.required, Validators.minLength(3)]],
+                TeacherEmail: [""],
+                AlternativeDate: ["", [Validators.required, Validators.minLength(5)]],
+                TeacherPhoneNo: ["", [Validators.required, Validators.min(1000000000)]],
+                EducationPurpose: ["", [Validators.required, Validators.minLength(5)]],
+              });
+  
+              //Clear the Validator for unavailable field
+              if(!this.bookingGroup.ProgramRestriction) {
+                this.clearFormControlValidator(this.registerForm.get("ProgramRestriction"))
+              }
+              if(!this.bookingGroup.OrganizationName) {
+                this.clearFormControlValidator(this.registerForm.get("OrganizationName"))
+              }
+              if(!this.bookingGroup.GradeLevel) {
+                this.clearFormControlValidator(this.registerForm.get("GradeLevel"))
+              }
+              if(!this.bookingGroup.TeacherName) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherName"))
+              }
+              if(!this.bookingGroup.TeacherEmail) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherEmail"))
+              }
+              if(!this.bookingGroup.TeacherPhoneNo) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherPhoneNo"))
+              }
+              if(!this.bookingGroup.AlternativeDate) {
+                this.clearFormControlValidator(this.registerForm.get("AlternativeDate"))
+              }
+              if(!this.bookingGroup.EducationPurpose) {
+                this.clearFormControlValidator(this.registerForm.get("EducationPurpose"))
+              }
+             
+          });
+          
+          break;
 
-          /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
-          case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-            this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
-              this.bookingIndividual = program;
-            });
+        /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
+        case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+          this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
+            this.bookingIndividual = program;
+          });
 
-            this.registerForm = this.fb.group({
-              ParticipantName: ['', [Validators.required, Validators.minLength(3)]],
-              ParticipantAge: ['', Validators.required],
-              Gender: ['', Validators.required],
-              MerchSize: ['', Validators.required],
-              AllergyInfo: [''],
-              SpecialInfo: [''],
-              InsureProviderName: ['', [Validators.required, Validators.minLength(3)]],
-              InsureRecipientName: ['', [Validators.required, Validators.minLength(3)]],
-              InsurePolicyNo: ['',[Validators.required, Validators.minLength(5)]],
-              InsurePhoneNo: ['',[Validators.required, Validators.maxLength(10)]],
-              AuthorizedPickupName1: ['', [Validators.required, Validators.minLength(3)]],
-              AuthorizedPickupPhone1: ['',[Validators.required, Validators.maxLength(10)]],
-              AuthorizedPickupName2: ['', []],
-              AuthorizedPickupPhone2: ['',[]],
-              EarlyDropOff: [''],
-              LatePickup: [''],
-              MediaRelease: [false, Validators.requiredTrue],
-              EmergencyMedicalRelease: [false, Validators.requiredTrue],
-              LiabilityAgreement: [false, Validators.requiredTrue],
-            });
-            
-            // Clear the Validator for unavailable field
-            if(!this.bookingIndividual.AllergyInfo) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.ParticipantAge) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.ParticipantName) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.Gender) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.MerchSize) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.SpecialInfo) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.InsureProviderName) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
-            }
-            if(!this.bookingIndividual.InsureRecipientName) {
-               this.clearFormControlValidator(this.registerForm.get('InsureRecipientName'));
-            }
-            if(!this.bookingIndividual.InsurePolicyNo) {
-               this.clearFormControlValidator(this.registerForm.get('InsurePolicyNo'));
-            }
-            if(!this.bookingIndividual.InsurePhoneNo) {
-               this.clearFormControlValidator(this.registerForm.get('InsurePhoneNo'));
-            }
-            if(!this.bookingIndividual.AuthorizedPickupName1) {
-               this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupName1'));
-            }
-            if(!this.bookingIndividual.AuthorizedPickupPhone1) {
-               this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupPhone1'));
-            }
-            if(!this.bookingIndividual.AuthorizedPickupName2) {
-               this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupName2'));
-            }
-            if(!this.bookingIndividual.AuthorizedPickupPhone2) {
-               this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupPhone2'));
-            }  
-            if(!this.bookingIndividual.EarlyDropOff) {
-               this.clearFormControlValidator(this.registerForm.get('EarlyDropOff'));
-            }
-            if(!this.bookingIndividual.LatePickup) {
-               this.clearFormControlValidator(this.registerForm.get('LatePickup'));
-            }
-            if(!this.bookingIndividual.MediaRelease) {
-               this.clearFormControlValidator(this.registerForm.get('MediaRelease'));
-            }
-            if(!this.bookingIndividual.EmergencyMedicalRelease) {
-               this.clearFormControlValidator(this.registerForm.get('EmergencyMedicalRelease'));
-            }
-            if(!this.bookingIndividual.LiabilityAgreement) {
-               this.clearFormControlValidator(this.registerForm.get('LiabilityAgreement'));
-            }
-        
-            // Clear Validator for QuantityForm when Individual Program is loadded.
-            this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age810Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1112Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1314Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1415Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1517Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("TotalQuantity"));
-            break;
-        }
-    });   // End Select Program header and initialize FormGroup
+          this.registerForm = this.fb.group({
+            ParticipantName: ['', [Validators.required, Validators.minLength(3)]],
+            ParticipantAge: ['', Validators.required],
+            Gender: ['', Validators.required],
+            MerchSize: ['', Validators.required],
+            AllergyInfo: [''],
+            SpecialInfo: [''],
+            InsureProviderName: ['', [Validators.required, Validators.minLength(3)]],
+            InsureRecipientName: ['', [Validators.required, Validators.minLength(3)]],
+            InsurePolicyNo: ['',[Validators.required, Validators.minLength(5)]],
+            InsurePhoneNo: ['',[Validators.required, Validators.maxLength(10)]],
+            AuthorizedPickupName1: ['', [Validators.required, Validators.minLength(3)]],
+            AuthorizedPickupPhone1: ['',[Validators.required, Validators.maxLength(10)]],
+            AuthorizedPickupName2: ['', []],
+            AuthorizedPickupPhone2: ['',[]],
+            EarlyDropOff: [''],
+            LatePickup: [''],
+            MediaRelease: [false, Validators.requiredTrue],
+            EmergencyMedicalRelease: [false, Validators.requiredTrue],
+            LiabilityAgreement: [false, Validators.requiredTrue],
+          });
+          
+          // Clear the Validator for unavailable field
+          if(!this.bookingIndividual.AllergyInfo) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.ParticipantAge) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.ParticipantName) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.Gender) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.MerchSize) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.SpecialInfo) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.InsureProviderName) {
+            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+          }
+          if(!this.bookingIndividual.InsureRecipientName) {
+             this.clearFormControlValidator(this.registerForm.get('InsureRecipientName'));
+          }
+          if(!this.bookingIndividual.InsurePolicyNo) {
+             this.clearFormControlValidator(this.registerForm.get('InsurePolicyNo'));
+          }
+          if(!this.bookingIndividual.InsurePhoneNo) {
+             this.clearFormControlValidator(this.registerForm.get('InsurePhoneNo'));
+          }
+          if(!this.bookingIndividual.AuthorizedPickupName1) {
+             this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupName1'));
+          }
+          if(!this.bookingIndividual.AuthorizedPickupPhone1) {
+             this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupPhone1'));
+          }
+          if(!this.bookingIndividual.AuthorizedPickupName2) {
+             this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupName2'));
+          }
+          if(!this.bookingIndividual.AuthorizedPickupPhone2) {
+             this.clearFormControlValidator(this.registerForm.get('AuthorizedPickupPhone2'));
+          }  
+          if(!this.bookingIndividual.EarlyDropOff) {
+             this.clearFormControlValidator(this.registerForm.get('EarlyDropOff'));
+          }
+          if(!this.bookingIndividual.LatePickup) {
+             this.clearFormControlValidator(this.registerForm.get('LatePickup'));
+          }
+          if(!this.bookingIndividual.MediaRelease) {
+             this.clearFormControlValidator(this.registerForm.get('MediaRelease'));
+          }
+          if(!this.bookingIndividual.EmergencyMedicalRelease) {
+             this.clearFormControlValidator(this.registerForm.get('EmergencyMedicalRelease'));
+          }
+          if(!this.bookingIndividual.LiabilityAgreement) {
+             this.clearFormControlValidator(this.registerForm.get('LiabilityAgreement'));
+          }
+      
+          // Clear Validator for QuantityForm when Individual Program is loadded.
+          this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age810Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1112Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1314Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1415Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1517Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("TotalQuantity"));
+          break;
+      }
+  });   // End Select Program header and initialize FormGroup
 
+   
 
     // INITIALIZE THE SCHEDULE
      this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) => {
@@ -417,8 +413,7 @@ export class ReservationComponent implements OnInit {
             .toLocaleString("en-US", this.options)
             .concat(" - ", end.toLocaleString("en-US", this.options));
 
-          this.availability =
-            res.MaximumParticipant - res.CurrentNumberParticipant;
+          this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
 
           this.quantityForm
             .get("CustomerSelectDate")
@@ -498,7 +493,6 @@ export class ReservationComponent implements OnInit {
     - ReservationHeader
     - ReservationGroupDetails
     - PaymentHeader 
-    - PaymentDetails
     - MarketingInformation     
     Data will be stored in the LocalStorage and insert at the end                               
   **********************************************************/
@@ -532,9 +526,12 @@ export class ReservationComponent implements OnInit {
   addFormControlValidator(control: any, type: any) {
     control.setValidators(type);
   }
-
   /******************************************************************************/
+
+  // This function will apply for both Group and Individual Program
   quantityProgramStepperNext(stepper: MatStepper, type: string) {
+    var balance = this.programDetails.PricePerParticipant;
+    // Add quantity data for Group Program only.
     if(type == "g") {
       this.reservationGroupDetails.AdultQuantity =this.quantityForm.get("Age57Quantity").value;
       this.reservationGroupDetails.Age810Quantity =this.quantityForm.get("Age810Quantity").value;
@@ -543,6 +540,7 @@ export class ReservationComponent implements OnInit {
       this.reservationGroupDetails.Age1415Quantity =this.quantityForm.get("Age1415Quantity").value;
       this.reservationGroupDetails.Age1517Quantity =this.quantityForm.get("Age1517Quantity").value;
       this.reservationGroupDetails.TotalQuantity =this.quantityForm.get("TotalQuantity").value;
+      balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
     }
 
     // Create new schedule record and insert into the database
@@ -552,12 +550,19 @@ export class ReservationComponent implements OnInit {
         this.SchedulePK = res.SchedulePK;
       });
     }
+
+    // Update data for Reservation Header.
+    this.reservationHeader.SchedulePK =  this.SchedulePK;
+    this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
+    this.reservationHeader.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+    this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
+    this.reservationHeader.RemainingBalance = balance;
+    this.stepOneIsCompleted = true;
     stepper.next();
   }
 
   registerStepperNext(stepper: MatStepper) {
-   
-    this.getFormValidationErrors();
+    // this.getFormValidationErrors();
 
      // Add User Input data to ReservationGroupDetails
      this.reservationGroupDetails.ProgramRestriction = this.registerForm.get("ProgramRestriction").value;
@@ -568,14 +573,12 @@ export class ReservationComponent implements OnInit {
      this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get("TeacherPhoneNo" ).value;
      this.reservationGroupDetails.AlternativeDate = this.registerForm.get("AlternativeDate").value;
      this.reservationGroupDetails.EducationPurpose = this.registerForm.get("EducationPurpose").value;
-     this.isCompleted = true;
+     this.stepTwoIsCompleted = true;
      
       stepper.next();
   }
   
   registerIndividualStepperNext(stepper: MatStepper) {
-    // Clear the Validator for unavailable field
-  
     // Add User Input data to ReservationIndividualDetails
     this.reservationIndividualDetails.ParticipantName = this.registerForm.get("ParticipantName").value;
     this.reservationIndividualDetails.ParticipantAge = this.registerForm.get("ParticipantAge").value;
@@ -595,7 +598,7 @@ export class ReservationComponent implements OnInit {
     this.reservationIndividualDetails.LatePickup = this.registerForm.get("LatePickup").value;
     this.reservationIndividualDetails.MediaRelease = this.registerForm.get("MediaRelease").value;
     this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get("EmergencyMedicalRelease").value;
-    this.isCompleted = true;
+    this.stepTwoIsCompleted = true;
 
      stepper.next();
  }

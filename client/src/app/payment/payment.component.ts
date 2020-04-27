@@ -1,9 +1,17 @@
-import { OnInit, Component } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { OnInit, Component, Input } from '@angular/core';
+import { AuthenticationService, UserDetails } from '../authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { ProgramServices } from '../services/program.services';
+import { ReservationService } from '../services/reservation.services';
+import { ReservationHeader } from '../data/reservation-header';
+import { ReservationGroupDetails } from "../data/reservation-group-details";
+import { ReservationIndividualDetails } from '../data/reservation-individual-details';
+import { AppConstants } from '../constants';
+
 
 @Component({
     selector: 'payment',
@@ -12,15 +20,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class PaymentComponent implements OnInit{
+    @Input() reservationDetails: any;
+    @Input() reservationHeader: ReservationHeader;
+    @Input() ProgramPK: number;
+    
+    userDetails: UserDetails
     paymentForm: FormGroup;
     submitted = false;
-    ProgramPK: number;
+    ProgramType: number;
 
     constructor(public auth: AuthenticationService,
         private fb: FormBuilder, public matDialog: MatDialog, 
-        private route: ActivatedRoute, private router: Router){}
+        private route: ActivatedRoute, private router: Router,
+        private program: ProgramServices,
+        private reservation : ReservationService){}
 
     ngOnInit(){
+        this.program.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((result) => {
+            this.ProgramType = result.ProgramType;
+        })
+
+        this.userDetails = this.auth.getUserDetails();
+
         this.paymentForm = this.fb.group({
             FirstName: ["", [Validators.required]],
             LastName: ["", [Validators.required]],
@@ -33,11 +54,19 @@ export class PaymentComponent implements OnInit{
             Expiration: ["", [Validators.required]],
             CVV: ["", [Validators.required]],
         })
-         // Get Group Program Requirement
-        this.route.params.subscribe(val => {
-            this.ProgramPK = val.id
-        })
 
+        // this.reservation.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
+        //     console.log("ReservationPK: " + result);
+        // });
+
+        switch(this.ProgramType) {
+            case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+               
+                break;
+            case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+
+                break;
+        }
     }
 
     get f() {

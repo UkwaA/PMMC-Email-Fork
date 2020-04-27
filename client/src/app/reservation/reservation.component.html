@@ -49,8 +49,10 @@
               </div>
             </div>
             <div *ngIf="ProgramType" class="button pt-1 pb-1">
-              <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
-              <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'i')" type="button"> Next </button>
+              <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book
+              </button>
+              <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block"
+                (click)="quantityProgramStepperNext(stepper,'i')" type="button"> Next </button>
             </div>
 
             <ng-container *ngIf="ProgramType == 0">
@@ -160,7 +162,8 @@
               <div class="button pt-1 pb-1">
                 <button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()">
                   Book </button>
-                <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
+                <button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block"
+                  (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
               </div>
               <!-- </form> -->
             </ng-container>
@@ -171,8 +174,10 @@
     <!-- END PICK SCHEDULE STEPPER -->
 
     <!-- INPUT INFORMATION STEPPER -->
+
     <mat-step [stepControl]="registerForm">
       <ng-template matStepLabel>Input The Information</ng-template>
+      <ng-container *ngIf="stepOneIsCompleted">
       <div class="row text-left">
         <h1>{{programName}}</h1>
       </div>
@@ -351,12 +356,12 @@
       <ng-container *ngIf="ProgramType == 1">
         <form id="registerForm" [formGroup]="registerForm">
           <div class="container">
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.ParticipantName">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantName">Participant Name:</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName" 
-                  [ngClass]="{'is-invalid': g.ParticipantName.errors }">
+                  <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName"
+                    [ngClass]="{'is-invalid': g.ParticipantName.errors }">
                   <div *ngIf="g.ParticipantName.errors" class="invalid-feedback">
                     <div *ngIf="g.ParticipantName.errors.required">Paticipant Name is required</div>
                     <div *ngIf="g.ParticipantName.errors.minlength">Must be at least 3 characters long.</div>
@@ -365,12 +370,12 @@
               </div>
             </fieldset>
             <!-- Participant Age -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantAge">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.ParticipantAge">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantAge">Participant Age: </label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
-                        [ngClass]="{'is-invalid': g.ParticipantAge.errors }">
+                  <input class="form-control" type="number" min="5" max="18" placeholder=""
+                    formControlName="ParticipantAge" [ngClass]="{'is-invalid': g.ParticipantAge.errors }">
                   <div *ngIf="g.ParticipantAge.errors" class="invalid-feedback">
                     <div *ngIf="g.ParticipantAge.errors.required">Paticipant Age is required</div>
                   </div>
@@ -378,28 +383,27 @@
               </div>
             </fieldset>
             <!-- Gender -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.Gender">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.Gender">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="Gender">Gender: </label>
                 <div class="col-sm-10">
-                  <select class="form-control" formControlName="Gender"
-                          [ngClass]="{ 'is-invalid': g.Gender.errors }">
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-                <div *ngIf="g.Gender.errors" class="invalid-feedback">
-                  <div *ngIf="g.Gender.errors.required">Gender is required</div>
-                </div>
+                  <select class="form-control" formControlName="Gender" [ngClass]="{ 'is-invalid': g.Gender.errors }">
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                  <div *ngIf="g.Gender.errors" class="invalid-feedback">
+                    <div *ngIf="g.Gender.errors.required">Gender is required</div>
+                  </div>
                 </div>
               </div>
             </fieldset>
             <!-- T-Shirt Size -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.MerchSize">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.MerchSize">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="MerchSize">T-Shirt Size: </label>
                 <div class="col-sm-10">
                   <select class="form-control" formControlName="MerchSize"
-                          [ngClass]="{ 'is-invalid':g.MerchSize.errors }">
+                    [ngClass]="{ 'is-invalid':g.MerchSize.errors }">
                     <option>Youth Small</option>
                     <option>Youth Medium</option>
                     <option>Youth Large</option>
@@ -415,240 +419,291 @@
               </div>
             </fieldset>
             <!-- Allergy Info -->
-              <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AllergyInfo">
-                <label for="AllergyInfo">Allergy Information: </label>
-                <textarea class="form-control" formControlName="AllergyInfo" rows="3"></textarea>
+            <div class="form-group font-weight-bold" *ngIf="bookingIndividual.AllergyInfo">
+              <label for="AllergyInfo">Allergy Information: </label>
+              <textarea class="form-control" formControlName="AllergyInfo" rows="3"></textarea>
+            </div>
+
+            <div class="form-group font-weight-bold" *ngIf="bookingIndividual.SpecialInfo">
+              <label for="SpecialInfo">Special Information: </label>
+              <textarea class="form-control" formControlName="SpecialInfo" rows="3"></textarea>
+            </div>
+            <div class="form-group card bg-light font-weight-bold pl-3" *ngIf="bookingIndividual.MediaRelease">
+              <label for="MediaRelease">Media Release: </label>
+              <div class="media_release row">
+                <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as
+                  advertising on our website at www.pacificmmc.org.</p>
+                <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO
+                  ADHERE TO THE TERMS OF THIS DOCUMENT.</p>
               </div>
-        
-              <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.SpecialInfo">
-                <label for="SpecialInfo">Special Information: </label>
-                <textarea class="form-control" formControlName="SpecialInfo" rows="3"></textarea>
+              <div class="form_checkbox row">
+                <input class="form-check-input" type="checkbox" value="" formControlName="MediaRelease"
+                  [ngClass]="{ 'is-invalid':g.MediaRelease.errors }">
+                <label class="form-check-label" for="MediaRelease">
+                  I agree.
+                </label>
+                <div *ngIf="g.MediaRelease.errors" class="invalid-feedback">Accept Media Release is required</div>
               </div>
-              <div class="form-group card bg-light font-weight-bold pl-3" *ngIf = "bookingIndividual.MediaRelease">
-                <label for="MediaRelease">Media Release: </label>
-                <div class="media_release row">
-                  <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as advertising on our website at www.pacificmmc.org.</p>
-                  <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</p>
-                </div>
-                <div class = "form_checkbox row">
-                  <input class="form-check-input" type="checkbox" value="" formControlName="MediaRelease"
-                          [ngClass]="{ 'is-invalid':g.MediaRelease.errors }">
-                  <label class="form-check-label" for="MediaRelease">
-                    I agree.
-                  </label>
-                  <div *ngIf="g.MediaRelease.errors" class="invalid-feedback">Accept Media Release is required</div>
+            </div>
+            <div class="form-group card bg-light font-weight-bold" *ngIf="bookingIndividual.EmergencyMedicalRelease">
+              <label for="EmergencyMedicalRelease">Emergency Medical Release: </label>
+              <div class="row">
+                <p>In case of emergency, the Pacific Marine Mammal Center will make every effort to contact the
+                  guardians of the child involved before any treatment has begun. However, in the event we are unable to
+                  contact you, the guardians, we require this medical release to be signed for all participants in the
+                  program.</p>
+                <h6>I HEREBY AUTHORIZE THE PHYSICIAN OR HOSPITAL SELECTED BY THE PACIFIC MARINE MAMMAL CENTER TO
+                  HOSPITILIZE, SECURE TREATMENT FOR, AND ORDER INJECTION, ANESTHESIA, OR SURGERY FOR MY CHILD.</h6>
+                <p>It is further understood that if you check this box, you will assume full responsibility for any such
+                  treatment, including the payment of all costs, and will hold the Pacific Marine Mammal Center, its
+                  representatives, directors, counselors and staff, harmless.</p>
+                <p>In the event of an evacuation emergency, I give permission for PMMC to transport my child to the
+                  following safety evacuation location:</p>
+                <p>Geneva Presbyterian Church
+                  24301 El Toro Rd, Laguna Woods, CA 92637</p>
+                <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO
+                  ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS
+                  DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH
+                  CHANGES.</h6>
+              </div>
+              <div class="form_checkbox row">
+                <input class="form-check-input" type="checkbox" value="" formControlName="EmergencyMedicalRelease"
+                  [ngClass]="{ 'is-invalid':g.EmergencyMedicalRelease.errors }">
+                <label class="form-check-label" for="EmergencyMedicalRelease">
+                  I agree.
+                </label>
+                <div *ngIf="g.EmergencyMedicalRelease.errors" class="invalid-feedback">Accept Emergency Medical Release
+                  is required</div>
+              </div>
+            </div>
+            <div class="form-group card bg-light font-weight-bold" *ngIf="bookingIndividual.LiabilityAgreement">
+              <label for="LiabilityAgreement">Liability Agreement: </label>
+              <div class="row">
+                <p>I hereby acknowledge that I am the parent or legal guardian of the child who I have registered to
+                  participate in services and programs offered by Pacific Marine Mammal Center. I recognize that
+                  children at play may suffer injuries despite adequate supervision. I know of the risks involved,
+                  accept them, and I nonetheless have voluntarily enrolled my child at Pacific Marine Mammal Center.</p>
+                <p>I hereby grant the Pacific Marine Mammal Center (PMMC) and news media outlets permission to use my
+                  child’s photograph or video in any and all of their publications. I hereby irrevocably authorize them
+                  to edit, alter, copy, exhibit, publish or distribute the photo or video for any lawful purpose.</p>
+                <p>In consideration of the services rendered by Pacific Marine Mammal Center, I agree that I, my heirs,
+                  executors, assigns, beneficiaries, or anyone claiming by or through me will not make a claim against,
+                  sue, attach the property of, or prosecute Pacific Marine Mammal Center, its employees, officers,
+                  directors, agents, servants, or volunteers for injury or damage resulting from the negligence or other
+                  acts, howsoever caused, connected to, arising out of, or as a result of, the provision of its services
+                  and programs, or my child's receipt of said services or participation in said programs.</p>
+                <p>In addition, I hereby release and discharge Pacific Marine Mammal Center from all causes of action,
+                  claims, or demands that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or
+                  through me many now have or may hereafter have for injury or damage resulting from my child's
+                  participation in Pacific Marine Mammal Center’s programs and services.</p>
+                <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out
+                  of any claims and demands whether made by or on behalf of my child or any other per-son or entity for
+                  either injuries to my child's person or property, or arising out of claims that my child's actions
+                  caused injury or damage to another person or property, whether or not such claims, injuries and
+                  damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>
+              </div>
+              <div class="form_checkbox row">
+                <input class="form-check-input" type="checkbox" value="" formControlName="LiabilityAgreement"
+                  [ngClass]="{ 'is-invalid': g.LiabilityAgreement.errors }">
+                <label class="form-check-label" for="LiabilityAgreement">
+                  I agree.
+                </label>
+                <div *ngIf="g.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required
                 </div>
               </div>
-              <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.EmergencyMedicalRelease">
-                <label for="EmergencyMedicalRelease">Emergency Medical Release: </label>
-                <div class="row">
-                  <p>In case of emergency, the Pacific Marine Mammal Center will make every effort to contact the guardians of the child involved before any treatment has begun. However, in the event we are unable to contact you, the guardians, we require this medical release to be signed for all participants in the program.</p>
-                  <h6>I HEREBY AUTHORIZE THE PHYSICIAN OR HOSPITAL SELECTED BY THE PACIFIC MARINE MAMMAL CENTER TO HOSPITILIZE, SECURE TREATMENT FOR, AND ORDER INJECTION, ANESTHESIA, OR SURGERY FOR MY CHILD.</h6>
-                  <p>It is further understood that if you check this box, you will assume full responsibility for any such treatment, including the payment of all costs, and will hold the Pacific Marine Mammal Center, its representatives, directors, counselors and staff, harmless.</p>
-                  <p>In the event of an evacuation emergency, I give permission for PMMC to transport my child to the following safety evacuation location:</p>
-                  <p>Geneva Presbyterian Church
-                    24301 El Toro Rd, Laguna Woods, CA 92637</p>
-                  <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH CHANGES.</h6>
-                </div>
-                <div class = "form_checkbox row">
-                  <input class="form-check-input" type="checkbox" value="" formControlName="EmergencyMedicalRelease"
-                          [ngClass]="{ 'is-invalid':g.EmergencyMedicalRelease.errors }">
-                  <label class="form-check-label" for="EmergencyMedicalRelease">
-                    I agree.
-                  </label>
-                  <div *ngIf="g.EmergencyMedicalRelease.errors" class="invalid-feedback">Accept Emergency Medical Release is required</div>
+            </div>
+            <!-- Name of Insurance Carrier -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsureProviderName">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsureProviderName">Name of Insurance Carrier: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
+                    [ngClass]="{ 'is-invalid': g.InsureProviderName.errors }">
+                  <div *ngIf="g.InsureProviderName.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
+                    <div *ngIf="g.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
+                  </div>
                 </div>
               </div>
-              <div class="form-group card bg-light font-weight-bold" *ngIf = "bookingIndividual.LiabilityAgreement">
-                <label for="LiabilityAgreement">Liability Agreement: </label>
-                <div class="row">
-                  <p>I hereby acknowledge that I am the parent or legal guardian of the child who I have registered to participate in services and programs offered by Pacific Marine Mammal Center.  I recognize that children at play may suffer injuries despite adequate supervision. I know of the risks involved, accept them, and I nonetheless have voluntarily enrolled my child at Pacific Marine Mammal Center.</p>
-                  <p>I hereby grant the Pacific Marine Mammal Center (PMMC) and news media outlets permission to use my child’s photograph or video in any and all of their publications. I hereby irrevocably authorize them to edit, alter, copy, exhibit, publish or distribute the photo or video for any lawful purpose.</p>
-                  <p>In consideration of the services rendered by Pacific Marine Mammal Center, I agree that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me will not make a claim against, sue, attach the property of, or prosecute Pacific Marine Mammal Center, its employees, officers, directors, agents, servants, or volunteers for injury or damage resulting from the negligence or other acts, howsoever caused, connected to, arising out of, or as a result of, the provision of its services and programs, or my child's receipt of said services or participation in said programs.</p>
-                  <p>In addition, I hereby release and discharge Pacific Marine Mammal Center from all causes of action, claims, or demands that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me many now have or may hereafter have for injury or damage resulting from my child's participation in Pacific Marine Mammal Center’s programs and services.</p>
-                  <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out of any claims and demands whether made by or on behalf of my child or any other per-son or entity for either injuries to my child's person or property, or arising out of claims that my child's actions caused injury or damage to another person or property, whether or not such claims, injuries and damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>
-                </div>
-                <div class = "form_checkbox row">
-                  <input class="form-check-input" type="checkbox" value="" formControlName="LiabilityAgreement"
-                          [ngClass]="{ 'is-invalid': g.LiabilityAgreement.errors }">
-                  <label class="form-check-label" for="LiabilityAgreement">
-                    I agree.
-                  </label>
-                  <div *ngIf="g.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required</div>
+            </fieldset>
+            <!-- Name of Insured Child -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsureRecipientName">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsureRecipientName">Name of Insured Child: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
+                    [ngClass]="{ 'is-invalid':g.InsureRecipientName.errors }">
+                  <div *ngIf="g.InsureRecipientName.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
+                    <div *ngIf="g.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
+                  </div>
                 </div>
               </div>
-              <!-- Name of Insurance Carrier -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureProviderName">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsureProviderName">Name of Insurance Carrier: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
-                        [ngClass]="{ 'is-invalid': g.InsureProviderName.errors }">
-                    <div *ngIf="g.InsureProviderName.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
-                      <div *ngIf="g.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
-                    </div> 
+            </fieldset>
+
+            <!-- Insurance Policy Number -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsurePolicyNo">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsurePolicyNo">Insurance Policy Number: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
+                    [ngClass]="{ 'is-invalid': g.InsurePolicyNo.errors }">
+                  <div *ngIf="g.InsurePolicyNo.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
+                    <div *ngIf="g.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
+                    <!-- <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Number</div> -->
                   </div>
                 </div>
-              </fieldset>
-              <!-- Name of Insured Child -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureRecipientName">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsureRecipientName">Name of Insured Child:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
-                        [ngClass]="{ 'is-invalid':g.InsureRecipientName.errors }">
-                    <div *ngIf="g.InsureRecipientName.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
-                      <div *ngIf="g.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Insurance Phone Number -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsurePhoneNo">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+                    [ngClass]="{ 'is-invalid':g.InsurePhoneNo.errors }">
+                  <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
+                    <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
+                    <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
                   </div>
                 </div>
-              </fieldset>
-        
-              <!-- Insurance Policy Number -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePolicyNo">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsurePolicyNo">Insurance Policy Number:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
-                        [ngClass]="{ 'is-invalid': g.InsurePolicyNo.errors }">
-                    <div *ngIf="g.InsurePolicyNo.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
-                      <div *ngIf="g.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
-                      <!-- <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Number</div> -->
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Name 1 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupName1">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="Full name"
+                    formControlName="AuthorizedPickupName1"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupName1.errors }">
+                  <div *ngIf="g.AuthorizedPickupName1.errors" class="invalid-feedback">
+                    <div *ngIf="g.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
+                    <div *ngIf="g.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Insurance Phone Number -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePhoneNo">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
-                        [ngClass]="{ 'is-invalid':g.InsurePhoneNo.errors }">
-                    <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
-                      <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
-                      <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Phone 1 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupPhone1">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1:
+                </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx"
+                    formControlName="AuthorizedPickupPhone1"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone1.errors }">
+                  <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Name 1 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName1">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupName1.errors }">
-                    <div *ngIf="g.AuthorizedPickupName1.errors" class="invalid-feedback">
-                      <div *ngIf="g.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
-                      <div *ngIf="g.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Name 2 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupName2">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="Full name"
+                    formControlName="AuthorizedPickupName2"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupName2.errors }">
+                </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Phone 2 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupPhone2">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2:
+                </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx"
+                    formControlName="AuthorizedPickupPhone2"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone2.errors }">
+                </div>
+              </div>
+            </fieldset>
+            <!-- Early Dropoff -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.EarlyDropOff">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="EarlyDropOff"
+                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
+                    <option>No, thanks! (+$0) </option>
+                    <option>Monday Early Drop Off (+$7)</option>
+                    <option>Tueday Early Drop Off (+$7)</option>
+                    <option>Wednesday Early Drop Off (+$7)</option>
+                    <option>Thursday Early Drop Off (+$7)</option>
+                  </select>
+                  <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
+                    <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Phone 1 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone1.errors }">
-                    <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
-                      <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
-                      <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Late Pickup -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.LatePickup">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="LatePickup"
+                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
+                    <option>No, thanks! (+$0) </option>
+                    <option>Monday Late Pick-Up (+$7)</option>
+                    <option>Tueday Late Pick-Up (+$7)</option>
+                    <option>Wednesday Late Pick-Up (+$7)</option>
+                    <option>Thursday Late Pick-Up (+$7)</option>
+                  
+                  </select>
+                  <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
+                    <div *ngIf="g.LatePickup.errors.required">This selection is required</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Name 2 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName2">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupName2.errors }">
-                  </div>
-                </div>
-              </fieldset>
-              <!-- Authorized Pickup Phone 2 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone2.errors }">
-                  </div>
-                </div>
-              </fieldset>
-              <!-- Early Dropoff -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.EarlyDropOff">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
-                  <div class="col-sm-9">
-                    <select class="form-control" formControlName="EarlyDropOff" 
-                          [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
-                      <option>No, thanks! (+$0) </option>
-                      <option>Monday Early Drop Off (+$7)</option>
-                      <option>Tueday Early Drop Off (+$7)</option>
-                      <option>Wednesday Early Drop Off (+$7)</option>
-                      <option>Thursday Early Drop Off (+$7)</option>
-                    </select>
-                    <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
-                      <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <!-- Late Pickup -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.LatePickup">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
-                  <div class="col-sm-9">
-                    <select class="form-control" formControlName="LatePickup"
-                          [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
-                      <option>No, thanks! (+$0) </option>
-                      <option>Monday Late Pick-Up (+$7)</option>
-                      <option>Tueday Late Pick-Up  (+$7)</option>
-                      <option>Wednesday Late Pick-Up  (+$7)</option>
-                      <option>Thursday Late Pick-Up  (+$7)</option>
-                    </select>
-                    <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
-                      <div *ngIf="g.LatePickup.errors.required">This selection is required</div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
+              </div>
+            </fieldset>
             <div class="btn_row row flex-end">
               <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-              <button class="btn btn-lg btn-info btn-block" (click)="registerIndividualStepperNext(stepper)" type="button"> Next</button>
+              <button class="btn btn-lg btn-info btn-block" (click)="registerIndividualStepperNext(stepper)"
+                type="button"> Next</button>
             </div>
           </div>
         </form>
       </ng-container>
-
+    </ng-container>
       <!-- END INDIVIDUAL PROGRAM SECTION -->
     </mat-step>
     <!-- END INPUT INFORMATION STEPPER -->
     <mat-step [stepControl]="confirmation">
-      <ng-template matStepLabel>Confirmation</ng-template>
-      <ng-container *ngIf="isCompleted  && ProgramType == 0">
-        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime] ="customerSelectTime"></confirmation>
+      <ng-template matStepLabel>Payment</ng-template>
+      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails"
+          [ProgramPK]="ProgramPK"></payment>
       </ng-container>
-      <ng-container *ngIf="isCompleted && ProgramType == 1">
-        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime] ="customerSelectTime"></confirmation>
-      </ng-container>
+      <!-- <ng-container *ngIf="isCompleted && ProgramType == 1">
+       
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails"
+        [ProgramPK]="ProgramPK"></payment>
+      </ng-container> -->
       <div>
         <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
         <button class="btn btn-lg btn-info btn-block" matStepperNext type="button"> Next </button>
       </div>
     </mat-step>
     <mat-step [stepControl]="paymentForm">
-      <ng-template matStepLabel>Payment</ng-template>
-      <payment></payment>
+      <ng-template matStepLabel>Confirmation</ng-template>
+      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
+        <confirmation [reservationDetails]
+        
+        reservationGroupDetails" [ProgramPK]="ProgramPK"
+          [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+      </ng-container>
+      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
+        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"
+          [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+      </ng-container>
       <div>
         <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
       </div>

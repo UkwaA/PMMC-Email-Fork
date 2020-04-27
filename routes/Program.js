@@ -118,7 +118,7 @@ program.get("/get-sub-group-program-type/:id", (req, res) => {
       if (program) {
         res.json(program.SubProgramPK);
       } else {
-        res.send("There is no sub program type available.");
+        res.json(null);
       }
     })
     .catch((err) => {

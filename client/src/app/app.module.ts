@@ -20,7 +20,6 @@ import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthCustomerGuardService } from './auth-customer-guard.service'
-import { StepperServices } from './services/stepper.services'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
@@ -252,7 +251,7 @@ const routes : Routes = [
     MatTabsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage, StepperServices,
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage,
               {
                 provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,
