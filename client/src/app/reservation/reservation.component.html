@@ -705,10 +705,11 @@
                 </div>
               </div>
             </fieldset>
-            <div class="btn_row row flex-end">
-              <button class="btn btn-lg btn-info btn-block" matStepperPrevious type="button"> Back </button>
-              <button class="btn btn-lg btn-info btn-block" (click)="registerIndividualStepperNext(stepper)"
-                type="button"> Next</button>
+            <div class="row pt-3">
+              <div class="col-md-12">
+                <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
+              </div>
             </div>
         </form>
       </ng-container>
