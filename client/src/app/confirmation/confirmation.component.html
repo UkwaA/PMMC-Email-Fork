@@ -42,22 +42,15 @@
               <td class="name">{{customerSelectTime}}</td>
             </tr>
             <tr>
-              <td>Total Quantity</td>
-              <td class="name"></td>
-            </tr>
-            <tr>
-              <td>Total Amount</td>
-              <td class="name"></td>
-            </tr>
-            <!-- Deposit needs ngIf here for group program only -->
-            <tr>
-              <td>Deposit Amount</td>
-              <td class="name">$25</td>
+              <td>Type</td>
+              <td class="name" *ngIf= "ProgramType == 0">Group</td>
+              <td class="name" *ngIf= "ProgramType == 1">Individual</td>
             </tr>
         </tbody>
     </table>
   </div>
 
+  <!-- Reservation Info -->
   <div class="table-responsive-sm">
     <table class="table table-hover" style="width:100%">
         <thead>
@@ -178,6 +171,33 @@
             <td class="name">{{reservationDetails.LiabilityAgreement}}</td>
           </tr>
       </tbody>
+    </table>
+  </div>
+
+  <!-- Payment Info -->
+  <div class="table-responsive-sm">
+    <table class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th style="width:60%">Payment Information</th>
+                <th style="width:40%">  </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>Total Quantity</td>
+              <td class="name"></td>
+            </tr>
+            <tr>
+              <td>Total Amount</td>
+              <td class="name"></td>
+            </tr>
+            <!-- Deposit needs ngIf here for group program only -->
+            <tr *ngIf= "ProgramType == 0">
+              <td>Deposit Amount Due Today</td>
+              <td class="name"></td>
+            </tr>
+        </tbody>
     </table>
   </div>
 </div>

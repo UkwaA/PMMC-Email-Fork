@@ -8,6 +8,7 @@ export class ProgramScheduleData {
     CurrentNumberParticipant: number
     CreatedBy: number
     IsActive: boolean
+    IsFull: boolean
 
     constructor(nSchedulePK: number, nProgramPK: number, nSessionDetailsPK:number, nStartTime: string,
         nEndTime: string, nMaximumParticipant: number, ncurrentNumberParticipant: number, nIsActive: boolean, nCreatedby: number, nCreatedDate: string){
@@ -20,5 +21,6 @@ export class ProgramScheduleData {
             this.CurrentNumberParticipant = ncurrentNumberParticipant
             this.IsActive = nIsActive
             this.CreatedBy = nCreatedby
+            this.IsFull = false
     }
 }

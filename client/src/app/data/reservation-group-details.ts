@@ -14,7 +14,7 @@ export class ReservationGroupDetails {
     TeacherName: string;
     TeacherEmail: string;
     TeacherPhoneNo: string;
-    AlternativeDate: Date;
+    AlternativeDate: string;
     EducationPurpose: string
   
     constructor() {
@@ -33,7 +33,7 @@ export class ReservationGroupDetails {
       this.TeacherName = "";
       this.TeacherEmail = "";
       this.TeacherPhoneNo = "";
-      this.AlternativeDate = null;
+      this.AlternativeDate = "";
       this.EducationPurpose = ""
     }
   }

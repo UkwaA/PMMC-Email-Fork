@@ -6,8 +6,7 @@ module.exports = db.sequelize.define(
   {
     ReservationPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     AdultQuantity: {
       type: Sequelize.INTEGER
@@ -52,7 +51,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.TEXT
     },
     AlternativeDate: {
-      type: Sequelize.DATE
+      type: Sequelize.TEXT
     },
     EducationPurpose: {
       type: Sequelize.TEXT

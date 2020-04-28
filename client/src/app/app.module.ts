@@ -20,11 +20,11 @@ import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthCustomerGuardService } from './auth-customer-guard.service'
-import { StepperServices } from './services/stepper.services'
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
 import { ProgramScheduleService } from './services/schedule.services'
+import { ReservationService } from './services/reservation.services';
 import { GroupProgramComponent } from './group-program/group-program.component' 
 import { IndividualProgramComponent} from './individual-program/individual-program.component'
 import { Contact } from './contact/contact.component';
@@ -84,6 +84,8 @@ import { AuthInterceptor } from './auth.interceptor';
 import { ReservationManagement } from './reservation-management/reservation-management.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PaymentManagementComponent } from './payment-management/payment-management.component';
+import { PaynowModalDialog } from './components/paynow-modal-dialog/paynow-modal-dialog.component';
+import { ReservationDetailsModalDialog } from './components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -213,6 +215,8 @@ const routes : Routes = [
     ConfirmationComponent, 
     ReservationManagement,
     PaymentManagementComponent,
+    PaynowModalDialog,
+    ReservationDetailsModalDialog
   ],
   imports: [
     BrowserModule,
@@ -255,7 +259,7 @@ const routes : Routes = [
     MatTabsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, DataStorage, StepperServices,
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, DataStorage,
               {
                 provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,
@@ -263,6 +267,6 @@ const routes : Routes = [
               }],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
-    AddScheduleModalDialogComponent, LoginPromptModal]
+    AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog]
 })
 export class AppModule { }

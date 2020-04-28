@@ -163,7 +163,6 @@
                   <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
                 </div>
               </div>
-              <!-- </form> -->
             </ng-container>
           </div>
         </div>
@@ -172,8 +171,10 @@
     <!-- END PICK SCHEDULE STEPPER -->
 
     <!-- INPUT INFORMATION STEPPER -->
+
     <mat-step [stepControl]="registerForm">
       <ng-template matStepLabel>Input The Information</ng-template>
+      <ng-container *ngIf="stepOneIsCompleted">
       <div class="row text-left">
         <h1>{{programName}}</h1>
       </div>
@@ -412,12 +413,13 @@
       <!-- INDIVIDUAL PROGRAM SECTION -->
       <ng-container *ngIf="ProgramType == 1">
         <form id="registerForm" [formGroup]="registerForm">
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantName">
+          <!-- <div class="container"> -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.ParticipantName">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantName">Participant Name:</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName" 
-                  [ngClass]="{'is-invalid': g.ParticipantName.errors }">
+                  <input class="form-control" type="text" placeholder="Full name" formControlName="ParticipantName"
+                    [ngClass]="{'is-invalid': g.ParticipantName.errors }">
                   <div *ngIf="g.ParticipantName.errors" class="invalid-feedback">
                     <div *ngIf="g.ParticipantName.errors.required">Paticipant Name is required</div>
                     <div *ngIf="g.ParticipantName.errors.minlength">Must be at least 3 characters long.</div>
@@ -426,12 +428,12 @@
               </div>
             </fieldset>
             <!-- Participant Age -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.ParticipantAge">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.ParticipantAge">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantAge">Participant Age: </label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="number" min = "5" max = "18" placeholder="" formControlName="ParticipantAge"
-                        [ngClass]="{'is-invalid': g.ParticipantAge.errors }">
+                  <input class="form-control" type="number" min="5" max="18" placeholder=""
+                    formControlName="ParticipantAge" [ngClass]="{'is-invalid': g.ParticipantAge.errors }">
                   <div *ngIf="g.ParticipantAge.errors" class="invalid-feedback">
                     <div *ngIf="g.ParticipantAge.errors.required">Paticipant Age is required</div>
                   </div>
@@ -439,28 +441,27 @@
               </div>
             </fieldset>
             <!-- Gender -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.Gender">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.Gender">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="Gender">Gender: </label>
                 <div class="col-sm-10">
-                  <select class="form-control" formControlName="Gender"
-                          [ngClass]="{ 'is-invalid': g.Gender.errors }">
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-                <div *ngIf="g.Gender.errors" class="invalid-feedback">
-                  <div *ngIf="g.Gender.errors.required">Gender is required</div>
-                </div>
+                  <select class="form-control" formControlName="Gender" [ngClass]="{ 'is-invalid': g.Gender.errors }">
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                  <div *ngIf="g.Gender.errors" class="invalid-feedback">
+                    <div *ngIf="g.Gender.errors.required">Gender is required</div>
+                  </div>
                 </div>
               </div>
             </fieldset>
             <!-- T-Shirt Size -->
-            <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.MerchSize">
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.MerchSize">
               <div class="row">
                 <label class="col-form-label col-sm-2" for="MerchSize">T-Shirt Size: </label>
                 <div class="col-sm-10">
                   <select class="form-control" formControlName="MerchSize"
-                          [ngClass]="{ 'is-invalid':g.MerchSize.errors }">
+                    [ngClass]="{ 'is-invalid':g.MerchSize.errors }">
                     <option>Youth Small</option>
                     <option>Youth Medium</option>
                     <option>Youth Large</option>
@@ -476,9 +477,22 @@
               </div>
             </fieldset>
             <!-- Allergy Info -->
-              <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.AllergyInfo">
-                <label for="AllergyInfo">Allergy Information: </label>
-                <textarea class="form-control" formControlName="AllergyInfo" rows="3"></textarea>
+            <div class="form-group font-weight-bold" *ngIf="bookingIndividual.AllergyInfo">
+              <label for="AllergyInfo">Allergy Information: </label>
+              <textarea class="form-control" formControlName="AllergyInfo" rows="3"></textarea>
+            </div>
+
+            <div class="form-group font-weight-bold" *ngIf="bookingIndividual.SpecialInfo">
+              <label for="SpecialInfo">Special Information: </label>
+              <textarea class="form-control" formControlName="SpecialInfo" rows="3"></textarea>
+            </div>
+            <div class="form-group card bg-light font-weight-bold pl-3" *ngIf="bookingIndividual.MediaRelease">
+              <label for="MediaRelease">Media Release: </label>
+              <div class="media_release row">
+                <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as
+                  advertising on our website at www.pacificmmc.org.</p>
+                <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO
+                  ADHERE TO THE TERMS OF THIS DOCUMENT.</p>
               </div>
         
               <div class="form-group font-weight-bold" *ngIf = "bookingIndividual.SpecialInfo">
@@ -538,170 +552,178 @@
                   <div *ngIf="g.LiabilityAgreement.errors" class="invalid-feedback">Accept Liability Agreement is required</div>
                 </div>
               </div>
-              <!-- Name of Insurance Carrier -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureProviderName">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsureProviderName">Name of Insurance Carrier: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
-                        [ngClass]="{ 'is-invalid': g.InsureProviderName.errors }">
-                    <div *ngIf="g.InsureProviderName.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
-                      <div *ngIf="g.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
-                    </div> 
+            </div>
+            <!-- Name of Insurance Carrier -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsureProviderName">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsureProviderName">Name of Insurance Carrier: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsureProviderName"
+                    [ngClass]="{ 'is-invalid': g.InsureProviderName.errors }">
+                  <div *ngIf="g.InsureProviderName.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsureProviderName.errors.required">Insurance Carrier's Name is required</div>
+                    <div *ngIf="g.InsureProviderName.errors.minlength">Must be at least 3 characters long.</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Name of Insured Child -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsureRecipientName">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsureRecipientName">Name of Insured Child:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
-                        [ngClass]="{ 'is-invalid':g.InsureRecipientName.errors }">
-                    <div *ngIf="g.InsureRecipientName.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
-                      <div *ngIf="g.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Name of Insured Child -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsureRecipientName">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsureRecipientName">Name of Insured Child: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsureRecipientName"
+                    [ngClass]="{ 'is-invalid':g.InsureRecipientName.errors }">
+                  <div *ngIf="g.InsureRecipientName.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsureRecipientName.errors.required">Insurance Recipient's Name is required</div>
+                    <div *ngIf="g.InsureRecipientName.errors.minlength">Must be at least 3 characters long.</div>
                   </div>
                 </div>
-              </fieldset>
-        
-              <!-- Insurance Policy Number -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePolicyNo">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsurePolicyNo">Insurance Policy Number:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
-                        [ngClass]="{ 'is-invalid': g.InsurePolicyNo.errors }">
-                    <div *ngIf="g.InsurePolicyNo.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
-                      <div *ngIf="g.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
-                      <!-- <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Number</div> -->
-                    </div>
+              </div>
+            </fieldset>
+
+            <!-- Insurance Policy Number -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsurePolicyNo">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsurePolicyNo">Insurance Policy Number: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="" formControlName="InsurePolicyNo"
+                    [ngClass]="{ 'is-invalid': g.InsurePolicyNo.errors }">
+                  <div *ngIf="g.InsurePolicyNo.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsurePolicyNo.errors.required">Insurance Policy Number is required</div>
+                    <div *ngIf="g.InsurePolicyNo.errors.minlength">Please enter correct Policy number</div>
+                    <!-- <div *ngIf="f.InsurePolicyNo.errors.pattern">Invalid Number</div> -->
                   </div>
                 </div>
-              </fieldset>
-              <!-- Insurance Phone Number -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.InsurePhoneNo">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number:  </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
-                        [ngClass]="{ 'is-invalid':g.InsurePhoneNo.errors }">
-                    <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
-                      <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
-                      <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
-                      <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Insurance Phone Number -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.InsurePhoneNo">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+                    [ngClass]="{ 'is-invalid':g.InsurePhoneNo.errors }">
+                  <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
+                    <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
+                    <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
+                    <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Name 1 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName1">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName1"
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupName1.errors }">
-                    <div *ngIf="g.AuthorizedPickupName1.errors" class="invalid-feedback">
-                      <div *ngIf="g.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
-                      <div *ngIf="g.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Name 1 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupName1">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupName1">Authorized Pick Up Name #1: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="Full name"
+                    formControlName="AuthorizedPickupName1"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupName1.errors }">
+                  <div *ngIf="g.AuthorizedPickupName1.errors" class="invalid-feedback">
+                    <div *ngIf="g.AuthorizedPickupName1.errors.required">Authorized Pickup Name is required</div>
+                    <div *ngIf="g.AuthorizedPickupName1.errors.minlength">Must be at least 3 characters long.</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Phone 1 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone1">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone1" 
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone1.errors }">
-                    <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
-                      <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
-                      <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
-                    </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Phone 1 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupPhone1">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone1">Authorized Pick Up Phone Number #1:
+                </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx"
+                    formControlName="AuthorizedPickupPhone1"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone1.errors }">
+                  <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Name 2 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupName2">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="text" placeholder="Full name" formControlName="AuthorizedPickupName2"
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupName2.errors }">
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Name 2 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupName2">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupName2">Authorized Pick Up Name #2: </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" placeholder="Full name"
+                    formControlName="AuthorizedPickupName2"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupName2.errors }">
+                </div>
+              </div>
+            </fieldset>
+            <!-- Authorized Pickup Phone 2 -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.AuthorizedPickupPhone2">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2:
+                </label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx"
+                    formControlName="AuthorizedPickupPhone2"
+                    [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone2.errors }">
+                </div>
+              </div>
+            </fieldset>
+            <!-- Early Dropoff -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.EarlyDropOff">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="EarlyDropOff"
+                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
+                    <option>No, thanks! (+$0) </option>
+                    <option>Monday Early Drop Off (+$7)</option>
+                    <option>Tueday Early Drop Off (+$7)</option>
+                    <option>Wednesday Early Drop Off (+$7)</option>
+                    <option>Thursday Early Drop Off (+$7)</option>
+                  </select>
+                  <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
+                    <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Authorized Pickup Phone 2 -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.AuthorizedPickupPhone2">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="AuthorizedPickupPhone2">Authorized Pick Up Phone Number #2: </label>
-                  <div class="col-sm-9">
-                    <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="AuthorizedPickupPhone2" 
-                        [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone2.errors }">
+              </div>
+            </fieldset>
+            <!-- Late Pickup -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingIndividual.LatePickup">
+              <div class="row">
+                <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="LatePickup"
+                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
+                    <option>No, thanks! (+$0) </option>
+                    <option>Monday Late Pick-Up (+$7)</option>
+                    <option>Tueday Late Pick-Up (+$7)</option>
+                    <option>Wednesday Late Pick-Up (+$7)</option>
+                    <option>Thursday Late Pick-Up (+$7)</option>
+                  
+                  </select>
+                  <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
+                    <div *ngIf="g.LatePickup.errors.required">This selection is required</div>
                   </div>
                 </div>
-              </fieldset>
-              <!-- Early Dropoff -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.EarlyDropOff">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
-                  <div class="col-sm-9">
-                    <select class="form-control" formControlName="EarlyDropOff" 
-                          [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
-                      <option>No, thanks! (+$0) </option>
-                      <option>Monday Early Drop Off (+$7)</option>
-                      <option>Tueday Early Drop Off (+$7)</option>
-                      <option>Wednesday Early Drop Off (+$7)</option>
-                      <option>Thursday Early Drop Off (+$7)</option>
-                    </select>
-                    <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
-                      <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-              <!-- Late Pickup -->
-              <fieldset class="form-group font-weight-bold" *ngIf = "bookingIndividual.LatePickup">
-                <div class="row">
-                  <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
-                  <div class="col-sm-9">
-                    <select class="form-control" formControlName="LatePickup"
-                          [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
-                      <option>No, thanks! (+$0) </option>
-                      <option>Monday Late Pick-Up (+$7)</option>
-                      <option>Tueday Late Pick-Up  (+$7)</option>
-                      <option>Wednesday Late Pick-Up  (+$7)</option>
-                      <option>Thursday Late Pick-Up  (+$7)</option>
-                    </select>
-                    <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
-                      <div *ngIf="g.LatePickup.errors.required">This selection is required</div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
+              </div>
+            </fieldset>
             <div class="row pt-3">
               <div class="col-md-12">
                 <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next </button>  
+                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
               </div>
             </div>
         </form>
       </ng-container>
-
+    </ng-container>
       <!-- END INDIVIDUAL PROGRAM SECTION -->
     </mat-step>
     <!-- END INPUT INFORMATION STEPPER -->
     <mat-step [stepControl]="confirmation">
-      <ng-template matStepLabel>Confirmation</ng-template>
-      <ng-container *ngIf="isCompleted  && ProgramType == 0">
-        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime] ="customerSelectTime"></confirmation>
+      <ng-template matStepLabel>Payment</ng-template>
+      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"></payment>
       </ng-container>
-      <ng-container *ngIf="isCompleted && ProgramType == 1">
-        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime] ="customerSelectTime"></confirmation>
+      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
+        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"></payment>
       </ng-container>
       <div class="row pt-3">
         <div class="col-md-12">
@@ -711,12 +733,17 @@
       </div>
     </mat-step>
     <mat-step [stepControl]="paymentForm">
-      <ng-template matStepLabel>Payment</ng-template>
-      <payment></payment>
-      <div class="row">
-        <div class="col-md-12">
-          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-        </div>
+      <ng-template matStepLabel>Confirmation</ng-template>
+      
+      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
+        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+      </ng-container>
+      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
+        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+      </ng-container>
+      <div>
+        <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
+        <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button"> Submit </button>  
       </div>
     </mat-step>
   </mat-horizontal-stepper>

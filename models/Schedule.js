@@ -38,6 +38,9 @@ module.exports = db.sequelize.define(
     },
     IsActive: {
       type: Sequelize.BOOLEAN
+    },
+    IsFull: {
+      type: Sequelize.BOOLEAN
     }
   },
   {

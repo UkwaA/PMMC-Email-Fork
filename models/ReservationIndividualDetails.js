@@ -6,76 +6,68 @@ module.exports = db.sequelize.define(
   {
     ReservationPK: {
       type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     ProgramPK: {
       type: Sequelize.INTEGER,
     },
+    ParticipantName: {
+      type: Sequelize.TEXT
+    },
     ParticipantAge: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.INTEGER
     },
     Gender: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     MerchSize: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AllergyInfo: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     SpecialInfo: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     InsureProviderName: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     InsureRecipientName: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     InsurePolicyNo: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     InsurePhoneNo: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AuthorizedPickupName1: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AuthorizedPickupPhone1: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AuthorizedPickupName2: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     AuthorizedPickupPhone2: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     EarlyDropOff: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     LatePickup: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     MediaRelease: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     EmergencyMedicalRelease: {
-      type: Sequelize.BOOLEAN
+      type: Sequelize.TEXT
     },
     LiabilityAgreement: {
-      type: Sequelize.BOOLEAN
-    },
-    FullAmount: {
-      type: Sequelize.INTEGER
-    },
-    CreatedBy: {
-      type: Sequelize.INTEGER
-    },
-    CreatedDate: {
-      type: Sequelize.DATEONLY,
-      defaultValue: Sequelize.NOW
-    }
+      type: Sequelize.TEXT
+    } 
   },
   {
     freezeTableName: true

@@ -17,17 +17,16 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    PaymentPK: {
+    ReservationStatus: {
       type: Sequelize.INTEGER,
-      primaryKey: true
-    },
-    ResevationStatus: {
-      type: Sequelize.BOOLEAN
     },
     NumberOfParticipant: {
       type: Sequelize.INTEGER
     },
     Total: {
+      type: Sequelize.INTEGER
+    },
+    RemainingBalance: {
       type: Sequelize.INTEGER
     },
     CreatedDate: {

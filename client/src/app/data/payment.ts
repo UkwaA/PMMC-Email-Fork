@@ -1,4 +1,4 @@
-export class PaymentHeader {
+export class Payment {
     PaymentPK: number;
     ReservationPK: number;
     UserPK: number;

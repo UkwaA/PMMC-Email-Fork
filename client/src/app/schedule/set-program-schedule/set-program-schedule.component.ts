@@ -19,6 +19,10 @@ declare var $: any;
 })
 
 export class SetProgramScheduleComponent {
+	//Define success message
+	programColorMessage = ""
+	scheduleSuccessMessage = ""
+
 	ProgramPK = 0;
 	currentUserPK = 0;
 	allBlackoutDates: any[] = []
@@ -97,7 +101,7 @@ export class SetProgramScheduleComponent {
         hour12: true
 	  };
     selectedColor: string = "";
-	programColorMessage = ""
+	
     public settings: PaletteSettings = {
         palette: [
           "#e76c36", "#ffbc00", "#edafb7", "#a18aab",
@@ -189,16 +193,15 @@ export class SetProgramScheduleComponent {
 				}
 			));			
 			this.allSessions = sampleDataWithCustomSchema
-			
 			//Reload the session table with selected schedule
 			this.dayArr.forEach(day =>{
 				day.eventList = []
 			})
 			this.allAdditionalSessions = []
 			this.allSessions.forEach(session =>{
+				this.hasSession = true
 				if(session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
 				//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
-					this.hasSession = true
 					this.dayArr.forEach(day =>{
 						if(session.RepeatDay.indexOf(day.value) >= 0){
 								day.eventList.push(session)
@@ -232,8 +235,7 @@ export class SetProgramScheduleComponent {
         private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
-	ngOnInit(){ 
-		console.log("2020-04-04T16:00:00.000Z" <= "2020-04-04T16:00:00.000Z")
+	ngOnInit(){ 		
 		this.errorMessage = ''
 		this.SetProgramScheduleForm = this.fb.group({    
 			programName: [],
@@ -305,9 +307,9 @@ export class SetProgramScheduleComponent {
 					}
 					//Loop through all allSessions
 					this.allSessions.forEach(session =>{
+						this.hasSession = true
 						if(session.ScheduleSettingPK == this.currentScheduleSetting.ScheduleSettingPK){
 						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList	
-							this.hasSession = true
 							this.dayArr.forEach(day =>{
 								if(session.RepeatDay.indexOf(day.value) >= 0){
 										day.eventList.push(session)
@@ -396,6 +398,10 @@ export class SetProgramScheduleComponent {
         addScheduleModalDialog.afterClosed().subscribe(res =>{
             if(res == "Yes"){
 				this.reloadAllScheduleSettingsByProgramPK()
+				this.scheduleSuccessMessage = "New schedule has been added."
+				setTimeout(()=>{ 
+					this.scheduleSuccessMessage = "";
+			   }, 5000);
             }
             else{
                 console.log("stop")                
@@ -567,7 +573,6 @@ export class SetProgramScheduleComponent {
             if(result == "Yes"){
 				//Set IsActive to false in sessiondetail table
 				this.programScheduleServices.deactivateSessionDetails(session).subscribe(res =>{
-					console.log(res.message)
 					this.reloadAllSessions()
 				})
                 
@@ -788,14 +793,14 @@ export class SetProgramScheduleComponent {
 		}
         this.programScheduleServices.setProgramColor(programColor).subscribe(res =>{
 			if(res.message){
-				this.programColorMessage = res.message
+				this.programColorMessage = res.message				
 			}
 			else{
 				this.programColorMessage = res.error
 			}
 			setTimeout(()=>{ 
 				this.programColorMessage = "";
-		   }, 3000);
+		   }, 5000);
 		})
 	}
 	

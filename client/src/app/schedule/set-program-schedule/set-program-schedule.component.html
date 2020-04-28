@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row text-center text-white mb-5 mt-4">
+    <div class="row text-center text-white mb-3 mt-4">
         <div class="col-lg-7 mx-auto">
             <h1>Program Schedule</h1>            
         </div>
@@ -42,8 +42,9 @@
                             </button>
                         </div>
                         <div class="col-md-4" *ngIf="programColorMessage">
-                            <div class="programColorMessage">
-                                <mat-icon matListIcon id="doneIcon">done</mat-icon>{{programColorMessage}}
+                            <div class="successColorMessage">
+                                <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>
+                                {{programColorMessage}}
                             </div>
                         </div>
                     </div>
@@ -60,12 +61,18 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <br/>
+                            <br/>
+                            <div class="row">                                
+                                <div class="col-md-3">                                    
                                     <button mat-raised-button onclick="this.blur()" color="primary" (click)="addNewScheduleModal()">
                                         <mat-icon matListIcon>add</mat-icon> New Schedule
                                     </button>                                
+                                </div>
+                                <div class="col-md-7" *ngIf="scheduleSuccessMessage">
+                                    <div class="successColorMessage">
+                                        <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>
+                                        {{scheduleSuccessMessage}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" *ngIf="!hasSchedule">
@@ -103,7 +110,7 @@
                                                         </div>                                                
                                                     </td>
                                                     <td>
-                                                        <button mat-icon-button onclick="this.blur()" matTooltip="Edit Schedule"
+                                                        <button mat-icon-button onclick="this.blur()" matTooltip="Edit Schedule" 
                                                             (click)="editScheduleModal(schedule)" >
                                                             <mat-icon>edit</mat-icon>
                                                         </button>

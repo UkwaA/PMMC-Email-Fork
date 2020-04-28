@@ -17,7 +17,6 @@ import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
 import { MatStepperModule } from '@angular/material/stepper';
-import { StepperServices } from '../services/stepper.services';
 
 @Component({
   selector: 'program-schedule',
@@ -59,6 +58,7 @@ export class ProgramScheduleComponent implements OnInit {
     CurrentNumberParticipant: 0,
     CreatedBy: 0,
     IsActive: true,
+    IsFull: false
   };
 
 

@@ -159,7 +159,7 @@
             <h1> Dashboard </h1>
         </div>
     </div> 
-    <h3 class = "text-muted"> All reservations</h3>
+    <h3 class = "text-muted"> Recent reservations</h3>
     <div class="row pb-5">
         <div class="col-lg-12 mx-auto p-3">
             <!-- List group-->
@@ -191,7 +191,9 @@
                                     <td> April 20, 2020</td>
                                     <td> 8:10 - 10:30</td>
                                     <td> 10 </td>
-                                    <td> - $200  <button class="btn btn-warning ml-3" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button></td>
+                                    <td> - $200  
+                                        <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

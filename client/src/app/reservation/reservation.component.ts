@@ -1,23 +1,23 @@
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
 import { ProgramScheduleService } from "../services/schedule.services";
+import { ReservationService } from "../services/reservation.services";
 import {
   SchedulerEvent,
   SchedulerModelFields,
   EventStyleArgs,
 } from "@progress/kendo-angular-scheduler";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { QuantiyFormData } from "../data/quantity-form-data";
 import { ProgramScheduleData } from "../data/program-schedule-data";
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
-import { MatStepperModule, MatStepper } from "@angular/material/stepper";
-import { StepperServices } from "../services/stepper.services";
+import { MatStepper } from "@angular/material/stepper";
 
 /*************  BOOKING GROUP PROGRAM  ******************* */
 import { BookingGroupData } from "../data/booking-group-data";
@@ -26,20 +26,22 @@ import { ReservationHeader } from "../data/reservation-header";
 import { ValidationErrors } from "@angular/forms";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from '../data/reservation-individual-details';
+import { addDays } from '@progress/kendo-date-math';
 
 @Component({
   templateUrl: "./reservation.component.html",
   styleUrls: ["./reservation.component.css"],
-  providers: [StepperServices],
 })
 export class ReservationComponent implements OnInit {
   @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
 
   ProgramPK: number;
-  isCompleted = false;
+  stepOneIsCompleted = false;
+  stepTwoIsCompleted = false;
+  stepThreeIsCompleted = false;
 
   // Data Model to store User Input
-  reservationHeader: ReservationHeader;
+  reservationHeader = new ReservationHeader();
   reservationIndividualDetails = new ReservationIndividualDetails();
   reservationGroupDetails = new ReservationGroupDetails();
 
@@ -52,8 +54,6 @@ export class ReservationComponent implements OnInit {
   submitted = false;
 
   programDetails: ProgramData;
-  total: number;
-
   programName: string;
   programDesc: string;
   ProgramType: number;
@@ -71,6 +71,9 @@ export class ReservationComponent implements OnInit {
     minute: "numeric",
     hour12: true,
   };
+
+  //Define this day arr to hide past event
+  dayOfWeekStr = ["SU","MO","TU","WE","TH","FR","SA"]
   //Define time format option for blackout date
   timeFormatOptions = {
 		hour: 'numeric',
@@ -96,6 +99,7 @@ export class ReservationComponent implements OnInit {
     CurrentNumberParticipant: 0,
     CreatedBy: 0,
     IsActive: true,
+    IsFull: false
   };
 
   //Define Schedule Module for Kendo schedule
@@ -114,21 +118,14 @@ export class ReservationComponent implements OnInit {
   };
 
   /**************************************************************/
-  constructor(
-    private route: ActivatedRoute,
-    private service: ProgramServices,
-    private programScheduleServices: ProgramScheduleService,
-    private fb: FormBuilder,
-    public matDialog: MatDialog,
-    private auth: AuthenticationService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.route.params.subscribe((val) => {
-      this.ProgramPK = val.id;
-    });
-
+  constructor(private route: ActivatedRoute,
+              private service: ProgramServices,
+              private programScheduleServices: ProgramScheduleService,
+              private fb: FormBuilder,
+              public matDialog: MatDialog,
+              private auth: AuthenticationService,
+              private router: Router,
+              private resServices : ReservationService) {
     this.quantityForm = this.fb.group({
       AdultQuantity: [
         { value: "0", disabled: true },
@@ -163,71 +160,76 @@ export class ReservationComponent implements OnInit {
       CustomerSelectTime: ["",[Validators.required]],
       Availability: ["",[Validators.required]],
     });
+  }
 
-    /******************PROGRAM SCHEDULE*************************/
-    this.service.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((details) => {
-        this.programDetails = details;
-        this.ProgramType = details.ProgramType;
-        this.programDesc = this.programDetails.Description;
-        this.programName = this.programDetails.Name;
+  ngOnInit() {
+    this.route.params.subscribe((val) => {
+      this.ProgramPK = val.id;
+    });
+
+     /******************PROGRAM SCHEDULE*************************/
+     this.service.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((details) => {
+      this.programDetails = details;
+      this.ProgramType = details.ProgramType;
+      this.programDesc = this.programDetails.Description;
+      this.programName = this.programDetails.Name;
 
 
-        switch(this.ProgramType) {
-          /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
-          case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-            this.service.getProgramRequirementDetails("g", this.ProgramPK).subscribe((program) => {
-                this.bookingGroup = program;
-                
-                this.registerForm = this.fb.group({
-                  ProgramRestriction: ["", Validators.required],
-                  OrganizationName: ["", [Validators.required, Validators.minLength(3)]],
-                  GradeLevel: ["", Validators.required],
-                  TeacherName: ["", [Validators.required, Validators.minLength(3)]],
-                  TeacherEmail: [""],
-                  AlternativeDate: ["", [Validators.required, Validators.minLength(5)]],
-                  TeacherPhoneNo: ["", [Validators.required, Validators.min(1000000000)]],
-                  EducationPurpose: ["", [Validators.required, Validators.minLength(5)]],
-                });
-    
-                //Clear the Validator for unavailable field
-                if(!this.bookingGroup.ProgramRestriction) {
-                  this.clearFormControlValidator(this.registerForm.get("ProgramRestriction"))
-                }
-                if(!this.bookingGroup.OrganizationName) {
-                  this.clearFormControlValidator(this.registerForm.get("OrganizationName"))
-                }
-                if(!this.bookingGroup.GradeLevel) {
-                  this.clearFormControlValidator(this.registerForm.get("ParticipantName"))
-                }
-                if(!this.bookingGroup.TeacherName) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherName"))
-                }
-                if(!this.bookingGroup.TeacherEmail) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherEmail"))
-                }
-                if(!this.bookingGroup.TeacherPhoneNo) {
-                  this.clearFormControlValidator(this.registerForm.get("TeacherPhoneNo"))
-                }
-                if(!this.bookingGroup.AlternativeDate) {
-                  this.clearFormControlValidator(this.registerForm.get("AlternativeDate"))
-                }
-                if(!this.bookingGroup.EducationPurpose) {
-                  this.clearFormControlValidator(this.registerForm.get("EducationPurpose"))
-                }
-               
-            });
-            
-            break;
+      switch(this.ProgramType) {
+        /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
+        case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+          this.service.getProgramRequirementDetails("g", this.ProgramPK).subscribe((program) => {
+              this.bookingGroup = program;
+              
+              this.registerForm = this.fb.group({
+                ProgramRestriction: ["", Validators.required],
+                OrganizationName: ["", [Validators.required, Validators.minLength(3)]],
+                GradeLevel: ["", Validators.required],
+                TeacherName: ["", [Validators.required, Validators.minLength(3)]],
+                TeacherEmail: [""],
+                AlternativeDate: ["", [Validators.required, Validators.minLength(5)]],
+                TeacherPhoneNo: ["", [Validators.required, Validators.min(1000000000)]],
+                EducationPurpose: ["", [Validators.required, Validators.minLength(5)]],
+              });
+  
+              //Clear the Validator for unavailable field
+              if(!this.bookingGroup.ProgramRestriction) {
+                this.clearFormControlValidator(this.registerForm.get("ProgramRestriction"))
+              }
+              if(!this.bookingGroup.OrganizationName) {
+                this.clearFormControlValidator(this.registerForm.get("OrganizationName"))
+              }
+              if(!this.bookingGroup.GradeLevel) {
+                this.clearFormControlValidator(this.registerForm.get("GradeLevel"))
+              }
+              if(!this.bookingGroup.TeacherName) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherName"))
+              }
+              if(!this.bookingGroup.TeacherEmail) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherEmail"))
+              }
+              if(!this.bookingGroup.TeacherPhoneNo) {
+                this.clearFormControlValidator(this.registerForm.get("TeacherPhoneNo"))
+              }
+              if(!this.bookingGroup.AlternativeDate) {
+                this.clearFormControlValidator(this.registerForm.get("AlternativeDate"))
+              }
+              if(!this.bookingGroup.EducationPurpose) {
+                this.clearFormControlValidator(this.registerForm.get("EducationPurpose"))
+              }
+             
+          });
+          
+          break;
 
-          /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
-          case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-            this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
-              this.bookingIndividual = program;
-            });
+        /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
+        case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+          this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
+            this.bookingIndividual = program;
 
             this.registerForm = this.fb.group({
               ParticipantName: ['', [Validators.required, Validators.minLength(3)]],
-              ParticipantAge: ['', Validators.required],
+              ParticipantAge: [0, Validators.required],
               Gender: ['', Validators.required],
               MerchSize: ['', Validators.required],
               AllergyInfo: [''],
@@ -249,25 +251,25 @@ export class ReservationComponent implements OnInit {
             
             // Clear the Validator for unavailable field
             if(!this.bookingIndividual.AllergyInfo) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("AllergyInfo"));
             }
             if(!this.bookingIndividual.ParticipantAge) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("ParticipantAge"));
             }
             if(!this.bookingIndividual.ParticipantName) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("ParticipantName"));
             }
             if(!this.bookingIndividual.Gender) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("Gender"));
             }
             if(!this.bookingIndividual.MerchSize) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("MerchSize"));
             }
             if(!this.bookingIndividual.SpecialInfo) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("SpecialInfo"));
             }
             if(!this.bookingIndividual.InsureProviderName) {
-              this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+              this.clearFormControlValidator(this.registerForm.get("InsureProviderName"));
             }
             if(!this.bookingIndividual.InsureRecipientName) {
                this.clearFormControlValidator(this.registerForm.get('InsureRecipientName'));
@@ -306,29 +308,51 @@ export class ReservationComponent implements OnInit {
                this.clearFormControlValidator(this.registerForm.get('LiabilityAgreement'));
             }
         
-            // Clear Validator for QuantityForm when Individual Program is loadded.
-            this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age810Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1112Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1314Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1415Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("Age1517Quantity"));
-            this.clearFormControlValidator(this.quantityForm.get("TotalQuantity"));
-            break;
-        }
-    });   // End Select Program header and initialize FormGroup
+          });
+
+          
+          // Clear Validator for QuantityForm when Individual Program is loadded.
+          this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age810Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1112Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1314Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1415Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("Age1517Quantity"));
+          this.clearFormControlValidator(this.quantityForm.get("TotalQuantity"));
+          break;
+      }
+  });   // End Select Program header and initialize FormGroup
 
     //Define and create to get schedule by ProgramPk
     const currentYear = new Date().getFullYear();
-    const parseAdjust = (eventDate: string): Date => {
-      const date = new Date(eventDate);
+    const parseAdjust = (eventDateTime: string, RepeatDay: string): Date => {
+      var date = new Date(eventDateTime);
       date.setFullYear(currentYear);
+      //Set the event Start and End to today dates if the Start/End is before today date
+      var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
+      let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
+      let dayIndex = todayDate.getDay()
+      //If date is before today's date and today's day is in the repeat day of the session
+      if(date < todayDate){
+          if(RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0){
+              date = todayDate
+          }
+          else{
+              for(var d = addDays(todayDate,1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)){
+                  if(RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0){
+                      date = d;
+                      break;
+                  }
+              }
+              
+          }                
+      }
       return date;
-    };
+  }; 
 
     //GET ALL BLACK-OUT DATES
-    this.programScheduleServices.getAllBlackoutDateException().subscribe(res =>{
+    this.programScheduleServices.getAllBlackoutDateException().subscribe((res) =>{
           this.allBlackoutDateException = res      
           console.log(res)
         // INITIALIZE THE SCHEDULE
@@ -341,8 +365,8 @@ export class ReservationComponent implements OnInit {
             Title: dataItem.Title,
             Description: dataItem.Description,
             StartTimezone: dataItem.StartTimezone,
-            Start: parseAdjust(dataItem.Start),
-            End: parseAdjust(dataItem.End),
+            Start: parseAdjust(dataItem.Start, dataItem.RepeatDay),
+            End: parseAdjust(dataItem.End, dataItem.RepeatDay),
             EndTimezone: dataItem.EndTimezone,
             MaximumParticipant: this.programDetails.MaximumParticipant,
             CurrentParticipant: 0,
@@ -359,25 +383,27 @@ export class ReservationComponent implements OnInit {
           
           //Create Date array for each event in RecurrenceException
           sampleDataWithCustomSchema.forEach(item =>{
-            var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
             //Just check repeated sessions, skip additional sessions (since it happens once)
-            if(result.length > 0 && item.ScheduleSettingPK != 0){
+            if(item.ScheduleSettingPK != 0){
+                var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
                 //get the time of the session
                 var timezoneOffset = (new Date(item.Start)).getTimezoneOffset()*60000
                 var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
                 var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0,10)
-                
+                //1. Add recurrence exception to each session based on Blackout Date
                 //add the start date to the recurrence exception to avoid Kendo UI bug
+                let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
                 item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
-                
-                //add each of the date in exceptionDateArr to recurence exception                        
-                result[0].exceptionDateArr.forEach(exceptionDate =>{
-                    item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
-                })
-                }
-              })
+                //if this session has blackout-date => add to recurenceException
+                if(result.length > 0){ 
+                    //add each of the date in exceptionDateArr to recurence exception                        
+                    result[0].exceptionDateArr.forEach(exceptionDate =>{
+                        item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                    })
+                }                                        
+            }
+        })
           this.allEvents = sampleDataWithCustomSchema;
-          console.log(this.allEvents)
         });
       })
     
@@ -443,19 +469,18 @@ export class ReservationComponent implements OnInit {
         eventStart,
         eventEnd
       )
-      .subscribe((res) => {
-        if (res) {
+      .subscribe((result) => {
+        if (result) {
           // There is a schedule in the database
-          this.tempDate = new Date(res.Start);
-          let end = new Date(res.End);
-          this.currentSession = res;
+          this.tempDate = new Date(result.Start);
+          let end = new Date(result.End);
+          this.currentSession = result;
           this.customerSelectDate = this.tempDate.toDateString();
           this.customerSelectTime = this.tempDate
             .toLocaleString("en-US", this.options)
             .concat(" - ", end.toLocaleString("en-US", this.options));
 
-          this.availability =
-            res.MaximumParticipant - res.CurrentNumberParticipant;
+          this.availability = result.MaximumParticipant - result.CurrentNumberParticipant;
 
           this.quantityForm
             .get("CustomerSelectDate")
@@ -466,8 +491,9 @@ export class ReservationComponent implements OnInit {
           this.quantityForm.get("Availability").setValue(this.availability);
 
           // Pass SchedulePK for Booking Page
-          this.SchedulePK = res.SchedulePK;
-        } else {
+          this.SchedulePK = result.SchedulePK;
+        } 
+        else {
           this.customerSelectDate = e.event.dataItem.Start.toDateString();
           this.customerSelectTime = e.event.dataItem.Start.toLocaleString(
             "en-US",
@@ -488,8 +514,7 @@ export class ReservationComponent implements OnInit {
           this.quantityForm.get("Availability").setValue(this.availability);
 
           // Pass SchedulePK for Booking Page
-          this.SchedulePK = e.event.dataItem.SchedulePK;
-
+          this.SchedulePK = 0;
           this.currentSession.SchedulePK = 0;   // SchedulePK is AutoIncrement
           this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
           this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
@@ -535,7 +560,6 @@ export class ReservationComponent implements OnInit {
     - ReservationHeader
     - ReservationGroupDetails
     - PaymentHeader 
-    - PaymentDetails
     - MarketingInformation     
     Data will be stored in the LocalStorage and insert at the end                               
   **********************************************************/
@@ -569,9 +593,12 @@ export class ReservationComponent implements OnInit {
   addFormControlValidator(control: any, type: any) {
     control.setValidators(type);
   }
-
   /******************************************************************************/
+
+  // This function will apply for both Group and Individual Program
   quantityProgramStepperNext(stepper: MatStepper, type: string) {
+    var balance = this.programDetails.PricePerParticipant;
+    // Add quantity data for Group Program only.
     if(type == "g") {
       this.reservationGroupDetails.AdultQuantity =this.quantityForm.get("Age57Quantity").value;
       this.reservationGroupDetails.Age810Quantity =this.quantityForm.get("Age810Quantity").value;
@@ -580,21 +607,30 @@ export class ReservationComponent implements OnInit {
       this.reservationGroupDetails.Age1415Quantity =this.quantityForm.get("Age1415Quantity").value;
       this.reservationGroupDetails.Age1517Quantity =this.quantityForm.get("Age1517Quantity").value;
       this.reservationGroupDetails.TotalQuantity =this.quantityForm.get("TotalQuantity").value;
+      balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
     }
 
     // Create new schedule record and insert into the database
     if(this.currentSession.SchedulePK == 0) {
       this.programScheduleServices.addNewSchedule(this.currentSession)
       .subscribe((res) => {
-        this.SchedulePK = res.SchedulePK;
+        this.SchedulePK = res;
       });
     }
+
+    // Update data for Reservation Header.
+    this.reservationHeader.SchedulePK =  this.SchedulePK;
+    this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
+    this.reservationHeader.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+    this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
+    this.reservationHeader.Total = balance;
+    this.reservationHeader.RemainingBalance = balance;
+    this.stepOneIsCompleted = true;
     stepper.next();
   }
 
   registerStepperNext(stepper: MatStepper) {
-   
-    this.getFormValidationErrors();
+    // this.getFormValidationErrors();
 
      // Add User Input data to ReservationGroupDetails
      this.reservationGroupDetails.ProgramRestriction = this.registerForm.get("ProgramRestriction").value;
@@ -605,14 +641,12 @@ export class ReservationComponent implements OnInit {
      this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get("TeacherPhoneNo" ).value;
      this.reservationGroupDetails.AlternativeDate = this.registerForm.get("AlternativeDate").value;
      this.reservationGroupDetails.EducationPurpose = this.registerForm.get("EducationPurpose").value;
-     this.isCompleted = true;
+     this.stepTwoIsCompleted = true;
      
       stepper.next();
   }
   
   registerIndividualStepperNext(stepper: MatStepper) {
-    // Clear the Validator for unavailable field
-  
     // Add User Input data to ReservationIndividualDetails
     this.reservationIndividualDetails.ParticipantName = this.registerForm.get("ParticipantName").value;
     this.reservationIndividualDetails.ParticipantAge = this.registerForm.get("ParticipantAge").value;
@@ -632,8 +666,72 @@ export class ReservationComponent implements OnInit {
     this.reservationIndividualDetails.LatePickup = this.registerForm.get("LatePickup").value;
     this.reservationIndividualDetails.MediaRelease = this.registerForm.get("MediaRelease").value;
     this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get("EmergencyMedicalRelease").value;
-    this.isCompleted = true;
-
+    this.stepTwoIsCompleted = true;
+    this.getFormValidationErrors();
      stepper.next();
+ }
+
+ submitReservation() {
+  this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
+    switch(this.ProgramType){
+      case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+        this.reservationGroupDetails.ReservationPK = result;
+        this.resServices.addGroupReservationDetails(this.reservationGroupDetails).subscribe((res) => {
+          if(res) {
+            const dialogConfig = new MatDialogConfig();
+            // The user can't close the dialog by clicking outside its body
+            dialogConfig.disableClose = true;
+            dialogConfig.id = "modal-component";
+            dialogConfig.height = "auto";
+            dialogConfig.maxHeight = "500px";
+            dialogConfig.width = "430px";
+            dialogConfig.data = {
+              title: "Thanks You.",
+              description: "Thank you for your reservation!",
+              actionButtonText: "Ok",
+              numberOfButton: "1"
+            }
+
+            const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+            modalDialog.afterClosed().subscribe(result => {
+              if (result == "Yes") {
+                //call register function                
+                this.router.navigateByUrl('/');
+              }
+            })
+          }
+        });
+       
+        break;
+      case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+        this.reservationIndividualDetails.ReservationPK = result;
+        this.resServices.addIndividualReservationDetails(this.reservationIndividualDetails).subscribe((res) => {
+          if(res) {
+            const dialogConfig = new MatDialogConfig();
+            // The user can't close the dialog by clicking outside its body
+            dialogConfig.disableClose = true;
+            dialogConfig.id = "modal-component";
+            dialogConfig.height = "auto";
+            dialogConfig.maxHeight = "500px";
+            dialogConfig.width = "430px";
+            dialogConfig.data = {
+              title: "Thanks You.",
+              description: "Thank you for your reservation!",
+              actionButtonText: "Ok",
+              numberOfButton: "1"
+            }
+
+            const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+            modalDialog.afterClosed().subscribe(result => {
+              if (result == "Yes") {
+                //call register function                
+                this.router.navigateByUrl('/');
+              }
+            })
+          }
+        });
+        break;
+    }
+  });
  }
 }

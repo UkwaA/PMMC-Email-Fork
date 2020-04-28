@@ -21,7 +21,7 @@ export class GroupProgramComponent implements OnInit{
             this.programs.forEach(e => {
                 e.ImgData = AppConstants.EXPRESS_SERVER_URL + e.ImgData;
                 this.programService.getSubGroupProgramType(e.ProgramPK).subscribe(result =>{
-                    e.SubProgramPK = result
+                    e.SubProgramPK = result;
                 })
             });
         })

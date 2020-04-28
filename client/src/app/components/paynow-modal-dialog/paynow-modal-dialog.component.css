@@ -1,0 +1,37 @@
+#modal-action-button{
+    width: 150px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+
+    background: #16222A; 
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A); 
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white;
+}
+
+#modal-action-button:hover{
+    text-decoration: underline;
+    text-shadow: whitesmoke;
+}
+
+#modal-cancel-button{
+    width: 100px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+    color: white;
+
+}
+
+#modal-cancel-button:hover{
+    text-decoration: underline;
+    text-shadow: whitesmoke;
+
+}

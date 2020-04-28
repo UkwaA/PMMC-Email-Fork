@@ -303,7 +303,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
       //Set up recurrence rule
       this.recurrenceRule = "FREQ=WEEKLY" + ";BYDAY=" + this.weeklyRepeatOnDayArr.join(",") 
-                              + ";UNTIL=" + dateEndRepeat
+                              + ";UNTIL=" + dateEndRepeat + "T23:00:00"
 
       this.currentSessionDetail = {
 			SessionDetailsPK: 0,			
@@ -335,8 +335,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				ScheduleSettingPK: 0,
 				ProgramPK: this.modalData.programPK,
 				ScheduleSettingName: this.scheduleSettingName,
-				Start: this.startDate.toISOString(),
-				End: this.endDate.toISOString(),
+				Start: (new Date(eventStartDate + "T06:00:00")).toISOString(),
+				End: (new Date(dateEndRepeat + "T16:59:00")).toISOString(),
 				IsActive: true,
 				CreatedBy: this.modalData.userPK
 				}

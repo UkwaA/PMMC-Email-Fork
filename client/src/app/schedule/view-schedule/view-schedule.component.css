@@ -1,6 +1,6 @@
-.mat-button, .mat-raised-button:hover{
+/* .mat-button, .mat-raised-button:hover{
     background-color: rgb(6, 3, 189);
-  } 
+  }  */
   
   .col-lg-12{
       padding-bottom: 20px;
@@ -53,3 +53,7 @@
   }
 
   :host >>> .selected::before { display: none; }
+
+  ::ng-deep .mat-card-title {
+    color: #08b2b8;
+  }
