@@ -85,6 +85,7 @@ import { ReservationManagement } from './reservation-management/reservation-mana
 import { MatTabsModule } from '@angular/material/tabs';
 import { PaymentManagementComponent } from './payment-management/payment-management.component';
 import { PaynowModalDialog } from './components/paynow-modal-dialog/paynow-modal-dialog.component';
+import { ReservationDetailsModalDialog } from './components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
 
 const routes : Routes = [
   {path: '', component: HomeComponent},
@@ -215,6 +216,7 @@ const routes : Routes = [
     ReservationManagement,
     PaymentManagementComponent,
     PaynowModalDialog,
+    ReservationDetailsModalDialog
   ],
   imports: [
     BrowserModule,
@@ -265,6 +267,6 @@ const routes : Routes = [
               }],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
-    AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog]
+    AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog]
 })
 export class AppModule { }

@@ -1,0 +1,35 @@
+<div id="modal-content-wrapper" style="text-align: center;">
+    <header id="modal-header">
+        <button type="button" class="close" (click)="closeModal()" onfocus="blur()">X</button>
+        <!-- <div class="alert alert-success alert-dismissible fade show mb-0">
+            <strong>Booking Successful!</strong> Please check your email for a confirmation detail.
+            <button type="button" close="close" data-dismiss="alert">&times;</button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show mb-0">
+            <strong>Error!</strong>Make sure all infomation is correct.
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Reservation Details</h3>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <mat-divider></mat-divider>
+    <br/>
+    <section id="modal-body" style="text-align: left;">
+        
+    </section>
+    <footer id ="modal-footer">
+        <button mat-raised-button id="modal-cancel-button" class="btn-warning" (click)="closeModal()" onfocus="blur()" style="float:right"> Cancel</button>
+    </footer>
+</div>
