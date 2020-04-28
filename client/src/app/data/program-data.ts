@@ -26,4 +26,6 @@ export class ProgramData {
         this.MaximumParticipant = participant;
         this.ImgData = nImageURL;
     }
+
+    
 }

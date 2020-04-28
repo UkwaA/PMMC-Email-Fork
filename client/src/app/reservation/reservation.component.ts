@@ -12,8 +12,9 @@ import {
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { QuantiyFormData } from "../data/quantity-form-data";
 import { ProgramScheduleData } from "../data/program-schedule-data";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatDialogConfig } from "@angular/material";
 import { LoginPromptModal } from "../components/login-prompt-modal/login-prompt-modal.component";
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { AuthenticationService } from "../authentication.service";
 import { AppConstants } from "../constants";
 import { MatStepper } from "@angular/material/stepper";
@@ -676,14 +677,58 @@ export class ReservationComponent implements OnInit {
       case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
         this.reservationGroupDetails.ReservationPK = result;
         this.resServices.addGroupReservationDetails(this.reservationGroupDetails).subscribe((res) => {
-          console.log(res);
+          if(res) {
+            const dialogConfig = new MatDialogConfig();
+            // The user can't close the dialog by clicking outside its body
+            dialogConfig.disableClose = true;
+            dialogConfig.id = "modal-component";
+            dialogConfig.height = "auto";
+            dialogConfig.maxHeight = "500px";
+            dialogConfig.width = "430px";
+            dialogConfig.data = {
+              title: "Thanks You.",
+              description: "Thank you for your reservation!",
+              actionButtonText: "Ok",
+              numberOfButton: "1"
+            }
+
+            const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+            modalDialog.afterClosed().subscribe(result => {
+              if (result == "Yes") {
+                //call register function                
+                this.router.navigateByUrl('/');
+              }
+            })
+          }
         });
        
         break;
       case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
         this.reservationIndividualDetails.ReservationPK = result;
         this.resServices.addIndividualReservationDetails(this.reservationIndividualDetails).subscribe((res) => {
-          console.log(res);
+          if(res) {
+            const dialogConfig = new MatDialogConfig();
+            // The user can't close the dialog by clicking outside its body
+            dialogConfig.disableClose = true;
+            dialogConfig.id = "modal-component";
+            dialogConfig.height = "auto";
+            dialogConfig.maxHeight = "500px";
+            dialogConfig.width = "430px";
+            dialogConfig.data = {
+              title: "Thanks You.",
+              description: "Thank you for your reservation!",
+              actionButtonText: "Ok",
+              numberOfButton: "1"
+            }
+
+            const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+            modalDialog.afterClosed().subscribe(result => {
+              if (result == "Yes") {
+                //call register function                
+                this.router.navigateByUrl('/');
+              }
+            })
+          }
         });
         break;
     }

@@ -11,7 +11,7 @@ import { ReservationHeader } from '../data/reservation-header';
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from '../data/reservation-individual-details';
 import { AppConstants } from '../constants';
-
+// import Stripe from 'stripe';
 
 @Component({
     selector: 'payment',
@@ -24,6 +24,10 @@ export class PaymentComponent implements OnInit{
     @Input() reservationHeader: ReservationHeader;
     @Input() ProgramPK: number;
     
+    // stripe = new Stripe('sk_test_...', {
+    //     apiVersion: '2020-03-02',
+    //   });
+      
     userDetails: UserDetails
     paymentForm: FormGroup;
     submitted = false;
