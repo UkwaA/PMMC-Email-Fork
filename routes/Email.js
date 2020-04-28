@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 //TO DO: need to update to sponsor's email server
 let emailServer = {
-  sponsorEmail: "hoangt5@uci.edu",
+  sponsorEmail: "uakkum@uci.edu",
   host: "email-smtp.us-west-2.amazonaws.com",
   port: 587,
   //This is AWS SES credential
@@ -49,7 +49,7 @@ async function sendContactEmail(user, callback) {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
     from: emailServer.sponsorEmail, // sender address
-    to: "hoangt5@uci.edu", // list of receivers
+    to: "uakkum@uci.edu", // list of receivers
     subject: user.subject, // Subject line
     html: `
     <h4>There is a message from ${user.name} at ${user.email}</h4><br>
@@ -69,12 +69,13 @@ async function sendContactEmail(user, callback) {
 
 app.post('/send-reset-password-email', (req,res) => {
     User.findOne({
-        where: {          
+        where: {       
           Email : req.body.Email
         }
       })
       .then(user =>{
           if(!user) {
+            console.log(req.body.Email)
             res.json({ error: 'Email does not exist' })            
           }
           else{                        
@@ -134,7 +135,7 @@ async function sendResetPasswordEmail(userInfo, callback) {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
     from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
-    to: "hoangt5@uci.edu", // need to put userInfo.Email
+    to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - Reset Your Password", // Subject line
     html: `<h1>Hi ${userInfo.Username},</h1><br>
     <h4>Email: ${userInfo.Email}</h4>    
@@ -228,7 +229,7 @@ async function sendPasswordConfirmationEmail(userInfo, callback){
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
     from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
-    to: "hoangt5@uci.edu", // need to put userInfo.Email
+    to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - Update Password Confirmation", // Subject line
     html: `<h1>Hi ${userInfo.Username},</h1><br>
     <h4>Email: ${userInfo.Email}</h4>     
@@ -303,15 +304,20 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
 
   let mailOptions = {
     from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
-    to: "hoangt5@uci.edu", // need to put userInfo.Email
+    to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - New Account Confirmation", // Subject line
-    html: `<h2>Hello,</h2><br>
-    <h4>Your new account has been created.</h4>
-    <h4>Username: ${userInfo.Username} </h4>
-    <h4>***NOTE: Please follow the link to reset your password: </h4>
+    html: `<h2>Hi,</h2>
+    <h4>Thank you for registering a new account with Pacific Marine Mammal Center. 
+    This account will give you the opportunity to book programs, view/modify reservations, 
+    save payment information for later use and much more. If you have any questions please do not 
+    hesitate to contact us. Lastly, for future reference we have included your username below.
+    </h4>
+    <h4>Your username is: ${userInfo.Username} </h4>
+    <h4>If you would like to reset your password please click the following link to do so: </h4>
     <h4>http://localhost:4200/login/reset-password/${token}</h4>
     <h4>The link will expire within 7 days.</h4>
-    <h4>If you did not request a new account, please contact us immediately.</h4>`
+    <h4> We look forward to seeing you in the future. </h4>
+    <h5>If you did not request a new account, please contact us immediately.</h5>`
     };
 
   let info = await transporter.sendMail(mailOptions);
