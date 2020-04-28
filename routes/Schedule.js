@@ -275,8 +275,8 @@ schedule.post("/add-new-session-details", (req, res) => {
     hour12: false
   }; 
 
-  startTime = (new Date(req.body.Start)).toISOString().slice(11,19);
-  endTime = (new Date(req.body.End)).toISOString().slice(11,19);
+  startTime = (req.body.Start).slice(11,19);
+  endTime = (req.body.End).slice(11,19);
   
   SessionDetails.findAll({
     where: {
@@ -322,8 +322,8 @@ schedule.post("/update-session-details", (req, res) => {
     hour12: false
   }; 
 
-  startTime = (new Date(req.body.Start)).toISOString().slice(11,19);;
-  endTime = (new Date(req.body.End)).toISOString().slice(11,19);;
+  startTime = (req.body.Start).slice(11,19);
+  endTime = (req.body.End).slice(11,19);
   
   SessionDetails.findAll({
     where: {
@@ -372,9 +372,9 @@ schedule.post("/update-session-details", (req, res) => {
               if(schedules){
                 //2.Update in bulk these schedules
                 schedules.forEach(schedule =>{
-                  tempStartDate = (new Date(schedule.Start)).toISOString().slice(0,10)                  
-                  schedule.Start = (new Date(tempStartDate + "T" + startTime)).toString()
-                  schedule.End = (new Date(tempStartDate + "T" + endTime)).toString()
+                  tempStartDate = (schedule.Start).slice(0,10)                  
+                  schedule.Start = (tempStartDate + "T" + startTime + ".000Z")
+                  schedule.End = (tempStartDate + "T" + endTime + ".000Z")
                 })
                 res.json(schedules)                                  
               }
@@ -999,6 +999,8 @@ schedule.post("/deactivate-blackout-date", (req,res) => {
     res.send("error: " + err);
   });
 })
+
+//TODO: reactivate program that was deactivated by this blackout date before ???
 
 /*******************************
   SET PROGRAM COLOR

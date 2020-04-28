@@ -93,7 +93,7 @@ export class ViewScheduleComponent {
         private renderer: Renderer2) {           
         }
     
-    ngOnInit(){       
+    ngOnInit(){
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
         });
@@ -101,7 +101,6 @@ export class ViewScheduleComponent {
         this.programService.getAllPrograms().then((result) =>{
             this.programs = result;
             this.allPrograms = result
-            console.log(this.allPrograms)
 
             // Filter program into Group and Individual
             this.programs.forEach(e => {
@@ -122,27 +121,28 @@ export class ViewScheduleComponent {
 
         const currentYear = new Date().getFullYear();
         const parseAdjust = (eventDateTime: string, RepeatDay: string): Date => {
+            
             var date = new Date(eventDateTime);
             date.setFullYear(currentYear);
             //Set the event Start and End to today dates if the Start/End is before today date
-            var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
-            let todayDate = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
-            let dayIndex = todayDate.getDay()
-            //If date is before today's date and today's day is in the repeat day of the session
-            if(date < todayDate){
-                if(RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0){
-                    date = todayDate
-                }
-                else{
-                    for(var d = addDays(todayDate,1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)){
-                        if(RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0){
-                            date = d;
-                            break;
-                        }
-                    }
+            // var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
+            // let todayDate:Date = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
+            // let dayIndex = todayDate.getDay()
+            // //If date is before today's date and today's day is in the repeat day of the session
+            // if(date < todayDate){
+            //     if(RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0){
+            //         date = todayDate
+            //     }
+            //     else{
+            //         for(var d = addDays(todayDate,1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)){
+            //             if(RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0){
+            //                 date = d;
+            //                 break;
+            //             }
+            //         }
                     
-                }                
-            }
+            //     }                
+            // }
             return date;
         };       
 
@@ -199,6 +199,7 @@ export class ViewScheduleComponent {
                         }
                     }
                 })
+                console.log(sampleDataWithCustomSchema)
                 
                 this.events = sampleDataWithCustomSchema
                 this.allEvents = sampleDataWithCustomSchema
@@ -282,7 +283,6 @@ export class ViewScheduleComponent {
         var eventEnd = e.event.dataItem.End.toISOString();
         var programPK = e.event.dataItem.ProgramPK;
         var ProgramDataObj:any = this.allPrograms.filter(x => x.ProgramPK == programPK);
-        console.log(ProgramDataObj)
         var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;        
         this.programScheduleServices.getScheduleByIdStartEnd(sessionDetailsPK,programPK,eventStart,eventEnd).subscribe(res =>{
             if(res){
@@ -305,11 +305,7 @@ export class ViewScheduleComponent {
             this.currentSessionDetails.tempDate = e.event.dataItem.Start.toLocaleDateString()
             this.currentSessionDetails.tempStart = (new Date(e.event.dataItem.Start)).toLocaleString('en-US', this.displayTimeFormatOption)
             this.currentSessionDetails.tempEnd = (new Date(e.event.dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption)
-        })
-        
-      
-
-        
+        }) 
         
       }
 

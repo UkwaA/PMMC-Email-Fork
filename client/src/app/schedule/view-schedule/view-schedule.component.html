@@ -64,9 +64,9 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-success btn-sm" *ngIf="currentSessionDetails.Availability != 0">
+                                    <button type="button" class="btn btn-success btn-sm" *ngIf="currentSessionDetails.Availability != 0" disabled>
                                         Available</button>
-                                    <button type="button" class="btn btn-danger btn-sm" *ngIf="currentSessionDetails.Availability == 0">
+                                    <button type="button" class="btn btn-danger btn-sm" *ngIf="currentSessionDetails.Availability == 0" disabled>
                                         Full</button>
                                 </div>
                             </div>
