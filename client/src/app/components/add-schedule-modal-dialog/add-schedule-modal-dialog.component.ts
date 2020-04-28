@@ -335,8 +335,8 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				ScheduleSettingPK: 0,
 				ProgramPK: this.modalData.programPK,
 				ScheduleSettingName: this.scheduleSettingName,
-				Start: this.startDate.toISOString(),
-				End: this.endDate.toISOString(),
+				Start: (new Date(eventStartDate + "T06:00:00")).toISOString(),
+				End: (new Date(dateEndRepeat + "T16:59:00")).toISOString(),
 				IsActive: true,
 				CreatedBy: this.modalData.userPK
 				}
