@@ -275,8 +275,8 @@ schedule.post("/add-new-session-details", (req, res) => {
     hour12: false
   }; 
 
-  startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
-  endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
+  startTime = (new Date(req.body.Start)).toISOString().slice(11,19);
+  endTime = (new Date(req.body.End)).toISOString().slice(11,19);
   
   SessionDetails.findAll({
     where: {
@@ -322,8 +322,8 @@ schedule.post("/update-session-details", (req, res) => {
     hour12: false
   }; 
 
-  startTime = (new Date(req.body.Start)).toLocaleString('en-US', timeFormatOptions);
-  endTime = (new Date(req.body.End)).toLocaleString('en-US', timeFormatOptions);
+  startTime = (new Date(req.body.Start)).toISOString().slice(11,19);;
+  endTime = (new Date(req.body.End)).toISOString().slice(11,19);;
   
   SessionDetails.findAll({
     where: {
