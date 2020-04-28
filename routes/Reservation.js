@@ -14,7 +14,7 @@ reservation.use(cors());
  *       GET RESERVATION HEADER           *
  ******************************************/
 reservation.get("/get-all-reservation", (req, res) => {
-  reservation
+  ReservationHeader
     .findAll({
       where: {
         IsActive: true,
@@ -22,7 +22,7 @@ reservation.get("/get-all-reservation", (req, res) => {
     })
     .then((result) => {
       if (result) {
-        res.json(program);
+        res.json(result);
       } else {
         res.send("There is no reservation available.");
       }
