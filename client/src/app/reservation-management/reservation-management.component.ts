@@ -51,7 +51,7 @@ export class ReservationManagement implements OnInit{
     dialogConfig.disableClose = true;
     dialogConfig.id = "paynow-modal-component";
     dialogConfig.maxHeight = "600px";
-    dialogConfig.width = "570px";
+    dialogConfig.width = "750x";
     dialogConfig.autoFocus = false;
    
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
