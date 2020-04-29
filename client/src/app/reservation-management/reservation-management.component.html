@@ -32,41 +32,24 @@
                         <th style="width:15%"> Program Name </th>
                         <th style="width:12.5%"> Date </th>
                         <th style="width:12.5%"> Total </th>
-                        <th style="width:10%"> Status </th>
+                        <th title="Ongoing: Haven't attended yet
+Attended: Attened the program + Not completed payment yet
+Completed: Attened the program + Completed payment
+Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
                         <th style="width:15%"> Name </th>
                         <th style="width:12.5%"> Email </th>
                         <th style="width:12.5%"> Action </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td> G2467 </td>
+                    <tr *ngFor="let reservation of allReservations">
+                        <td> {{reservation.ReservationPK}} </td>
                         <td> Change the Life of a Seal </td>
                         <td> April 20, 2020</td>
-                        <td> $1000 </td>
-                        <td> Completed </td>
+                        <td> {{reservation.Total}} </td>
+                        <td > {{reservation.ReservationStatus}} </td>
                         <td> Alice Nguyen </td>
                         <td> alice@gmail.com </td>
-                        <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
-                    </tr>
-                    <tr>
-                        <td> I1234 </td>
-                        <td> Camp Pinniped </td>
-                        <td> June 20, 2020</td>
-                        <td> $120 </td>
-                        <td> Cancelled </td>
-                        <td> Brian Pham</td>
-                        <td> brian@gmail.com </td>
-                        <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
-                    </tr>
-                    <tr>
-                        <td> R1234 </td>
-                        <td> Pinniped Pollution Project </td>
-                        <td> May 10, 2020</td>
-                        <td> $600 </td>
-                        <td> Completed </td>
-                        <td> Anna Tran</td>
-                        <td> anna@gmail.com </td>
                         <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
                     </tr>
                 </tbody>
