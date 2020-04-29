@@ -19,7 +19,8 @@
       <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
       <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
         <a mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
-        <a mat-list-item [routerLink]="['/profile/payment-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a>
+        <a mat-list-item [routerLink]="['/profile/payment-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>view_quilt</mat-icon>Report Management</a>
+        <!-- <a mat-list-item [routerLink]="['/profile/payment-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a> -->
       </mat-nav-list>
 
       <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>

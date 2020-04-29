@@ -40,7 +40,7 @@
         </div>
         <br/>
         <mat-divider></mat-divider>
-        <br/>
+        <br/> 
         <div class="row">
             <div class="col-md-3">
                 <p><strong>Account</strong></p>
@@ -57,9 +57,27 @@
             <div class="col-md-3">
                 <p><strong>Pay with</strong></p>
             </div>
-            <div class="col-md-7">
+            <div class="payment col-md-4">
                 <p>Visa *1234</p>
             </div>
+
+            <form class="cvv-form">
+                <mat-form-field class="example-full-width">
+                    <mat-label>CVV</mat-label>
+                    <input matInput [formControl]="cvvForm" placeholder="Ex. 123"
+                        min="0" max="999" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58)return false;" [formControl]="cvvRequired">
+                    <mat-hint>Must be 3 digits</mat-hint>
+                    <mat-error *ngIf="cvvForm.hasError('required')">
+                        CVV is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="cvvForm.hasError('minLength')">
+                        Must be <strong>3 digits!</strong>
+                    </mat-error>
+                </mat-form-field>
+            </form>
+
+
+
         </div>
         <mat-divider></mat-divider>
         <br/>
@@ -82,7 +100,7 @@
         <br/>
     </section>
     <footer id ="modal-footer">
-        <button mat-raised-button id="modal-action-button" onfocus="blur()" style="float:right"> Place Order</button>
-        <button mat-raised-button id="modal-cancel-button" class="btn-warning" (click)="closeModal()" onfocus="blur()" style="float:left"> Cancel</button>
+        <button mat-raised-button id="modal-action-button" onfocus="blur()" style="float:right" type="submit"> Place Order</button>
+        <!-- <button mat-raised-button id="modal-cancel-button" class="btn-warning" (click)="closeModal()" onfocus="blur()" style="float:left"> Cancel</button> -->
     </footer>
 </div>
