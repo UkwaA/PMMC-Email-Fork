@@ -4,6 +4,7 @@ import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProgramScheduleService } from 'src/app/services/schedule.services';
 
 declare var $: any;
 
@@ -13,6 +14,7 @@ declare var $: any;
 })
 
 export class ScheduleManagementComponent {
+    //Define variables for program info
     programs : ProgramData[];
     allPrograms : ProgramData[];
     individualProgram: ProgramData[] = [];
@@ -20,7 +22,10 @@ export class ScheduleManagementComponent {
     searchText: string;
     selectedValue = 0;
     isDisabled= true; //temporary variabe to hold the value for enable/disable button of program
-  
+    
+    //Define variable to hold all schedule settings
+    allScheduleSettings:any = []
+
     // Dropdown Menu Option
     programCategories: Array<Object> = [
         { id: 0, name: "All Program" },
@@ -28,7 +33,7 @@ export class ScheduleManagementComponent {
         { id: 2, name: "Individual Program" }
     ]
 
-    constructor(private programService: ProgramServices,
+    constructor(private programService: ProgramServices, private programScheduleServices: ProgramScheduleService,
                 public matDialog: MatDialog) { }
 
     ngOnInit() {
@@ -38,7 +43,7 @@ export class ScheduleManagementComponent {
         });
 
         // Service call to get data from server
-        this.programService.getAllPrograms().then((result) =>{
+        this.programScheduleServices.getAllProgramsWithScheduleSettings().subscribe((result) =>{
             this.programs = result;
             this.allPrograms = result
 

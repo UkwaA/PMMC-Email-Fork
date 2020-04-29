@@ -404,6 +404,7 @@ export class ReservationComponent implements OnInit {
             }
         })
           this.allEvents = sampleDataWithCustomSchema;
+          console.log(this.allEvents)
         });
       })
     

@@ -40,7 +40,7 @@ export class ViewScheduleComponent {
         { id: 2, name: "Individual Programs" }
     ]
 
-    choice:any = 0
+    choice = "0"
     currentMode = ""
     
     timeFormatOptions = {
@@ -94,6 +94,7 @@ export class ViewScheduleComponent {
         }
     
     ngOnInit(){
+        this.choice = "0"
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
         });
@@ -200,7 +201,6 @@ export class ViewScheduleComponent {
                     }
                 })
                 console.log(sampleDataWithCustomSchema)
-                
                 this.events = sampleDataWithCustomSchema
                 this.allEvents = sampleDataWithCustomSchema
                 //Loop through all events
@@ -231,11 +231,11 @@ export class ViewScheduleComponent {
                     })
                 }
             })
-        })        
+        })              
     }
 
     //Capture the filter option
-    selectChangeHandler(event: any) {
+    selectChangeHandler(event: any) {        
         this.choice = event.target.value;
         // Update the data of table
         switch(this.choice) {
@@ -252,6 +252,9 @@ export class ViewScheduleComponent {
                 this.programs = this.individualProgram
                 break;
        }
+       //Reset the current session view on card
+       this.currentSessionDetails.ProgramPK = 0
+       this.currentSessionDetails.Title = ""      
     }
 
     onChangeSelectedProgram(program: any){
@@ -260,8 +263,9 @@ export class ViewScheduleComponent {
             this.programs.forEach(program =>{
                 if(program.ProgramPK == this.selectedProgramPK){
                     this.events = program.eventList
+                    this.currentSessionDetails.Title = program.Name
                 }
-            })
+            })            
         }
         else{
             switch(this.choice) {
@@ -275,7 +279,14 @@ export class ViewScheduleComponent {
                     this.events = this.individualEvent                    
                     break;   
             }         
-        }        
+            //Reset the current session view on card
+            this.currentSessionDetails.Title = ""
+            
+        }  
+        //Reset the current session view on card
+        this.currentSessionDetails.ProgramPK = 0    
+        this.currentSessionDetails.MaximumParticipant = 0
+        this.currentSessionDetails.Availability = 0  
     }
 
     public eventClick = (e) => {

@@ -3,6 +3,7 @@ const cors = require("cors");
 const schedule = express.Router();
 const bodyParser = require("body-parser");
 
+const Program = require("../models/Program");
 const Schedule = require("../models/Schedule");
 const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
@@ -14,10 +15,66 @@ const Op = Sequelize.Op;
 schedule.use(bodyParser.json());
 schedule.use(cors());
 
-/*********************************************
-   GET ALL CURRENT PROGRAM SCHEDULE SETTINGS
- *********************************************/
-schedule.get("/get-all-schedule-settings-by-program/:id", (req, res) => {
+/*************************************************************
+   GET ALL PROGRAM SCHEDULE SETTING FOR SCHEDULE MANAGEMENT
+ ************************************************************/
+schedule.get("/get-all-programs-with-schedule-settings", (req, res) => {  
+  let allProgramSchedules = []
+  //Get a list of all active programs
+  Program.findAll({
+    where:{
+      IsActive: true
+    }
+  })
+  .then(allPrograms =>{ //<---- Program.findAll    
+    if(allPrograms.length > 0){
+      let tempAllPrograms = []
+      //Get the list of all active schedule setting
+      ScheduleSetting.findAll({
+        where:{
+          IsActive: true
+        }
+      })
+      .then((allScheduleSettings) =>{ //<---- ScheduleSetting.findAll
+        if(allScheduleSettings.length > 0){          
+          allPrograms.forEach(program => {
+            let tempProgram = {
+              ProgramPK: program.ProgramPK,
+              Name: program.Name,
+              Description: program.Description,
+              DepositAmount: program.DepositAmount,
+              PricePerParticipant: program.PricePerParticipant,
+              MaximumParticipant: program.MaximumParticipant,
+              ImgData: program.ImgData,
+              ProgramType: program.ProgramType,
+              CreatedDate: program.CreatedDate,
+              CreatedBy: program.CreatedBy,
+              IsActive: program.IsActive,
+              hasSchedule: false
+            }            
+            var result = allScheduleSettings.filter(x => x.ProgramPK == program.ProgramPK);
+            if(result.length > 0){
+              tempProgram.hasSchedule = true
+            }
+            tempAllPrograms.push(tempProgram)
+          })
+          res.json(tempAllPrograms)
+        }        
+      })
+      .catch(err => {  //<---- ScheduleSetting.findAll
+        res.send("errorExpressErr: " + err);
+      });
+    }
+  })
+  .catch(err => {  //<---- Program.findAll
+    res.send("errorExpressErr: " + err);
+  });
+});
+
+/********************************************************
+   GET ALL CURRENT PROGRAM SCHEDULE SETTINGS BY PROGRAM
+ ********************************************************/
+schedule.get("/get-schedule-settings-by-program/:id", (req, res) => {
   ScheduleSetting.findAll({
     where : {
 		ProgramPK: req.params.id,
@@ -292,7 +349,7 @@ schedule.post("/add-new-session-details", (req, res) => {
     }
   })
   .then(scheduleSetting =>{
-    if(scheduleSetting.length > 0){ //if there exists session in selected time frame      
+    if(scheduleSetting.length > 0 || startTime === endTime){ //if there exists session in selected time frame      
       res.json(
         {error:"There exists sessions in this time frame" 
           + ". Please edit the existing session that is in this time frame OR choose another time frame"}
