@@ -137,8 +137,7 @@ async function sendResetPasswordEmail(userInfo, callback) {
     from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - Reset Your Password", // Subject line
-    html: `<h1>Hi ${userInfo.Username},</h1><br>
-    <h4>Email: ${userInfo.Email}</h4>    
+    html: `<h1>Hi ${userInfo.Username},</h1>
     <h4>Here's the link to reset your password: </h4>
     <h4>http://localhost:4200/login/reset-password/${token}</h4>
     <h4>The link will expire within 1 hour.</h4>
@@ -323,6 +322,85 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
   let info = await transporter.sendMail(mailOptions);
   callback(info);
 }
+
+/***********************************************************************
+  PROGRAM BOOKED - SEND EMAIL CONFIRMATION FOR PROGRAM REQUESTED
+***********************************************************************/
+app.post('/send-initial-booking-confirmation-email', (req,res) => {
+  User.findOne({
+    where: {          
+      UserPK : req.body.UserPK
+    }
+  })
+  .then(user =>{
+      if(!user) {
+        res.json({ error: 'User does not exist' })            
+      }
+      else{                        
+        let userInfo = req.body
+        userInfo.UserPK = user.UserPK
+        userInfo.Email = user.Email
+        
+        //send email to user            
+        SendInitialBookingConfirmationEmail(userInfo, info => {
+            console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+            res.send(info);
+          });
+      }          
+  })
+  .catch(err => {
+    res.send('error: ' + err)
+  })
+});
+
+async function SendInitialBookingConfirmationEmail(userInfo, callback){
+let transporter = nodemailer.createTransport({
+  host: emailServer.host,
+  port: emailServer.port,
+  secure: false, // true for 465, false for other ports
+  auth: {
+      //This is AWS SES credential
+    user: emailServer.user,
+    pass: emailServer.pass
+  }
+});
+
+//Create new token
+let payload = {
+  userID: userInfo.UserPK,
+  userEmail: userInfo.Email,
+  userPassword : userInfo.Password
+};
+
+let token = jwt.sign(payload, process.env.SECRET_KEY, {
+  expiresIn: 604800 //expires in 7 days
+})
+
+//For Testing only
+  // let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
+  // let decodeUserPK = decodedToken.userID
+  // let decodeUserEmail = decodedToken.userEmail
+  // let decodeUserPassword = decodedToken.userPassword
+
+let mailOptions = {
+  from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
+  to: "uakkum@uci.edu", // need to put userInfo.Email
+  subject: "PMMC - New Account Confirmation", // Subject line
+  html:
+  `<i>Thank you for requesting a program with Pacific Marine Mammal Center. 
+  All education program proceeds help support our seal and sea lion patients!</br>
+  Your program inquiry is being reviewed and should be confirmed shortly. If not, 
+  we will work hard to find an alternative date/time that works with your schedule.
+  </br></br>
+  We look forward to seeing you soon!
+  </i>`
+  };
+
+let info = await transporter.sendMail(mailOptions);
+callback(info);
+}
+
+
 
 //main().catch(console.error);
 module.exports = app

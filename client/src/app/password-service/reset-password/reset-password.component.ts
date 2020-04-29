@@ -172,7 +172,7 @@ export class ResetPasswordComponent{
         modalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
                 //redirect Users to login page
-                this.router.navigateByUrl('/login')
+                this.router.navigateByUrl('/')
             }
             else{
                 console.log("stop")                
