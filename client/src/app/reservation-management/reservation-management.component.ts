@@ -4,6 +4,7 @@ import { ReservationHeader } from '../data/reservation-header';
 import { ReservationService } from '../services/reservation.services';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ReservationDetailsModalDialog } from '../components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
+import { ProgramServices } from '../services/program.services';
 
 @Component ({
     templateUrl: '/reservation-management.component.html',
@@ -13,11 +14,13 @@ import { ReservationDetailsModalDialog } from '../components/reservation-details
 
 export class ReservationManagement implements OnInit{
     role:string;
-    allReseravtions: any;
+    allReservations: any;
+    programInfo: any;
 
     constructor(private auth: AuthenticationService,
         private reservationSerivce: ReservationService,
-        public matDialog:MatDialog){}
+        public matDialog:MatDialog,
+        private programService: ProgramServices){}
     
     ngOnInit(){
         this.auth.profile().subscribe(
@@ -32,10 +35,12 @@ export class ReservationManagement implements OnInit{
 
         this.reservationSerivce.getAllReservation().subscribe(
             allRes =>{
-            this.allReseravtions = allRes;
-            console.log(this.allReseravtions);
+            this.allReservations = allRes;
+            console.log(this.allReservations);
             }
         )
+
+        this.programService.getAllPrograms
     }
 
     // viewReservationModal
@@ -46,9 +51,9 @@ export class ReservationManagement implements OnInit{
     dialogConfig.disableClose = true;
     dialogConfig.id = "paynow-modal-component";
     dialogConfig.maxHeight = "600px";
-    dialogConfig.width = "570px";
+    dialogConfig.width = "750x";
     dialogConfig.autoFocus = false;
    
-    const paynowModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
+    const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
   }
 }

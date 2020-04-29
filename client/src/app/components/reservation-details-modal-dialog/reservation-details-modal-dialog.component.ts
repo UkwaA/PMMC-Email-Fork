@@ -17,8 +17,7 @@ export class ReservationDetailsModalDialog implements OnInit{
     
     ngOnInit(){
         $(".alert-success").hide()
-        $(".alert-danger").hide()
-       
+        $(".alert-danger").hide()     
     }
 
 
@@ -29,7 +28,6 @@ export class ReservationDetailsModalDialog implements OnInit{
     actionFunction() {
         console.log("Modal closing");
         this.dialogRef.close("Yes");
-  }
-
+    }
 
 }

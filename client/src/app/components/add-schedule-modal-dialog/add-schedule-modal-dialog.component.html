@@ -11,7 +11,7 @@
         <div class="container">
             <form [formGroup]="SetProgramScheduleForm" >
                 <div class="form-group font-weight-bold">                    
-                    <div class="row">
+                    <div class="row p-2">
                         <div class="col-md-2">
                             <label>Program Name</label>
                         </div>
@@ -19,29 +19,23 @@
                             <input type="text" class="form-control" formControlName="programName" [(ngModel)]="modalData.name" readonly>
                         </div> 
                     </div>
-                    <br/>
-                    <div class="row">
+                    
+                    <div class="row p-2" >
                         <div class="col-md-2">
                             <label>Date</label>
-                        </div>                
-                        <div class="col-md-1">
+                        </div>                        
+                        <div class="col-md-1" *ngIf="modalData.mode == 'newadditionalsession' || modalData.mode == 'editadditionalsession'">
                             <label>Start:</label>
                         </div>                            
-                        <div class="col-md-4">
+                        <div class="col-md-4" *ngIf="modalData.mode == 'newadditionalsession' || modalData.mode == 'editadditionalsession'">
                             <kendo-datepicker 
                                 [(value)]="startDate"
                                 (valueChange)="onChangeStartDate($event)"
-                                [navigation]="false"
-                                [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
-                                        && modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession' 
-                                        && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
+                                [navigation]="false"                                
                                 >                        
-                            </kendo-datepicker>
-                            <!-- <div class="errorMessage" *ngIf="startDateErrorMessage">
-                                <mat-icon matListIcon>error</mat-icon>{{startDateErrorMessage}}
-                            </div> -->
-                        </div>
-                        <div class="col-md-1" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
+                            </kendo-datepicker>                            
+                        </div>                    
+                        <!-- <div class="col-md-1" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <label>End:</label>
                         </div>
                         <div class="col-md-4" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
@@ -57,13 +51,46 @@
                             <div class="errorMessage" *ngIf="endDateErrorMessage">
                                 <mat-icon matListIcon>error</mat-icon>{{endDateErrorMessage}}
                             </div>
-                        </div>   
-                        <div class="errorMessage" *ngIf="newScheduleErrorMessage">
-                            <mat-icon matListIcon>error</mat-icon>{{newScheduleErrorMessage}}
+                        </div>    -->
+                        <div class="col-md-10" *ngIf="modalData.mode == 'newschedule' || modalData.mode == 'editschedule'
+                                                    || modalData.mode == 'newsession' || modalData.mode == 'editsession'
+                                                    || modalData.mode == 'addblackoutdate' || modalData.mode == 'editblackoutdate'">
+                            <kendo-daterange>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <label>Start:</label> 
+                                    </div>
+                                    <div class="col-md-5">
+                                        <kendo-dateinput kendoDateRangeStartInput 
+                                        autoCorrectOn="blur" 
+                                        [(value)]="startDate"
+                                        (valueChange)="onChangeStartDate($event)"
+                                        [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
+                                            && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
+                                        ></kendo-dateinput>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>End:</label> 
+                                    </div>
+                                    <div class="col-md-5">
+                                        <kendo-dateinput kendoDateRangeEndInput 
+                                        autoCorrectOn="blur"
+                                        [(value)]="endDate"
+                                        (valueChange)="onChangeEndDate($event)"
+                                        [readonly]="true"
+                                        [disabled]="modalData.mode != 'newschedule' && modalData.mode != 'editschedule' 
+                                            && modalData.mode != 'addblackoutdate' && modalData.mode != 'editblackoutdate'"
+                                        ></kendo-dateinput> 
+                                    </div>
+                                </div>
+                            </kendo-daterange>
+                            <div class="errorMessage" *ngIf="newScheduleErrorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{newScheduleErrorMessage}}
+                            </div>
                         </div>
                     </div>
-                    <br/>
-                    <div class="row" *ngIf="modalData.mode == 'newschedule' || modalData.mode == 'editschedule'">
+                    
+                    <div class="row p-2" *ngIf="modalData.mode == 'newschedule' || modalData.mode == 'editschedule'">
                         <div class="col-md-2">
                             <label>Schedule Name*</label>
                         </div>
@@ -77,7 +104,7 @@
                     </div>
                     <div *ngIf="modalData.mode == 'newsession' || modalData.mode == 'editsession' 
                             || modalData.mode == 'newadditionalsession' || modalData.mode == 'editadditionalsession'">
-                        <div class="row" >
+                        <div class="row p-2" >
                             <div class="col-md-2">
                                 <label>Time</label>
                             </div>
@@ -115,8 +142,7 @@
                                 </div>  
                             </div>
                         </div>
-                        <br/>            
-                        <div class="row" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
+                        <div class="row p-2" *ngIf="modalData.mode != 'newadditionalsession' && modalData.mode != 'editadditionalsession'">
                             <div class="col-md-2">
                                 <label>Repeat on</label>
                             </div>
@@ -143,8 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <br/> 
-                    <div class="row" *ngIf="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'">
+                    <div class="row p-2" *ngIf="modalData.mode != 'newschedule' && modalData.mode != 'editschedule'">
                         <div class="col-md-2">
                             <label>Note</label>
                         </div>

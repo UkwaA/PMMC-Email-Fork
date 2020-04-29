@@ -22,6 +22,9 @@ export class SetProgramScheduleComponent {
 	//Define success message
 	programColorMessage = ""
 	scheduleSuccessMessage = ""
+	sessionSuccessMessage = ""
+	additionalSessionSuccessMessage = ""
+	blackoutDateSuccessMessage = ""
 
 	ProgramPK = 0;
 	currentUserPK = 0;
@@ -396,12 +399,12 @@ export class SetProgramScheduleComponent {
             }
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
         addScheduleModalDialog.afterClosed().subscribe(res =>{
-            if(res == "Yes"){
-				this.reloadAllScheduleSettingsByProgramPK()
+            if(res == "Yes"){				
 				this.scheduleSuccessMessage = "New schedule has been added."
 				setTimeout(()=>{ 
 					this.scheduleSuccessMessage = "";
 			   }, 5000);
+			   this.reloadAllScheduleSettingsByProgramPK()
             }
             else{
                 console.log("stop")                
@@ -434,8 +437,12 @@ export class SetProgramScheduleComponent {
 			 }
 		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
 		addScheduleModalDialog.afterClosed().subscribe(res =>{
-			if(res == "Yes"){
-				this.reloadAllScheduleSettingsByProgramPK()
+			if(res == "Yes"){				
+				this.scheduleSuccessMessage = this.currentScheduleSetting.ScheduleSettingName + " has been updated."
+				setTimeout(()=>{ 
+					this.scheduleSuccessMessage = "";
+			   }, 5000);
+			   this.reloadAllScheduleSettingsByProgramPK()
 				this.reloadAllSessions()
 			}
 			else{
@@ -467,7 +474,11 @@ export class SetProgramScheduleComponent {
             if(result == "Yes"){
 				//Set IsActive to false in schedulesetting, sessiondetail, and schedule table
 				this.programScheduleServices.deactiveScheduleSetting(scheduleSetting).subscribe(res =>{
-					if(res.message){
+					if(res.message){						
+						this.scheduleSuccessMessage = this.currentScheduleSetting.ScheduleSettingName + " has been removed."
+						setTimeout(()=>{ 
+							this.scheduleSuccessMessage = "";
+							}, 5000);
 						this.reloadAllScheduleSettingsByProgramPK()
 						this.reloadAllSessions()
 					}					
@@ -508,6 +519,10 @@ export class SetProgramScheduleComponent {
 		addScheduleModalDialog.afterClosed().subscribe(result =>{
 			if(result == "Yes"){				
 				this.reloadAllSessions()
+				this.sessionSuccessMessage = "New session has been added."
+				setTimeout(()=>{ 
+					this.sessionSuccessMessage = "";
+					}, 5000);
 			}
 			else{
 					console.log("stop")                
@@ -541,7 +556,11 @@ export class SetProgramScheduleComponent {
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                this.reloadAllSessions()
+				this.reloadAllSessions()
+				this.sessionSuccessMessage = "Session has been updated."
+				setTimeout(()=>{ 
+					this.sessionSuccessMessage = "";
+					}, 5000);
             }
             else{
                 console.log("stop")                
@@ -574,6 +593,10 @@ export class SetProgramScheduleComponent {
 				//Set IsActive to false in sessiondetail table
 				this.programScheduleServices.deactivateSessionDetails(session).subscribe(res =>{
 					this.reloadAllSessions()
+					this.sessionSuccessMessage = "Session has been removed."
+					setTimeout(()=>{ 
+						this.sessionSuccessMessage = "";
+						}, 5000);
 				})
                 
             }
@@ -612,6 +635,10 @@ export class SetProgramScheduleComponent {
 		addScheduleModalDialog.afterClosed().subscribe(result =>{
 			if(result == "Yes"){				
 				this.reloadAllSessions()
+				this.additionalSessionSuccessMessage = "New additional session has been added."
+				setTimeout(()=>{ 
+					this.additionalSessionSuccessMessage = "";
+					}, 5000);
 			}
 			else{
 				console.log("stop")                
@@ -644,7 +671,11 @@ export class SetProgramScheduleComponent {
         const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                this.reloadAllSessions()
+				this.reloadAllSessions()
+				this.additionalSessionSuccessMessage = "Additional session has been updated."
+				setTimeout(()=>{ 
+					this.additionalSessionSuccessMessage = "";
+					}, 5000);
             }
             else{
                 console.log("stop")                
@@ -676,6 +707,10 @@ export class SetProgramScheduleComponent {
 				//Set IsActive to false in sessiondetail table
 				this.programScheduleServices.deactivateSessionDetails(session).subscribe(res =>{
 					this.reloadAllSessions()
+					this.additionalSessionSuccessMessage = "Additional session has been removed."
+					setTimeout(()=>{ 
+						this.additionalSessionSuccessMessage = "";
+						}, 5000);
 				})                
             }
             else{
@@ -712,7 +747,11 @@ export class SetProgramScheduleComponent {
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
 				this.reloadAllSessions()
-				this.reloadAllBlackoutDates()				
+				this.reloadAllBlackoutDates()	
+				this.blackoutDateSuccessMessage = "New blackout date has been added."
+				setTimeout(()=>{ 
+					this.blackoutDateSuccessMessage = "";
+					}, 5000);			
             }
             else{
                 console.log("stop")                
@@ -746,7 +785,11 @@ export class SetProgramScheduleComponent {
         addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
 				this.reloadAllSessions()
-				this.reloadAllBlackoutDates()				
+				this.reloadAllBlackoutDates()
+				this.blackoutDateSuccessMessage = "Blackout date has been updated."
+				setTimeout(()=>{ 
+					this.blackoutDateSuccessMessage = "";
+					}, 5000);				
             }
             else{
                 console.log("stop")                
@@ -777,8 +820,12 @@ export class SetProgramScheduleComponent {
 				//Set IsActive to false in sessiondetail table
 				this.programScheduleServices.deactivateBlackoutDate(blackoutDate).subscribe(res =>{
 					this.reloadAllBlackoutDates()
-				})                
-            }
+					this.blackoutDateSuccessMessage = "Blackout date has been removed."
+					setTimeout(()=>{ 
+						this.blackoutDateSuccessMessage = "";
+						}, 5000);
+					})                
+			}
             else{
                 console.log("stop")                
             }
