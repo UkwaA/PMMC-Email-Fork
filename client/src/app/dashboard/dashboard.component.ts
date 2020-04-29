@@ -3,6 +3,7 @@ import { AuthenticationService } from '../authentication.service';
 import { ProgramData } from '../data/program-data';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { PaynowModalDialog } from "../components/paynow-modal-dialog/paynow-modal-dialog.component";
+import { FixedGroupTemplateDirective } from '@progress/kendo-angular-dropdowns';
 
 declare var $: any;
 
@@ -115,9 +116,11 @@ pieChartOptions = {
 
     dialogConfig.disableClose = true;
     dialogConfig.id = "paynow-modal-component";
-    dialogConfig.maxHeight = "600px";
-    dialogConfig.width = "570px";
-    dialogConfig.autoFocus = false;
+    dialogConfig.height = "750px"
+    dialogConfig.maxHeight = "100%";
+    dialogConfig.width = "580px";
+    dialogConfig.maxWidth = "100%"
+    // dialogConfig.autoFocus = false;
    
     const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
   }
