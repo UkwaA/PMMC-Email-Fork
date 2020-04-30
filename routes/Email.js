@@ -385,7 +385,7 @@ let token = jwt.sign(payload, process.env.SECRET_KEY, {
 let mailOptions = {
   from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
   to: "uakkum@uci.edu", // need to put userInfo.Email
-  subject: "PMMC - New Account Confirmation", // Subject line
+  subject: "New PMMC Account Confirmation", // Subject line
   html:
   `<i>Thank you for requesting a program with Pacific Marine Mammal Center. 
   All education program proceeds help support our seal and sea lion patients!</br>
@@ -398,6 +398,251 @@ let mailOptions = {
 
 let info = await transporter.sendMail(mailOptions);
 callback(info);
+}
+
+/***********************
+  SEND REGISTRATION CONFIRMATION EMAIL
+***********************/
+app.post('/send-registration-confirmation-email', (req, res) => {
+  let user = req.body;
+  sendRegistrationConfirmationEmail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendRegistrationConfirmationEmail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  //Using AWS SES for SMTP server
+  let transporter = nodemailer.createTransport({
+    host: emailServer.host,
+    port: emailServer.port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: emailServer.user,
+      pass: emailServer.pass
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: emailServer.sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: "PMMC Registration Confirmation", // Subject line
+    html: `
+    <h2>Hi,</h2>
+    <h4>Thank you for registering a new account with Pacific Marine Mammal Center. 
+    This account will give you the opportunity to book programs, view/modify reservations, 
+    save payment information for later use and much more. If you have any questions please do not 
+    hesitate to contact us.</h4>
+    <h4> We look forward to seeing you in the future. </h4>
+    `
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+/***********************
+  PROGRAM BOOKING CONFIRMED
+***********************/
+app.post('/send-program-confirmation-email', (req, res) => {
+  let user = req.body;
+  sendProgramConfirmationEmail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendProgramConfirmationEmail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  //Using AWS SES for SMTP server
+  let transporter = nodemailer.createTransport({
+    host: emailServer.host,
+    port: emailServer.port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: emailServer.user,
+      pass: emailServer.pass
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: emailServer.sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: "PMMC - Final Booking Confirmation", // Subject line
+    html: `
+    <i>Your program with Pacific Marine Mammal Center has been confirmed! 
+    You are now registered for:
+    (PROGRAM NAME, DATE & TIME SHOULD BE INSERTED AUTOMATICALLY HERE) </i>
+    <i>We have processed your deposit of 
+    (AUTOMATIC INSERTION OF DEPOSIT AMOUNT IF MADE). 
+    Your remaining balance of (AUTOMATIC INSERTION OF REMAINING BALANCE DUE) 
+    prior to your program unless special arrangements have been made with 
+    PMMC administration.</i>
+    <i>We look forward to having you join us. See you soon! </i>`
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+/***********************
+  PROGRAM/PAYMENT REMINDER
+***********************/
+app.post('/send-program-reminder-email', (req, res) => {
+  let user = req.body;
+  sendProgramReminderEmail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendProgramReminderEmail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  //Using AWS SES for SMTP server
+  let transporter = nodemailer.createTransport({
+    host: emailServer.host,
+    port: emailServer.port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: emailServer.user,
+      pass: emailServer.pass
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: emailServer.sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: "PMMC Upcoming Program", // Subject line
+    html: `
+    <i>This is a reminder about your upcoming visit to Pacific Marine Mammal 
+    Center on (AUTOMATIC INSERTION OF PROGRAM DATE/TIME) for 
+    (AUTOMATIC INSERTION OF PROGRAM NAME). Your balance of: 
+    (AUTOMATIC INSERTION OF PROGRAM BALANCE HERE) should be paid prior to 
+    your program unless special arrangements have been made with PMMC 
+    administration.</i>
+    <br/>
+    <i>We look forward to having you join us. See you soon! </i>`
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+/***********************
+  PAYMENT CONFIRMATION
+***********************/
+app.post('/send-payment-confirmation-email', (req, res) => {
+  let user = req.body;
+  sendPaymentConfirmationEmail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendPaymentConfirmationEmail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  //Using AWS SES for SMTP server
+  let transporter = nodemailer.createTransport({
+    host: emailServer.host,
+    port: emailServer.port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: emailServer.user,
+      pass: emailServer.pass
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: emailServer.sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: "PMMC - Payment Confirmation", // Subject line
+    html: `
+    <i>Thank you for your payment of (AUTOMATIC INSERTION OF PAYMENT BALANCE) 
+    for your program with Pacific Marine Mammal Center (AUTOMATIC INSERTION 
+    OF PROGRAM NAME, DATE/TIME HERE). All education program proceeds help 
+    support our seal and sea lion patients!</i>
+    <br/>
+    <i>We look forward to having you join us. See you soon! </i>`
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
+
+/***********************
+  POST-PROGRAM EMAIL
+***********************/
+app.post('/send-post-program-email', (req, res) => {
+  let user = req.body;
+  sendPostProgramEmail(user, info => {
+    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+    res.send(info);
+  });
+});
+
+async function sendPostProgramEmail(user, callback) {
+  // create reusable transporter object using the default SMTP transport
+  //Using AWS SES for SMTP server
+  let transporter = nodemailer.createTransport({
+    host: emailServer.host,
+    port: emailServer.port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: emailServer.user,
+      pass: emailServer.pass
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: emailServer.sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: "Thank you from PMMC", // Subject line
+    html: `
+    <i>Thank you for attending your program (AUTOMATIC INSERTION OF PROGRAM 
+    NAME DATE/TIME) with Pacific Marine Mammal Center! We appreciate the 
+    opportunity to share our mission of ocean awareness and conservation 
+    with you.</i>
+    <br/>
+    <i>PMMC is always striving to improve our educational efforts. You can 
+    help by giving a quick program evaluation here: 
+    (AUTOMATIC INSERTION OF SPECIFIC SURVEY LINK). </i>
+    <br/>
+    <i>We are also grateful for your support of our seal and sea lion 
+    patients! Should you wish to keep up with our patients’ stories, 
+    sign up for our e-newsletter or a membership today at:</i>
+    <br/>
+    <i>We look forward to seeing you again in the future!</i>
+    `
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
 }
 
 
