@@ -754,7 +754,7 @@ schedule.get("/get-program-schedules-by-programpk/:id", (req, res) => {
 schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
   Schedule.findAll({
     where: {
-      SchedulePK: req.body.id,
+      SchedulePK: req.params.id,
       IsActive: true
     }
   })
