@@ -38,7 +38,8 @@ export class ReservationManagement implements OnInit{
         private reservationSerivce: ReservationService,
         public matDialog:MatDialog,
         private scheduleService: ProgramScheduleService,
-        private customerService: CustomerService){}
+        private customerService: CustomerService,
+        private programService: ProgramServices){}
     
     ngOnInit(){
         this.auth.profile().subscribe(
@@ -63,6 +64,7 @@ export class ReservationManagement implements OnInit{
                         SchedulePK: 0,
                         UserPK: 0,
                         PaymentPK: 0,
+                        ProgramPK: 0,
                         ProgramName: '',
                         Date: '',
                         CustomerName: '',
@@ -98,12 +100,20 @@ export class ReservationManagement implements OnInit{
 
                     reservation.Total = item.Total;
                     reservation.RemainingBalance = item.RemainingBalance;
-                    console.log(reservation.SchedulePK);
-                    this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe(schedule => {
-                        console.log(schedule);
-                        reservation.Date = schedule.Start;
-                        reservation.ProgramName = schedule.ProgramPK;
+                    this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
+                        reservation.Date = schedule[0].Start.slice(0, 10);
+                        reservation.ProgramPK = schedule[0].ProgramPK;
+                        this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
+                            reservation.ProgramName = program.Name;
+                            if (program.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
+                                this.groupReservations.push(reservation);
+                            }
+                            else{
+                                this.individualReservations.push(reservation);
+                            }
+                        })
                     })
+
                     this.allReservations.push(reservation);
                 })
             }
@@ -138,8 +148,8 @@ export class ReservationManagement implements OnInit{
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    dialogConfig.id = "paynow-modal-component";
-    dialogConfig.maxHeight = "600px";
+    dialogConfig.id = "reservation-modal-component";
+    dialogConfig.height = "600px";
     dialogConfig.width = "750x";
     dialogConfig.autoFocus = false;
    

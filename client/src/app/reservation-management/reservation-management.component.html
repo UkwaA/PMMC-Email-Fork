@@ -28,8 +28,8 @@
             <table #datatable class="table table-hover" style="width:100%">
                 <thead>
                     <tr>
-                        <th style="width:10%"> #Res </th>
-                        <th style="width:15%"> Program Name </th>
+                        <th style="width:7.5%"> #Res </th>
+                        <th style="width:17.5%"> Program Name </th>
                         <th style="width:12.5%"> Date </th>
                         <th title="Ongoing: Haven't attended yet
 Attended: Attened the program + Not completed payment yet
@@ -44,7 +44,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                 <tbody>
                     <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                         <td> {{reservation.ReservationPK}} </td>
-                        <td> Change the Life of a Seal </td>
+                        <td> {{reservation.ProgramName}} </td>
                         <td> {{reservation.Date}}</td>
                         <td > {{reservation.ReservationStatus}} </td>
                         <td> {{reservation.CustomerName}} </td>
