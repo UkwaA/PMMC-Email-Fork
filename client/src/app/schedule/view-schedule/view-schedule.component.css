@@ -58,6 +58,10 @@
     color: #08b2b8;
   }
 
+  .mat-card {
+    border: 0.5px solid rgb(168, 167, 167);
+  }
+
   button.available:disabled{
     display: block;
     background-color: green;
@@ -76,5 +80,16 @@
     border-radius: 20px;
     width: 80px;
     height: 30px;    
+  }
+
+  button.pastevent:disabled{
+    display: block;
+    background-color: #eb8817;
+    border: #eb8817;
+    color: white;
+    border-radius: 20px;
+    width: 250px;
+    height: 40px;    
+    font-weight: bold;
   }
 
