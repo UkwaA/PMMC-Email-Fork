@@ -6,8 +6,13 @@
     <div></div>
      <div class="tab-group col-lg-12">
          <mat-tab-group>
-             <mat-tab label="Charts">
-                <ng-template matTabContent>
+             <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon matListIcon>insert_chart</mat-icon>
+                    <span style="font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);">
+                         Charts
+                    </span>
+                </ng-template> 
                     <mat-tab-group >
                         <mat-tab label="Bar Chart">
                         <br/><br/>
@@ -44,12 +49,17 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
-                </ng-template> 
+                
             </mat-tab>
 
             <!-- TABLE -->
-             <mat-tab label="Tables">
-                <ng-template matTabContent>
+             <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon matListIcon>table_chart</mat-icon>
+                    <span style="font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);">
+                         Tables
+                    </span>
+                </ng-template> 
                     <mat-tab-group>
                         <mat-tab label="Payment Report"> 
                         <br/><br/>
@@ -252,98 +262,6 @@
 
                         </mat-tab>
                     </mat-tab-group>
-                </ng-template>
-
-
-                <!-- <ng-template mat-tab-label>
-                    <mat-icon matListIcon>table_chart</mat-icon>
-                    <span> Tables</span> -->
-                   
-                <!-- <br/><br/>
-                <div class="download-btn col-md-12" style="text-align: right;">
-                    <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn"><mat-icon matListIcon>cloud_download</mat-icon></button>
-                    
-                </div>
-
-
-                <div class="payment-report">
-                    <table #datatable class="table" style="width:100%">
-
-                    </table>
-                </div>
-                <div class="table-responsive-sm">
-                    <table #datatable class="table table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width:10%"> Res#</th>
-                                <th style="width:20%"> Date</th>
-                                <th style="width:30%"> Recipient</th>
-                                <th style="width:10%"> Status</th>
-                                <th style="width:10%"> Amount</th>
-                                <th style="width:10%"> Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> G2467 </td>
-                                <td> April 20, 2020 </td>
-                                <td> alice@gmail.com </td>
-                                <td> 
-                                    <button class="paid-btn btn-success" disabled>Paid</button>
-                                </td>
-                                <td> $200</td>
-                                <td>
-                                    <select class="action">
-                                        <option value="select">Select</option>
-                                        <option value="view">View</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="refund">Refund</option>
-                                        <option value="cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> I1234 </td>
-                                <td> June 20, 2020 </td>
-                                <td> brian@gmail.com </td>
-                                <td> 
-                                    <button class="unpaid-btn btn-warning" disabled>Unpaid</button>
-                                </td>
-                                <td> $300</td>
-                                <td>
-                                    <select class="action">
-                                        <option value="select">Select</option>
-                                        <option value="view">View</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="refund">Refund</option>
-                                        <option value="cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> R1234 </td>
-                                <td> May 10, 2020 </td>
-                                <td> anna@gmail.com </td>
-                                <td> 
-                                    <button class="refuned-btn btn-danger" disabled>Refunded</button>
-                                </td>
-                                <td> $100</td>
-                                <td>
-                                    <select class="action">
-                                        <option value="select">Select</option>
-                                        <option value="view">View</option>
-                                        <option value="pdf">PDF</option>
-                                        <option value="refund">Refund</option>
-                                        <option value="cancel">Cancel</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table> -->
-                    <!-- <button class="btn btn-info" style="float: right;">Submit</button> -->
-                <!-- </div> -->
-            
             </mat-tab>
          </mat-tab-group>
      </div>
