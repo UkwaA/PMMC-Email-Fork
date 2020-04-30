@@ -87,6 +87,10 @@ p{
   color: #08b2b8;
 }
 
+.mat-card {
+  border: 0.5px solid rgb(168, 167, 167);
+}
+
 /* 
 mat-button-toggle-group {
   box-shadow: none;

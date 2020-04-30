@@ -16,62 +16,62 @@ export class DashboardComponent implements OnInit {
   role:string;
   searchText: string;
   /* CHART USING NG2-CHARTS */
-  title = 'Bar Chart Example Using ng2-charts';
+  //title = 'Bar Chart Example Using ng2-charts';
 
   // ADD CHART OPTIONS. 
-  chartOptions = {
-    responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  }
+  // chartOptions = {
+  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+  // }
 
-  labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  chartData = [
-    {
-      label: '1st Year',
-      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-    },
-    { 
-      label: '2nd Year',
-      data: [47, 9, 28, 54, 77, 51, 24]
-    }
-  ];
+  // chartData = [
+  //   {
+  //     label: '1st Year',
+  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+  //   },
+  //   { 
+  //     label: '2nd Year',
+  //     data: [47, 9, 28, 54, 77, 51, 24]
+  //   }
+  // ];
 
   // CHART COLOR.
-  colors = [
-    { // 1st Year.
-      backgroundColor: 'rgba(77,83,96,0.2)'
-    },
-    { // 2nd Year.
-      backgroundColor: 'rgba(30, 169, 224, 0.8)'
-    }
-  ]
+ // colors = [
+   // { // 1st Year.
+  //    backgroundColor: 'rgba(77,83,96,0.2)'
+  //  },
+  //  { // 2nd Year.
+  //    backgroundColor: 'rgba(30, 169, 224, 0.8)'
+   // }
+//  ]
    /* FINISH CHART USING NG2-CHARTS */
   
    
 /* PIE CHART*/
-pieChartOptions = {
-  responsive: true,
-  legend: {
-    position: 'top',
-  },
-  plugins: {
-    datalabels: {
-      formatter: (value, ctx) => {
-        const label = ctx.chart.data.labels[ctx.dataIndex];
-        return label;
-      },
-    },
-  }
-};
- pieChartLabels = [
-  ['Request Reservation', 'Cancel', 'Completed'],
-  ['Showed', 'No Showed'],
-  ['Group Programs', 'Individual Programs']];
+// pieChartOptions = {
+//   responsive: true,
+//   legend: {
+//     position: 'top',
+//   },
+//   plugins: {
+//     datalabels: {
+//       formatter: (value, ctx) => {
+//         const label = ctx.chart.data.labels[ctx.dataIndex];
+//         return label;
+//       },
+//     },
+//   }
+// };
+//  pieChartLabels = [
+//   ['Request Reservation', 'Cancel', 'Completed'],
+//   ['Showed', 'No Showed'],
+//   ['Group Programs', 'Individual Programs']];
 
- pieChartData = [300,500,100];
+//  pieChartData = [300,500,100];
 
- pieChartPlugins = [];
+//  pieChartPlugins = [];
 
 /* END PIE CHART*/
 

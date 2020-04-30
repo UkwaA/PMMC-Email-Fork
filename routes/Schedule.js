@@ -36,7 +36,7 @@ schedule.get("/get-all-programs-with-schedule-settings", (req, res) => {
         }
       })
       .then((allScheduleSettings) =>{ //<---- ScheduleSetting.findAll
-        if(allScheduleSettings.length > 0){          
+                  
           allPrograms.forEach(program => {
             let tempProgram = {
               ProgramPK: program.ProgramPK,
@@ -51,15 +51,17 @@ schedule.get("/get-all-programs-with-schedule-settings", (req, res) => {
               CreatedBy: program.CreatedBy,
               IsActive: program.IsActive,
               hasSchedule: false
-            }            
-            var result = allScheduleSettings.filter(x => x.ProgramPK == program.ProgramPK);
+            }
+            if(allScheduleSettings){
+              var result = allScheduleSettings.filter(x => x.ProgramPK == program.ProgramPK);
+            }
             if(result.length > 0){
               tempProgram.hasSchedule = true
             }
             tempAllPrograms.push(tempProgram)
           })
           res.json(tempAllPrograms)
-        }        
+        
       })
       .catch(err => {  //<---- ScheduleSetting.findAll
         res.send("errorExpressErr: " + err);

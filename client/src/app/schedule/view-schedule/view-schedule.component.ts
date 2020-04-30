@@ -42,7 +42,7 @@ export class ViewScheduleComponent {
 
     choice = "0"
     currentMode = ""
-    
+    todayDate:string = (new Date()).toISOString()
     timeFormatOptions = {
 		hour: 'numeric',
 		minute: 'numeric',
@@ -94,6 +94,7 @@ export class ViewScheduleComponent {
         }
     
     ngOnInit(){
+        console.log(this.todayDate)
         this.choice = "0"
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
@@ -253,7 +254,8 @@ export class ViewScheduleComponent {
        }
        //Reset the current session view on card
        this.currentSessionDetails.ProgramPK = 0
-       this.currentSessionDetails.Title = ""      
+       this.currentSessionDetails.Title = ""
+       $("#matcard").css("border","")
     }
 
     onChangeSelectedProgram(program: any){
@@ -279,13 +281,13 @@ export class ViewScheduleComponent {
                     break;   
             }         
             //Reset the current session view on card
-            this.currentSessionDetails.Title = ""
-            
+            this.currentSessionDetails.Title = ""            
         }  
         //Reset the current session view on card
         this.currentSessionDetails.ProgramPK = 0    
         this.currentSessionDetails.MaximumParticipant = 0
-        this.currentSessionDetails.Availability = 0  
+        this.currentSessionDetails.Availability = 0
+        $("#matcard").css("border","")
     }
 
     public eventClick = (e) => {
@@ -315,8 +317,14 @@ export class ViewScheduleComponent {
             this.currentSessionDetails.tempDate = e.event.dataItem.Start.toLocaleDateString()
             this.currentSessionDetails.tempStart = (new Date(e.event.dataItem.Start)).toLocaleString('en-US', this.displayTimeFormatOption)
             this.currentSessionDetails.tempEnd = (new Date(e.event.dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption)
-        }) 
-        
+
+            if(e.event.dataItem.Start.toISOString() < this.todayDate){
+                $("#matcard").css("border","2px solid #eb8817");
+            }
+            else{
+                $("#matcard").css("border","");
+            }
+        })
       }
 
     //get all events in a selected view
