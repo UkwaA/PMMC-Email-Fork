@@ -524,6 +524,12 @@ export class ReservationComponent implements OnInit {
           this.currentSession.CurrentNumberParticipant = 0;
           this.currentSession.IsActive = true;
           this.currentSession.CreatedBy = AppConstants.SYSTEM_USER_PK; // UserPk represent for System Auto Create Data
+
+          // Create new schedule record and insert into the database
+          this.programScheduleServices.addNewSchedule(this.currentSession).subscribe((res) => {
+            this.SchedulePK = res;
+            this.reservationHeader.SchedulePK = res;
+          });
         }
 
         if(this.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
@@ -608,15 +614,11 @@ export class ReservationComponent implements OnInit {
       this.reservationGroupDetails.Age1517Quantity =this.quantityForm.get("Age1517Quantity").value;
       this.reservationGroupDetails.TotalQuantity =this.quantityForm.get("TotalQuantity").value;
       balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
+    } else {
+      this.currTotalQuantity =  1;
     }
 
-    // Create new schedule record and insert into the database
-    if(this.currentSession.SchedulePK == 0) {
-      this.programScheduleServices.addNewSchedule(this.currentSession)
-      .subscribe((res) => {
-        this.SchedulePK = res;
-      });
-    }
+   
 
     // Update data for Reservation Header.
     this.reservationHeader.SchedulePK =  this.SchedulePK;
@@ -672,6 +674,7 @@ export class ReservationComponent implements OnInit {
  }
 
  submitReservation() {
+
   this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
     switch(this.ProgramType){
       case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
