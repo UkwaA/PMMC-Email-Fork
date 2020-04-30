@@ -140,13 +140,19 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">                            
-                            <div class="row">
+                            <br/>
+                            <div class="row">                                
                                 <div class="col-md-3">
-                                    <br/>
                                     <button mat-raised-button onclick="this.blur()" color="primary" (click)="addNewSessionDetailsModal()" [disabled]="!hasSchedule">
                                         <mat-icon matListIcon>add</mat-icon> New Session
                                     </button>                                
-                                </div>                        
+                                </div>     
+                                <div class="col-md-7" *ngIf="sessionSuccessMessage">
+                                    <div class="successColorMessage">
+                                        <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>
+                                        {{sessionSuccessMessage}}
+                                    </div>
+                                </div>                   
                             </div>
                             <div class="row" *ngIf="!hasSession && hasSchedule">
                                 <p>Please select "New Session" to create new session.</p>
@@ -183,6 +189,13 @@
                                 </div>                        
                             </div>
                         </div>
+                    </div>
+                    <mat-divider></mat-divider>                    
+                    <div class="row pt-3">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6 text-center">
+                            <h6>You can edit the session's info in the table below.</h6>
+                        </div>                        
                     </div>
                     <div class="row" *ngIf="hasSession">
                         <div class="col-md-2"></div>
@@ -235,12 +248,18 @@
                     <div class="row" >
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <div class="row">
+                            <br/>
+                            <div class="row">                                
                                 <div class="col-md-3">
-                                    <br/>
                                     <button mat-raised-button color="primary" onclick="this.blur()" (click)="addNewAdditionalSessionDetailsModal()">
                                         <mat-icon matListIcon>add</mat-icon> New additional session                             
                                     </button>                                
+                                </div>
+                                <div class="col-md-7" *ngIf="additionalSessionSuccessMessage">
+                                    <div class="successColorMessage">
+                                        <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>
+                                        {{additionalSessionSuccessMessage}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" *ngIf="hasAdditionalSession">
@@ -291,12 +310,18 @@
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <br/>
+                            <br/>
+                            <div class="row">                                
+                                <div class="col-md-3">                                    
                                     <button mat-raised-button color="primary" onclick="this.blur()" (click)="addBlackoutDateModal()" >
                                         <mat-icon matListIcon>add</mat-icon> New Black-out date                                
                                     </button>                                
+                                </div>
+                                <div class="col-md-7" *ngIf="blackoutDateSuccessMessage">
+                                    <div class="successColorMessage">
+                                        <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>
+                                        {{blackoutDateSuccessMessage}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" *ngIf="hasBlackoutDate">

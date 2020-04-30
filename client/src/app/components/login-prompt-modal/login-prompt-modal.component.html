@@ -25,6 +25,7 @@
     </header>
 
     <mat-divider></mat-divider>
+    <form>
     <mat-dialog-content [formGroup]="loginForm">
         <p class="mt-2" style="margin-bottom: 0rem;">
             <mat-form-field appearance="standard">
@@ -47,6 +48,7 @@
             Login
         </button>
     </p>
+</form>
     <mat-divider></mat-divider>
     <div class="d-flex justify-content-between sign-up">
         <button class="link" (click)="resetPassword()"> Forgot password</button>

@@ -49,13 +49,16 @@
             </div>
         </div>
         <div class="col-md-4 pl-3">
-            <mat-card *ngIf="currentSessionDetails.ProgramPK != 0">
+            <mat-card >
                 <mat-card-header>
                     <div class="container p-0">
                         <mat-card-title>
                             {{currentSessionDetails.Title}}
                         </mat-card-title>  
-                        <mat-card-subtitle>                           
+                        <mat-card-subtitle *ngIf="currentSessionDetails.ProgramPK == 0">
+                            Select a session on calendar to see more detail.
+                        </mat-card-subtitle>
+                        <mat-card-subtitle *ngIf="currentSessionDetails.ProgramPK != 0">                           
                             <div class="row">
                                 <div class="col-md-12">
                                     {{currentSessionDetails.tempDate}}, 
@@ -64,9 +67,9 @@
                             </div>
                             <div class="row pt-2">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-success btn-sm" *ngIf="currentSessionDetails.Availability != 0" disabled>
+                                    <button class="available" *ngIf="currentSessionDetails.Availability != 0" disabled>
                                         Available</button>
-                                    <button type="button" class="btn btn-danger btn-sm" *ngIf="currentSessionDetails.Availability == 0" disabled>
+                                    <button class="full" *ngIf="currentSessionDetails.Availability == 0" disabled>
                                         Full</button>
                                 </div>
                             </div>
@@ -109,7 +112,7 @@
                     </div>                    
                 </mat-card-content>
                 <mat-card-actions align="end">
-                    <button mat-button onclick="this.blur()" color="primary"
+                    <button mat-raised-button onclick="this.blur()" color="primary" [disabled]="currentSessionDetails.ProgramPK == 0"
                         [routerLink]="['/profile','program-details', currentSessionDetails.ProgramPK, 'set-program-schedule']">
                         EDIT SESSION</button>
                 </mat-card-actions>

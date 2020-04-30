@@ -36,6 +36,9 @@ app.use('/reservation', Reservation)
 var Payment = require('./routes/Payment')
 app.use('/payment', Payment)
 
+var NodeSchedule = require('./routes/Node-Schedule')
+app.use('/node-schedule', NodeSchedule)
+
 // Folder for photo
 app.use(express.static('public'));
 

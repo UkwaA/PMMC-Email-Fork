@@ -57,3 +57,24 @@
   ::ng-deep .mat-card-title {
     color: #08b2b8;
   }
+
+  button.available:disabled{
+    display: block;
+    background-color: green;
+    border: green;
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+    height: 30px;    
+  }
+
+  button.full:disabled{
+    display: block;
+    background-color: #eb443e;
+    border: #eb443e;
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+    height: 30px;    
+  }
+

@@ -352,7 +352,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				}
         	switch(this.modalData.mode){
 				//======= ADD NEW SCHEDULE ===========
-				case "newschedule":					
+				case "newschedule":									
 						if(this.currentScheduleSetting.ScheduleSettingName){
 							this.programScheduleServices.addNewScheduleSetting(this.currentScheduleSetting).subscribe(res => {
 								if(res.error){
