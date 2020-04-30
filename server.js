@@ -34,6 +34,9 @@ app.use('/schedule', Schedule)
 var Reservation = require('./routes/Reservation')
 app.use('/reservation', Reservation)
 
+var NodeSchedule = require('./routes/Node-Schedule')
+app.use('/node-schedule', NodeSchedule)
+
 // Folder for photo
 app.use(express.static('public'));
 

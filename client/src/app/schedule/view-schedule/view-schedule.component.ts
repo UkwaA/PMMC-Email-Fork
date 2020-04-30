@@ -200,7 +200,6 @@ export class ViewScheduleComponent {
                         }
                     }
                 })
-                console.log(sampleDataWithCustomSchema)
                 this.events = sampleDataWithCustomSchema
                 this.allEvents = sampleDataWithCustomSchema
                 //Loop through all events
