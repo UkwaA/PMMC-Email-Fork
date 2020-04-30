@@ -708,7 +708,7 @@
             <div class="row pt-3">
               <div class="col-md-12">
                 <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerStepperNext(stepper)" type="button"> Next</button>
+                <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="registerIndividualStepperNext(stepper)" type="button"> Next</button>
               </div>
             </div>
         </form>
@@ -736,10 +736,10 @@
       <ng-template matStepLabel>Confirmation</ng-template>
       
       <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <confirmation [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+        <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
-        <confirmation [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
+        <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>

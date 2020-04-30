@@ -145,7 +145,7 @@ export class RegisterModalDialogComponent implements OnInit{
       console.log(this.customerDetails)
       this.userInfo.Email = this.newUserForm.get("email").value;
       
-      this.emailService.CreateNewUserConfirmationEmail(this.userInfo).subscribe(
+      this.emailService.sendRegistrationConfirmationEmail(this.userInfo).subscribe(
           (res) => {
               if(res.error){
                   console.log("fotgot ts file: " + res.error)                                     

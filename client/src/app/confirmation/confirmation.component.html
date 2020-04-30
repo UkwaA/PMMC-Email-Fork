@@ -186,17 +186,25 @@
         <tbody>
             <tr>
               <td>Total Quantity</td>
-              <td class="name"></td>
+              <td class="name">{{reservationHeader.NumberOfParticipant}}</td>
             </tr>
             <tr>
               <td>Total Amount</td>
-              <td class="name"></td>
+              <td class="name">${{reservationHeader.Total}}</td>
             </tr>
-            <!-- Deposit needs ngIf here for group program only -->
-            <tr *ngIf= "ProgramType == 0">
-              <td>Deposit Amount Due Today</td>
-              <td class="name"></td>
+            <tr >
+              <td>Amount Due Today</td>
+              <!-- Amount Due will be 25 for group program -->
+              <td *ngIf= "ProgramType == 0" class="name">$25</td>
+              <!-- Amount Due will be the Total for Individual program -->
+              <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}</td>
             </tr>
+            <tr >
+              <td>Remaining Balance</td>
+              <td *ngIf= "ProgramType == 0" class="name">${{reservationHeader.RemainingBalance}}</td>
+              <td *ngIf= "ProgramType == 1" class="name">$0</td>
+            </tr>
+            
         </tbody>
     </table>
   </div>

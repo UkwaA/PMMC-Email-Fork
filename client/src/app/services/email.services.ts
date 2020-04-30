@@ -29,4 +29,30 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/create-new-user-confirmation-email/', body);
   }
 
+  public SendInitialBookingConfirmationEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-initial-booking-confirmation-email/', body);
+  }
+
+  public sendRegistrationConfirmationEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-registration-confirmation-email/', body);
+  }
+  
+  public sendProgramConfirmationEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-confirmation-email/', body);
+  }
+
+  public sendProgramReminderEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-reminder-email/', body);
+  }
+
+  public sendPaymentConfirmationEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-payment-confirmation-email/', body);
+  }
+
+  public sendPostProgramEmail(body): Observable<any>{
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-post-program-email/', body);
+  }
+  
+  
+
 }
