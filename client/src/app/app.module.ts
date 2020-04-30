@@ -20,6 +20,7 @@ import { ProgramServices } from './services/program.services'
 import { AuthGuardService } from './auth-guard.service'
 import { AuthRoleGuardService} from './auth-role-guard.service'
 import { AuthCustomerGuardService } from './auth-customer-guard.service'
+import { PaymentServices } from "./services/payment.services";
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
 import { CustomerService } from './services/customer.services'
@@ -83,7 +84,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { ReservationManagement } from './reservation-management/reservation-management.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { PaymentManagementComponent } from './payment-management/payment-management.component';
+import { ReportManagementComponent } from './report-management/report-management.component';
 import { PaynowModalDialog } from './components/paynow-modal-dialog/paynow-modal-dialog.component';
 import { ReservationDetailsModalDialog } from './components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
 
@@ -128,7 +129,7 @@ const routes : Routes = [
         canActivate: [AuthRoleGuardService]
       },
       {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
-      {path: 'payment-management', component: PaymentManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'report-management', component: ReportManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule', 
         component: SetProgramScheduleComponent, 
@@ -214,7 +215,7 @@ const routes : Routes = [
     SafeHtmlPipe,
     ConfirmationComponent, 
     ReservationManagement,
-    PaymentManagementComponent,
+    ReportManagementComponent,
     PaynowModalDialog,
     ReservationDetailsModalDialog
   ],
@@ -259,7 +260,7 @@ const routes : Routes = [
     MatTabsModule
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, DataStorage,
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, DataStorage,
               {
                 provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,

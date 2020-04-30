@@ -33,4 +33,5 @@ export class ReservationService {
     public updateCustomerInfo(UserPK: number, customer: CustomerData):Observable<any>{
         return this.http.put(AppConstants.EXPRESS_SERVER_URL + "reservation/update-customer-info/" + UserPK, customer);
     }
+    
 }

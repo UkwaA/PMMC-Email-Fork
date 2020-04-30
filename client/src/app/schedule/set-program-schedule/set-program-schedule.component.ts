@@ -134,7 +134,7 @@ export class SetProgramScheduleComponent {
 	*********************************************/
 	reloadAllScheduleSettingsByProgramPK(){
 		this.hasSchedule = false
-		this.programScheduleServices.getAllScheduleSettingsByProgram(this.ProgramPK).subscribe(res =>{
+		this.programScheduleServices.getScheduleSettingsByProgram(this.ProgramPK).subscribe(res =>{
 			if(!res.error){
 				this.allScheduleSettings = res
 				if(this.allScheduleSettings.length > 0){
@@ -259,7 +259,7 @@ export class SetProgramScheduleComponent {
 		this.route.params.subscribe(val =>{
 			this.ProgramPK = val.id
 			//Get all current schedule settings			
-			this.programScheduleServices.getAllScheduleSettingsByProgram(this.ProgramPK).subscribe(res =>{
+			this.programScheduleServices.getScheduleSettingsByProgram(this.ProgramPK).subscribe(res =>{
 				if(!res.error){
 					this.allScheduleSettings = res
 					if(this.allScheduleSettings.length > 0){

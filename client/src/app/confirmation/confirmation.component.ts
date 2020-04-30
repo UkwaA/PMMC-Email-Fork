@@ -8,12 +8,14 @@ import { ProgramServices } from "../services/program.services";
 })
 export class ConfirmationComponent implements OnInit {
   @Input() reservationDetails: any;
+  @Input() reservationHeader: any;
   @Input() ProgramPK: number;
   @Input() customerSelectDate: string;
   @Input() customerSelectTime: string;
 
   ProgramType = 0;
   ProgramName = "";
+  
   constructor(private service: ProgramServices) {}
 
   ngOnInit() {

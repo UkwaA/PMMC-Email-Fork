@@ -17,7 +17,7 @@
                 [(ngModel)]="searchText">
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2">
-            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
+            <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
         </div>
     </div>
 
@@ -28,28 +28,28 @@
             <table #datatable class="table table-hover" style="width:100%">
                 <thead>
                     <tr>
-                        <th style="width:10%"> #Res </th>
-                        <th style="width:15%"> Program Name </th>
+                        <th style="width:7.5%"> #Res </th>
+                        <th style="width:17.5%"> Program Name </th>
                         <th style="width:12.5%"> Date </th>
-                        <th style="width:12.5%"> Total </th>
                         <th title="Ongoing: Haven't attended yet
 Attended: Attened the program + Not completed payment yet
 Completed: Attened the program + Completed payment
 Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
                         <th style="width:15%"> Name </th>
-                        <th style="width:12.5%"> Email </th>
+                        <th style="width:12.5%"> Total </th>
+                        <th style="width:12.5%"> Remaining </th>
                         <th style="width:12.5%"> Action </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let reservation of allReservations">
+                    <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                         <td> {{reservation.ReservationPK}} </td>
-                        <td> Change the Life of a Seal </td>
-                        <td> April 20, 2020</td>
-                        <td> {{reservation.Total}} </td>
+                        <td> {{reservation.ProgramName}} </td>
+                        <td> {{reservation.Date}}</td>
                         <td > {{reservation.ReservationStatus}} </td>
-                        <td> Alice Nguyen </td>
-                        <td> alice@gmail.com </td>
+                        <td> {{reservation.CustomerName}} </td>
+                        <td> {{reservation.Total}} </td>
+                        <td> {{reservation.RemainingBalance}} </td>
                         <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
                     </tr>
                 </tbody>

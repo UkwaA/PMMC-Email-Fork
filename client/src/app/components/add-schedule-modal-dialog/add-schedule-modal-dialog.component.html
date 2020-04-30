@@ -126,7 +126,8 @@
                             </div>  
                             <div class="col-md-4">
                                 <kendo-timepicker
-                                    [(value)]="endTime"                                
+                                    [(value)]="endTime"
+                                    [min]="startTime"                                
                                     (valueChange)="onChangeEndTime($event)">
                                 </kendo-timepicker>
                                 <div class="errorMessage" *ngIf="endTimeErrorMessage">

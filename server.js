@@ -7,7 +7,6 @@ const port = process.env.PORT || 3000
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
-
 app.use(bodyParser.json())
 app.use(cors())
 app.use(
@@ -33,6 +32,12 @@ app.use('/schedule', Schedule)
 
 var Reservation = require('./routes/Reservation')
 app.use('/reservation', Reservation)
+
+var Payment = require('./routes/Payment')
+app.use('/payment', Payment)
+
+var NodeSchedule = require('./routes/Node-Schedule')
+app.use('/node-schedule', NodeSchedule)
 
 // Folder for photo
 app.use(express.static('public'));

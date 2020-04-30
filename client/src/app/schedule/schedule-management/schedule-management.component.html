@@ -31,7 +31,7 @@
             <tbody>
                 <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                     <td class="name"> {{program.Name}}
-                        <div class="errorMessage" *ngIf="!program.IsActive">
+                        <div class="errorMessage" *ngIf="!program.hasSchedule">
                             <mat-icon color="red">error</mat-icon>
                             <label>Missing Schedule</label>
                         </div>
