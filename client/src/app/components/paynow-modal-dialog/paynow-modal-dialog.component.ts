@@ -1,5 +1,8 @@
 import { OnInit, Component, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+
+
 
 declare var $: any;
 
@@ -11,16 +14,34 @@ declare var $: any;
 })
 
 export class PaynowModalDialog implements OnInit{
-    role:string;
-
-    constructor(public dialogRef: MatDialogRef<PaynowModalDialog>, public matDialog:MatDialog){}
+    // cvvForm: FormGroup;
+    // cvvRequired = new FormControl('', [Validators.minLength(3), Validators.required]);
+    
+    cvvForm = new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]);
+    
+    
+    constructor(
+        public dialogRef: MatDialogRef<PaynowModalDialog>, 
+        public matDialog: MatDialog,
+        private formBuilder: FormBuilder
+        ){}
     
     ngOnInit(){
-        $(".alert-success").hide()
-        $(".alert-danger").hide()
+
+        // this.cvvForm = this.formBuilder.group({
+        //      cvv: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(3)]]
+
+        //  });
+
+         $(".alert-success").hide()
+         $(".alert-danger").hide()
        
     }
 
+  
 
 closeModal(){
     this.dialogRef.close("No");
