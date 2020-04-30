@@ -731,12 +731,30 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
 });
 
 /*******************************
-  GET ALL PROGRAM SCHEDULES BY ID
+  GET ALL PROGRAM SCHEDULES BY PROGRAMPK
+ *******************************/
+schedule.get("/get-program-schedules-by-programpk/:id", (req, res) => {
+  Schedule.findAll({
+    where: {
+      ProgramPK: req.params.id,
+      IsActive: true
+    }
+  })
+    .then(schedules => {
+      res.json(schedules);
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
+
+/*******************************
+  GET ALL PROGRAM SCHEDULES BY SCHEDULEPK
  *******************************/
 schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
   Schedule.findAll({
     where: {
-      ProgramPK: req.params.id,
+      SchedulePK: req.body.id,
       IsActive: true
     }
   })
@@ -747,6 +765,7 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
       res.send("error: " + err);
     });
 });
+
 
 /**********************************************
    GET ALL BLACKOUT DATE EXCEPTION ARRAY 
