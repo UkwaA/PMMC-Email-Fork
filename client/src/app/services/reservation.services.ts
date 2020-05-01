@@ -23,8 +23,8 @@ export class ReservationService {
     }
 
     //Define this request for View Schedule Page
-    public getAllReservationDetailsBySchedulePK(body: any): Observable<any>{
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-schedulepk", body);
+    public getAllReservationDetailsForViewSchedule(SchedulePK: number, ProgramPK: number, ProgramType: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-view-schedule/" + SchedulePK + "/" + ProgramPK + "/" + ProgramType);
     }
 
     public addNewReservationHeader(reservationHeader: ReservationHeader): Observable<any>{

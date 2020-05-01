@@ -7,12 +7,13 @@ import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArg
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
-import { AuthenticationService } from '../../authentication.service';
 import '@progress/kendo-date-math/tz/America/Los_Angeles';
 import { ActivatedRoute } from '@angular/router';
 import { ActiveColorClickEvent } from '@progress/kendo-angular-inputs';
 import { addDays } from '@progress/kendo-date-math';
 import { AppConstants } from 'src/app/constants';
+import { ReservationService } from 'src/app/services/reservation.services';
+
 declare var $: any;
 
 @Component({
@@ -42,6 +43,7 @@ export class ViewScheduleComponent {
 
     choice = "0"
     currentMode = ""
+    programType = ""
     todayDate:string = (new Date()).toISOString()
     timeFormatOptions = {
 		hour: 'numeric',
@@ -81,6 +83,9 @@ export class ViewScheduleComponent {
         End: "",
         MaximumParticipant: 0,
         Availability: 0,
+        AgeRange: "-",
+        NumChildren: 0,
+        NumChaparones: 0,
         CreatedBy: 0,
         IsActive: true,
         tempDate: "",
@@ -90,7 +95,7 @@ export class ViewScheduleComponent {
 
     constructor (private programService : ProgramServices, private programScheduleServices: ProgramScheduleService,
         private formBuilder: FormBuilder, private route: ActivatedRoute, private cd: ChangeDetectorRef,
-        private renderer: Renderer2) {           
+        private reservationService: ReservationService) {           
         }
     
     ngOnInit(){
@@ -126,6 +131,7 @@ export class ViewScheduleComponent {
             
             var date = new Date(eventDateTime);
             date.setFullYear(currentYear);
+            //NOTE: uncomment these lines below to hide the past events on admin's calendar
             //Set the event Start and End to today dates if the Start/End is before today date
             // var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
             // let todayDate:Date = (new Date((new Date()).toISOString().slice(0,10) + "T" + eventStartTime))
@@ -287,21 +293,90 @@ export class ViewScheduleComponent {
         this.currentSessionDetails.ProgramPK = 0    
         this.currentSessionDetails.MaximumParticipant = 0
         this.currentSessionDetails.Availability = 0
+        //reset card border
         $("#matcard").css("border","")
     }
 
+    //Display event info when clicked on calendar
     public eventClick = (e) => {
+        
         var eventStart = e.event.dataItem.Start.toISOString();
         var eventEnd = e.event.dataItem.End.toISOString();
         var programPK = e.event.dataItem.ProgramPK;
+        //Get program data info
         var ProgramDataObj:any = this.allPrograms.filter(x => x.ProgramPK == programPK);
+        if(ProgramDataObj[0].ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
+            this.programType = "group"
+        }
+        else{
+            this.programType = "individual"
+        }
         var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;        
+        //Get schedule info from schedule table
         this.programScheduleServices.getScheduleByIdStartEnd(sessionDetailsPK,programPK,eventStart,eventEnd).subscribe(res =>{
+            //if there is a record in schedule table, get the info and replace selected event info with response
             if(res){
                 this.currentSessionDetails = res
                 this.currentSessionDetails.MaximumParticipant = res.MaximumParticipant
                 this.currentSessionDetails.Availability = res.MaximumParticipant - res.CurrentNumberParticipant
+                this.currentSessionDetails.AgeRange = "-"
+                this.currentSessionDetails.NumChildren = 0
+                if(this.programType == "group"){
+                    this.currentSessionDetails.NumChaparones = 0
+                    this.currentSessionDetails.Age57 = 0
+                    this.currentSessionDetails.Age810 = 0
+                    this.currentSessionDetails.Age1112 = 0
+                    this.currentSessionDetails.Age1314 = 0
+                    this.currentSessionDetails.Age1415 = 0
+                    this.currentSessionDetails.Age1517 = 0
+                }
+                else{
+                    this.currentSessionDetails.AgeRange = ""
+                }
+                //Get a Reservation Header object with reservation info
+                let requestBody = {
+                    SchedulePK: this.currentSessionDetails.SchedulePK,
+                    ProgramPK: e.event.dataItem.ProgramPK,
+                    ProgramType: ProgramDataObj[0].ProgramType
+                }
+                console.log(requestBody)
+                this.reservationService.getAllReservationDetailsForViewSchedule(requestBody.SchedulePK,requestBody.ProgramPK, requestBody.ProgramType)
+                .subscribe(res => {
+                    console.log(res)
+                    if(!res.error && res.length > 0){
+                        var minAge = res[0].ParticipantAge
+                        var maxAge = res[0].ParticipantAge
+                        res.forEach(item =>{
+                            if(this.programType == "group"){
+                                this.currentSessionDetails.NumChildren += item.Age57Quantity + item.Age810Quantity 
+                                                                        + item.Age1112Quantity + item.Age1314Quantity
+                                                                        + item.Age1415Quantity + item.Age1517Quantity
+                                this.currentSessionDetails.NumChaparones += item.AdultQuantity
+                                this.currentSessionDetails.Age57 += item.Age57Quantity
+                                this.currentSessionDetails.Age810 += item.Age810Quantity
+                                this.currentSessionDetails.Age1112 += item.Age1112Quantity
+                                this.currentSessionDetails.Age1314 += item.Age1314Quantity
+                                this.currentSessionDetails.Age1415 += item.Age1415Quantity
+                                this.currentSessionDetails.Age1517 += item.Age1517Quantity
+                            }
+                            else{                                
+                                if(item.ParticipantAge <= 18){
+                                    this.currentSessionDetails.NumChildren += 1
+                                    if(item.ParticipantAge > maxAge){
+                                        maxAge = item.ParticipantAge
+                                    }
+                                    else if(item.ParticipantAge < minAge)
+                                    {
+                                        minAge = item.ParticipantAge
+                                    }
+                                }
+                            }                               
+                        })
+                        this.currentSessionDetails.AgeRange = String(minAge) + "-" + String(maxAge)
+                    }                                        
+                })
             }
+            //otherwise, use the info from the selected event
             else{
                 this.currentSessionDetails.SchedulePK = 0;   // SchedulePK is AutoIncrement
                 this.currentSessionDetails.ProgramPK = e.event.dataItem.ProgramPK;
@@ -310,6 +385,16 @@ export class ViewScheduleComponent {
                 this.currentSessionDetails.End = e.event.dataItem.End.toISOString();
                 this.currentSessionDetails.MaximumParticipant = ProgramDataObj[0].MaximumParticipant; //FINDME, need to fix it
                 this.currentSessionDetails.Availability = ProgramDataObj[0].MaximumParticipant;
+                this.currentSessionDetails.AgeRange = "-"
+                this.currentSessionDetails.NumChildren = 0
+                this.currentSessionDetails.NumChaparones = 0
+                this.currentSessionDetails.Age57 = 0
+                this.currentSessionDetails.Age810 = 0
+                this.currentSessionDetails.Age1112 = 0
+                this.currentSessionDetails.Age1314 = 0
+                this.currentSessionDetails.Age1415 = 0
+                this.currentSessionDetails.Age1517 = 0
+                this.currentSessionDetails.AgeRange = "-"
                 this.currentSessionDetails.IsActive = true;
                 this.currentSessionDetails.CreatedBy = AppConstants.SYSTEM_USER_PK;                
             }
@@ -319,6 +404,7 @@ export class ViewScheduleComponent {
             this.currentSessionDetails.tempEnd = (new Date(e.event.dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption)
 
             if(e.event.dataItem.Start.toISOString() < this.todayDate){
+                //set card border to orange for past event
                 $("#matcard").css("border","2px solid #eb8817");
             }
             else{
@@ -345,13 +431,6 @@ export class ViewScheduleComponent {
     // onDateChange(args: DateChangeEvent){
         
     // }
-
-    // ngAfterViewChecked() {
-    //     //this.renderer.setStyle(document.querySelector("multi-day-view .k-scheduler-pane"), "display", "none");
-    //     //this.renderer.removeStyle(document.querySelector("[aria-label='Monday, April 27, 2020, 9:00 AM–10:00 AM, Change the Life of a Seal']"), "display");
-    //     //this.renderer.setStyle(document.querySelector("[aria-label='Monday, April 27, 2020, 9:00 AM–10:00 AM, Change the Life of a Seal']"), "display", "none");
-    // }
-    
  
     getEventStyles(args: EventStyleArgs){
         return { backgroundColor: args.event.dataItem.Color };

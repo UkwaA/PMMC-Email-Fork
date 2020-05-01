@@ -7,6 +7,9 @@ const ReservationHeader = require("../models/ReservationHeader");
 const ReservationGroupDetails = require("../models/ReservationGroupDetails");
 const ReservationIndividualDetails = require("../models/ReservationIndividualDetails");
 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 reservation.use(bodyParser.json());
 reservation.use(cors());
 
@@ -85,6 +88,59 @@ async function getReservationBySchedulePK(schedulepk, callback){
       callback("error: Get Reservation" + err);
       });  
 }
+
+/***********************************************************
+ *  GET ALL ACTIVE RESERVATION DETAILS FOR VIEW SCHEDULE
+ ***********************************************************/
+reservation.get("/get-all-reservation-details-for-view-schedule/:schedulepk/:programpk/:type", (req, res) => {  
+  getReservationBySchedulePK(req.params.schedulepk, returnInfo =>{    
+    if(returnInfo.result){      
+      //Get the array of all ReservationPK
+      let reservationPKArr = []
+      returnInfo.result.forEach(item =>{
+        reservationPKArr.push(item.ReservationPK)
+      })
+      console.log(reservationPKArr)
+      //Get all reservation details by ReservationPK
+      switch(req.params.type){
+        case "0": //group
+            ReservationGroupDetails.findAll({
+              where:{
+                ReservationPK: {[Op.in]: reservationPKArr}
+              }
+            })
+            .then(groupDetails =>{
+              if(groupDetails.length > 0){
+                res.json(groupDetails)
+              }
+              else{
+                res.json({error: "There is no group reservation details."})
+              }            
+            })
+            break;
+
+        case "1": //individual
+            ReservationIndividualDetails.findAll({
+              where:{
+                ReservationPK: {[Op.in]: reservationPKArr}
+              }
+            })
+            .then(individualDetails =>{
+              if(individualDetails.length > 0){
+                res.json(individualDetails)
+              }
+              else{
+                res.json({error: "There is no indidivual reservation details."})
+              }            
+            })
+            break;
+      }      
+    }
+    else{
+      res.send(returnInfo)
+    }
+  })  
+});
 
 /******************************************
  *       CREATE NEW RESERVATION HEADER    *

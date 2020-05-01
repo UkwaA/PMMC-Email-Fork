@@ -99,19 +99,56 @@
                             <div class="row pb-1">
                                 <div class="col-md-8"><h6>Available: </h6></div>
                                 <div class="col-md-3 text-right">{{currentSessionDetails.Availability}}</div>
-                            </div>
-                            <div class="row pb-1">
-                                <div class="col-md-8"><h6>Age range:</h6></div>
-                                <div class="col-md-3 text-right">-</div>
-                            </div>
-                            <div class="row pb-1">
-                                <div class="col-md-8"><h6>No. of children: </h6></div>
-                                <div class="col-md-3 text-right">-</div>
-                            </div>
-                            <div class="row pb-1">
-                                <div class="col-md-8"><h6>No. of chaperones: </h6></div>
-                                <div class="col-md-3 text-right">-</div>
-                            </div>
+                            </div>                            
+                            <div *ngIf="programType =='group'">  <!-- Group -->
+                                <div class="row pb-1">
+                                    <div class="col-md-8"><h6>No. of chaperones: </h6></div>
+                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChaparones}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-md-8"><h6>Total children: </h6></div>
+                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChildren}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-11">
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 5-7</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age57}}</div>
+                                        </div>
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 8-10</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age810}}</div>
+                                        </div>
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 11-12</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1112}}</div>
+                                        </div>
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 13-14</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1314}}</div>
+                                        </div>
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 14-15</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1415}}</div>
+                                        </div>
+                                        <div class="row pb-1">
+                                            <div class="col-md-9">Age 15-17</div>
+                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1517}}</div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div> <!--End group-->
+                            <div *ngIf="programType =='individual'">  <!-- Individual -->
+                                <div class="row pb-1">
+                                    <div class="col-md-8"><h6>Total children: </h6></div>
+                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChildren}}</div>
+                                </div>
+                                <div class="row pb-1">
+                                    <div class="col-md-8"><h6>Age Range: </h6></div>
+                                    <div class="col-md-3 text-right">{{currentSessionDetails.AgeRange}}</div>
+                                </div>
+                            </div> <!--End individual-->
                         </div>
                     </div>                    
                 </mat-card-content>

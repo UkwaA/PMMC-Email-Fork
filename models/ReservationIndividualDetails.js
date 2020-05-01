@@ -8,9 +8,6 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    ProgramPK: {
-      type: Sequelize.INTEGER,
-    },
     ParticipantName: {
       type: Sequelize.TEXT
     },
