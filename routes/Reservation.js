@@ -11,12 +11,35 @@ reservation.use(bodyParser.json());
 reservation.use(cors());
 
 /******************************************
- *       GET RESERVATION HEADER           *
+ *       GET ALL RESERVATION HEADER           *
  ******************************************/
 reservation.get("/get-all-reservation", (req, res) => {
   ReservationHeader
     .findAll({
       where: {
+        IsActive: true,
+      },
+    })
+    .then((result) => {
+      if (result) {
+        res.json(result);
+      } else {
+        res.send("There is no reservation available.");
+      }
+    })
+    .catch((err) => {
+      res.send("error: Get Reservation" + err);
+    });
+});
+
+/******************************************
+ *  GET ALL RESERVATION HEADER BY USER PK *
+ ******************************************/
+reservation.get("/get-all-reservation-by-userpk/:id", (req, res) => {
+  ReservationHeader
+    .findAll({
+      where: {
+        UserPk: req.params.id,
         IsActive: true,
       },
     })

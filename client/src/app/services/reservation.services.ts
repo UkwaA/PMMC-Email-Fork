@@ -14,6 +14,10 @@ export class ReservationService {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation");
     }
 
+    public getAllReservationByUserPK(UserPK: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-userpk/" + UserPK);
+    }
+
     public addNewReservationHeader(reservationHeader: ReservationHeader): Observable<any>{
        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/add-new-reservation", reservationHeader);
     }
