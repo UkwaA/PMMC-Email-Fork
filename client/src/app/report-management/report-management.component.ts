@@ -4,8 +4,10 @@ import { ProgramServices } from '../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { AuthenticationService } from '../authentication.service';
+import { Observable, Observer } from 'rxjs';
 
 declare var $: any;
+
 
 @Component({
     selector: 'report-management',
@@ -30,8 +32,11 @@ export class ReportManagementComponent {
         { id: 2, name: "Individual Program" }
     ]
 
-    constructor(private programService: ProgramServices,
-                public matDialog: MatDialog) { }
+    constructor(
+      private programService: ProgramServices,
+      public matDialog: MatDialog) 
+      {
+      }
 
     ngOnInit() {
         // Add option for the dropdown menu
