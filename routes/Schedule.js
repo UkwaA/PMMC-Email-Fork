@@ -720,8 +720,8 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
       SessionDetailsPK: req.params.session,
       ProgramPK: req.params.id,
       Start: req.params.start,
-      End: req.params.end,
-      IsActive: true
+      End: req.params.end
+      //IsActive: true
     }
   })
   .then((schedule) =>{

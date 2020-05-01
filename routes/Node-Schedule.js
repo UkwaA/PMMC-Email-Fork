@@ -17,7 +17,7 @@ const cors = require("cors");
 const nodeschedule = express.Router();
 const bodyParser = require("body-parser");
 
-var NodeScheduler = require('node-schedule');
+var NodeSchedule = require('node-schedule');
 const Schedule = require("../models/Schedule");
 const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
@@ -31,29 +31,59 @@ nodeschedule.use(cors());
 
 /********************************************* */
 
-// var rule = new NodeScheduler.RecurrenceRule();
-// rule.second = 5;  
+//Define a new rule that runs everyday
+var everydayRule = new NodeSchedule.RecurrenceRule();
+everydayRule.hour = 6;
+everydayRule.minute = 0;
+everydayRule.second = 0;
+everydayRule.dayOfWeek = new NodeSchedule.Range(0,6);
 
-// NodeScheduler.scheduleJob(rule, function(){
-//     console.log("Updating database every 1 minute and 5 seconds")
-//     var todayDate = (new Date()).toISOString()
-//     Schedule.update({
-//         IsActive : false
-//     },{
-//         where:{
-//             Start:{
-//                 [Op.lt]: todayDate
-//             }
-//         }
-//     })
-//     .then(()=>{
 
-//     })
-//     .catch(err => {  
-//         res.send("errorExpressErr: " + err);
-//       });
-//   });
+/**********************************************
+ * UPDATE SCHEDULE TABLE 
+ * Set IsActive to "false" for schedule that pasts today's date
+ **********************************************/
+NodeSchedule.scheduleJob(everydayRule, function(){
+    console.log("Updating schedule table every day at 6AM")
+    var todayDate = (new Date()).toISOString()
+    Schedule.update({
+        IsActive : false
+    },{
+        where:{
+            End:{
+                [Op.lt]: todayDate
+            }
+        }
+    })
+    .then(()=>{
+    })
+    .catch(err => {  
+        res.send("errorExpressErr: " + err);
+      });
+  });
 
+  /**********************************************
+ * UPDATE PROGRAM BLACKOUT DATE TABLE 
+ * Set IsActive to "false" for blackout date that pasts today's date
+ **********************************************/
+NodeSchedule.scheduleJob(everydayRule, function(){
+  console.log("Updating programblackout date table every day at 6AM")
+  var todayDate = (new Date()).toISOString()
+  BlackoutDate.update({
+      IsActive : false
+  },{
+      where:{
+          End:{
+              [Op.lt]: todayDate
+          }
+      }
+  })
+  .then(()=>{
+  })
+  .catch(err => {  
+      res.send("errorExpressErr: " + err);
+    });
+});
 
 // ========================END=====================
   module.exports = nodeschedule;

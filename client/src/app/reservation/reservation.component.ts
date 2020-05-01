@@ -393,12 +393,18 @@ export class ReservationComponent implements OnInit {
                 //1. Add recurrence exception to each session based on Blackout Date
                 //add the start date to the recurrence exception to avoid Kendo UI bug
                 let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
-                item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                //check if date exists in the RecurenceException arr
+                if(!item.RecurrenceException.find(e => {return e.getTime() == newStartDateTime.getTime()})){
+                  item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                }
                 //if this session has blackout-date => add to recurenceException
                 if(result.length > 0){ 
                     //add each of the date in exceptionDateArr to recurence exception                        
                     result[0].exceptionDateArr.forEach(exceptionDate =>{
-                        item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                        //check if date exists in the RecurenceException arr
+                        if(!item.RecurrenceException.find(e => {return e.getTime() == (new Date(exceptionDate+"T"+eventStartTime)).getTime()})){
+                          item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))    
+                      }
                     })
                 }                                        
             }

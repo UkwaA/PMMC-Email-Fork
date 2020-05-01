@@ -99,7 +99,6 @@ export class ViewScheduleComponent {
         }
     
     ngOnInit(){
-        console.log(this.todayDate)
         this.choice = "0"
         this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
@@ -197,18 +196,26 @@ export class ViewScheduleComponent {
                         //1. Add recurrence exception to each session based on Blackout Date
                         //add the start date to the recurrence exception to avoid Kendo UI bug
                         let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
-                        item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                        //check if date exists in the RecurenceException arr
+                        if(!item.RecurrenceException.find(e => {return e.getTime() == newStartDateTime.getTime()})){
+                            item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
+                        }
+                        
                         //if this session has blackout-date => add to recurenceException
                         if(result.length > 0){ 
                             //add each of the date in exceptionDateArr to recurence exception                        
                             result[0].exceptionDateArr.forEach(exceptionDate =>{
-                                item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))
+                                //check if date exists in the RecurenceException arr
+                                if(!item.RecurrenceException.find(e => {return e.getTime() == (new Date(exceptionDate+"T"+eventStartTime)).getTime()})){
+                                    item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))    
+                                }                                
                             })
                         }
                     }
                 })
                 this.events = sampleDataWithCustomSchema
                 this.allEvents = sampleDataWithCustomSchema
+                console.log(sampleDataWithCustomSchema)
                 //Loop through all events
                 this.events.forEach(event =>{
                     //for each event, loop through all programs and compare ProgramPK
@@ -339,10 +346,8 @@ export class ViewScheduleComponent {
                     ProgramPK: e.event.dataItem.ProgramPK,
                     ProgramType: ProgramDataObj[0].ProgramType
                 }
-                console.log(requestBody)
                 this.reservationService.getAllReservationDetailsForViewSchedule(requestBody.SchedulePK,requestBody.ProgramPK, requestBody.ProgramType)
                 .subscribe(res => {
-                    console.log(res)
                     if(!res.error && res.length > 0){
                         var minAge = res[0].ParticipantAge
                         var maxAge = res[0].ParticipantAge
