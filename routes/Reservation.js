@@ -35,11 +35,11 @@ reservation.get("/get-all-reservation", (req, res) => {
 /******************************************
  *  GET ALL RESERVATION HEADER BY USER PK *
  ******************************************/
-reservation.get("/get-all-reservation-by-userpk/:id", (req, res) => {
+reservation.get("/get-all-reservation-by-userpk/:userpk", (req, res) => {
   ReservationHeader
     .findAll({
       where: {
-        UserPk: req.params.id,
+        UserPk: req.params.userpk,
         IsActive: true,
       },
     })
@@ -54,6 +54,37 @@ reservation.get("/get-all-reservation-by-userpk/:id", (req, res) => {
       res.send("error: Get Reservation" + err);
     });
 });
+
+/******************************************
+ *  GET ALL ACTIVE RESERVATION HEADER BY SCHEDULE PK *
+ ******************************************/
+reservation.get("/get-all-reservation-by-schedulepk/:schedulepk", (req, res) => {  
+  getReservationBySchedulePK(req.params.schedulepk, returnInfo =>{
+    res.json(returnInfo.result)
+  })  
+});
+
+//Define this function to reuse for other HTTP request
+async function getReservationBySchedulePK(schedulepk, callback){
+  ReservationHeader
+  .findAll({
+    where: {
+      Schedulepk: schedulepk,
+      IsActive: true,
+      ReservationStatus: 1 //On-going
+    },
+  })
+  .then((allReservationHeader) => {
+    if (allReservationHeader.length > 0) {
+      callback({result: allReservationHeader});
+    } else {
+      callback({error: "There is no reservation available."});
+    }
+  })
+  .catch((err) => {
+      callback("error: Get Reservation" + err);
+      });  
+}
 
 /******************************************
  *       CREATE NEW RESERVATION HEADER    *
