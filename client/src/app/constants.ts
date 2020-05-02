@@ -50,6 +50,19 @@ export class AppConstants {
         COMPLETED: "Completed",
         CANCELLED: "Cancelled"
     }
+
+    public static PAYMENT_TYPE_CODE = {
+        CARD: 1,
+        CASH: 2,
+        CHECK: 3
+    }
+
+    public static PAYMENT_TYPE_TEXT = {
+        CARD: "Card",
+        CASH: "Cash",
+        CHECK: "Check"
+    }
+
     public static USER_ROLE = {
         CUSTOMER: 1,
         MANAGER: 2,

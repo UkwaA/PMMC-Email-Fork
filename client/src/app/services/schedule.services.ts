@@ -90,6 +90,10 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + SchedulePK);
     }
 
+    public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
+        return this.http.put(AppConstants.EXPRESS_SERVER_URL + "schedule/update-number-participant/" + SchedulePK, {"quantity" : quantity});
+    }
+
     /*================================
             BLACKOUT DATE
     ================================*/

@@ -31,7 +31,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER
     },
     CreatedDate: {
-      type: Sequelize.DATEONLY,
+      type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
     },
     CreatedBy: {
