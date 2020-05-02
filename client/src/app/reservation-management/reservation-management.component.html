@@ -21,109 +21,71 @@
         </div>
     </div>
 
-    <!-- ADMIN/PROGRAM MANAGER -->
-    <div  *ngIf = "role == '2' || role == '3'">
+    <div class="table-responsive-sm hide-with-small">
         <!-- List of all reservations for admin -->
-        <div class="table-responsive-sm hide-with-small">
-            <table #datatable class="table table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th style="width:7.5%"> #Res </th>
-                        <th style="width:17.5%"> Program Name </th>
-                        <th style="width:12.5%"> Date </th>
-                        <th title="Ongoing: Haven't attended yet
+        <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '2' || role == '3'">
+            <thead>
+                <tr>
+                    <th style="width:7.5%"> #Res </th>
+                    <th style="width:17.5%"> Program Name </th>
+                    <th style="width:12.5%"> Date </th>
+                    <th title="Ongoing: Haven't attended yet
 Attended: Attened the program + Not completed payment yet
 Completed: Attened the program + Completed payment
 Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
-                        <th style="width:15%"> Name </th>
-                        <th style="width:12.5%"> Total </th>
-                        <th style="width:12.5%"> Remaining </th>
-                        <th style="width:12.5%"> Action </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
-                        <td> {{reservation.ReservationPK}} </td>
-                        <td> {{reservation.ProgramName}} </td>
-                        <td> {{reservation.Date}}</td>
-                        <td > {{reservation.ReservationStatus}} </td>
-                        <td> {{reservation.CustomerName}} </td>
-                        <td> {{reservation.Total}} </td>
-                        <td> {{reservation.RemainingBalance}} </td>
-                        <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>  
-    </div>
-
-    <div *ngIf = "role == '1'">
-        <mat-tab-group>
-            <!-- List of past reservations -->
-            <mat-tab label="Past Reservations"> 
-                <div class="table-responsive-sm hide-with-small">
-                    <table class="table table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width:10%"> #ID </th>
-                                <th style="width:20%"> Program Name </th>
-                                <th style="width:15%"> Date </th>
-                                <th style="width:15%"> Time </th>
-                                <th style="width:10%"> Quantity </th>
-                                <th style="width:10%"> Total Amount </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> G2467 </td>
-                                <td> Change the Life of Seal </td>
-                                <td> April 20, 2020</td>
-                                <td> 8:10 - 10:30</td>
-                                <td> 10 </td>
-                                <td> $1000 </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </mat-tab>
-            <!-- List of ongoing reservations -->
-            <mat-tab label="Ongoing Reservations">
-                <div class="table-responsive-sm hide-with-small">
-                    <table class="table table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th style="width:8%"> #ID </th>
-                                <th style="width:15%"> Program Name </th>
-                                <th style="width:15%"> Date </th>
-                                <th style="width:15%"> Time </th>
-                                <th style="width:6%"> Quantity </th>
-                                <th style="width:8%"> Total </th>
-                                <th style="width:13%"> Remaining </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> G2467 </td>
-                                <td> Change the Life of Seal </td>
-                                <td> April 20, 2020</td>
-                                <td> 8:10 - 10:30</td>
-                                <td> 10 </td>
-                                <td> $1000 </td>
-                                <td> -$975 <button class="btn btn-sm btn-warning ml-3" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button></td>
-                            </tr>
-                            <tr>
-                                <td> I123 </td>
-                                <td> Camp Pinniped </td>
-                                <td> April 20, 2020</td>
-                                <td> 8:10 - 10:30</td>
-                                <td> 1 </td>
-                                <td> $120 </td>
-                                <td> $0 </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
+                    <th style="width:15%"> Name </th>
+                    <th style="width:12.5%"> Total </th>
+                    <th style="width:12.5%"> Remaining </th>
+                    <th style="width:12.5%"> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                    <td> {{reservation.ReservationPK}} </td>
+                    <td> {{reservation.ProgramName}} </td>
+                    <td> {{reservation.Date}}</td>
+                    <td > {{reservation.ReservationStatus}} </td>
+                    <td> {{reservation.CustomerName}} </td>
+                    <td> {{reservation.Total}} </td>
+                    <td> {{reservation.RemainingBalance}} </td>
+                    <td> <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button> </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- List of Reservarion By Customer -->
+        <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '1'">
+            <thead>
+                <tr>
+                    <th style="width:10%"> #ID </th>
+                    <th style="width:20%"> Program Name </th>
+                    <th style="width:15%"> Date </th>
+                    <th style="width:15%"> Time </th>
+                    <th style="width:7%"> Quantity </th>
+                    <th style="width:8%"> Total </th>
+                    <th style="width:15%"> Remaining </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                    <td> {{reservation.ReservationPK}} </td>
+                    <td> {{reservation.ProgramName}} </td>
+                    <td> {{reservation.Date}}</td>
+                    <td > {{reservation.Time}}</td>
+                    <td> {{reservation.Quantity}} </td>
+                    <td> {{reservation.Total}} </td>
+                    <td> {{reservation.RemainingBalance}} 
+                        <button mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>  
 </div>

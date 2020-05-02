@@ -20,11 +20,13 @@ declare var $: any;
 
 export class ReservationManagement implements OnInit{
     role:string;
+    UserPK: number;
     reservations = [];
     allReservations = [];
     groupReservations = [];
     individualReservations = [];
     searchText: string;
+    temp =[];
     selectedValue = 0;
 
     // Dropdown Menu Option
@@ -35,7 +37,7 @@ export class ReservationManagement implements OnInit{
     ]
 
     constructor(private auth: AuthenticationService,
-        private reservationSerivce: ReservationService,
+        private reservationService: ReservationService,
         public matDialog:MatDialog,
         private scheduleService: ProgramScheduleService,
         private customerService: CustomerService,
@@ -45,6 +47,112 @@ export class ReservationManagement implements OnInit{
         this.auth.profile().subscribe(
             user => {
                 this.role = user.Role_FK;
+                this.UserPK = user.UserPK;
+                if (this.role == '1'){
+                    this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser)=>{
+                        resByUser.forEach((item)=>{
+                            console.log(item);
+                            let details = {
+                                ReservationPK: 0,
+                                SchedulePK: 0,
+                                PaymentPK: 0,
+                                ProgramPK: 0,
+                                Quantity: 0,
+                                ProgramName: '',
+                                Date: '',
+                                Time: '',
+                                Total:'',
+                                RemainingBalance: '',
+                            }
+                            details.ReservationPK = item.ReservationPK;
+                            details.SchedulePK = item.SchedulePK;
+                            details.Total = item.Total;
+                            details.RemainingBalance = item.RemainingBalance;
+                            details.Quantity = item.NumberOfParticipant;
+
+                            this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
+                                details.Date = schedule[0].Start.slice(0, 10);
+                                details.Time = schedule[0].Start.slice(12,16) + " - " + schedule[0].End.slice(12,16);
+                                details.ProgramPK = schedule[0].ProgramPK;
+                                this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program)=>{
+                                    details.ProgramName = program.Name;
+                                    if (program.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
+                                        this.groupReservations.push(details);
+                                    }
+                                    else{
+                                        this.individualReservations.push(details);
+                                    }
+                                })
+                            })
+                            this.allReservations.push(details);
+                        })
+                    })
+                    this.reservations = this.allReservations;
+                }
+                else{
+                    /* Get all Reservation details */
+                    this.reservationService.getAllReservation().subscribe((allRes)=>{
+                        allRes.forEach((item) =>{
+                            let reservation = {
+                                ReservationPK: 0,
+                                SchedulePK: 0,
+                                UserPK: 0,
+                                PaymentPK: 0,
+                                ProgramPK: 0,
+                                ProgramName: '',
+                                Date: '',
+                                CustomerName: '',
+                                ReservationStatus:'',
+                                Total:'',
+                                RemainingBalance: '',
+                            }
+                            reservation.ReservationPK = item.ReservationPK;
+                            reservation.SchedulePK = item.SchedulePK;
+                            reservation.UserPK = item.UserPK;
+                            
+                            this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
+                                reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
+                            })
+                            switch(item.ReservationStatus){
+                                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                                    break;
+                                }
+                                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
+                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                                    break;
+                                }
+                                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
+                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                                    break;
+                                }
+                                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
+                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                                    break;
+                                }
+                            }
+
+                            reservation.Total = item.Total;
+                            reservation.RemainingBalance = item.RemainingBalance;
+                            this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
+                                reservation.Date = schedule[0].Start.slice(0, 10);
+                                reservation.ProgramPK = schedule[0].ProgramPK;
+                                this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
+                                    reservation.ProgramName = program.Name;
+                                    if (program.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
+                                        this.groupReservations.push(reservation);
+                                    }
+                                    else{
+                                        this.individualReservations.push(reservation);
+                                    }
+                                })
+                            })
+
+                            this.allReservations.push(reservation);
+                        })
+                    })
+                    this.reservations = this.allReservations;
+                }
             },
             err => {
                 console.error(err)
@@ -56,71 +164,7 @@ export class ReservationManagement implements OnInit{
             $("#programCat").append(new Option(e['name'], e['id']));
         });
 
-        /* Get all Reservation details */
-        this.reservationSerivce.getAllReservation().subscribe((allRes)=>{
-                allRes.forEach((item) =>{
-                    let reservation = {
-                        ReservationPK: 0,
-                        SchedulePK: 0,
-                        UserPK: 0,
-                        PaymentPK: 0,
-                        ProgramPK: 0,
-                        ProgramName: '',
-                        Date: '',
-                        CustomerName: '',
-                        ReservationStatus:'',
-                        Total:'',
-                        RemainingBalance: '',
-                    }
-                    reservation.ReservationPK = item.ReservationPK;
-                    reservation.SchedulePK = item.SchedulePK;
-                    reservation.UserPK = item.UserPK;
-                    
-                    this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-                        reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
-                    })
-                    switch(item.ReservationStatus){
-                        case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                            break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
-                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                            break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
-                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                            break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
-                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                            break;
-                        }
-                    }
-
-                    reservation.Total = item.Total;
-                    reservation.RemainingBalance = item.RemainingBalance;
-                    this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
-                        reservation.Date = schedule[0].Start.slice(0, 10);
-                        reservation.ProgramPK = schedule[0].ProgramPK;
-                        this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
-                            reservation.ProgramName = program.Name;
-                            if (program.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
-                                this.groupReservations.push(reservation);
-                            }
-                            else{
-                                this.individualReservations.push(reservation);
-                            }
-                        })
-                    })
-
-                    this.allReservations.push(reservation);
-                })
-            }
-        )
-        this.reservations = this.allReservations;
     }
-
     clearSearch() {
         this.searchText = "";
     }

@@ -14,6 +14,19 @@ export class ReservationService {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation");
     }
 
+    public getAllReservationByUserPK(UserPK: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-userpk/" + UserPK);
+    }
+
+    public getAllReservationBySchedulePK(SchedulePK: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-schedulepk/" + SchedulePK);
+    }
+
+    //Define this request for View Schedule Page
+    public getAllReservationDetailsForViewSchedule(SchedulePK: number, ProgramPK: number, ProgramType: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-view-schedule/" + SchedulePK + "/" + ProgramPK + "/" + ProgramType);
+    }
+
     public addNewReservationHeader(reservationHeader: ReservationHeader): Observable<any>{
        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/add-new-reservation", reservationHeader);
     }
