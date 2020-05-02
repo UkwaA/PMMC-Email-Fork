@@ -6,17 +6,21 @@ h1 {
     color: #08b2b8; 
 }
 
+h4{
+    color: #08b2b8;
+}
+
 .row{
     padding-bottom: 20px;
 }
 
-.list-group[data-payment = "paid"]{
+.completed-layout{
     border-width: 5px;
     border-left-style: solid;
     border-left-color:  rgb(14, 161, 14);
 }
 
-.list-group[data-payment = "waiting"]{
+.waiting-layout{
     border-width: 5px;
     border-left-style: solid;
     border-left-color:  #ffc107;

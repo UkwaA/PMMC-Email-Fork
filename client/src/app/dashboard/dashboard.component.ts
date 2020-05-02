@@ -4,6 +4,9 @@ import { ProgramData } from '../data/program-data';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { PaynowModalDialog } from "../components/paynow-modal-dialog/paynow-modal-dialog.component";
 import { FixedGroupTemplateDirective } from '@progress/kendo-angular-dropdowns';
+import { ReservationService } from '../services/reservation.services';
+import { ProgramScheduleService } from '../services/schedule.services';
+import { ProgramServices } from '../services/program.services';
 
 declare var $: any;
 
@@ -15,6 +18,9 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
   role:string;
   searchText: string;
+  customerRes = [];
+  today = new Date();
+  newDate: Date;
   /* CHART USING NG2-CHARTS */
   //title = 'Bar Chart Example Using ng2-charts';
 
@@ -82,16 +88,56 @@ export class DashboardComponent implements OnInit {
     { id: 2, name: "Individual Reservations" }
   ]
 
-  constructor(private auth: AuthenticationService, public matDialog:MatDialog) { }
+  constructor(private auth: AuthenticationService, public matDialog:MatDialog,
+    private reservationService: ReservationService,
+    private scheduleService: ProgramScheduleService,
+    private programService: ProgramServices) { }
 
   ngOnInit() {
     // Add option for the dropdown menu(later)
     
-
     this.auth.profile().subscribe(
       user => {
-          this.role = user.Role_FK;
-          console.log(this.role)
+        this.role = user.Role_FK;
+        if (this.role == '1'){
+          this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser)=>{
+              resByUser.forEach((item)=>{
+                  let details = {
+                      ReservationPK: 0,
+                      SchedulePK: 0,
+                      PaymentPK: 0,
+                      ProgramPK: 0,
+                      Quantity: 0,
+                      ProgramName: '',
+                      Date: '',
+                      Time: '',
+                      Total:'',
+                      RemainingBalance: '',
+                  }
+                  details.ReservationPK = item.ReservationPK;
+                  details.SchedulePK = item.SchedulePK;
+                  details.Total = item.Total;
+                  details.RemainingBalance = item.RemainingBalance;
+                  details.Quantity = item.NumberOfParticipant;
+
+                  this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
+                      details.Date = schedule[0].Start.slice(0, 10);
+                      details.Time = schedule[0].Start.slice(12,16) + " - " + schedule[0].End.slice(12,16);
+                      details.ProgramPK = schedule[0].ProgramPK;
+                      this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program)=>{
+                          details.ProgramName = program.Name;
+                      })
+
+                     /*  only display the current reservation, not past reservations */
+                     this.newDate = new Date(details.Date)
+                      if (this.newDate >= this.today){
+                        this.customerRes.push(details);
+                      }
+                  })
+              })
+          })
+      }
+
       },
       err => {
           console.error(err)
