@@ -198,7 +198,7 @@
                                     <td> {{res.Quantity}} </td>
                                     <td> {{res.Total}} </td>
                                     <td> {{res.RemainingBalance}}  
-                                        <button mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                                        <button mat-raised-button *ngIf = "res.RemainingBalance != 0" class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
                                     </td>
                                 </tr>
                             </tbody>
