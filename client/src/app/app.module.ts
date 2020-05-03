@@ -80,8 +80,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DataStorage } from "./services/dataProvider";
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+import { NgxStripeModule } from 'ngx-stripe';
 import { ReservationManagement } from './reservation-management/reservation-management.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReportManagementComponent } from './report-management/report-management.component';
@@ -259,15 +258,17 @@ const routes : Routes = [
     ButtonsModule,
     DropDownsModule,
     ChartsModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxStripeModule.forRoot('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W'),
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService, 
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, DataStorage,
-              {
-                provide: HTTP_INTERCEPTORS,
-                useClass: AuthInterceptor,
-                multi: true,
-              }],
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, DataStorage
+              // {
+              //   provide: HTTP_INTERCEPTORS,
+              //   useClass: AuthInterceptor,
+              //   multi: true,
+              // }
+            ],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
     AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog, AdminReservationsModalDialog]

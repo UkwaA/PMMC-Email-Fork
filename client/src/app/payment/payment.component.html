@@ -1,26 +1,22 @@
-<!-- <form (submit)="handleForm($event)">
-
-
-    <div #cardElement>
+<!-- <form [formGroup]="stripeTest">
+    
+    <div id="card-element">
     </div>
-
-
-    <p>{{ cardErrors }}</p>
-
-
-  <button class="btn btn-lg btn-info float-right width-btn" >Buy for ${{ amount / 100 }}.00</button>
   
+    <div id="card-errors" role="alert"></div>
+    <button #payment mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="pay()">Submit Payment</button>
 </form> -->
 
-<form [formGroup]="paymentForm">
-    <div id="cardElement"><!--Stripe.js injects the Card Element--></div>
-    <button id="submit" (click)="pay()">
-      <div class="spinner hidden" id="spinner"></div>
-      <span id="button-text">Pay</span>
-    </button>
-    <p id="card-errors" role="alert"></p>
-    <p class="result-message hidden">
-      Payment succeeded, see the result in your
-      <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-    </p>
-  </form>
+
+<form (ngSubmit)="pay()"[formGroup]="stripeTest">
+  <div id="card-element">
+  </div>
+  <button type="submit">
+    <div class="spinner hidden" id="spinner"></div>
+    <span id="button-text">Verify</span>
+  </button>
+  <p id="card-errors" role="alert"></p>
+  <p class="result-message hidden">
+    Verify succeeded
+  </p>
+</form>

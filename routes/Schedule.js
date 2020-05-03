@@ -1110,6 +1110,41 @@ schedule.post("/set-program-color", (req,res) => {
 });
 
 
+/**********************************************
+          UPDATE NUMBER OF PARTICIPANT
+ **********************************************/
+schedule.put("/update-number-participant/:id", (req,res) => {
+  Schedule.findOne({
+    where :{
+      SchedulePK: req.params.id 
+    }
+  })
+  .then((result) => {
+    if(result){
+      console.log(req.body.quantity);
+      var temp = result.CurrentNumberParticipant + req.body.quantity;
+      result.update({
+        CurrentNumberParticipant: temp
+      })
+      .then(result =>{
+        if (result) {
+          res.send({
+           message: "NUMBER OF PARTICIPANT has been changed."
+          });
+        }
+        else {
+          res.send({
+           error: "Cannot update NUMBER OF PARTICIPANT."
+          });
+        }
+      })
+    }
+  })
+  .catch(err => {
+    res.send("error: " + err);
+  });
+})
+
 
 
 // ========================END=====================

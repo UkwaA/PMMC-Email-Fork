@@ -1,4 +1,4 @@
-import { OnInit, AfterViewInit, Component, Input, ViewChild, ElementRef } from "@angular/core";
+import { OnInit, Component, Input, Output,EventEmitter } from "@angular/core";
 import { AuthenticationService, UserDetails } from "../authentication.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogConfig, MatDialog } from "@angular/material";
@@ -12,33 +12,31 @@ import { ReservationHeader } from "../data/reservation-header";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from "../data/reservation-individual-details";
 import { AppConstants } from "../constants";
-
-declare var Stripe;
+import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
 
 @Component({
   selector: "payment",
   templateUrl: "./payment.component.html",
   styleUrls: ["./payment.component.css"],
 })
-export class PaymentComponent implements OnInit, AfterViewInit  {
+export class PaymentComponent implements OnInit  {
   @Input() reservationDetails: any;
   @Input() reservationHeader: ReservationHeader;
   @Input() ProgramPK: number;
-  @ViewChild('cardElement',{static: false}) cardElement: ElementRef;
+  @Output() token = new EventEmitter<any>();
 
-  token: any;
-  userDetails: UserDetails;
-  paymentForm: FormGroup;
-  submitted = false;
-  ProgramType: number;
-  amount = 100;
+  elements: Elements;
+  card: StripeElement;
 
-  stripe: any; // : stripe.Stripe;
-  card: any;
-  cardErrors: any;
-  clientSecret = "";
+  ProgramType = "";
+  userDetails: any;
 
-  confirmation: any;
+  // optional parameters
+  elementsOptions: ElementsOptions = {
+    locale: 'en'
+  };
+ 
+  stripeTest: FormGroup;
 
   constructor(
     public auth: AuthenticationService,
@@ -48,7 +46,8 @@ export class PaymentComponent implements OnInit, AfterViewInit  {
     private router: Router,
     private program: ProgramServices,
     private paymentService: PaymentServices,
-    private reservation: ReservationService
+    private reservation: ReservationService,
+    private stripeService: StripeService
   ) {}
 
   ngOnInit() {
@@ -60,125 +59,83 @@ export class PaymentComponent implements OnInit, AfterViewInit  {
 
     this.userDetails = this.auth.getUserDetails();
 
-    this.paymentService.createPaymentIntent(100).subscribe((res) => {
-        this.clientSecret = res;
-        console.log(res);
+    this.stripeTest = this.fb.group({
+      name: ['', [Validators.required]]
     });
 
-    this.stripe = Stripe('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W');
-    const elements = this.stripe.elements();
-
-    this.card = elements.create('card');
-    this.card.mount(this.cardElement.nativeElement);
-
-    this.card.addEventListener('change', ({ error }) => {
-        this.cardErrors = error && error.message;
-    });
+    this.stripeService.elements(this.elementsOptions)
+      .subscribe(elements => {
+        this.elements = elements;
+        // Only mount the element the first time
+        if (!this.card) {
+          this.card = this.elements.create('card', {
+            style: {
+              base: {
+                color: "#32325d",
+                fontFamily: 'Arial, sans-serif',
+                fontSmoothing: "antialiased",
+                fontSize: "16px",
+                "::placeholder": {
+                  color: "#32325d"
+                }
+              },
+              invalid: {
+                fontFamily: 'Arial, sans-serif',
+                color: "#fa755a",
+                iconColor: "#fa755a"
+              }
+            }
+          });
+          this.card.mount('#card-element');
+        }
+      });
   }
 
   pay() {
-    this.stripe.confirmCardPayment(this.clientSecret, {
-      payment_method: {
-        card: this.card
-      }
-    })
-    .then((result) =>{
-      if (result.error) {
-        // Show error to your customer
-        this.showError(result.error.message);
-      } else {
-        // The payment succeeded!
-        this.orderComplete(result.paymentIntent.id);
-      }
-    });
+    // const name = this.stripeTest.get('name').value;
+    // {
+    //   name: 'tested_ca',
+    //   address_line1: '123 A Place',
+    //   address_line2: 'Suite 100',
+    //   address_city: 'Irving',
+    //   address_state: 'BC',
+    //   address_zip: 'VOE 1H0',
+    //   address_country: 'CA'
+    // }
+    const name = this.stripeTest.get('name').value;
+
+    this.stripeService
+      .createToken(this.card, {})
+      .subscribe(result => {
+        if (result.token) {
+          this.token.emit(result.token)
+
+          // Use the token to create a charge or a customer
+          // https://stripe.com/docs/charges
+          const dialogConfig = new MatDialogConfig();
+          // The user can't close the dialog by clicking outside its body
+          dialogConfig.disableClose = true;
+          dialogConfig.id = "modal-component";
+          dialogConfig.height = "auto";
+          dialogConfig.maxHeight = "500px";
+          dialogConfig.width = "430px";
+          dialogConfig.data = {
+            title: "Thanks You.",
+            description: "Thank you for your payment!",
+            actionButtonText: "Ok",
+            numberOfButton: "1"
+          }
+          const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+          modalDialog.afterClosed().subscribe(result => {
+            if (result == "Yes") {
+            }
+          })
+          console.log(result.token);
+        } else if (result.error) {
+          // Error creating the token
+          console.log(result.error.message);
+        }
+      });
   }
 
-  loading (isLoading: boolean) {
-    if (isLoading) {
-      // Disable the button and show a spinner
-      document.querySelector("button").disabled = true;
-      document.querySelector("#spinner").classList.remove("hidden");
-      document.querySelector("#button-text").classList.add("hidden");
-    } else {
-      document.querySelector("button").disabled = false;
-      document.querySelector("#spinner").classList.add("hidden");
-      document.querySelector("#button-text").classList.remove("hidden");
-    }
-  }
-
-  showError(errorMsgText) {
-    this.loading(false);
-    var errorMsg = document.querySelector("#card-errors");
-    errorMsg.textContent = errorMsgText;
-    setTimeout(function() {
-      errorMsg.textContent = "";
-    }, 4000);
-  }
-
-  orderComplete(paymentIntentId) {
-    this.loading(false);
-    document
-      .querySelector(".result-message a")
-      .setAttribute(
-        "href",
-        "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-      );
-    document.querySelector(".result-message").classList.remove("hidden");
-    document.querySelector("button").disabled = true;
-  };
-
-  ngAfterViewInit () {
-   
-  }
-
-  get f() {
-    return this.paymentForm.controls;
-  }
-
-  // Clear data when click on input field
-  onFocus(event) {
-    if (event.target.value == 0) event.target.value = "";
-  }
-
-  // Restore data when lose focus on input field
-  lostFocus(event) {
-    if (event.target.value === 0 || event.target.value === "") {
-      event.target.value = 0;
-    }
-  }
-
-  payment() {
-    this.submitted = true;
-    if (this.paymentForm.invalid) {
-      console.log("invalid");
-      return;
-    }
-    //Configure Modal Dialog
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "auto";
-    dialogConfig.maxHeight = "500px";
-    dialogConfig.width = "350px";
-    dialogConfig.autoFocus = false;
-    dialogConfig.data = {
-      title: "Check out",
-      description: "Are you sure to check out?",
-      actionButtonText: "Confirm",
-      numberOfButton: "2",
-    };
-
-    const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-    modalDialog.afterClosed().subscribe((result) => {
-      if (result == "Yes") {
-        //Save data here
-
-        //route to the confirmation page
-        this.router.navigateByUrl("/confirmation/" + this.ProgramPK);
-      } else {
-        //otherwise, do nothing
-      }
-    });
-  }
 }
