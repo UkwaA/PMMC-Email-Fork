@@ -1,0 +1,61 @@
+<div id="modal-content-wrapper" style="text-align: center;">
+    <header id="modal-header">
+        <button type="button" class="close" (click)="closeModal()" onfocus="blur()">X</button>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Reservation Details</h3>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="table-responsive-sm hide-with-small">
+        <!-- List of reservations for admin -->
+        <table #datatable class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width:8%"> #Res </th>
+                    <th style="width:20%"> Program Name </th>
+                    <th style="width:15%"> Date </th>
+                    <th title="Ongoing: Haven't attended yet
+Attended: Attened the program + Not completed payment yet
+Completed: Attened the program + Completed payment
+Cancelled: Cancelled reservation" style="width:13%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
+                    <th style="width:20%"> Name </th>
+                    <th style="width:12%"> Total </th>
+                    <th style="width:12%"> Remaining </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reservation of reservations | paginate:{itemsPerPage: 7, currentPage:p}">
+                    <td> {{reservation.ReservationPK}} </td>
+                    <td> {{reservation.ProgramName}} </td>
+                    <td> {{reservation.Date}}</td>
+                    <td > {{reservation.ReservationStatus}} </td>
+                    <td> {{reservation.CustomerName}} </td>
+                    <td> {{reservation.Total}} </td>
+                    <td> {{reservation.RemainingBalance}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <footer id ="modal-footer">
+        <button mat-raised-button id="modal-cancel-button" class="btn-warning" (click)="closeModal()" onfocus="blur()" style="float:right"> Cancel</button>
+    </footer>
+</div>

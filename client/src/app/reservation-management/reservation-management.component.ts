@@ -188,15 +188,15 @@ export class ReservationManagement implements OnInit{
 
     // viewReservationModal
     openReservationModal(){
-    console.log("Reservation Details Modal called")
-    const dialogConfig = new MatDialogConfig();
+        console.log("Reservation Details Modal called")
+        const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "reservation-modal-component";
-    dialogConfig.height = "600px";
-    dialogConfig.width = "750x";
-    dialogConfig.autoFocus = false;
-   
-    const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "reservation-modal-component";
+        dialogConfig.height = "600px";
+        dialogConfig.width = "750x";
+        dialogConfig.autoFocus = false;
+    
+        const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
   }
 }
