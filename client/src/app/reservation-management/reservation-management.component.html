@@ -80,10 +80,8 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
             </tbody>
         </table>
         <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8">
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
+            <div class="col-sm-12">
+                <pagination-controls class="float-right" (pageChange)="p=$event" autoHide="true" responsive="true">
                 </pagination-controls>
             </div>
         </div>

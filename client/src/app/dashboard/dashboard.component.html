@@ -11,13 +11,13 @@
                     <span class="label p-3">Start</span>
                     <kendo-dateinput kendoDateRangeStartInput 
                     [(value)]="range.start"
-                    (valueChange)="onChangeDate($event)"></kendo-dateinput>
+                    (valueChange)="onChangeDate()"></kendo-dateinput>
                 </label>
                 <label>
                     <span class="label p-3">End</span>
                     <kendo-dateinput kendoDateRangeEndInput 
                     [(value)]="range.end"
-                    (valueChange)="onChangeDate($event)"></kendo-dateinput>
+                    (valueChange)="onChangeDate()"></kendo-dateinput>
                 </label>
             </kendo-daterange>
         </div>
@@ -25,11 +25,11 @@
             <div class="card bg-c-green order-card h-100">
                 <div class="card-body">
                     <h6 class="m-b-20">Completed Reservations</h6>
-                    <h5 class="text-right">Reservations: {{completedRes}}</h5>
+                    <h2 class="text-right">{{completedRes}}</h2>
                     <h5 class="text-right">Total: ${{completedTotal}}</h5>
                 </div>
                 <div class="card-footer bg-g-white">
-                    View Completed Reservations
+                    <button class="link" (click)="openReservationModal('Completed')" onfocus="blur()">View Completed Reservations</button>
                 </div>
             </div>
         </div>
@@ -38,11 +38,11 @@
             <div class="card bg-c-blue order-card h-100">
                 <div class="card-body">
                     <h6 class="m-b-20">Ongoing Reservations</h6>
-                    <h5 class="text-right">Reservations: {{ongoingRes}}</h5>
+                    <h2 class="text-right">{{ongoingRes}}</h2>
                     <h5 class="text-right">Total: ${{ongoingTotal}}</h5>
                 </div>
                 <div class="card-footer bg-b-white">
-                    <button class="link" (click)="openReservationModal()" onfocus="blur()">View Ongoing Reservations</button> 
+                    <button class="link" (click)="openReservationModal('On Going')" onfocus="blur()">View Ongoing Reservations</button> 
                 </div>
             </div>
         </div>
@@ -51,11 +51,11 @@
             <div class="card bg-c-yellow order-card h-100">
                 <div class="card-body">
                     <h6 class="m-b-20">Attended Reservations</h6>
-                    <h5 class="text-right">Reservations: {{attendedRes}}</h5>
+                    <h2 class="text-right">{{attendedRes}}</h2>
                     <h5 class="text-right">Total: ${{attendedTotal}}</h5>
                 </div>
                 <div class="card-footer bg-y-white">
-                    View Attended Reservations
+                    <button class="link" (click)="openReservationModal('Attended')" onfocus="blur()">View Attended Reservations</button>
                 </div>
             </div>
         </div>
@@ -64,11 +64,11 @@
             <div class="card bg-c-pink order-card h-100">
                 <div class="card-body">
                     <h6 class="m-b-20"> Cancelled Reservations </h6>
-                    <h5 class="text-right">Reservations: {{cancelledRes}}</h5>
+                    <h2 class="text-right">{{cancelledRes}}</h2>
                     <h5 class="text-right">Total: ${{cancelledTotal}}</h5>
                 </div>
                 <div class="card-footer bg-p-white">
-                    View Canceled Reservations
+                    <button class="link" (click)="openReservationModal('Cancelled')" onfocus="blur()">View Cancelled Reservations</button>
                 </div>
             </div>
         </div>
@@ -89,9 +89,9 @@
         </canvas>
     </div>
     
-    <br/>
+    <br/> -->
 
-    <div>
+    <!-- <div>
         <h2>PIE CHART EXAMPLE</h2>
         <canvas 
             baseChart 
@@ -106,7 +106,7 @@
     
     <h3 class = "text-muted"> Lastest Reservations </h3> -->
     <!-- SEARCH BAR -->
-    <div class="row filter">
+    <!-- <div class="row filter">
         <div class="col-lg-2 col-md-2 col-sm-3 p-0">
             <select class="form-control" style="font-weight: bold" id="programCat"
                 (change)="selectChangeHandler($event)">
@@ -119,9 +119,9 @@
         <div class="col-lg-2 col-md-2 col-sm-2">
             <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
         </div>
-    </div>
+    </div> -->
     <!-- TABLE -->
-    <div class="table-responsive-sm hide-with-small">
+    <!-- <div class="table-responsive-sm hide-with-small">
         <table #datatable class="table table-hover" style="width:100%">
             <thead>
                 <tr>
@@ -168,7 +168,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 
 <div *ngIf = "role == '1'" class="container">

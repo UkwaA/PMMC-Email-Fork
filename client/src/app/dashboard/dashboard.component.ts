@@ -10,6 +10,7 @@ import { ProgramServices } from '../services/program.services';
 import { AppConstants } from '../constants';
 import { AdminReservationsModalDialog } from '../components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
 import { CustomerService } from '../services/customer.services';
+import { Breakpoints } from '@angular/cdk/layout';
 
 declare var $: any;
 
@@ -27,23 +28,27 @@ export class DashboardComponent implements OnInit {
   range = { start: new Date(), end: new Date()};
   completedRes = 0;
   completedTotal = 0;
+  completedDetails = [];
   ongoingRes = 0;
   ongoingTotal = 0;
   ongoingDetails = [];
   attendedRes = 0;
   attendedTotal = 0;
+  attendedDetails = [];
   cancelledRes = 0;
   cancelledTotal = 0;
+  cancelledDetails = [];
 
   /* CHART USING NG2-CHARTS */
   //title = 'Bar Chart Example Using ng2-charts';
 
   // ADD CHART OPTIONS. 
-  // chartOptions = {
-  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  // }
+  /* chartOptions = {
+    responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+  }
 
-  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  labels =  ['On Going', 'Completed', 'Attended', 'Cancelled'];
+  chartData = []; */
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
   // chartData = [
@@ -58,9 +63,9 @@ export class DashboardComponent implements OnInit {
   // ];
 
   // CHART COLOR.
- // colors = [
+ //colors = [
    // { // 1st Year.
-  //    backgroundColor: 'rgba(77,83,96,0.2)'
+    //  backgroundColor: 'rgba(77,83,96,0.2)'
   //  },
   //  { // 2nd Year.
   //    backgroundColor: 'rgba(30, 169, 224, 0.8)'
@@ -152,13 +157,13 @@ export class DashboardComponent implements OnInit {
           })
         }
         else {
-          /* this.onChangeDate(); */
+          this.onChangeDate();
         }
       },
       err => {
           console.error(err)
       }
-  )
+    )
   }
   clearSearch() {
     this.searchText = "";
@@ -170,89 +175,96 @@ export class DashboardComponent implements OnInit {
   }
 
   /* Change the Start and End Date */
-  onChangeDate(event){
+  onChangeDate(){
     console.log("Start: " + this.range.start)
     console.log("End: " + this.range.end)
-    /* this.range.start.setHours(0,0,0,0);
-    this.range.end.setHours(23,59,59,999) */;
-    /* Reset all values before set new value */
-    this.completedRes = 0;
-    this.completedTotal = 0;
-    this.ongoingRes = 0;
-    this.ongoingTotal = 0;
-    this.ongoingDetails = [];
-    this.attendedRes = 0;
-    this.attendedTotal = 0;
-    this.cancelledRes = 0;
-    this.cancelledTotal = 0;
-    
-    this.reservationService.getAllReservation().subscribe((allRes)=>{
-      allRes.forEach((item) =>{
-        /* Object for reservation details */
-        let reservation = {
-          ReservationPK: 0,
-          SchedulePK: 0,
-          UserPK: 0,
-          PaymentPK: 0,
-          ProgramPK: 0,
-          ProgramName: '',
-          Date: '',
-          CustomerName: '',
-          ReservationStatus:'',
-          Total:'',
-          RemainingBalance: '',
-        }
-        reservation.ReservationPK = item.ReservationPK;
-        reservation.SchedulePK = item.SchedulePK;
-        reservation.UserPK = item.UserPK;
-        this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-            reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
-        })
-        reservation.Total = item.Total;
-        reservation.RemainingBalance = item.RemainingBalance;
-        this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
-            reservation.Date = schedule[0].Start.slice(0, 10);
-            reservation.ProgramPK = schedule[0].ProgramPK;
-            this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
-                reservation.ProgramName = program.Name;
-            })
-        })
-        this.scheduleService.getScheduleById(item.SchedulePK).subscribe((schedule) => {
-          /* ??? before one date if change to Date */
-          let resDate = new Date(schedule[0].Start.slice(0, 10));
-          resDate.setHours(0,0,0,0);
-          if (this.range.start <= resDate && this.range.end >= resDate){
-            switch(item.ReservationStatus){
-              case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                console.log(this.ongoingRes);
-                this.ongoingRes += 1;
-                console.log(this.ongoingRes);
-                this.ongoingTotal += item.Total;
-                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                this.ongoingDetails.push(reservation);
-                console.log(this.ongoingDetails)
-                break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
-                this.attendedRes += 1;
-                this.attendedTotal += item.Total;
-                break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
-                this.completedRes += 1;
-                this.completedTotal += item.Total;
+    if (this.range.start <= this.range.end){
+      console.log("in");
+      this.range.start.setHours(0,0,0,0);
+      this.range.end.setHours(23,59,59,999);
+      this.completedRes = 0;
+      this.completedTotal = 0;
+      this.completedDetails = [];
+      this.ongoingRes = 0;
+      this.ongoingTotal = 0;
+      this.ongoingDetails = [];
+      this.attendedRes = 0;
+      this.attendedTotal = 0;
+      this.attendedDetails = [];
+      this.cancelledRes = 0;
+      this.cancelledTotal = 0;
+      this.cancelledDetails = [];
+      
+      this.reservationService.getAllReservation().subscribe((allRes)=>{
+        allRes.forEach((item) =>{
+          /* Object for reservation details */
+          let reservation = {
+            ReservationPK: 0,
+            SchedulePK: 0,
+            UserPK: 0,
+            PaymentPK: 0,
+            ProgramPK: 0,
+            ProgramName: '',
+            Date: '',
+            CustomerName: '',
+            ReservationStatus:'',
+            Total:'',
+            RemainingBalance: '',
+          }
+          reservation.ReservationPK = item.ReservationPK;
+          reservation.SchedulePK = item.SchedulePK;
+          reservation.UserPK = item.UserPK;
+          this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
+              reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
+          })
+          reservation.Total = item.Total;
+          reservation.RemainingBalance = item.RemainingBalance;
+          this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
+              reservation.Date = schedule[0].Start.slice(0, 10);
+              reservation.ProgramPK = schedule[0].ProgramPK;
+              this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
+                  reservation.ProgramName = program.Name;
+              })
+          })
+          this.scheduleService.getScheduleById(item.SchedulePK).subscribe((schedule) => {
+            /* ??? before one date if change to Date */
+            let resDate = new Date(schedule[0].Start.slice(0, 10));
+            if (this.range.start <= resDate && this.range.end >= resDate){
+              switch(item.ReservationStatus){
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                  this.ongoingRes += 1;
+                  this.ongoingTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                  this.ongoingDetails.push(reservation);
                   break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
-                this.cancelledRes += 1;
-                this.cancelledTotal += item.Total;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
+                  this.attendedRes += 1;
+                  this.attendedTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                  this.attendedDetails.push(reservation);
                   break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
+                  this.completedRes += 1;
+                  this.completedTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                  this.completedDetails.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
+                  this.cancelledRes += 1;
+                  this.cancelledTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                  this.cancelledDetails.push(reservation);
+                  break;
+                }
               }
             }
-          }
+          })
         })
       })
-    })
+    }
   }
 
   // PaynowModal
@@ -272,7 +284,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // viewReservationModal
-  openReservationModal(){
+  openReservationModal(status: string){
     console.log("Admin Reservations Modal called")
     const dialogConfig = new MatDialogConfig();
 
@@ -281,7 +293,24 @@ export class DashboardComponent implements OnInit {
     dialogConfig.maxHeight = "600px";
     dialogConfig.width = "1000px";
     dialogConfig.autoFocus = false;
-    dialogConfig.data = this.ongoingDetails;
+    switch(status){
+      case AppConstants.RESERVATION_STATUS_TEXT.ON_GOING:{
+        dialogConfig.data = this.ongoingDetails;
+        break;
+      }
+      case AppConstants.RESERVATION_STATUS_TEXT.ATTENDED:{
+        dialogConfig.data = this.attendedDetails;
+        break;
+      }
+      case AppConstants.RESERVATION_STATUS_TEXT.COMPLETED:{
+        dialogConfig.data = this.completedDetails;
+        break;
+      }
+      case AppConstants.RESERVATION_STATUS_TEXT.CANCELLED:{
+        dialogConfig.data = this.cancelledDetails;
+        break;
+      }
+    }
     const adminReservationModalDialog = this.matDialog.open(AdminReservationsModalDialog, dialogConfig);
   }
 
