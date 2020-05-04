@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
 import { ProgramData } from "../data/program-data";
+import { Payment } from "../data/payment";
 import { ProgramScheduleService } from "../services/schedule.services";
 import { ReservationService } from "../services/reservation.services";
 import {
@@ -27,6 +28,8 @@ import { ValidationErrors } from "@angular/forms";
 import { ReservationGroupDetails } from "../data/reservation-group-details";
 import { ReservationIndividualDetails } from '../data/reservation-individual-details';
 import { addDays } from '@progress/kendo-date-math';
+import { PaymentServices } from '../services/payment.services';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   templateUrl: "./reservation.component.html",
@@ -58,7 +61,17 @@ export class ReservationComponent implements OnInit {
   programDesc: string;
   ProgramType: number;
   SchedulePK: number;
-  // isDisable = true;
+
+  // Intent Object
+  paymentObj =  {
+    token: "",
+    amount: 0,
+    description: "",
+    email: ""
+  };
+
+  paymentData  = new Payment();
+
 
   // Schedule View Variables
   public selectedDate: Date = new Date();
@@ -125,7 +138,8 @@ export class ReservationComponent implements OnInit {
               public matDialog: MatDialog,
               private auth: AuthenticationService,
               private router: Router,
-              private resServices : ReservationService) {
+              private resServices : ReservationService,
+              private paymentServices: PaymentServices) {
     this.quantityForm = this.fb.group({
       AdultQuantity: [
         { value: "0", disabled: true },
@@ -174,7 +188,7 @@ export class ReservationComponent implements OnInit {
       this.programDesc = this.programDetails.Description;
       this.programName = this.programDetails.Name;
 
-
+     
       switch(this.ProgramType) {
         /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
         case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
@@ -224,6 +238,7 @@ export class ReservationComponent implements OnInit {
 
         /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
         case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+           // Update the Total amount if user pick individual program
           this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
             this.bookingIndividual = program;
 
@@ -310,7 +325,6 @@ export class ReservationComponent implements OnInit {
         
           });
 
-          
           // Clear Validator for QuantityForm when Individual Program is loadded.
           this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
           this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
@@ -625,8 +639,6 @@ export class ReservationComponent implements OnInit {
       this.currTotalQuantity =  1;
     }
 
-   
-
     // Update data for Reservation Header.
     this.reservationHeader.SchedulePK =  this.SchedulePK;
     this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
@@ -680,11 +692,52 @@ export class ReservationComponent implements OnInit {
      stepper.next();
  }
 
- submitReservation() {
+ // Get the token value change from the Verify Card Form Child Component
+ dataChangedHandler(token: string) {
+  // Update the pToken
+  this.paymentObj.token = token;
+} 
 
-  this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
+ submitReservation() {
+   this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
+   
     switch(this.ProgramType){
       case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+        // Update the Amount Due when User checkout
+        this.paymentObj.amount = this.programDetails.DepositAmount;
+        this.paymentObj.description = this.auth.getUserDetails().Username;      
+        this.paymentObj.email = this.auth.getUserDetails().Email;
+
+        // Charge User
+        this.paymentServices.processToken(this.paymentObj).subscribe((res) => {
+          this.paymentData.PaymentPK = this.paymentObj.token["id"];
+          this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+          this.paymentData.ReservationPK = result;        // ReservationPK
+          this.paymentData.Total = res.amount;
+          this.paymentData.ChargeToken = res.id;
+          this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
+
+          // Create PaymenData
+          this.paymentServices.createPaymentData(this.paymentData)
+          .subscribe((res) => {
+            console.log(res);
+          })
+
+          // Update remaining balance
+          this.resServices.updateRemainingBalance(this.reservationHeader.SchedulePK,this.reservationHeader.RemainingBalance - (res.amount /100))
+          .subscribe((res) => {
+            console.log(res);
+          });
+        })
+
+        // Update Schedule CurrentNumberParticipant
+        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, this.reservationHeader.NumberOfParticipant)
+        .subscribe((res) => {
+          console.log("Update NumberParticipant " + res);
+        })
+
+        
+        // Insert Reservation Details
         this.reservationGroupDetails.ReservationPK = result;
         this.resServices.addGroupReservationDetails(this.reservationGroupDetails).subscribe((res) => {
           if(res) {
@@ -714,6 +767,36 @@ export class ReservationComponent implements OnInit {
        
         break;
       case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+        // Update the Amount Due when User checkout
+        this.paymentObj.amount = this.programDetails.PricePerParticipant;
+        this.paymentObj.description = this.auth.getUserDetails().Username;      
+        this.paymentObj.email = this.auth.getUserDetails().Email;
+
+        // Charge User
+        this.paymentServices.processToken(this.paymentObj).subscribe((res) => {
+          this.paymentData.PaymentPK = this.paymentObj.token["id"];
+          this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+          this.paymentData.ReservationPK = result;        // ReservationPK
+          this.paymentData.Total = res.amount;
+          this.paymentData.ChargeToken = res.id;
+          this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
+          
+          // Create PaymenData
+          this.paymentServices.createPaymentData(this.paymentData).subscribe((res) => {
+            console.log(res);
+          })
+
+          // Update remaining balance
+          this.resServices.updateRemainingBalance(this.reservationHeader.SchedulePK, 0);
+        })
+
+        // Update Schedule CurrentNumberParticipant
+        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, 1)
+        .subscribe((res) => {
+          console.log("Update NumberParticipant " + res);
+        })
+        
+        // Insert Reservation Details
         this.reservationIndividualDetails.ReservationPK = result;
         this.resServices.addIndividualReservationDetails(this.reservationIndividualDetails).subscribe((res) => {
           if(res) {
@@ -743,5 +826,5 @@ export class ReservationComponent implements OnInit {
         break;
     }
   });
- }
+  }
 }

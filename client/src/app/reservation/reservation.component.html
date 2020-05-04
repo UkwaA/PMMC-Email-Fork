@@ -1,5 +1,4 @@
 <div class="container">
-
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
     <!-- PICK SCHEDULE STEPPER -->
     <mat-step [stepControl]="quantityForm">
@@ -716,8 +715,7 @@
     </ng-container>
       <!-- END INDIVIDUAL PROGRAM SECTION -->
     </mat-step>
-    <!-- END INPUT INFORMATION STEPPER -->
-    <mat-step [stepControl]="confirmation">
+    <!-- <mat-step [stepControl]="confirmation">
       <ng-template matStepLabel>Payment</ng-template>
       <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
         <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"></payment>
@@ -731,16 +729,213 @@
           <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
         </div>
       </div>
-    </mat-step>
-    <mat-step [stepControl]="paymentForm">
+    </mat-step> -->
+    <mat-step [stepControl]="confirmation">
       <ng-template matStepLabel>Confirmation</ng-template>
+      <div *ngIf="stepTwoIsCompleted" class="container">
+        <div class="row text-left m-0">
+          <h1>{{programName}}</h1>
+        </div>
+        <hr>
+        <!-- General Information -->
+        <div class="table-responsive-sm">
+          <table class="table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th style="width:60%">General Information</th>
+                      <th style="width:40%">  </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Date</td>
+                      <td class="name">{{customerSelectDate}}</td>
+                  </tr>
+                  <tr>
+                    <td>Time</td>
+                    <td class="name">{{customerSelectTime}}</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
       
-      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
+        <!-- Reservation Info -->
+        <div class="table-responsive-sm">
+          <table class="table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th style="width:60%">Reservation Information</th>
+                      <th style="width:40%">  </th>
+                  </tr>
+              </thead>
+              <tbody *ngIf= "ProgramType == 0">
+                <tr>
+                    <td>Program Restriction</td>
+                    <td class="name">{{reservationGroupDetails.ProgramRestriction}}</td>
+                </tr>
+                <tr>
+                  <td>Organization Name</td>
+                  <td class="name">{{reservationGroupDetails.OrganizationName}}</td>
+                </tr>
+                <tr>
+                  <td>Grade Level</td>
+                  <td class="name">{{reservationGroupDetails.GradeLevel}}</td>
+                </tr>
+                <tr>
+                  <td>Teacher Name</td>
+                  <td class="name">{{reservationGroupDetails.TeacherName}}</td>
+                </tr>
+                <tr>
+                  <td>Teacher Email</td>
+                  <td class="name">{{reservationGroupDetails.TeacherEmail}}</td>
+                </tr>
+                <tr>
+                  <td>Teacher Phone Number</td>
+                  <td class="name">{{reservationGroupDetails.TeacherPhoneNo}}</td>
+                </tr>
+                <tr>
+                  <td>Alternative Date</td>
+                  <td class="name">{{reservationGroupDetails.AlternativeDate}}</td>
+                </tr>
+                <tr>
+                  <td>Education Purpose</td>
+                  <td class="name">{{reservationGroupDetails.EducationPurpose}}</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf= "ProgramType == 1">
+                <tr>
+                    <td>Participant Name</td>
+                    <td class="name">{{reservationIndividualDetails.ParticipantName}}</td>
+                </tr>
+                <tr>
+                  <td>Participant Age</td>
+                  <td class="name">{{reservationIndividualDetails.ParticipantAge}}</td>
+                </tr>
+                <tr>
+                  <td>Gender</td>
+                  <td class="name">{{reservationIndividualDetails.Gender}}</td>
+                </tr>
+                <tr>
+                  <td>T-Shirt Size</td>
+                  <td class="name">{{reservationIndividualDetails.MerchSize}}</td>
+                </tr>
+                <tr>
+                  <td>Allergy Information</td>
+                  <td class="name">{{reservationIndividualDetails.AllergyInfo}}</td>
+                </tr>
+                <tr>
+                  <td>Special Information</td>
+                  <td class="name">{{reservationIndividualDetails.SpecialInfo}}</td>
+                </tr>
+                <tr>
+                  <td>Insurance Provider Name</td>
+                  <td class="name">{{reservationIndividualDetails.InsureProviderName}}</td>
+                </tr>
+                <tr>
+                  <td>Insured Recipient Name</td>
+                  <td class="name">{{reservationIndividualDetails.InsureRecipientName}}</td>
+                </tr>
+                <tr>
+                  <td>Insurance Policy Number</td>
+                  <td class="name">{{reservationIndividualDetails.InsurePolicyNo}}</td>
+                </tr>
+                <tr>
+                  <td>Insurance Phone Number</td>
+                  <td class="name">{{reservationIndividualDetails.InsurePhoneNo}}</td>
+                </tr>
+                <tr>
+                  <td>Authorized Pickup Name 1</td>
+                  <td class="name">{{reservationIndividualDetails.AuthorizedPickupName1}}</td>
+                </tr>
+                <tr>
+                  <td>Authorized Pickup Phone 1</td>
+                  <td class="name">{{reservationIndividualDetails.AuthorizedPickupPhone1}}</td>
+                </tr>
+                <tr>
+                  <td>Authorized Pickup Name 2</td>
+                  <td class="name">{{reservationIndividualDetails.AuthorizedPickupName2}}</td>
+                </tr>
+                <tr>
+                  <td>Authorized Pickup Phone 2</td>
+                  <td class="name">{{reservationIndividualDetails.AuthorizedPickupPhone2}}</td>
+                </tr>
+                <tr>
+                  <td>Early Drop Off</td>
+                  <td class="name">{{reservationIndividualDetails.EarlyDropOff}}</td>
+                </tr>
+                <tr>
+                  <td>Late Pick-up</td>
+                  <td class="name">{{reservationIndividualDetails.LatePickup}}</td>
+                </tr>
+                <tr>
+                  <td>Media Release</td>
+                  <td class="name">{{reservationIndividualDetails.MediaRelease}}</td>
+                </tr>
+                <tr>
+                  <td>Emergency Medical Release</td>
+                  <td class="name">{{reservationIndividualDetails.EmergencyMedicalRelease}}</td>
+                </tr>
+                <tr>
+                  <td>Liability Argreement</td>
+                  <td class="name">{{reservationIndividualDetails.LiabilityAgreement}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      
+        <!-- Payment Info -->
+        <div class="table-responsive-sm">
+          <table class="table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th style="width:60%">Payment Information</th>
+                      <th style="width:40%">  </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>Total Participant</td>
+                    <td class="name">{{reservationHeader.NumberOfParticipant}}</td>
+                  </tr>
+                  <tr>
+                    <td>Price per Participant</td>
+                    <td class="name">${{programDetails.PricePerParticipant}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Amount</td>
+                    <td class="name">${{reservationHeader.Total}}</td>
+                  </tr>
+                  <tr >
+                    <td>Amount Due Today</td>
+                    <!-- Amount Due will be 25 for group program -->
+                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}</td>
+                    <!-- Amount Due will be the Total for Individual program -->
+                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+
+         <!-- Verify Payment Info -->
+         <div class="table-responsive-sm">
+          <table class="table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th style="width:60%">Verify Payment</th>
+                      <th style="width:40%">  </th>
+                  </tr>
+              </thead>
+          </table>
+        </div>
+        <payment (token)="dataChangedHandler($event)"></payment>
+
+      </div>
+      <!-- <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
         <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
       <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
         <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
-      </ng-container>
+      </ng-container> -->
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
         <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button"> Submit </button>  

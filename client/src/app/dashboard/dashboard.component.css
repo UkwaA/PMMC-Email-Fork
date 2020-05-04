@@ -6,17 +6,25 @@ h1 {
     color: #08b2b8; 
 }
 
+h4{
+    color: #08b2b8;
+}
+
+span.label{
+    font-weight: bold;
+}
+
 .row{
     padding-bottom: 20px;
 }
 
-.list-group[data-payment = "paid"]{
+.completed-layout{
     border-width: 5px;
     border-left-style: solid;
     border-left-color:  rgb(14, 161, 14);
 }
 
-.list-group[data-payment = "waiting"]{
+.waiting-layout{
     border-width: 5px;
     border-left-style: solid;
     border-left-color:  #ffc107;
@@ -41,6 +49,10 @@ h1 {
     background: #5cb85c;
 }
 
+.bg-c-blue {
+    background: blue;
+}
+
 .bg-c-yellow {
     background: linear-gradient(45deg,#FFB64D,#ffcb80);
 }
@@ -53,15 +65,47 @@ h1 {
     color: #5cb85c;
     background: white;
 }
+.bg-g-white button.link{
+    padding: 0;
+    color: #5cb85c;
+    background: none;
+    border: none;
+}
 
 .bg-p-white {
     color: #d9534f;
     background: white;
 }
+.bg-p-white button.link{
+    padding: 0;
+    color: #d9534f;
+    background: none;
+    border: none;
+}
+
 
 .bg-y-white {
     color: #FFB64D;
     background: white;
+}
+
+.bg-y-white button.link{
+    padding: 0;
+    color: #FFB64D;
+    background: none;
+    border: none;
+}
+
+.bg-b-white {
+    color: #007bff;
+    background: white;
+}
+
+.bg-b-white button.link{
+    padding: 0;
+    color: #007bff;
+    background: none;
+    border: none;
 }
 
 
@@ -73,6 +117,10 @@ h1 {
     margin-bottom: 10px;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+
+.card-body{
+    padding-bottom: 0;
 }
 
 .order-card i {

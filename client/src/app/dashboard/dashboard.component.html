@@ -5,56 +5,74 @@
         </div>
     </div> 
     <div class="row">
-        <div class="col-sm-12 col-md-4 col-xl-4">
+        <div class="col-sm-12">
+            <kendo-daterange class = "float-right p-3">
+                <label>
+                    <span class="label p-3">Start</span>
+                    <kendo-dateinput kendoDateRangeStartInput 
+                    [(value)]="range.start"
+                    (valueChange)="onChangeDate()"></kendo-dateinput>
+                </label>
+                <label>
+                    <span class="label p-3">End</span>
+                    <kendo-dateinput kendoDateRangeEndInput 
+                    [(value)]="range.end"
+                    (valueChange)="onChangeDate()"></kendo-dateinput>
+                </label>
+            </kendo-daterange>
+        </div>
+        <div class="col-sm-12 col-md-6 col-xl-3">
             <div class="card bg-c-green order-card h-100">
                 <div class="card-body">
                     <h6 class="m-b-20">Completed Reservations</h6>
-                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
-                    <!-- <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> -->
+                    <h2 class="text-right">{{completedRes}}</h2>
+                    <h5 class="text-right">Total: ${{completedTotal}}</h5>
                 </div>
                 <div class="card-footer bg-g-white">
-                    View Completed Reservations
+                    <button class="link" (click)="openReservationModal('Completed')" onfocus="blur()">View Completed Reservations</button>
                 </div>
             </div>
         </div>
         
-        <!-- <div class="col-sm-12 col-md-6 col-xl-3">
-            <div class="card bg-c-green order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Pending Reservations</h6>
-                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+        <div class="col-sm-12 col-md-6 col-xl-3">
+            <div class="card bg-c-blue order-card h-100">
+                <div class="card-body">
+                    <h6 class="m-b-20">Ongoing Reservations</h6>
+                    <h2 class="text-right">{{ongoingRes}}</h2>
+                    <h5 class="text-right">Total: ${{ongoingTotal}}</h5>
                 </div>
-                <div class="card-footer bg-g-white">
-                    View Pending Reservations
+                <div class="card-footer bg-b-white">
+                    <button class="link" (click)="openReservationModal('On Going')" onfocus="blur()">View Ongoing Reservations</button> 
                 </div>
             </div>
-        </div> -->
+        </div>
         
-        <div class="col-sm-12 col-md-4 col-xl-4">
+        <div class="col-sm-12 col-md-6 col-xl-3">
             <div class="card bg-c-yellow order-card h-100">
                 <div class="card-body">
-                    <h6 class="m-b-20">Pending Reservations</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>512</span></h2>
+                    <h6 class="m-b-20">Attended Reservations</h6>
+                    <h2 class="text-right">{{attendedRes}}</h2>
+                    <h5 class="text-right">Total: ${{attendedTotal}}</h5>
                 </div>
                 <div class="card-footer bg-y-white">
-                    View Pending Reservations
+                    <button class="link" (click)="openReservationModal('Attended')" onfocus="blur()">View Attended Reservations</button>
                 </div>
             </div>
         </div>
         
-        <div class="col-sm-12 col-md-4 col-xl-4">
+        <div class="col-sm-12 col-md-6 col-xl-3">
             <div class="card bg-c-pink order-card h-100">
                 <div class="card-body">
-                    <h6 class="m-b-20"> Canceled Reservation </h6>
-                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>121</span></h2>
-
+                    <h6 class="m-b-20"> Cancelled Reservations </h6>
+                    <h2 class="text-right">{{cancelledRes}}</h2>
+                    <h5 class="text-right">Total: ${{cancelledTotal}}</h5>
                 </div>
                 <div class="card-footer bg-p-white">
-                    View Canceled Reservation
+                    <button class="link" (click)="openReservationModal('Cancelled')" onfocus="blur()">View Cancelled Reservations</button>
                 </div>
             </div>
         </div>
+        
     </div>
     <!-- CHART USING NG2-CHARTS -->
     <!-- <div>
@@ -71,9 +89,9 @@
         </canvas>
     </div>
     
-    <br/>
+    <br/> -->
 
-    <div>
+    <!-- <div>
         <h2>PIE CHART EXAMPLE</h2>
         <canvas 
             baseChart 
@@ -88,7 +106,7 @@
     
     <h3 class = "text-muted"> Lastest Reservations </h3> -->
     <!-- SEARCH BAR -->
-    <div class="row filter">
+    <!-- <div class="row filter">
         <div class="col-lg-2 col-md-2 col-sm-3 p-0">
             <select class="form-control" style="font-weight: bold" id="programCat"
                 (change)="selectChangeHandler($event)">
@@ -101,9 +119,9 @@
         <div class="col-lg-2 col-md-2 col-sm-2">
             <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
         </div>
-    </div>
+    </div> -->
     <!-- TABLE -->
-    <div class="table-responsive-sm hide-with-small">
+    <!-- <div class="table-responsive-sm hide-with-small">
         <table #datatable class="table table-hover" style="width:100%">
             <thead>
                 <tr>
@@ -150,7 +168,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 
 <div *ngIf = "role == '1'" class="container">
@@ -160,79 +178,46 @@
         </div>
     </div> 
     <h3 class = "text-muted"> Recent reservations</h3>
-    <div class="row pb-5">
+    <div class="row pb-5" *ngFor="let res of customerRes">
         <div class="col-lg-12 mx-auto p-3">
             <!-- List group-->
-            <ul data-payment = "waiting" class="list-group shadow">
+            <ul [ngClass]="res.RemainingBalance == 0 ? 'completed-layout': 'waiting-layout'" class="list-group shadow">
                 <!-- list group item-->
                 <li class="list-group-item">
-                    <div class="row pt-3">
-                        <div class="col-lg-8">
-                            <h4> Change the Life of a Seal <sup class = "waiting"> Payment Not Completed </sup> </h4>
+                    <div class="row p-3">
+                        <div class="col-md-4">
+                            <h4> {{res.ProgramName}} </h4>
                         </div>
-                        <div class="col-lg-4">
-                            <button class="btn btn-outline-danger float-right mr-5" type="submit" onfocus="blur()">Cancel Reservation</button>
+                        <div class="col-md-5">
+                            <h4 *ngIf = "res.RemainingBalance == 0"><sup class = "completed"> Payment Completed </sup> </h4>
+                            <h4 *ngIf = "res.RemainingBalance != 0"><sup class = "waiting"> Payment Not Completed </sup></h4>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-outline-danger float-right" type="submit" onfocus="blur()">Cancel Reservation</button>
                         </div>
                     </div>
-                    <div class="table-responsive-sm hide-with-small">
+                    <div class="table-responsive-sm">
                         <table class="table table-borderless" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th style="width:23%"> Reservation Number </th>
-                                    <th style="width:18%"> Date </th>
-                                    <th style="width:18%"> Time </th>
+                                    <th style="width:10%"> #Res </th>
+                                    <th style="width:20%"> Date </th>
+                                    <th style="width:15%"> Time </th>
                                     <th style="width:15%"> Quantity </th>
-                                    <th style="width:26%"> Remaining Balance</th>
+                                    <th style="width:15%"> Total </th>
+                                    <th style="width:25%"> Remaining Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td> G2467 </td>
-                                    <td> April 20, 2020</td>
-                                    <td> 8:10 - 10:30</td>
-                                    <td> 10 </td>
-                                    <td> - $200  
-                                        <button mat-raised-button class="btn btn-warning ml-3" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                                    <td> {{res.ReservationPK}} </td>
+                                    <td> {{res.Date}}</td>
+                                    <td> {{res.Time}}</td>
+                                    <td> {{res.Quantity}} </td>
+                                    <td> {{res.Total}} </td>
+                                    <td> {{res.RemainingBalance}}  
+                                        <button mat-raised-button *ngIf = "res.RemainingBalance != 0" class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </li> <!-- End -->
-            </ul> <!-- End -->
-        </div>
-
-        <div class="col-lg-12 mx-auto">
-            <!-- List group-->
-            <ul data-payment = "paid" class="list-group shadow">
-                <!-- list group item-->
-                <li class="list-group-item">
-                    <div class="row pt-3">
-                        <div class="col-lg-8">
-                            <h4> Pinniped Pollution Project <sup class = "completed">Payment Completed </sup> </h4>
-                        </div>
-                        <div class="col-lg-4">
-                            <button class="btn btn-outline-danger float-right mr-5" type="submit" onfocus="blur()">Cancel Reservation</button>
-                        </div>
-                    </div>
-                    <div class="table-responsive-sm hide-with-small">
-                        <table class="table table-borderless" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th style="width:23%"> Reservation Number </th>
-                                    <th style="width:18%"> Date </th>
-                                    <th style="width:18%"> Time </th>
-                                    <th style="width:15%"> Quantity </th>
-                                    <th style="width:26%"> Remaining Balance</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> I1256 </td>
-                                    <td> June 22, 2020</td>
-                                    <td> 8:10 - 17:30</td>
-                                    <td> 1  </td>
-                                    <td> $0  </td>
                                 </tr>
                             </tbody>
                         </table>

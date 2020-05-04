@@ -41,8 +41,7 @@ button.link{
     background: none;
     border: none;
     color: #08b2b8;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
 }
 
 button.link:focus {

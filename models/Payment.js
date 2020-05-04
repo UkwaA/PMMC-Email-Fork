@@ -5,16 +5,30 @@ module.exports = db.sequelize.define(
   'payment',
   {
     PaymentPK: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+      type: Sequelize.TEXT,
+      primaryKey: true
     },
     ReservationPK: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      primaryKey: true
     },
     UserPK: {
+      type: Sequelize.INTEGER,
+      primaryKey: true
+    },
+    PaymentType: {
       type: Sequelize.INTEGER
-    }
+    },
+    Total: {
+      type: Sequelize.INTEGER
+    },
+    ChargeToken: {
+      type: Sequelize.TEXT
+    },
+    CreatedDate: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    },
   },
   {
     freezeTableName: true,
