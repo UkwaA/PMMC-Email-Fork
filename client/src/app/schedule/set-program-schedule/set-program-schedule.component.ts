@@ -239,6 +239,7 @@ export class SetProgramScheduleComponent {
         private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
 	ngOnInit(){ 		
+		console.log((new Date()).toISOString())
 		this.errorMessage = ''
 		this.SetProgramScheduleForm = this.fb.group({    
 			programName: [],
@@ -264,14 +265,24 @@ export class SetProgramScheduleComponent {
 					this.allScheduleSettings = res
 					if(this.allScheduleSettings.length > 0){
 						this.hasSchedule = true
+						var flag = false
+						var todayDate = (new Date()).toLocaleDateString()
 						this.allScheduleSettings.forEach(schedule => {
 								schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
 								schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
 								schedule.Start = new Date(schedule.Start)
 								schedule.End = new Date(schedule.End)
+								//Set default view to current schedule
+								if(schedule.tempStart <= todayDate && schedule.tempEnd >= todayDate){
+									this.currentScheduleSetting = schedule
+									schedule.IsSelected = true
+									flag = true
+								}
 						})									
-						this.currentScheduleSetting = this.allScheduleSettings[0]
-						this.allScheduleSettings[0].IsSelected = true
+						if(!flag){
+							this.currentScheduleSetting = this.allScheduleSettings[0]
+							this.allScheduleSettings[0].IsSelected = true
+						}						
 					}
 				}	
 			})
