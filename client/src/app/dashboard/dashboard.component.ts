@@ -148,8 +148,8 @@ export class DashboardComponent implements OnInit {
                       })
 
                      /*  only display the current reservation, not past reservations */
-                     this.newDate = new Date(details.Date)
-                      if (this.newDate >= this.today){
+                     //this.newDate = new Date(schedule[0].Start)
+                      if ((item.ReservationStatus == AppConstants.RESERVATION_STATUS_CODE.ON_GOING) || (item.ReservationStatus == AppConstants.RESERVATION_STATUS_CODE.ATTENDED)){
                         this.customerRes.push(details);
                       }
                   })

@@ -76,7 +76,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                     <td> {{reservation.Quantity}} </td>
                     <td> {{reservation.Total}} </td>
                     <td> {{reservation.RemainingBalance}} 
-                        <button mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                        <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
                     </td>
                 </tr>
             </tbody>
