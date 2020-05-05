@@ -23,6 +23,7 @@ import { AuthCustomerGuardService } from './auth-customer-guard.service'
 import { PaymentServices } from "./services/payment.services";
 import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
 import { EmailService } from './services/email.services'
+import { EmailDetailsComponent } from './email-details/email-details.component'
 import { CustomerService } from './services/customer.services'
 import { ProgramScheduleService } from './services/schedule.services'
 import { ReservationService } from './services/reservation.services';
@@ -34,7 +35,8 @@ import { BookingGroupProgramComponent } from './booking-group-program/booking-gr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatFormFieldModule, MatInputModule, MatListModule, MatSidenavModule } from '@angular/material';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ProgramManagementComponent } from './program-management/program-management.component'
+import { ProgramManagementComponent } from './program-management/program-management.component';
+import { EmailManagementComponent } from './email-management/email-management.component';
 import { ProgramDetailsComponent } from './program-details/program-details.component';
 import { UserManagementComponent } from './system-admin-dashboard/user-management/user-management.component';
 import { UserDetailsComponent } from './system-admin-dashboard/user-details/user-details.component';
@@ -121,6 +123,8 @@ const routes : Routes = [
     children: [
       {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
       {path: 'reservation-management', component: ReservationManagement, canActivate: [AuthGuardService]},
+      {path: 'email-management', component:EmailManagementComponent, canActivate: [AuthRoleGuardService]},
+      {path: 'email-details/:id/:mode', component: EmailDetailsComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
       {path: 'program-management', component: ProgramManagementComponent, canActivate: [AuthRoleGuardService]},
       {
@@ -189,6 +193,8 @@ const routes : Routes = [
     BookingGroupProgramComponent,
     ProgramManagementComponent,
     ProgramDetailsComponent,
+    EmailManagementComponent,
+    EmailDetailsComponent,
     UserManagementComponent,
     UserDetailsComponent, 
     IProgramComponent,

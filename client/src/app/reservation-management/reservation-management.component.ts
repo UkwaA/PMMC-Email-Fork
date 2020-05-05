@@ -25,12 +25,26 @@ export class ReservationManagement implements OnInit{
     allReservations = [];
     groupReservations = [];
     individualReservations = [];
+    ongoingReservations =[];
+    attendedReservations =[];
+    completedReservations= [];
+    cancelledReservations = [];
     searchText: string;
     temp =[];
     selectedValue = 0;
 
     // Dropdown Menu Option
-    programCategories: Array<Object> = [
+    programCategoriesAdmin: Array<Object> = [
+        { id: 0, name: "All Program" },
+        { id: 1, name: "Group Program" },
+        { id: 2, name: "Individual Program" },
+        { id: 3, name: "Ongoing Program" },
+        { id: 4, name: "Attended Program" },
+        { id: 5, name: "Completed Program" },
+        { id: 6, name: "Cancelled Program" }
+    ]
+
+    programCategoriesCustomer: Array<Object> = [
         { id: 0, name: "All Program" },
         { id: 1, name: "Group Program" },
         { id: 2, name: "Individual Program" }
@@ -49,6 +63,9 @@ export class ReservationManagement implements OnInit{
                 this.role = user.Role_FK;
                 this.UserPK = user.UserPK;
                 if (this.role == '1'){
+                    this.programCategoriesCustomer.forEach(e => {
+                        $("#programCat").append(new Option(e['name'], e['id']));
+                    });
                     this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser)=>{
                         resByUser.forEach((item)=>{
                             console.log(item);
@@ -90,6 +107,9 @@ export class ReservationManagement implements OnInit{
                     this.reservations = this.allReservations;
                 }
                 else{
+                    this.programCategoriesAdmin.forEach(e => {
+                        $("#programCat").append(new Option(e['name'], e['id']));
+                    });
                     /* Get all Reservation details */
                     this.reservationService.getAllReservation().subscribe((allRes)=>{
                         allRes.forEach((item) =>{
@@ -113,7 +133,7 @@ export class ReservationManagement implements OnInit{
                             this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
                                 reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
                             })
-                            switch(item.ReservationStatus){
+                            /* switch(item.ReservationStatus){
                                 case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
                                     reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
                                     break;
@@ -130,7 +150,7 @@ export class ReservationManagement implements OnInit{
                                     reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
                                     break;
                                 }
-                            }
+                            } */
 
                             reservation.Total = item.Total;
                             reservation.RemainingBalance = item.RemainingBalance;
@@ -139,6 +159,28 @@ export class ReservationManagement implements OnInit{
                                 reservation.ProgramPK = schedule[0].ProgramPK;
                                 this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
                                     reservation.ProgramName = program.Name;
+                                    switch(item.ReservationStatus){
+                                        case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                                            this.ongoingReservations.push(reservation);
+                                            break;
+                                        }
+                                        case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
+                                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                                            this.attendedReservations.push(reservation);
+                                            break;
+                                        }
+                                        case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
+                                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                                            this.completedReservations.push(reservation);
+                                            break;
+                                        }
+                                        case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
+                                            reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                                            this.cancelledReservations.push(reservation);
+                                            break;
+                                        }
+                                    }
                                     if (program.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM){
                                         this.groupReservations.push(reservation);
                                     }
@@ -160,9 +202,9 @@ export class ReservationManagement implements OnInit{
         )
 
         // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
+        /* this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
-        });
+        }); */
 
     }
     clearSearch() {
@@ -182,6 +224,18 @@ export class ReservationManagement implements OnInit{
                 break;
             case '2':
                 this.reservations = this.individualReservations;
+                break;
+            case '3':
+                this.reservations = this.ongoingReservations;
+                break;
+            case '4':
+                this.reservations = this.attendedReservations;
+                break;
+            case '5':
+                this.reservations = this.completedReservations;
+                break;
+            case '6':
+                this.reservations = this.cancelledReservations;
                 break;
        }
     }

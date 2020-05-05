@@ -4,6 +4,7 @@ import { ProgramServices } from '../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProgramScheduleService } from '../services/schedule.services';
 
 declare var $: any;
 
@@ -30,7 +31,7 @@ export class ProgramManagementComponent {
         { id: 2, name: "Individual Program" }
     ]
 
-    constructor(private programService: ProgramServices,
+    constructor(private programService: ProgramServices, private programScheduleServices: ProgramScheduleService,
                 public matDialog: MatDialog) { }
 
     ngOnInit() {
@@ -40,7 +41,7 @@ export class ProgramManagementComponent {
         });
 
         // Service call to get data from server
-        this.programService.getAllPrograms().then((result) =>{
+        this.programScheduleServices.getAllProgramsWithScheduleSettingsRequirements().subscribe((result) =>{
             this.programs = result;
             this.allPrograms = result
 

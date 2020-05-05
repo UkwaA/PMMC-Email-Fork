@@ -105,7 +105,6 @@ reservation.get("/get-all-reservation-details-for-view-schedule/:schedulepk/:pro
       returnInfo.result.forEach(item =>{
         reservationPKArr.push(item.ReservationPK)
       })
-      console.log(reservationPKArr)
       //Get all reservation details by ReservationPK
       switch(req.params.type){
         case "0": //group

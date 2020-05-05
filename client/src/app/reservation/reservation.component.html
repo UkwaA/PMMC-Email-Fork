@@ -43,7 +43,17 @@
             </div>
             <div>
               <div class="form-group font-weight-bold">
-                <label>Availability </label>
+                <div class="row">
+                  <div class="col-md-8">
+                    <label>Availability </label>
+                  </div>
+                  <div class="col-md-4" *ngIf="currentSession.ProgramPK != 0">
+                    <button class="available pb-1" *ngIf="!scheduleFull" disabled>
+                      Available</button>
+                    <button class="full pb-1" *ngIf="scheduleFull" disabled>
+                      Full</button>
+                  </div>
+                </div>                
                 <input type="number" class="form-control" formControlName="Availability" readonly>
               </div>
             </div>

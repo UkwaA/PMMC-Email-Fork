@@ -43,7 +43,7 @@ export class ScheduleManagementComponent {
         });
 
         // Service call to get data from server
-        this.programScheduleServices.getAllProgramsWithScheduleSettings().subscribe((result) =>{
+        this.programScheduleServices.getAllProgramsWithScheduleSettingsRequirements().subscribe((result) =>{
             this.programs = result;
             this.allPrograms = result
 
@@ -80,59 +80,31 @@ export class ScheduleManagementComponent {
     }
 
     //open Modal when switching Activate/Deactivate button
-    openModalSwitch(programPK: number, status: boolean){
-        this.isDisabled = status
+    setBlackoutDateforAllPrograms(){
         //Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose =true;
-        dialogConfig.id = "modal-component";
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "add-blackout-date-for-all-programs-modal-component";
         dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
+        dialogConfig.maxHeight = "600px";
         dialogConfig.width = "350px";
         dialogConfig.autoFocus = false;
-        if (this.isDisabled){
-            dialogConfig.data = {
-                title: "Disable Program",
-                description: "This program is not able to be viewed by customers. Are you sure to disable this program?",            
-                actionButtonText: "Confirm",   
-                numberOfButton: "2"         
+        dialogConfig.data = {
+            title: "Add blackout date for ALL program",
+            mode: "removeschedule",
+			description: "This action will add blackout date for ALL programs and affect ongoing reservations. "
+				+ "Customers will receive emails about this cancellation. Are you sure to continue?",
+            actionButtonText: "Yes",
+            numberOfButton: "2"            
             }
-        }
-        else {
-            dialogConfig.data = {
-                title: "Enable Program",
-                description: "This program is able to be viewed by customers. Are you sure to enable this program?",            
-                actionButtonText: "Confirm",   
-                numberOfButton: "2"         
-            }
-        }
-
-        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-        modalDialog.afterClosed().subscribe(result =>{
+        const addScheduleModalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
             if(result == "Yes"){
-                //deactivate or activate the program here
-                if (this.isDisabled){ 
-                    //disable program here
-                    this.programService.setProgramActiveStatus(programPK, false)
-                    .subscribe((res) =>{
-                        window.location.reload();
-
-                    })
-                }
-                else {
-                    //enable program here
-                    this.programService.setProgramActiveStatus(programPK, true)
-                    .subscribe((res) =>{
-                        console.log(res.message)
-                        window.location.reload();
-                    })
-                }
-                //switch the button
-                this.isDisabled = !this.isDisabled;
+				
             }
             else{
-                //otherwise, do nothing               
+                console.log("stop")                
             }
         })
     }
