@@ -296,7 +296,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
       //var eventEndDate = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)        
       var eventStartTime = this.startTime.toLocaleString('en-US', this.timeFormatOptions);
       var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
-      var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)
+      var dateEndRepeat = (new Date(this.endDate)).toISOString().slice(0,10)
       
       var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toISOString()
       var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toISOString()   
@@ -421,6 +421,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
 				//======= ADD NEW SESSION ===========
 				case "newsession":
+					debugger
 					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
 					this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
 						if(res.error){
@@ -445,7 +446,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 							this.errorMessage = res.error            
 						}
 						//if there is no error
-						else{
+						else{							
 							//updateSessionDetails return array of schedules, 
 							//then call UpdateScheduleinBulks to update records in schedule table
 							this.programScheduleServices.updateSchedulesInBulk(res).subscribe(result =>{

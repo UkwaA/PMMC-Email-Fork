@@ -97,12 +97,7 @@ schedule.get("/get-all-programs-with-schedule-settings-and-requirements", (req, 
             res.json(returnAllPrograms)
           })
         })
-      })
-
-      
-        
-      
-      
+      }) 
     }
   })
   .catch(err => {  //<---- Program.findAll
@@ -471,7 +466,7 @@ schedule.post("/update-session-details", (req, res) => {
                   tempStartDate = (schedule.Start).slice(0,10)                  
                   schedule.Start = (tempStartDate + "T" + startTime + ".000Z")
                   schedule.End = (tempStartDate + "T" + endTime + ".000Z")
-                })
+                })                
                 res.json(schedules)                                  
               }
             })
