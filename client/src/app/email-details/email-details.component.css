@@ -1,0 +1,17 @@
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 300px !important;
+    border-color: gray;
+}
+
+.form-group{
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 50px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: #08b2b8; 
+}

@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from 'rxjs'
 import { AppConstants } from '../constants'
+import { EmailData } from '../data/email-data'
 
 @Injectable(
   {providedIn: "root"}
@@ -9,6 +10,30 @@ import { AppConstants } from '../constants'
 export class EmailService {
   constructor(private http: HttpClient) {}
 
+  public getAllEmails(): Promise<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-all-emails').toPromise();
+  }
+
+  public getUserEmails(): Promise<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-user-emails').toPromise();
+  }
+
+  public getProgramEmails(): Promise<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-program-emails').toPromise();
+  }
+
+  public getPaymentEmails(): Promise<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-payment-emails').toPromise();
+  }
+
+  public getEmailByID(emailPK: number): Observable<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-email-by-id/' + emailPK);
+  }
+
+  public updateEmail(data: EmailData): Observable<any> {
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/update-email', data);
+  }
+  
   public sendContactEmail(data)  {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-contact-email', data);
   }
@@ -29,7 +54,7 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/create-new-user-confirmation-email/', body);
   }
 
-  public SendInitialBookingConfirmationEmail(body): Observable<any>{
+  public SendBookingRequestConfirmationEmail(body): Observable<any>{
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-initial-booking-confirmation-email/', body);
   }
 
@@ -53,6 +78,6 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-post-program-email/', body);
   }
   
-  
+
 
 }
