@@ -6,15 +6,16 @@
     </div> 
     <div class="row">
         <div class="col-sm-12">
-            <kendo-daterange class = "float-right p-3">
+            <h6> Pick the date range you'd like to view the reservation information: </h6>
+            <kendo-daterange class = "float-left">
                 <label>
-                    <span class="label p-3">Start</span>
+                    <span class="label p-3">From </span>
                     <kendo-dateinput kendoDateRangeStartInput 
                     [(value)]="range.start"
                     (valueChange)="onChangeDate()"></kendo-dateinput>
                 </label>
                 <label>
-                    <span class="label p-3">End</span>
+                    <span class="label p-3">To </span>
                     <kendo-dateinput kendoDateRangeEndInput 
                     [(value)]="range.end"
                     (valueChange)="onChangeDate()"></kendo-dateinput>
