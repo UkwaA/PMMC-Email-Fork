@@ -31,8 +31,8 @@ export class ProgramScheduleService{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-schedule-setting", scheduleSetting);
     }
 
-    public getAllProgramsWithScheduleSettings():Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-programs-with-schedule-settings");
+    public getAllProgramsWithScheduleSettingsRequirements():Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-programs-with-schedule-settings-and-requirements");
     }
 
     /*================================

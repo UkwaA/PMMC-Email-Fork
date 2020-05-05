@@ -31,9 +31,13 @@
             <tbody>
                 <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                     <td class="name"> {{program.Name}}
-                        <div class="row errorMessage ml-auto" *ngIf="!program.IsActive">
+                        <div class="row errorMessage ml-auto" *ngIf="!program.hasSchedule">
                             <mat-icon color="orange">error</mat-icon>
-                            <span>Inactive</span>
+                            <span>Missing Schedule (select "Schedule" to fix error)</span>
+                        </div>
+                        <div class="row errorMessage ml-auto" *ngIf="!program.hasRequirement">
+                            <mat-icon color="orange">error</mat-icon>
+                            <span>Missing Requirement (select "Edit" to fix error)</span>
                         </div>
                     </td>
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
@@ -47,14 +51,19 @@
                             class="btn btn-warning">
                             <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
-                        <button *ngIf="!program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
+                        <button [routerLink]="['/profile','program-details', program.ProgramPK, 'set-program-schedule']"
+                            class="btn btn-success">
+                            <mat-icon matListIcon>calendar_today</mat-icon> Schedule
+                       </button>
+                        
+                        <!-- <button *ngIf="!program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-success">
                             <mat-icon matListIcon> visibility </mat-icon> Enable
-                        </button>
-                        <button *ngIf="program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
+                        </button> -->
+                        <!-- <button *ngIf="program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-danger">
                             <mat-icon matListIcon> visibility_off </mat-icon> Disable
-                        </button>
+                        </button> -->
                     </td>    
                 </tr>
             </tbody>

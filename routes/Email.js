@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 const User = require('../models/User')
+const Email = require('../models/Email')
+const ReservationHeader = require('../models/ReservationHeader')
 
 const app = express.Router();
 app.use(cors());
@@ -19,6 +21,128 @@ let emailServer = {
   user: "AKIAZLUS724LTPCQBNLZ",
   pass: "BDoLIi+pcZX19ruFCRysMVNNxdxF2HbRou5fT785SM08"
 };
+
+/***********************
+  GET ALL EMAILS
+***********************/
+app.get('/get-all-emails', (req,res) => {
+  Email.findAll({})
+  .then(email => {
+    if (email) {
+      res.json(email);
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
+
+/***********************
+  GET USER EMAILS
+***********************/
+app.get('/get-user-emails', (req,res) => {
+  Email.findAll({
+    where:{
+      Type: 'User'
+    }
+  })
+  .then(email => {
+    if (email) {
+      res.json(email);
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
+
+/***********************
+  GET PROGRAM EMAILS
+***********************/
+app.get('/get-program-emails', (req,res) => {
+  Email.findAll({
+    where:{
+      Type: 'Program'
+    }
+  })
+  .then(email => {
+    if (email) {
+      res.json(email);
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
+
+/***********************
+  GET PAYMENT EMAILS
+***********************/
+app.get('/get-payment-emails', (req,res) => {
+  Email.findAll({
+    where:{
+      Type: 'Payment'
+    }
+  })
+  .then(email => {
+    if (email) {
+      res.json(email);
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
+
+/***********************
+  GET EMAIL BY ID
+***********************/
+app.get('/get-email-by-id/:id', (req,res) => {
+  Email.findOne({
+    where:{
+      EmailPK: req.params.id
+    }
+  })
+  .then(email => {
+    if (email) {
+      res.json(email);
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
+
+/***********************
+  UPDATE EMAIL
+***********************/
+app.post('/update-email', (req,res) => {
+  console.log(req.body)
+  const email = {
+    Subject: req.body.Subject,
+    Body: req.body.Body,
+    Type: req.body.Type,
+  }
+  Email.update(email, {
+    where:{
+      EmailPK: req.body.EmailPK
+    }
+  })
+  .then(email => {
+    if (email) {
+      res.json("Email successfully updated");
+      console.log(email);
+    }
+  })
+  .catch(err => {
+    res.send(err);
+  })
+})
 
 /***********************
   SEND CONTACT EMAIL
@@ -83,13 +207,20 @@ app.post('/send-reset-password-email', (req,res) => {
             userInfo.Username = user.Username
             userInfo.UserPK = user.UserPK
             userInfo.Email = user.Email
-            userInfo.Password = user.Password            
+            userInfo.Password = user.Password   
             
-            //send email to user            
-            sendResetPasswordEmail(userInfo, info => {
+            Email.findOne({
+              where:{ 
+                EmailPK: 1
+              }
+            }).then(email => {
+              //send email to user            
+              sendResetPasswordEmail(userInfo, email, info => {
                 console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
                 res.send(info);
               });
+            })     
+            
           }          
       })
       .catch(err => {
@@ -99,7 +230,7 @@ app.post('/send-reset-password-email', (req,res) => {
 });
 
 
-async function sendResetPasswordEmail(userInfo, callback) {
+async function sendResetPasswordEmail(userInfo, email, callback) {
     //Create new token
     let payload = {
       userID: userInfo.UserPK,
@@ -110,6 +241,10 @@ async function sendResetPasswordEmail(userInfo, callback) {
     let token = jwt.sign(payload, process.env.SECRET_KEY, {
       expiresIn: 3600 //expires in 1 hour
     })
+
+    email.Body = email.Body.replace("{Username}", `${userInfo.Username}`).replace("{token}", `${token}`)
+    console.log(email.Body)
+    
 
     //For Testing only
     //let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
@@ -136,12 +271,8 @@ async function sendResetPasswordEmail(userInfo, callback) {
     // otherwise, need to upgrade to Premium
     from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
-    subject: "PMMC - Reset Your Password", // Subject line
-    html: `<h1>Hi ${userInfo.Username},</h1>
-    <h4>Here's the link to reset your password: </h4>
-    <h4>http://localhost:4200/login/reset-password/${token}</h4>
-    <h4>The link will expire within 1 hour.</h4>
-    <h4>If you did not request this, please ignore this email and your password will remain unchanged.</h4>`
+    subject: email.Subject, // Subject line
+    html: email.Body
     };
 
     // send mail with defined transport object
@@ -326,7 +457,7 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
 /***********************************************************************
   PROGRAM BOOKED - SEND EMAIL CONFIRMATION FOR PROGRAM REQUESTED
 ***********************************************************************/
-app.post('/send-initial-booking-confirmation-email', (req,res) => {
+app.post('/send-booking-request-confirmation-email', (req,res) => {
   User.findOne({
     where: {          
       UserPK : req.body.UserPK
@@ -340,12 +471,21 @@ app.post('/send-initial-booking-confirmation-email', (req,res) => {
         let userInfo = req.body
         userInfo.UserPK = user.UserPK
         userInfo.Email = user.Email
+
+        Email.findOne({
+          where: {emailPK: 2}
+        }).then(email => {
+          if (email){
+            SendBookingRequestConfirmationEmail(userInfo, email, info => {
+              console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+              res.send(info);
+            });
+          }
+          else {
+            res.json({ error: 'Email not found' })
+          }
+        })        
         
-        //send email to user            
-        SendInitialBookingConfirmationEmail(userInfo, info => {
-            console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-            res.send(info);
-          });
       }          
   })
   .catch(err => {
@@ -353,7 +493,7 @@ app.post('/send-initial-booking-confirmation-email', (req,res) => {
   })
 });
 
-async function SendInitialBookingConfirmationEmail(userInfo, callback){
+async function SendBookingRequestConfirmationEmail(userInfo, email, callback){
 let transporter = nodemailer.createTransport({
   host: emailServer.host,
   port: emailServer.port,
@@ -385,15 +525,8 @@ let token = jwt.sign(payload, process.env.SECRET_KEY, {
 let mailOptions = {
   from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
   to: "uakkum@uci.edu", // need to put userInfo.Email
-  subject: "New PMMC Account Confirmation", // Subject line
-  html:
-  `<i>Thank you for requesting a program with Pacific Marine Mammal Center. 
-  All education program proceeds help support our seal and sea lion patients!</br>
-  Your program inquiry is being reviewed and should be confirmed shortly. If not, 
-  we will work hard to find an alternative date/time that works with your schedule.
-  </br></br>
-  We look forward to seeing you soon!
-  </i>`
+  subject: email.Subject, // Subject line
+  html: email.Body
   };
 
 let info = await transporter.sendMail(mailOptions);
@@ -405,13 +538,19 @@ callback(info);
 ***********************/
 app.post('/send-registration-confirmation-email', (req, res) => {
   let user = req.body;
-  sendRegistrationConfirmationEmail(user, info => {
+  Email.findOne({ 
+    where:{
+      emailPK: 0
+    }
+  }).then(email => {
+  sendRegistrationConfirmationEmail(email, info => {
     console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
     res.send(info);
   });
+})
 });
 
-async function sendRegistrationConfirmationEmail(user, callback) {
+async function sendRegistrationConfirmationEmail(email, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
@@ -430,15 +569,8 @@ async function sendRegistrationConfirmationEmail(user, callback) {
       // otherwise, need to upgrade to Premium
     from: emailServer.sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
-    subject: "PMMC Registration Confirmation", // Subject line
-    html: `
-    <h2>Hi,</h2>
-    <h4>Thank you for registering a new account with Pacific Marine Mammal Center. 
-    This account will give you the opportunity to book programs, view/modify reservations, 
-    save payment information for later use and much more. If you have any questions please do not 
-    hesitate to contact us.</h4>
-    <h4> We look forward to seeing you in the future. </h4>
-    `
+    subject: email.Subject, // Subject line
+    html: email.Body
   };
 
   // send mail with defined transport object
@@ -451,10 +583,17 @@ async function sendRegistrationConfirmationEmail(user, callback) {
   PROGRAM BOOKING CONFIRMED
 ***********************/
 app.post('/send-program-confirmation-email', (req, res) => {
-  let user = req.body;
-  sendProgramConfirmationEmail(user, info => {
-    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-    res.send(info);
+  User.findOne({
+    where: {
+      UserPK: req.body.UserPK
+    }
+  }).then( user => {
+    if (user){
+      sendProgramConfirmationEmail(user, info => {
+        console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+        res.send(info);
+      })
+  }
   });
 });
 
@@ -500,7 +639,6 @@ async function sendProgramConfirmationEmail(user, callback) {
   PROGRAM/PAYMENT REMINDER
 ***********************/
 app.post('/send-program-reminder-email', (req, res) => {
-  let user = req.body;
   sendProgramReminderEmail(user, info => {
     console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
     res.send(info);
@@ -548,7 +686,6 @@ async function sendProgramReminderEmail(user, callback) {
   PAYMENT CONFIRMATION
 ***********************/
 app.post('/send-payment-confirmation-email', (req, res) => {
-  let user = req.body;
   sendPaymentConfirmationEmail(user, info => {
     console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
     res.send(info);
@@ -594,7 +731,6 @@ async function sendPaymentConfirmationEmail(user, callback) {
   POST-PROGRAM EMAIL
 ***********************/
 app.post('/send-post-program-email', (req, res) => {
-  let user = req.body;
   sendPostProgramEmail(user, info => {
     console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
     res.send(info);

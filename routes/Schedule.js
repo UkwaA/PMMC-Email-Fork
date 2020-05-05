@@ -4,6 +4,8 @@ const schedule = express.Router();
 const bodyParser = require("body-parser");
 
 const Program = require("../models/Program");
+const IndividualProgramRequirement = require("../models/IndividualRequirement");
+const GroupProgramRequirement = require("../models/GroupRequirement");
 const Schedule = require("../models/Schedule");
 const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
@@ -16,10 +18,9 @@ schedule.use(bodyParser.json());
 schedule.use(cors());
 
 /*************************************************************
-   GET ALL PROGRAM SCHEDULE SETTING FOR SCHEDULE MANAGEMENT
+   GET ALL PROGRAM SCHEDULE SETTING AND REQUIREMENTS FOR PROGRAM MANAGEMENT
  ************************************************************/
-schedule.get("/get-all-programs-with-schedule-settings", (req, res) => {  
-  let allProgramSchedules = []
+schedule.get("/get-all-programs-with-schedule-settings-and-requirements", (req, res) => {    
   //Get a list of all active programs
   Program.findAll({
     where:{
@@ -28,44 +29,80 @@ schedule.get("/get-all-programs-with-schedule-settings", (req, res) => {
   })
   .then(allPrograms =>{ //<---- Program.findAll    
     if(allPrograms.length > 0){
-      let tempAllPrograms = []
-      //Get the list of all active schedule setting
+      let returnAllPrograms = []
+      programPKArr = []
+      allPrograms.forEach(program => {
+        let tempProgram = {
+          ProgramPK: program.ProgramPK,
+          Name: program.Name,
+          Description: program.Description,
+          DepositAmount: program.DepositAmount,
+          PricePerParticipant: program.PricePerParticipant,
+          MaximumParticipant: program.MaximumParticipant,
+          ImgData: program.ImgData,
+          ProgramType: program.ProgramType,
+          CreatedDate: program.CreatedDate,
+          CreatedBy: program.CreatedBy,
+          IsActive: program.IsActive,
+          hasSchedule: false,
+          hasRequirement: false
+        }
+        
+        returnAllPrograms.push(tempProgram)
+        programPKArr.push(program.ProgramPK)
+      })
+      //1. Get all schedulesetting associated with existing programPK
       ScheduleSetting.findAll({
         where:{
+          ProgramPK: {[Op.in]: programPKArr},
           IsActive: true
         }
       })
-      .then((allScheduleSettings) =>{ //<---- ScheduleSetting.findAll
-                  
-          allPrograms.forEach(program => {
-            let tempProgram = {
-              ProgramPK: program.ProgramPK,
-              Name: program.Name,
-              Description: program.Description,
-              DepositAmount: program.DepositAmount,
-              PricePerParticipant: program.PricePerParticipant,
-              MaximumParticipant: program.MaximumParticipant,
-              ImgData: program.ImgData,
-              ProgramType: program.ProgramType,
-              CreatedDate: program.CreatedDate,
-              CreatedBy: program.CreatedBy,
-              IsActive: program.IsActive,
-              hasSchedule: false
+      .then(scheduleSetting =>{ //<---- ScheduleSetting.findAll    
+        //2.Get all Group requirement associated with existing programPK
+        GroupProgramRequirement.findAll({
+          where:{
+            GroupProgramPK: {[Op.in]: programPKArr},
+          }
+        })
+        .then(groupRequirement =>{//<---- GroupProgramRequirement.findAll 
+          //3.Get all Individual requirement associated with existing programPK
+          IndividualProgramRequirement.findAll({
+            where:{
+              IndividualProgramPK: {[Op.in]: programPKArr},
             }
-            if(allScheduleSettings){
-              var result = allScheduleSettings.filter(x => x.ProgramPK == program.ProgramPK);
-            }
-            if(result.length > 0){
-              tempProgram.hasSchedule = true
-            }
-            tempAllPrograms.push(tempProgram)
           })
-          res.json(tempAllPrograms)
-        
+          .then(individualRequirement =>{//<---- IndividualProgramRequirement.findAll  
+            //check each program and set hasSchedule and hasRequirement
+            returnAllPrograms.forEach(program=>{
+              //check if the program has schedulesetting
+              if(scheduleSetting.length > 0){
+                var schedule = scheduleSetting.filter(x => x.ProgramPK === program.ProgramPK);
+                if(schedule.length > 0){
+                  program.hasSchedule = true
+                }
+              }
+              //check if program has group/individual requirement
+              var tempRequirement = []
+              if(program.ProgramType === 0 && groupRequirement.length > 0){                
+                tempRequirement = groupRequirement.filter(x => x.GroupProgramPK === program.ProgramPK);
+              }
+              else if(program.ProgramType === 1 && individualRequirement.length > 0){
+                tempRequirement = individualRequirement.filter(x => x.IndividualProgramPK === program.ProgramPK);
+              }              
+              if(tempRequirement.length > 0){
+                  program.hasRequirement = true                
+              }
+            })
+            res.json(returnAllPrograms)
+          })
+        })
       })
-      .catch(err => {  //<---- ScheduleSetting.findAll
-        res.send("errorExpressErr: " + err);
-      });
+
+      
+        
+      
+      
     }
   })
   .catch(err => {  //<---- Program.findAll
@@ -720,8 +757,8 @@ schedule.get("/get-schedule-by-id-start-end/:session/:id/:start/:end",(req,res) 
       SessionDetailsPK: req.params.session,
       ProgramPK: req.params.id,
       Start: req.params.start,
-      End: req.params.end,
-      IsActive: true
+      End: req.params.end
+      //IsActive: true
     }
   })
   .then((schedule) =>{
