@@ -34,7 +34,7 @@ export class ReservationManagement implements OnInit{
     selectedValue = 0;
 
     // Dropdown Menu Option
-    programCategories: Array<Object> = [
+    programCategoriesAdmin: Array<Object> = [
         { id: 0, name: "All Program" },
         { id: 1, name: "Group Program" },
         { id: 2, name: "Individual Program" },
@@ -42,6 +42,12 @@ export class ReservationManagement implements OnInit{
         { id: 4, name: "Attended Program" },
         { id: 5, name: "Completed Program" },
         { id: 6, name: "Cancelled Program" }
+    ]
+
+    programCategoriesCustomer: Array<Object> = [
+        { id: 0, name: "All Program" },
+        { id: 1, name: "Group Program" },
+        { id: 2, name: "Individual Program" }
     ]
 
     constructor(private auth: AuthenticationService,
@@ -57,6 +63,9 @@ export class ReservationManagement implements OnInit{
                 this.role = user.Role_FK;
                 this.UserPK = user.UserPK;
                 if (this.role == '1'){
+                    this.programCategoriesCustomer.forEach(e => {
+                        $("#programCat").append(new Option(e['name'], e['id']));
+                    });
                     this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser)=>{
                         resByUser.forEach((item)=>{
                             console.log(item);
@@ -98,6 +107,9 @@ export class ReservationManagement implements OnInit{
                     this.reservations = this.allReservations;
                 }
                 else{
+                    this.programCategoriesAdmin.forEach(e => {
+                        $("#programCat").append(new Option(e['name'], e['id']));
+                    });
                     /* Get all Reservation details */
                     this.reservationService.getAllReservation().subscribe((allRes)=>{
                         allRes.forEach((item) =>{
@@ -190,9 +202,9 @@ export class ReservationManagement implements OnInit{
         )
 
         // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
+        /* this.programCategories.forEach(e => {
             $("#programCat").append(new Option(e['name'], e['id']));
-        });
+        }); */
 
     }
     clearSearch() {
