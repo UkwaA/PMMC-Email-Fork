@@ -606,6 +606,7 @@
                   <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
                     <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
                     <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
+                    <div *ngIf="g.InsurePhoneNo.errors.minlength">Please enter a valid phone number</div>
                     <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
                   </div>
                 </div>
@@ -638,6 +639,7 @@
                   <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
                     <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
                     <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.minLength">Please enter a valid phone number</div>
                   </div>
                 </div>
               </div>

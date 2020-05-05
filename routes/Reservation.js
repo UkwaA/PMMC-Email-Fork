@@ -192,6 +192,7 @@ reservation.post("/add-individual-reservation-details", (req, res) => {
       UPDATE REMAINING BALANCE    
  ******************************************/
 reservation.put("/update-balance/:id", (req, res) => {
+  var balance = req.body.amount
   ReservationHeader.findOne({
     where :{
       ReservationPK: req.params.id 
@@ -200,7 +201,7 @@ reservation.put("/update-balance/:id", (req, res) => {
     .then((result) => {
       if(result){
         result.update({
-          RemainingBalance: req.body.amount
+          RemainingBalance: balance
         })
         .then(result =>{
           if (result) {

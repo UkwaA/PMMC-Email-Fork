@@ -1,3 +1,4 @@
+import { map, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProgramServices } from "../services/program.services";
@@ -251,10 +252,10 @@ export class ReservationComponent implements OnInit {
               SpecialInfo: [''],
               InsureProviderName: ['', [Validators.required, Validators.minLength(3)]],
               InsureRecipientName: ['', [Validators.required, Validators.minLength(3)]],
-              InsurePolicyNo: ['',[Validators.required, Validators.minLength(5)]],
+              InsurePolicyNo: ['',[Validators.required, Validators.minLength(5),Validators.minLength(10)]],
               InsurePhoneNo: ['',[Validators.required, Validators.maxLength(10)]],
               AuthorizedPickupName1: ['', [Validators.required, Validators.minLength(3)]],
-              AuthorizedPickupPhone1: ['',[Validators.required, Validators.maxLength(10)]],
+              AuthorizedPickupPhone1: ['',[Validators.required, Validators.maxLength(10),Validators.minLength(10)]],
               AuthorizedPickupName2: ['', []],
               AuthorizedPickupPhone2: ['',[]],
               EarlyDropOff: [''],
@@ -567,11 +568,7 @@ export class ReservationComponent implements OnInit {
       LoginPromptModal,
       AppConstants.LOGIN_DIALOG_CONFIG
     );
-    loginModal.afterClosed().subscribe((result) => {
-      if (result == "Yes") {
-        console.log("Login Modal");
-      }
-    });
+    loginModal.afterClosed();
   }
 
   /**************************************************************************************************************************/
@@ -692,49 +689,47 @@ export class ReservationComponent implements OnInit {
   this.paymentObj.token = token;
 } 
 
- submitReservation() {
-   this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((result) => {
-   
+submitReservation() {
+
+  this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((resHeaderPK) => {
+  if(resHeaderPK){
     switch(this.ProgramType){
       case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
         // Update the Amount Due when User checkout
         this.paymentObj.amount = this.programDetails.DepositAmount;
         this.paymentObj.description = this.auth.getUserDetails().Username;      
         this.paymentObj.email = this.auth.getUserDetails().Email;
-
+ 
         // Charge User
-        this.paymentServices.processToken(this.paymentObj).subscribe((res) => {
-          this.paymentData.PaymentPK = this.paymentObj.token["id"];
-          this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
-          this.paymentData.ReservationPK = result;        // ReservationPK
-          this.paymentData.Total = res.amount;
-          this.paymentData.ChargeToken = res.id;
-          this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
-
-          // Create PaymenData
-          this.paymentServices.createPaymentData(this.paymentData)
-          .subscribe((res) => {
-            console.log(res);
-          })
-
-          // Update remaining balance
-          this.resServices.updateRemainingBalance(this.reservationHeader.SchedulePK,this.reservationHeader.RemainingBalance - (res.amount /100))
-          .subscribe((res) => {
-            console.log(res);
-          });
+        this.paymentServices.processToken(this.paymentObj).subscribe((chargeResult) => {
+          if(chargeResult) {
+            this.paymentData.PaymentPK = this.paymentObj.token["id"];
+            this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+            this.paymentData.ReservationPK = resHeaderPK;        // ReservationPK
+            this.paymentData.Total = chargeResult.amount;
+            this.paymentData.ChargeToken = chargeResult.id;
+            this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
+   
+            // Create PaymenData
+            this.paymentServices.createPaymentData(this.paymentData).subscribe((paymentInfo) => {
+              console.log(paymentInfo);
+            });
+   
+            // Update reservation remaining balance
+            this.resServices.updateRemainingBalance(resHeaderPK,this.reservationHeader.RemainingBalance - (chargeResult.amount /100)).subscribe((info) => {
+              console.log(info);
+            });;
+          }
         })
-
+ 
         // Update Schedule CurrentNumberParticipant
-        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, this.reservationHeader.NumberOfParticipant)
-        .subscribe((res) => {
-          console.log("Update NumberParticipant " + res);
-        })
-
+        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, this.reservationHeader.NumberOfParticipant);
         
         // Insert Reservation Details
-        this.reservationGroupDetails.ReservationPK = result;
-        this.resServices.addGroupReservationDetails(this.reservationGroupDetails).subscribe((res) => {
-          if(res) {
+        this.reservationGroupDetails.ReservationPK = resHeaderPK;
+        this.resServices.addGroupReservationDetails(this.reservationGroupDetails)
+        .subscribe((resGroupDetails) => {
+          if(resGroupDetails) {
             const dialogConfig = new MatDialogConfig();
             // The user can't close the dialog by clicking outside its body
             dialogConfig.disableClose = true;
@@ -748,7 +743,7 @@ export class ReservationComponent implements OnInit {
               actionButtonText: "Ok",
               numberOfButton: "1"
             }
-
+ 
             const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
             modalDialog.afterClosed().subscribe(result => {
               if (result == "Yes") {
@@ -765,33 +760,29 @@ export class ReservationComponent implements OnInit {
         this.paymentObj.amount = this.programDetails.PricePerParticipant;
         this.paymentObj.description = this.auth.getUserDetails().Username;      
         this.paymentObj.email = this.auth.getUserDetails().Email;
-
+ 
         // Charge User
-        this.paymentServices.processToken(this.paymentObj).subscribe((res) => {
+        this.paymentServices.processToken(this.paymentObj)
+        .subscribe((res) => {
           this.paymentData.PaymentPK = this.paymentObj.token["id"];
           this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
-          this.paymentData.ReservationPK = result;        // ReservationPK
+          this.paymentData.ReservationPK = resHeaderPK;        // ReservationPK
           this.paymentData.Total = res.amount;
           this.paymentData.ChargeToken = res.id;
           this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
           
           // Create PaymenData
-          this.paymentServices.createPaymentData(this.paymentData).subscribe((res) => {
-            console.log(res);
-          })
-
-          // Update remaining balance
-          this.resServices.updateRemainingBalance(this.reservationHeader.SchedulePK, 0);
+          this.paymentServices.createPaymentData(this.paymentData);
+ 
+          // Update reservation remaining balance
+          this.resServices.updateRemainingBalance(resHeaderPK, 0);
         })
-
+ 
         // Update Schedule CurrentNumberParticipant
-        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, 1)
-        .subscribe((res) => {
-          console.log("Update NumberParticipant " + res);
-        })
-        
+        this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, 1);
+              
         // Insert Reservation Details
-        this.reservationIndividualDetails.ReservationPK = result;
+        this.reservationIndividualDetails.ReservationPK = resHeaderPK;
         this.resServices.addIndividualReservationDetails(this.reservationIndividualDetails).subscribe((res) => {
           if(res) {
             const dialogConfig = new MatDialogConfig();
@@ -807,7 +798,7 @@ export class ReservationComponent implements OnInit {
               actionButtonText: "Ok",
               numberOfButton: "1"
             }
-
+ 
             const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
             modalDialog.afterClosed().subscribe(result => {
               if (result == "Yes") {
@@ -819,6 +810,8 @@ export class ReservationComponent implements OnInit {
         });
         break;
     }
-  });
   }
+   
+ });
+ }
 }
