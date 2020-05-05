@@ -72,6 +72,8 @@ export class ReservationComponent implements OnInit {
 
   paymentData  = new Payment();
 
+  //Schedule Availability Status
+  scheduleFull = false
 
   // Schedule View Variables
   public selectedDate: Date = new Date();
@@ -502,7 +504,8 @@ export class ReservationComponent implements OnInit {
             .concat(" - ", end.toLocaleString("en-US", this.options));
 
           this.availability = result.MaximumParticipant - result.CurrentNumberParticipant;
-
+          this.scheduleFull = result.IsFull
+          
           this.quantityForm
             .get("CustomerSelectDate")
             .setValue(this.customerSelectDate);
@@ -525,7 +528,7 @@ export class ReservationComponent implements OnInit {
           );
 
           this.availability = e.event.dataItem.MaximumParticipant;
-
+          this.scheduleFull = false
           this.quantityForm
             .get("CustomerSelectDate")
             .setValue(this.customerSelectDate);
