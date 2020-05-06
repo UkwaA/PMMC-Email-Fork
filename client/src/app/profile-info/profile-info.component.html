@@ -1,17 +1,16 @@
-<h1> Profile Information Page </h1>
-<hr>
 <div class="container bootstrap snippet">
+    <h1> Profile Information </h1>
     <div class="row">
-  		<div class="col-sm-3 col-md-5"><!--left col-->
+  		<!-- <div class="col-sm-3 col-md-5">
             <div class="text-center">
                 <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                 <h6>Upload a different photo...</h6>
                 <input type="file" class="text-center center-block file-upload">
             </div>
             <br>
-        </div><!--/col-3-->
-    	<div class="col-sm-9 col-md-7">
-            <section class="readonly">
+        </div> -->
+    	<div class="col-sm-12 col-md-12">
+            <section class="readonly field">
                 <button *ngIf="isDisabled" class="btn btn-sm btn-warning" type="submit" (click)="viewOrEditMode()">
                     <mat-icon matListIcon>edit</mat-icon>Edit
                 </button>
@@ -19,95 +18,79 @@
                     <mat-icon matListIcon>edit</mat-icon>Editing...
                 </button>
             </section>
-            <hr>
-                <form [formGroup]="customerInfoForm" (ngSubmit)="openModal()">
-                    <fieldset [disabled]="isDisabled">
-                        <div class="col-xs-6">
+            <form [formGroup]="customerInfoForm" (ngSubmit)="openModal()">
+                <fieldset [disabled]="isDisabled">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 field">
                             <label><h4>First name</h4></label>
                             <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName" 
                             [ngClass]="{'is-invalid': submitted && f.FirstName.errors }">
                             <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
                                 <div *ngIf="f.FirstName.errors.required">First Name is required</div>
-                              </div>
+                                </div>
                         </div>
-                        <br/>
-                        
-                        <div class="col-xs-6">
-                        <label><h4>Last name</h4></label>
+                        <div class="col-md-6 col-sm-6 field">
+                            <label><h4>Last name</h4></label>
                             <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName" 
                             [ngClass]="{'is-invalid': submitted && f.LastName.errors }">
                             <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
                                 <div *ngIf="f.LastName.errors.required">Last Name is required</div>
-                              </div>
+                            </div>
                         </div>
-                        <br/>
-            
-                        <div class="col-xs-6">
+                        <div class="col-md-8 col-sm-8 field">
+                            <label><h4>Address</h4></label>
+                            <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" 
+                            [ngClass]="{'is-invalid': submitted && f.Address.errors }" >
+                            <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                                <div *ngIf="f.Address.errors.required">Street Address is required</div>
+                                </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 field">
                             <label><h4>Phone Number</h4></label>
                             <input type="text" pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" 
                             [ngClass]="{'is-invalid': submitted && f.PhoneNo.errors }" >
                             <div *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
                                 <div *ngIf="f.PhoneNo.errors.required">Phone No is required</div>
                                 <div *ngIf="f.PhoneNo.errors.pattern"> Please enter a valid Phone Number (10 digits)</div>
-                              </div>
+                                </div>
                         </div>
-                        <br/>
-            
-                        <div class="col-xs-6">
-                            <label><h4>Address</h4></label>
-                            <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" 
-                            [ngClass]="{'is-invalid': submitted && f.Address.errors }" >
-                            <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
-                                <div *ngIf="f.Address.errors.required">Street Address is required</div>
-                              </div>
-                        </div>
-                        <br/>
-
-                        <div class="col-xs-6">
+                        <div class="col-md-4 col-sm-4 field">
                             <label><h4>City</h4></label>
                             <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" 
                             [ngClass]="{'is-invalid': submitted && f.City.errors }" >
                             <div *ngIf="submitted && f.City.errors" class="invalid-feedback">
                                 <div *ngIf="f.City.errors.required">City is required</div>
-                              </div>
+                                </div>
                         </div>
-                        <br/>
-
-                        <div class="col-xs-6">
+                        <div class="col-md-4 col-sm-4 field">
                             <label><h4>State</h4></label>
                             <input type="text" pattern="[a-zA-Z]{2}" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State" 
                             [ngClass]="{'is-invalid': submitted && f.State.errors }">
                             <div *ngIf="submitted && f.State.errors" class="invalid-feedback">
                                 <div *ngIf="f.State.errors.required">State is required</div>
                                 <div *ngIf="f.State.errors.pattern"> Please enter a valid State</div>
-                              </div>
+                                </div>
                         </div>
-                        <br/>
-
-                        <div class="col-xs-6">
+                        <div class="col-md-4 col-sm-4 field">
                             <label><h4>Zipcode</h4></label>
                             <input type="text" pattern="[0-9]{5}" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode"
                             [ngClass]="{'is-invalid': submitted && f.Zipcode.errors }">
                             <div *ngIf="submitted && f.Zipcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.Zipcode.errors.required">Zipcode is required</div>
                                 <div *ngIf="f.Zipcode.errors.pattern"> Please enter a valid Zipcode (5 digits)</div>
-                              </div>
+                                </div>
                         </div>
-                        <br/>
-
-                        <div>
-                            <section class="options-section">
-                                <mat-checkbox class="options-margin" formControlName="Subscribe"
-                                [(ngModel)]="subscribeChecked">Subscribe to Email</mat-checkbox>
-                            </section>
-                        </div>
-                        <br>
-                        <div class="col-xs-12 input-group form-group ">                            
-                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign" onfocus="blur()"></i>Update Personal Info</button>
-                        </div>
-                        <br/>
-                    </fieldset>
-              	</form>
-              <hr>
+                    </div>
+                    <div>
+                        <section class="options-section field">
+                            <mat-checkbox class="options-margin" formControlName="Subscribe"
+                            [(ngModel)]="subscribeChecked">Subscribe to Email</mat-checkbox>
+                        </section>
+                    </div>
+                    <div class="col-md-12 input-group form-group field">                            
+                        <button class="btn btn-lg btn-info" type="submit"><i class="glyphicon glyphicon-ok-sign" onfocus="blur()"></i>Update Personal Info</button>
+                    </div>
+                </fieldset>
+            </form>
         </div><!--/col-9-->
     </div><!--/row-->
