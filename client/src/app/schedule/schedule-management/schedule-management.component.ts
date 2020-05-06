@@ -14,7 +14,8 @@ declare var $: any;
 })
 
 export class ScheduleManagementComponent {
-    //Define variables for program info
+    // Define variables for program info
+    p: number;
     programs : ProgramData[];
     allPrograms : ProgramData[];
     individualProgram: ProgramData[] = [];

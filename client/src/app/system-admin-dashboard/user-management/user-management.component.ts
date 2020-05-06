@@ -12,13 +12,14 @@ declare var $: any;
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent {
-  listOfUsers: UserData[];
-  userRoles:string[]
-  searchText: string
-  currentUserID: number
-  allUsers: UserData[] = []
-  activeUsers: UserData[] = []
-  inactiveUsers: UserData[] = []
+    p: number;
+    listOfUsers: UserData[];
+    userRoles:string[]
+    searchText: string
+    currentUserID: number
+    allUsers: UserData[] = []
+    activeUsers: UserData[] = []
+    inactiveUsers: UserData[] = []
   IsActive: boolean; //temporary variabe to hold the value for deactivate/activate button of user account
     // Dropdown Meny Option
     userStatus: Array<Object> = [

@@ -8,15 +8,17 @@ import { ProgramScheduleService } from '../services/schedule.services';
 import { CustomerService } from '../services/customer.services';
 import { AppConstants } from '../constants';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { NumericTextBoxComponent } from '@progress/kendo-angular-inputs';
 
+declare var $: any;
 @Component({
   templateUrl: './reservation-management.component.html',
   styleUrls: ['./reservation-management.component.css']
 })
 
 export class ReservationManagementComponent implements OnInit {
-  @ViewChild('programCat', { static: false }) programCat;
-
+  // @ViewChild('programCat', { static: false }) programCat;
+  p: number;
   role: string;
   UserPK: number;
   reservations = [];
@@ -62,8 +64,11 @@ export class ReservationManagementComponent implements OnInit {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
         if (this.role === '1') {
-          this.programCategoriesCustomer.forEach((e) => {
-           this.programCat.appendChild(new Option(e['name'], e['id']));
+          /* this.programCategoriesCustomer.forEach((e) => {
+            this.programCat.appendChild(new Option(e['name'], e['id']));
+          }); */
+          this.programCategoriesCustomer.forEach(e => {
+            $('programCat').append(new Option(e['name'], e['id']));
           });
           this.reservationService
             .getAllReservationByUserPK(user.UserPK)
@@ -116,9 +121,12 @@ export class ReservationManagementComponent implements OnInit {
             });
           this.reservations = this.allReservations;
         } else {
-          this.programCategoriesAdmin.forEach((e) => {
-            this.programCat.appendChild(new Option(e['name'], e['id']));
+          this.programCategoriesCustomer.forEach(e => {
+            $('#programCat').append(new Option(e['name'], e['id']));
           });
+          /* this.programCategoriesAdmin.forEach((e) => {
+            this.programCat.appendChild(new Option(e['name'], e['id']));
+          }); */
           /* Get all Reservation details */
           this.reservationService.getAllReservation().subscribe((allRes) => {
             allRes.forEach((item) => {
@@ -259,32 +267,35 @@ export class ReservationManagementComponent implements OnInit {
     }
 
     openCancelModal() {
-        // Configure Modal Dialog
-        const dialogConfig = new MatDialogConfig();
-        // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose = true;
-        dialogConfig.id = 'modal-component';
-        dialogConfig.height = 'auto';
-        dialogConfig.maxHeight = '500px';
-        dialogConfig.width = '350px';
-        dialogConfig.autoFocus = false;
-        dialogConfig.data = {
-            title: 'Cancel Confirmation',
-            description: 'Are you sure you would like to cancel this reservation for the customer?',
-            actionButtonText: 'Confirm',
-            numberOfButton: '2'
-        };
+    // Configure Modal Dialog
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxHeight = '500px';
+    dialogConfig.width = '350px';
+    dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+        title: 'Cancel Confirmation',
+        description: 'Are you sure you would like to cancel this reservation for the customer?',
+        actionButtonText: 'Confirm',
+        numberOfButton: '2'
+    };
 
-        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-        modalDialog.afterClosed().subscribe(result => {
-          if (result === 'Yes') {
-            // Update Database
-            // Make the refund
-            // Send cancel email
-          } else {
-            // Do nothing
-          }
-        });
-
+    const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+    modalDialog.afterClosed().subscribe(result => {
+      if (result === 'Yes') {
+        // Update Database
+        // Make the refund
+        // Send cancel email
+      } else {
+        // Do nothing
       }
+    });
+  }
+
+  openPaynowModal() {
+
+  }
 }

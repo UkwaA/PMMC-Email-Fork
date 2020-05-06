@@ -10,7 +10,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 
 export class AdminReservationsModalDialogComponent implements OnInit {
     reservations = [];
-
+    p: number;
     constructor(public dialogRef: MatDialogRef<AdminReservationsModalDialogComponent>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) public data: any) {}
 

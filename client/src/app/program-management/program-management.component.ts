@@ -15,7 +15,7 @@ declare var $: any;
 })
 
 export class ProgramManagementComponent {
-
+    p: number;
     programs : ProgramData[];
     allPrograms : ProgramData[];
     individualProgram: ProgramData[] = [];
