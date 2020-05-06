@@ -1,12 +1,11 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService} from '../../authentication.service'
-import { CustomerService } from '../../services/customer.services'
+import { AuthenticationService} from '../../authentication.service';
+import { CustomerService } from '../../services/customer.services';
 import { EmailService } from '../../services/email.services';
-import { Router } from "@angular/router";
-import { ModalDialogComponent } from "../modal-dialog/modal-dialog.component";
-import { LoginPromptModal } from "../login-prompt-modal/login-prompt-modal.component";
+import { Router } from '@angular/router';
+import { LoginPromptModal } from '../login-prompt-modal/login-prompt-modal.component';
 import { UserData } from '../../../app/data/user-data';
 import { CustomerData } from '../../../app/data/customer-data';
 
@@ -20,9 +19,9 @@ declare var $: any;
 })
 
 export class RegisterModalDialogComponent implements OnInit{
-    newUserForm: FormGroup
-    modalHeader: String
-    modalContent: String
+    newUserForm: FormGroup;
+    modalHeader: string;
+    modalContent: string;
     submitted = false;
     errorMessage = '';
     currentUserPK: number;
@@ -32,12 +31,12 @@ export class RegisterModalDialogComponent implements OnInit{
       Username: '',
       Password: '',
       Role_FK: '',
-      Email: '',      
+      Email: '',
       IsActive: true,
       CreatedDate: ''
   }
 
-  customerDetails:CustomerData = {
+  customerDetails: CustomerData = {
     UserPK: 0,
     FirstName: '',
     LastName: '',
@@ -47,46 +46,48 @@ export class RegisterModalDialogComponent implements OnInit{
     State: '',
     Zipcode: '',
     Subscribe: 0,
-  }
+  };
 
-    constructor(public dialogRegisterRef: MatDialogRef<RegisterModalDialogComponent>,
-      private fb:FormBuilder, private auth:AuthenticationService, 
-      private custService:CustomerService, private router:Router,
+    constructor(
+      public dialogRegisterRef: MatDialogRef<RegisterModalDialogComponent>,
+      private fb: FormBuilder, private auth: AuthenticationService,
+      private custService: CustomerService, private router: Router,
       public dialogLoginRef: MatDialogRef<LoginPromptModal>,
-      public emailService:EmailService,
-        @Inject(MAT_DIALOG_DATA) private modalData: any){}
+      public emailService: EmailService,
+      @Inject(MAT_DIALOG_DATA) private modalData: any) {}
 
     ngOnInit(){
-      this.newUserForm = this.fb.group({    
+      this.newUserForm = this.fb.group({
         username: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
         FirstName: ['', Validators.required],
         LastName: ['', Validators.required],
         PhoneNo: ['', [Validators.required, Validators.min(1000000000)]],
         Address: ['', Validators.required],
         City: ['', Validators.required],
         State: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-        Zipcode:['', [Validators.required, Validators.min(10000)]],
+        Zipcode: ['', [Validators.required, Validators.min(10000)]],
         Subscribe: [0]
-      })
+      });
 
     }
 
-    actionFunction() {        
-        this.dialogRegisterRef.close("Yes");
+    actionFunction() {
+        this.dialogRegisterRef.close('Yes');
       }
-    
+
     closeModal() {
-      this.dialogRegisterRef.close("No");
+      this.dialogRegisterRef.close('No');
     }
 
-    get f() { return this.newUserForm.controls; }  
+    get f() { return this.newUserForm.controls; }
 
     loadUserDetails(){
-      this.userInfo.Username = this.newUserForm.get('username').value
-      this.userInfo.Email = this.newUserForm.get('email').value
-      this.userInfo.Password = this.newUserForm.get('password').value
+      this.userInfo.Username = this.newUserForm.get('username').value;
+      this.userInfo.Email = this.newUserForm.get('email').value;
+      this.userInfo.Password = this.newUserForm.get('password').value;
       this.userInfo.Role_FK = '1';
     }
 
@@ -101,64 +102,49 @@ export class RegisterModalDialogComponent implements OnInit{
       this.customerDetails.Subscribe = this.newUserForm.get('Subscribe').value;
     }
 
-    onSubmit(){
+    onSubmit() {
       this.submitted = true;
-      if (this.newUserForm.invalid)
-        console.log("Invalid")
-      else{
-        console.log(this.newUserForm)
+      if (this.newUserForm.invalid) {
+      } else {
+        console.log(this.newUserForm);
         this.loadUserDetails();
         this.loadCustomerDetails();
         this.auth.register(this.userInfo).subscribe((res) => {
-          if (res.error){
-            console.log(res)
-            this.errorMessage = "*"+res.error;
+          if (res.error) {
+            console.log(res);
+            this.errorMessage = '*' + res.error;
             return;
-          }
-          else{
-            // this.userInfo.UserPK = res.UserPK;
+          } else {
             this.customerDetails.UserPK = res.UserPK;
             this.userInfo.UserPK = this.customerDetails.UserPK;
             this.custService.finishRegister(this.customerDetails).subscribe((res) => {
-              if (res.error){
-                console.log(res)
-                this.errorMessage = "*"+res.error;
+              if (res.error) {
+                console.log(res);
+                this.errorMessage = '*' + res.error;
                 return;
-              }
-              else{
-                // this.userInfo.UserPK = res.UserPK;
+              } else {
                 this.sendConfirmation();
                 this.actionFunction();
               }
-            })
+            });
           }
-          err => {
-            console.error(err);
-            return;
-          }
-        })
+        });
       }
     }
 
-    sendConfirmation(){        
-      console.log(this.userInfo)
-      console.log(this.customerDetails)
-      this.userInfo.Email = this.newUserForm.get("email").value;
-      
+    sendConfirmation() {
+      this.userInfo.Email = this.newUserForm.get('email').value;
+
       this.emailService.sendRegistrationConfirmationEmail(this.userInfo).subscribe(
           (res) => {
-              if(res.error){
-                  console.log("fotgot ts file: " + res.error)                                     
+              if (res.error) {
+                  console.log('email sending error: ' + res.error);
               }
-              else{                    
-                  console.log("Confirmation Email has been sent to " + this.userInfo.Email)
-                  // this.closeModal();
-              }
+
           },
           err => {
-              console.log(err)
+              console.log(err);
           }
       );
   }
-    
 }

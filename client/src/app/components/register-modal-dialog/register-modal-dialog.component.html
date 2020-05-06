@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label for="formEmail">Email</label>
-                    <input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" class="form-control" id="formEmail" formControlName="email"
+                    <input type="text" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$" class="form-control" id="formEmail" formControlName="email"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="submitted && f.email.errors.required">Email is required</div>
@@ -34,6 +34,15 @@
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="submitted && f.password.errors.required">Password is required</div>
+                        <div *ngIf="submitted && f.password.errors.minlength">Password must be at least 6 characters long</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="formConfirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="formConfirmPassword" formControlName="confirmPassword"
+                    [ngClass]="{ 'is-invalid': submitted && (this.f.confirmPassword.value != this.f.password.value) }">
+                    <div *ngIf="submitted && (this.f.confirmPassword.value != this.f.password.value)" class="invalid-feedback">
+                        The passwords must match
                     </div>
                 </div>
             </div>
