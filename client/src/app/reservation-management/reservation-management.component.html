@@ -49,7 +49,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                     <td> {{reservation.Total}} </td>
                     <td> {{reservation.RemainingBalance}} </td>
                     <td> <button mat-raised-button class="btn btn-warning mr-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
-                        <button mat-raised-button class="btn btn-danger" type="submit" (click)="openReservationModal()" onfocus="blur()">Cancel</button>
+                        <button mat-raised-button class="btn btn-danger" type="submit" (click)="openCancelModal()" onfocus="blur()">Cancel</button>
                     </td>
                 </tr>
             </tbody>

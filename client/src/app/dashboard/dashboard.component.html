@@ -194,7 +194,7 @@
                             <h4 *ngIf = "res.RemainingBalance != 0"><sup class = "waiting"> Payment Not Completed </sup></h4>
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-outline-danger float-right" type="submit" onfocus="blur()">Cancel Reservation</button>
+                            <button *ngIf = "res.ReservationStatus == 1" class="btn btn-outline-danger float-right" type="submit" (click)="openCancelModal(res.ProgramType)" onfocus="blur()">Cancel Reservation</button>
                         </div>
                     </div>
                     <div class="table-responsive-sm">

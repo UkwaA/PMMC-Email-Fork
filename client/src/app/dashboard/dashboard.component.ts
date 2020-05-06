@@ -11,6 +11,7 @@ import { AppConstants } from '../constants';
 import { AdminReservationsModalDialog } from '../components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
 import { CustomerService } from '../services/customer.services';
 import { Breakpoints } from '@angular/cdk/layout';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 
 declare var $: any;
 
@@ -127,7 +128,9 @@ export class DashboardComponent implements OnInit {
                       PaymentPK: 0,
                       ProgramPK: 0,
                       Quantity: 0,
+                      ReservationStatus: 0,
                       ProgramName: '',
+                      ProgramType: 0,
                       Date: '',
                       Time: '',
                       Total:'',
@@ -145,7 +148,13 @@ export class DashboardComponent implements OnInit {
                       details.ProgramPK = schedule[0].ProgramPK;
                       this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program)=>{
                           details.ProgramName = program.Name;
+                          details.ProgramType = program.ProgramType;
                       })
+
+                      if (item.ReservationStatus == AppConstants.RESERVATION_STATUS_CODE.ON_GOING){
+                        details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+                      }
+                      
 
                      /*  only display the current reservation, not past reservations */
                      //this.newDate = new Date(schedule[0].Start)
@@ -281,6 +290,48 @@ export class DashboardComponent implements OnInit {
     // dialogConfig.autoFocus = false;
    
     const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
+  }
+
+  openCancelModal(type: number){
+    console.log("Cancel Modal called")
+    //Configure Modal Dialog
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose =true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "auto";
+    dialogConfig.maxHeight = "500px";
+    dialogConfig.width = "350px";
+    dialogConfig.autoFocus = false;
+    if (type == AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM){
+      dialogConfig.data = {
+        title: "Cancel Confirmation",
+        description: "Are you sure you would like to cancel this reservation? Your payment for this reservation'll be refunded soon!",            
+        actionButtonText: "Confirm",   
+        numberOfButton: "2"         
+      }
+    }
+    else {
+      dialogConfig.data = {
+        title: "Cancel Confirmation",
+        description: "Are you sure you would like to cancel this reservation for customer? We'll collect the $25 deposit and refund the rest of your payment!",            
+        actionButtonText: "Confirm",   
+        numberOfButton: "2"         
+      }
+    }
+
+    const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+    modalDialog.afterClosed().subscribe(result =>{
+      if(result == "Yes"){
+        //Update Database
+        //Make the refund
+        //Send cancel email
+      }
+      else {
+        //Do nothing
+      }
+    })
+        
   }
 
   // viewReservationModal

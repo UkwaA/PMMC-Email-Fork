@@ -9,6 +9,7 @@ import { templateJitUrl } from '@angular/compiler';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { CustomerService } from '../services/customer.services';
 import { AppConstants } from '../constants';
+import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 
 declare var $: any;
 
@@ -252,5 +253,37 @@ export class ReservationManagement implements OnInit{
         dialogConfig.autoFocus = false;
     
         const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
-  }
+    }
+
+    openCancelModal(){
+        console.log("Cancel Modal called")
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose =true;
+        dialogConfig.id = "modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "500px";
+        dialogConfig.width = "350px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Cancel Confirmation",
+            description: "Are you sure you would like to cancel this reservation for the customer?",            
+            actionButtonText: "Confirm",   
+            numberOfButton: "2"
+        }
+    
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result =>{
+          if(result == "Yes"){
+            //Update Database
+            //Make the refund
+            //Send cancel email
+          }
+          else {
+            //Do nothing
+          }
+        })
+            
+      }
 }
