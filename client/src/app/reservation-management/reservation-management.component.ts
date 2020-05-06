@@ -1,4 +1,4 @@
-import { OnInit, Component, ViewEncapsulation } from '@angular/core';
+import { OnInit, Component,  ViewChild, ElementRef} from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ReservationService } from '../services/reservation.services';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -9,14 +9,14 @@ import { CustomerService } from '../services/customer.services';
 import { AppConstants } from '../constants';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 
-declare var $: any;
 @Component({
-  templateUrl: '/reservation-management.component.html',
-  styleUrls: ['./reservation-management.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  templateUrl: './reservation-management.component.html',
+  styleUrls: ['./reservation-management.component.css']
 })
 
 export class ReservationManagementComponent implements OnInit {
+  @ViewChild('programCat', { static: false }) programCat;
+
   role: string;
   UserPK: number;
   reservations = [];
@@ -61,9 +61,9 @@ export class ReservationManagementComponent implements OnInit {
       (user) => {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
-        if (this.role == '1') {
+        if (this.role === '1') {
           this.programCategoriesCustomer.forEach((e) => {
-            $('#programCat').append(new Option(e['name'], e['id']));
+           this.programCat.appendChild(new Option(e['name'], e['id']));
           });
           this.reservationService
             .getAllReservationByUserPK(user.UserPK)
@@ -102,7 +102,7 @@ export class ReservationManagementComponent implements OnInit {
                       .subscribe((program) => {
                         details.ProgramName = program.Name;
                         if (
-                          program.ProgramType ==
+                          program.ProgramType ===
                           AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM
                         ) {
                           this.groupReservations.push(details);
@@ -117,7 +117,7 @@ export class ReservationManagementComponent implements OnInit {
           this.reservations = this.allReservations;
         } else {
           this.programCategoriesAdmin.forEach((e) => {
-            $('#programCat').append(new Option(e['name'], e['id']));
+            this.programCat.appendChild(new Option(e['name'], e['id']));
           });
           /* Get all Reservation details */
           this.reservationService.getAllReservation().subscribe((allRes) => {
@@ -145,25 +145,6 @@ export class ReservationManagementComponent implements OnInit {
                   reservation.CustomerName =
                     customer.LastName + ', ' + customer.FirstName;
                 });
-              /* switch(item.ReservationStatus){
-                                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                                    break;
-                                }
-                                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
-                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                                    break;
-                                }
-                                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
-                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                                    break;
-                                }
-                                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
-                                    reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                                    break;
-                                }
-                            } */
-
               reservation.Total = item.Total;
               reservation.RemainingBalance = item.RemainingBalance;
               this.scheduleService
@@ -222,12 +203,8 @@ export class ReservationManagementComponent implements OnInit {
         console.error(err);
       }
     );
-
-    // Add option for the dropdown menu
-    /* this.programCategories.forEach(e => {
-            $('#programCat').append(new Option(e['name'], e['id']));
-        }); */
   }
+
   clearSearch() {
     this.searchText = '';
   }
@@ -271,45 +248,44 @@ export class ReservationManagementComponent implements OnInit {
     dialogConfig.height = '600px';
     dialogConfig.width = '750x';
     dialogConfig.autoFocus = false;
+    dialogConfig.disableClose = true;
+    dialogConfig.id = 'reservation-modal-component';
+    dialogConfig.height = '600px';
+    dialogConfig.width = '750x';
+    dialogConfig.autoFocus = false;
 
-        dialogConfig.disableClose = true;
-        dialogConfig.id = "reservation-modal-component";
-        dialogConfig.height = "600px";
-        dialogConfig.width = "750x";
-        dialogConfig.autoFocus = false;
-    
-        const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
+    const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
+
     }
 
     openCancelModal(){
-        console.log("Cancel Modal called")
-        //Configure Modal Dialog
+        console.log('Cancel Modal called')
+        // Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose =true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Cancel Confirmation",
-            description: "Are you sure you would like to cancel this reservation for the customer?",            
-            actionButtonText: "Confirm",   
-            numberOfButton: "2"
+            title: 'Cancel Confirmation',
+            description: 'Are you sure you would like to cancel this reservation for the customer?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         }
-    
+
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-        modalDialog.afterClosed().subscribe(result =>{
-          if(result == "Yes"){
-            //Update Database
-            //Make the refund
-            //Send cancel email
+        modalDialog.afterClosed().subscribe(result => {
+          if (result === 'Yes') {
+            // Update Database
+            // Make the refund
+            // Send cancel email
+          } else {
+            // Do nothing
           }
-          else {
-            //Do nothing
-          }
-        })
-            
+        });
+
       }
 }

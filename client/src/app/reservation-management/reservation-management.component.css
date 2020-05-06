@@ -1,64 +1,64 @@
 h1 {
-    font-family: 'Source Sans Pro', sans-serif; 
-    font-size: 50px;
-    font-weight: bold;
-    padding-top: 10px;
-    color: #08b2b8; 
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 50px;
+  font-weight: bold;
+  padding-top: 10px;
+  color: #08b2b8; 
 }
 
 .row{
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .filter{
-    padding-bottom: 30px;
-    padding-left: 30px;
-    font-weight: bold;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  font-weight: bold;
 }
 
 /* TAB */
 /* Styles for tab labels */
 .mat-tab-label {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 /* Styles for the active tab label */
 .mat-tab-label.mat-tab-label-active {
-    font-weight: 700px;
-    font-size: 18px;
-    color: #08b2b8;
+  font-weight: 700px;
+  font-size: 18px;
+  color: #08b2b8;
 }
 
 /* Styles for the ink bar */
 .mat-ink-bar {
-    background-color: #08b2b8 !important;
+  background-color: #08b2b8 !important;
 }
 
 .mat-tab-body-wrapper{
-    padding-top: 30px;
-    padding-bottom: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 /* TABLE */
 thead{
-    background-color:  rgba(0, 0, 0, 0.658);
-    color: white;
+  background-color:  rgba(0, 0, 0, 0.658);
+  color: white;
 }
 
 th, td {
-    text-align: left;
+  text-align: left;
 }
 
 td {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 td.name{
-    color:  #08b2b8;
+  color:  #08b2b8;
 }
 
 th {
-    font-family: 'Source Sans Pro', sans-serif; 
-    font-size: 18px;
-    font-weight: bold;
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 18px;
+  font-weight: bold;
 }

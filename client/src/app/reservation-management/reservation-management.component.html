@@ -1,91 +1,91 @@
 <div class="container">
-    <div class="row text-center">
-        <div class="col-lg-7 mt-5 mx-auto">
-            <h1>Reservation Management</h1>
-        </div>
-    </div> 
+  <div class="row text-center">
+      <div class="col-lg-7 mt-5 mx-auto">
+          <h1>Reservation Management</h1>
+      </div>
+  </div> 
 
-    <!-- SEARCH BAR -->
-    <div class="row filter">
-        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
-            <select class="form-control" style="font-weight: bold" id="programCat"
-                (change)="selectChangeHandler($event)">
-            </select>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
-            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
-                [(ngModel)]="searchText">
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
-        </div>
-    </div>
+  <!-- SEARCH BAR -->
+  <div class="row filter">
+      <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+          <select class="form-control" style="font-weight: bold" id="programCat"
+              (change)="selectChangeHandler($event)">
+          </select>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
+          <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
+              [(ngModel)]="searchText">
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2">
+          <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
+      </div>
+  </div>
 
-    <div class="table-responsive-sm hide-with-small">
-        <!-- List of all reservations for admin -->
-        <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '2' || role == '3'">
-            <thead>
-                <tr>
-                    <th style="width:7.5%"> #Res </th>
-                    <th style="width:17.5%"> Program Name </th>
-                    <th style="width:12.5%"> Date </th>
-                    <th title="Ongoing: Haven't attended yet
+  <div class="table-responsive-sm hide-with-small">
+      <!-- List of all reservations for admin -->
+      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '2' || role == '3'">
+          <thead>
+              <tr>
+                  <th style="width:7.5%"> #Res </th>
+                  <th style="width:17.5%"> Program Name </th>
+                  <th style="width:12.5%"> Date </th>
+                  <th title="Ongoing: Haven't attended yet
 Attended: Attened the program + Not completed payment yet
 Completed: Attened the program + Completed payment
 Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
-                    <th style="width:15%"> Name </th>
-                    <th style="width:10%"> Total </th>
-                    <th style="width:10%"> Remaining </th>
-                    <th style="width:17.5%"> Action </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
-                    <td> {{reservation.ReservationPK}} </td>
-                    <td> {{reservation.ProgramName}} </td>
-                    <td> {{reservation.Date}}</td>
-                    <td > {{reservation.ReservationStatus}} </td>
-                    <td> {{reservation.CustomerName}} </td>
-                    <td> {{reservation.Total}} </td>
-                    <td> {{reservation.RemainingBalance}} </td>
-                    <td> <button mat-raised-button class="btn btn-warning mr-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
-                        <button mat-raised-button class="btn btn-danger" type="submit" (click)="openCancelModal()" onfocus="blur()">Cancel</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- List of Reservarion By Customer -->
-        <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '1'">
-            <thead>
-                <tr>
-                    <th style="width:10%"> #ID </th>
-                    <th style="width:20%"> Program Name </th>
-                    <th style="width:15%"> Date </th>
-                    <th style="width:15%"> Time </th>
-                    <th style="width:7%"> Quantity </th>
-                    <th style="width:8%"> Total </th>
-                    <th style="width:15%"> Remaining </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
-                    <td> {{reservation.ReservationPK}} </td>
-                    <td> {{reservation.ProgramName}} </td>
-                    <td> {{reservation.Date}}</td>
-                    <td > {{reservation.Time}}</td>
-                    <td> {{reservation.Quantity}} </td>
-                    <td> {{reservation.Total}} </td>
-                    <td> {{reservation.RemainingBalance}} 
-                        <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-sm-12">
-                <pagination-controls class="float-right" (pageChange)="p=$event" autoHide="true" responsive="true">
-                </pagination-controls>
-            </div>
-        </div>
-    </div>  
+                  <th style="width:15%"> Name </th>
+                  <th style="width:10%"> Total </th>
+                  <th style="width:10%"> Remaining </th>
+                  <th style="width:17.5%"> Action </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                  <td> {{reservation.ReservationPK}} </td>
+                  <td> {{reservation.ProgramName}} </td>
+                  <td> {{reservation.Date}}</td>
+                  <td > {{reservation.ReservationStatus}} </td>
+                  <td> {{reservation.CustomerName}} </td>
+                  <td> {{reservation.Total}} </td>
+                  <td> {{reservation.RemainingBalance}} </td>
+                  <td> <button mat-raised-button class="btn btn-warning mr-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
+                      <button mat-raised-button class="btn btn-danger" type="submit" (click)="openCancelModal()" onfocus="blur()">Cancel</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <!-- List of Reservarion By Customer -->
+      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '1'">
+          <thead>
+              <tr>
+                  <th style="width:10%"> #ID </th>
+                  <th style="width:20%"> Program Name </th>
+                  <th style="width:15%"> Date </th>
+                  <th style="width:15%"> Time </th>
+                  <th style="width:7%"> Quantity </th>
+                  <th style="width:8%"> Total </th>
+                  <th style="width:15%"> Remaining </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                  <td> {{reservation.ReservationPK}} </td>
+                  <td> {{reservation.ProgramName}} </td>
+                  <td> {{reservation.Date}}</td>
+                  <td > {{reservation.Time}}</td>
+                  <td> {{reservation.Quantity}} </td>
+                  <td> {{reservation.Total}} </td>
+                  <td> {{reservation.RemainingBalance}} 
+                      <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <div class="row">
+          <div class="col-sm-12">
+              <pagination-controls class="float-right" (pageChange)="p=$event" autoHide="true" responsive="true">
+              </pagination-controls>
+          </div>
+      </div>
+  </div>  
 </div>

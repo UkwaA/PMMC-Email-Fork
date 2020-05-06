@@ -5,8 +5,8 @@ export class AppConstants {
     return 'http://localhost:4200/';
   }
   public static get EXPRESS_SERVER_URL(): string {
-    // return 'http://localhost:3000/';
-    return 'http://ec2-54-153-55-225.us-west-1.compute.amazonaws.com:8080/';
+    return 'http://localhost:3000/';
+    // return 'http://ec2-54-153-55-225.us-west-1.compute.amazonaws.com:8080/';
   }
 
   public static get LOGIN_DIALOG_CONFIG(): MatDialogConfig {

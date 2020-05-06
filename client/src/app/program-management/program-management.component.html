@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:'p'}">
                     <td class="name"> {{program.Name}}
                         <div class="row errorMessage ml-auto" *ngIf="!program.hasSchedule">
                             <mat-icon color="orange">error</mat-icon>
@@ -72,7 +72,7 @@
             <div class="col-lg-8 col-md-8 col-sm-8">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
-                <pagination-controls (pageChange)="p=$event" autoHide="true" responsive="true">
+                <pagination-controls (pageChange)='p=$event' autoHide="true" responsive="true">
                 </pagination-controls>
             </div>
         </div>

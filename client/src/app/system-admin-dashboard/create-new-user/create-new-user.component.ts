@@ -29,12 +29,12 @@ export class CreateNewUserComponent {
         Username: '',
         Password: '',
         Role_FK: '',
-        Email: '',      
+        Email: '',
         IsActive: true,
         CreatedDate: ''
     }
-  
-    customerDetails:CustomerData = {
+
+    customerDetails: CustomerData = {
       UserPK: 0,
       FirstName: '',
       LastName: '',
@@ -47,11 +47,11 @@ export class CreateNewUserComponent {
     }
 
     constructor(private route: ActivatedRoute, private auth: AuthenticationService,private fb: FormBuilder, 
-        private router: Router, public emailService:EmailService, public matDialog: MatDialog, private customer: CustomerService,) { }
+        private router: Router, public emailService: EmailService, public matDialog: MatDialog, private customer: CustomerService,) { }
 
-    ngOnInit(){
-        this.errorMessage = ''
-        this.createNewUserForm = this.fb.group({    
+    ngOnInit() {
+        this.errorMessage = '';
+        this.createNewUserForm = this.fb.group({
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
@@ -63,8 +63,8 @@ export class CreateNewUserComponent {
             State: [],
             Zipcode:[],
             Subscribe: []
-          })
-        
+          });
+
           this.userRoles.forEach(e => {
             $("#roleSelection").append(new Option(e, e));  
           });

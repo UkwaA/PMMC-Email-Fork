@@ -9,7 +9,7 @@ import { AppConstants } from '../constants';
 })
 
 export class GroupProgramComponent implements OnInit{
-    programs:ProgramData[];
+    programs: ProgramData[];
     searchText = "";
     constructor(private programService: ProgramServices){
 

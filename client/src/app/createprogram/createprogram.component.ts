@@ -17,7 +17,7 @@ import { MatDialogConfig, MatDialog } from "@angular/material";
   providers: [ProgramServices]
 })
 export class CreateProgramComponent implements OnInit {
-  @ViewChild('editor', { static: false }) inputElement:ElementRef; 
+  @ViewChild('editor', { static: false }) inputElement:ElementRef;
 
   file: File;
   createProgramForm: FormGroup;
@@ -67,7 +67,6 @@ export class CreateProgramComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.inputElement)
     this.createProgramForm = this.fb.group({
       Name: [
         "",

@@ -666,7 +666,7 @@ export class ReservationComponent implements OnInit {
      
       stepper.next();
   }
-  
+
   registerIndividualStepperNext(stepper: MatStepper) {
     // Add User Input data to ReservationIndividualDetails
     this.reservationIndividualDetails.ParticipantName = this.registerForm.get('ParticipantName').value;
@@ -689,7 +689,8 @@ export class ReservationComponent implements OnInit {
     this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get('EmergencyMedicalRelease').value;
     this.stepTwoIsCompleted = true;
     this.getFormValidationErrors();
-     stepper.next();
+
+    stepper.next();
  }
 
  // Get the token value change from the Verify Card Form Child Component
@@ -708,7 +709,7 @@ submitReservation() {
         this.paymentObj.amount = this.programDetails.DepositAmount;
         this.paymentObj.description = this.auth.getUserDetails().Username;      
         this.paymentObj.email = this.auth.getUserDetails().Email;
- 
+
         // Charge User
         this.paymentServices.processToken(this.paymentObj).subscribe((chargeResult) => {
           if(chargeResult) {
@@ -718,19 +719,19 @@ submitReservation() {
             this.paymentData.Total = chargeResult.amount;
             this.paymentData.ChargeToken = chargeResult.id;
             this.paymentData.PaymentType = AppConstants.PAYMENT_TYPE_CODE.CARD;
-   
+
             // Create PaymenData
             this.paymentServices.createPaymentData(this.paymentData).subscribe((paymentInfo) => {
               console.log(paymentInfo);
             });
-   
+
             // Update reservation remaining balance
             this.resServices.updateRemainingBalance(resHeaderPK,this.reservationHeader.RemainingBalance - (chargeResult.amount /100)).subscribe((info) => {
               console.log(info);
             });;
           }
         })
- 
+
         // Update Schedule CurrentNumberParticipant
         this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, this.reservationHeader.NumberOfParticipant);
         

@@ -19,11 +19,11 @@ export class ProfileComponent {
     details: UserDetails;
     faPhone = faPhone;
     option: string;
-    role:string;
-    userName:string;
+    role: string;
+    userName: string;
     id: number;
-    
-    constructor(private auth: AuthenticationService, private breakpointObserver: BreakpointObserver) {}
+
+    constructor(public auth: AuthenticationService, private breakpointObserver: BreakpointObserver) {}
 
     ngOnInit() {
         this.option = "";
