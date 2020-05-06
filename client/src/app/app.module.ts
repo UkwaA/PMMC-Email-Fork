@@ -88,7 +88,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { PaynowModalDialog } from './components/paynow-modal-dialog/paynow-modal-dialog.component';
 import { ReservationDetailsModalDialog } from './components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
-import { AdminReservationsModalDialog } from './components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component'
+import { AdminReservationsModalDialogComponent } from './components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -224,7 +224,7 @@ const routes: Routes = [
     ReportManagementComponent,
     PaynowModalDialog,
     ReservationDetailsModalDialog,
-    AdminReservationsModalDialog
+    AdminReservationsModalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -277,6 +277,6 @@ const routes: Routes = [
             ],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
-    AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog, AdminReservationsModalDialog]
+            AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog, AdminReservationsModalDialogComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ import { ReservationService } from '../services/reservation.services';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { ProgramServices } from '../services/program.services';
 import { AppConstants } from '../constants';
-import { AdminReservationsModalDialog } from '../components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
+import { AdminReservationsModalDialogComponent } from '../components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
 import { CustomerService } from '../services/customer.services';
 import { Breakpoints } from '@angular/cdk/layout';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
@@ -362,7 +362,7 @@ export class DashboardComponent implements OnInit {
         break;
       }
     }
-    const adminReservationModalDialog = this.matDialog.open(AdminReservationsModalDialog, dialogConfig);
+    const adminReservationModalDialog = this.matDialog.open(AdminReservationsModalDialogComponent, dialogConfig);
   }
 
 }

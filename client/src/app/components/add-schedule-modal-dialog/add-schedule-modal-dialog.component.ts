@@ -104,7 +104,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
     constructor(public dialogRef: MatDialogRef<AddScheduleModalDialogComponent>,
         private fb: FormBuilder, private programScheduleServices: ProgramScheduleService,
         private router: Router, public matDialog: MatDialog,
-        @Inject(MAT_DIALOG_DATA) private modalData: any){}
+        @Inject(MAT_DIALOG_DATA) public modalData: any){}
 
     ngOnInit(){
       switch(this.modalData.mode){

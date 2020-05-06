@@ -8,23 +8,21 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 
 export class CustomerModalDialogComponent implements OnInit{
-     modalHeader: String
-     modalContent: String
+     modalHeader: string;
+     modalContent: string;
 
     constructor(public dialogRef: MatDialogRef<CustomerModalDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private modalData: any){}
+          @Inject(MAT_DIALOG_DATA) public modalData: any){}
 
     ngOnInit(){
-
     }
 
-    actionFunction() {        
-        //this.closeModal();
-        this.dialogRef.close("Yes");
+    actionFunction() {
+        // this.closeModal();
+        this.dialogRef.close('Yes');
       }
-    
+
       closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
       }
-    
 }
