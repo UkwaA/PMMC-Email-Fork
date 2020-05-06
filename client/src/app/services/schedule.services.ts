@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import {ProgramScheduleData} from '../data/program-schedule-data'
 import { AppConstants } from '../constants'
@@ -12,115 +12,115 @@ export class ProgramScheduleService{
             SCHEDULE SETTING
     ================================*/
     public getScheduleSettingsByProgram(ProgramPK: any): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-settings-by-program/" + ProgramPK);
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-schedule-settings-by-program/' + ProgramPK);
     }
 
     public addNewScheduleSetting(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/add-new-schedule-setting', scheduleSetting);
     }
 
     public updateScheduleSetting(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting", scheduleSetting);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-schedule-setting', scheduleSetting);
     }
 
     public updateScheduleSettingSessionDetails(sessions: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedule-setting-session-details", sessions);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-schedule-setting-session-details', sessions);
     }
 
     public deactiveScheduleSetting(scheduleSetting: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-schedule-setting", scheduleSetting);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/deactivate-schedule-setting', scheduleSetting);
     }
 
     public getAllProgramsWithScheduleSettingsRequirements():Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-programs-with-schedule-settings-and-requirements");
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-all-programs-with-schedule-settings-and-requirements');
     }
 
     /*================================
             SESSION DETAILS
     ================================*/
     public addNewSessionDetails(sessionDetails: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-session-details", sessionDetails);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/add-new-session-details', sessionDetails);
     }
 
     public updateSessionDetails(sessionDetails: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-session-details", sessionDetails);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-session-details', sessionDetails);
     }
 
     public deactivateSessionDetails(sessionDetails: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", sessionDetails);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/deactivate-session-details/', sessionDetails);
     }
-    
+
     public getAllSessionDetails(): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-session-details");
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-all-session-details');
     }
 
     public getSessionDetailsById(ProgramPK: number): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-session-details-by-id/" + ProgramPK);
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-session-details-by-id/' + ProgramPK);
     }
 
     public updateSchedulesInBulk(schedules: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-schedules-in-bulk", schedules);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-schedules-in-bulk', schedules);
     }
 
     public addNewAdditionalSessionDetails(sessionDetails: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-additional-session-details", sessionDetails);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/add-new-additional-session-details', sessionDetails);
     }
 
     public updateAdditionalSessionDetails(sessionDetails: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-additional-session-details", sessionDetails);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-additional-session-details', sessionDetails);
     }
 
     /*================================
             SCHEDULE
     ================================*/
     public addNewSchedule(schedule: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-new-schedule", schedule);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/add-new-schedule', schedule);
     }
 
     public getScheduleByProgramPK(ProgramPK: number): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-programpk/" + ProgramPK);
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-program-schedules-by-programpk/' + ProgramPK);
     }
-    
-    public getScheduleByIdStartEnd(SessionDetailsPK:number, ProgramPK: number, eventStart: string,eventEnd: string): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-schedule-by-id-start-end/" + SessionDetailsPK
-                + "/" + ProgramPK + "/" + eventStart + "/" + eventEnd);
+
+    public getScheduleByIdStartEnd(SessionDetailsPK: number, ProgramPK: number, eventStart: string, eventEnd: string): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-schedule-by-id-start-end/' + SessionDetailsPK
+                + '/' + ProgramPK + '/' + eventStart + '/' + eventEnd);
     }
 
     public getScheduleById(SchedulePK: number): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + SchedulePK);
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-program-schedules-by-id/' + SchedulePK);
     }
 
     public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
-        return this.http.put(AppConstants.EXPRESS_SERVER_URL + "schedule/update-number-participant/" + SchedulePK, {"quantity" : quantity});
+        return this.http.put(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {quantity});
     }
 
     /*================================
             BLACKOUT DATE
     ================================*/
     public addBlackoutDate(blackoutDate: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/add-blackout-date", blackoutDate);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/add-blackout-date', blackoutDate);
     }
 
     public updateBlackoutDate(blackoutDate: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/update-blackout-date", blackoutDate);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-blackout-date', blackoutDate);
     }
 
     public deactivateBlackoutDate(blackoutDate: any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/deactivate-blackout-date", blackoutDate);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/deactivate-blackout-date', blackoutDate);
     }
 
 
     public getAllBlackoutDatesByProgram(ProgramPK: number): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-program-blackout-date-by-id/" + ProgramPK);
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-program-blackout-date-by-id/' + ProgramPK);
     }
 
     public getAllBlackoutDateException(): Observable<any> {
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "schedule/get-all-blackout-date-exception/");
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-all-blackout-date-exception/');
     }
     /*================================
             OTHERS
     ================================*/
     public setProgramColor(programColor:any): Observable<any>{
-        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "schedule/set-program-color", programColor);
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/set-program-color', programColor);
     }
 }
