@@ -9,11 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
-<<<<<<< Updated upstream
 import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { CustomerRegisterComponent } from './customer-info/customer-info.component';
 import { HomeComponent } from './home/home.component';
 import { CreateProgramComponent } from './createprogram/createprogram.component';
 import { AuthenticationService } from './authentication.service';
@@ -27,33 +23,11 @@ import { EmailService } from './services/email.services';
 import { EmailDetailsComponent } from './email-details/email-details.component';
 import { CustomerService } from './services/customer.services';
 import { ProgramScheduleService } from './services/schedule.services';
-=======
-import { ProfileComponent } from './profile/profile.component'
-import { HomeComponent } from './home/home.component'
-import { CreateProgramComponent } from './createprogram/createprogram.component'
-import { AuthenticationService } from './authentication.service'
-import { ProgramServices } from './services/program.services'
-import { AuthGuardService } from './auth-guard.service'
-import { AuthRoleGuardService} from './auth-role-guard.service'
-import { AuthCustomerGuardService } from './auth-customer-guard.service'
-import { PaymentServices } from "./services/payment.services";
-import { AuthSystemRoleGuardService} from './auth-system-role-guard.service'
-import { EmailService } from './services/email.services'
-import { EmailDetailsComponent } from './email-details/email-details.component'
-import { CustomerService } from './services/customer.services'
-import { ProgramScheduleService } from './services/schedule.services'
->>>>>>> Stashed changes
 import { ReservationService } from './services/reservation.services';
 import { GroupProgramComponent } from './group-program/group-program.component';
 import { IndividualProgramComponent} from './individual-program/individual-program.component';
 import { Contact } from './contact/contact.component';
-<<<<<<< Updated upstream
-import { BookingIndividualProgramComponent } from './booking-individual-program/booking-individual-program.component';
-import { BookingGroupProgramComponent } from './booking-group-program/booking-group-program.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-=======
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
->>>>>>> Stashed changes
 import { MatFormFieldModule, MatInputModule, MatListModule, MatSidenavModule } from '@angular/material';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ProgramManagementComponent } from './program-management/program-management.component';
@@ -112,33 +86,9 @@ import { AdminReservationsModalDialogComponent } from './components/admin-reserv
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-<<<<<<< Updated upstream
-  // {path: 'login', component: LoginComponent},
-  // {path: 'register', component: RegisterComponent},
-  // {
-  //   path: 'customer-register/:id',
-  //   component:CustomerRegisterComponent,
-  //   canActivate: [AuthCustomerGuardService],
-  // },
   {path: 'group-program', component: GroupProgramComponent},
   {path: 'individual-program', component: IndividualProgramComponent},
   {path: 'contact', component: Contact},
-  // {
-  //   path: 'booking-individual-program/:id',
-  //   component: BookingIndividualProgramComponent,
-  //   canActivate: [AuthGuardService]
-  // },
-  // {
-  //   path: 'booking-group-program/:id',
-  //   component: BookingGroupProgramComponent,
-  //   canActivate: [AuthGuardService]
-  // },
-  // {path: 'program-schedule/:id', component: ProgramScheduleComponent},
-=======
-  {path: 'group-program', component: GroupProgramComponent},
-  {path: 'individual-program', component: IndividualProgramComponent},
-  {path: 'contact', component: Contact},
->>>>>>> Stashed changes
   {path: 'reservation/:id', component: ReservationComponent},
   {path: 'login/forgot-password', component: ForgotPasswordComponent},
   {path: 'login/reset-password/:token', component: ResetPasswordComponent},
@@ -148,11 +98,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
-<<<<<<< Updated upstream
       {path: 'reservation-management', component: ReservationManagementComponent, canActivate: [AuthGuardService]},
-=======
-      {path: 'reservation-management', component: ReservationManagement, canActivate: [AuthGuardService]},
->>>>>>> Stashed changes
       {path: 'email-management', component: EmailManagementComponent, canActivate: [AuthRoleGuardService]},
       {path: 'email-details/:id/:mode', component: EmailDetailsComponent, canActivate: [AuthRoleGuardService]},
       {path: 'createprogram', component: CreateProgramComponent, canActivate: [AuthRoleGuardService]},
@@ -170,11 +116,7 @@ const routes: Routes = [
         canActivate: [AuthRoleGuardService]
       },
       {
-<<<<<<< Updated upstream
         path: 'program-details/:id/:mode',
-=======
-        path: 'program-details/:id/:mode', 
->>>>>>> Stashed changes
         component: ProgramDetailsComponent,
         canActivate: [AuthRoleGuardService],
       },
@@ -184,29 +126,17 @@ const routes: Routes = [
         canActivate: [AuthSystemRoleGuardService],
       },
       {
-<<<<<<< Updated upstream
         path: 'user-details/:id',
-=======
-        path: 'user-details/:id', 
->>>>>>> Stashed changes
         component: UserDetailsComponent,
         canActivate: [AuthSystemRoleGuardService],
       },
       {
-<<<<<<< Updated upstream
         path: 'create-new-user',
-=======
-        path: 'create-new-user', 
->>>>>>> Stashed changes
         component: CreateNewUserComponent,
         canActivate: [AuthSystemRoleGuardService],
       },
       {
-<<<<<<< Updated upstream
         path: 'profile-info/:id',
-=======
-        path: 'profile-info/:id', 
->>>>>>> Stashed changes
         component: ProfileInfo,
         canActivate: [AuthGuardService],
       },
@@ -222,7 +152,7 @@ const routes: Routes = [
       }
     ]
   }
-  ]
+  ];
 
 @NgModule({
   declarations: [
@@ -233,11 +163,6 @@ const routes: Routes = [
     GroupProgramComponent,
     IndividualProgramComponent,
     Contact,
-<<<<<<< Updated upstream
-    BookingIndividualProgramComponent,
-    BookingGroupProgramComponent,
-=======
->>>>>>> Stashed changes
     ProgramManagementComponent,
     ProgramDetailsComponent,
     EmailManagementComponent,
