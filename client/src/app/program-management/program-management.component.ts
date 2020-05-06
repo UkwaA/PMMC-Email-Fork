@@ -6,7 +6,6 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProgramScheduleService } from '../services/schedule.services';
 
-declare var $: any;
 
 @Component({
     templateUrl: './program-management.component.html',
@@ -15,7 +14,7 @@ declare var $: any;
 })
 
 export class ProgramManagementComponent {
-
+    p: number;
     programs : ProgramData[];
     allPrograms : ProgramData[];
     individualProgram: ProgramData[] = [];
@@ -35,11 +34,6 @@ export class ProgramManagementComponent {
                 public matDialog: MatDialog) { }
 
     ngOnInit() {
-        // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        });
-
         // Service call to get data from server
         this.programScheduleServices.getAllProgramsWithScheduleSettingsRequirements().subscribe((result) =>{
             this.programs = result;

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { AuthenticationService, UserDetails} from '../authentication.service'
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService, UserDetails} from '../authentication.service';
 import { faEnvelope, faPhone, faMapMarkedAlt, faHandHoldingUsd, faDoorOpen, faLaughWink} from '@fortawesome/free-solid-svg-icons';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { map, shareReplay } from 'rxjs/operators';
     styleUrls: ['./profile.component.css']
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -26,9 +26,7 @@ export class ProfileComponent {
     constructor(public auth: AuthenticationService, private breakpointObserver: BreakpointObserver) {}
 
     ngOnInit() {
-        this.option = "";
-        /* this.hf.hide();  */
-
+        this.option = '';
         this.auth.profile().subscribe(
             user => {
                 this.details = user;
@@ -37,9 +35,8 @@ export class ProfileComponent {
                 this.id = user.UserPK;
             },
             err => {
-                console.error(err)
+                console.error(err);
             }
-        )
+        );
     }
-        
 }

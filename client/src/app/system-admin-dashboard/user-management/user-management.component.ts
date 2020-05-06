@@ -3,8 +3,6 @@ import {UserData} from '../../data/user-data';
 import { AuthenticationService, UserDetails} from '../../authentication.service'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from 'src/app/components/modal-dialog/modal-dialog.component';
-import { NgxPaginationModule } from 'ngx-pagination';
-declare var $: any;
 
 @Component({
   selector: 'app-user-management',
@@ -12,13 +10,14 @@ declare var $: any;
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent {
-  listOfUsers: UserData[];
-  userRoles:string[]
-  searchText: string
-  currentUserID: number
-  allUsers: UserData[] = []
-  activeUsers: UserData[] = []
-  inactiveUsers: UserData[] = []
+    p: number;
+    listOfUsers: UserData[];
+    userRoles:string[]
+    searchText: string
+    currentUserID: number
+    allUsers: UserData[] = []
+    activeUsers: UserData[] = []
+    inactiveUsers: UserData[] = []
   IsActive: boolean; //temporary variabe to hold the value for deactivate/activate button of user account
     // Dropdown Meny Option
     userStatus: Array<Object> = [
@@ -30,11 +29,6 @@ export class UserManagementComponent {
   constructor(private auth: AuthenticationService, public matDialog: MatDialog) {}
 
   ngOnInit() {
-    // Add option for the dropdown menu
-    this.userStatus.forEach(e => {
-        $("#userStatus").append(new Option(e['name'], e['id']));
-    });
-
     this.userRoles = ['Customer', 'Manager','System Admin'];
     this.auth.getAllUser().subscribe((result) => {
       this.listOfUsers = result;

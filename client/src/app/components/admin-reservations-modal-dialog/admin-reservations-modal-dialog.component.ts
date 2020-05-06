@@ -3,14 +3,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 
 
 @Component ({
-    selector: 'admin-reservations-modal-dialog',
+    selector: 'app-admin-reservations-modal-dialog',
     templateUrl: './admin-reservations-modal-dialog.component.html',
     styleUrls: ['./admin-reservations-modal-dialog.component.css'],
 })
 
 export class AdminReservationsModalDialogComponent implements OnInit {
     reservations = [];
-
+    p: number;
     constructor(public dialogRef: MatDialogRef<AdminReservationsModalDialogComponent>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) public data: any) {}
 

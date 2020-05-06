@@ -66,7 +66,7 @@ export class CreateNewUserComponent {
           });
 
           this.userRoles.forEach(e => {
-            $("#roleSelection").append(new Option(e, e));  
+            $('#roleSelection').append(new Option(e, e));  
           });
     }
 
@@ -78,90 +78,78 @@ export class CreateNewUserComponent {
         if (this.createNewUserForm.invalid) {
             return;
         }
-        
-        //Configure Modal Dialog
+
         const dialogConfig = new MatDialogConfig();
-        // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose =true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Create New User",
-            description: "All information is correct?",            
-            actionButtonText: "Confirm",   
-            numberOfButton: "2"         
+            title: 'Create New User',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
             }
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result =>{
-            if(result == "Yes"){
-                //call register function                
-                this.createNewUser()          
+            if (result === 'Yes') {
+                this.createNewUser();
             }
-            else{
-                console.log("stop")                
-            }
-        })
+        });
     }
 
-    createNewUser(){
-        //Get new role selected info
-        this.NewRole = $("#roleSelection :selected").text();   
-        
-        //Get new Role info
-        if(this.NewRole == "Customer") 
-            {this.userDetails.Role_FK = "1"}
-        else if(this.NewRole == "Manager")
-            {this.userDetails.Role_FK = "2"}
-        else
-            {this.userDetails.Role_FK = "3"}
+    createNewUser() {
+        // Get new role selected info
+        this.NewRole = $('#roleSelection :selected').text();
+
+        // Get new Role info
+        if (this.NewRole === 'Customer')
+            {this.userDetails.Role_FK = '1'} else
+        if(this.NewRole === 'Manager')
+            {this.userDetails.Role_FK = '2'} else
+                {this.userDetails.Role_FK = '3'}
 
         //Get subscribe checkbox info
-        if(this.subscribeChecked){
-            this.customerDetails.Subscribe = 1
+        if (this.subscribeChecked) {
+            this.customerDetails.Subscribe = 1;
         }
-        else{
-            this.customerDetails.Subscribe = 0
+        else {
+            this.customerDetails.Subscribe = 0;
         }
 
-        console.log(this.userDetails)
-        console.log(this.customerDetails)
-        this.auth.register(this.userDetails).subscribe((res)=> {
-            if(res.error)
+        this.auth.register(this.userDetails).subscribe((res) => {
+            if (res.error)
             {
                 console.log(res)
-                this.errorMessage = "*" + res.error
-                return
-            }
-            else{                
-                this.customerDetails.UserPK = res.UserPK
-                this.userDetails.UserPK = res.UserPK
-                this.customer.finishRegister(this.customerDetails).subscribe((res)=>{
-                    console.log(res.message)
-                    //Send confirmation email confirmation and change password for the first time
+                this.errorMessage = '*' + res.error
+                return;
+            } else {
+                this.customerDetails.UserPK = res.UserPK;
+                this.userDetails.UserPK = res.UserPK;
+                this.customer.finishRegister(this.customerDetails).subscribe((res2) => {
+                    console.log(res2.message);
+                    // Send confirmation email confirmation and change password for the first time
                     this.emailService.CreateNewUserConfirmationEmail(this.userDetails).subscribe(
-                        (res) => {
-                            if(res.error){
-                                console.log(res.error)                                     
-                            }
-                            else{                    
-                                console.log("Reset Email has been sent to " + this.userDetails.Email)
+                        (res3) => {
+                            if (res3.error) {
+                                console.log(res3.error);
+                            } else {
+                                console.log('Reset Email has been sent to ' + this.userDetails.Email);
                             }
                         },
                         err => {
-                            console.log(err)
+                            console.log(err);
                         })
-                    //Navigate back to User Management Page
-                    this.router.navigateByUrl("/profile/user-management")
-                })
+                    this.router.navigateByUrl('/profile/user-management');
+                });
             }
         },
             err => {
                 console.error(err);
-                return
+                return;
             }
-        )
+        );
     }
 }

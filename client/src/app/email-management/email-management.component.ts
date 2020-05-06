@@ -11,7 +11,7 @@ declare var $: any;
 })
 
 export class EmailManagementComponent{
-
+    p: number;
     emails: EmailData[];
     allEmails: EmailData[];
     userEmails: EmailData[] = [];

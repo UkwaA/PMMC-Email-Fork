@@ -7,14 +7,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     styleUrls: ['../modal-dialog/modal-dialog.component.css']
 })
 
-export class CustomerModalDialogComponent implements OnInit{
+export class CustomerModalDialogComponent implements OnInit {
      modalHeader: string;
      modalContent: string;
 
-    constructor(public dialogRef: MatDialogRef<CustomerModalDialogComponent>,
-          @Inject(MAT_DIALOG_DATA) public modalData: any){}
+    constructor(
+      public dialogRef: MatDialogRef<CustomerModalDialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public modalData: any) {}
 
-    ngOnInit(){
+    ngOnInit() {
     }
 
     actionFunction() {
