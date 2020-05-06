@@ -4,30 +4,25 @@ import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 declare var $: any;
 
 @Component ({
-    selector: 'reservation-details-modal-dialog',
+    selector: 'app-reservation-details-modal-dialog',
     templateUrl: './reservation-details-modal-dialog.component.html',
-    styleUrls: ['./reservation-details-modal-dialog.component.css'],
-    
+    styleUrls: ['./reservation-details-modal-dialog.component.css']
 })
 
 export class ReservationDetailsModalDialog implements OnInit{
-    role:string;
+    role: string;
 
-    constructor(public dialogRef: MatDialogRef<ReservationDetailsModalDialog>, public matDialog:MatDialog){}
-    
-    ngOnInit(){
-        $(".alert-success").hide()
-        $(".alert-danger").hide()     
+    constructor(public dialogRef: MatDialogRef<ReservationDetailsModalDialog>, public matDialog: MatDialog) {}
+    ngOnInit() {
     }
 
 
-    closeModal(){
-        this.dialogRef.close("No");
+    closeModal() {
+        this.dialogRef.close('No');
     }
 
     actionFunction() {
-        console.log("Modal closing");
-        this.dialogRef.close("Yes");
+        console.log('Modal closing');
+        this.dialogRef.close('Yes');
     }
-
 }

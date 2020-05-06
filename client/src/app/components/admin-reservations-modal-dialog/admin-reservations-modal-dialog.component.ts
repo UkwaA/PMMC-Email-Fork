@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 
 
 @Component ({
-    selector: 'admin-reservations-modal-dialog',
+    selector: 'app-admin-reservations-modal-dialog',
     templateUrl: './admin-reservations-modal-dialog.component.html',
     styleUrls: ['./admin-reservations-modal-dialog.component.css'],
 })

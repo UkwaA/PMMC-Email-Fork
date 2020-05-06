@@ -258,8 +258,7 @@ export class ReservationManagementComponent implements OnInit {
 
     }
 
-    openCancelModal(){
-        console.log('Cancel Modal called')
+    openCancelModal() {
         // Configure Modal Dialog
         const dialogConfig = new MatDialogConfig();
         // The user can't close the dialog by clicking outside its body
@@ -274,7 +273,7 @@ export class ReservationManagementComponent implements OnInit {
             description: 'Are you sure you would like to cancel this reservation for the customer?',
             actionButtonText: 'Confirm',
             numberOfButton: '2'
-        }
+        };
 
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result => {

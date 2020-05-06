@@ -18,81 +18,69 @@ export class GProgramComponent implements OnInit {
   @Input() ProgramPK: number;
   @Input() formData: FormData;
   @Output() dataChange: EventEmitter<BookingGroupData> = new EventEmitter();
-  
-  bookingGroup = new BookingGroupData();
-  varLabels: Array<Object>; 
 
-  constructor(private auth: AuthenticationService,
-    private service: ProgramServices,
-    private router: Router,
-    public matDialog: MatDialog) { }
+  bookingGroup = new BookingGroupData();
+  varLabels: Array<object>;
+
+  constructor(private auth: AuthenticationService, public service: ProgramServices, public router: Router, public matDialog: MatDialog) { }
 
   ngOnInit() {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     this.service.getProgramRequirementByID('g', this.ProgramPK)
       .subscribe((res) => {
-        this.bookingGroup = res
-      })
+        this.bookingGroup = res;
+      });
 
     this.varLabels = [
-      { var: "ProgramRestriction", label: "Program Restriction" },
-      { var: "OrganizationName", label: "Organization Name" },
-      { var: "GradeLevel", label: "Grade Level" },
-      { var: "TeacherName", label: "Teacher Name" },
-      { var: "TeacherEmail", label: "Teacher Email" },
-      { var: "TeacherPhoneNo", label: "Teacher Phone Number" },
-      { var: "AlternativeDate", label: "Alternative Date" },
-      { var: "EducationPurpose", label: "Education Purpose" }
-    ]
-    this.bookingGroup.GroupProgramPK = this.ProgramPK
-    this.bookingGroup.CreatedBy = this.auth.getUserDetails().UserPK
+      { var: 'ProgramRestriction', label: 'Program Restriction'},
+      { var: 'OrganizationName', label: 'Organization Name'},
+      { var: 'GradeLevel', label: 'Grade Level'},
+      { var: 'TeacherName', label: 'Teacher Name'},
+      { var: 'TeacherEmail', label: 'Teacher Email'},
+      { var: 'TeacherPhoneNo', label: 'Teacher Phone Number'},
+      { var: 'AlternativeDate', label: 'Alternative Date'},
+      { var: 'EducationPurpose', label: 'Education Purpose'}
+    ];
+    this.bookingGroup.GroupProgramPK = this.ProgramPK;
+    this.bookingGroup.CreatedBy = this.auth.getUserDetails().UserPK;
 
   }
-
-  // Event Handler for checkbox
-  // Pass checkbox data to EventEmitter for Parent component
-  // type: 'g' - Group Program
-  //       'i' - Individual Program
-  // data: actual data for the checkbox
 
   chkbDataChange(event) {
-    this.dataChange.emit(this.bookingGroup)
+    this.dataChange.emit(this.bookingGroup);
   }
 
-  //Configure Modal Dialog
+  // Configure Modal Dialog
   openModal() {
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "auto";
-    dialogConfig.maxHeight = "500px";
-    dialogConfig.width = "430px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = 'auto';
+    dialogConfig.maxHeight = '500px';
+    dialogConfig.width = '430px';
     dialogConfig.data = {
-      title: "Update Group Program Details",
-      description: "All information is correct?",
-      actionButtonText: "Confirm",
-      numberOfButton: "2"
+      title: 'Update Group Program Details',
+      description: 'All information is correct?',
+      actionButtonText: 'Confirm',
+      numberOfButton: '2'
     }
     // https://material.angular.io/components/dialog/overview
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
     modalDialog.afterClosed().subscribe(result => {
-      if (result == "Yes") {
-        //call register function                
-        this.submit()
-      }
-      else {
-        console.log("stop")
-      }
-    })
+      if (result === 'Yes') {
+        // call register function
+        this.submit();
+      } else {}
+    });
   }
 
   submit() {
     this.service.updateProgramLayoutDetails('g', this.bookingGroup)
       .subscribe((response) => {
-        this.router.navigateByUrl("/profile/program-management")
-      })
+        this.router.navigateByUrl('/profile/program-management');
+      });
   }
 }

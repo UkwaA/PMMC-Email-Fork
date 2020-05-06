@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { ProgramServices } from "../services/program.services";
+import { Component, OnInit, Input } from '@angular/core';
+import { ProgramServices } from '../services/program.services';
 
 @Component({
-  selector: "confirmation",
-  templateUrl: "./confirmation.component.html",
-  styleUrls: ["./confirmation.component.css"],
+  selector: 'confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: ['./confirmation.component.css'],
 })
 export class ConfirmationComponent implements OnInit {
   @Input() reservationDetails: any;
@@ -14,8 +14,7 @@ export class ConfirmationComponent implements OnInit {
   @Input() customerSelectTime: string;
 
   ProgramType = 0;
-  ProgramName = "";
-  
+  ProgramName = '';
   constructor(private service: ProgramServices) {}
 
   ngOnInit() {
