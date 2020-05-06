@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingIndividualData } from 'src/app/data/booking-individual-data';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
@@ -26,7 +26,7 @@ export class IProgramComponent implements OnInit {
               public matDialog: MatDialog) { }
 
   ngOnInit() {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
     this.service.getProgramRequirementByID('i', this.ProgramPK)
     .subscribe((res) => {
       this.bookingIndividual = res;
@@ -62,7 +62,7 @@ export class IProgramComponent implements OnInit {
   }
 
   // Configure Modal Dialog
-  openModal(){
+  openModal() {
     // Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body

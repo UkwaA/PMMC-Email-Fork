@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuantiyFormData } from '../data/quantity-form-data';
 import { ProgramScheduleData } from '../data/program-schedule-data';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { LoginPromptModal } from '../components/login-prompt-modal/login-prompt-modal.component';
+import { LoginPromptModalComponent } from '../components/login-prompt-modal/login-prompt-modal.component';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { AuthenticationService } from '../authentication.service';
 import { AppConstants } from '../constants';
@@ -574,7 +574,7 @@ export class ReservationComponent implements OnInit {
 
   openLoginModal() {
     const loginModal = this.matDialog.open(
-      LoginPromptModal,
+      LoginPromptModalComponent,
       AppConstants.LOGIN_DIALOG_CONFIG
     );
     loginModal.afterClosed();

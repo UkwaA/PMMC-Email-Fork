@@ -28,7 +28,7 @@ export class ProfileInfo implements OnInit {
     State: '',
     Zipcode: '',
     Subscribe: 0,
-  }
+  };
 
 
   constructor(private route: ActivatedRoute,
@@ -73,7 +73,7 @@ export class ProfileInfo implements OnInit {
   }
 
   // Configure Modal Dialog
-  openModal() { 
+  openModal() {
     // Form validation
     this.submitted = true;
     if (this.customerInfoForm.invalid) {
@@ -97,7 +97,7 @@ export class ProfileInfo implements OnInit {
 
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
     modalDialog.afterClosed().subscribe(result => {
-      if (result === 'Yes'){
+      if (result === 'Yes') {
           // call register function
           this.updateInfo();
       } else {}

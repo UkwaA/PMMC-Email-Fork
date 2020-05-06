@@ -62,7 +62,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
+import { LoginPromptModalComponent } from './components/login-prompt-modal/login-prompt-modal.component';
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 import { AddScheduleModalDialogComponent } from './components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
@@ -180,7 +180,7 @@ const routes: Routes = [
     RegisterModalDialogComponent,
     CustomerModalDialogComponent,
     AddScheduleModalDialogComponent,
-    LoginPromptModal,
+    LoginPromptModalComponent,
     ScheduleManagementComponent,
     ViewScheduleComponent,
     AccountSetting,
@@ -247,6 +247,6 @@ const routes: Routes = [
             ],
   bootstrap: [AppComponent],
   entryComponents: [ModalDialogComponent, RegisterModalDialogComponent, CustomerModalDialogComponent,
-            AddScheduleModalDialogComponent, LoginPromptModal, PaynowModalDialog, ReservationDetailsModalDialog, AdminReservationsModalDialogComponent]
+            AddScheduleModalDialogComponent, LoginPromptModalComponent, PaynowModalDialog, ReservationDetailsModalDialog, AdminReservationsModalDialogComponent]
 })
 export class AppModule { }

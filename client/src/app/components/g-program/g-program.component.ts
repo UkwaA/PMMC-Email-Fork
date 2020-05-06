@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProgramServices } from 'src/app/services/program.services';
 import { BookingGroupData } from 'src/app/data/booking-group-data';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
@@ -65,7 +65,7 @@ export class GProgramComponent implements OnInit {
       description: 'All information is correct?',
       actionButtonText: 'Confirm',
       numberOfButton: '2'
-    }
+    };
     // https://material.angular.io/components/dialog/overview
     // https://material.angular.io/components/dialog/overview
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
