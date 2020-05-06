@@ -1,362 +1,329 @@
 <div class="container">
     <div class="row text-center mb-5 mt-4">
-        <div class="col-lg-7 mx-auto">
+        <div class="col-lg-7 mx-auto pb-5">
             <h1>Report Management </h1>
+        </div>
+
+        <div class="tab-group col-lg-12">
+            <mat-tab-group>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon matListIcon>payment </mat-icon>
+                        <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
+                            Payment Report
+                        </span>
+                    </ng-template>
+
+                    <div class="col-sm-12">
+                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Payment Report</strong>
+                        </h5>
+                        <kendo-daterange class="float-left">
+                            <label>
+                                <span class="label p-3">From </span>
+                                <!-- <kendo-dateinput kendoDateRangeStartInput 
+                                        [(value)]="range.start"
+                                        (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                            </label>
+                            <label>
+                                <span class="label p-3">To </span>
+                                <!-- <kendo-dateinput kendoDateRangeEndInput 
+                                        [(value)]="range.end"
+                                        (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                            </label>
+                        </kendo-daterange>
+                    </div>
+
+                    <br /><br />
+                    <div class="download-btn col-md-12" style="text-align: right;">
+                        <h5>Export</h5>
+                        <span><button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                                <mat-icon matListIcon>cloud_download</mat-icon>
+                            </button></span>
+                    </div>
+
+                    <table mat-table [dataSource]="PaymentDataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="year">
+                            <th mat-header-cell *matHeaderCellDef> Year </th>
+                            <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jan">
+                            <th mat-header-cell *matHeaderCellDef> Jan </th>
+                            <td mat-cell *matCellDef="let element">{{element.jan}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="feb">
+                            <th mat-header-cell *matHeaderCellDef> Feb </th>
+                            <td mat-cell *matCellDef="let element">{{element.feb}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="mar">
+                            <th mat-header-cell *matHeaderCellDef> Mar </th>
+                            <td mat-cell *matCellDef="let element">{{element.mar}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apr">
+                            <th mat-header-cell *matHeaderCellDef> Apr </th>
+                            <td mat-cell *matCellDef="let element">{{element.apr}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="may">
+                            <th mat-header-cell *matHeaderCellDef> May </th>
+                            <td mat-cell *matCellDef="let element">{{element.may}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jun">
+                            <th mat-header-cell *matHeaderCellDef> Jun </th>
+                            <td mat-cell *matCellDef="let element">{{element.jun}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jul">
+                            <th mat-header-cell *matHeaderCellDef> Jul </th>
+                            <td mat-cell *matCellDef="let element">{{element.jul}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="aug">
+                            <th mat-header-cell *matHeaderCellDef> Aug </th>
+                            <td mat-cell *matCellDef="let element">{{element.aug}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sep">
+                            <th mat-header-cell *matHeaderCellDef> Sep </th>
+                            <td mat-cell *matCellDef="let element">{{element.sep}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="oct">
+                            <th mat-header-cell *matHeaderCellDef> Oct </th>
+                            <td mat-cell *matCellDef="let element">{{element.oct}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nov">
+                            <th mat-header-cell *matHeaderCellDef> Nov </th>
+                            <td mat-cell *matCellDef="let element">{{element.nov}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dec">
+                            <th mat-header-cell *matHeaderCellDef> Dec </th>
+                            <td mat-cell *matCellDef="let element">{{element.dec}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon matListIcon>bar_chart</mat-icon>
+                        <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
+                            Monthly Report
+                        </span>
+                    </ng-template>
+                    <div class="col-sm-12">
+                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Monthly Report</strong></h5>
+                        <kendo-daterange class="float-left">
+                            <label>
+                                <span class="label p-3">From </span>
+                                <!-- <kendo-dateinput kendoDateRangeStartInput 
+                                             [(value)]="range.start"
+                                             (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                            </label>
+                            <label>
+                                <span class="label p-3">To </span>
+                                <!-- <kendo-dateinput kendoDateRangeEndInput 
+                                             [(value)]="range.end"
+                                             (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                            </label>
+                        </kendo-daterange>
+                    </div>
+                    <br /><br />
+                    <div class="download-btn col-md-12" style="text-align: right;">
+                        <h5>Export</h5>
+                        <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                            <mat-icon matListIcon>cloud_download</mat-icon>
+                        </button>
+                    </div>
+                    <h4 class="program-name float-left">Field Trip</h4>
+                    <table mat-table [dataSource]="MonthlyDataSourceField" class="mat-elevation-z8">
+                        <ng-container matColumnDef="year">
+                            <th mat-header-cell *matHeaderCellDef> Year </th>
+                            <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jan">
+                            <th mat-header-cell *matHeaderCellDef> Jan </th>
+                            <td mat-cell *matCellDef="let element">{{element.jan}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="feb">
+                            <th mat-header-cell *matHeaderCellDef> Feb </th>
+                            <td mat-cell *matCellDef="let element">{{element.feb}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="mar">
+                            <th mat-header-cell *matHeaderCellDef> Mar </th>
+                            <td mat-cell *matCellDef="let element">{{element.mar}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apr">
+                            <th mat-header-cell *matHeaderCellDef> Apr </th>
+                            <td mat-cell *matCellDef="let element">{{element.apr}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="may">
+                            <th mat-header-cell *matHeaderCellDef> May </th>
+                            <td mat-cell *matCellDef="let element">{{element.may}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jun">
+                            <th mat-header-cell *matHeaderCellDef> Jun </th>
+                            <td mat-cell *matCellDef="let element">{{element.jun}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jul">
+                            <th mat-header-cell *matHeaderCellDef> Jul </th>
+                            <td mat-cell *matCellDef="let element">{{element.jul}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="aug">
+                            <th mat-header-cell *matHeaderCellDef> Aug </th>
+                            <td mat-cell *matCellDef="let element">{{element.aug}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sep">
+                            <th mat-header-cell *matHeaderCellDef> Sep </th>
+                            <td mat-cell *matCellDef="let element">{{element.sep}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="oct">
+                            <th mat-header-cell *matHeaderCellDef> Oct </th>
+                            <td mat-cell *matCellDef="let element">{{element.oct}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nov">
+                            <th mat-header-cell *matHeaderCellDef> Nov </th>
+                            <td mat-cell *matCellDef="let element">{{element.nov}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dec">
+                            <th mat-header-cell *matHeaderCellDef> Dec </th>
+                            <td mat-cell *matCellDef="let element">{{element.dec}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+                    </table>
+
+                    <br /><br />
+
+                    <h4 class="program-name float-left">Girl Scout</h4>
+                    <table mat-table [dataSource]="MonthlyDataSourceGirl" class="mat-elevation-z8">
+                        <ng-container matColumnDef="year">
+                            <th mat-header-cell *matHeaderCellDef> Year </th>
+                            <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jan">
+                            <th mat-header-cell *matHeaderCellDef> Jan </th>
+                            <td mat-cell *matCellDef="let element">{{element.jan}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="feb">
+                            <th mat-header-cell *matHeaderCellDef> Feb </th>
+                            <td mat-cell *matCellDef="let element">{{element.feb}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="mar">
+                            <th mat-header-cell *matHeaderCellDef> Mar </th>
+                            <td mat-cell *matCellDef="let element">{{element.mar}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="apr">
+                            <th mat-header-cell *matHeaderCellDef> Apr </th>
+                            <td mat-cell *matCellDef="let element">{{element.apr}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="may">
+                            <th mat-header-cell *matHeaderCellDef> May </th>
+                            <td mat-cell *matCellDef="let element">{{element.may}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jun">
+                            <th mat-header-cell *matHeaderCellDef> Jun </th>
+                            <td mat-cell *matCellDef="let element">{{element.jun}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="jul">
+                            <th mat-header-cell *matHeaderCellDef> Jul </th>
+                            <td mat-cell *matCellDef="let element">{{element.jul}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="aug">
+                            <th mat-header-cell *matHeaderCellDef> Aug </th>
+                            <td mat-cell *matCellDef="let element">{{element.aug}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sep">
+                            <th mat-header-cell *matHeaderCellDef> Sep </th>
+                            <td mat-cell *matCellDef="let element">{{element.sep}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="oct">
+                            <th mat-header-cell *matHeaderCellDef> Oct </th>
+                            <td mat-cell *matCellDef="let element">{{element.oct}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="nov">
+                            <th mat-header-cell *matHeaderCellDef> Nov </th>
+                            <td mat-cell *matCellDef="let element">{{element.nov}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="dec">
+                            <th mat-header-cell *matHeaderCellDef> Dec </th>
+                            <td mat-cell *matCellDef="let element">{{element.dec}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+                    </table>
+
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon matListIcon>beach_access </mat-icon>
+                        <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
+                            Camp Program Report
+                        </span>
+                    </ng-template>
+                    <br /><br />
+                    <div class="download-btn col-md-12" style="text-align: right;">
+                        <h5>Export</h5>
+                        <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                            <mat-icon matListIcon>cloud_download</mat-icon>
+                        </button>
+                    </div>
+                    Camp
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon matListIcon>schedule </mat-icon>
+                        <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
+                            Monthly Master Schedule
+                        </span>
+                    </ng-template>
+                    <br /><br />
+                    <div class="download-btn col-md-12" style="text-align: right;">
+                        <h5>Export</h5>
+                        <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                            <mat-icon matListIcon>cloud_download</mat-icon>
+                        </button>
+                    </div>
+                    schedule
+
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
     </div>
-    <div></div>
-     <div class="tab-group col-lg-12">
-         <mat-tab-group>
-             <mat-tab>
-                <ng-template mat-tab-label>
-                    <mat-icon matListIcon>insert_chart</mat-icon>
-                    <span style="font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);">
-                         Charts
-                    </span>
-                </ng-template> 
-                    <mat-tab-group >
-                        <mat-tab label="Bar Chart">
-                        <br/><br/>
-                <!-- CHART USING NG2-CHARTS -->
-                        <div>
-                            <h2>{{title}}</h2>
-                            <canvas
-                                baseChart
-                                [chartType]="'bar'"
-                                [datasets]="chartData"
-                                [labels]="labels"
-                                [options]="chartOptions"
-                                [legend]="true"
-                                [colors]="colors"
-                                (chartClick)="onChartClick($event)">
-                            </canvas>
-                        </div>
-                        </mat-tab>  
-                        
-                        <mat-tab label="Pie Chart">
-                            <br/><br/>
-                            <div>
-                                <h2>PIE CHART EXAMPLE</h2>
-                                <br/>
-                                <canvas 
-                                    baseChart 
-                                    [data]="pieChartData" 
-                                    [labels]="pieChartLabels" 
-                                    [chartType]="'pie'"
-                                    [options]="pieChartOptions"
-                                    [legend]="true"
-                                    [plugins]= "pieChartPlugins">
-                                </canvas>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
-                
-            </mat-tab>
-
-            <!-- TABLE -->
-             <mat-tab>
-                <ng-template mat-tab-label>
-                    <mat-icon matListIcon>table_chart</mat-icon>
-                    <span style="font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);">
-                         Tables
-                    </span>
-                </ng-template> 
-                    <mat-tab-group>
-                        <mat-tab label="Payment Report"> 
-                        <br/><br/>
-                        <div class="download-btn col-md-12" style="text-align: right;">
-                            <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn"><mat-icon matListIcon>cloud_download</mat-icon></button>
-                        </div>
-                        <div class="table-responsive-sm">
-                            <table #datatable class="payment-report" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="width:4%"> Year</th>
-                                        <th style="width:8%"> Jan</th>
-                                        <th style="width:8%"> Feb</th>
-                                        <th style="width:8%"> Mar</th>
-                                        <th style="width:8%"> Apr</th>
-                                        <th style="width:8%"> May</th>
-                                        <th style="width:8%"> Jun</th>
-                                        <th style="width:8%"> Jul</th>
-                                        <th style="width:8%"> Aug</th>
-                                        <th style="width:8%"> Sep</th>
-                                        <th style="width:8%"> Oct</th>
-                                        <th style="width:8%"> Nov</th>
-                                        <th style="width:8%"> Dec</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="background-color: wheat;"> 2019 </td>
-                                        <td> $1000 </td>
-                                        <td> $2000 </td>
-                                        <td> $3000</td>
-                                        <td> $4000</td>
-                                        <td> $5000</td>
-                                        <td> $6000</td>
-                                        <td> $7000</td>
-                                        <td> $8000</td>
-                                        <td> $9000</td>
-                                        <td> $10000</td>
-                                        <td> $11000</td>
-                                        <td> $12000</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background-color: wheat;"> 2018 </td>
-                                        <td> $12000 </td>
-                                        <td> $11000 </td>
-                                        <td> $10000</td>
-                                        <td> $9000</td>
-                                        <td> $8000</td>
-                                        <td> $7000</td>
-                                        <td> $6000</td>
-                                        <td> $5000</td>
-                                        <td> $4000</td>
-                                        <td> $3000</td>
-                                        <td> $2000</td>
-                                        <td> $1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background-color: wheat;"> 2017 </td>
-                                        <td> $2000 </td>
-                                        <td> $1000 </td>
-                                        <td> $11000</td>
-                                        <td> $3000</td>
-                                        <td> $6000</td>
-                                        <td> $2000</td>
-                                        <td> $7000</td>
-                                        <td> $4000</td>
-                                        <td> $9000</td>
-                                        <td> $8000</td>
-                                        <td> $5000</td>
-                                        <td> $12000</td>
-                                    </tr>
-                                    
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                        </mat-tab>
-
-                        <mat-tab label="Monthly Report">
-                            <br/><br/>
-                        <div class="download-btn col-md-12" style="text-align: right;">
-                            <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn"><mat-icon matListIcon>cloud_download</mat-icon></button>
-                        </div>
-                        <div class="table-responsive-sm">
-                            <table #datatable class="monthly-report" style="width:100%">
-                               
-                                    <tr>
-                                        <th style="width:10%; background-color: thistle;"> Field Trips </th>
-                                        <th style="width:6%; background-color: thistle;"> Year</th>
-                                        <th style="width:7%; background-color: thistle;"> Jan</th>
-                                        <th style="width:7%; background-color: thistle;"> Feb</th>
-                                        <th style="width:7%; background-color: thistle;"> Mar</th>
-                                        <th style="width:7%; background-color: thistle;"> Apr</th>
-                                        <th style="width:7%; background-color: thistle;"> May</th>
-                                        <th style="width:7%; background-color: thistle;"> Jun</th>
-                                        <th style="width:7%; background-color: thistle;"> Jul</th>
-                                        <th style="width:7%; background-color: thistle;"> Aug</th>
-                                        <th style="width:7%; background-color: thistle;"> Sep</th>
-                                        <th style="width:7%; background-color: thistle;"> Oct</th>
-                                        <th style="width:7%; background-color: thistle;"> Nov</th>
-                                        <th style="width:7%; background-color: thistle;"> Dec</th>
-                                    </tr>
-                               
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td style="background-color: wheat;"> 2019 </td>
-                                        <td> 6 </td>
-                                        <td> 6 </td>
-                                        <td> 7</td>
-                                        <td> 10</td>
-                                        <td> 8</td>
-                                        <td> 2</td>
-                                        <td> 3</td>
-                                        <td> 2</td>
-                                        <td> 2</td>
-                                        <td> 4</td>
-                                        <td> 5</td>
-                                        <td> 8</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td style="background-color: wheat;"> 2018 </td>
-                                        <td> 5 </td>
-                                        <td> 1 </td>
-                                        <td> 2</td>
-                                        <td> 5</td>
-                                        <td> 7</td>
-                                        <td> 9</td>
-                                        <td> 3</td>
-                                        <td> 9</td>
-                                        <td> 4</td>
-                                        <td> 7</td>
-                                        <td> 6</td>
-                                        <td> 2</td>
-                                    </tr>
-                              
-                                    <tr>
-                                        <th style="width:10%; background-color: thistle;">Girl Scouts </th>
-                                        <th style="width:6%; background-color: thistle;"> Year</th>
-                                        <th style="width:7%; background-color: thistle;"> Jan</th>
-                                        <th style="width:7%; background-color: thistle;"> Feb</th>
-                                        <th style="width:7%; background-color: thistle;"> Mar</th>
-                                        <th style="width:7%; background-color: thistle;"> Apr</th>
-                                        <th style="width:7%; background-color: thistle;"> May</th>
-                                        <th style="width:7%; background-color: thistle;"> Jun</th>
-                                        <th style="width:7%; background-color: thistle;"> Jul</th>
-                                        <th style="width:7%; background-color: thistle;"> Aug</th>
-                                        <th style="width:7%; background-color: thistle;"> Sep</th>
-                                        <th style="width:7%; background-color: thistle;"> Oct</th>
-                                        <th style="width:7%; background-color: thistle;"> Nov</th>
-                                        <th style="width:7%; background-color: thistle;"> Dec</th>
-                                    </tr>
-                         
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td style="background-color: wheat;"> 2019 </td>
-                                        <td> 6 </td>
-                                        <td> 6 </td>
-                                        <td> 7</td>
-                                        <td> 10</td>
-                                        <td> 8</td>
-                                        <td> 2</td>
-                                        <td> 3</td>
-                                        <td> 2</td>
-                                        <td> 2</td>
-                                        <td> 4</td>
-                                        <td> 5</td>
-                                        <td> 8</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td style="background-color: wheat;"> 2018 </td>
-                                        <td> 5 </td>
-                                        <td> 1 </td>
-                                        <td> 2</td>
-                                        <td> 5</td>
-                                        <td> 7</td>
-                                        <td> 9</td>
-                                        <td> 3</td>
-                                        <td> 9</td>
-                                        <td> 4</td>
-                                        <td> 7</td>
-                                        <td> 6</td>
-                                        <td> 2</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-
-                        </mat-tab> 
-
-                        <mat-tab label="Camp Program Report">ccc
-
-                        </mat-tab>
-
-                        <mat-tab label="Monthly Master Schedule"> schedule 
-
-                        </mat-tab>
-                    </mat-tab-group>
-            </mat-tab>
-         </mat-tab-group>
-     </div>
-
-
 </div>
-    <!-- SEARCH -->
-    <!-- <div class="row filter">
-        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
-            <select class="form-control" style="font-weight: bold;" id="paymentCat"
-                (change)="selectChangeHandler($event)">
-            </select>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
-            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
-                [(ngModel)]="searchText">
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            <button mat-raised-button color="primary" (click)="clearSearch()">Clear Search</button>
-        </div>
-    </div> -->
-    <!-- TABLE -->
-    <!-- <div class="table-responsive-sm">
-        <table #datatable class="table table-hover" style="width:100%">
-            <thead>
-                <tr>
-                    <th style="width:10%"> Res#</th>
-                    <th style="width:20%"> Date</th>
-                    <th style="width:30%"> Recipient</th>
-                    <th style="width:10%"> Status</th>
-                    <th style="width:10%"> Amount</th>
-                    <th style="width:10%"> Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td> G2467 </td>
-                    <td> April 20, 2020 </td>
-                    <td> alice@gmail.com </td>
-                    <td> 
-                        <button class="btn btn-success">Paid</button>
-                    </td>
-                    <td> $200</td>
-                    <td>
-                        <select class="action">
-                            <option value="select">Select</option>
-                            <option value="view">View</option>
-                            <option value="pdf">PDF</option>
-                            <option value="refund">Refund</option>
-                            <option value="cancel">Cancel</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td> I1234 </td>
-                    <td> June 20, 2020 </td>
-                    <td> brian@gmail.com </td>
-                    <td> 
-                        <button class="btn btn-warning">Unpaid</button>
-                    </td>
-                    <td> $300</td>
-                    <td>
-                        <select class="action">
-                            <option value="select">Select</option>
-                            <option value="view">View</option>
-                            <option value="pdf">PDF</option>
-                            <option value="refund">Refund</option>
-                            <option value="cancel">Cancel</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td> R1234 </td>
-                    <td> May 10, 2020 </td>
-                    <td> anna@gmail.com </td>
-                    <td> 
-                        <button class="btn btn-danger">Refunded</button>
-                    </td>
-                    <td> $100</td>
-                    <td>
-                        <select class="action">
-                            <option value="select">Select</option>
-                            <option value="view">View</option>
-                            <option value="pdf">PDF</option>
-                            <option value="refund">Refund</option>
-                            <option value="cancel">Cancel</option>
-                        </select>
-                    </td>
-                </tr>
-                
-            </tbody>
-        </table>
-        <button class="btn btn-info" style="float: right;">Submit</button>
-    </div>
-</div> -->
-
-
-

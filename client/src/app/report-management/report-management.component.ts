@@ -1,151 +1,59 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
 import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
-import { MatDialogConfig, MatDialog } from '@angular/material';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { Sort } from '@angular/material';
 import { AuthenticationService } from '../authentication.service';
 import { Observable, Observer } from 'rxjs';
 
-declare var $: any;
+export interface PeriodicElement {
+  year: number;
+  jan: number;
+  feb: number;
+  mar: number;
+  apr: number;
+  may: number;
+  jun: number;
+  jul: number;
+  aug: number;
+  sep: number;
+  oct: number;
+  nov: number;
+  dec: number;
+}
 
+const PAYMENT_DATA: PeriodicElement[] = [
+  {year: 2020, jan: 4000, feb: 5000, mar: 6000, apr: 7000, may: 8000, jun:2345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234},
+  {year: 2019, jan: 7000, feb: 2000, mar: 3000, apr: 2000, may: 4000, jun:6345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234},
+  {year: 2018, jan: 9000, feb: 6000, mar: 7000, apr: 8000, may: 2000, jun:5345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234},
+];
+
+const MONTHLY_DATA_FIELD_TRIP: PeriodicElement[] = [
+  {year: 2020, jan: 4, feb: 5, mar: 6, apr: 7, may: 8, jun:23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12},
+  {year: 2019, jan: 7, feb: 2, mar: 3, apr: 2, may: 4, jun:63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134},
+  {year: 2018, jan: 9, feb: 6, mar: 7, apr: 8, may: 2, jun:53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124},
+];
+
+const MONTHLY_DATA_GIRL_SCOUT: PeriodicElement[] = [
+  {year: 2020, jan: 20, feb: 53, mar: 64, apr: 7, may: 8, jun:23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12},
+  {year: 2019, jan: 74, feb: 22, mar: 33, apr: 2, may: 4, jun:63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134},
+  {year: 2018, jan: 92, feb: 61, mar: 27, apr: 8, may: 2, jun:53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124},
+];
 
 @Component({
     selector: 'report-management',
     templateUrl: './report-management.component.html',
     styleUrls: ['./report-management.component.css'],
-    providers: [ProgramServices]
 })
 
 export class ReportManagementComponent {
+  displayedColumns: string[] = ['year', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  PaymentDataSource = PAYMENT_DATA;
+  MonthlyDataSourceField = MONTHLY_DATA_FIELD_TRIP;
+  MonthlyDataSourceGirl = MONTHLY_DATA_GIRL_SCOUT;
 
-    programs : ProgramData[];
-    allPrograms : ProgramData[];
-    individualProgram: ProgramData[] = [];
-    groupProgram: ProgramData[] = [];
-    searchText: string;
-    selectedValue = 0;
-    
-    // Dropdown Menu Option
-    programCategories: Array<Object> = [
-        { id: 0, name: "All Program" },
-        { id: 1, name: "Group Program" },
-        { id: 2, name: "Individual Program" }
-    ]
-
-    constructor(
-      private programService: ProgramServices,
-      public matDialog: MatDialog) 
-      {
-      }
+  
 
     ngOnInit() {
-        // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
-            $("#paymentCat").append(new Option(e['name'], e['id']));
-        });
-
-        // Service call to get data from server
-        this.programService.getAllPrograms().then((result) =>{
-            this.programs = result;
-            this.allPrograms = result
-
-            // Filter program into Group and Individual
-            this.programs.forEach(e => {
-                if(e.ProgramType == 0) {
-                    this.groupProgram.push(e);
-                } else {
-                    this.individualProgram.push(e);
-                }
-            });
-        })
     }
-    
-    clearSearch() {
-        this.searchText = "";
-    }
-
-    // Catch the event dropdown menu
-    selectChangeHandler(event: any) {
-        let choice = event.target.value;
-        // Update the data of table
-       switch(choice) {
-            case '0':
-                this.programs = this.allPrograms;
-                break;
-            case '1':
-                this.programs = this.groupProgram;
-                break;
-            case '2':
-                this.programs = this.individualProgram;
-                break;
-       }
-    }
-
-
-     //On Click event of chart
-  onChartClick(event) {
-    console.log(event);
   }
-
-   /* CHART USING NG2-CHARTS */
-   title = 'Bar Chart Example Using ng2-charts';
-
-   // ADD CHART OPTIONS. 
-   chartOptions = {
-     responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-   }
- 
-   labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
- 
-   // STATIC DATA FOR THE CHART IN JSON FORMAT.
-   chartData = [
-     {
-       label: '1st Year',
-       data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-     },
-     { 
-       label: '2nd Year',
-       data: [47, 9, 28, 54, 77, 51, 24]
-     }
-   ];
- 
-   // CHART COLOR.
-   colors = [
-     { // 1st Year.
-       backgroundColor: 'rgba(77,83,96,0.2)'
-     },
-     { // 2nd Year.
-       backgroundColor: 'rgba(30, 169, 224, 0.8)'
-     }
-   ]
-    /* FINISH CHART USING NG2-CHARTS */
-   
-    
- /* PIE CHART*/
- pieChartOptions = {
-   responsive: true,
-   legend: {
-     position: 'top',
-   },
-   plugins: {
-     datalabels: {
-       formatter: (value, ctx) => {
-         const label = ctx.chart.data.labels[ctx.dataIndex];
-         return label;
-       },
-     },
-   }
- };
-  pieChartLabels = [
-   ['Request Reservation', 'Cancel', 'Completed'],
-   ['Showed', 'No Showed'],
-   ['Group Programs', 'Individual Programs']];
- 
-  pieChartData = [300,500,100];
- 
-  pieChartPlugins = [];
- 
- /* END PIE CHART*/
-
-}
-
