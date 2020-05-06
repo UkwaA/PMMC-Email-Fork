@@ -7,9 +7,9 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { DOCUMENT } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-import { LoginPromptModal } from './components/login-prompt-modal/login-prompt-modal.component';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { LoginPromptModalComponent } from './components/login-prompt-modal/login-prompt-modal.component';
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.component";
 import { AppConstants } from './constants';
 
 declare const window: any;
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   openLoginModal() {
-      const loginModal = this.matDialog.open(LoginPromptModal, AppConstants.LOGIN_DIALOG_CONFIG);
+      const loginModal = this.matDialog.open(LoginPromptModalComponent, AppConstants.LOGIN_DIALOG_CONFIG);
       loginModal.afterClosed().subscribe((result) => {
         if (result === 'Yes') {
           console.log('Login Modal');

@@ -5,7 +5,7 @@ import { AuthenticationService} from '../../authentication.service';
 import { CustomerService } from '../../services/customer.services';
 import { EmailService } from '../../services/email.services';
 import { Router } from '@angular/router';
-import { LoginPromptModal } from '../login-prompt-modal/login-prompt-modal.component';
+import { LoginPromptModalComponent } from '../login-prompt-modal/login-prompt-modal.component';
 import { UserData } from '../../../app/data/user-data';
 import { CustomerData } from '../../../app/data/customer-data';
 
@@ -18,7 +18,7 @@ declare var $: any;
     styleUrls: ['../modal-dialog/modal-dialog.component.css']
 })
 
-export class RegisterModalDialogComponent implements OnInit{
+export class RegisterModalDialogComponent implements OnInit {
     newUserForm: FormGroup;
     modalHeader: string;
     modalContent: string;
@@ -34,7 +34,7 @@ export class RegisterModalDialogComponent implements OnInit{
       Email: '',
       IsActive: true,
       CreatedDate: ''
-  }
+  };
 
   customerDetails: CustomerData = {
     UserPK: 0,
@@ -52,11 +52,11 @@ export class RegisterModalDialogComponent implements OnInit{
       public dialogRegisterRef: MatDialogRef<RegisterModalDialogComponent>,
       private fb: FormBuilder, private auth: AuthenticationService,
       private custService: CustomerService, private router: Router,
-      public dialogLoginRef: MatDialogRef<LoginPromptModal>,
+      public dialogLoginRef: MatDialogRef<LoginPromptModalComponent>,
       public emailService: EmailService,
       @Inject(MAT_DIALOG_DATA) private modalData: any) {}
 
-    ngOnInit(){
+    ngOnInit() {
       this.newUserForm = this.fb.group({
         username: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
@@ -84,14 +84,14 @@ export class RegisterModalDialogComponent implements OnInit{
 
     get f() { return this.newUserForm.controls; }
 
-    loadUserDetails(){
+    loadUserDetails() {
       this.userInfo.Username = this.newUserForm.get('username').value;
       this.userInfo.Email = this.newUserForm.get('email').value;
       this.userInfo.Password = this.newUserForm.get('password').value;
       this.userInfo.Role_FK = '1';
     }
 
-    loadCustomerDetails(){
+    loadCustomerDetails() {
       this.customerDetails.FirstName = this.newUserForm.get('FirstName').value;
       this.customerDetails.LastName = this.newUserForm.get('LastName').value;
       this.customerDetails.PhoneNo = this.newUserForm.get('PhoneNo').value;
@@ -117,10 +117,8 @@ export class RegisterModalDialogComponent implements OnInit{
           } else {
             this.customerDetails.UserPK = res.UserPK;
             this.userInfo.UserPK = this.customerDetails.UserPK;
-            this.custService.finishRegister(this.customerDetails).subscribe((res) => {
-              if (res.error) {
-                console.log(res);
-                this.errorMessage = '*' + res.error;
+            this.custService.finishRegister(this.customerDetails).subscribe( res2 => {
+              if (res2.error) {
                 return;
               } else {
                 this.sendConfirmation();
