@@ -1,6 +1,15 @@
 .mat-button, .mat-raised-button:hover{
     background-color: rgb(6, 3, 189);
   } 
+
+table{
+  width: 100%;
+}
+
+.mat-header-cell{
+  background-color: teal;
+
+}
   
   .col-lg-12{
       padding-bottom: 25px;
