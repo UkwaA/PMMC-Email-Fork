@@ -3,7 +3,7 @@ import { ProgramData } from '../../data/program-data';
 import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
-import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArgs, EventStyleArgs, DateChangeEvent  } from '@progress/kendo-angular-scheduler';
+import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArgs, EventStyleArgs, DateChangeEvent} from '@progress/kendo-angular-scheduler';
 import { ProgramScheduleData } from '../../data/program-schedule-data';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
@@ -99,10 +99,7 @@ export class ViewScheduleComponent {
         }
     
     ngOnInit(){
-        this.choice = "0"
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        });
+        this.choice = "0";
         // Service call to get data from server
         this.programService.getAllPrograms().then((result) =>{
             this.programs = result;
