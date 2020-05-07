@@ -130,6 +130,7 @@ export class SetProgramScheduleComponent {
         recurrenceExceptions : 'RecurrenceException'
     };
 	
+	hoveredIndex:any;
 	/********************************************
 	 * FUNCTION DECLARATION
 	*********************************************/
@@ -166,6 +167,7 @@ export class SetProgramScheduleComponent {
 	}
 
 	reloadAllSessions(){
+		this.hoveredIndex = null	
 		this.hasSession = false
 		this.hasAdditionalSession = false
 		this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) =>{

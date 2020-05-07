@@ -46,7 +46,7 @@ export class Contact implements OnInit {
         return this.myForm.get('message');
     }
 
-    submit(){
+    submit(value){
         this.loading = true;
         let user = {
         name: this.myForm.value.fullName,
