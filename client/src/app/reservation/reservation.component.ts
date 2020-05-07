@@ -36,7 +36,7 @@ import { PaymentServices } from '../services/payment.services';
 })
 export class ReservationComponent implements OnInit {
   @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
-
+  confirmation: any;
   ProgramPK: number;
   stepOneIsCompleted = false;
   stepTwoIsCompleted = false;
