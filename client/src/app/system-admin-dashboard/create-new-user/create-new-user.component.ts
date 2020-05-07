@@ -46,8 +46,10 @@ export class CreateNewUserComponent {
       Subscribe: 0,
     }
 
-    constructor(private route: ActivatedRoute, private auth: AuthenticationService,private fb: FormBuilder, 
-        private router: Router, public emailService: EmailService, public matDialog: MatDialog, private customer: CustomerService,) { }
+    constructor(
+        private route: ActivatedRoute, private auth: AuthenticationService, private fb: FormBuilder,
+        private router: Router, public emailService: EmailService, public matDialog: MatDialog, 
+        private customer: CustomerService) { }
 
     ngOnInit() {
         this.errorMessage = '';
@@ -61,19 +63,19 @@ export class CreateNewUserComponent {
             Address: [],
             City: [],
             State: [],
-            Zipcode:[],
+            Zipcode: [],
             Subscribe: []
           });
 
-          this.userRoles.forEach(e => {
-            $('#roleSelection').append(new Option(e, e));  
-          });
+        this.userRoles.forEach(e => {
+            $('#roleSelection').append(new Option(e, e));
+        });
     }
 
     get f() { return this.createNewUserForm.controls; }
 
-    openModalCreateNewUser(){
-        //Form validation
+    openModalCreateNewUser() {
+        // Form validation
         this.submitted = true;
         if (this.createNewUserForm.invalid) {
             return;
@@ -111,7 +113,7 @@ export class CreateNewUserComponent {
             {this.userDetails.Role_FK = '2'} else
                 {this.userDetails.Role_FK = '3'}
 
-        //Get subscribe checkbox info
+        // Get subscribe checkbox info
         if (this.subscribeChecked) {
             this.customerDetails.Subscribe = 1;
         }
@@ -122,8 +124,8 @@ export class CreateNewUserComponent {
         this.auth.register(this.userDetails).subscribe((res) => {
             if (res.error)
             {
-                console.log(res)
-                this.errorMessage = '*' + res.error
+                console.log(res);
+                this.errorMessage = '*' + res.error;
                 return;
             } else {
                 this.customerDetails.UserPK = res.UserPK;
@@ -141,7 +143,7 @@ export class CreateNewUserComponent {
                         },
                         err => {
                             console.log(err);
-                        })
+                        });
                     this.router.navigateByUrl('/profile/user-management');
                 });
             }

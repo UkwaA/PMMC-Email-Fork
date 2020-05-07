@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService, TokenPayload } from '../../authentication.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RegisterModalDialogComponent } from '../register-modal-dialog/register-modal-dialog.component';
@@ -30,7 +30,6 @@ export class LoginPromptModalComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     public dialogRef: MatDialogRef<LoginPromptModalComponent>,
-    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     public matDialog: MatDialog,
@@ -72,7 +71,6 @@ export class LoginPromptModalComponent implements OnInit {
     registerDialogConfig.autoFocus = false;
     registerDialogConfig.data = {
     title: 'Register New User',
-    routerURL: this.modalData.routerURL,
     numberOfButton: '2'
     };
     const registerModal = this.matDialog.open(RegisterModalDialogComponent, registerDialogConfig);

@@ -19,6 +19,9 @@ module.exports = db.sequelize.define(
         },
         IsActive: {
             type: Sequelize.BOOLEAN
+        },
+        FileData: {
+            type: Sequelize.JSON
         }
     }
 )
