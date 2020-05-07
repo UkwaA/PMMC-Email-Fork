@@ -38,26 +38,34 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-contact-email', data);
   }
 
+  // Connected
   public sendResetPasswordEmail(userInfo): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-reset-password-email', userInfo);
   }
 
+  // Connected
   public ValidPasswordToken(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/reset-password/' + body.resettoken, body);
   }
 
+  // Connected
   public sendPasswordConfirmationEmail(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-password-confirmation-email/', body);
   }
 
+  // Connected
   public CreateNewUserConfirmationEmail(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/create-new-user-confirmation-email/', body);
   }
 
+  // 
   public SendBookingRequestConfirmationEmail(body): Observable<any> {
-    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-initial-booking-confirmation-email/', body);
+    console.log("Send booking request called");
+    console.log(body);
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-booking-request-confirmation-email/', body);
   }
 
+  // Connected
   public sendRegistrationConfirmationEmail(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-registration-confirmation-email/', body);
   }
@@ -76,6 +84,15 @@ export class EmailService {
 
   public sendPostProgramEmail(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-post-program-email/', body);
+  }
+
+  public getEmailAttachmentsByID(): Observable<any> {
+    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-email-attachments/' + 2);
+  }
+
+  public changeEmailActiveStatus(body): Observable<any> {
+    console.log('Change email called1');
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/change-email-active-status/', body);
   }
 
 
