@@ -46,13 +46,13 @@ everydayRule.minute = 0;
 everydayRule.second = 0;
 everydayRule.dayOfWeek = new NodeSchedule.Range(0,6);
 
-var testRule = new NodeSchedule.RecurrenceRule();
-testRule.second = 6;
+// var testRule = new NodeSchedule.RecurrenceRule();
+// testRule.second = 6;
 /**********************************************
  * UPDATE SCHEDULE TABLE 
  * Set IsActive to "false" for schedule that pasts today's date
  **********************************************/
-NodeSchedule.scheduleJob(testRule, function(){
+NodeSchedule.scheduleJob(everydayRule, function(){
     console.log("Updating schedule table every day at 6AM")
     var todayDate = (new Date()).toISOString()
     Schedule.findAll({

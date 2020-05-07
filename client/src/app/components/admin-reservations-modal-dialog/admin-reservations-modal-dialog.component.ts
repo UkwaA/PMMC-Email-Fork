@@ -11,11 +11,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 export class AdminReservationsModalDialogComponent implements OnInit {
     reservations = [];
     p: number;
+    range = {start: '', end: ''};
     constructor(public dialogRef: MatDialogRef<AdminReservationsModalDialogComponent>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     ngOnInit() {
-        this.reservations = this.data;
+        this.reservations = this.data.reservations;
+        this.range.start = this.data.range.start.toDateString();
+        this.range.end = this.data.range.end.toDateString();
     }
 
     closeModal() {
