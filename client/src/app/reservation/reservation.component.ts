@@ -98,7 +98,6 @@ export class ReservationComponent implements OnInit {
 
   public allEvents: SchedulerEvent[];
   allBlackoutDateException: any = [];
-  quantityData: QuantiyFormData;
   quantityForm: FormGroup;
   currTotalQuantity = 0;
   availability: number;
@@ -557,11 +556,11 @@ export class ReservationComponent implements OnInit {
                     new Date(eventStartDate + 'T' + eventStartTime)
                   );
                 }
-                //if this session has blackout-date => add to recurenceException
+                // if this session has blackout-date => add to recurenceException
                 if (result.length > 0) {
-                  //add each of the date in exceptionDateArr to recurence exception
+                  // add each of the date in exceptionDateArr to recurence exception
                   result[0].exceptionDateArr.forEach((exceptionDate) => {
-                    //check if date exists in the RecurenceException arr
+                    // check if date exists in the RecurenceException arr
                     if (
                       !item.RecurrenceException.find((e) => {
                         return (
@@ -593,15 +592,18 @@ export class ReservationComponent implements OnInit {
 
   // Clear data when click on input field
   onFocus(event) {
-    if (event.target.value == 0) event.target.value = '';
+    if (event.target.value == 0) {
+      event.target.value = ''
+    }
   }
 
   // Restore data when lose focus on input field
   lostFocus(event) {
     if (event.target.value === 0 || event.target.value === '') {
-      event.target.value = 0;
+      event.target.value = '0';
     }
     this.calculateTotalQuantity();
+    // console.log(this.quantityForm.value);
   }
 
   // Helper function to calculate total attendee
@@ -720,7 +722,7 @@ export class ReservationComponent implements OnInit {
           totalQuantControl.clearValidators();
           totalQuantControl.setValidators([
             Validators.required,
-            Validators.min(1),
+            Validators.min(8),
             Validators.max(this.availability),
           ]);
           totalQuantControl.updateValueAndValidity();
@@ -742,9 +744,8 @@ export class ReservationComponent implements OnInit {
    Booking a Group Program will associate below tables:
     - ReservationHeader
     - ReservationGroupDetails
-    - PaymentHeader 
-    - MarketingInformation     
-    Data will be stored in the LocalStorage and insert at the end                               
+    - PaymentHeader
+    - MarketingInformation
   **********************************************************/
 
   // Helper function to check validator
@@ -939,7 +940,7 @@ export class ReservationComponent implements OnInit {
                 .processToken(this.paymentObj)
                 .subscribe((chargeResult) => {
                   if (chargeResult) {
-                    this.paymentData.PaymentPK = this.paymentObj.token['id'];
+                    this.paymentData.PaymentPK = this.paymentObj.token["id"];
                     this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
                     this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
                     this.paymentData.Total = chargeResult.amount;

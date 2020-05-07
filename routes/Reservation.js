@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const reservation = express.Router();
 const bodyParser = require("body-parser");
 
@@ -16,7 +16,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 reservation.use(bodyParser.json());
-reservation.use(cors());
+// reservation.use(cors());
 
 /******************************************
  *       GET ALL RESERVATION HEADER           *
@@ -191,30 +191,28 @@ reservation.post("/add-individual-reservation-details", (req, res) => {
       UPDATE REMAINING BALANCE    
  ******************************************/
 reservation.put("/update-balance/:id", (req, res) => {
-  var balance = req.body.amount
+  var balance = req.body.value
   ReservationHeader.findOne({
     where :{
       ReservationPK: req.params.id 
     }
     })
     .then((result) => {
-      if(result){
-        result.update({
-          RemainingBalance: balance
-        })
-        .then(result =>{
-          if (result) {
-            res.send({
-             message: "REMAINING BALANCE has been changed."
-            });
-          }
-          else {
-            res.send({
-             error: "Cannot update REMAINING BALANCE."
-            });
-          }
-        })
-      }
+      result.update({
+        RemainingBalance: balance
+      })
+      .then(result =>{
+        if (result) {
+          res.send({
+           message: "REMAINING BALANCE has been changed."
+          });
+        }
+        else {
+          res.send({
+           error: "Cannot update REMAINING BALANCE."
+          });
+        }
+      })
     })
     .catch(err => {
       res.send("error: " + err);
