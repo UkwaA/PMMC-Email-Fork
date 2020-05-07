@@ -46,7 +46,7 @@ program.get("/get-active-programs", (req, res) => {
       }
     })
     .catch((err) => {
-      res.send("error: " + err);
+      res.send("error Get Program Header Information: " + err);
     });
 });
 

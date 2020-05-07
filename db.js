@@ -20,12 +20,15 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 })
 
 // Connection to AWS
-// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
+// const sequelize = new Sequelize(process.env.AWZ_DB_NAME, process.env.AWZ_DB_USER, process.env.AWZ_DB_PASSWORD, {
+//   host: process.env.AWZ_DB_HOST,
+//   port: process.env.AWZ_DB_PORT,
 //   logging: console.log,
 //   maxConcurrentQueries: 100,
 //   dialect: 'mysql',
+//   define: {
+//       timestamps: false
+//   },
 //   dialectOptions: {
 //     connectTimeout: 60000
 //   },

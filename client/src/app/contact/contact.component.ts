@@ -9,11 +9,11 @@ import { EmailService } from '../services/email.services';
 })
 
 export class Contact implements OnInit {
-    loading = false
+    loading = false;
     myForm: FormGroup;
-    modalHeader = "Contact Form"
-    modalContent = " Thank you for contacting us. Your message has been successfully submitted. We will response to you as soon as possible."
-    constructor(private fb: FormBuilder, public emailService:EmailService) {
+    modalHeader = 'Contact Form'
+    modalContent = 'Thank you for contacting us. Your message has been successfully submitted. We will response to you as soon as possible.'
+    constructor(private fb: FormBuilder, public emailService: EmailService) {
 
     }
     ngOnInit() {
@@ -48,12 +48,12 @@ export class Contact implements OnInit {
 
     submit(){
         this.loading = true;
-        let user = {
+        const user = {
         name: this.myForm.value.fullName,
         email: this.myForm.value.email,
         subject: this.myForm.value.subject,
         message: this.myForm.value.message
-        }        
+        }
         this.emailService.sendContactEmail(user).subscribe(
         data => {
             let res:any = data; 
@@ -64,10 +64,10 @@ export class Contact implements OnInit {
         err => {
             console.log(err);
             this.loading = false;
-            console.log("submitted")
-        },() => {
+            console.log('submitted')
+        }, () => {
             //this.loading = false;
-            //this.buttionText = "Submit";
+            //this.buttionText = 'Submit';
         }
         );
     }

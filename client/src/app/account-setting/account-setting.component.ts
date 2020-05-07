@@ -10,21 +10,21 @@ import { UserData } from '../data/user-data';
     styleUrls: ['./account-setting.component.css']
   })
   export class AccountSetting implements OnInit {
-    UserPK: number
+    UserPK: number;
     userDetails: UserData = {
       UserPK: 0,
       Username: '',
       Password: '',
       Role_FK: '',
-      Email: '',      
+      Email: '',
       IsActive: false,
-      CreatedDate: ''      
+      CreatedDate: ''
   }
-   
+
     constructor(private route: ActivatedRoute, private auth: AuthenticationService) { }
     ngOnInit() {
         this.route.params.subscribe(val => {
-            this.UserPK = val.id
+            this.UserPK = val.id;
             this.auth.getUserDetailsByID(this.UserPK).subscribe(user => {
               this.userDetails = user;
             })

@@ -91,7 +91,7 @@ export class ProgramScheduleService{
     }
 
     public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
-        return this.http.put(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {quantity});
+        return this.http.put(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {"quantity" : quantity});
     }
 
     /*================================

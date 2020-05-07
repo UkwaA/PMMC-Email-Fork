@@ -335,32 +335,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/booking-group-program/booking-group-program.component.html":
-/*!******************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/booking-group-program/booking-group-program.component.html ***!
-  \******************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<form id = \"registerForm\" [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\r\n<div class=\"container\">\r\n    <div class=\"row text-left\">\r\n            <h1 id=\"program_name\"></h1>\r\n    </div>\r\n    <hr>\r\n    <!-- Quantity Part -->\r\n    <div class=\"row text-left\">\r\n      <div class=\"col-md-12\">\r\n        <h4> Quantity Information: </h4>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-12\">\r\n        <ul class=\"list row\">\r\n          <!-- <li class=\"list-item col-md-6\">Adult Quantity: {{quantityForm.AdultQuantity}} </li>\r\n          <li class=\"list-item col-md-6\">Age 5-7 Quantity: {{quantityForm.Age57Quantity}}</li>\r\n          <li class=\"list-item col-md-6\">Age 8-10 Quantity: {{quantityForm.Age810Quantity}}</li>\r\n          <li class=\"list-item col-md-6\">Age 11-12 Quantity: {{quantityForm.Age1112Quantity}}</li>\r\n          <li class=\"list-item col-md-6\">Age 13-14 Quantity: {{quantityForm.Age1314Quantity}}</li>\r\n          <li class=\"list-item col-md-6\">Age 14-15 Quantity: {{quantityForm.Age1415Quantity}}</li>\r\n          <li class=\"list-item col-md-6\">Age 15-17 Quantity: {{quantityForm.Age1517Quantity}}</li> -->\r\n        </ul>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12\">\r\n        <!-- <h6> Total Quantity : {{quantityForm.TotalQuantity}} </h6> -->\r\n      </div>\r\n    </div>\r\n    <hr>\r\n\r\n    <div class=\"row text-left\">\r\n      <div class=\"col-md-12\">\r\n        <h4> Please fill out the form: </h4>\r\n      </div>\r\n    </div>\r\n    <p id=\"final_warning\"></p>\r\n \r\n  \r\n      <!-- Organization Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.OrganizationName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"OrganizationName\">School Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"OrganizationName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.OrganizationName.errors }\">\r\n            <div *ngIf=\"submitted && f.OrganizationName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.OrganizationName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.OrganizationName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Name -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"TeacherName\">Teacher Name: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"TeacherName\" \r\n                  [ngClass]=\"{'is-invalid': submitted && f.TeacherName.errors }\">\r\n            <div *ngIf=\"submitted && f.TeacherName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherName.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Email -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherEmail\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"TeacherEmail\">Teacher Email: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"email\" formControlName=\"TeacherEmail\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherEmail.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherEmail.errors\" class=\"invalid-feedback\">\r\n                <div *ngIf=\"f.TeacherEmail.errors.required\">Email is required</div>\r\n                <div *ngIf=\"f.TeacherEmail.errors.pattern\">Email must be a valid email address</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Teacher Phone Number -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.TeacherPhoneNo\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"TeacherPhoneNo\">Teacher Phone Number: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"TeacherPhoneNo\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.TeacherPhoneNo.errors }\" />\r\n            <div *ngIf=\"submitted && f.TeacherPhoneNo.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.required\">This is required</div>\r\n              <div *ngIf=\"f.TeacherPhoneNo.errors.min\">Please enter a valid phone number</div>\r\n              <!-- <div *ngIf=\"f.TeacherPhoneNo.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Alternative Date -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.AlternativeDate\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"AlternativeDate\">Alternative Date: </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" formControlName=\"AlternativeDate\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.AlternativeDate.errors }\" />\r\n            <div *ngIf=\"submitted && f.AlternativeDate.errors\" class=\"invalid-feedback\">\r\n                <div *ngIf=\"f.AlternativeDate.errors.required\">Alternative Date is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Grade Level  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.GradeLevel\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"GradeLevel\">Grade Level: </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"GradeLevel\" [ngClass]=\"{ 'is-invalid': submitted && f.GradeLevel.errors }\">\r\n              <option>Kindergarten </option>\r\n              <option>1st</option>\r\n              <option>2nd</option>\r\n              <option>3rd</option>\r\n              <option>4th</option>\r\n              <option>5th</option>\r\n              <option>6th</option>\r\n              <option>7th</option>\r\n              <option>8th</option>\r\n              <option>9th</option>\r\n              <option>10th</option>\r\n              <option>11th</option>\r\n              <option>12th</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.GradeLevel.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.GradeLevel.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Program Restriction  -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.ProgramRestriction\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"ProgramRestriction\">Are you a Title One School? </label>\r\n          <div class=\"col-sm-10\">\r\n            <select class=\"form-control\" formControlName=\"ProgramRestriction\" [ngClass]=\"{ 'is-invalid': submitted && f.ProgramRestriction.errors }\">\r\n              <option>No </option>\r\n              <option>Yes</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.ProgramRestriction.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.ProgramRestriction.errors.required\">This is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n       <!-- Education Purpose  -->\r\n       <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingGroup.EducationPurpose\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-2\" for=\"EducationPurpose\">Education Purpose </label>\r\n          <div class=\"col-sm-10\">\r\n            <input class=\"form-control\" type=\"text\" formControlName=\"EducationPurpose\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.EducationPurpose.errors }\" />\r\n            <div *ngIf=\"submitted && f.EducationPurpose.errors\" class=\"invalid-feedback\">\r\n                <div *ngIf=\"f.EducationPurpose.errors.required\">Education Purpose is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <div class=\"btn_row row flex-end\">\r\n        <button type=\"button\" id=\"edit_btn\" (click)=\"editClicked($event)\" class=\"btn btn-info mr-2\" onfocus=\"blur()\">Edit</button>\r\n        <button type=\"submit\" class=\"submit_btn btn btn-info\" onfocus=\"blur()\">Submit</button>\r\n        <button class=\"btn btn-lg btn-info btn-block\" matStepperNext type=\"button\" onfocus=\"blur()\">Next</button>\r\n      </div>\r\n  </div>\r\n</form>\r\n");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/booking-individual-program/booking-individual-program.component.html":
-/*!****************************************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/booking-individual-program/booking-individual-program.component.html ***!
-  \****************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n<div class=\"container\">\r\n  <div class=\"row text-left\">\r\n    <h1 id=\"program_name\"></h1>\r\n  </div>\r\n  <hr>\r\n <!--  <div class=\"row\">\r\n    <div id=\"program_desc\"></div>\r\n  </div>\r\n  <hr> -->\r\n  <p id=\"final_warning\"></p>\r\n\r\n  <form id=\"registerForm\" [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\r\n    <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.ParticipantName\">\r\n      <div class=\"row\">\r\n        <label class=\"col-form-label col-sm-2\" for=\"ParticipantName\">Participant Name:</label>\r\n        <div class=\"col-sm-10\">\r\n          <input class=\"form-control\" type=\"text\" placeholder=\"Full name\" formControlName=\"ParticipantName\" \r\n          [ngClass]=\"{'is-invalid': submitted && f.ParticipantName.errors }\">\r\n          <div *ngIf=\"submitted && f.ParticipantName.errors\" class=\"invalid-feedback\">\r\n            <div *ngIf=\"f.ParticipantName.errors.required\">Paticipant Name is required</div>\r\n            <div *ngIf=\"f.ParticipantName.errors.minlength\">Must be at least 3 characters long.</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </fieldset>\r\n    <!-- Participant Age -->\r\n    <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.ParticipantAge\">\r\n      <div class=\"row\">\r\n        <label class=\"col-form-label col-sm-2\" for=\"ParticipantAge\">Participant Age: </label>\r\n        <div class=\"col-sm-10\">\r\n          <input class=\"form-control\" type=\"number\" min = \"5\" max = \"18\" placeholder=\"\" formControlName=\"ParticipantAge\"\r\n                [ngClass]=\"{'is-invalid': submitted && f.ParticipantAge.errors }\">\r\n          <div *ngIf=\"submitted && f.ParticipantAge.errors\" class=\"invalid-feedback\">\r\n            <div *ngIf=\"f.ParticipantAge.errors.required\">Paticipant Age is required</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </fieldset>\r\n    <!-- Gender -->\r\n    <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.Gender\">\r\n      <div class=\"row\">\r\n        <label class=\"col-form-label col-sm-2\" for=\"Gender\">Gender: </label>\r\n        <div class=\"col-sm-10\">\r\n          <select class=\"form-control\" formControlName=\"Gender\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.Gender.errors }\">\r\n          <option>Male</option>\r\n          <option>Female</option>\r\n        </select>\r\n        <div *ngIf=\"submitted && f.Gender.errors\" class=\"invalid-feedback\">\r\n          <div *ngIf=\"f.Gender.errors.required\">Gender is required</div>\r\n        </div>\r\n        </div>\r\n      </div>\r\n    </fieldset>\r\n    <!-- T-Shirt Size -->\r\n    <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.MerchSize\">\r\n      <div class=\"row\">\r\n        <label class=\"col-form-label col-sm-2\" for=\"MerchSize\">T-Shirt Size: </label>\r\n        <div class=\"col-sm-10\">\r\n          <select class=\"form-control\" formControlName=\"MerchSize\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.MerchSize.errors }\">\r\n            <option>Youth Small</option>\r\n            <option>Youth Medium</option>\r\n            <option>Youth Large</option>\r\n            <option>Youth X Large</option>\r\n            <option>Adult Small</option>\r\n            <option>Adult Medium</option>\r\n            <option>Adult Large</option>\r\n          </select>\r\n          <div *ngIf=\"submitted && f.MerchSize.errors\" class=\"invalid-feedback\">\r\n            <div *ngIf=\"f.MerchSize.errors.required\">Gender is required</div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </fieldset>\r\n    <!-- Allergy Info -->\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.AllergyInfo\">\r\n        <label for=\"AllergyInfo\">Allergy Information: </label>\r\n        <textarea class=\"form-control\" id=\"AllergyInfo\" rows=\"3\"></textarea>\r\n      </div>\r\n\r\n      <div class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.SpecialInfo\">\r\n        <label for=\"SpecialInfo\">Special Information: </label>\r\n        <textarea class=\"form-control\" id=\"SpecialInfo\" rows=\"3\"></textarea>\r\n      </div>\r\n      <div class=\"form-group card bg-light font-weight-bold pl-3\" *ngIf = \"bookingIndividual.MediaRelease\">\r\n        <label for=\"MediaRelease\">Media Release: </label>\r\n        <div class=\"media_release row\">\r\n          <p> I hereby authorize the Pacific Marine Mammal Center to take and possibly use pictures of my child as advertising on our website at www.pacificmmc.org.</p>\r\n          <p> I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT.</p>\r\n        </div>\r\n        <div class = \"form_checkbox row\">\r\n          <input class=\"form-check-input\" type=\"checkbox\" value=\"\" formControlName=\"MediaRelease\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.MediaRelease.errors }\">\r\n          <label class=\"form-check-label\" for=\"MediaRelease\">\r\n            I agree.\r\n          </label>\r\n          <div *ngIf=\"submitted && f.MediaRelease.errors\" class=\"invalid-feedback\">Accept Media Release is required</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group card bg-light font-weight-bold\" *ngIf = \"bookingIndividual.EmergencyMedicalRelease\">\r\n        <label for=\"EmergencyMedicalRelease\">Emergency Medical Release: </label>\r\n        <div class=\"row\">\r\n          <p>In case of emergency, the Pacific Marine Mammal Center will make every effort to contact the guardians of the child involved before any treatment has begun. However, in the event we are unable to contact you, the guardians, we require this medical release to be signed for all participants in the program.</p>\r\n          <h6>I HEREBY AUTHORIZE THE PHYSICIAN OR HOSPITAL SELECTED BY THE PACIFIC MARINE MAMMAL CENTER TO HOSPITILIZE, SECURE TREATMENT FOR, AND ORDER INJECTION, ANESTHESIA, OR SURGERY FOR MY CHILD.</h6>\r\n          <p>It is further understood that if you check this box, you will assume full responsibility for any such treatment, including the payment of all costs, and will hold the Pacific Marine Mammal Center, its representatives, directors, counselors and staff, harmless.</p>\r\n          <p>In the event of an evacuation emergency, I give permission for PMMC to transport my child to the following safety evacuation location:</p>\r\n          <p>Geneva Presbyterian Church\r\n            24301 El Toro Rd, Laguna Woods, CA 92637</p>\r\n          <h6>I HAVE READ AND UNDERSTOOD ALL OF THE INFORMATION WRITTEN AND BY CHECKING THIS BOX, I AGREE TO ADHERE TO THE TERMS OF THIS DOCUMENT. IT IS FURTHER UNDERSTOOD THAT POLICIES AND TERMS OF THIS DOCUMENT MAY BE CHANGED AND AMENDED AS NEEDED AND THAT I SHALL BE INFORMED, IN WRITING, OF SUCH CHANGES.</h6>\r\n        </div>\r\n        <div class = \"form_checkbox row\">\r\n          <input class=\"form-check-input\" type=\"checkbox\" value=\"\" formControlName=\"EmergencyMedicalRelease\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.EmergencyMedicalRelease.errors }\">\r\n          <label class=\"form-check-label\" for=\"EmergencyMedicalRelease\">\r\n            I agree.\r\n          </label>\r\n          <div *ngIf=\"submitted && f.EmergencyMedicalRelease.errors\" class=\"invalid-feedback\">Accept Emergency Medical Release is required</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-group card bg-light font-weight-bold\" *ngIf = \"bookingIndividual.LiabilityAgreement\">\r\n        <label for=\"LiabilityAgreement\">Liability Agreement: </label>\r\n        <div class=\"row\">\r\n          <p>I hereby acknowledge that I am the parent or legal guardian of the child who I have registered to participate in services and programs offered by Pacific Marine Mammal Center.  I recognize that children at play may suffer injuries despite adequate supervision. I know of the risks involved, accept them, and I nonetheless have voluntarily enrolled my child at Pacific Marine Mammal Center.</p>\r\n          <p>I hereby grant the Pacific Marine Mammal Center (PMMC) and news media outlets permission to use my child’s photograph or video in any and all of their publications. I hereby irrevocably authorize them to edit, alter, copy, exhibit, publish or distribute the photo or video for any lawful purpose.</p>\r\n          <p>In consideration of the services rendered by Pacific Marine Mammal Center, I agree that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me will not make a claim against, sue, attach the property of, or prosecute Pacific Marine Mammal Center, its employees, officers, directors, agents, servants, or volunteers for injury or damage resulting from the negligence or other acts, howsoever caused, connected to, arising out of, or as a result of, the provision of its services and programs, or my child's receipt of said services or participation in said programs.</p>\r\n          <p>In addition, I hereby release and discharge Pacific Marine Mammal Center from all causes of action, claims, or demands that I, my heirs, executors, assigns, beneficiaries, or anyone claiming by or through me many now have or may hereafter have for injury or damage resulting from my child's participation in Pacific Marine Mammal Center’s programs and services.</p>\r\n          <p>I further agree to indemnify, defend, and to hold harmless Pacific Marine Mammal Center arising out of any claims and demands whether made by or on behalf of my child or any other per-son or entity for either injuries to my child's person or property, or arising out of claims that my child's actions caused injury or damage to another person or property, whether or not such claims, injuries and damages were in fact caused or contributed to by Pacific Marine Mammal Center.</p>\r\n        </div>\r\n        <div class = \"form_checkbox row\">\r\n          <input class=\"form-check-input\" type=\"checkbox\" value=\"\" formControlName=\"LiabilityAgreement\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.LiabilityAgreement.errors }\">\r\n          <label class=\"form-check-label\" for=\"LiabilityAgreement\">\r\n            I agree.\r\n          </label>\r\n          <div *ngIf=\"submitted && f.LiabilityAgreement.errors\" class=\"invalid-feedback\">Accept Liability Agreement is required</div>\r\n        </div>\r\n      </div>\r\n      <!-- Name of Insurance Carrier -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.InsureProviderName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"InsureProviderName\">Name of Insurance Carrier: </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"InsureProviderName\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.InsureProviderName.errors }\">\r\n            <div *ngIf=\"submitted && f.InsureProviderName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.InsureProviderName.errors.required\">Insurance Carrier's Name is required</div>\r\n              <div *ngIf=\"f.InsureProviderName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div> \r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Name of Insured Child -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.InsureRecipientName\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"InsureRecipientName\">Name of Insured Child:  </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"InsureRecipientName\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.InsureRecipientName.errors }\">\r\n            <div *ngIf=\"submitted && f.InsureRecipientName.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.InsureRecipientName.errors.required\">Insurance Recipient's Name is required</div>\r\n              <div *ngIf=\"f.InsureRecipientName.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n\r\n      <!-- Insurance Policy Number -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.InsurePolicyNo\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"InsurePolicyNo\">Insurance Policy Number:  </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"\" formControlName=\"InsurePolicyNo\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.InsurePolicyNo.errors }\">\r\n            <div *ngIf=\"submitted && f.InsurePolicyNo.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.InsurePolicyNo.errors.required\">Insurance Policy Number is required</div>\r\n              <div *ngIf=\"f.InsurePolicyNo.errors.minlength\">Please enter correct Policy number</div>\r\n              <!-- <div *ngIf=\"f.InsurePolicyNo.errors.pattern\">Invalid Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Insurance Phone Number -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.InsurePhoneNo\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"InsurePhoneNo\">Insurance Phone Number:  </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"InsurePhoneNo\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.InsurePhoneNo.errors }\">\r\n            <div *ngIf=\"submitted && f.InsurePhoneNo.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.InsurePhoneNo.errors.required\">Insurance Phone Number is required</div>\r\n              <div *ngIf=\"f.InsurePhoneNo.errors.min\">Please enter a valid phone number</div>\r\n              <!-- <div *ngIf=\"f.InsurePhoneNo.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Authorized Pickup Name 1 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.AuthorizedPickupName1\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"AuthorizedPickupName1\">Authorized Pick Up Name #1: </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"Full name\" formControlName=\"AuthorizedPickupName1\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.AuthorizedPickupName1.errors }\">\r\n            <div *ngIf=\"submitted && f.AuthorizedPickupName1.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AuthorizedPickupName1.errors.required\">Authorized Pickup Name is required</div>\r\n              <div *ngIf=\"f.AuthorizedPickupName1.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Authorized Pickup Phone 1 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.AuthorizedPickupPhone1\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"AuthorizedPickupPhone1\">Authorized Pick Up Phone Number #1: </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"AuthorizedPickupPhone1\" \r\n                [ngClass]=\"{ 'is-invalid': submitted && f.AuthorizedPickupPhone1.errors }\">\r\n            <div *ngIf=\"submitted && f.AuthorizedPickupPhone1.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AuthorizedPickupPhone1.errors.required\">Authorized Pickup Phone is required</div>\r\n              <div *ngIf=\"f.AuthorizedPickupPhone1.errors.min\">Please enter a valid phone number</div>\r\n              <!-- <div *ngIf=\"f.AuthorizedPickupPhone1.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Authorized Pickup Name 2 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.AuthorizedPickupName2\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"AuthorizedPickupName2\">Authorized Pick Up Name #2: </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"Full name\" formControlName=\"AuthorizedPickupName2\"\r\n                [ngClass]=\"{ 'is-invalid': submitted && f.AuthorizedPickupName2.errors }\">\r\n            <div *ngIf=\"submitted && f.AuthorizedPickupName2.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AuthorizedPickupName2.errors.required\">2nd Authorized Pickup Name is required</div>\r\n              <div *ngIf=\"f.AuthorizedPickupName2.errors.minlength\">Must be at least 3 characters long.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Authorized Pickup Phone 2 -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.AuthorizedPickupPhone2\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"AuthorizedPickupPhone2\">Authorized Pick Up Phone Number #2: </label>\r\n          <div class=\"col-sm-9\">\r\n            <input class=\"form-control\" type=\"number\" placeholder=\"xxx-xxx-xxxx\" formControlName=\"AuthorizedPickupPhone2\" \r\n                [ngClass]=\"{ 'is-invalid': submitted && f.AuthorizedPickupPhone2.errors }\">\r\n            <div *ngIf=\"submitted && f.AuthorizedPickupPhone2.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AuthorizedPickupPhone2.errors.required\">2nd Authorized Pickup Phone is required</div>\r\n              <div *ngIf=\"f.AuthorizedPickupPhone2.errors.min\">Please enter a valid phone number</div>\r\n              <!-- <div *ngIf=\"f.AuthorizedPickupPhone2.errors.pattern\">Invalid Phone Number</div> -->\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Early Dropoff -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.EarlyDropOff\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"EarlyDropOff\">Early Drop Off: </label>\r\n          <div class=\"col-sm-9\">\r\n            <select class=\"form-control\" formControlName=\"EarlyDropOff\" \r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.EarlyDropOff.errors }\">\r\n              <option>No, thanks! (+$0) </option>\r\n              <option>Monday Early Drop Off (+$7)</option>\r\n              <option>Tueday Early Drop Off (+$7)</option>\r\n              <option>Wednesday Early Drop Off (+$7)</option>\r\n              <option>Thursday Early Drop Off (+$7)</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.EarlyDropOff.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.EarlyDropOff.errors.required\">This selection is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n      <!-- Late Pickup -->\r\n      <fieldset class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.LatePickup\">\r\n        <div class=\"row\">\r\n          <label class=\"col-form-label col-sm-3\" for=\"LatePickup\">Late Pick Up: </label>\r\n          <div class=\"col-sm-9\">\r\n            <select class=\"form-control\" formControlName=\"LatePickup\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.LatePickup.errors }\">\r\n              <option>No, thanks! (+$0) </option>\r\n              <option>Monday Late Pick-Up (+$7)</option>\r\n              <option>Tueday Late Pick-Up  (+$7)</option>\r\n              <option>Wednesday Late Pick-Up  (+$7)</option>\r\n              <option>Thursday Late Pick-Up  (+$7)</option>\r\n            </select>\r\n            <div *ngIf=\"submitted && f.LatePickup.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.LatePickup.errors.required\">This selection is required</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </fieldset>\r\n\r\n      <!-- <div class=\"form-group font-weight-bold\" *ngIf = \"bookingIndividual.FullAmount\">\r\n        <label for=\"FullAmount\">This program requires you to pay full amount. </label>\r\n      </div> -->\r\n      <div class=\"btn_row row flex-end\">\r\n        <button type=\"button\" id=\"edit_btn\" (click)=\"editClicked($event)\" class=\"btn btn-info mr-2\" onfocus=\"blur()\">Edit</button>\r\n        <button type=\"submit\" class=\"submit_btn btn btn-info\" onfocus=\"blur()\">Submit</button>\r\n      </div>\r\n    </form>\r\n</div>");
-
-/***/ }),
-
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.html":
 /*!*************************************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.html ***!
@@ -422,7 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <h4 class=\"text-center\">Choose the options you'd like to display:</h4>\r\n    <div class=\"row\">\r\n      <div class = \"col-sm-6\" *ngFor = 'let item of varLabels'>\r\n        <section class=\"options-section\">\r\n          <mat-checkbox class=\"options-margin\" [(ngModel)]=\"bookingIndividual[item.var]\" (change)=\"chkbDataChange($event)\">\r\n            <div data-toggle=\"tooltip\" title=\"{{item.tooltip}}\">\r\n            {{item.label}}\r\n            </div>\r\n          </mat-checkbox>\r\n        </section>  \r\n      </div>\r\n    </div>\r\n    <!-- <div class=\"button pt-5 pb-5\">\r\n      <button class=\"btn btn-lg btn-info btn-block \" type=\"submit\" (click)=\"openModal()\">Update Program Requirement</button>\r\n    </div> -->\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <h4 class=\"text-center\">Choose the options you'd like to display:</h4>\r\n    <div class=\"row\">\r\n      <div class = \"col-sm-6\" *ngFor = 'let item of varLabels'>\r\n        <section class=\"options-section\">\r\n          <mat-checkbox class=\"options-margin\" [(ngModel)]=\"bookingIndividual[item.var]\" (change)=\"chkbDataChange($event)\">\r\n            <div data-toggle=\"tooltip\" title=\"{{item.tooltip}}\">\r\n            {{item.label}}\r\n            </div>\r\n          </mat-checkbox>\r\n        </section>  \r\n      </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -474,7 +448,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"modal-content-wrapper\">\r\n    <header id=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" (click)=\"closeModal()\" onfocus=\"blur()\">X</button>\r\n        <h1 id=\"modal-title\">{{modalData.title}}</h1>\r\n    </header>\r\n    <mat-divider></mat-divider>\r\n    <section id=\"modal-body\" style=\"padding-bottom:0px;overflow-y:auto!important; max-height:500px; max-width:700px;overflow-x:hidden\">\r\n        <div class=\"formerrors\" style=\"color:red;\">{{errorMessage}}</div>\r\n        <form>\r\n        <div class=\"registration row\" [formGroup]=\"newUserForm\">\r\n            <div class=\"col-sm-5\">\r\n                <h5>Account Info</h5>\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formUsername\">Username</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"formUsername\" formControlName=\"username\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\">\r\n                    <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.username.errors.required\">Username is required</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formEmail\">Email</label>\r\n                    <input type=\"text\" pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,63}$\" class=\"form-control\" id=\"formEmail\" formControlName=\"email\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\">\r\n                    <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.email.errors.required\">Email is required</div>\r\n                        <div *ngIf=\"submitted && f.email.errors.pattern\">Please enter a valid email</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formPassword\">Password</label>\r\n                    <input type=\"password\" class=\"form-control\" id=\"formPassword\" formControlName=\"password\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                    <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.password.errors.required\">Password is required</div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-7\">\r\n                <h5>Personal Info</h5>\r\n                <hr>\r\n                <div class=\"form-group row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <label for=\"formFirstName\">First Name</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formFirstName\" formControlName=\"FirstName\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.FirstName.errors }\">\r\n                        <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"submitted && f.FirstName.errors.required\">First Name is required</div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <label for=\"formLastName\">Last Name</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formLastName\" formControlName=\"LastName\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.LastName.errors }\">\r\n                        <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"submitted && f.LastName.errors.required\">Last Name is required</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formPhoneNo\">Phone Number</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"formPhoneNo\" maxlength=\"10\" formControlName=\"PhoneNo\"\r\n                    oninput=\"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.PhoneNo.errors }\">\r\n                    <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.PhoneNo.errors.required\">Phone Number is required</div>\r\n                        <div *ngIf=\"submitted && f.PhoneNo.errors.min\">Please enter a valid phone number</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formAddress\">Address</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"formAddress\" formControlName=\"Address\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.Address.errors }\">\r\n                    <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.Address.errors.required\">Address is required</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-row\">\r\n                    <div class=\"col-sm-7\">\r\n                        <label for=\"formCity\">City</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formCity\" formControlName=\"City\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.City.errors }\">\r\n                    </div>\r\n                    <div class=\"col-sm-2\">\r\n                        <label for=\"formState\">State</label>\r\n                        <input type=\"text\" class=\"state form-control\" id=\"formState\" maxLength=\"2\" formControlName=\"State\"\r\n                        style=\"text-transform:uppercase;\" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))'\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.State.errors }\">\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                        <label for=\"formZipCode\">Zip Code</label>\r\n                        <input type=\"number\" class=\"form-control\" id=\"formZipCode\" maxlength=\"5\" formControlName=\"Zipcode\"\r\n                        oninput=\"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.Zipcode.errors }\">\r\n                    </div>\r\n                    <div *ngIf=\"submitted && (f.City.errors || f.State.errors || f.Zipcode.errors)\" \r\n                        class=\"col-sm-12\" style=\"color:red\">\r\n                        <small>Please enter a valid location</small>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group row mt-3\" style=\"padding-left:15px;\">\r\n                    <section class=\"options-section\">\r\n                        <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                        [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                    </section>\r\n                </div>\r\n\r\n            </div>\r\n\r\n        </div>\r\n        </form>\r\n    </section>\r\n    <mat-divider></mat-divider>\r\n    <footer id=\"modal-footer\">\r\n        <button mat-raised-button id=\"modal-action-button\" (click)=\"onSubmit()\" onfocus=\"blur()\">\r\n            Sign Up\r\n        </button>\r\n        <button *ngIf = \"modalData.numberOfButton == '2'\" mat-raised-button id=\"modal-cancel-button\" (click)=\"closeModal()\" onfocus=\"blur()\">\r\n            Cancel\r\n        </button>\r\n    </footer>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"modal-content-wrapper\">\r\n    <header id=\"modal-header\">\r\n        <button type=\"button\" class=\"close\" (click)=\"closeModal()\" onfocus=\"blur()\">X</button>\r\n        <h1 id=\"modal-title\">{{modalData.title}}</h1>\r\n    </header>\r\n    <mat-divider></mat-divider>\r\n    <section id=\"modal-body\" style=\"padding-bottom:0px;overflow-y:auto!important; max-height:500px; max-width:700px;overflow-x:hidden\">\r\n        <div class=\"formerrors\" style=\"color:red;\">{{errorMessage}}</div>\r\n        <form>\r\n        <div class=\"registration row\" [formGroup]=\"newUserForm\">\r\n            <div class=\"col-sm-5\">\r\n                <h5>Account Info</h5>\r\n                <hr>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formUsername\">Username</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"formUsername\" formControlName=\"username\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\">\r\n                    <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.username.errors.required\">Username is required</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formEmail\">Email</label>\r\n                    <input type=\"text\" pattern=\"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}$\" class=\"form-control\" id=\"formEmail\" formControlName=\"email\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\">\r\n                    <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.email.errors.required\">Email is required</div>\r\n                        <div *ngIf=\"submitted && f.email.errors.pattern\">Please enter a valid email</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formPassword\">Password</label>\r\n                    <input type=\"password\" class=\"form-control\" id=\"formPassword\" formControlName=\"password\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                    <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.password.errors.required\">Password is required</div>\r\n                        <div *ngIf=\"submitted && f.password.errors.minlength\">Password must be at least 6 characters long</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formConfirmPassword\">Confirm Password</label>\r\n                    <input type=\"password\" class=\"form-control\" id=\"formConfirmPassword\" formControlName=\"confirmPassword\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && (this.f.confirmPassword.value != this.f.password.value) }\">\r\n                    <div *ngIf=\"submitted && (this.f.confirmPassword.value != this.f.password.value)\" class=\"invalid-feedback\">\r\n                        The passwords must match\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-7\">\r\n                <h5>Personal Info</h5>\r\n                <hr>\r\n                <div class=\"form-group row\">\r\n                    <div class=\"col-sm-6\">\r\n                        <label for=\"formFirstName\">First Name</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formFirstName\" formControlName=\"FirstName\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.FirstName.errors }\">\r\n                        <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"submitted && f.FirstName.errors.required\">First Name is required</div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-sm-6\">\r\n                        <label for=\"formLastName\">Last Name</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formLastName\" formControlName=\"LastName\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.LastName.errors }\">\r\n                        <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"submitted && f.LastName.errors.required\">Last Name is required</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formPhoneNo\">Phone Number</label>\r\n                    <input type=\"number\" class=\"form-control\" id=\"formPhoneNo\" maxlength=\"10\" formControlName=\"PhoneNo\"\r\n                    oninput=\"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.PhoneNo.errors }\">\r\n                    <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.PhoneNo.errors.required\">Phone Number is required</div>\r\n                        <div *ngIf=\"submitted && f.PhoneNo.errors.min\">Please enter a valid phone number</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"formAddress\">Address</label>\r\n                    <input type=\"text\" class=\"form-control\" id=\"formAddress\" formControlName=\"Address\"\r\n                    [ngClass]=\"{ 'is-invalid': submitted && f.Address.errors }\">\r\n                    <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"submitted && f.Address.errors.required\">Address is required</div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-row\">\r\n                    <div class=\"col-sm-7\">\r\n                        <label for=\"formCity\">City</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"formCity\" formControlName=\"City\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.City.errors }\">\r\n                    </div>\r\n                    <div class=\"col-sm-2\">\r\n                        <label for=\"formState\">State</label>\r\n                        <input type=\"text\" class=\"state form-control\" id=\"formState\" maxLength=\"2\" formControlName=\"State\"\r\n                        style=\"text-transform:uppercase;\" onkeypress='return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))'\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.State.errors }\">\r\n                    </div>\r\n                    <div class=\"col-sm-3\">\r\n                        <label for=\"formZipCode\">Zip Code</label>\r\n                        <input type=\"number\" class=\"form-control\" id=\"formZipCode\" maxlength=\"5\" formControlName=\"Zipcode\"\r\n                        oninput=\"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.Zipcode.errors }\">\r\n                    </div>\r\n                    <div *ngIf=\"submitted && (f.City.errors || f.State.errors || f.Zipcode.errors)\" \r\n                        class=\"col-sm-12\" style=\"color:red\">\r\n                        <small>Please enter a valid location</small>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group row mt-3\" style=\"padding-left:15px;\">\r\n                    <section class=\"options-section\">\r\n                        <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                        [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                    </section>\r\n                </div>\r\n\r\n            </div>\r\n\r\n        </div>\r\n        </form>\r\n    </section>\r\n    <mat-divider></mat-divider>\r\n    <footer id=\"modal-footer\">\r\n        <button mat-raised-button id=\"modal-action-button\" (click)=\"onSubmit()\" onfocus=\"blur()\">\r\n            Sign Up\r\n        </button>\r\n        <button *ngIf = \"modalData.numberOfButton == '2'\" mat-raised-button id=\"modal-cancel-button\" (click)=\"closeModal()\" onfocus=\"blur()\">\r\n            Cancel\r\n        </button>\r\n    </footer>\r\n</div>");
 
 /***/ }),
 
@@ -530,19 +504,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/customer-info/customer-info.component.html":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/customer-info/customer-info.component.html ***!
-  \**************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class = \"banner\">\r\n    <div class = \"container\">\r\n        <div class=\"d-flex justify-content-center h-100\"></div>\r\n            <div class = \"card\">\r\n                <div class = \"card-header\">\r\n                    <h3 class = \"text_header text-center\"> Personal Info </h3>\r\n                </div>\r\n                <div class = \"card-body\">\r\n                <form [formGroup] = \"customerInfoForm\" (ngSubmit) = \"openModal()\" \r\n                ng-class=\"{submitted:this.submitted}\" class=\"registerform\">\r\n                <div class = \"contact_header_title row justify-content-center\"> \r\n                    <h5 class = \"text_header text-center mb-1\"> </h5>\r\n                </div>\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faAddressBook\"></fa-icon></span>\r\n                    </div>\r\n                    <input id = \"fname\" type = \"string\" class = \"form-control\" placeholder = \"First Name\"\r\n                    formControlName=\"firstName\" \r\n                    [(ngModel)]=\"credentials.FirstName\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('firstName').valid}\">\r\n                    <div *ngIf=\"submitted && f.firstName.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.firstName.errors.required\">First name is required </div>\r\n                    </div>\r\n                </div>\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faAddressBook\"></fa-icon></span>\r\n                    </div>\r\n                    <input id = \"fname\" type = \"string\" class = \"form-control\" placeholder = \"Last Name\" \r\n                    formControlName=\"lastName\" \r\n                    [(ngModel)]=\"credentials.LastName\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('lastName').valid}\">\r\n                    <div *ngIf=\"submitted && f.lastName.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.lastName.errors.required\">Last name is required </div>\r\n                    </div>\r\n                </div>\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faPhoneSquare\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"number\" class = \"form-control\" placeholder = \"Phone Number\"\r\n                    formControlName=\"phoneNum\" \r\n                    [(ngModel)]=\"credentials.PhoneNo\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('phoneNum').valid}\">\r\n                    <div *ngIf=\"submitted && f.phoneNum.errors\" class = \"invalid-feedback\"> \r\n                     <div *ngIf=\"f.phoneNum.errors.required\">Phone number is required </div>\r\n                     <div *ngIf=\"f.phoneNum.errors.min\">Please enter a valid phone number </div>\r\n                    </div>\r\n                </div>\r\n                <div class = \"address_header_title row justify-content-center\"> \r\n                    <h5 class = \"text_header text-center mt-3 mb-3\">  </h5>\r\n                </div>\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faHome\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"string\" class = \"form-control\" placeholder = \"Street Address\"\r\n                    formControlName=\"address_street\" \r\n                    [(ngModel)]=\"credentials.Address\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('address_street').valid}\">\r\n                    <div *ngIf=\"submitted && f.address_street.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.address_street.errors.required\">Street address is required </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <!-- <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faHome\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"string\" class = \"form-control\" placeholder = \"Line 2\" \r\n                    formControlName=\"address_unit\" \r\n                    [(ngModel)]=\"credentials.StreetAddress2\">\r\n                </div>  -->\r\n\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faMapPin\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"string\" class = \"form-control\" placeholder  = \"City\"\r\n                    formControlName=\"address_city\" \r\n                    [(ngModel)]=\"credentials.City\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('address_city').valid}\">\r\n                    <div *ngIf=\"submitted && f.address_city.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.address_city.errors.required\">City is required </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faMap\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"string\" class = \"state form-control\" maxlength = \"2\" placeholder = \"State\"\r\n                    ng-keypressed=\"letterOnly(event)\" formControlName=\"address_state\"\r\n                    [(ngModel)]=\"credentials.State\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('address_state').valid}\">\r\n                    <div *ngIf=\"submitted && f.address_state.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.address_state.errors.required\">State is required </div>\r\n                        <div *ngIf=\"f.address_state.errors.minlength\">Please enter a valid state</div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class = \"input-group form-group\">\r\n                    <div class=\"input-group-prepend\">\r\n                        <span class=\"input-group-text\"><fa-icon [icon]=\"faMapMarker\"></fa-icon></span>\r\n                    </div>\r\n                    <input type = \"number\" class = \"form-control\" maxlength = \"5\" placeholder = \"Zip Code\"\r\n                    oninput=\"javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);\"\r\n                    formControlName=\"address_zipcode\" \r\n                    [(ngModel)]=\"credentials.Zipcode\" [ngClass]=\"{ 'is-invalid': submitted && !customerInfoForm.get('address_zipcode').valid}\">\r\n                    <div *ngIf=\"submitted && f.address_zipcode.errors\" class = \"invalid-feedback\"> \r\n                        <div *ngIf=\"f.address_zipcode.errors.required\">Zip Code is required </div>\r\n                        <div *ngIf=\"f.address_zipcode.errors.min\">Please enter a valid zip code </div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class = \"row form-group checkbox text-break\">\r\n                    <mat-checkbox color = \"primary\" id=\"ckbox\" name=\"ckbox\" class = \"form-control col-sm-2 p-0\" (change) = \"checkBoxClicked()\">\r\n                        Subscribe to our newsletter\r\n                    </mat-checkbox>\r\n                    <!-- <label for=\"ckbox\" class=\"cb_label col-sm-8 text-break\">Check to subscribe to our newsletter</label> -->\r\n                </div>\r\n\r\n            <div class = \"d-flex submit_button flex-row-reverse\"> \r\n                <button  class = \"submit_btn btn btn-primary\" [disabled] = \"customerInfoForm.ng-invalid\" type=\"submit\" onfocus=\"blur()\"> Submit </button>\r\n            </div>\r\n        </form>\r\n        </div>\r\n    </div>\r\n    </div>\r\n</div>\r\n\r\n");
-
-/***/ }),
-
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/dashboard/dashboard.component.html":
 /*!******************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/dashboard/dashboard.component.html ***!
@@ -552,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf = \"role == '2' || role == '3'\" class=\"container\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>Dashboard</h1>\r\n        </div>\r\n    </div> \r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n            <h6> Pick the date range you'd like to view the reservation information: </h6>\r\n            <kendo-daterange class = \"float-left\">\r\n                <label>\r\n                    <span class=\"label p-3\">From </span>\r\n                    <kendo-dateinput kendoDateRangeStartInput \r\n                    [(value)]=\"range.start\"\r\n                    (valueChange)=\"onChangeDate()\"></kendo-dateinput>\r\n                </label>\r\n                <label>\r\n                    <span class=\"label p-3\">To </span>\r\n                    <kendo-dateinput kendoDateRangeEndInput \r\n                    [(value)]=\"range.end\"\r\n                    (valueChange)=\"onChangeDate()\"></kendo-dateinput>\r\n                </label>\r\n            </kendo-daterange>\r\n        </div>\r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-green order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Completed Reservations</h6>\r\n                    <h2 class=\"text-right\">{{completedRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{completedTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-g-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Completed')\" onfocus=\"blur()\">View Completed Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-blue order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Ongoing Reservations</h6>\r\n                    <h2 class=\"text-right\">{{ongoingRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{ongoingTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-b-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('On Going')\" onfocus=\"blur()\">View Ongoing Reservations</button> \r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-yellow order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Attended Reservations</h6>\r\n                    <h2 class=\"text-right\">{{attendedRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{attendedTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-y-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Attended')\" onfocus=\"blur()\">View Attended Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-pink order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\"> Cancelled Reservations </h6>\r\n                    <h2 class=\"text-right\">{{cancelledRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{cancelledTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-p-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Cancelled')\" onfocus=\"blur()\">View Cancelled Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n    </div>\r\n    <!-- CHART USING NG2-CHARTS -->\r\n    <!-- <div>\r\n        <h2>{{title}}</h2>\r\n        <canvas\r\n            baseChart\r\n            [chartType]=\"'bar'\"\r\n            [datasets]=\"chartData\"\r\n            [labels]=\"labels\"\r\n            [options]=\"chartOptions\"\r\n            [legend]=\"true\"\r\n            [colors]=\"colors\"\r\n            (chartClick)=\"onChartClick($event)\">\r\n        </canvas>\r\n    </div>\r\n    \r\n    <br/> -->\r\n\r\n    <!-- <div>\r\n        <h2>PIE CHART EXAMPLE</h2>\r\n        <canvas \r\n            baseChart \r\n            [data]=\"pieChartData\" \r\n            [labels]=\"pieChartLabels\" \r\n            [chartType]=\"'pie'\"\r\n            [options]=\"pieChartOptions\"\r\n            [legend]=\"true\"\r\n            [plugins]= \"pieChartPlugins\">\r\n        </canvas>\r\n    </div>\r\n    \r\n    <h3 class = \"text-muted\"> Lastest Reservations </h3> -->\r\n    <!-- SEARCH BAR -->\r\n    <!-- <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div> -->\r\n    <!-- TABLE -->\r\n    <!-- <div class=\"table-responsive-sm hide-with-small\">\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:10%\"> #Res </th>\r\n                    <th style=\"width:15%\"> Program Name </th>\r\n                    <th style=\"width:12.5%\"> Date </th>\r\n                    <th style=\"width:12.5%\"> Status </th>\r\n                    <th style=\"width:12.5%\"> First Name </th>\r\n                    <th style=\"width:12.5%\"> Last Name </th>\r\n                    <th style=\"width:12.5%\"> Email </th>\r\n                    <th style=\"width:12.5%\"> Phone </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr>\r\n                    <td> G2467 </td>\r\n                    <td> Change the Life of a Seal </td>\r\n                    <td> April 20, 2020</td>\r\n                    <td> Pending </td>\r\n                    <td> Alice </td>\r\n                    <td> Nguyen </td>\r\n                    <td> alice@gmail.com </td>\r\n                    <td> 7149999999 </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> I1234 </td>\r\n                    <td> Camp Pinniped </td>\r\n                    <td> June 20, 2020</td>\r\n                    <td> Completed </td>\r\n                    <td> Brian </td>\r\n                    <td> Pham </td>\r\n                    <td> brian@gmail.com </td>\r\n                    <td> 7141111111 </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> R1234 </td>\r\n                    <td> Pinniped Pollution Project </td>\r\n                    <td> May 10, 2020</td>\r\n                    <td> Request </td>\r\n                    <td> Anna </td>\r\n                    <td> Tran </td>\r\n                    <td> anna@gmail.com </td>\r\n                    <td> 714222222 </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div> -->\r\n</div>\r\n\r\n<div *ngIf = \"role == '1'\" class=\"container\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1> Dashboard </h1>\r\n        </div>\r\n    </div> \r\n    <h3 class = \"text-muted\"> Recent reservations</h3>\r\n    <div class=\"row pb-5\" *ngFor=\"let res of customerRes\">\r\n        <div class=\"col-lg-12 mx-auto p-3\">\r\n            <!-- List group-->\r\n            <ul [ngClass]=\"res.RemainingBalance == 0 ? 'completed-layout': 'waiting-layout'\" class=\"list-group shadow\">\r\n                <!-- list group item-->\r\n                <li class=\"list-group-item\">\r\n                    <div class=\"row p-3\">\r\n                        <div class=\"col-md-4\">\r\n                            <h4> {{res.ProgramName}} </h4>\r\n                        </div>\r\n                        <div class=\"col-md-5\">\r\n                            <h4 *ngIf = \"res.RemainingBalance == 0\"><sup class = \"completed\"> Payment Completed </sup> </h4>\r\n                            <h4 *ngIf = \"res.RemainingBalance != 0\"><sup class = \"waiting\"> Payment Not Completed </sup></h4>\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <button class=\"btn btn-outline-danger float-right\" type=\"submit\" onfocus=\"blur()\">Cancel Reservation</button>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive-sm\">\r\n                        <table class=\"table table-borderless\" style=\"width:100%\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th style=\"width:10%\"> #Res </th>\r\n                                    <th style=\"width:20%\"> Date </th>\r\n                                    <th style=\"width:15%\"> Time </th>\r\n                                    <th style=\"width:15%\"> Quantity </th>\r\n                                    <th style=\"width:15%\"> Total </th>\r\n                                    <th style=\"width:25%\"> Remaining Balance</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td> {{res.ReservationPK}} </td>\r\n                                    <td> {{res.Date}}</td>\r\n                                    <td> {{res.Time}}</td>\r\n                                    <td> {{res.Quantity}} </td>\r\n                                    <td> {{res.Total}} </td>\r\n                                    <td> {{res.RemainingBalance}}  \r\n                                        <button mat-raised-button *ngIf = \"res.RemainingBalance != 0\" class=\"btn btn-warning float-right\" type=\"submit\" (click)=\"openPaynowModal()\" onfocus=\"blur()\">Pay Now</button>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </li> <!-- End -->\r\n            </ul> <!-- End -->\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf = \"role == '2' || role == '3'\" class=\"container\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>Dashboard</h1>\r\n        </div>\r\n    </div> \r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12\">\r\n            <h6> Pick the date range you'd like to view the reservation information: </h6>\r\n            <kendo-daterange class = \"float-left\">\r\n                <label>\r\n                    <span class=\"label p-3\">From </span>\r\n                    <kendo-dateinput kendoDateRangeStartInput \r\n                    [(value)]=\"range.start\"\r\n                    (valueChange)=\"onChangeDate()\"></kendo-dateinput>\r\n                </label>\r\n                <label>\r\n                    <span class=\"label p-3\">To </span>\r\n                    <kendo-dateinput kendoDateRangeEndInput \r\n                    [(value)]=\"range.end\"\r\n                    (valueChange)=\"onChangeDate()\"></kendo-dateinput>\r\n                </label>\r\n            </kendo-daterange>\r\n        </div>\r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-green order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Completed Reservations</h6>\r\n                    <h2 class=\"text-right\">{{completedRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{completedTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-g-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Completed')\" onfocus=\"blur()\">View Completed Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-blue order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Ongoing Reservations</h6>\r\n                    <h2 class=\"text-right\">{{ongoingRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{ongoingTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-b-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('On Going')\" onfocus=\"blur()\">View Ongoing Reservations</button> \r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-yellow order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\">Attended Reservations</h6>\r\n                    <h2 class=\"text-right\">{{attendedRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{attendedTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-y-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Attended')\" onfocus=\"blur()\">View Attended Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"col-sm-12 col-md-6 col-xl-3\">\r\n            <div class=\"card bg-c-pink order-card h-100\">\r\n                <div class=\"card-body\">\r\n                    <h6 class=\"m-b-20\"> Cancelled Reservations </h6>\r\n                    <h2 class=\"text-right\">{{cancelledRes}}</h2>\r\n                    <h5 class=\"text-right\">Total: ${{cancelledTotal}}</h5>\r\n                </div>\r\n                <div class=\"card-footer bg-p-white\">\r\n                    <button class=\"link\" (click)=\"openReservationModal('Cancelled')\" onfocus=\"blur()\">View Cancelled Reservations</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n    </div>\r\n    <!-- CHART USING NG2-CHARTS -->\r\n    <!-- <div>\r\n        <h2>{{title}}</h2>\r\n        <canvas\r\n            baseChart\r\n            [chartType]=\"'bar'\"\r\n            [datasets]=\"chartData\"\r\n            [labels]=\"labels\"\r\n            [options]=\"chartOptions\"\r\n            [legend]=\"true\"\r\n            [colors]=\"colors\"\r\n            (chartClick)=\"onChartClick($event)\">\r\n        </canvas>\r\n    </div>\r\n    \r\n    <br/> -->\r\n\r\n    <!-- <div>\r\n        <h2>PIE CHART EXAMPLE</h2>\r\n        <canvas \r\n            baseChart \r\n            [data]=\"pieChartData\" \r\n            [labels]=\"pieChartLabels\" \r\n            [chartType]=\"'pie'\"\r\n            [options]=\"pieChartOptions\"\r\n            [legend]=\"true\"\r\n            [plugins]= \"pieChartPlugins\">\r\n        </canvas>\r\n    </div>\r\n    \r\n    <h3 class = \"text-muted\"> Lastest Reservations </h3> -->\r\n    <!-- SEARCH BAR -->\r\n    <!-- <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div> -->\r\n    <!-- TABLE -->\r\n    <!-- <div class=\"table-responsive-sm hide-with-small\">\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:10%\"> #Res </th>\r\n                    <th style=\"width:15%\"> Program Name </th>\r\n                    <th style=\"width:12.5%\"> Date </th>\r\n                    <th style=\"width:12.5%\"> Status </th>\r\n                    <th style=\"width:12.5%\"> First Name </th>\r\n                    <th style=\"width:12.5%\"> Last Name </th>\r\n                    <th style=\"width:12.5%\"> Email </th>\r\n                    <th style=\"width:12.5%\"> Phone </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr>\r\n                    <td> G2467 </td>\r\n                    <td> Change the Life of a Seal </td>\r\n                    <td> April 20, 2020</td>\r\n                    <td> Pending </td>\r\n                    <td> Alice </td>\r\n                    <td> Nguyen </td>\r\n                    <td> alice@gmail.com </td>\r\n                    <td> 7149999999 </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> I1234 </td>\r\n                    <td> Camp Pinniped </td>\r\n                    <td> June 20, 2020</td>\r\n                    <td> Completed </td>\r\n                    <td> Brian </td>\r\n                    <td> Pham </td>\r\n                    <td> brian@gmail.com </td>\r\n                    <td> 7141111111 </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> R1234 </td>\r\n                    <td> Pinniped Pollution Project </td>\r\n                    <td> May 10, 2020</td>\r\n                    <td> Request </td>\r\n                    <td> Anna </td>\r\n                    <td> Tran </td>\r\n                    <td> anna@gmail.com </td>\r\n                    <td> 714222222 </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div> -->\r\n</div>\r\n\r\n<div *ngIf = \"role == '1'\" class=\"container\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1> Dashboard </h1>\r\n        </div>\r\n    </div> \r\n    <h3 class = \"text-muted\"> Recent reservations</h3>\r\n    <div class=\"row pb-5\" *ngFor=\"let res of customerRes\">\r\n        <div class=\"col-lg-12 mx-auto p-3\">\r\n            <!-- List group-->\r\n            <ul [ngClass]=\"res.RemainingBalance == 0 ? 'completed-layout': 'waiting-layout'\" class=\"list-group shadow\">\r\n                <!-- list group item-->\r\n                <li class=\"list-group-item\">\r\n                    <div class=\"row p-3\">\r\n                        <div class=\"col-md-4\">\r\n                            <h4> {{res.ProgramName}} </h4>\r\n                        </div>\r\n                        <div class=\"col-md-5\">\r\n                            <h4 *ngIf = \"res.RemainingBalance == 0\"><sup class = \"completed\"> Payment Completed </sup> </h4>\r\n                            <h4 *ngIf = \"res.RemainingBalance != 0\"><sup class = \"waiting\"> Payment Not Completed </sup></h4>\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <button *ngIf = \"res.ReservationStatus == 1\" class=\"btn btn-outline-danger float-right\" type=\"submit\" (click)=\"openCancelModal(res.ProgramType)\" onfocus=\"blur()\">Cancel Reservation</button>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive-sm\">\r\n                        <table class=\"table table-borderless\" style=\"width:100%\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th style=\"width:10%\"> #Res </th>\r\n                                    <th style=\"width:20%\"> Date </th>\r\n                                    <th style=\"width:15%\"> Time </th>\r\n                                    <th style=\"width:15%\"> Quantity </th>\r\n                                    <th style=\"width:15%\"> Total </th>\r\n                                    <th style=\"width:25%\"> Remaining Balance</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td> {{res.ReservationPK}} </td>\r\n                                    <td> {{res.Date}}</td>\r\n                                    <td> {{res.Time}}</td>\r\n                                    <td> {{res.Quantity}} </td>\r\n                                    <td> {{res.Total}} </td>\r\n                                    <td> {{res.RemainingBalance}}  \r\n                                        <button mat-raised-button *ngIf = \"res.RemainingBalance != 0\" class=\"btn btn-warning float-right\" type=\"submit\" (click)=\"openPaynowModal()\" onfocus=\"blur()\">Pay Now</button>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </li> <!-- End -->\r\n            </ul> <!-- End -->\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -591,7 +552,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center mb-1\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1 class=\"title\">Group Program List</h1>\r\n        </div>\r\n    </div>\r\n    <div class=\"row mb-3 filter\">\r\n        <div class=\"col-lg-10 col-md-10 col-sm-8 col-8\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Description to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-4 col-4 p-0\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\"  *ngFor = 'let program of programs | filter:searchText' >\r\n        <div class=\"col-lg-12 mx-auto\" *ngIf='program.ProgramType == 0'>\r\n            <!-- List group-->\r\n            <ul class=\"list-group shadow\">\r\n                <!-- list group item-->\r\n                <li class=\"list-group-item\">\r\n                    <div class=\"image-wrapper p-3\">\r\n                        <img src={{program.ImgData}} class=\"float-left p-3 col-sm-12 col-md-5\" alt=\"Generic placeholder image\">\r\n                        <h4 *ngIf = 'program.SubProgramPK == 1' class = 'text-muted'><mat-icon>stars</mat-icon> Field Trip </h4>\r\n                        <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted'><mat-icon>stars</mat-icon> Scout Program </h4>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-10\">\r\n                                <a  [routerLink]=\"['/reservation', program.ProgramPK]\"><h5 class=\"mb-3\">{{program.Name}}</h5></a>\r\n                            </div>\r\n                            <div class=\"col-sm-2\">\r\n                                <h5 class=\"price\">${{program.PricePerParticipant}}</h5>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-break d-none d-md-block\" [innerHTML]=\"program.Description | safeHtml\"></div>\r\n                        <div class=\"d-block d-md-none\">Please click the button below for more details.</div>\r\n                        <div class=\"row mt-1\">\r\n                            <div class=\"col-sm-12\">\r\n                            <!-- <h6 class=\"font-weight-bold my-2\">${{program.PricePerParticipant}}</h6> -->\r\n                            <!-- <a [routerLink]=\"['/booking-group-program', program.ProgramPK]\" class=\"btn btn-info btn-lg active\" role=\"button\" aria-pressed=\"true\">Book now!</a> -->\r\n                                <a [routerLink]=\"['/reservation', program.ProgramPK]\" [fragment]=\"schedule\" class=\"btn btn-info btn-lg active float-right\" role=\"button\" aria-pressed=\"true\">Book now!</a>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </li> <!-- End -->\r\n            </ul> <!-- End -->\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center mb-1\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1 class=\"title\">Group Program List</h1>\r\n        </div>\r\n    </div>\r\n    <div class=\"row mb-3 filter\">\r\n        <div class=\"col-lg-10 col-md-10 col-sm-8 col-8\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Description to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-4 col-4 p-0\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\"  *ngFor = 'let program of programs | filter:searchText' >\r\n        <div class=\"col-lg-12 mx-auto\" *ngIf='program.ProgramType == 0'>\r\n            <!-- List group-->\r\n            <ul class=\"list-group shadow\">\r\n                <!-- list group item-->\r\n                <li class=\"list-group-item\">\r\n                    <div class=\"image-wrapper p-3\">\r\n                        <img src={{program.ImgData}} class=\"float-left p-3 col-sm-12 col-md-5\" alt=\"Generic placeholder image\">\r\n                        <h4 *ngIf = 'program.SubProgramPK == 1' class = 'text-muted'><mat-icon>stars</mat-icon> Field Trip </h4>\r\n                        <h4 *ngIf = 'program.SubProgramPK == 2' class = 'text-muted'><mat-icon>stars</mat-icon> Scout Program </h4>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-10\">\r\n                                <a  [routerLink]=\"['/reservation', program.ProgramPK]\"><h5 class=\"mb-3\">{{program.Name}}</h5></a>\r\n                            </div>\r\n                            <div class=\"col-sm-2\">\r\n                                <h5 class=\"price\">${{program.PricePerParticipant}}</h5>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-break d-none d-md-block\" [innerHTML]=\"program.Description | safeHtml\"></div>\r\n                        <div class=\"d-block d-md-none\">Please click the button below for more details.</div>\r\n                        <div class=\"row mt-1\">\r\n                            <div class=\"col-sm-12\">\r\n                                <a [routerLink]=\"['/reservation', program.ProgramPK]\" class=\"btn btn-info btn-lg active float-right\" role=\"button\" aria-pressed=\"true\">Book now!</a>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </li> <!-- End -->\r\n            </ul> <!-- End -->\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -604,7 +565,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\" >\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-12\">\r\n        <h1 class=\"text\"> PACIFIC MARINE MAMMAL CENTER </h1>\r\n        <h2 class=\"greeting\" style=\"color:white\">Enjoy your exploration with our programs!</h2>\r\n      </div> \r\n    </div>\r\n  </div>\r\n</div> \r\n  <!-- Page Content -->\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row text-center\">\r\n      <div class=\"col-lg-12\">\r\n        <h1>Most Popular Programs</h1>\r\n      </div>\r\n    </div>\r\n    <!-- Page Features -->\r\n    <div class=\"card-deck row\">\r\n      <div class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\"  *ngFor = \"let program of programs\">\r\n        <div class=\"program_card card h-100 border-light\" style=\"box-shadow: 0px 2px 2px #34393a80;\">\r\n       <!--Card image-->\r\n          <div class=\"view overlay row\">\r\n            <img class=\"image_div card-img flex-fill p-1\" src={{program.ImgData}} alt=\"Card image cap\" width=\"270\" height=\"260\">\r\n          </div>\r\n          <div class=\"card-body d-flex flex-column\">\r\n            <!-- <a *ngIf = \"program.ProgramType\" [routerLink] = \"['/booking-individual-program', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a>\r\n            <a *ngIf = \"!program.ProgramType\" [routerLink] = \"['/booking-group-program', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a> -->\r\n            <a [routerLink] = \"['/program-schedule', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a>\r\n            <hr class=\"card__item card__divider\">\r\n            <div class=\"block-with-text\">\r\n              <div [innerHTML]=\"program.Description | safeHtml\"></div>\r\n            </div>\r\n            <h4> ... </h4>\r\n          </div>\r\n          <div class=\"card-body-btn d-flex flex-column\">\r\n           <!--  <a *ngIf = \"program.ProgramType\" [routerLink] = \"['/booking-individual-program', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a>\r\n            <a *ngIf = \"!program.ProgramType\" [routerLink] = \"['/booking-group-program', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a> -->\r\n            <a [routerLink] = \"['/program-schedule', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a>\r\n          </div>\r\n          <div class=\"card-footer text-muted d-flex justify-content-between bg-light border-light\">\r\n            <a style = \"color: #5077a9;\" ><fa-icon [icon]=\"faClock\"></fa-icon> 1h45 </a>\r\n            <a style = \"color: #5077a9;\" > <fa-icon [icon]=\"faComment\"></fa-icon> 115 </a>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      \r\n    </div>\r\n\r\n    \r\n    \r\n\r\n  ");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\" >\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-lg-12\">\r\n        <h1 class=\"text\"> PACIFIC MARINE MAMMAL CENTER </h1>\r\n        <h2 class=\"greeting\" style=\"color:white\">Enjoy your exploration with our programs!</h2>\r\n      </div> \r\n    </div>\r\n  </div>\r\n</div> \r\n  <!-- Page Content -->\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row text-center\">\r\n      <div class=\"col-lg-12\">\r\n        <h1>Most Popular Programs</h1>\r\n      </div>\r\n    </div>\r\n    <!-- Page Features -->\r\n    <div class=\"card-deck row\">\r\n      <div class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\"  *ngFor = \"let program of programs\">\r\n        <div class=\"program_card card h-100 border-light\" style=\"box-shadow: 0px 2px 2px #34393a80;\">\r\n       <!--Card image-->\r\n          <div class=\"view overlay row\">\r\n            <img class=\"image_div card-img flex-fill p-1\" src={{program.ImgData}} alt=\"Card image cap\" width=\"270\" height=\"260\">\r\n          </div>\r\n          <div class=\"card-body d-flex flex-column\">\r\n            <!-- <a *ngIf = \"program.ProgramType\" [routerLink] = \"['/booking-individual-program', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a>\r\n            <a *ngIf = \"!program.ProgramType\" [routerLink] = \"['/booking-group-program', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a> -->\r\n            <a [routerLink] = \"['/reservation', program.ProgramPK]\"><h4 class=\"card-title\">{{program.Name}}</h4></a>\r\n            <hr class=\"card__item card__divider\">\r\n            <div class=\"block-with-text\">\r\n              <div [innerHTML]=\"program.Description | safeHtml\"></div>\r\n            </div>\r\n            <h4> ... </h4>\r\n          </div>\r\n          <div class=\"card-body-btn d-flex flex-column\">\r\n           <!--  <a *ngIf = \"program.ProgramType\" [routerLink] = \"['/booking-individual-program', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a>\r\n            <a *ngIf = \"!program.ProgramType\" [routerLink] = \"['/booking-group-program', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a> -->\r\n            <a [routerLink] = \"['/reservation', program.ProgramPK]\" class=\"align-self-end btn btn-outline-info\">Find Out More!</a>\r\n          </div>\r\n          <div class=\"card-footer text-muted d-flex justify-content-between bg-light border-light\">\r\n            <a style = \"color: #5077a9;\" ><fa-icon [icon]=\"faClock\"></fa-icon> 1h45 </a>\r\n            <a style = \"color: #5077a9;\" > <fa-icon [icon]=\"faComment\"></fa-icon> 115 </a>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      \r\n    </div>\r\n\r\n    \r\n    \r\n\r\n  ");
 
 /***/ }),
 
@@ -618,19 +579,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center mb-1\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1 class=\"title\">Individual Program List</h1>\r\n        </div>\r\n    </div>\r\n    <div class=\"row mb-3 filter\">\r\n        <div class=\"col-lg-10 col-md-10 col-sm-8 col-8\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Description to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-4 col-4 p-0\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\" >Clear Search</button>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\"  *ngFor = 'let program of programs | filter:searchText' >\r\n        <div class=\"col-lg-12 mx-auto\" *ngIf='program.ProgramType == 1'>\r\n            <!-- List group-->\r\n            <ul class=\"list-group shadow\">\r\n                <!-- list group item-->\r\n                <li class=\"list-group-item\">\r\n                    <!-- Custom content-->\r\n                    <div class=\"image-wrapper p-3\">\r\n                        <img src={{program.ImgData}} class=\"float-left p-3  col-sm-12 col-md-5\" alt=\"Generic placeholder image\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-10\">\r\n                                <a  [routerLink]=\"['/reservation', program.ProgramPK]\"><h5 class=\"mb-3\">{{program.Name}}</h5></a>\r\n                            </div>\r\n                            <div class=\"col-sm-2\">\r\n                                <h5 class=\"price\">${{program.PricePerParticipant}}</h5>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-break\" [innerHTML]=\"program.Description | safeHtml\"></div>\r\n                        <div class=\"row mt-1\">\r\n                            <div class=\"col-sm-12\">\r\n                            <!-- <a [routerLink]=\"['/booking-individual-program', program.ProgramPK]\" class=\"btn btn-info btn-lg active\" role=\"button\" aria-pressed=\"true\">Book now!</a> -->\r\n                                <a [routerLink]=\"['/reservation', program.ProgramPK]\" class=\"btn btn-info btn-lg active float-right\" role=\"button\" aria-pressed=\"true\">Book now!</a>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </li> <!-- End -->\r\n            </ul> <!-- End -->\r\n        </div>\r\n    </div>\r\n</div>");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html ***!
-  \**********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\">\r\n    <div class=\"container\">\r\n        <div class=\"d-flex justify-content-center h-100\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3 class=\"text-center\">Sign In</h3>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <form (submit)=\"login()\" [formGroup]=\"loginForm\">\r\n                        <p class=\"error\" *ngIf = \"errorMessage\"> {{errorMessage}}</p>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faUser\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"username\" placeholder=\"Enter Username\" \r\n                            [(ngModel)] =\"credentials.Username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\">\r\n                            <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.username.errors.required\">Username is required</div>\r\n                            </div> \r\n                        </div>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faKey\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"password\" class=\"form-control\" placeholder=\"password\"\r\n                            formControlName=\"password\" placeholder=\"Password\" [(ngModel)] =\"credentials.Password\"  [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                            <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.password.errors.required\">Password is required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row align-items-center remember\">\r\n                            <input type=\"checkbox\">Remember Me\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"submit\" value=\"Login\" class=\"btn float-right login_btn\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <div class=\"d-flex justify-content-center links\">\r\n                        Don't have an account?<a [routerLink]=\"['/register']\">Sign Up</a>\r\n                    </div>\r\n                    <div class=\"d-flex justify-content-center\">\r\n                        <a [routerLink]=\"['/login/forgot-password']\">Forgot your password?</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -669,7 +617,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\">\r\n    <div class=\"container\">\r\n        <div class=\"d-flex justify-content-center h-100\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3 class=\"text-center\">Set New Password</h3>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <form (ngSubmit)=\"setNewPassword()\" [formGroup]=\"resetPasswordForm\">\r\n                        <div *ngIf=\"CurrentState == 'NotVerified'\" class=\"error-message\">\r\n                            <p>*{{errorMessage}}</p>\r\n                            <br>Click <button type=\"button\" class=\"btn btn-info btn-sm\"\r\n                                [routerLink]=\"['/login/forgot-password']\">HERE</button> to go back to Forgot Password Page.\r\n                        </div>                        \r\n                        <div *ngIf=\"CurrentState == 'TokenValid'\">\r\n                            <div class=\"input-group form-group\">\r\n                                <div class=\"input-group-prepend\">\r\n                                    <span class=\"input-group-text\">\r\n                                        <fa-icon [icon]=\"faKey\"></fa-icon>\r\n                                    </span>\r\n                                </div>\r\n                                <input type=\"password\" class=\"form-control\" formControlName=\"password\"\r\n                                    placeholder=\"Enter New Password\" [(ngModel)]=\"newPassword\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\r\n                                    <div *ngIf=\"f.password.errors.minlength\">Password must be at least 6 characters\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"input-group form-group\">\r\n                                <div class=\"input-group-prepend\">\r\n                                    <span class=\"input-group-text\">\r\n                                        <fa-icon [icon]=\"faCheckDouble\"></fa-icon>\r\n                                    </span>\r\n                                </div>\r\n                                <input type=\"password\" class=\"form-control\" formControlName=\"confirmPassword\"\r\n                                    placeholder=\"Re-enter New Password\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                                <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.confirmPassword.errors.required\">Confirm Password is required</div>\r\n                                    <div *ngIf=\"f.confirmPassword.errors.mustMatch\">Passwords must match</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <input type=\"submit\" class=\"btn float-right update-btn mt-5 mb-5\" aria-pressed=\"true\"\r\n                                    value=\"Update Password\">\r\n                            </div>\r\n                        </div>                     \r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\">\r\n    <div class=\"container\">\r\n        <div class=\"d-flex justify-content-center h-100\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3 class=\"text-center\">Set New Password</h3>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <form (ngSubmit)=\"setNewPassword()\" [formGroup]=\"resetPasswordForm\">\r\n                        <div *ngIf=\"CurrentState == 'NotVerified'\" class=\"error-message\">\r\n                            <p>*{{errorMessage}}</p>\r\n                            <br>Click <button type=\"button\" class=\"btn btn-info btn-sm\"\r\n                                [routerLink]=\"['/']\">HERE</button> to go back to the Home Page.\r\n                        </div>                        \r\n                        <div *ngIf=\"CurrentState == 'TokenValid'\">\r\n                            <div class=\"input-group form-group\">\r\n                                <div class=\"input-group-prepend\">\r\n                                    <span class=\"input-group-text\">\r\n                                        <fa-icon [icon]=\"faKey\"></fa-icon>\r\n                                    </span>\r\n                                </div>\r\n                                <input type=\"password\" class=\"form-control\" formControlName=\"password\"\r\n                                    placeholder=\"Enter New Password\" [(ngModel)]=\"newPassword\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.password.errors.required\">Password is required</div>\r\n                                    <div *ngIf=\"f.password.errors.minlength\">Password must be at least 6 characters\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"input-group form-group\">\r\n                                <div class=\"input-group-prepend\">\r\n                                    <span class=\"input-group-text\">\r\n                                        <fa-icon [icon]=\"faCheckDouble\"></fa-icon>\r\n                                    </span>\r\n                                </div>\r\n                                <input type=\"password\" class=\"form-control\" formControlName=\"confirmPassword\"\r\n                                    placeholder=\"Re-enter New Password\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                                <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.confirmPassword.errors.required\">Confirm Password is required</div>\r\n                                    <div *ngIf=\"f.confirmPassword.errors.mustMatch\">Passwords must match</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <input type=\"submit\" class=\"btn float-right update-btn mt-5 mb-5\" aria-pressed=\"true\"\r\n                                    value=\"Update Password\">\r\n                            </div>\r\n                        </div>                     \r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -695,7 +643,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h1> Profile Information Page </h1>\r\n<hr>\r\n<div class=\"container bootstrap snippet\">\r\n    <div class=\"row\">\r\n  \t\t<div class=\"col-sm-3 col-md-5\"><!--left col-->\r\n            <div class=\"text-center\">\r\n                <img src=\"http://ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">\r\n                <h6>Upload a different photo...</h6>\r\n                <input type=\"file\" class=\"text-center center-block file-upload\">\r\n            </div>\r\n            <br>\r\n        </div><!--/col-3-->\r\n    \t<div class=\"col-sm-9 col-md-7\">\r\n            <section class=\"readonly\">\r\n                <button *ngIf=\"isDisabled\" class=\"btn btn-sm btn-warning\" type=\"submit\" (click)=\"viewOrEditMode()\">\r\n                    <mat-icon matListIcon>edit</mat-icon>Edit\r\n                </button>\r\n                <button *ngIf=\"!isDisabled\" class=\"btn btn-sm btn-secondary\" type=\"submit\" (click)=\"viewOrEditMode()\">\r\n                    <mat-icon matListIcon>edit</mat-icon>Editing...\r\n                </button>\r\n            </section>\r\n            <hr>\r\n                <form [formGroup]=\"customerInfoForm\" (ngSubmit)=\"openModal()\">\r\n                    <fieldset [disabled]=\"isDisabled\">\r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>First name</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"FirstName\" placeholder=\"First name\" [(ngModel)]=\"customerDetails.FirstName\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.FirstName.errors }\">\r\n                            <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.FirstName.errors.required\">First Name is required</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n                        \r\n                        <div class=\"col-xs-6\">\r\n                        <label><h4>Last name</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"LastName\"placeholder=\"Last name\" [(ngModel)]=\"customerDetails.LastName\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.LastName.errors }\">\r\n                            <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.LastName.errors.required\">Last Name is required</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n            \r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>Phone Number</h4></label>\r\n                            <input type=\"text\" pattern=\"[0-9]{10}\" class=\"form-control\" formControlName=\"PhoneNo\" placeholder=\"Phone No\" [(ngModel)]=\"customerDetails.PhoneNo\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.PhoneNo.errors }\" >\r\n                            <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.PhoneNo.errors.required\">Phone No is required</div>\r\n                                <div *ngIf=\"f.PhoneNo.errors.pattern\"> Please enter a valid Phone Number (10 digits)</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n            \r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>Address</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"Address\"placeholder=\"enter address\" [(ngModel)]=\"customerDetails.Address\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.Address.errors }\" >\r\n                            <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.Address.errors.required\">Street Address is required</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n\r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>City</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"City\" placeholder=\"enter city\" [(ngModel)]=\"customerDetails.City\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.City.errors }\" >\r\n                            <div *ngIf=\"submitted && f.City.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.City.errors.required\">City is required</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n\r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>State</h4></label>\r\n                            <input type=\"text\" pattern=\"[a-zA-Z]{2}\" class=\"form-control\" formControlName=\"State\" placeholder=\"enter state\" [(ngModel)]=\"customerDetails.State\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.State.errors }\">\r\n                            <div *ngIf=\"submitted && f.State.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.State.errors.required\">State is required</div>\r\n                                <div *ngIf=\"f.State.errors.pattern\"> Please enter a valid State</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n\r\n                        <div class=\"col-xs-6\">\r\n                            <label><h4>Zipcode</h4></label>\r\n                            <input type=\"text\" pattern=\"[0-9]{5}\" class=\"form-control\" formControlName=\"Zipcode\" placeholder=\"enter zipcode\" [(ngModel)]=\"customerDetails.Zipcode\"\r\n                            [ngClass]=\"{'is-invalid': submitted && f.Zipcode.errors }\">\r\n                            <div *ngIf=\"submitted && f.Zipcode.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.Zipcode.errors.required\">Zipcode is required</div>\r\n                                <div *ngIf=\"f.Zipcode.errors.pattern\"> Please enter a valid Zipcode (5 digits)</div>\r\n                              </div>\r\n                        </div>\r\n                        <br/>\r\n\r\n                        <div>\r\n                            <section class=\"options-section\">\r\n                                <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                                [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                            </section>\r\n                        </div>\r\n                        <br>\r\n                        <div class=\"col-xs-12 input-group form-group \">                            \r\n                            <button class=\"btn btn-lg btn-success\" type=\"submit\"><i class=\"glyphicon glyphicon-ok-sign\" onfocus=\"blur()\"></i>Update Personal Info</button>\r\n                        </div>\r\n                        <br/>\r\n                    </fieldset>\r\n              \t</form>\r\n              <hr>\r\n        </div><!--/col-9-->\r\n    </div><!--/row-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container bootstrap snippet\">\r\n    <h1> Profile Information </h1>\r\n    <div class=\"row\">\r\n  \t\t<!-- <div class=\"col-sm-3 col-md-5\">\r\n            <div class=\"text-center\">\r\n                <img src=\"http://ssl.gstatic.com/accounts/ui/avatar_2x.png\" class=\"avatar img-circle img-thumbnail\" alt=\"avatar\">\r\n                <h6>Upload a different photo...</h6>\r\n                <input type=\"file\" class=\"text-center center-block file-upload\">\r\n            </div>\r\n            <br>\r\n        </div> -->\r\n    \t<div class=\"col-sm-12 col-md-12\">\r\n            <section class=\"readonly field\">\r\n                <button *ngIf=\"isDisabled\" class=\"btn btn-sm btn-warning\" type=\"submit\" (click)=\"viewOrEditMode()\">\r\n                    <mat-icon matListIcon>edit</mat-icon>Edit\r\n                </button>\r\n                <button *ngIf=\"!isDisabled\" class=\"btn btn-sm btn-secondary\" type=\"submit\" (click)=\"viewOrEditMode()\">\r\n                    <mat-icon matListIcon>edit</mat-icon>Editing...\r\n                </button>\r\n            </section>\r\n            <form [formGroup]=\"customerInfoForm\" (ngSubmit)=\"openModal()\">\r\n                <fieldset [disabled]=\"isDisabled\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-6 col-sm-6 field\">\r\n                            <label><h4>First name</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"FirstName\" placeholder=\"First name\" [(ngModel)]=\"customerDetails.FirstName\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.FirstName.errors }\">\r\n                            <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.FirstName.errors.required\">First Name is required</div>\r\n                                </div>\r\n                        </div>\r\n                        <div class=\"col-md-6 col-sm-6 field\">\r\n                            <label><h4>Last name</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"LastName\"placeholder=\"Last name\" [(ngModel)]=\"customerDetails.LastName\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.LastName.errors }\">\r\n                            <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.LastName.errors.required\">Last Name is required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-md-8 col-sm-8 field\">\r\n                            <label><h4>Address</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"Address\"placeholder=\"enter address\" [(ngModel)]=\"customerDetails.Address\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.Address.errors }\" >\r\n                            <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.Address.errors.required\">Street Address is required</div>\r\n                                </div>\r\n                        </div>\r\n                        <div class=\"col-md-4 col-sm-4 field\">\r\n                            <label><h4>Phone Number</h4></label>\r\n                            <input type=\"text\" pattern=\"[0-9]{10}\" class=\"form-control\" formControlName=\"PhoneNo\" placeholder=\"Phone No\" [(ngModel)]=\"customerDetails.PhoneNo\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.PhoneNo.errors }\" >\r\n                            <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.PhoneNo.errors.required\">Phone No is required</div>\r\n                                <div *ngIf=\"f.PhoneNo.errors.pattern\"> Please enter a valid Phone Number (10 digits)</div>\r\n                                </div>\r\n                        </div>\r\n                        <div class=\"col-md-4 col-sm-4 field\">\r\n                            <label><h4>City</h4></label>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"City\" placeholder=\"enter city\" [(ngModel)]=\"customerDetails.City\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.City.errors }\" >\r\n                            <div *ngIf=\"submitted && f.City.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.City.errors.required\">City is required</div>\r\n                                </div>\r\n                        </div>\r\n                        <div class=\"col-md-4 col-sm-4 field\">\r\n                            <label><h4>State</h4></label>\r\n                            <input type=\"text\" pattern=\"[a-zA-Z]{2}\" class=\"form-control\" formControlName=\"State\" placeholder=\"enter state\" [(ngModel)]=\"customerDetails.State\" \r\n                            [ngClass]=\"{'is-invalid': submitted && f.State.errors }\">\r\n                            <div *ngIf=\"submitted && f.State.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.State.errors.required\">State is required</div>\r\n                                <div *ngIf=\"f.State.errors.pattern\"> Please enter a valid State</div>\r\n                                </div>\r\n                        </div>\r\n                        <div class=\"col-md-4 col-sm-4 field\">\r\n                            <label><h4>Zipcode</h4></label>\r\n                            <input type=\"text\" pattern=\"[0-9]{5}\" class=\"form-control\" formControlName=\"Zipcode\" placeholder=\"enter zipcode\" [(ngModel)]=\"customerDetails.Zipcode\"\r\n                            [ngClass]=\"{'is-invalid': submitted && f.Zipcode.errors }\">\r\n                            <div *ngIf=\"submitted && f.Zipcode.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.Zipcode.errors.required\">Zipcode is required</div>\r\n                                <div *ngIf=\"f.Zipcode.errors.pattern\"> Please enter a valid Zipcode (5 digits)</div>\r\n                                </div>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <section class=\"options-section field\">\r\n                            <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                            [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                        </section>\r\n                    </div>\r\n                    <div class=\"col-md-12 input-group form-group field\">                            \r\n                        <button class=\"btn btn-lg btn-info\" type=\"submit\"><i class=\"glyphicon glyphicon-ok-sign\" onfocus=\"blur()\"></i>Update Personal Info</button>\r\n                    </div>\r\n                </fieldset>\r\n            </form>\r\n        </div><!--/col-9-->\r\n    </div><!--/row-->");
 
 /***/ }),
 
@@ -708,7 +656,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-sidenav-container class=\"sidenav-container\">\r\n    <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\r\n        [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n        [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n        [opened]=\"(isHandset$ | async) === false\">\r\n      <mat-toolbar> \r\n        <a class=\"navbar-brand\" href=\"#\">\r\n          <img src = \"https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png\" width=\"120\" height=\"60\"> </a>\r\n      </mat-toolbar>\r\n      \r\n      <section > General </section>\r\n      <mat-divider> </mat-divider>\r\n      <mat-nav-list>\r\n        <a mat-list-item [routerLink]=\"['/profile']\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{ exact: true }\"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>\r\n        <a *ngIf = \"role == '1'\" mat-list-item [routerLink]=\"['/profile/reservation-management']\" [routerLinkActive]=\"['active']\"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>\r\n      </mat-nav-list>\r\n\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Reservation </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/reservation-management']\" [routerLinkActive]=\"['active']\"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/report-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>view_quilt</mat-icon>Report Management</a>\r\n        <!-- <a mat-list-item [routerLink]=\"['/profile/payment-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a> -->\r\n      </mat-nav-list>\r\n\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Program </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]=\"selected\" matListIcon>add_circle</mat-icon> New Program</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/program-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>edit</mat-icon> Program Management</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/view-schedule','viewAllSchedule']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>calendar_view_day</mat-icon> View Calendar</a>\r\n        <!-- <a mat-list-item [routerLink]=\"['/profile/schedule-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>calendar_today</mat-icon> Schedule Management</a> -->        \r\n        <a mat-list-item [routerLink]=\"['/profile/email-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>mail_outline</mat-icon>Email Management</a>\r\n      </mat-nav-list>\r\n\r\n      <section *ngIf = \"role == '3'\"> User</section>\r\n      <mat-divider *ngIf = \"role == '3'\"></mat-divider>\r\n      <mat-nav-list *ngIf = \"role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/create-new-user']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]=\"selected\" matListIcon>add_circle</mat-icon>Create New User</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/user-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>\r\n      </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content>\r\n      <mat-toolbar color=\"primary\">\r\n        <button\r\n          type=\"button\"\r\n          aria-label=\"Toggle sidenav\"\r\n          mat-icon-button\r\n          (click)=\"drawer.toggle()\"\r\n          *ngIf=\"isHandset$ | async\">\r\n          <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n        </button>\r\n        <h1><span class=\"full-text\">PACIFIC MARINE MAMMAL CENTER</span>\r\n          <span class=\"short-text\">PMMC</span></h1>\r\n        <!-- User Information -->\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\">\r\n          <span>{{userName}} </span>\r\n          <!-- <img class=\"img-profile rounded-circle\" src=\"https://source.unsplash.com/QAB-WJcbgJk/60x60\"> -->\r\n          <mat-icon matListIcon>account_circle</mat-icon>\r\n        </a>\r\n        <!-- Dropdown - User Information -->\r\n        <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\" aria-labelledby=\"userDropdown\">\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'profile-info', id]\">\r\n            <mat-icon>info</mat-icon>\r\n            Profile\r\n          </a>\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'account-setting', id]\">\r\n            <mat-icon>settings</mat-icon>\r\n            Account Setting\r\n          </a>\r\n          <div class=\"dropdown-divider\"></div>\r\n          <a class=\"dropdown-item\" href=\"#\" (click)=\"auth.logout()\">\r\n            <mat-icon>exit_to_app</mat-icon>\r\n            Logout\r\n          </a>\r\n        </div>\r\n      </mat-toolbar>\r\n      <!-- Add Content Here --> \r\n      <router-outlet></router-outlet>\r\n    </mat-sidenav-content>\r\n  </mat-sidenav-container>\r\n  ");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-sidenav-container class=\"sidenav-container\">\r\n    <mat-sidenav #drawer class=\"sidenav\" fixedInViewport\r\n        [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\r\n        [mode]=\"(isHandset$ | async) ? 'over' : 'side'\"\r\n        [opened]=\"(isHandset$ | async) === false\">\r\n      <mat-toolbar> \r\n        <a class=\"navbar-brand\" href=\"#\">\r\n          <img src = \"https://files.constantcontact.com/51bd4a7a001/b894f4d9-d76a-48cc-b5b0-3a0d3b8c79cd.png\" width=\"120\" height=\"60\"> </a>\r\n      </mat-toolbar>\r\n      \r\n      <section > General </section>\r\n      <mat-divider> </mat-divider>\r\n      <mat-nav-list>\r\n        <a mat-list-item [routerLink]=\"['/profile']\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{ exact: true }\"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>\r\n        <a *ngIf = \"role == '1'\" mat-list-item [routerLink]=\"['/profile/reservation-management']\" [routerLinkActive]=\"['active']\"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>\r\n      </mat-nav-list>\r\n\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Reservation </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/reservation-management']\" [routerLinkActive]=\"['active']\"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/report-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>view_quilt</mat-icon>Report Management</a>\r\n        <!-- <a mat-list-item [routerLink]=\"['/profile/payment-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a> -->\r\n      </mat-nav-list>\r\n\r\n      <section [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"> Program </section>\r\n      <mat-divider [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\"></mat-divider>\r\n      <mat-nav-list [routerLinkActive]=\"['active']\" *ngIf = \"role == '2' || role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/createprogram']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]=\"['selected']\" matListIcon>add_circle</mat-icon> New Program</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/program-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>edit</mat-icon> Program Management</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/view-schedule','viewAllSchedule']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>calendar_view_day</mat-icon> View Calendar</a>\r\n        <!-- <a mat-list-item [routerLink]=\"['/profile/schedule-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>calendar_today</mat-icon> Schedule Management</a> -->        \r\n        <a mat-list-item [routerLink]=\"['/profile/email-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>email</mat-icon>Email Management</a>\r\n      </mat-nav-list>\r\n\r\n      <section *ngIf = \"role == '3'\"> User</section>\r\n      <mat-divider *ngIf = \"role == '3'\"></mat-divider>\r\n      <mat-nav-list *ngIf = \"role == '3'\">\r\n        <a mat-list-item [routerLink]=\"['/profile/create-new-user']\" [routerLinkActive]=\"['active']\"> <mat-icon [class.active]=\"['selected']\" matListIcon>add_circle</mat-icon>Create New User</a>\r\n        <a mat-list-item [routerLink]=\"['/profile/user-management']\" [routerLinkActive]=\"['active']\"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>\r\n      </mat-nav-list>\r\n    </mat-sidenav>\r\n    <mat-sidenav-content>\r\n      <mat-toolbar color=\"primary\">\r\n        <button\r\n          type=\"button\"\r\n          aria-label=\"Toggle sidenav\"\r\n          mat-icon-button\r\n          (click)=\"drawer.toggle()\"\r\n          *ngIf=\"isHandset$ | async\">\r\n          <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\r\n        </button>\r\n        <h1><span class=\"full-text\">PACIFIC MARINE MAMMAL CENTER</span>\r\n          <span class=\"short-text\">PMMC</span></h1>\r\n        <!-- User Information -->\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\">\r\n          <span>{{userName}} </span>\r\n          <!-- <img class=\"img-profile rounded-circle\" src=\"https://source.unsplash.com/QAB-WJcbgJk/60x60\"> -->\r\n          <mat-icon matListIcon>account_circle</mat-icon>\r\n        </a>\r\n        <!-- Dropdown - User Information -->\r\n        <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in\" aria-labelledby=\"userDropdown\">\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'profile-info', id]\">\r\n            <mat-icon>info</mat-icon>\r\n            Profile\r\n          </a>\r\n          <a class=\"dropdown-item\" [routerLink]=\"['/profile', 'account-setting', id]\">\r\n            <mat-icon>settings</mat-icon>\r\n            Account Setting\r\n          </a>\r\n          <div class=\"dropdown-divider\"></div>\r\n          <a class=\"dropdown-item\" href=\"#\" (click)='this.auth.logout()'>\r\n            <mat-icon>exit_to_app</mat-icon>\r\n            Logout\r\n          </a>\r\n        </div>\r\n      </mat-toolbar>\r\n      <!-- Add Content Here --> \r\n      <router-outlet></router-outlet>\r\n    </mat-sidenav-content>\r\n  </mat-sidenav-container>\r\n  ");
 
 /***/ }),
 
@@ -734,33 +682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>Program Management</h1>\r\n        </div>\r\n    </div>\r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div>\r\n    <!--  Create table -->\r\n    <div class=\"table-responsive-sm\">\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:45%\"> Program Name </th>\r\n                    <th style=\"width:20%\"> Program Type </th>\r\n                    <th style=\"width:35%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                    <td class=\"name\"> {{program.Name}}\r\n                        <div class=\"row errorMessage ml-auto\" *ngIf=\"!program.hasSchedule\">\r\n                            <mat-icon color=\"orange\">error</mat-icon>\r\n                            <span>Missing Schedule (select \"Schedule\" to fix error)</span>\r\n                        </div>\r\n                        <div class=\"row errorMessage ml-auto\" *ngIf=\"!program.hasRequirement\">\r\n                            <mat-icon color=\"orange\">error</mat-icon>\r\n                            <span>Missing Requirement (select \"Edit\" to fix error)</span>\r\n                        </div>\r\n                    </td>\r\n                    <td *ngIf=\"program.ProgramType =='0'\"> Group Program </td>\r\n                    <td *ngIf=\"program.ProgramType =='1'\"> Individual Program </td>\r\n                    <td>\r\n                        <button [routerLink]=\"['/profile', 'program-details', program.ProgramPK, 'view']\"\r\n                            class=\"btn btn-info\">\r\n                            <mat-icon matListIcon>visibility</mat-icon> View\r\n                        </button>\r\n                        <button [routerLink]=\"['/profile', 'program-details', program.ProgramPK, 'edit']\"\r\n                            class=\"btn btn-warning\">\r\n                            <mat-icon matListIcon>edit</mat-icon> Edit\r\n                        </button>\r\n                        <button [routerLink]=\"['/profile','program-details', program.ProgramPK, 'set-program-schedule']\"\r\n                            class=\"btn btn-success\">\r\n                            <mat-icon matListIcon>calendar_today</mat-icon> Schedule\r\n                       </button>\r\n                        \r\n                        <!-- <button *ngIf=\"!program.IsActive\" (click)=\"openModalSwitch(program.ProgramPK, program.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            <mat-icon matListIcon> visibility </mat-icon> Enable\r\n                        </button> -->\r\n                        <!-- <button *ngIf=\"program.IsActive\" (click)=\"openModalSwitch(program.ProgramPK, program.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            <mat-icon matListIcon> visibility_off </mat-icon> Disable\r\n                        </button> -->\r\n                    </td>    \r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-8 col-md-8 col-sm-8\">\r\n            </div>\r\n            <div class=\"col-lg-4 col-md-4 col-sm-4\">\r\n                <pagination-controls (pageChange)=\"p=$event\" autoHide=\"true\" responsive=\"true\">\r\n                </pagination-controls>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/program-schedule/program-schedule.component.html":
-/*!********************************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/program-schedule/program-schedule.component.html ***!
-  \********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row text-left m-0\">\r\n  <h1>{{programName}}</h1>\r\n</div>\r\n<hr>\r\n<div class=\"row m-0\">\r\n  <div [innerHTML]=\"programDesc | safeHtml\"></div>\r\n</div>\r\n<hr>\r\n<form [formGroup]=\"quantityForm\">\r\n  <div class=\"row mt-4 mb-5\">\r\n    <div class=\"col-lg-8 col-md-7 col-sm-12 pr-5\">\r\n      <h3> Schedule </h3>\r\n      <div class=\"row filter m-0 mb-5\">\r\n        <kendo-scheduler [kendoSchedulerBinding]=\"allEvents\" [eventClass]=\"getEventClass\"\r\n          (eventClick)=\"eventClick($event)\" [modelFields]=\"eventFields\" [showWorkHours]=\"true\"\r\n          [selectedDate]=\"selectedDate\" style=\"height: 850px; width: 1500px\">\r\n          <kendo-scheduler-week-view [startTime]=\"startTime\">\r\n            <ng-template kendoSchedulerEventTemplate let-event>\r\n              {{ event.dataItem.Title }}\r\n            </ng-template>\r\n          </kendo-scheduler-week-view>\r\n          <kendo-scheduler-month-view> </kendo-scheduler-month-view>\r\n        </kendo-scheduler>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 col-md-5 col-sm-12\">\r\n      <div>\r\n        <div class=\"form-group font-weight-bold \">\r\n          <label>Selected Date</label>\r\n          <input type=\"text\" class=\"form-control\" formControlName=\"CustomerSelectDate\" readonly>\r\n        </div>\r\n      </div>\r\n      <div>\r\n        <div class=\"form-group font-weight-bold \">\r\n          <label>Selected Time</label>\r\n          <input type=\"text\" class=\"form-control\" formControlName=\"CustomerSelectTime\" readonly>\r\n        </div>\r\n      </div>\r\n      <div>\r\n        <div class=\"form-group font-weight-bold\">\r\n          <label>Availability </label>\r\n          <input type=\"number\" class=\"form-control\" formControlName=\"Availability\" readonly>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"ProgramType\" class=\"button pt-1 pb-1\">\r\n        <button class=\"btn btn-lg btn-info btn-block\" [disabled]=\"isDisable\" (click)=\"individualSchedule()\"> Book\r\n        </button>\r\n      </div>\r\n\r\n      <form *ngIf=\"!ProgramType\" [formGroup]=\"quantityForm\" (submit)=\"enterQuantity()\" enctype=\"multipart/form-data\">\r\n        <h3>Enter Quantity</h3>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Adult Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"AdultQuantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.AdultQuantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.AdultQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.AdultQuantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.AdultQuantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 5-7 Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age57Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age57Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age57Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age57Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age57Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 8-10 Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age810Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age810Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age810Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age810Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age810Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 11-12 Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age1112Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age1112Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age1112Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1112Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age1112Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 13-14 Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age1314Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age1314Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age1314Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1314Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age1314Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 14-15 Quantity</label>\r\n          <div class=\"col-sm-5\" >\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age1415Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age1415Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age1415Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1415Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age1415Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Age 15-17 Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"0\" class=\"form-control\" formControlName=\"Age1517Quantity\" value=\"0\"\r\n              [ngClass]=\"{'is-invalid': submitted && f.Age1517Quantity.errors }\" (focus)=\"onFocus($event)\"\r\n              (blur)=\"lostFocus($event)\" required>\r\n            <div *ngIf=\"submitted && f.Age1517Quantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.Age1517Quantity.errors.required\">It's required</div>\r\n              <div *ngIf=\"f.Age1517Quantity.errors.min\">From 0 and up.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group font-weight-bold row\">\r\n          <label class=\"col-sm-7 col-form-label\">Total Quantity</label>\r\n          <div class=\"col-sm-5\">\r\n            <input matInput type=\"number\" min=\"1\" class=\"form-control\" formControlName=\"TotalQuantity\" value=\"0\" readonly\r\n              [ngClass]=\"{'is-invalid': submitted && f.TotalQuantity.errors }\" required>\r\n            <div *ngIf=\"submitted && f.TotalQuantity.errors\" class=\"invalid-feedback\">\r\n              <div *ngIf=\"f.TotalQuantity.errors.min\">Must be at least 1 person.</div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"button pt-1 pb-1\">\r\n          <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\" matStepperNext> Book </button>\r\n        </div>\r\n        <button class=\"btn btn-lg btn-info btn-block\"  matStepperNext type=\"button\">Next</button>\r\n\r\n      </form>\r\n    </div>\r\n  </div>\r\n</form>");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"banner\">\r\n    <div class=\"container\">\r\n        <div class=\"d-flex justify-content-center h-100\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3 class=\"text-center\">Register</h3>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <form (ngSubmit)=\"openModal()\" [formGroup]=\"registerForm\">\r\n                        <p class=\"error\" *ngIf=\"errorMessage\">{{errorMessage}}</p>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faUser\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"username\" placeholder=\"Enter Username\" \r\n                            [(ngModel)]=\"credentials.Username\" [ngClass]=\"{ 'is-invalid': submitted && f.username.errors }\">\r\n                            <div *ngIf=\"submitted && f.username.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.username.errors.required\">Username is required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faEnvelope\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"email\" required pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,63}$\" class=\"form-control\" formControlName=\"email\" placeholder=\"Email\"\r\n                                [(ngModel)]=\"credentials.Email\" [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\">\r\n                            <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.email.errors.required\">Email is required</div>\r\n                                <div *ngIf=\"f.email.errors.pattern\">Must be a valid email address</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faKey\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"password\" class=\"form-control\" formControlName=\"password\" placeholder=\"Password\" \r\n                                [(ngModel)]=\"credentials.Password\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\">\r\n                            <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.password.errors.required\">Password is required</div>\r\n                                <div *ngIf=\"f.password.errors.minlength\">Password must be at least 6 characters</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"input-group form-group\">\r\n                            <div class=\"input-group-prepend\">\r\n                                <span class=\"input-group-text\"><fa-icon [icon]=\"faCheckDouble\"></fa-icon></span>\r\n                            </div>\r\n                            <input type=\"password\" class=\"form-control\" formControlName=\"confirmPassword\" placeholder=\"Re-enter Password\"\r\n                                [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                            <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.confirmPassword.errors.required\">Confirm Password is required</div>\r\n                                <div *ngIf=\"f.confirmPassword.errors.mustMatch\">Passwords must match</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row align-items-center acceptTerms\">\r\n                            <input type=\"checkbox\" formControlName=\"acceptTerms\" \r\n                            [ngClass]=\"{ 'is-invalid': submitted && f.acceptTerms.errors }\">\r\n                            <label for=\"acceptTerms\"> Accept Terms & Conditions</label>\r\n                            <div *ngIf=\"submitted && f.acceptTerms.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.acceptTerms.errors.required\">Accept Terms & Conditions is required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <input type=\"submit\" value=\"Register\" class=\"btn float-right register_btn\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <div class=\"d-flex justify-content-center links\">\r\n                        Already have an account!<a [routerLink]=\"['/login']\">Sign In</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>Program Management</h1>\r\n        </div>\r\n    </div>\r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\" (change)=\"selectChangeHandler($event)\">\r\n                <option *ngFor=\"let item of programCategories\" [value]=\"item.id\">{{item.name}}</option>\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div>\r\n    <!--  Create table -->\r\n    <div class=\"table-responsive-sm\">\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:45%\"> Program Name </th>\r\n                    <th style=\"width:20%\"> Program Type </th>\r\n                    <th style=\"width:35%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                    <td class=\"name\"> {{program.Name}}\r\n                        <div class=\"row errorMessage ml-auto\" *ngIf=\"!program.hasSchedule\">\r\n                            <mat-icon color=\"orange\">error</mat-icon>\r\n                            <span>Missing Schedule (select \"Schedule\" to fix error)</span>\r\n                        </div>\r\n                        <div class=\"row errorMessage ml-auto\" *ngIf=\"!program.hasRequirement\">\r\n                            <mat-icon color=\"orange\">error</mat-icon>\r\n                            <span>Missing Requirement (select \"Edit\" to fix error)</span>\r\n                        </div>\r\n                    </td>\r\n                    <td *ngIf=\"program.ProgramType =='0'\"> Group Program </td>\r\n                    <td *ngIf=\"program.ProgramType =='1'\"> Individual Program </td>\r\n                    <td>\r\n                        <button [routerLink]=\"['/profile', 'program-details', program.ProgramPK, 'view']\"\r\n                            class=\"btn btn-info\">\r\n                            <mat-icon matListIcon>visibility</mat-icon> View\r\n                        </button>\r\n                        <button [routerLink]=\"['/profile', 'program-details', program.ProgramPK, 'edit']\"\r\n                            class=\"btn btn-warning\">\r\n                            <mat-icon matListIcon>edit</mat-icon> Edit\r\n                        </button>\r\n                        <button [routerLink]=\"['/profile','program-details', program.ProgramPK, 'set-program-schedule']\"\r\n                            class=\"btn btn-success\">\r\n                            <mat-icon matListIcon>calendar_today</mat-icon> Schedule\r\n                       </button>\r\n                        \r\n                        <!-- <button *ngIf=\"!program.IsActive\" (click)=\"openModalSwitch(program.ProgramPK, program.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            <mat-icon matListIcon> visibility </mat-icon> Enable\r\n                        </button> -->\r\n                        <!-- <button *ngIf=\"program.IsActive\" (click)=\"openModalSwitch(program.ProgramPK, program.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            <mat-icon matListIcon> visibility_off </mat-icon> Disable\r\n                        </button> -->\r\n                    </td>    \r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-8 col-md-8 col-sm-8\">\r\n            </div>\r\n            <div class=\"col-lg-4 col-md-4 col-sm-4\">\r\n                <pagination-controls (pageChange)='p=$event' autoHide=\"true\" responsive=\"true\">\r\n                </pagination-controls>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -773,7 +695,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center mb-5 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>Report Management </h1>\r\n    </div>\r\n    <div></div>\r\n     <div class=\"tab-group col-lg-12\">\r\n         <mat-tab-group>\r\n             <mat-tab>\r\n                <ng-template mat-tab-label>\r\n                    <mat-icon matListIcon>insert_chart</mat-icon>\r\n                    <span style=\"font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);\">\r\n                         Charts\r\n                    </span>\r\n                </ng-template> \r\n                    <mat-tab-group >\r\n                        <mat-tab label=\"Bar Chart\">\r\n                        <br/><br/>\r\n                <!-- CHART USING NG2-CHARTS -->\r\n                        <div>\r\n                            <h2>{{title}}</h2>\r\n                            <canvas\r\n                                baseChart\r\n                                [chartType]=\"'bar'\"\r\n                                [datasets]=\"chartData\"\r\n                                [labels]=\"labels\"\r\n                                [options]=\"chartOptions\"\r\n                                [legend]=\"true\"\r\n                                [colors]=\"colors\"\r\n                                (chartClick)=\"onChartClick($event)\">\r\n                            </canvas>\r\n                        </div>\r\n                        </mat-tab>  \r\n                        \r\n                        <mat-tab label=\"Pie Chart\">\r\n                            <br/><br/>\r\n                            <div>\r\n                                <h2>PIE CHART EXAMPLE</h2>\r\n                                <br/>\r\n                                <canvas \r\n                                    baseChart \r\n                                    [data]=\"pieChartData\" \r\n                                    [labels]=\"pieChartLabels\" \r\n                                    [chartType]=\"'pie'\"\r\n                                    [options]=\"pieChartOptions\"\r\n                                    [legend]=\"true\"\r\n                                    [plugins]= \"pieChartPlugins\">\r\n                                </canvas>\r\n                            </div>\r\n                        </mat-tab>\r\n                    </mat-tab-group>\r\n                \r\n            </mat-tab>\r\n\r\n            <!-- TABLE -->\r\n             <mat-tab>\r\n                <ng-template mat-tab-label>\r\n                    <mat-icon matListIcon>table_chart</mat-icon>\r\n                    <span style=\"font-weight:bold; font-size: 20px; color: rgb(0, 128, 96);\">\r\n                         Tables\r\n                    </span>\r\n                </ng-template> \r\n                    <mat-tab-group>\r\n                        <mat-tab label=\"Payment Report\"> \r\n                        <br/><br/>\r\n                        <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                            <button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\"><mat-icon matListIcon>cloud_download</mat-icon></button>\r\n                        </div>\r\n                        <div class=\"table-responsive-sm\">\r\n                            <table #datatable class=\"payment-report\" style=\"width:100%\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th style=\"width:4%\"> Year</th>\r\n                                        <th style=\"width:8%\"> Jan</th>\r\n                                        <th style=\"width:8%\"> Feb</th>\r\n                                        <th style=\"width:8%\"> Mar</th>\r\n                                        <th style=\"width:8%\"> Apr</th>\r\n                                        <th style=\"width:8%\"> May</th>\r\n                                        <th style=\"width:8%\"> Jun</th>\r\n                                        <th style=\"width:8%\"> Jul</th>\r\n                                        <th style=\"width:8%\"> Aug</th>\r\n                                        <th style=\"width:8%\"> Sep</th>\r\n                                        <th style=\"width:8%\"> Oct</th>\r\n                                        <th style=\"width:8%\"> Nov</th>\r\n                                        <th style=\"width:8%\"> Dec</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td style=\"background-color: wheat;\"> 2019 </td>\r\n                                        <td> $1000 </td>\r\n                                        <td> $2000 </td>\r\n                                        <td> $3000</td>\r\n                                        <td> $4000</td>\r\n                                        <td> $5000</td>\r\n                                        <td> $6000</td>\r\n                                        <td> $7000</td>\r\n                                        <td> $8000</td>\r\n                                        <td> $9000</td>\r\n                                        <td> $10000</td>\r\n                                        <td> $11000</td>\r\n                                        <td> $12000</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td style=\"background-color: wheat;\"> 2018 </td>\r\n                                        <td> $12000 </td>\r\n                                        <td> $11000 </td>\r\n                                        <td> $10000</td>\r\n                                        <td> $9000</td>\r\n                                        <td> $8000</td>\r\n                                        <td> $7000</td>\r\n                                        <td> $6000</td>\r\n                                        <td> $5000</td>\r\n                                        <td> $4000</td>\r\n                                        <td> $3000</td>\r\n                                        <td> $2000</td>\r\n                                        <td> $1000</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td style=\"background-color: wheat;\"> 2017 </td>\r\n                                        <td> $2000 </td>\r\n                                        <td> $1000 </td>\r\n                                        <td> $11000</td>\r\n                                        <td> $3000</td>\r\n                                        <td> $6000</td>\r\n                                        <td> $2000</td>\r\n                                        <td> $7000</td>\r\n                                        <td> $4000</td>\r\n                                        <td> $9000</td>\r\n                                        <td> $8000</td>\r\n                                        <td> $5000</td>\r\n                                        <td> $12000</td>\r\n                                    </tr>\r\n                                    \r\n                                    \r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        </mat-tab>\r\n\r\n                        <mat-tab label=\"Monthly Report\">\r\n                            <br/><br/>\r\n                        <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                            <button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\"><mat-icon matListIcon>cloud_download</mat-icon></button>\r\n                        </div>\r\n                        <div class=\"table-responsive-sm\">\r\n                            <table #datatable class=\"monthly-report\" style=\"width:100%\">\r\n                               \r\n                                    <tr>\r\n                                        <th style=\"width:10%; background-color: thistle;\"> Field Trips </th>\r\n                                        <th style=\"width:6%; background-color: thistle;\"> Year</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jan</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Feb</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Mar</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Apr</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> May</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jun</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jul</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Aug</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Sep</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Oct</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Nov</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Dec</th>\r\n                                    </tr>\r\n                               \r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td></td>\r\n                                        <td style=\"background-color: wheat;\"> 2019 </td>\r\n                                        <td> 6 </td>\r\n                                        <td> 6 </td>\r\n                                        <td> 7</td>\r\n                                        <td> 10</td>\r\n                                        <td> 8</td>\r\n                                        <td> 2</td>\r\n                                        <td> 3</td>\r\n                                        <td> 2</td>\r\n                                        <td> 2</td>\r\n                                        <td> 4</td>\r\n                                        <td> 5</td>\r\n                                        <td> 8</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td></td>\r\n                                        <td style=\"background-color: wheat;\"> 2018 </td>\r\n                                        <td> 5 </td>\r\n                                        <td> 1 </td>\r\n                                        <td> 2</td>\r\n                                        <td> 5</td>\r\n                                        <td> 7</td>\r\n                                        <td> 9</td>\r\n                                        <td> 3</td>\r\n                                        <td> 9</td>\r\n                                        <td> 4</td>\r\n                                        <td> 7</td>\r\n                                        <td> 6</td>\r\n                                        <td> 2</td>\r\n                                    </tr>\r\n                              \r\n                                    <tr>\r\n                                        <th style=\"width:10%; background-color: thistle;\">Girl Scouts </th>\r\n                                        <th style=\"width:6%; background-color: thistle;\"> Year</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jan</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Feb</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Mar</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Apr</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> May</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jun</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Jul</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Aug</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Sep</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Oct</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Nov</th>\r\n                                        <th style=\"width:7%; background-color: thistle;\"> Dec</th>\r\n                                    </tr>\r\n                         \r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td></td>\r\n                                        <td style=\"background-color: wheat;\"> 2019 </td>\r\n                                        <td> 6 </td>\r\n                                        <td> 6 </td>\r\n                                        <td> 7</td>\r\n                                        <td> 10</td>\r\n                                        <td> 8</td>\r\n                                        <td> 2</td>\r\n                                        <td> 3</td>\r\n                                        <td> 2</td>\r\n                                        <td> 2</td>\r\n                                        <td> 4</td>\r\n                                        <td> 5</td>\r\n                                        <td> 8</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td></td>\r\n                                        <td style=\"background-color: wheat;\"> 2018 </td>\r\n                                        <td> 5 </td>\r\n                                        <td> 1 </td>\r\n                                        <td> 2</td>\r\n                                        <td> 5</td>\r\n                                        <td> 7</td>\r\n                                        <td> 9</td>\r\n                                        <td> 3</td>\r\n                                        <td> 9</td>\r\n                                        <td> 4</td>\r\n                                        <td> 7</td>\r\n                                        <td> 6</td>\r\n                                        <td> 2</td>\r\n                                    </tr>\r\n                                    \r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n\r\n                        </mat-tab> \r\n\r\n                        <mat-tab label=\"Camp Program Report\">ccc\r\n\r\n                        </mat-tab>\r\n\r\n                        <mat-tab label=\"Monthly Master Schedule\"> schedule \r\n\r\n                        </mat-tab>\r\n                    </mat-tab-group>\r\n            </mat-tab>\r\n         </mat-tab-group>\r\n     </div>\r\n\r\n\r\n</div>\r\n    <!-- SEARCH -->\r\n    <!-- <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold;\" id=\"paymentCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\">Clear Search</button>\r\n        </div>\r\n    </div> -->\r\n    <!-- TABLE -->\r\n    <!-- <div class=\"table-responsive-sm\">\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:10%\"> Res#</th>\r\n                    <th style=\"width:20%\"> Date</th>\r\n                    <th style=\"width:30%\"> Recipient</th>\r\n                    <th style=\"width:10%\"> Status</th>\r\n                    <th style=\"width:10%\"> Amount</th>\r\n                    <th style=\"width:10%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr>\r\n                    <td> G2467 </td>\r\n                    <td> April 20, 2020 </td>\r\n                    <td> alice@gmail.com </td>\r\n                    <td> \r\n                        <button class=\"btn btn-success\">Paid</button>\r\n                    </td>\r\n                    <td> $200</td>\r\n                    <td>\r\n                        <select class=\"action\">\r\n                            <option value=\"select\">Select</option>\r\n                            <option value=\"view\">View</option>\r\n                            <option value=\"pdf\">PDF</option>\r\n                            <option value=\"refund\">Refund</option>\r\n                            <option value=\"cancel\">Cancel</option>\r\n                        </select>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> I1234 </td>\r\n                    <td> June 20, 2020 </td>\r\n                    <td> brian@gmail.com </td>\r\n                    <td> \r\n                        <button class=\"btn btn-warning\">Unpaid</button>\r\n                    </td>\r\n                    <td> $300</td>\r\n                    <td>\r\n                        <select class=\"action\">\r\n                            <option value=\"select\">Select</option>\r\n                            <option value=\"view\">View</option>\r\n                            <option value=\"pdf\">PDF</option>\r\n                            <option value=\"refund\">Refund</option>\r\n                            <option value=\"cancel\">Cancel</option>\r\n                        </select>\r\n                    </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> R1234 </td>\r\n                    <td> May 10, 2020 </td>\r\n                    <td> anna@gmail.com </td>\r\n                    <td> \r\n                        <button class=\"btn btn-danger\">Refunded</button>\r\n                    </td>\r\n                    <td> $100</td>\r\n                    <td>\r\n                        <select class=\"action\">\r\n                            <option value=\"select\">Select</option>\r\n                            <option value=\"view\">View</option>\r\n                            <option value=\"pdf\">PDF</option>\r\n                            <option value=\"refund\">Refund</option>\r\n                            <option value=\"cancel\">Cancel</option>\r\n                        </select>\r\n                    </td>\r\n                </tr>\r\n                \r\n            </tbody>\r\n        </table>\r\n        <button class=\"btn btn-info\" style=\"float: right;\">Submit</button>\r\n    </div>\r\n</div> -->\r\n\r\n\r\n\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center mb-5 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto pb-5\">\r\n            <h1>Report Management </h1>\r\n        </div>\r\n\r\n        <div class=\"tab-group col-lg-12\">\r\n            <mat-tab-group>\r\n                <mat-tab>\r\n                    <ng-template mat-tab-label>\r\n                        <mat-icon matListIcon>payment </mat-icon>\r\n                        <span style=\"font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);\">\r\n                            Payment Report\r\n                        </span>\r\n                    </ng-template>\r\n\r\n                    <div class=\"col-sm-12\">\r\n                        <h5 class=\"lable text-left pt-5 pb-1\">*Choose the range for <strong>Payment Report</strong>\r\n                        </h5>\r\n                        <kendo-daterange class=\"float-left\">\r\n                            <label>\r\n                                <span class=\"label p-3\">From </span>\r\n                                <!-- <kendo-dateinput kendoDateRangeStartInput \r\n                                        [(value)]=\"range.start\"\r\n                                        (valueChange)=\"onChangeDate()\"></kendo-dateinput> -->\r\n                            </label>\r\n                            <label>\r\n                                <span class=\"label p-3\">To </span>\r\n                                <!-- <kendo-dateinput kendoDateRangeEndInput \r\n                                        [(value)]=\"range.end\"\r\n                                        (valueChange)=\"onChangeDate()\"></kendo-dateinput> -->\r\n                            </label>\r\n                        </kendo-daterange>\r\n                    </div>\r\n\r\n                    <br /><br />\r\n                    <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                        <h5>Export</h5>\r\n                        <span><button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\">\r\n                                <mat-icon matListIcon>cloud_download</mat-icon>\r\n                            </button></span>\r\n                    </div>\r\n\r\n                    <table mat-table [dataSource]=\"PaymentDataSource\" class=\"mat-elevation-z8\">\r\n                        <ng-container matColumnDef=\"year\">\r\n                            <th mat-header-cell *matHeaderCellDef> Year </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.year}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jan\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jan </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jan}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"feb\">\r\n                            <th mat-header-cell *matHeaderCellDef> Feb </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.feb}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"mar\">\r\n                            <th mat-header-cell *matHeaderCellDef> Mar </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.mar}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"apr\">\r\n                            <th mat-header-cell *matHeaderCellDef> Apr </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.apr}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"may\">\r\n                            <th mat-header-cell *matHeaderCellDef> May </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.may}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jun\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jun </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jun}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jul\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jul </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jul}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"aug\">\r\n                            <th mat-header-cell *matHeaderCellDef> Aug </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.aug}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"sep\">\r\n                            <th mat-header-cell *matHeaderCellDef> Sep </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.sep}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"oct\">\r\n                            <th mat-header-cell *matHeaderCellDef> Oct </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.oct}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"nov\">\r\n                            <th mat-header-cell *matHeaderCellDef> Nov </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.nov}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"dec\">\r\n                            <th mat-header-cell *matHeaderCellDef> Dec </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.dec}}</td>\r\n                        </ng-container>\r\n\r\n                        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n                    </table>\r\n                </mat-tab>\r\n\r\n                <mat-tab>\r\n                    <ng-template mat-tab-label>\r\n                        <mat-icon matListIcon>bar_chart</mat-icon>\r\n                        <span style=\"font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);\">\r\n                            Monthly Report\r\n                        </span>\r\n                    </ng-template>\r\n                    <div class=\"col-sm-12\">\r\n                        <h5 class=\"lable text-left pt-5 pb-1\">*Choose the range for <strong>Monthly Report</strong></h5>\r\n                        <kendo-daterange class=\"float-left\">\r\n                            <label>\r\n                                <span class=\"label p-3\">From </span>\r\n                                <!-- <kendo-dateinput kendoDateRangeStartInput \r\n                                             [(value)]=\"range.start\"\r\n                                             (valueChange)=\"onChangeDate()\"></kendo-dateinput> -->\r\n                            </label>\r\n                            <label>\r\n                                <span class=\"label p-3\">To </span>\r\n                                <!-- <kendo-dateinput kendoDateRangeEndInput \r\n                                             [(value)]=\"range.end\"\r\n                                             (valueChange)=\"onChangeDate()\"></kendo-dateinput> -->\r\n                            </label>\r\n                        </kendo-daterange>\r\n                    </div>\r\n                    <br /><br />\r\n                    <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                        <h5>Export</h5>\r\n                        <button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\">\r\n                            <mat-icon matListIcon>cloud_download</mat-icon>\r\n                        </button>\r\n                    </div>\r\n                    <h4 class=\"program-name float-left\">Field Trip</h4>\r\n                    <table mat-table [dataSource]=\"MonthlyDataSourceField\" class=\"mat-elevation-z8\">\r\n                        <ng-container matColumnDef=\"year\">\r\n                            <th mat-header-cell *matHeaderCellDef> Year </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.year}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jan\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jan </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jan}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"feb\">\r\n                            <th mat-header-cell *matHeaderCellDef> Feb </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.feb}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"mar\">\r\n                            <th mat-header-cell *matHeaderCellDef> Mar </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.mar}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"apr\">\r\n                            <th mat-header-cell *matHeaderCellDef> Apr </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.apr}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"may\">\r\n                            <th mat-header-cell *matHeaderCellDef> May </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.may}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jun\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jun </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jun}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jul\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jul </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jul}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"aug\">\r\n                            <th mat-header-cell *matHeaderCellDef> Aug </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.aug}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"sep\">\r\n                            <th mat-header-cell *matHeaderCellDef> Sep </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.sep}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"oct\">\r\n                            <th mat-header-cell *matHeaderCellDef> Oct </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.oct}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"nov\">\r\n                            <th mat-header-cell *matHeaderCellDef> Nov </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.nov}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"dec\">\r\n                            <th mat-header-cell *matHeaderCellDef> Dec </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.dec}}</td>\r\n                        </ng-container>\r\n\r\n                        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                        <tr mat-row *matRowDef=\"let row; columns:displayedColumns;\"></tr>\r\n                    </table>\r\n\r\n                    <br /><br />\r\n\r\n                    <h4 class=\"program-name float-left\">Girl Scout</h4>\r\n                    <table mat-table [dataSource]=\"MonthlyDataSourceGirl\" class=\"mat-elevation-z8\">\r\n                        <ng-container matColumnDef=\"year\">\r\n                            <th mat-header-cell *matHeaderCellDef> Year </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.year}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jan\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jan </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jan}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"feb\">\r\n                            <th mat-header-cell *matHeaderCellDef> Feb </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.feb}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"mar\">\r\n                            <th mat-header-cell *matHeaderCellDef> Mar </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.mar}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"apr\">\r\n                            <th mat-header-cell *matHeaderCellDef> Apr </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.apr}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"may\">\r\n                            <th mat-header-cell *matHeaderCellDef> May </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.may}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jun\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jun </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jun}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"jul\">\r\n                            <th mat-header-cell *matHeaderCellDef> Jul </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.jul}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"aug\">\r\n                            <th mat-header-cell *matHeaderCellDef> Aug </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.aug}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"sep\">\r\n                            <th mat-header-cell *matHeaderCellDef> Sep </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.sep}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"oct\">\r\n                            <th mat-header-cell *matHeaderCellDef> Oct </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.oct}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"nov\">\r\n                            <th mat-header-cell *matHeaderCellDef> Nov </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.nov}}</td>\r\n                        </ng-container>\r\n\r\n                        <ng-container matColumnDef=\"dec\">\r\n                            <th mat-header-cell *matHeaderCellDef> Dec </th>\r\n                            <td mat-cell *matCellDef=\"let element\">{{element.dec}}</td>\r\n                        </ng-container>\r\n\r\n                        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                        <tr mat-row *matRowDef=\"let row; columns:displayedColumns;\"></tr>\r\n                    </table>\r\n\r\n                </mat-tab>\r\n                <mat-tab>\r\n                    <ng-template mat-tab-label>\r\n                        <mat-icon matListIcon>beach_access </mat-icon>\r\n                        <span style=\"font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);\">\r\n                            Camp Program Report\r\n                        </span>\r\n                    </ng-template>\r\n                    <br /><br />\r\n                    <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                        <h5>Export</h5>\r\n                        <button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\">\r\n                            <mat-icon matListIcon>cloud_download</mat-icon>\r\n                        </button>\r\n                    </div>\r\n                    Camp\r\n                </mat-tab>\r\n\r\n                <mat-tab>\r\n                    <ng-template mat-tab-label>\r\n                        <mat-icon matListIcon>schedule </mat-icon>\r\n                        <span style=\"font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);\">\r\n                            Monthly Master Schedule\r\n                        </span>\r\n                    </ng-template>\r\n                    <br /><br />\r\n                    <div class=\"download-btn col-md-12\" style=\"text-align: right;\">\r\n                        <h5>Export</h5>\r\n                        <button data-toggle=\"tooltip\" data-placement=\"right\" title=\"Download Report\" class=\"btn\">\r\n                            <mat-icon matListIcon>cloud_download</mat-icon>\r\n                        </button>\r\n                    </div>\r\n                    schedule\r\n\r\n                </mat-tab>\r\n\r\n            </mat-tab-group>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -786,7 +708,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>Reservation Management</h1>\r\n        </div>\r\n    </div> \r\n\r\n    <!-- SEARCH BAR -->\r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n                [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"table-responsive-sm hide-with-small\">\r\n        <!-- List of all reservations for admin -->\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\" *ngIf = \"role == '2' || role == '3'\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:7.5%\"> #Res </th>\r\n                    <th style=\"width:17.5%\"> Program Name </th>\r\n                    <th style=\"width:12.5%\"> Date </th>\r\n                    <th title=\"Ongoing: Haven't attended yet\r\nAttended: Attened the program + Not completed payment yet\r\nCompleted: Attened the program + Completed payment\r\nCancelled: Cancelled reservation\" style=\"width:10%\"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>\r\n                    <th style=\"width:15%\"> Name </th>\r\n                    <th style=\"width:10%\"> Total </th>\r\n                    <th style=\"width:10%\"> Remaining </th>\r\n                    <th style=\"width:17.5%\"> Action </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                    <td> {{reservation.ReservationPK}} </td>\r\n                    <td> {{reservation.ProgramName}} </td>\r\n                    <td> {{reservation.Date}}</td>\r\n                    <td > {{reservation.ReservationStatus}} </td>\r\n                    <td> {{reservation.CustomerName}} </td>\r\n                    <td> {{reservation.Total}} </td>\r\n                    <td> {{reservation.RemainingBalance}} </td>\r\n                    <td> <button mat-raised-button class=\"btn btn-warning mr-3\" type=\"submit\" (click)=\"openReservationModal()\" onfocus=\"blur()\">View</button>\r\n                        <button mat-raised-button class=\"btn btn-danger\" type=\"submit\" (click)=\"openReservationModal()\" onfocus=\"blur()\">Cancel</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!-- List of Reservarion By Customer -->\r\n        <table #datatable class=\"table table-hover\" style=\"width:100%\" *ngIf = \"role == '1'\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:10%\"> #ID </th>\r\n                    <th style=\"width:20%\"> Program Name </th>\r\n                    <th style=\"width:15%\"> Date </th>\r\n                    <th style=\"width:15%\"> Time </th>\r\n                    <th style=\"width:7%\"> Quantity </th>\r\n                    <th style=\"width:8%\"> Total </th>\r\n                    <th style=\"width:15%\"> Remaining </th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                    <td> {{reservation.ReservationPK}} </td>\r\n                    <td> {{reservation.ProgramName}} </td>\r\n                    <td> {{reservation.Date}}</td>\r\n                    <td > {{reservation.Time}}</td>\r\n                    <td> {{reservation.Quantity}} </td>\r\n                    <td> {{reservation.Total}} </td>\r\n                    <td> {{reservation.RemainingBalance}} \r\n                        <button *ngIf = \"reservation.RemainingBalance != 0\" mat-raised-button class=\"btn btn-warning float-right\" type=\"submit\" (click)=\"openPaynowModal()\" onfocus=\"blur()\">Pay Now</button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n                <pagination-controls class=\"float-right\" (pageChange)=\"p=$event\" autoHide=\"true\" responsive=\"true\">\r\n                </pagination-controls>\r\n            </div>\r\n        </div>\r\n    </div>  \r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n  <div class=\"row text-center\">\r\n      <div class=\"col-lg-7 mt-5 mx-auto\">\r\n          <h1>Reservation Management</h1>\r\n      </div>\r\n  </div> \r\n\r\n  <!-- SEARCH BAR -->\r\n  <div class=\"row filter\">\r\n      <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n          <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\" (change)=\"selectChangeHandler($event)\">\r\n            <option *ngFor=\"let item of programCategories\" [value]=\"item.id\">{{item.name}}</option>\r\n          </select>\r\n      </div>\r\n      <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n          <input type=\"text\" class=\"form-control\" placeholder=\"Type in Program Name or Keywords to Search\"\r\n              [(ngModel)]=\"searchText\">\r\n      </div>\r\n      <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n          <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\" onfocus=\"blur()\">Clear Search</button>\r\n      </div>\r\n  </div>\r\n\r\n  <div class=\"table-responsive-sm hide-with-small\">\r\n      <!-- List of all reservations for admin -->\r\n      <table #datatable class=\"table table-hover\" style=\"width:100%\" *ngIf = \"role == '2' || role == '3'\">\r\n          <thead>\r\n              <tr>\r\n                  <th style=\"width:7.5%\"> #Res </th>\r\n                  <th style=\"width:17.5%\"> Program Name </th>\r\n                  <th style=\"width:12.5%\"> Date </th>\r\n                  <th title=\"Ongoing: Haven't attended yet\r\nAttended: Attened the program + Not completed payment yet\r\nCompleted: Attened the program + Completed payment\r\nCancelled: Cancelled reservation\" style=\"width:10%\"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>\r\n                  <th style=\"width:15%\"> Name </th>\r\n                  <th style=\"width:10%\"> Total </th>\r\n                  <th style=\"width:10%\"> Remaining </th>\r\n                  <th style=\"width:17.5%\"> Action </th>\r\n              </tr>\r\n          </thead>\r\n          <tbody>\r\n              <tr *ngFor=\"let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                  <td> {{reservation.ReservationPK}} </td>\r\n                  <td> {{reservation.ProgramName}} </td>\r\n                  <td> {{reservation.Date}}</td>\r\n                  <td > {{reservation.ReservationStatus}} </td>\r\n                  <td> {{reservation.CustomerName}} </td>\r\n                  <td> {{reservation.Total}} </td>\r\n                  <td> {{reservation.RemainingBalance}} </td>\r\n                  <td> <button mat-raised-button class=\"btn btn-warning mr-3\" type=\"submit\" (click)=\"openReservationModal()\" onfocus=\"blur()\">View</button>\r\n                      <button *ngIf = \"reservation.ReservationStatus == 'On Going'\" mat-raised-button class=\"btn btn-danger\" type=\"submit\" (click)=\"openCancelModal()\" onfocus=\"blur()\">Cancel</button>\r\n                  </td>\r\n              </tr>\r\n          </tbody>\r\n      </table>\r\n      <!-- List of Reservarion By Customer -->\r\n      <table #datatable class=\"table table-hover\" style=\"width:100%\" *ngIf = \"role == '1'\">\r\n          <thead>\r\n              <tr>\r\n                  <th style=\"width:10%\"> #ID </th>\r\n                  <th style=\"width:20%\"> Program Name </th>\r\n                  <th style=\"width:15%\"> Date </th>\r\n                  <th style=\"width:15%\"> Time </th>\r\n                  <th style=\"width:7%\"> Quantity </th>\r\n                  <th style=\"width:8%\"> Total </th>\r\n                  <th style=\"width:15%\"> Remaining </th>\r\n              </tr>\r\n          </thead>\r\n          <tbody>\r\n              <tr *ngFor=\"let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                  <td> {{reservation.ReservationPK}} </td>\r\n                  <td> {{reservation.ProgramName}} </td>\r\n                  <td> {{reservation.Date}}</td>\r\n                  <td > {{reservation.Time}}</td>\r\n                  <td> {{reservation.Quantity}} </td>\r\n                  <td> {{reservation.Total}} </td>\r\n                  <td> {{reservation.RemainingBalance}} \r\n                      <button *ngIf = \"reservation.RemainingBalance != 0\" mat-raised-button class=\"btn btn-warning float-right\" type=\"submit\" (click)=\"openPaynowModal()\" onfocus=\"blur()\">Pay Now</button>\r\n                  </td>\r\n              </tr>\r\n          </tbody>\r\n      </table>\r\n      <div class=\"row\">\r\n          <div class=\"col-sm-12\">\r\n              <pagination-controls class=\"float-right\" (pageChange)=\"p=$event\" autoHide=\"true\" responsive=\"true\">\r\n              </pagination-controls>\r\n          </div>\r\n      </div>\r\n  </div>  \r\n</div>");
 
 /***/ }),
 
@@ -825,7 +747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-3 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>Program Schedule</h1>            \r\n        </div>\r\n    </div>\r\n    <form [formGroup]=\"SetProgramScheduleForm\" >\r\n        <div class=\"form-group font-weight-bold container\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Program</mat-card-title>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\">\r\n                            <label>Program Name</label>\r\n                        </div>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"programName\" [(ngModel)]=\"programData.Name\" readonly>\r\n                        </div>                \r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\">\r\n                            <label>Program Color:</label>\r\n                        </div>\r\n                        <div class=\"col-md-1\">\r\n                            <kendo-colorpicker \r\n                                #picker\r\n                                [view]=\"'palette'\"\r\n                                [format]=\"'hex'\"\r\n                                [paletteSettings]=\"settings\"\r\n                                [(value)]=\"selectedColor\"\r\n                            >\r\n                            </kendo-colorpicker>\r\n                        </div>\r\n                        <div class=\"col-md-2\">\r\n                            <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"setProgramColor()\">\r\n                                Set Color\r\n                            </button>\r\n                        </div>\r\n                        <div class=\"col-md-4\" *ngIf=\"programColorMessage\">\r\n                            <div class=\"successColorMessage\">\r\n                                <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                {{programColorMessage}}\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>            \r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>                                  \r\n                    <mat-card-title>Current Schedule </mat-card-title>\r\n                    <mat-card-subtitle>You can define a new schedule that will start on a specified date.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">                                    \r\n                                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"addNewScheduleModal()\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New Schedule\r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"scheduleSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{scheduleSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"!hasSchedule\">\r\n                                <p>Please select \"New Schedule\" to create new schedule.</p>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasSchedule\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:15%\">From</th>\r\n                                                    <th style=\"width:15%\">To</th>\r\n                                                    <th style=\"width:40%\">Schedule Name</th>\r\n                                                    <th style=\"width:20%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let schedule of allScheduleSettings; let index=index\" \r\n                                                        on-mouseover=\"hoveredIndex=index\">\r\n                                                    <td class=\"scheduleTable\">{{schedule.tempStart}}</td>\r\n                                                    <td class=\"scheduleTable\">{{schedule.tempEnd}}</td>\r\n                                                    <td class=\"scheduleTable\">\r\n                                                        <div class=\"row\">\r\n                                                            <div class=\"col-md-7\">\r\n                                                                {{schedule.ScheduleSettingName}} \r\n                                                            </div>\r\n                                                            <div class=\"col-md-3\">\r\n                                                                <mat-icon matListIcon id=\"doneIcon\" *ngIf=\"schedule.IsSelected\">check_circle</mat-icon>\r\n                                                                <button mat-stroked-button color=\"primary\" *ngIf=\"index==hoveredIndex && !schedule.IsSelected\"\r\n                                                                    (click)=\"viewSchedule(schedule)\">\r\n                                                                    View\r\n                                                                </button>\r\n                                                            </div>\r\n                                                        </div>                                                \r\n                                                    </td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Schedule\" \r\n                                                            (click)=\"editScheduleModal(schedule)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\"(click)=\"removeScheduleSetting(schedule)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>\r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>                                  \r\n                    <mat-card-title>Current Sessions</mat-card-title>\r\n                    <mat-card-subtitle>Display all available sessions in a schedule</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">                            \r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">\r\n                                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"addNewSessionDetailsModal()\" [disabled]=\"!hasSchedule\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New Session\r\n                                    </button>                                \r\n                                </div>     \r\n                                <div class=\"col-md-7\" *ngIf=\"sessionSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{sessionSuccessMessage}}\r\n                                    </div>\r\n                                </div>                   \r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"!hasSession && hasSchedule\">\r\n                                <p>Please select \"New Session\" to create new session.</p>\r\n                            </div>                            \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-1\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <div class=\"row\" *ngIf=\"hasSession && hasSchedule\">\r\n                                <div class=\"col-md-12 text-center\">\r\n                                    <p>This <strong>{{currentScheduleSetting.ScheduleSettingName}}</strong> schedule is effective from \r\n                                        {{currentScheduleSetting.tempStart}} to {{currentScheduleSetting.tempEnd}}.\r\n                                    </p>\r\n                                </div>\r\n                                <!--  Create table -->\r\n                                <div class=\"col padding-0\" *ngFor=\"let day of dayArr\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:100%\">{{day.day}}</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let item of day.eventList\">\r\n                                                    <td>\r\n                                                        {{item.tempStart}} <br/>to {{item.tempEnd}}                                                \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <mat-divider></mat-divider>                    \r\n                    <div class=\"row pt-3\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-6 text-center\">\r\n                            <h6>You can edit the session's info in the table below.</h6>\r\n                        </div>                        \r\n                    </div>\r\n                    <div class=\"row\" *ngIf=\"hasSession\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <div class=\"row\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">Session</th>\r\n                                                    <th style=\"width:20%\">Repeat on</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let session of allSessions\">\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\">\r\n                                                        {{session.tempStart}} - {{session.tempEnd}}</td>\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\" >\r\n                                                        {{session.RepeatDay}}</td>\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\">\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Session\" \r\n                                                            (click)=\"updateSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\" (click)=\"removeSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>   \r\n                            </div>                     \r\n                        </div>\r\n                    </div>  \r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Additional Sessions</mat-card-title>\r\n                    <mat-card-subtitle>You can add one-off Programs on specific dates and times.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\" >\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">\r\n                                    <button mat-raised-button color=\"primary\" onclick=\"this.blur()\" (click)=\"addNewAdditionalSessionDetailsModal()\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New additional session                             \r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"additionalSessionSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{additionalSessionSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasAdditionalSession\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">Date</th>\r\n                                                    <th style=\"width:20%\">Time</th>\r\n                                                    <th style=\"width:15%\">Notes</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let session of allAdditionalSessions\">\r\n                                                    <td>{{session.tempDate}}</td>\r\n                                                    <td>{{session.tempStart}} - {{session.tempEnd}}</td>\r\n                                                    <td>{{session.Description}}</td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Session\" \r\n                                                            (click)=\"updateAdditionalSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\" (click)=\"removeAdditionalSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>   \r\n                            </div>                     \r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br>\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Black-out Date</mat-card-title>\r\n                    <mat-card-subtitle>Program is NOT available during the following days/periods.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">                                    \r\n                                    <button mat-raised-button color=\"primary\" onclick=\"this.blur()\" (click)=\"addBlackoutDateModal()\" >\r\n                                        <mat-icon matListIcon>add</mat-icon> New Black-out date                                \r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"blackoutDateSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{blackoutDateSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasBlackoutDate\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table table-hover\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">From</th>\r\n                                                    <th style=\"width:20%\">To</th>\r\n                                                    <th style=\"width:15%\">Notes</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let date of allBlackoutDates\">\r\n                                                    <td>{{date.tempStart}}</td>\r\n                                                    <td>{{date.tempEnd}}</td>\r\n                                                    <td>{{date.Description}}</td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit\" \r\n                                                            (click)=\"updateBlackoutDateModal(date)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove\" (click)=\"removeBlackoutDateModal(date)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-1\"></div>\r\n                <div class=\"col-md-4\">\r\n                    <button [routerLink]=\"['/profile','view-schedule',programData.ProgramPK]\"\r\n                        class=\"btn btn-lg btn-info btn-block\">\r\n                        <mat-icon matListIcon>calendar_today</mat-icon> View on Calendar\r\n                    </button>\r\n                </div>\r\n                <div class=\"col-md-2\"></div>\r\n                <div class=\"col-md-4 form-group\">              \r\n                    <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\" [routerLink]=\"['/profile','schedule-management']\">Save</button>\r\n                </div>\r\n                <div class=\"col-md-1\"></div>\r\n            </div>\r\n        </div>\r\n    </form>    \r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-3 mt-4\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>Program Schedule</h1>            \r\n        </div>\r\n    </div>\r\n    <form [formGroup]=\"SetProgramScheduleForm\" >\r\n        <div class=\"form-group font-weight-bold container\">\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Program</mat-card-title>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\">\r\n                            <label>Program Name</label>\r\n                        </div>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"programName\" [(ngModel)]=\"programData.Name\" readonly>\r\n                        </div>                \r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\">\r\n                            <label>Program Color:</label>\r\n                        </div>\r\n                        <div class=\"col-md-1\">\r\n                            <kendo-colorpicker \r\n                                #picker\r\n                                [view]=\"'palette'\"\r\n                                [format]=\"'hex'\"\r\n                                [paletteSettings]=\"settings\"\r\n                                [(value)]=\"selectedColor\"\r\n                            >\r\n                            </kendo-colorpicker>\r\n                        </div>\r\n                        <div class=\"col-md-2\">\r\n                            <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"setProgramColor()\">\r\n                                Set Color\r\n                            </button>\r\n                        </div>\r\n                        <div class=\"col-md-4\" *ngIf=\"programColorMessage\">\r\n                            <div class=\"successColorMessage\">\r\n                                <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                {{programColorMessage}}\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>            \r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>                                  \r\n                    <mat-card-title>Current Schedule </mat-card-title>\r\n                    <mat-card-subtitle>You can define a new schedule that will start on a specified date.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">                                    \r\n                                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"addNewScheduleModal()\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New Schedule\r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"scheduleSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{scheduleSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"!hasSchedule\">\r\n                                <p>Please select \"New Schedule\" to create new schedule.</p>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasSchedule\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:15%\">From</th>\r\n                                                    <th style=\"width:15%\">To</th>\r\n                                                    <th style=\"width:40%\">Schedule Name</th>\r\n                                                    <th style=\"width:20%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let schedule of allScheduleSettings; let index=index\" \r\n                                                        on-mouseover=\"hoveredIndex=index\">\r\n                                                    <td class=\"scheduleTable\">{{schedule.tempStart}}</td>\r\n                                                    <td class=\"scheduleTable\">{{schedule.tempEnd}}</td>\r\n                                                    <td class=\"scheduleTable\">\r\n                                                        <div class=\"row\">\r\n                                                            <div class=\"col-md-7\">\r\n                                                                {{schedule.ScheduleSettingName}} \r\n                                                            </div>\r\n                                                            <div class=\"col-md-3\">\r\n                                                                <mat-icon matListIcon id=\"doneIcon\" *ngIf=\"schedule.IsSelected\">check_circle</mat-icon>\r\n                                                                <button mat-stroked-button color=\"primary\" *ngIf=\"index==hoveredIndex && !schedule.IsSelected\"\r\n                                                                    (click)=\"viewSchedule(schedule)\">\r\n                                                                    View\r\n                                                                </button>\r\n                                                            </div>\r\n                                                        </div>                                                \r\n                                                    </td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Schedule\" \r\n                                                            (click)=\"editScheduleModal(schedule)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <!-- <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\"(click)=\"removeScheduleSetting(schedule)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button> -->\r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>                                  \r\n                    <mat-card-title>Current Sessions</mat-card-title>\r\n                    <mat-card-subtitle>Display all available sessions in a schedule</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">                            \r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">\r\n                                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" (click)=\"addNewSessionDetailsModal()\" [disabled]=\"!hasSchedule\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New Session\r\n                                    </button>                                \r\n                                </div>     \r\n                                <div class=\"col-md-7\" *ngIf=\"sessionSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{sessionSuccessMessage}}\r\n                                    </div>\r\n                                </div>                   \r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"!hasSession && hasSchedule\">\r\n                                <p>Please select \"New Session\" to create new session.</p>\r\n                            </div>                            \r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-1\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <div class=\"row\" *ngIf=\"hasSession && hasSchedule\">\r\n                                <div class=\"col-md-12 text-center\">\r\n                                    <p>This <strong>{{currentScheduleSetting.ScheduleSettingName}}</strong> schedule is effective from \r\n                                        {{currentScheduleSetting.tempStart}} to {{currentScheduleSetting.tempEnd}}.\r\n                                    </p>\r\n                                </div>\r\n                                <!--  Create table -->\r\n                                <div class=\"col padding-0\" *ngFor=\"let day of dayArr\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table table-hover\" style=\"width:100%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:100%\">{{day.day}}</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let item of day.eventList\">\r\n                                                    <td>\r\n                                                        {{item.tempStart}} <br/>to {{item.tempEnd}}                                                \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <mat-divider></mat-divider>                    \r\n                    <div class=\"row pt-3\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-6 text-center\">\r\n                            <h6>You can edit the session's info in the table below.</h6>\r\n                        </div>                        \r\n                    </div>\r\n                    <div class=\"row\" *ngIf=\"hasSession\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <div class=\"row\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">Session</th>\r\n                                                    <th style=\"width:20%\">Repeat on</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let session of allSessions\">\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\">\r\n                                                        {{session.tempStart}} - {{session.tempEnd}}</td>\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\" >\r\n                                                        {{session.RepeatDay}}</td>\r\n                                                    <td *ngIf=\"session.ScheduleSettingPK == currentScheduleSetting.ScheduleSettingPK\">\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Session\" \r\n                                                            (click)=\"updateSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\" (click)=\"removeSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>   \r\n                            </div>                     \r\n                        </div>\r\n                    </div>  \r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Additional Sessions</mat-card-title>\r\n                    <mat-card-subtitle>You can add one-off Programs on specific dates and times.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\" >\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">\r\n                                    <button mat-raised-button color=\"primary\" onclick=\"this.blur()\" (click)=\"addNewAdditionalSessionDetailsModal()\">\r\n                                        <mat-icon matListIcon>add</mat-icon> New additional session                             \r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"additionalSessionSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{additionalSessionSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasAdditionalSession\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table  table-hover\" on-mouseleave=\"hoveredIndex=null\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">Date</th>\r\n                                                    <th style=\"width:20%\">Time</th>\r\n                                                    <th style=\"width:15%\">Notes</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let session of allAdditionalSessions\">\r\n                                                    <td>{{session.tempDate}}</td>\r\n                                                    <td>{{session.tempStart}} - {{session.tempEnd}}</td>\r\n                                                    <td>{{session.Description}}</td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit Session\" \r\n                                                            (click)=\"updateAdditionalSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove Schedule\" (click)=\"removeAdditionalSessionDetailsModal(session)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>   \r\n                            </div>                     \r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br>\r\n            <mat-card>\r\n                <mat-card-header>\r\n                    <mat-card-title>Black-out Date</mat-card-title>\r\n                    <mat-card-subtitle>Program is NOT available during the following days/periods.</mat-card-subtitle>\r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-2\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <br/>\r\n                            <div class=\"row\">                                \r\n                                <div class=\"col-md-3\">                                    \r\n                                    <button mat-raised-button color=\"primary\" onclick=\"this.blur()\" (click)=\"addBlackoutDateModal()\" >\r\n                                        <mat-icon matListIcon>add</mat-icon> New Black-out date                                \r\n                                    </button>                                \r\n                                </div>\r\n                                <div class=\"col-md-7\" *ngIf=\"blackoutDateSuccessMessage\">\r\n                                    <div class=\"successColorMessage\">\r\n                                        <mat-icon matListIcon id=\"doneIcon\">check_circle</mat-icon>\r\n                                        {{blackoutDateSuccessMessage}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"hasBlackoutDate\">\r\n                                <div class=\"col padding-0\">\r\n                                    <div class=\"table-responsive-sm\">\r\n                                        <table #datatable class=\"table table-hover\" style=\"width:70%\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th style=\"width:20%\">From</th>\r\n                                                    <th style=\"width:20%\">To</th>\r\n                                                    <th style=\"width:15%\">Notes</th>\r\n                                                    <th style=\"width:15%\">Actions</th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr *ngFor=\"let date of allBlackoutDates\">\r\n                                                    <td>{{date.tempStart}}</td>\r\n                                                    <td>{{date.tempEnd}}</td>\r\n                                                    <td>{{date.Description}}</td>\r\n                                                    <td>\r\n                                                        <button mat-icon-button onclick=\"this.blur()\" matTooltip=\"Edit\" \r\n                                                            (click)=\"updateBlackoutDateModal(date)\" >\r\n                                                            <mat-icon>edit</mat-icon>\r\n                                                        </button>\r\n                                                        <button mat-icon-button color=\"warn\" id=\"removeButton\" onclick=\"this.blur()\"\r\n                                                            matTooltip=\"Remove\" (click)=\"removeBlackoutDateModal(date)\" >\r\n                                                            <mat-icon>delete</mat-icon>\r\n                                                        </button>                                            \r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>                        \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </mat-card-content>\r\n            </mat-card>\r\n            <br/>\r\n            <div class=\"row\">\r\n                <div class=\"col-md-1\"></div>\r\n                <div class=\"col-md-4\">\r\n                    <button [routerLink]=\"['/profile','view-schedule',programData.ProgramPK]\"\r\n                        class=\"btn btn-lg btn-info btn-block\">\r\n                        <mat-icon matListIcon>calendar_today</mat-icon> View on Calendar\r\n                    </button>\r\n                </div>\r\n                <div class=\"col-md-2\"></div>\r\n                <div class=\"col-md-4 form-group\">              \r\n                    <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\" [routerLink]=\"['/profile','schedule-management']\">Save</button>\r\n                </div>\r\n                <div class=\"col-md-1\"></div>\r\n            </div>\r\n        </div>\r\n    </form>    \r\n</div>");
 
 /***/ }),
 
@@ -838,7 +760,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-2 mt-2\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>View Schedule</h1>\r\n        </div>\r\n    </div> \r\n    <div class=\"row\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\"\r\n                (change)=\"selectChangeHandler($event)\">\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-1 col-md-1 col-sm-1 p-0\">            \r\n        </div>\r\n        <div class=\"col-lg-6 col-md-6 col-sm-6 p-0\" id=\"4\">            \r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"listOfPrograms\"\r\n                (change)=\"onChangeSelectedProgram($event)\">\r\n                <option selected value=\"0\"> --- Select {{programCategories[choice].name}} --- </option>\r\n                <option *ngFor=\"let program of programs\" [value]=\"program.ProgramPK\">\r\n                    {{program.Name}}\r\n                </option>\r\n            </select>\r\n            \r\n        </div>\r\n    </div>    \r\n    <div class=\"row pt-3\">\r\n        <div class=\"col-md-8 p-0\">\r\n            <div class=\"row filter m-0 mb-5\">\r\n                <kendo-scheduler\r\n                    [kendoSchedulerBinding]=\"events\"                \r\n                    (eventClick)=\"eventClick($event)\"\r\n                    [modelFields]=\"eventFields\"\r\n                    [selectedDate]=\"selectedDate\"\r\n                    [showWorkHours] = \"true\"\r\n                    [eventStyles]=\"getEventStyles\"\r\n                    [eventClass]=\"getEventClass\" \r\n                    style=\"height: 850px; width: 1500px\">\r\n                    <ng-template kendoSchedulerEventTemplate let-event>\r\n                        {{ event.dataItem.Title }} \r\n                    </ng-template>\r\n                    <!-- <kendo-scheduler-day-view >\r\n                    </kendo-scheduler-day-view> -->\r\n                    <kendo-scheduler-week-view >\r\n                    </kendo-scheduler-week-view>\r\n                    <kendo-scheduler-month-view > </kendo-scheduler-month-view>\r\n                    <!-- <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view> -->\r\n                    <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>\r\n                </kendo-scheduler>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-4 pl-3\">\r\n            <mat-card id=\"matcard\">\r\n                <mat-card-header>\r\n                    <div class=\"container p-0\">\r\n                        <mat-card-title>\r\n                            {{currentSessionDetails.Title}}\r\n                        </mat-card-title>  \r\n                        <mat-card-subtitle *ngIf=\"currentSessionDetails.ProgramPK == 0\">\r\n                            Select a session on calendar to see more detail.\r\n                        </mat-card-subtitle>\r\n                        <mat-card-subtitle *ngIf=\"currentSessionDetails.ProgramPK != 0\">                           \r\n                            <div class=\"row\">\r\n                                <div class=\"col-md-12\">\r\n                                    {{currentSessionDetails.tempDate}}, \r\n                                    {{currentSessionDetails.tempStart}} - {{currentSessionDetails.tempEnd}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row pt-2\">\r\n                                <div class=\"col-md-12\" *ngIf=\"currentSessionDetails.Start >= todayDate\">\r\n                                    <button class=\"available\" *ngIf=\"currentSessionDetails.Availability != 0\" disabled>\r\n                                        Available</button>\r\n                                    <button class=\"full\" *ngIf=\"currentSessionDetails.Availability == 0\" disabled>\r\n                                        Full</button>\r\n                                </div>\r\n                                <div class=\"col-md-12\" *ngIf=\"currentSessionDetails.Start < todayDate\">\r\n                                    <button class=\"pastevent\" disabled>\r\n                                        PAST EVENT</button>\r\n                                </div>\r\n                            </div>\r\n                        </mat-card-subtitle>\r\n                    </div> \r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-1\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <!-- <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\">\r\n                                    <h6>Instructor:</h6>\r\n                                </div>                       \r\n                                <div class=\"col-md-3 text-right\">-</div>\r\n                            </div> -->\r\n                            <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\"><h6>Seats:</h6></div>\r\n                                <div class=\"col-md-3 text-right\">{{currentSessionDetails.MaximumParticipant}}</div>\r\n                            </div>\r\n                            <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\"><h6>Available: </h6></div>\r\n                                <div class=\"col-md-3 text-right\">{{currentSessionDetails.Availability}}</div>\r\n                            </div>                            \r\n                            <div *ngIf=\"programType =='group'\">  <!-- Group -->\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>No. of chaperones: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChaparones}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Total children: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChildren}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-1\"></div>\r\n                                    <div class=\"col-md-11\">\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 5-7</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age57}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 8-10</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age810}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 11-12</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1112}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 13-14</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1314}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 14-15</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1415}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 15-17</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1517}}</div>\r\n                                        </div>\r\n                                    </div>                                    \r\n                                </div>\r\n                            </div> <!--End group-->\r\n                            <div *ngIf=\"programType =='individual'\">  <!-- Individual -->\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Total children: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChildren}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Age Range: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.AgeRange}}</div>\r\n                                </div>\r\n                            </div> <!--End individual-->\r\n                        </div>\r\n                    </div>                    \r\n                </mat-card-content>\r\n                <mat-card-actions align=\"end\">\r\n                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" \r\n                        [disabled]=\"currentSessionDetails.ProgramPK == 0 || currentSessionDetails.Start < todayDate\"\r\n                        [routerLink]=\"['/profile','program-details', currentSessionDetails.ProgramPK, 'set-program-schedule']\">\r\n                        EDIT SESSION</button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n        </div>        \r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-2 mt-2\">\r\n        <div class=\"col-lg-7 mx-auto\">\r\n            <h1>View Schedule</h1>\r\n        </div>\r\n    </div> \r\n    <div class=\"row\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"programCat\" (change)=\"selectChangeHandler($event)\">\r\n                <option *ngFor=\"let item of programCategories\" [value]=\"item.id\">{{item.name}}</option>\r\n            </select>\r\n        </div>\r\n        <div class=\"col-lg-1 col-md-1 col-sm-1 p-0\">            \r\n        </div>\r\n        <div class=\"col-lg-6 col-md-6 col-sm-6 p-0\" id=\"4\">            \r\n            <select class=\"form-control\" style=\"font-weight: bold\" id=\"listOfPrograms\"\r\n                (change)=\"onChangeSelectedProgram($event)\">\r\n                <option selected value=\"0\"> --- Select {{programCategories[choice].name}} --- </option>\r\n                <option *ngFor=\"let program of programs\" [value]=\"program.ProgramPK\">\r\n                    {{program.Name}}\r\n                </option>\r\n            </select>\r\n            \r\n        </div>\r\n    </div>    \r\n    <div class=\"row pt-3\">\r\n        <div class=\"col-md-8 p-0\">\r\n            <div class=\"row filter m-0 mb-5\">\r\n                <kendo-scheduler\r\n                    [kendoSchedulerBinding]=\"events\"                \r\n                    (eventClick)=\"eventClick($event)\"\r\n                    [modelFields]=\"eventFields\"\r\n                    [selectedDate]=\"selectedDate\"\r\n                    [showWorkHours] = \"true\"\r\n                    [eventStyles]=\"getEventStyles\"\r\n                    [eventClass]=\"getEventClass\" \r\n                    style=\"height: 850px; width: 1500px\">\r\n                    <ng-template kendoSchedulerEventTemplate let-event>\r\n                        {{ event.dataItem.Title }} \r\n                    </ng-template>\r\n                    <!-- <kendo-scheduler-day-view >\r\n                    </kendo-scheduler-day-view> -->\r\n                    <kendo-scheduler-week-view >\r\n                    </kendo-scheduler-week-view>\r\n                    <kendo-scheduler-month-view > </kendo-scheduler-month-view>\r\n                    <!-- <kendo-scheduler-timeline-view> </kendo-scheduler-timeline-view> -->\r\n                    <kendo-scheduler-agenda-view> </kendo-scheduler-agenda-view>\r\n                </kendo-scheduler>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-4 pl-3\">\r\n            <mat-card id=\"matcard\">\r\n                <mat-card-header>\r\n                    <div class=\"container p-0\">\r\n                        <mat-card-title>\r\n                            {{currentSessionDetails.Title}}\r\n                        </mat-card-title>  \r\n                        <mat-card-subtitle *ngIf=\"currentSessionDetails.ProgramPK == 0\">\r\n                            Select a session on calendar to see more detail.\r\n                        </mat-card-subtitle>\r\n                        <mat-card-subtitle *ngIf=\"currentSessionDetails.ProgramPK != 0\">                           \r\n                            <div class=\"row\">\r\n                                <div class=\"col-md-12\">\r\n                                    {{currentSessionDetails.tempDate}}, \r\n                                    {{currentSessionDetails.tempStart}} - {{currentSessionDetails.tempEnd}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row pt-2\">\r\n                                <div class=\"col-md-12\" *ngIf=\"currentSessionDetails.Start >= todayDate\">\r\n                                    <button class=\"available\" *ngIf=\"currentSessionDetails.Availability != 0\" disabled>\r\n                                        Available</button>\r\n                                    <button class=\"full\" *ngIf=\"currentSessionDetails.Availability == 0\" disabled>\r\n                                        Full</button>\r\n                                </div>\r\n                                <div class=\"col-md-12\" *ngIf=\"currentSessionDetails.Start < todayDate\">\r\n                                    <button class=\"pastevent\" disabled>\r\n                                        PAST EVENT</button>\r\n                                </div>\r\n                            </div>\r\n                        </mat-card-subtitle>\r\n                    </div> \r\n                </mat-card-header>\r\n                <mat-divider></mat-divider>\r\n                <mat-card-content>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-1\"></div>\r\n                        <div class=\"col-md-10\">\r\n                            <!-- <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\">\r\n                                    <h6>Instructor:</h6>\r\n                                </div>                       \r\n                                <div class=\"col-md-3 text-right\">-</div>\r\n                            </div> -->\r\n                            <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\"><h6>Seats:</h6></div>\r\n                                <div class=\"col-md-3 text-right\">{{currentSessionDetails.MaximumParticipant}}</div>\r\n                            </div>\r\n                            <div class=\"row pb-1\">\r\n                                <div class=\"col-md-8\"><h6>Available: </h6></div>\r\n                                <div class=\"col-md-3 text-right\">{{currentSessionDetails.Availability}}</div>\r\n                            </div>                            \r\n                            <div *ngIf=\"programType =='group'\">  <!-- Group -->\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>No. of chaperones: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChaparones}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Total children: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChildren}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-1\"></div>\r\n                                    <div class=\"col-md-11\">\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 5-7</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age57}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 8-10</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age810}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 11-12</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1112}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 13-14</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1314}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 14-15</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1415}}</div>\r\n                                        </div>\r\n                                        <div class=\"row pb-1\">\r\n                                            <div class=\"col-md-9\">Age 15-17</div>\r\n                                            <div class=\"col-md-3 text-right\">{{currentSessionDetails.Age1517}}</div>\r\n                                        </div>\r\n                                    </div>                                    \r\n                                </div>\r\n                            </div> <!--End group-->\r\n                            <div *ngIf=\"programType =='individual'\">  <!-- Individual -->\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Total children: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.NumChildren}}</div>\r\n                                </div>\r\n                                <div class=\"row pb-1\">\r\n                                    <div class=\"col-md-8\"><h6>Age Range: </h6></div>\r\n                                    <div class=\"col-md-3 text-right\">{{currentSessionDetails.AgeRange}}</div>\r\n                                </div>\r\n                            </div> <!--End individual-->\r\n                        </div>\r\n                    </div>                    \r\n                </mat-card-content>\r\n                <mat-card-actions align=\"end\">\r\n                    <button mat-raised-button onclick=\"this.blur()\" color=\"primary\" \r\n                        [disabled]=\"currentSessionDetails.ProgramPK == 0 || currentSessionDetails.Start < todayDate\"\r\n                        [routerLink]=\"['/profile','program-details', currentSessionDetails.ProgramPK, 'set-program-schedule']\">\r\n                        EDIT SESSION</button>\r\n                </mat-card-actions>\r\n            </mat-card>\r\n        </div>        \r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -864,7 +786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-8 mt-12 mx-auto\">\r\n            <div class=\"row text-center text-white mb-5\">\r\n                <div class=\"col-lg-12 mx-auto\">\r\n                    <h1>User Detail</h1>\r\n                </div>\r\n            </div>\r\n            <div><h3>Account Info</h3></div>\r\n            <hr>\r\n            <form [formGroup]=\"userDetailForm\" (ngSubmit)=\"openModalUpdateUserDetail()\"> \r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Username</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"username\" [(ngModel)]=\"userDetails.Username\" \r\n                            readonly>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Password</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-3\">•••••••••••••                     \r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-md btn-warning col-md-4\" \r\n                            (click)=\"openModalResetPassword()\">\r\n                            Reset Password</button>                            \r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Email</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"email\" [(ngModel)]=\"userDetails.Email\"\r\n                            [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\">\r\n                            <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.email.errors.required\">Email is required</div>\r\n                                <div *ngIf=\"f.email.errors.email\">Must be a valid email address</div>\r\n                            </div>                                                        \r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Current Role</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <div *ngIf = \"userDetails.Role_FK == 1\">Customer</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == 2\">Manager</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == 3\">System Admin</div>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>New Role</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <select id=\"roleSelection\">                                \r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                <div><h3>Personal Info</h3></div>\r\n                <hr>\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>First name</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"FirstName\" placeholder=\"First name\" [(ngModel)]=\"customerDetails.FirstName\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.FirstName.errors }\">\r\n                    <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.FirstName.errors.required\">First Name is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n                \r\n                <div class=\"col-xs-6\">\r\n                <label><h5>Last name</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"LastName\"placeholder=\"Last name\" [(ngModel)]=\"customerDetails.LastName\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.LastName.errors }\">\r\n                    <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.LastName.errors.required\">Last Name is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n    \r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Phone Number</h5></label>\r\n                    <input type=\"text\" pattern=\"[0-9]{10}\" class=\"form-control\" formControlName=\"PhoneNo\" placeholder=\"Phone No\" [(ngModel)]=\"customerDetails.PhoneNo\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.PhoneNo.errors }\" >\r\n                    <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.PhoneNo.errors.required\">Phone No is required</div>\r\n                        <div *ngIf=\"f.PhoneNo.errors.pattern\"> Please enter a valid Phone Number (10 digits)</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n    \r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Address</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"Address\"placeholder=\"enter address\" [(ngModel)]=\"customerDetails.Address\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Address.errors }\" >\r\n                    <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.Address.errors.required\">Street Address is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>City</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"City\" placeholder=\"enter city\" [(ngModel)]=\"customerDetails.City\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.City.errors }\" >\r\n                    <div *ngIf=\"submitted && f.City.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.City.errors.required\">City is required</div>\r\n                    </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>State</h5></label>\r\n                    <input type=\"text\" pattern=\"[a-zA-Z]{2}\" class=\"form-control\" formControlName=\"State\"placeholder=\"enter state\" [(ngModel)]=\"customerDetails.State\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.State.errors }\" maxlength = \"2\" >\r\n                    <div *ngIf=\"submitted && f.State.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.State.errors.required\">State is required</div>\r\n                        <div *ngIf=\"f.State.errors.pattern\"> Please enter a valid State</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Zipcode</h5></label>\r\n                    <input type=\"text\" pattern=\"[0-9]{5}\" class=\"form-control\" formControlName=\"Zipcode\" placeholder=\"enter zipcode\" [(ngModel)]=\"customerDetails.Zipcode\"\r\n                    [ngClass]=\"{'is-invalid': submitted && f.Zipcode.errors }\">\r\n                    <div *ngIf=\"submitted && f.Zipcode.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.Zipcode.errors.required\">Zipcode is required</div>\r\n                        <div *ngIf=\"f.Zipcode.errors.pattern\"> Please enter a valid Zipcode (5 digits)</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div>\r\n                    <section class=\"options-section\">\r\n                        <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                        [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                    </section>\r\n                </div>\r\n                <br>\r\n\r\n                <div class=\"col-xs-12 form-group \">                    \r\n                    <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\">Update User Details</button>\r\n                </div>\r\n            </form>\r\n         \r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-8 mt-12 mx-auto\">\r\n            <div class=\"row text-center text-white mb-5\">\r\n                <div class=\"col-lg-12 mx-auto\">\r\n                    <h1>User Detail</h1>\r\n                </div>\r\n            </div>\r\n            <div><h3>Account Info</h3></div>\r\n            <hr>\r\n            <form [formGroup]=\"userDetailForm\" (ngSubmit)=\"openModalUpdateUserDetail()\"> \r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Username</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"username\" [(ngModel)]=\"userDetails.Username\" \r\n                            readonly>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Password</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-3\">•••••••••••••                     \r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-md btn-warning col-md-4\" \r\n                            (click)=\"openModalResetPassword()\">\r\n                            Reset Password</button>                            \r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Email</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" class=\"form-control\" formControlName=\"email\" [(ngModel)]=\"userDetails.Email\"\r\n                            [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\">\r\n                            <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.email.errors.required\">Email is required</div>\r\n                                <div *ngIf=\"f.email.errors.email\">Must be a valid email address</div>\r\n                            </div>                                                        \r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>Current Role</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <div *ngIf = \"userDetails.Role_FK == '1'\">Customer</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == '2'\">Manager</div>\r\n                            <div *ngIf = \"userDetails.Role_FK == '3'\">System Admin</div>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-4\">\r\n                            <label><h5>New Role</h5></label>\r\n                        </div>\r\n                        <div class=\"col-md-8\">\r\n                            <select id=\"roleSelection\">                                \r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                    <br/>\r\n                <div><h3>Personal Info</h3></div>\r\n                <hr>\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>First name</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"FirstName\" placeholder=\"First name\" [(ngModel)]=\"customerDetails.FirstName\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.FirstName.errors }\">\r\n                    <div *ngIf=\"submitted && f.FirstName.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.FirstName.errors.required\">First Name is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n                \r\n                <div class=\"col-xs-6\">\r\n                <label><h5>Last name</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"LastName\"placeholder=\"Last name\" [(ngModel)]=\"customerDetails.LastName\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.LastName.errors }\">\r\n                    <div *ngIf=\"submitted && f.LastName.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.LastName.errors.required\">Last Name is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n    \r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Phone Number</h5></label>\r\n                    <input type=\"text\" pattern=\"[0-9]{10}\" class=\"form-control\" formControlName=\"PhoneNo\" placeholder=\"Phone No\" [(ngModel)]=\"customerDetails.PhoneNo\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.PhoneNo.errors }\" >\r\n                    <div *ngIf=\"submitted && f.PhoneNo.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.PhoneNo.errors.required\">Phone No is required</div>\r\n                        <div *ngIf=\"f.PhoneNo.errors.pattern\"> Please enter a valid Phone Number (10 digits)</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n    \r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Address</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"Address\"placeholder=\"enter address\" [(ngModel)]=\"customerDetails.Address\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.Address.errors }\" >\r\n                    <div *ngIf=\"submitted && f.Address.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.Address.errors.required\">Street Address is required</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>City</h5></label>\r\n                    <input type=\"text\" class=\"form-control\" formControlName=\"City\" placeholder=\"enter city\" [(ngModel)]=\"customerDetails.City\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.City.errors }\" >\r\n                    <div *ngIf=\"submitted && f.City.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.City.errors.required\">City is required</div>\r\n                    </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>State</h5></label>\r\n                    <input type=\"text\" pattern=\"[a-zA-Z]{2}\" class=\"form-control\" formControlName=\"State\"placeholder=\"enter state\" [(ngModel)]=\"customerDetails.State\" \r\n                    [ngClass]=\"{'is-invalid': submitted && f.State.errors }\" maxlength = \"2\" >\r\n                    <div *ngIf=\"submitted && f.State.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.State.errors.required\">State is required</div>\r\n                        <div *ngIf=\"f.State.errors.pattern\"> Please enter a valid State</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div class=\"col-xs-6\">\r\n                    <label><h5>Zipcode</h5></label>\r\n                    <input type=\"text\" pattern=\"[0-9]{5}\" class=\"form-control\" formControlName=\"Zipcode\" placeholder=\"enter zipcode\" [(ngModel)]=\"customerDetails.Zipcode\"\r\n                    [ngClass]=\"{'is-invalid': submitted && f.Zipcode.errors }\">\r\n                    <div *ngIf=\"submitted && f.Zipcode.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.Zipcode.errors.required\">Zipcode is required</div>\r\n                        <div *ngIf=\"f.Zipcode.errors.pattern\"> Please enter a valid Zipcode (5 digits)</div>\r\n                      </div>\r\n                </div>\r\n                <br/>\r\n\r\n                <div>\r\n                    <section class=\"options-section\">\r\n                        <mat-checkbox class=\"options-margin\" formControlName=\"Subscribe\"\r\n                        [(ngModel)]=\"subscribeChecked\">Subscribe to Email</mat-checkbox>\r\n                    </section>\r\n                </div>\r\n                <br>\r\n\r\n                <div class=\"col-xs-12 form-group \">                    \r\n                    <button class=\"btn btn-lg btn-info btn-block\" type=\"submit\">Update User Details</button>\r\n                </div>\r\n            </form>\r\n         \r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -877,7 +799,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>User Management</h1>\r\n        </div>\r\n    </div>      \r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style = \"font-weight: bold\" id=\"userStatus\" (change)=\"selectChangeHandler($event)\" >\r\n            </select>\r\n        </div>     \r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Username or Keywords to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\">Clear Search</button>\r\n        </div>\r\n    </div>  \r\n    \r\n    <div class=\"table-responsive-sm\">\r\n        <table class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:25%\"> User Name </th>\r\n                    <th style=\"width:20%\"> Current Role </th>\r\n                    <th style=\"width:25%\"> Email </th>\r\n                    <th style=\"width:30%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody *ngFor = \"let user of listOfUsers | filter:searchText  | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                <tr *ngIf =\"user.UserPK != currentUserID\">\r\n                    <td class=\"name\"> {{user.Username}} </td>\r\n                    <td *ngIf=\"user.Role_FK == 1\">Customer</td>\r\n                    <td *ngIf=\"user.Role_FK == 2\">Manager</td>\r\n                    <td *ngIf=\"user.Role_FK == 3\">System Admin</td>\r\n                    \r\n                    <td> {{user.Email}} </td>\r\n                    <td><button [routerLink]=\"['/profile', 'user-details', user.UserPK]\" class=\"btn btn-warning\"> <mat-icon matListIcon>edit</mat-icon> Edit</button>\r\n                        <button *ngIf = \"!user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            Activate Account  \r\n                        </button>\r\n                        <button *ngIf = \"user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            Deactivate Account\r\n                        </button>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-8 col-md-8 col-sm-8\">\r\n            </div>\r\n            <div class=\"col-lg-4 col-md-4 col-sm-4\">\r\n                <pagination-controls (pageChange)=\"p=$event\" autoHide=\"true\" responsive=\"true\">\r\n                </pagination-controls>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\r\n    <div class=\"row text-center text-white mb-5\">\r\n        <div class=\"col-lg-7 mt-5 mx-auto\">\r\n            <h1>User Management</h1>\r\n        </div>\r\n    </div>      \r\n    <div class=\"row filter\">\r\n        <div class=\"col-lg-2 col-md-2 col-sm-3 p-0\">\r\n            <select class=\"form-control\" style = \"font-weight: bold\" id=\"userStatus\" (change)=\"selectChangeHandler($event)\" >\r\n                <option *ngFor=\"let item of userStatus\" [value]=\"item.id\">{{item.name}}</option>\r\n            </select>\r\n        </div>     \r\n        <div class=\"col-lg-8 col-md-8 col-sm-7 pr-0\">\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Type in Username or Keywords to Search\" [(ngModel)]=\"searchText\">\r\n        </div>\r\n        <div class=\"col-lg-2 col-md-2 col-sm-2\">\r\n            <button mat-raised-button color=\"primary\" (click)=\"clearSearch()\">Clear Search</button>\r\n        </div>\r\n    </div>  \r\n    \r\n    <div class=\"table-responsive-sm\">\r\n        <table class=\"table table-hover\" style=\"width:100%\">\r\n            <thead>\r\n                <tr>\r\n                    <th style=\"width:25%\"> User Name </th>\r\n                    <th style=\"width:20%\"> Current Role </th>\r\n                    <th style=\"width:25%\"> Email </th>\r\n                    <th style=\"width:30%\"> Actions</th>\r\n                </tr>\r\n            </thead>\r\n            <tbody *ngFor = \"let user of listOfUsers | filter:searchText  | paginate:{itemsPerPage: 7, currentPage:p}\">\r\n                <tr *ngIf =\"user.UserPK != currentUserID\">\r\n                    <td class=\"name\"> {{user.Username}} </td>\r\n                    <td *ngIf=\"user.Role_FK == 1\">Customer</td>\r\n                    <td *ngIf=\"user.Role_FK == 2\">Manager</td>\r\n                    <td *ngIf=\"user.Role_FK == 3\">System Admin</td>\r\n                    \r\n                    <td> {{user.Email}} </td>\r\n                    <td><button [routerLink]=\"['/profile', 'user-details', user.UserPK]\" class=\"btn btn-warning\"> <mat-icon matListIcon>edit</mat-icon> Edit</button>\r\n                        <button *ngIf = \"!user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-success\">\r\n                            Activate Account  \r\n                        </button>\r\n                        <button *ngIf = \"user.IsActive\" (click) = \"openModalSwitch(user.UserPK, user.IsActive)\"\r\n                            class=\"btn btn-danger\">\r\n                            Deactivate Account\r\n                        </button>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-8 col-md-8 col-sm-8\">\r\n            </div>\r\n            <div class=\"col-lg-4 col-md-4 col-sm-4\">\r\n                <pagination-controls (pageChange)=\"p=$event\" autoHide=\"true\" responsive=\"true\">\r\n                </pagination-controls>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1277,10 +1199,10 @@ let AppComponent = class AppComponent {
     }
     get f() { return this.registerForm.controls; }
     openLoginModal() {
-        const loginModal = this.matDialog.open(_components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_9__["LoginPromptModal"], _constants__WEBPACK_IMPORTED_MODULE_11__["AppConstants"].LOGIN_DIALOG_CONFIG);
+        const loginModal = this.matDialog.open(_components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_9__["LoginPromptModalComponent"], _constants__WEBPACK_IMPORTED_MODULE_11__["AppConstants"].LOGIN_DIALOG_CONFIG);
         loginModal.afterClosed().subscribe((result) => {
-            if (result == "Yes") {
-                console.log("Login Modal");
+            if (result === 'Yes') {
+                console.log('Login Modal');
             }
         });
     }
@@ -1355,89 +1277,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng2-charts */ "./node_modules/ng2-charts/fesm2015/ng2-charts.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _profile_profile_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./profile/profile.component */ "./src/app/profile/profile.component.ts");
-/* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
-/* harmony import */ var _register_register_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./register/register.component */ "./src/app/register/register.component.ts");
-/* harmony import */ var _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./customer-info/customer-info.component */ "./src/app/customer-info/customer-info.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./createprogram/createprogram.component */ "./src/app/createprogram/createprogram.component.ts");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _services_program_services__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/program.services */ "./src/app/services/program.services.ts");
-/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
-/* harmony import */ var _auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./auth-role-guard.service */ "./src/app/auth-role-guard.service.ts");
-/* harmony import */ var _auth_customer_guard_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./auth-customer-guard.service */ "./src/app/auth-customer-guard.service.ts");
-/* harmony import */ var _services_payment_services__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./services/payment.services */ "./src/app/services/payment.services.ts");
-/* harmony import */ var _auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./auth-system-role-guard.service */ "./src/app/auth-system-role-guard.service.ts");
-/* harmony import */ var _services_email_services__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/email.services */ "./src/app/services/email.services.ts");
-/* harmony import */ var _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./email-details/email-details.component */ "./src/app/email-details/email-details.component.ts");
-/* harmony import */ var _services_customer_services__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./services/customer.services */ "./src/app/services/customer.services.ts");
-/* harmony import */ var _services_schedule_services__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/schedule.services */ "./src/app/services/schedule.services.ts");
-/* harmony import */ var _services_reservation_services__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/reservation.services */ "./src/app/services/reservation.services.ts");
-/* harmony import */ var _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./group-program/group-program.component */ "./src/app/group-program/group-program.component.ts");
-/* harmony import */ var _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./individual-program/individual-program.component */ "./src/app/individual-program/individual-program.component.ts");
-/* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
-/* harmony import */ var _booking_individual_program_booking_individual_program_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./booking-individual-program/booking-individual-program.component */ "./src/app/booking-individual-program/booking-individual-program.component.ts");
-/* harmony import */ var _booking_group_program_booking_group_program_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./booking-group-program/booking-group-program.component */ "./src/app/booking-group-program/booking-group-program.component.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
-/* harmony import */ var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @ckeditor/ckeditor5-angular */ "./node_modules/@ckeditor/ckeditor5-angular/fesm2015/ckeditor-ckeditor5-angular.js");
-/* harmony import */ var _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./program-management/program-management.component */ "./src/app/program-management/program-management.component.ts");
-/* harmony import */ var _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./email-management/email-management.component */ "./src/app/email-management/email-management.component.ts");
-/* harmony import */ var _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./program-details/program-details.component */ "./src/app/program-details/program-details.component.ts");
-/* harmony import */ var _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./system-admin-dashboard/user-management/user-management.component */ "./src/app/system-admin-dashboard/user-management/user-management.component.ts");
-/* harmony import */ var _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./system-admin-dashboard/user-details/user-details.component */ "./src/app/system-admin-dashboard/user-details/user-details.component.ts");
-/* harmony import */ var _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./system-admin-dashboard/create-new-user/create-new-user.component */ "./src/app/system-admin-dashboard/create-new-user/create-new-user.component.ts");
-/* harmony import */ var _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/i-program/i-program.component */ "./src/app/components/i-program/i-program.component.ts");
-/* harmony import */ var _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/g-program/g-program.component */ "./src/app/components/g-program/g-program.component.ts");
-/* harmony import */ var _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./password-service/forgot-password/forgot-password.component */ "./src/app/password-service/forgot-password/forgot-password.component.ts");
-/* harmony import */ var _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./password-service/reset-password/reset-password.component */ "./src/app/password-service/reset-password/reset-password.component.ts");
-/* harmony import */ var _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./password-service/change-current-password/change-current-password.component */ "./src/app/password-service/change-current-password/change-current-password.component.ts");
-/* harmony import */ var _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./account-setting/account-setting.component */ "./src/app/account-setting/account-setting.component.ts");
-/* harmony import */ var _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./profile-info/profile-info.component */ "./src/app/profile-info/profile-info.component.ts");
-/* harmony import */ var _program_schedule_program_schedule_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./program-schedule/program-schedule.component */ "./src/app/program-schedule/program-schedule.component.ts");
-/* harmony import */ var _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./reservation/reservation.component */ "./src/app/reservation/reservation.component.ts");
-/* harmony import */ var _payment_payment_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./payment/payment.component */ "./src/app/payment/payment.component.ts");
-/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/material/stepper */ "./node_modules/@angular/material/esm2015/stepper.js");
-/* harmony import */ var _confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./confirmation/confirmation.component */ "./src/app/confirmation/confirmation.component.ts");
-/* harmony import */ var _angular_material_radio__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! @angular/material/radio */ "./node_modules/@angular/material/esm2015/radio.js");
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/esm2015/datepicker.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm2015/select.js");
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/esm2015/core.js");
-/* harmony import */ var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! @angular/material/tooltip */ "./node_modules/@angular/material/esm2015/tooltip.js");
-/* harmony import */ var _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @angular/material/button-toggle */ "./node_modules/@angular/material/esm2015/button-toggle.js");
-/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
-/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm2015/toolbar.js");
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm2015/icon.js");
-/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! @angular/material/checkbox */ "./node_modules/@angular/material/esm2015/checkbox.js");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
-/* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! @angular/material/progress-spinner */ "./node_modules/@angular/material/esm2015/progress-spinner.js");
-/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
-/* harmony import */ var _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/login-prompt-modal/login-prompt-modal.component */ "./src/app/components/login-prompt-modal/login-prompt-modal.component.ts");
-/* harmony import */ var _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/register-modal-dialog/register-modal-dialog.component */ "./src/app/components/register-modal-dialog/register-modal-dialog.component.ts");
-/* harmony import */ var _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/customer-modal-dialog/customer-modal-dialog.component */ "./src/app/components/customer-modal-dialog/customer-modal-dialog.component.ts");
-/* harmony import */ var _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/add-schedule-modal-dialog/add-schedule-modal-dialog.component */ "./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.ts");
-/* harmony import */ var _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./schedule/schedule-management/schedule-management.component */ "./src/app/schedule/schedule-management/schedule-management.component.ts");
-/* harmony import */ var _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./schedule/view-schedule/view-schedule.component */ "./src/app/schedule/view-schedule/view-schedule.component.ts");
-/* harmony import */ var _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./schedule/set-program-schedule/set-program-schedule.component */ "./src/app/schedule/set-program-schedule/set-program-schedule.component.ts");
-/* harmony import */ var _progress_kendo_angular_scheduler__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! @progress/kendo-angular-scheduler */ "./node_modules/@progress/kendo-angular-scheduler/dist/fesm2015/index.js");
-/* harmony import */ var _progress_kendo_angular_dateinputs__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! @progress/kendo-angular-dateinputs */ "./node_modules/@progress/kendo-angular-dateinputs/dist/fesm2015/index.js");
-/* harmony import */ var _services_SafeHtmlPipe__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./services/SafeHtmlPipe */ "./src/app/services/SafeHtmlPipe.ts");
-/* harmony import */ var _progress_kendo_angular_inputs__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @progress/kendo-angular-inputs */ "./node_modules/@progress/kendo-angular-inputs/dist/fesm2015/index.js");
-/* harmony import */ var _progress_kendo_angular_buttons__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! @progress/kendo-angular-buttons */ "./node_modules/@progress/kendo-angular-buttons/dist/fesm2015/index.js");
-/* harmony import */ var _progress_kendo_angular_dropdowns__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! @progress/kendo-angular-dropdowns */ "./node_modules/@progress/kendo-angular-dropdowns/dist/fesm2015/index.js");
-/* harmony import */ var _services_dataProvider__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./services/dataProvider */ "./src/app/services/dataProvider.ts");
-/* harmony import */ var ngx_stripe__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ngx-stripe */ "./node_modules/ngx-stripe/fesm2015/ngx-stripe.js");
-/* harmony import */ var _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./reservation-management/reservation-management.component */ "./src/app/reservation-management/reservation-management.component.ts");
-/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! @angular/material/tabs */ "./node_modules/@angular/material/esm2015/tabs.js");
-/* harmony import */ var _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./report-management/report-management.component */ "./src/app/report-management/report-management.component.ts");
-/* harmony import */ var _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/paynow-modal-dialog/paynow-modal-dialog.component */ "./src/app/components/paynow-modal-dialog/paynow-modal-dialog.component.ts");
-/* harmony import */ var _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/reservation-details-modal-dialog/reservation-details-modal-dialog.component */ "./src/app/components/reservation-details-modal-dialog/reservation-details-modal-dialog.component.ts");
-/* harmony import */ var _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component */ "./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.ts");
-
-
-
-
-
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./createprogram/createprogram.component */ "./src/app/createprogram/createprogram.component.ts");
+/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./authentication.service */ "./src/app/authentication.service.ts");
+/* harmony import */ var _services_program_services__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/program.services */ "./src/app/services/program.services.ts");
+/* harmony import */ var _auth_guard_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./auth-guard.service */ "./src/app/auth-guard.service.ts");
+/* harmony import */ var _auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./auth-role-guard.service */ "./src/app/auth-role-guard.service.ts");
+/* harmony import */ var _auth_customer_guard_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./auth-customer-guard.service */ "./src/app/auth-customer-guard.service.ts");
+/* harmony import */ var _services_payment_services__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/payment.services */ "./src/app/services/payment.services.ts");
+/* harmony import */ var _auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./auth-system-role-guard.service */ "./src/app/auth-system-role-guard.service.ts");
+/* harmony import */ var _services_email_services__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/email.services */ "./src/app/services/email.services.ts");
+/* harmony import */ var _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./email-details/email-details.component */ "./src/app/email-details/email-details.component.ts");
+/* harmony import */ var _services_customer_services__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/customer.services */ "./src/app/services/customer.services.ts");
+/* harmony import */ var _services_schedule_services__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./services/schedule.services */ "./src/app/services/schedule.services.ts");
+/* harmony import */ var _services_reservation_services__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./services/reservation.services */ "./src/app/services/reservation.services.ts");
+/* harmony import */ var _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./group-program/group-program.component */ "./src/app/group-program/group-program.component.ts");
+/* harmony import */ var _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./individual-program/individual-program.component */ "./src/app/individual-program/individual-program.component.ts");
+/* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @ckeditor/ckeditor5-angular */ "./node_modules/@ckeditor/ckeditor5-angular/fesm2015/ckeditor-ckeditor5-angular.js");
+/* harmony import */ var _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./program-management/program-management.component */ "./src/app/program-management/program-management.component.ts");
+/* harmony import */ var _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./email-management/email-management.component */ "./src/app/email-management/email-management.component.ts");
+/* harmony import */ var _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./program-details/program-details.component */ "./src/app/program-details/program-details.component.ts");
+/* harmony import */ var _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./system-admin-dashboard/user-management/user-management.component */ "./src/app/system-admin-dashboard/user-management/user-management.component.ts");
+/* harmony import */ var _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./system-admin-dashboard/user-details/user-details.component */ "./src/app/system-admin-dashboard/user-details/user-details.component.ts");
+/* harmony import */ var _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./system-admin-dashboard/create-new-user/create-new-user.component */ "./src/app/system-admin-dashboard/create-new-user/create-new-user.component.ts");
+/* harmony import */ var _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/i-program/i-program.component */ "./src/app/components/i-program/i-program.component.ts");
+/* harmony import */ var _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/g-program/g-program.component */ "./src/app/components/g-program/g-program.component.ts");
+/* harmony import */ var _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./password-service/forgot-password/forgot-password.component */ "./src/app/password-service/forgot-password/forgot-password.component.ts");
+/* harmony import */ var _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./password-service/reset-password/reset-password.component */ "./src/app/password-service/reset-password/reset-password.component.ts");
+/* harmony import */ var _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./password-service/change-current-password/change-current-password.component */ "./src/app/password-service/change-current-password/change-current-password.component.ts");
+/* harmony import */ var _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./account-setting/account-setting.component */ "./src/app/account-setting/account-setting.component.ts");
+/* harmony import */ var _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./profile-info/profile-info.component */ "./src/app/profile-info/profile-info.component.ts");
+/* harmony import */ var _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./reservation/reservation.component */ "./src/app/reservation/reservation.component.ts");
+/* harmony import */ var _payment_payment_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./payment/payment.component */ "./src/app/payment/payment.component.ts");
+/* harmony import */ var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @angular/material/stepper */ "./node_modules/@angular/material/esm2015/stepper.js");
+/* harmony import */ var _confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./confirmation/confirmation.component */ "./src/app/confirmation/confirmation.component.ts");
+/* harmony import */ var _angular_material_radio__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @angular/material/radio */ "./node_modules/@angular/material/esm2015/radio.js");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @angular/material/datepicker */ "./node_modules/@angular/material/esm2015/datepicker.js");
+/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm2015/select.js");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/esm2015/core.js");
+/* harmony import */ var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! @angular/material/tooltip */ "./node_modules/@angular/material/esm2015/tooltip.js");
+/* harmony import */ var _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @angular/material/button-toggle */ "./node_modules/@angular/material/esm2015/button-toggle.js");
+/* harmony import */ var _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! @angular/cdk/layout */ "./node_modules/@angular/cdk/esm2015/layout.js");
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm2015/toolbar.js");
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm2015/icon.js");
+/* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! @angular/material/checkbox */ "./node_modules/@angular/material/esm2015/checkbox.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+/* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @angular/material/progress-spinner */ "./node_modules/@angular/material/esm2015/progress-spinner.js");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
+/* harmony import */ var _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/login-prompt-modal/login-prompt-modal.component */ "./src/app/components/login-prompt-modal/login-prompt-modal.component.ts");
+/* harmony import */ var _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/register-modal-dialog/register-modal-dialog.component */ "./src/app/components/register-modal-dialog/register-modal-dialog.component.ts");
+/* harmony import */ var _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/customer-modal-dialog/customer-modal-dialog.component */ "./src/app/components/customer-modal-dialog/customer-modal-dialog.component.ts");
+/* harmony import */ var _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/add-schedule-modal-dialog/add-schedule-modal-dialog.component */ "./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.ts");
+/* harmony import */ var _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./schedule/schedule-management/schedule-management.component */ "./src/app/schedule/schedule-management/schedule-management.component.ts");
+/* harmony import */ var _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./schedule/view-schedule/view-schedule.component */ "./src/app/schedule/view-schedule/view-schedule.component.ts");
+/* harmony import */ var _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./schedule/set-program-schedule/set-program-schedule.component */ "./src/app/schedule/set-program-schedule/set-program-schedule.component.ts");
+/* harmony import */ var _progress_kendo_angular_scheduler__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! @progress/kendo-angular-scheduler */ "./node_modules/@progress/kendo-angular-scheduler/dist/fesm2015/index.js");
+/* harmony import */ var _progress_kendo_angular_dateinputs__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! @progress/kendo-angular-dateinputs */ "./node_modules/@progress/kendo-angular-dateinputs/dist/fesm2015/index.js");
+/* harmony import */ var _services_SafeHtmlPipe__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./services/SafeHtmlPipe */ "./src/app/services/SafeHtmlPipe.ts");
+/* harmony import */ var _progress_kendo_angular_inputs__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! @progress/kendo-angular-inputs */ "./node_modules/@progress/kendo-angular-inputs/dist/fesm2015/index.js");
+/* harmony import */ var _progress_kendo_angular_buttons__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! @progress/kendo-angular-buttons */ "./node_modules/@progress/kendo-angular-buttons/dist/fesm2015/index.js");
+/* harmony import */ var _progress_kendo_angular_dropdowns__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! @progress/kendo-angular-dropdowns */ "./node_modules/@progress/kendo-angular-dropdowns/dist/fesm2015/index.js");
+/* harmony import */ var _services_dataProvider__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./services/dataProvider */ "./src/app/services/dataProvider.ts");
+/* harmony import */ var ngx_stripe__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ngx-stripe */ "./node_modules/ngx-stripe/fesm2015/ngx-stripe.js");
+/* harmony import */ var _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./reservation-management/reservation-management.component */ "./src/app/reservation-management/reservation-management.component.ts");
+/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @angular/material/tabs */ "./node_modules/@angular/material/esm2015/tabs.js");
+/* harmony import */ var _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./report-management/report-management.component */ "./src/app/report-management/report-management.component.ts");
+/* harmony import */ var _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/paynow-modal-dialog/paynow-modal-dialog.component */ "./src/app/components/paynow-modal-dialog/paynow-modal-dialog.component.ts");
+/* harmony import */ var _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/reservation-details-modal-dialog/reservation-details-modal-dialog.component */ "./src/app/components/reservation-details-modal-dialog/reservation-details-modal-dialog.component.ts");
+/* harmony import */ var _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component */ "./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.ts");
 
 
 
@@ -1525,88 +1436,70 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_15__["HomeComponent"] },
-    // {path: 'login', component: LoginComponent},
-    // {path: 'register', component: RegisterComponent},  
-    // {
-    //   path: 'customer-register/:id',
-    //   component:CustomerRegisterComponent,
-    //   canActivate: [AuthCustomerGuardService],
-    // },
-    { path: 'group-program', component: _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_29__["GroupProgramComponent"] },
-    { path: 'individual-program', component: _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_30__["IndividualProgramComponent"] },
-    { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_31__["Contact"] },
-    // {
-    //   path: 'booking-individual-program/:id', 
-    //   component: BookingIndividualProgramComponent,
-    //   canActivate: [AuthGuardService]
-    // },
-    // {
-    //   path: 'booking-group-program/:id', 
-    //   component: BookingGroupProgramComponent,
-    //   canActivate: [AuthGuardService]
-    // },
-    // {path: 'program-schedule/:id', component: ProgramScheduleComponent},
-    { path: 'reservation/:id', component: _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_51__["ReservationComponent"] },
-    { path: 'login/forgot-password', component: _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_45__["ForgotPasswordComponent"] },
-    { path: 'login/reset-password/:token', component: _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_46__["ResetPasswordComponent"] },
+    { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"] },
+    { path: 'group-program', component: _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_26__["GroupProgramComponent"] },
+    { path: 'individual-program', component: _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_27__["IndividualProgramComponent"] },
+    { path: 'contact', component: _contact_contact_component__WEBPACK_IMPORTED_MODULE_28__["Contact"] },
+    { path: 'reservation/:id', component: _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_45__["ReservationComponent"] },
+    { path: 'login/forgot-password', component: _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_40__["ForgotPasswordComponent"] },
+    { path: 'login/reset-password/:token', component: _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_41__["ResetPasswordComponent"] },
     {
         path: 'profile',
         component: _profile_profile_component__WEBPACK_IMPORTED_MODULE_11__["ProfileComponent"],
-        canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]],
+        canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]],
         children: [
-            { path: '', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_67__["DashboardComponent"], canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]] },
-            { path: 'reservation-management', component: _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_84__["ReservationManagement"], canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]] },
-            { path: 'email-management', component: _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_38__["EmailManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
-            { path: 'email-details/:id/:mode', component: _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_25__["EmailDetailsComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
-            { path: 'createprogram', component: _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_16__["CreateProgramComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
-            { path: 'program-management', component: _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_37__["ProgramManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
+            { path: '', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_61__["DashboardComponent"], canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]] },
+            { path: 'reservation-management', component: _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_78__["ReservationManagementComponent"], canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]] },
+            { path: 'email-management', component: _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_33__["EmailManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
+            { path: 'email-details/:id/:mode', component: _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_22__["EmailDetailsComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
+            { path: 'createprogram', component: _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_13__["CreateProgramComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
+            { path: 'program-management', component: _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_32__["ProgramManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
             {
                 path: 'view-schedule/:mode',
-                component: _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_74__["ViewScheduleComponent"],
-                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]]
+                component: _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_68__["ViewScheduleComponent"],
+                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]]
             },
-            { path: 'schedule-management', component: _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_73__["ScheduleManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
-            { path: 'report-management', component: _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_86__["ReportManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]] },
+            { path: 'schedule-management', component: _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_67__["ScheduleManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
+            { path: 'report-management', component: _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_80__["ReportManagementComponent"], canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]] },
             {
                 path: 'program-details/:id/set-program-schedule',
-                component: _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_75__["SetProgramScheduleComponent"],
-                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]]
+                component: _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_69__["SetProgramScheduleComponent"],
+                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]]
             },
             {
                 path: 'program-details/:id/:mode',
-                component: _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_39__["ProgramDetailsComponent"],
-                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"]],
+                component: _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_34__["ProgramDetailsComponent"],
+                canActivate: [_auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"]],
             },
             {
                 path: 'user-management',
-                component: _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_40__["UserManagementComponent"],
-                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_23__["AuthSystemRoleGuardService"]],
+                component: _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_35__["UserManagementComponent"],
+                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]],
             },
             {
                 path: 'user-details/:id',
-                component: _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_41__["UserDetailsComponent"],
-                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_23__["AuthSystemRoleGuardService"]],
+                component: _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_36__["UserDetailsComponent"],
+                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]],
             },
             {
                 path: 'create-new-user',
-                component: _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_42__["CreateNewUserComponent"],
-                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_23__["AuthSystemRoleGuardService"]],
+                component: _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_37__["CreateNewUserComponent"],
+                canActivate: [_auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"]],
             },
             {
                 path: 'profile-info/:id',
-                component: _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_49__["ProfileInfo"],
-                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]],
+                component: _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_44__["ProfileInfo"],
+                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]],
             },
             {
                 path: 'account-setting/:id',
-                component: _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_48__["AccountSetting"],
-                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]],
+                component: _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_43__["AccountSetting"],
+                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]],
             },
             {
                 path: 'change-current-password',
-                component: _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_47__["ChangeCurrentPasswordComponent"],
-                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]],
+                component: _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_42__["ChangeCurrentPasswordComponent"],
+                canActivate: [_auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"]],
             }
         ]
     }
@@ -1618,49 +1511,43 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
             _profile_profile_component__WEBPACK_IMPORTED_MODULE_11__["ProfileComponent"],
-            _login_login_component__WEBPACK_IMPORTED_MODULE_12__["LoginComponent"],
-            _register_register_component__WEBPACK_IMPORTED_MODULE_13__["RegisterComponent"],
-            _home_home_component__WEBPACK_IMPORTED_MODULE_15__["HomeComponent"],
-            _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_16__["CreateProgramComponent"],
-            _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_29__["GroupProgramComponent"],
-            _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_30__["IndividualProgramComponent"],
-            _contact_contact_component__WEBPACK_IMPORTED_MODULE_31__["Contact"],
-            _booking_individual_program_booking_individual_program_component__WEBPACK_IMPORTED_MODULE_32__["BookingIndividualProgramComponent"],
-            _booking_group_program_booking_group_program_component__WEBPACK_IMPORTED_MODULE_33__["BookingGroupProgramComponent"],
-            _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_37__["ProgramManagementComponent"],
-            _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_39__["ProgramDetailsComponent"],
-            _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_38__["EmailManagementComponent"],
-            _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_25__["EmailDetailsComponent"],
-            _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_40__["UserManagementComponent"],
-            _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_41__["UserDetailsComponent"],
-            _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_43__["IProgramComponent"],
-            _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_44__["GProgramComponent"],
-            _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_51__["ReservationComponent"],
-            _customer_info_customer_info_component__WEBPACK_IMPORTED_MODULE_14__["CustomerRegisterComponent"],
-            _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_45__["ForgotPasswordComponent"],
-            _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_46__["ResetPasswordComponent"],
-            _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_47__["ChangeCurrentPasswordComponent"],
-            _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_67__["DashboardComponent"],
-            _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_68__["ModalDialogComponent"],
-            _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_70__["RegisterModalDialogComponent"],
-            _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_71__["CustomerModalDialogComponent"],
-            _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_72__["AddScheduleModalDialogComponent"],
-            _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_69__["LoginPromptModal"],
-            _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_73__["ScheduleManagementComponent"],
-            _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_74__["ViewScheduleComponent"],
-            _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_48__["AccountSetting"],
-            _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_49__["ProfileInfo"],
-            _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_42__["CreateNewUserComponent"],
-            _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_75__["SetProgramScheduleComponent"],
-            _program_schedule_program_schedule_component__WEBPACK_IMPORTED_MODULE_50__["ProgramScheduleComponent"],
-            _payment_payment_component__WEBPACK_IMPORTED_MODULE_52__["PaymentComponent"],
-            _services_SafeHtmlPipe__WEBPACK_IMPORTED_MODULE_78__["SafeHtmlPipe"],
-            _confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_54__["ConfirmationComponent"],
-            _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_84__["ReservationManagement"],
-            _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_86__["ReportManagementComponent"],
-            _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_87__["PaynowModalDialog"],
-            _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_88__["ReservationDetailsModalDialog"],
-            _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_89__["AdminReservationsModalDialog"]
+            _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"],
+            _createprogram_createprogram_component__WEBPACK_IMPORTED_MODULE_13__["CreateProgramComponent"],
+            _group_program_group_program_component__WEBPACK_IMPORTED_MODULE_26__["GroupProgramComponent"],
+            _individual_program_individual_program_component__WEBPACK_IMPORTED_MODULE_27__["IndividualProgramComponent"],
+            _contact_contact_component__WEBPACK_IMPORTED_MODULE_28__["Contact"],
+            _program_management_program_management_component__WEBPACK_IMPORTED_MODULE_32__["ProgramManagementComponent"],
+            _program_details_program_details_component__WEBPACK_IMPORTED_MODULE_34__["ProgramDetailsComponent"],
+            _email_management_email_management_component__WEBPACK_IMPORTED_MODULE_33__["EmailManagementComponent"],
+            _email_details_email_details_component__WEBPACK_IMPORTED_MODULE_22__["EmailDetailsComponent"],
+            _system_admin_dashboard_user_management_user_management_component__WEBPACK_IMPORTED_MODULE_35__["UserManagementComponent"],
+            _system_admin_dashboard_user_details_user_details_component__WEBPACK_IMPORTED_MODULE_36__["UserDetailsComponent"],
+            _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_38__["IProgramComponent"],
+            _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_39__["GProgramComponent"],
+            _reservation_reservation_component__WEBPACK_IMPORTED_MODULE_45__["ReservationComponent"],
+            _password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_40__["ForgotPasswordComponent"],
+            _password_service_reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_41__["ResetPasswordComponent"],
+            _password_service_change_current_password_change_current_password_component__WEBPACK_IMPORTED_MODULE_42__["ChangeCurrentPasswordComponent"],
+            _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_61__["DashboardComponent"],
+            _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_62__["ModalDialogComponent"],
+            _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_64__["RegisterModalDialogComponent"],
+            _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_65__["CustomerModalDialogComponent"],
+            _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_66__["AddScheduleModalDialogComponent"],
+            _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_63__["LoginPromptModalComponent"],
+            _schedule_schedule_management_schedule_management_component__WEBPACK_IMPORTED_MODULE_67__["ScheduleManagementComponent"],
+            _schedule_view_schedule_view_schedule_component__WEBPACK_IMPORTED_MODULE_68__["ViewScheduleComponent"],
+            _account_setting_account_setting_component__WEBPACK_IMPORTED_MODULE_43__["AccountSetting"],
+            _profile_info_profile_info_component__WEBPACK_IMPORTED_MODULE_44__["ProfileInfo"],
+            _system_admin_dashboard_create_new_user_create_new_user_component__WEBPACK_IMPORTED_MODULE_37__["CreateNewUserComponent"],
+            _schedule_set_program_schedule_set_program_schedule_component__WEBPACK_IMPORTED_MODULE_69__["SetProgramScheduleComponent"],
+            _payment_payment_component__WEBPACK_IMPORTED_MODULE_46__["PaymentComponent"],
+            _services_SafeHtmlPipe__WEBPACK_IMPORTED_MODULE_72__["SafeHtmlPipe"],
+            _confirmation_confirmation_component__WEBPACK_IMPORTED_MODULE_48__["ConfirmationComponent"],
+            _reservation_management_reservation_management_component__WEBPACK_IMPORTED_MODULE_78__["ReservationManagementComponent"],
+            _report_management_report_management_component__WEBPACK_IMPORTED_MODULE_80__["ReportManagementComponent"],
+            _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_81__["PaynowModalDialog"],
+            _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_82__["ReservationDetailsModalDialog"],
+            _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_83__["AdminReservationsModalDialogComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -1672,39 +1559,40 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 scrollPositionRestoration: 'enabled'
             }),
             _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FontAwesomeModule"],
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_34__["BrowserAnimationsModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_29__["BrowserAnimationsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatFormFieldModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatInputModule"],
-            _angular_material_stepper__WEBPACK_IMPORTED_MODULE_53__["MatStepperModule"],
-            _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_59__["MatTooltipModule"],
-            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_56__["MatDatepickerModule"],
-            _angular_material_select__WEBPACK_IMPORTED_MODULE_57__["MatSelectModule"],
-            _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_36__["CKEditorModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatListModule"],
-            _angular_material_radio__WEBPACK_IMPORTED_MODULE_55__["MatRadioModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatSidenavModule"],
-            _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_61__["LayoutModule"],
-            _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_62__["MatToolbarModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatButtonModule"],
-            _angular_material_icon__WEBPACK_IMPORTED_MODULE_63__["MatIconModule"],
-            _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_64__["MatCheckboxModule"],
-            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_65__["MatDialogModule"],
-            _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_66__["MatProgressSpinnerModule"],
-            _progress_kendo_angular_scheduler__WEBPACK_IMPORTED_MODULE_76__["SchedulerModule"],
-            _progress_kendo_angular_dateinputs__WEBPACK_IMPORTED_MODULE_77__["DateInputsModule"],
-            _angular_material_core__WEBPACK_IMPORTED_MODULE_58__["MatNativeDateModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_35__["MatCardModule"],
-            _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_60__["MatButtonToggleModule"],
-            _progress_kendo_angular_inputs__WEBPACK_IMPORTED_MODULE_79__["InputsModule"],
-            _progress_kendo_angular_buttons__WEBPACK_IMPORTED_MODULE_80__["ButtonsModule"],
-            _progress_kendo_angular_dropdowns__WEBPACK_IMPORTED_MODULE_81__["DropDownsModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatFormFieldModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatInputModule"],
+            _angular_material_stepper__WEBPACK_IMPORTED_MODULE_47__["MatStepperModule"],
+            _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_53__["MatTooltipModule"],
+            _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_50__["MatDatepickerModule"],
+            _angular_material_select__WEBPACK_IMPORTED_MODULE_51__["MatSelectModule"],
+            _ckeditor_ckeditor5_angular__WEBPACK_IMPORTED_MODULE_31__["CKEditorModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatListModule"],
+            _angular_material_radio__WEBPACK_IMPORTED_MODULE_49__["MatRadioModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatSidenavModule"],
+            _angular_cdk_layout__WEBPACK_IMPORTED_MODULE_55__["LayoutModule"],
+            _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_56__["MatToolbarModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatButtonModule"],
+            _angular_material_icon__WEBPACK_IMPORTED_MODULE_57__["MatIconModule"],
+            _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_58__["MatCheckboxModule"],
+            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_59__["MatDialogModule"],
+            _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_60__["MatProgressSpinnerModule"],
+            _progress_kendo_angular_scheduler__WEBPACK_IMPORTED_MODULE_70__["SchedulerModule"],
+            _progress_kendo_angular_dateinputs__WEBPACK_IMPORTED_MODULE_71__["DateInputsModule"],
+            _angular_material_core__WEBPACK_IMPORTED_MODULE_52__["MatNativeDateModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatCardModule"],
+            _angular_material_button_toggle__WEBPACK_IMPORTED_MODULE_54__["MatButtonToggleModule"],
+            _progress_kendo_angular_inputs__WEBPACK_IMPORTED_MODULE_73__["InputsModule"],
+            _progress_kendo_angular_buttons__WEBPACK_IMPORTED_MODULE_74__["ButtonsModule"],
+            _progress_kendo_angular_dropdowns__WEBPACK_IMPORTED_MODULE_75__["DropDownsModule"],
             ng2_charts__WEBPACK_IMPORTED_MODULE_9__["ChartsModule"],
-            _angular_material_tabs__WEBPACK_IMPORTED_MODULE_85__["MatTabsModule"],
-            ngx_stripe__WEBPACK_IMPORTED_MODULE_83__["NgxStripeModule"].forRoot('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W'),
+            _angular_material_tabs__WEBPACK_IMPORTED_MODULE_79__["MatTabsModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_30__["MatTableModule"],
+            ngx_stripe__WEBPACK_IMPORTED_MODULE_77__["NgxStripeModule"].forRoot('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W'),
         ],
-        providers: [_services_email_services__WEBPACK_IMPORTED_MODULE_24__["EmailService"], _services_program_services__WEBPACK_IMPORTED_MODULE_18__["ProgramServices"], _services_customer_services__WEBPACK_IMPORTED_MODULE_26__["CustomerService"], _auth_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthRoleGuardService"], _auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_23__["AuthSystemRoleGuardService"], _auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"],
-            _auth_customer_guard_service__WEBPACK_IMPORTED_MODULE_21__["AuthCustomerGuardService"], _authentication_service__WEBPACK_IMPORTED_MODULE_17__["AuthenticationService"], _services_schedule_services__WEBPACK_IMPORTED_MODULE_27__["ProgramScheduleService"], _services_reservation_services__WEBPACK_IMPORTED_MODULE_28__["ReservationService"], _services_payment_services__WEBPACK_IMPORTED_MODULE_22__["PaymentServices"], _services_dataProvider__WEBPACK_IMPORTED_MODULE_82__["DataStorage"]
+        providers: [_services_email_services__WEBPACK_IMPORTED_MODULE_21__["EmailService"], _services_program_services__WEBPACK_IMPORTED_MODULE_15__["ProgramServices"], _services_customer_services__WEBPACK_IMPORTED_MODULE_23__["CustomerService"], _auth_role_guard_service__WEBPACK_IMPORTED_MODULE_17__["AuthRoleGuardService"], _auth_system_role_guard_service__WEBPACK_IMPORTED_MODULE_20__["AuthSystemRoleGuardService"], _auth_guard_service__WEBPACK_IMPORTED_MODULE_16__["AuthGuardService"],
+            _auth_customer_guard_service__WEBPACK_IMPORTED_MODULE_18__["AuthCustomerGuardService"], _authentication_service__WEBPACK_IMPORTED_MODULE_14__["AuthenticationService"], _services_schedule_services__WEBPACK_IMPORTED_MODULE_24__["ProgramScheduleService"], _services_reservation_services__WEBPACK_IMPORTED_MODULE_25__["ReservationService"], _services_payment_services__WEBPACK_IMPORTED_MODULE_19__["PaymentServices"], _services_dataProvider__WEBPACK_IMPORTED_MODULE_76__["DataStorage"]
             // {
             //   provide: HTTP_INTERCEPTORS,
             //   useClass: AuthInterceptor,
@@ -1712,8 +1600,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             // }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]],
-        entryComponents: [_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_68__["ModalDialogComponent"], _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_70__["RegisterModalDialogComponent"], _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_71__["CustomerModalDialogComponent"],
-            _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_72__["AddScheduleModalDialogComponent"], _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_69__["LoginPromptModal"], _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_87__["PaynowModalDialog"], _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_88__["ReservationDetailsModalDialog"], _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_89__["AdminReservationsModalDialog"]]
+        entryComponents: [_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_62__["ModalDialogComponent"], _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_64__["RegisterModalDialogComponent"], _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_65__["CustomerModalDialogComponent"],
+            _components_add_schedule_modal_dialog_add_schedule_modal_dialog_component__WEBPACK_IMPORTED_MODULE_66__["AddScheduleModalDialogComponent"], _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_63__["LoginPromptModalComponent"], _components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_81__["PaynowModalDialog"], _components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_82__["ReservationDetailsModalDialog"], _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_83__["AdminReservationsModalDialogComponent"]]
     })
 ], AppModule);
 
@@ -2040,343 +1928,6 @@ AuthenticationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/booking-group-program/booking-group-program.component.css":
-/*!***************************************************************************!*\
-  !*** ./src/app/booking-group-program/booking-group-program.component.css ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".container {\r\n  padding-top: 100px;\r\n  padding-bottom: 56px;\r\n}\r\n\r\n.row{\r\npadding-top: 10px;\r\n}\r\n\r\n.final_warning{\r\n  color:orange !important;\r\n}\r\n\r\n.btn_row{\r\n  -webkit-box-pack: end;\r\n          justify-content: flex-end;\r\n}\r\n\r\nh1 {\r\n  font-family: 'Source Sans Pro', sans-serif; \r\n  font-size: 50px;\r\n  font-weight: bold;\r\n  padding-top: 20px;\r\n  color: #08b2b8; \r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9va2luZy1ncm91cC1wcm9ncmFtL2Jvb2tpbmctZ3JvdXAtcHJvZ3JhbS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQWtCO0VBQ2xCLG9CQUFvQjtBQUN0Qjs7QUFFQTtBQUNBLGlCQUFpQjtBQUNqQjs7QUFFQTtFQUNFLHVCQUF1QjtBQUN6Qjs7QUFFQTtFQUNFLHFCQUF5QjtVQUF6Qix5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSwwQ0FBMEM7RUFDMUMsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2Jvb2tpbmctZ3JvdXAtcHJvZ3JhbS9ib29raW5nLWdyb3VwLXByb2dyYW0uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xyXG4gIHBhZGRpbmctdG9wOiAxMDBweDtcclxuICBwYWRkaW5nLWJvdHRvbTogNTZweDtcclxufVxyXG5cclxuLnJvd3tcclxucGFkZGluZy10b3A6IDEwcHg7XHJcbn1cclxuXHJcbi5maW5hbF93YXJuaW5ne1xyXG4gIGNvbG9yOm9yYW5nZSAhaW1wb3J0YW50O1xyXG59XHJcblxyXG4uYnRuX3Jvd3tcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xyXG59XHJcblxyXG5oMSB7XHJcbiAgZm9udC1mYW1pbHk6ICdTb3VyY2UgU2FucyBQcm8nLCBzYW5zLXNlcmlmOyBcclxuICBmb250LXNpemU6IDUwcHg7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgcGFkZGluZy10b3A6IDIwcHg7XHJcbiAgY29sb3I6ICMwOGIyYjg7IFxyXG59Il19 */");
-
-/***/ }),
-
-/***/ "./src/app/booking-group-program/booking-group-program.component.ts":
-/*!**************************************************************************!*\
-  !*** ./src/app/booking-group-program/booking-group-program.component.ts ***!
-  \**************************************************************************/
-/*! exports provided: BookingGroupProgramComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookingGroupProgramComponent", function() { return BookingGroupProgramComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _data_booking_group_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data/booking-group-data */ "./src/app/data/booking-group-data.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var src_app_services_program_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/program.services */ "./src/app/services/program.services.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _data_reservation_group_details__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../data/reservation-group-details */ "./src/app/data/reservation-group-details.ts");
-
-
-
-
-
-
-
-
-
-/**********************************************************
- Booking a Group Program will associate below tables:
-  - ReservationHeader
-  - ReservationGroupDetails
-  - PaymentHeader
-  - PaymentDetails
-  - MarketingInformation
- Data will be stored in the LocalStorage and insert at the end
-**********************************************************/
-let BookingGroupProgramComponent = class BookingGroupProgramComponent {
-    constructor(route, router, fb, auth, service) {
-        this.route = route;
-        this.router = router;
-        this.fb = fb;
-        this.auth = auth;
-        this.service = service;
-        this.reservationGroupDetails = new _data_reservation_group_details__WEBPACK_IMPORTED_MODULE_7__["ReservationGroupDetails"]();
-        this.bookingGroup = new _data_booking_group_data__WEBPACK_IMPORTED_MODULE_2__["BookingGroupData"]();
-        this.submitted = false;
-    }
-    ngOnInit() {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 800);
-        // Get QuantityForm from Local Storage
-        // Clear the Local Storage after finish checking out
-        this.quantityForm = JSON.parse(localStorage.getItem('QuantityFormLocal'));
-        this.registerForm = this.fb.group({
-            ProgramRestriction: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            OrganizationName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)]],
-            GradeLevel: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            TeacherName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)]],
-            TeacherEmail: [''],
-            AlternativeDate: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(5)]],
-            TeacherPhoneNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].min(1000000000)]],
-            EducationPurpose: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(5)]]
-        });
-        // // Process data for ReservationHeader
-        // this.reservationHeader = new ReservationHeader(this.quantityForm.SchedulePK, 
-        //                                               this.auth.getUserDetails().UserPK, 
-        //                                               this.quantityForm.TotalQuantity);
-        // Map data of QuantityForm to ReservationDetails                                              
-        // this.reservationGroupDetails.AdultQuantity = this.quantityForm.AdultQuantity;
-        // this.reservationGroupDetails.Age57Quantity = this.quantityForm.Age57Quantity;
-        // this.reservationGroupDetails.Age810Quantity = this.quantityForm.Age810Quantity;
-        // this.reservationGroupDetails.Age1112Quantity = this.quantityForm.Age1112Quantity;
-        // this.reservationGroupDetails.Age1314Quantity = this.quantityForm.Age1314Quantity;
-        // this.reservationGroupDetails.Age1415Quantity = this.quantityForm.Age1415Quantity;
-        // this.reservationGroupDetails.Age1517Quantity = this.quantityForm.Age1517Quantity;
-        // this.reservationGroupDetails.TotalQuantity = this.quantityForm.TotalQuantity;
-        this.total = 0;
-        this.num_submits = 0;
-        // // Get Group Program Requirement
-        // this.route.params.subscribe(val => {
-        //   this.ProgramPK = val.id
-        // })
-        this.service.getProgramRequirementDetails('g', this.ProgramPK)
-            .subscribe(program => {
-            this.bookingGroup = program;
-            this.setRegisterFormValidators();
-        });
-        this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
-            .subscribe(details => {
-            this.programDetails = details;
-            document.getElementById("program_name").innerHTML = this.programDetails.Name;
-        });
-    }
-    setRegisterFormValidators() {
-        const ProgRestrictionControl = this.registerForm.get('ProgramRestriction');
-        const OrgNameControl = this.registerForm.get('OrganizationName');
-        const GradeLevelControl = this.registerForm.get('GradeLevel');
-        const TeacherNameControl = this.registerForm.get('TeacherName');
-        const TeacherEmailControl = this.registerForm.get('TeacherEmail');
-        const TeacherPhoneNoControl = this.registerForm.get('TeacherPhoneNo');
-        if (this.bookingGroup.ProgramRestriction != true)
-            ProgRestrictionControl.clearValidators();
-        if (this.bookingGroup.OrganizationName != true) {
-            OrgNameControl.clearValidators();
-        }
-        if (this.bookingGroup.GradeLevel != true)
-            GradeLevelControl.clearValidators();
-        if (this.bookingGroup.TeacherName != true)
-            TeacherNameControl.clearValidators();
-        if (this.bookingGroup.TeacherEmail == true) {
-            TeacherEmailControl.setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]);
-        }
-        if (this.bookingGroup.TeacherPhoneNo != true)
-            TeacherPhoneNoControl.clearValidators();
-        ProgRestrictionControl.updateValueAndValidity();
-        OrgNameControl.updateValueAndValidity();
-        GradeLevelControl.updateValueAndValidity();
-        TeacherNameControl.updateValueAndValidity();
-        TeacherEmailControl.updateValueAndValidity;
-        TeacherPhoneNoControl.updateValueAndValidity();
-    }
-    get f() { return this.registerForm.controls; }
-    getFormValidationErrors() {
-        Object.keys(this.registerForm.controls).forEach(key => {
-            const controlErrors = this.registerForm.get(key).errors;
-            if (controlErrors != null) {
-                Object.keys(controlErrors).forEach(keyError => {
-                    console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-                });
-            }
-        });
-    }
-    onSubmit() {
-        this.submitted = true;
-        // Stop here if form is invalid
-        if (this.registerForm.invalid) {
-            this.getFormValidationErrors();
-            return;
-        }
-        else {
-            alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-            // Add User Input data to ReservationGroupDetails
-            this.reservationGroupDetails.ProgramRestriction = this.registerForm.get('ProgramRestriction').value;
-            this.reservationGroupDetails.OrganizationName = this.registerForm.get('OrganizationName').value;
-            this.reservationGroupDetails.GradeLevel = this.registerForm.get('GradeLevel').value;
-            this.reservationGroupDetails.TeacherName = this.registerForm.get('TeacherName').value;
-            this.reservationGroupDetails.TeacherEmail = this.registerForm.get('TeacherEmail').value;
-            this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get('TeacherPhoneNo').value;
-            this.reservationGroupDetails.AlternativeDate = this.registerForm.get('AlternativeDate').value;
-            this.reservationGroupDetails.EducationPurpose = this.registerForm.get('EducationPurpose').value;
-            // Add ReservationGroupDetails to localStorage
-            localStorage.setItem('ReservationGroupLocal', JSON.stringify(this.reservationGroupDetails));
-            //route to the payment page
-            this.router.navigateByUrl("/payment/" + this.ProgramPK);
-        }
-        console.log("submitted");
-        console.log("valid");
-    }
-};
-BookingGroupProgramComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"] },
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] },
-    { type: src_app_services_program_services__WEBPACK_IMPORTED_MODULE_4__["ProgramServices"] }
-];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-], BookingGroupProgramComponent.prototype, "ProgramPK", void 0);
-BookingGroupProgramComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-booking-group-program',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./booking-group-program.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/booking-group-program/booking-group-program.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./booking-group-program.component.css */ "./src/app/booking-group-program/booking-group-program.component.css")).default]
-    })
-], BookingGroupProgramComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/booking-individual-program/booking-individual-program.component.css":
-/*!*************************************************************************************!*\
-  !*** ./src/app/booking-individual-program/booking-individual-program.component.css ***!
-  \*************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".container {\r\n    padding-top: 100px;\r\n    padding-bottom: 56px;\r\n  }\r\n\r\n  h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 50px;\r\n    font-weight: bold;\r\n    padding-top: 20px;\r\n    color: #08b2b8; \r\n}\r\n\r\n  .row{\r\n  padding-top: 10px;\r\n  padding-left: 14px;\r\n  padding-right: 21px;\r\n  padding-bottom: 0px;\r\n}\r\n\r\n  .form-check-label{\r\n  padding-left: 10px;\r\n}\r\n\r\n  .form_checkbox{\r\n  padding-left: 40px;\r\n}\r\n\r\n  .form-group.card{\r\n  padding-top: 7px;\r\n  padding-left: 7px;\r\n}\r\n\r\n  .btn_row{\r\n  -webkit-box-pack: end;\r\n          justify-content: flex-end;\r\n}\r\n\r\n  label{\r\n  padding-bottom: 10px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYm9va2luZy1pbmRpdmlkdWFsLXByb2dyYW0vYm9va2luZy1pbmRpdmlkdWFsLXByb2dyYW0uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGtCQUFrQjtJQUNsQixvQkFBb0I7RUFDdEI7O0VBRUE7SUFDRSwwQ0FBMEM7SUFDMUMsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIsY0FBYztBQUNsQjs7RUFFQTtFQUNFLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLG1CQUFtQjtBQUNyQjs7RUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7RUFFQTtFQUNFLGtCQUFrQjtBQUNwQjs7RUFFQTtFQUNFLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7O0VBRUE7RUFDRSxxQkFBeUI7VUFBekIseUJBQXlCO0FBQzNCOztFQUVBO0VBQ0Usb0JBQW9CO0FBQ3RCIiwiZmlsZSI6InNyYy9hcHAvYm9va2luZy1pbmRpdmlkdWFsLXByb2dyYW0vYm9va2luZy1pbmRpdmlkdWFsLXByb2dyYW0uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xyXG4gICAgcGFkZGluZy10b3A6IDEwMHB4O1xyXG4gICAgcGFkZGluZy1ib3R0b206IDU2cHg7XHJcbiAgfVxyXG5cclxuICBoMSB7XHJcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gICAgZm9udC1zaXplOiA1MHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICBwYWRkaW5nLXRvcDogMjBweDtcclxuICAgIGNvbG9yOiAjMDhiMmI4OyBcclxufVxyXG5cclxuLnJvd3tcclxuICBwYWRkaW5nLXRvcDogMTBweDtcclxuICBwYWRkaW5nLWxlZnQ6IDE0cHg7XHJcbiAgcGFkZGluZy1yaWdodDogMjFweDtcclxuICBwYWRkaW5nLWJvdHRvbTogMHB4O1xyXG59XHJcblxyXG4uZm9ybS1jaGVjay1sYWJlbHtcclxuICBwYWRkaW5nLWxlZnQ6IDEwcHg7XHJcbn1cclxuXHJcbi5mb3JtX2NoZWNrYm94e1xyXG4gIHBhZGRpbmctbGVmdDogNDBweDtcclxufVxyXG5cclxuLmZvcm0tZ3JvdXAuY2FyZHtcclxuICBwYWRkaW5nLXRvcDogN3B4O1xyXG4gIHBhZGRpbmctbGVmdDogN3B4O1xyXG59XHJcblxyXG4uYnRuX3Jvd3tcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xyXG59XHJcblxyXG5sYWJlbHtcclxuICBwYWRkaW5nLWJvdHRvbTogMTBweDtcclxufSJdfQ== */");
-
-/***/ }),
-
-/***/ "./src/app/booking-individual-program/booking-individual-program.component.ts":
-/*!************************************************************************************!*\
-  !*** ./src/app/booking-individual-program/booking-individual-program.component.ts ***!
-  \************************************************************************************/
-/*! exports provided: BookingIndividualProgramComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BookingIndividualProgramComponent", function() { return BookingIndividualProgramComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var src_app_services_program_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/program.services */ "./src/app/services/program.services.ts");
-
-
-
-
-
-
-let BookingIndividualProgramComponent = class BookingIndividualProgramComponent {
-    constructor(fb, route, router, service) {
-        this.fb = fb;
-        this.route = route;
-        this.router = router;
-        this.service = service;
-        this.submitted = false;
-    }
-    ngOnInit() {
-        this.bookingIndividual = {};
-        this.num_submits = 0;
-        // Get Individual Program Requirement
-        this.route.params.subscribe(val => {
-            this.ProgramPK = val.id;
-            this.service.getProgramRequirementDetails('i', this.ProgramPK)
-                .subscribe(program => {
-                this.bookingIndividual = program;
-            });
-            this.service.getProgramHeaderDeatailsByID(this.ProgramPK)
-                .subscribe(details => {
-                this.programDetails = details;
-                document.getElementById("program_name").innerHTML = this.programDetails.Name;
-                /* document.getElementById("program_desc").innerHTML = this.programDetails.Description; */
-            });
-        });
-        document.getElementById("edit_btn").style.visibility = "hidden";
-        this.registerForm = this.fb.group({
-            ParticipantName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)]],
-            ParticipantAge: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            Gender: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            MerchSize: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            //AllergyInfo: ['', Validators.required],
-            //SpecialInfo: ['', Validators.required],
-            MediaRelease: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].requiredTrue],
-            EmergencyMedicalRelease: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].requiredTrue],
-            LiabilityAgreement: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].requiredTrue],
-            InsureProviderName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)]],
-            InsureRecipientName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)]],
-            InsurePolicyNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(5)]],
-            InsurePhoneNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(1000000000)]],
-            AuthorizedPickupName1: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)]],
-            AuthorizedPickupPhone1: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(1000000000)]],
-            AuthorizedPickupName2: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(3)]],
-            AuthorizedPickupPhone2: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(1000000000)]],
-            EarlyDropOff: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            LatePickup: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
-        });
-    }
-    get f() { return this.registerForm.controls; }
-    editClicked(event) {
-        console.log("Edit Clicked");
-        document.getElementById("edit_btn").style.visibility = "hidden";
-        this.num_submits = 0;
-        $(document).ready(function () {
-            $("#registerForm :input").prop("disabled", false);
-            $('body,html').animate({
-                scrollTop: 0
-            }, 800);
-        });
-        document.getElementById("final_warning").innerHTML = "";
-    }
-    onSubmit() {
-        this.submitted = true;
-        console.log("submitted");
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            console.log("invalid");
-            return;
-        }
-        ++this.num_submits;
-        if (this.num_submits == 1) {
-            $(document).ready(function () {
-                $("#registerForm :input").prop("disabled", true);
-                $("#registerForm :button").prop("disabled", false);
-                $('body,html').animate({
-                    scrollTop: 0
-                }, 800);
-                $('#submit_btn').text('Confirm');
-            });
-            // document.getElementById("submit_btn").innerHTML="Confirm";
-            document.getElementById("edit_btn").style.visibility = "visible";
-            document.getElementById("final_warning").innerHTML = "*Please confirm that the following information is correct.".fontcolor("orange");
-        }
-        else if (this.num_submits == 2) {
-            alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-        }
-        //route to the payment page
-        this.router.navigateByUrl("/payment/" + this.ProgramPK);
-    }
-};
-BookingIndividualProgramComponent.ctorParameters = () => [
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: src_app_services_program_services__WEBPACK_IMPORTED_MODULE_4__["ProgramServices"] }
-];
-BookingIndividualProgramComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-booking-individual-program',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./booking-individual-program.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/booking-individual-program/booking-individual-program.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./booking-individual-program.component.css */ "./src/app/booking-individual-program/booking-individual-program.component.css")).default]
-    })
-], BookingIndividualProgramComponent);
-
-
-
-/***/ }),
-
 /***/ "./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.css":
 /*!**********************************************************************************************!*\
   !*** ./src/app/components/add-schedule-modal-dialog/add-schedule-modal-dialog.component.css ***!
@@ -2669,7 +2220,7 @@ let AddScheduleModalDialogComponent = class AddScheduleModalDialogComponent {
         //var eventEndDate = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0,10)        
         var eventStartTime = this.startTime.toLocaleString('en-US', this.timeFormatOptions);
         var eventEndTime = this.endTime.toLocaleString('en-US', this.timeFormatOptions);
-        var dateEndRepeat = (new Date(this.endDate - timezoneOffset)).toISOString().slice(0, 10);
+        var dateEndRepeat = (new Date(this.endDate)).toISOString().slice(0, 10);
         var eventStartDateTime = (new Date(eventStartDate + "T" + eventStartTime)).toISOString();
         var eventEndDateTime = (new Date(eventStartDate + "T" + eventEndTime)).toISOString();
         //Set up recurrence rule
@@ -2783,6 +2334,7 @@ let AddScheduleModalDialogComponent = class AddScheduleModalDialogComponent {
                     break;
                 //======= ADD NEW SESSION ===========
                 case "newsession":
+                    debugger;
                     this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK;
                     this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res => {
                         if (res.error) {
@@ -2936,19 +2488,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************************************************************!*\
   !*** ./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.ts ***!
   \*********************************************************************************************************/
-/*! exports provided: AdminReservationsModalDialog */
+/*! exports provided: AdminReservationsModalDialogComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminReservationsModalDialog", function() { return AdminReservationsModalDialog; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminReservationsModalDialogComponent", function() { return AdminReservationsModalDialogComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
 
 
 
-let AdminReservationsModalDialog = class AdminReservationsModalDialog {
+let AdminReservationsModalDialogComponent = class AdminReservationsModalDialogComponent {
     constructor(dialogRef, matDialog, data) {
         this.dialogRef = dialogRef;
         this.matDialog = matDialog;
@@ -2959,26 +2511,26 @@ let AdminReservationsModalDialog = class AdminReservationsModalDialog {
         this.reservations = this.data;
     }
     closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
     }
     actionFunction() {
-        console.log("Modal closing");
-        this.dialogRef.close("Yes");
+        console.log('Modal closing');
+        this.dialogRef.close('Yes');
     }
 };
-AdminReservationsModalDialog.ctorParameters = () => [
+AdminReservationsModalDialogComponent.ctorParameters = () => [
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialog"] },
     { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
 ];
-AdminReservationsModalDialog = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+AdminReservationsModalDialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'admin-reservations-modal-dialog',
+        selector: 'app-admin-reservations-modal-dialog',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./admin-reservations-modal-dialog.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./admin-reservations-modal-dialog.component.css */ "./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.css")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
-], AdminReservationsModalDialog);
+], AdminReservationsModalDialogComponent);
 
 
 
@@ -3008,11 +2560,11 @@ let CustomerModalDialogComponent = class CustomerModalDialogComponent {
     ngOnInit() {
     }
     actionFunction() {
-        //this.closeModal();
-        this.dialogRef.close("Yes");
+        // this.closeModal();
+        this.dialogRef.close('Yes');
     }
     closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
     }
 };
 CustomerModalDialogComponent.ctorParameters = () => [
@@ -3087,59 +2639,52 @@ let GProgramComponent = class GProgramComponent {
             this.bookingGroup = res;
         });
         this.varLabels = [
-            { var: "ProgramRestriction", label: "Program Restriction" },
-            { var: "OrganizationName", label: "Organization Name" },
-            { var: "GradeLevel", label: "Grade Level" },
-            { var: "TeacherName", label: "Teacher Name" },
-            { var: "TeacherEmail", label: "Teacher Email" },
-            { var: "TeacherPhoneNo", label: "Teacher Phone Number" },
-            { var: "AlternativeDate", label: "Alternative Date" },
-            { var: "EducationPurpose", label: "Education Purpose" }
+            { var: 'ProgramRestriction', label: 'Program Restriction' },
+            { var: 'OrganizationName', label: 'Organization Name' },
+            { var: 'GradeLevel', label: 'Grade Level' },
+            { var: 'TeacherName', label: 'Teacher Name' },
+            { var: 'TeacherEmail', label: 'Teacher Email' },
+            { var: 'TeacherPhoneNo', label: 'Teacher Phone Number' },
+            { var: 'AlternativeDate', label: 'Alternative Date' },
+            { var: 'EducationPurpose', label: 'Education Purpose' }
         ];
         this.bookingGroup.GroupProgramPK = this.ProgramPK;
         this.bookingGroup.CreatedBy = this.auth.getUserDetails().UserPK;
     }
-    // Event Handler for checkbox
-    // Pass checkbox data to EventEmitter for Parent component
-    // type: 'g' - Group Program
-    //       'i' - Individual Program
-    // data: actual data for the checkbox
     chkbDataChange(event) {
         this.dataChange.emit(this.bookingGroup);
     }
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     openModal() {
-        //Configure Modal Dialog
+        // Configure Modal Dialog
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "430px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '430px';
         dialogConfig.data = {
-            title: "Update Group Program Details",
-            description: "All information is correct?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Update Group Program Details',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         };
         // https://material.angular.io/components/dialog/overview
         // https://material.angular.io/components/dialog/overview
         const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
+            if (result === 'Yes') {
+                // call register function
                 this.submit();
             }
-            else {
-                console.log("stop");
-            }
+            else { }
         });
     }
     submit() {
         this.service.updateProgramLayoutDetails('g', this.bookingGroup)
             .subscribe((response) => {
-            this.router.navigateByUrl("/profile/program-management");
+            this.router.navigateByUrl('/profile/program-management');
         });
     }
 };
@@ -3225,25 +2770,25 @@ let IProgramComponent = class IProgramComponent {
             this.bookingIndividual = res;
         });
         this.varLabels = [
-            { var: "ParticipantName", label: "Participant Name", tooltip: "" },
-            { var: "ParticipantAge", label: "Participant Age" },
-            { var: "Gender", label: "Gender" },
-            { var: "MerchSize", label: "T-Shirt Size" },
-            { var: "AllergyInfo", label: "Allergy Information" },
-            { var: "SpecialInfo", label: "Special Information" },
-            { var: "InsureProviderName", label: "Insurance Provider Name" },
-            { var: "InsureRecipientName", label: "Insured Recipient Name" },
-            { var: "InsurePolicyNo", label: "Insurance Policy Number" },
-            { var: "InsurePhoneNo", label: "Insurance Phone Number" },
-            { var: "AuthorizedPickupName1", label: "Authorized Pickup Name 1" },
-            { var: "AuthorizedPickupPhone1", label: "Authorized Pickup Phone 1" },
-            { var: "AuthorizedPickupName2", label: "Authorized Pickup Name 2" },
-            { var: "AuthorizedPickupPhone2", label: "Authorized Pickup Phone 2" },
-            { var: "EarlyDropOff", label: "Early Drop Off" },
-            { var: "LatePickup", label: "Late Pick-up" },
-            { var: "MediaRelease", label: "Media Release" },
-            { var: "EmergencyMedicalRelease", label: "Emergency Medical Release" },
-            { var: "LiabilityAgreement", label: "Liability Agreement", tooltip: "Require User to sign the Liability Agreement" }
+            { var: 'ParticipantName', label: 'Participant Name', tooltip: '' },
+            { var: 'ParticipantAge', label: 'Participant Age' },
+            { var: 'Gender', label: 'Gender' },
+            { var: 'MerchSize', label: 'T-Shirt Size' },
+            { var: 'AllergyInfo', label: 'Allergy Information' },
+            { var: 'SpecialInfo', label: 'Special Information' },
+            { var: 'InsureProviderName', label: 'Insurance Provider Name' },
+            { var: 'InsureRecipientName', label: 'Insured Recipient Name' },
+            { var: 'InsurePolicyNo', label: 'Insurance Policy Number' },
+            { var: 'InsurePhoneNo', label: 'Insurance Phone Number' },
+            { var: 'AuthorizedPickupName1', label: 'Authorized Pickup Name 1' },
+            { var: 'AuthorizedPickupPhone1', label: 'Authorized Pickup Phone 1' },
+            { var: 'AuthorizedPickupName2', label: 'Authorized Pickup Name 2' },
+            { var: 'AuthorizedPickupPhone2', label: 'Authorized Pickup Phone 2' },
+            { var: 'EarlyDropOff', label: 'Early Drop Off' },
+            { var: 'LatePickup', label: 'Late Pick-up' },
+            { var: 'MediaRelease', label: 'Media Release' },
+            { var: 'EmergencyMedicalRelease', label: 'Emergency Medical Release' },
+            { var: 'LiabilityAgreement', label: 'Liability Agreement', tooltip: 'Require User to sign the Liability Agreement' }
         ];
         this.bookingIndividual.IndividualProgramPK = this.ProgramPK;
         this.bookingIndividual.CreatedBy = this.auth.getUserDetails().UserPK;
@@ -3251,39 +2796,36 @@ let IProgramComponent = class IProgramComponent {
     chkbDataChange(event) {
         this.dataChange.emit(this.bookingIndividual);
     }
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     openModal() {
-        //Configure Modal Dialog
+        // Configure Modal Dialog
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "430px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '430px';
         dialogConfig.data = {
-            title: "Update Individual Program Details",
-            description: "All information is correct?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Update Individual Program Details',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         };
-        // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
         const modalDialog = this.matDialog.open(_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
+            if (result === 'Yes') {
+                // call register function
                 this.submit();
             }
             else {
-                console.log("stop");
             }
         });
     }
     submit() {
         this.service.updateProgramLayoutDetails('i', this.bookingIndividual)
             .subscribe((response) => {
-            this.router.navigateByUrl("/profile/program-management");
+            this.router.navigateByUrl('/profile/program-management');
         });
     }
 };
@@ -3331,12 +2873,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************************************!*\
   !*** ./src/app/components/login-prompt-modal/login-prompt-modal.component.ts ***!
   \*******************************************************************************/
-/*! exports provided: LoginPromptModal */
+/*! exports provided: LoginPromptModalComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPromptModal", function() { return LoginPromptModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPromptModalComponent", function() { return LoginPromptModalComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
@@ -3355,7 +2897,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let LoginPromptModal = class LoginPromptModal {
+let LoginPromptModalComponent = class LoginPromptModalComponent {
     constructor(auth, dialogRef, router, route, formBuilder, matDialog, modalData) {
         this.auth = auth;
         this.dialogRef = dialogRef;
@@ -3366,10 +2908,10 @@ let LoginPromptModal = class LoginPromptModal {
         this.modalData = modalData;
         this.credentials = {
             UserPK: 0,
-            Username: "",
-            Password: "",
-            Role_FK: "",
-            Email: "",
+            Username: '',
+            Password: '',
+            Role_FK: '',
+            Email: '',
         };
         this.errorHandling = (control, error) => {
             return this.loginForm.controls[control].hasError(error);
@@ -3377,78 +2919,76 @@ let LoginPromptModal = class LoginPromptModal {
     }
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
-            password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(20)]],
+            username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]],
+            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6), _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].maxLength(20)]],
         });
-        $(".alert-success").hide();
-        $(".alert-danger").hide();
+        $('.alert-success').hide();
+        $('.alert-danger').hide();
     }
     // convenience getter for easy access to form fields
     get f() {
         return this.loginForm.controls;
     }
     closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
     }
     actionFunction() {
-        console.log("Modal closing");
-        this.dialogRef.close("Yes");
+        this.dialogRef.close('Yes');
     }
     createNew() {
         const registerDialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
-        registerDialogConfig.id = "register-modal-component";
-        registerDialogConfig.height = "auto";
+        registerDialogConfig.id = 'register-modal-component';
+        registerDialogConfig.height = 'auto';
         registerDialogConfig.disableClose = true;
-        registerDialogConfig.width = "auto";
+        registerDialogConfig.width = 'auto';
         registerDialogConfig.autoFocus = false;
         registerDialogConfig.data = {
-            title: "Register New User",
+            title: 'Register New User',
             routerURL: this.modalData.routerURL,
-            numberOfButton: "2"
+            numberOfButton: '2'
         };
         const registerModal = this.matDialog.open(_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["RegisterModalDialogComponent"], registerDialogConfig);
         registerModal.afterClosed().subscribe((result) => {
-            if (result == "Yes")
-                $(".alert-success").show();
+            if (result === 'Yes') {
+                $('.alert-success').show();
+            }
         });
     }
     resetPassword() {
-        console.log("Reset Password called");
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // The user can't close the dialog by clicking outside its body
         // dialogConfig.disableClose =;
-        dialogConfig.id = "register-modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "550px";
-        dialogConfig.width = "450px";
+        dialogConfig.id = 'register-modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '550px';
+        dialogConfig.width = '450px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Set New Password",
-            description: "Password has been successfully updated. You are now redirecting to Login Page",
-            actionButtonText: "Close",
-            numberOfButton: "1"
+            title: 'Set New Password',
+            description: 'Password has been successfully updated. You are now redirecting to Login Page',
+            actionButtonText: 'Close',
+            numberOfButton: '1'
         };
         const resetModal = this.matDialog.open(_password_service_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_8__["ForgotPasswordComponent"], dialogConfig);
     }
     signIn() {
         if (this.loginForm.valid) {
-            //;
             this.credentials.Username = this.loginForm.get('username').value;
             this.credentials.Password = this.loginForm.get('password').value;
             this.auth.login(this.credentials).subscribe((res) => {
-                this.dialogRef.close("Yes");
+                this.dialogRef.close('Yes');
                 // this.actionFunction();
             }, (err) => {
-                $(".alert-danger").show();
+                $('.alert-danger').show();
                 // alert('Username and password do not match')
-                // console.log("*Username and password do not match");
+                // console.log('*Username and password do not match');
                 return;
             });
-            console.log("Sign In");
+            console.log('Sign In');
         }
     }
 };
-LoginPromptModal.ctorParameters = () => [
+LoginPromptModalComponent.ctorParameters = () => [
     { type: _authentication_service__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"] },
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
@@ -3457,14 +2997,14 @@ LoginPromptModal.ctorParameters = () => [
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] },
     { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
 ];
-LoginPromptModal = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+LoginPromptModalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: "login-prompt-modal.component",
+        selector: 'login-prompt-modal.component',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login-prompt-modal.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/login-prompt-modal/login-prompt-modal.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login-prompt-modal.component.css */ "./src/app/components/login-prompt-modal/login-prompt-modal.component.css")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](6, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"]))
-], LoginPromptModal);
+], LoginPromptModalComponent);
 
 
 
@@ -3508,10 +3048,10 @@ let ModalDialogComponent = class ModalDialogComponent {
     }
     actionFunction() {
         //this.closeModal();
-        this.dialogRef.close("Yes");
+        this.dialogRef.close('Yes');
     }
     closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
     }
 };
 ModalDialogComponent.ctorParameters = () => [
@@ -3670,6 +3210,7 @@ let RegisterModalDialogComponent = class RegisterModalDialogComponent {
             username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].email]],
             password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6)]],
+            confirmPassword: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(6)]],
             FirstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             LastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             PhoneNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].min(1000000000)]],
@@ -3681,10 +3222,10 @@ let RegisterModalDialogComponent = class RegisterModalDialogComponent {
         });
     }
     actionFunction() {
-        this.dialogRegisterRef.close("Yes");
+        this.dialogRegisterRef.close('Yes');
     }
     closeModal() {
-        this.dialogRegisterRef.close("No");
+        this.dialogRegisterRef.close('No');
     }
     get f() { return this.newUserForm.controls; }
     loadUserDetails() {
@@ -3705,8 +3246,8 @@ let RegisterModalDialogComponent = class RegisterModalDialogComponent {
     }
     onSubmit() {
         this.submitted = true;
-        if (this.newUserForm.invalid)
-            console.log("Invalid");
+        if (this.newUserForm.invalid) {
+        }
         else {
             console.log(this.newUserForm);
             this.loadUserDetails();
@@ -3714,44 +3255,30 @@ let RegisterModalDialogComponent = class RegisterModalDialogComponent {
             this.auth.register(this.userInfo).subscribe((res) => {
                 if (res.error) {
                     console.log(res);
-                    this.errorMessage = "*" + res.error;
+                    this.errorMessage = '*' + res.error;
                     return;
                 }
                 else {
-                    // this.userInfo.UserPK = res.UserPK;
                     this.customerDetails.UserPK = res.UserPK;
                     this.userInfo.UserPK = this.customerDetails.UserPK;
-                    this.custService.finishRegister(this.customerDetails).subscribe((res) => {
-                        if (res.error) {
-                            console.log(res);
-                            this.errorMessage = "*" + res.error;
+                    this.custService.finishRegister(this.customerDetails).subscribe(res2 => {
+                        if (res2.error) {
                             return;
                         }
                         else {
-                            // this.userInfo.UserPK = res.UserPK;
                             this.sendConfirmation();
                             this.actionFunction();
                         }
                     });
                 }
-                err => {
-                    console.error(err);
-                    return;
-                };
             });
         }
     }
     sendConfirmation() {
-        console.log(this.userInfo);
-        console.log(this.customerDetails);
-        this.userInfo.Email = this.newUserForm.get("email").value;
+        this.userInfo.Email = this.newUserForm.get('email').value;
         this.emailService.sendRegistrationConfirmationEmail(this.userInfo).subscribe((res) => {
             if (res.error) {
-                console.log("fotgot ts file: " + res.error);
-            }
-            else {
-                console.log("Confirmation Email has been sent to " + this.userInfo.Email);
-                // this.closeModal();
+                console.log('email sending error: ' + res.error);
             }
         }, err => {
             console.log(err);
@@ -3816,15 +3343,13 @@ let ReservationDetailsModalDialog = class ReservationDetailsModalDialog {
         this.matDialog = matDialog;
     }
     ngOnInit() {
-        $(".alert-success").hide();
-        $(".alert-danger").hide();
     }
     closeModal() {
-        this.dialogRef.close("No");
+        this.dialogRef.close('No');
     }
     actionFunction() {
-        console.log("Modal closing");
-        this.dialogRef.close("Yes");
+        console.log('Modal closing');
+        this.dialogRef.close('Yes');
     }
 };
 ReservationDetailsModalDialog.ctorParameters = () => [
@@ -3833,7 +3358,7 @@ ReservationDetailsModalDialog.ctorParameters = () => [
 ];
 ReservationDetailsModalDialog = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'reservation-details-modal-dialog',
+        selector: 'app-reservation-details-modal-dialog',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./reservation-details-modal-dialog.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/reservation-details-modal-dialog/reservation-details-modal-dialog.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./reservation-details-modal-dialog.component.css */ "./src/app/components/reservation-details-modal-dialog/reservation-details-modal-dialog.component.css")).default]
     })
@@ -3876,7 +3401,7 @@ let ConfirmationComponent = class ConfirmationComponent {
     constructor(service) {
         this.service = service;
         this.ProgramType = 0;
-        this.ProgramName = "";
+        this.ProgramName = '';
     }
     ngOnInit() {
         this.service
@@ -3907,7 +3432,7 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 ], ConfirmationComponent.prototype, "customerSelectTime", void 0);
 ConfirmationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: "confirmation",
+        selector: 'confirmation',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./confirmation.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/confirmation/confirmation.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./confirmation.component.css */ "./src/app/confirmation/confirmation.component.css")).default]
     })
@@ -3932,74 +3457,76 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AppConstants {
-    static get BASE_URL() { return "http://localhost:4200/"; }
-    static get EXPRESS_SERVER_URL() {
-        //return "http://localhost:3000/";
-        return "http://ec2-54-153-55-225.us-west-1.compute.amazonaws.com:8080/";
+    static get BASE_URL() {
+        return 'http://localhost:4200/';
     }
-    static get ERR_USER_NOT_FOUND() { return "http://localhost:4200/api"; }
-    static get ERR_EMAIL_NOT_FOUND() { return "http://localhost:4200/api"; }
-    static get ERR_EMAIL_DUPLICATE() { return "http://localhost:4200/api"; }
-    static get ERR_WRONG_PASSWORD() { return "http://localhost:4200/api"; }
+    static get EXPRESS_SERVER_URL() {
+        //return 'http://localhost:3000/';
+        return 'http://ec2-54-153-55-225.us-west-1.compute.amazonaws.com:8080/';
+    }
     static get LOGIN_DIALOG_CONFIG() {
         const loginDialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogConfig"]();
-        loginDialogConfig.id = "modal-component";
-        loginDialogConfig.minHeight = "550px";
-        loginDialogConfig.width = "450px";
+        loginDialogConfig.id = 'modal-component';
+        loginDialogConfig.minHeight = '550px';
+        loginDialogConfig.width = '450px';
         loginDialogConfig.autoFocus = false;
         loginDialogConfig.data = {
-            routerRedirect: false
+            routerRedirect: false,
         };
         return loginDialogConfig;
     }
-    static get SYSTEM_USER_PK() { return 6868; }
-    //Set additional session's ScheduleSettingPK to 0
-    static get ADDITIONAL_SESSION_DETAIL() { return 0; }
+    static get SYSTEM_USER_PK() {
+        return 6868;
+    }
+    // Set additional session's ScheduleSettingPK to 0
+    static get ADDITIONAL_SESSION_DETAIL() {
+        return 0;
+    }
 }
 AppConstants.PROGRAM_TYPE_CODE = {
     GROUP_PROGRAM: 0,
-    INDIVIDUAL_PROGRAM: 1
+    INDIVIDUAL_PROGRAM: 1,
 };
 AppConstants.PROGRAM_TEXT = {
-    GROUP_PROGRAM: "Group Program",
-    INDIVIDUAL_PROGRAM: "Individual Program"
+    GROUP_PROGRAM: 'Group Program',
+    INDIVIDUAL_PROGRAM: 'Individual Program',
 };
 AppConstants.RESERVATION_STATUS_CODE = {
     ON_GOING: 1,
     ATTENDED: 2,
     COMPLETED: 3,
-    CANCELLED: 4
+    CANCELLED: 4,
 };
 AppConstants.RESERVATION_STATUS_TEXT = {
-    ON_GOING: "On Going",
-    ATTENDED: "Attended",
-    COMPLETED: "Completed",
-    CANCELLED: "Cancelled"
+    ON_GOING: 'On Going',
+    ATTENDED: 'Attended',
+    COMPLETED: 'Completed',
+    CANCELLED: 'Cancelled',
 };
 AppConstants.PAYMENT_TYPE_CODE = {
     CARD: 1,
     CASH: 2,
-    CHECK: 3
+    CHECK: 3,
 };
 AppConstants.PAYMENT_TYPE_TEXT = {
-    CARD: "Card",
-    CASH: "Cash",
-    CHECK: "Check"
+    CARD: 'Card',
+    CASH: 'Cash',
+    CHECK: 'Check',
 };
 AppConstants.USER_ROLE = {
     CUSTOMER: 1,
     MANAGER: 2,
-    SYSTEM: 3
+    SYSTEM: 3,
 };
 AppConstants.SUB_GROUP_PROGRAM_TEXT = {
-    FIELD_TRIP: "Field Trip",
-    SCOUT_PROGRAM: "Scout Program",
-    DISTANCE_LEARNING: "Distance Learning"
+    FIELD_TRIP: 'Field Trip',
+    SCOUT_PROGRAM: 'Scout Program',
+    DISTANCE_LEARNING: 'Distance Learning',
 };
 AppConstants.SUB_PROGRAM_CODE = {
     FIELD_TRIP: 1,
     SCOUT_PROGRAM: 2,
-    DISTANCE_LEARNING: 3
+    DISTANCE_LEARNING: 3,
 };
 
 
@@ -4041,8 +3568,8 @@ let Contact = class Contact {
         this.fb = fb;
         this.emailService = emailService;
         this.loading = false;
-        this.modalHeader = "Contact Form";
-        this.modalContent = " Thank you for contacting us. Your message has been successfully submitted. We will response to you as soon as possible.";
+        this.modalHeader = 'Contact Form';
+        this.modalContent = 'Thank you for contacting us. Your message has been successfully submitted. We will response to you as soon as possible.';
     }
     ngOnInit() {
         this.myForm = this.fb.group({
@@ -4072,7 +3599,7 @@ let Contact = class Contact {
     }
     submit() {
         this.loading = true;
-        let user = {
+        const user = {
             name: this.myForm.value.fullName,
             email: this.myForm.value.email,
             subject: this.myForm.value.subject,
@@ -4084,10 +3611,10 @@ let Contact = class Contact {
         }, err => {
             console.log(err);
             this.loading = false;
-            console.log("submitted");
+            console.log('submitted');
         }, () => {
             //this.loading = false;
-            //this.buttionText = "Submit";
+            //this.buttionText = 'Submit';
         });
     }
     reset() {
@@ -4150,7 +3677,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// declare var $: any;
 let CreateProgramComponent = class CreateProgramComponent {
     constructor(services, fb, auth, router) {
         this.services = services;
@@ -4164,51 +3690,52 @@ let CreateProgramComponent = class CreateProgramComponent {
         this.DepositAmount = 0;
         this.programData = {
             ProgramPK: 0,
-            Name: "",
-            Description: "",
+            Name: '',
+            Description: '',
             DepositAmount: null,
             PricePerParticipant: null,
             MaximumParticipant: null,
-            ImgData: "",
+            ImgData: '',
             ProgramType: 0,
-            CreatedDate: "",
+            CreatedDate: '',
             CreatedBy: 0,
             IsActive: false,
-            SubProgramPK: 0
+            SubProgramPK: 0,
         };
-        // Initialize Dropdown List for Program Type
-        // programs = [
-        //   {name: AppConstants.PROGRAM_TYPE_TEXT.GROUP_PROGRAM},
-        //   {name: AppConstants.PROGRAM_TYPE_TEXT.INDIVIDUAL_PROGRAM}
-        // ];
         this.programCategories = [
-            { id: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TEXT.GROUP_PROGRAM },
-            { id: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TEXT.INDIVIDUAL_PROGRAM }
+            {
+                id: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM,
+                name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TEXT.GROUP_PROGRAM,
+            },
+            {
+                id: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM,
+                name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].PROGRAM_TEXT.INDIVIDUAL_PROGRAM,
+            },
         ];
         // Initialize Dropdown List for Sub Type of Group Program
         this.programSubCategories = [
-            { id: 0, name: "None" },
+            { id: 0, name: 'None' },
             { id: 1, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].SUB_GROUP_PROGRAM_TEXT.FIELD_TRIP },
-            { id: 2, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM }
+            { id: 2, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM },
+            { id: 3, name: _constants__WEBPACK_IMPORTED_MODULE_6__["AppConstants"].SUB_GROUP_PROGRAM_TEXT.DISTANCE_LEARNING },
         ];
     }
     ngOnInit() {
-        console.log(this.inputElement);
         this.createProgramForm = this.fb.group({
             Name: [
-                "",
+                '',
                 [
                     _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required,
                     _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].maxLength(100)
-                ]
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].maxLength(100),
+                ],
             ],
             programType: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             subProgramType: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            DepositAmount: ["0", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
-            PricePerParticipant: ["0", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
-            MaximumParticipant: ["0", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1)]],
-            ImgData: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]]
+            DepositAmount: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
+            PricePerParticipant: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
+            MaximumParticipant: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1)]],
+            ImgData: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
         });
     }
     get f() {
@@ -4219,8 +3746,8 @@ let CreateProgramComponent = class CreateProgramComponent {
         // Update the variable
         this.selectedProgramType = event.target.value;
         // Reset value of Deposit when user change value of Program Type
-        if (this.selectedProgramType == 1) {
-            this.createProgramForm.controls["DepositAmount"].patchValue(0);
+        if (this.selectedProgramType === 1) {
+            this.createProgramForm.controls['DepositAmount'].patchValue(0);
             this.selectedSubType = 0;
         }
     }
@@ -4232,13 +3759,15 @@ let CreateProgramComponent = class CreateProgramComponent {
     onFileChange(event) {
         if (event.target.files.length > 0) {
             this.file = event.target.files[0];
-            this.createProgramForm.get('ImgData').setValue(this.file ? this.file.name : '');
+            this.createProgramForm
+                .get('ImgData')
+                .setValue(this.file ? this.file.name : '');
         }
     }
     createProgram() {
         this.submitted = true;
         if (this.createProgramForm.invalid) {
-            console.log("invalid");
+            console.log('invalid');
             return;
         }
         this.programData.CreatedBy = this.auth.getUserDetails().UserPK;
@@ -4249,9 +3778,9 @@ let CreateProgramComponent = class CreateProgramComponent {
         this.programData.PricePerParticipant = this.createProgramForm.get('PricePerParticipant').value;
         this.programData.MaximumParticipant = this.createProgramForm.get('MaximumParticipant').value;
         // Call Programs Service to send request to server
-        this.services.addNewProgram(this.getFormData()).subscribe(response => {
+        this.services.addNewProgram(this.getFormData()).subscribe((response) => {
             console.log(response);
-            this.router.navigateByUrl("/profile/program-details/" + response + "/edit");
+            this.router.navigateByUrl('/profile/program-details/' + response + '/edit');
         });
     }
     // Initialize CkEditor
@@ -4262,12 +3791,13 @@ let CreateProgramComponent = class CreateProgramComponent {
     }
     // Clear data when click on input field
     onFocus(event) {
-        if (event.target.value == 0)
-            event.target.value = "";
+        if (event.target.value === '0') {
+            event.target.value = '';
+        }
     }
     // Restore data when lose focus on input field
     lostFocus(event) {
-        if (event.target.value === 0 || event.target.value === "") {
+        if (event.target.value === '0' || event.target.value === '') {
             event.target.value = 0;
         }
     }
@@ -4275,7 +3805,7 @@ let CreateProgramComponent = class CreateProgramComponent {
         // Use FormData to pass file data to server.
         // Without FormData, the file data will be empty.
         const formData = new FormData();
-        formData.append("file", this.file, this.file.name);
+        formData.append('file', this.file, this.file.name);
         for (const key of Object.keys(this.programData)) {
             const value = this.programData[key];
             formData.append(key, value);
@@ -4300,189 +3830,6 @@ CreateProgramComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     })
 ], CreateProgramComponent);
 
-
-
-/***/ }),
-
-/***/ "./src/app/customer-info/customer-info.component.css":
-/*!***********************************************************!*\
-  !*** ./src/app/customer-info/customer-info.component.css ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".container {\r\n    max-width: 720px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    align-content: center;\r\n}\r\n\r\n.submit_btn{\r\n    background-color: #FFC312;\r\n    border: 0px;\r\n}\r\n\r\n.user_info{\r\n    padding-top: 20px;\r\n}\r\n\r\n.page_title{\r\n    color: #08b2b8;\r\n    margin-left:auto;\r\n    margin-right: auto;\r\n}\r\n\r\n.header_title{\r\n    padding-left: 270px;\r\n}\r\n\r\n.contact_header_title{\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n.address_header_title{\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n.location_info{\r\n    margin: auto;\r\n}\r\n\r\n.address_info{\r\n    padding-top:15px;\r\n}\r\n\r\n.submit_button{\r\n    margin-right: 15px;\r\n    color: black;\r\n}\r\n\r\n.checkbox{\r\n    padding-top:10px;\r\n    margin-left: auto;\r\n}\r\n\r\n.form-check-label{\r\n    font-size:17px;\r\n  }\r\n\r\nh1 {\r\n    font-family: sans-serif;\r\n    font-size: 32px;\r\n    font-style: normal;\r\n    font-weight: bold;\r\n    padding-top: 20px;\r\n    color: #0ebbff; \r\n  }\r\n\r\ninput.ng-touched.ng-invalid{ color: red; \r\n    border-color: red;}\r\n\r\n.warning{\r\n    color: red; \r\n}\r\n\r\n.card{\r\n    margin: auto;\r\n    min-height: 625px;\r\n    max-width: 400px;\r\n    background-color: rgba(0, 0, 0, 0.5) !important;\r\n}\r\n\r\n.text_header{\r\n    color:white;\r\n}\r\n\r\n.banner{\r\n    background-image: url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    height: 100%;\r\n    font-family: 'Numans', sans-serif;\r\n    padding-top: 100px;\r\n    padding-bottom: 100px;\r\n    }\r\n\r\nmat-checkbox{\r\n    background: none;\r\n    border: 0px;\r\n    color: white;\r\n}\r\n\r\nspan{\r\n    word-wrap: break-word;\r\n    word-break: break-word;\r\n}\r\n\r\n.cb_label{\r\n    color:white;\r\n}\r\n\r\n.input-group-prepend span{\r\n    background-color: #FFC312;\r\n    color: black;\r\n    border:0 !important;\r\n    width:50px;\r\n}\r\n\r\n::ng-deep .mat-checkbox-frame {\r\n    border-color: white\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3VzdG9tZXItaW5mby9jdXN0b21lci1pbmZvLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxnQkFBZ0I7SUFDaEIsaUJBQWlCO0lBQ2pCLGtCQUFrQjtJQUNsQixxQkFBcUI7QUFDekI7O0FBRUE7SUFDSSx5QkFBeUI7SUFDekIsV0FBVztBQUNmOztBQUVBO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksY0FBYztJQUNkLGdCQUFnQjtJQUNoQixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxrQkFBa0I7SUFDbEIsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixpQkFBaUI7QUFDckI7O0FBRUU7SUFDRSxjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksdUJBQXVCO0lBQ3ZCLGVBQWU7SUFDZixrQkFBa0I7SUFDbEIsaUJBQWlCO0lBQ2pCLGlCQUFpQjtJQUNqQixjQUFjO0VBQ2hCOztBQUVGLDZCQUE2QixVQUFVO0lBQ25DLGlCQUFpQixDQUFDOztBQUV0QjtJQUNJLFVBQVU7QUFDZDs7QUFFQTtJQUNJLFlBQVk7SUFDWixpQkFBaUI7SUFDakIsZ0JBQWdCO0lBQ2hCLCtDQUErQztBQUNuRDs7QUFFQTtJQUNJLFdBQVc7QUFDZjs7QUFFQTtJQUNJLCtIQUErSDtJQUMvSCxzQkFBc0I7SUFDdEIsNEJBQTRCO0lBQzVCLFlBQVk7SUFDWixpQ0FBaUM7SUFDakMsa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQjs7QUFFSjtJQUNJLGdCQUFnQjtJQUNoQixXQUFXO0lBQ1gsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLHFCQUFxQjtJQUNyQixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxXQUFXO0FBQ2Y7O0FBRUE7SUFDSSx5QkFBeUI7SUFDekIsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixVQUFVO0FBQ2Q7O0FBRUE7SUFDSTtFQUNGIiwiZmlsZSI6InNyYy9hcHAvY3VzdG9tZXItaW5mby9jdXN0b21lci1pbmZvLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcclxuICAgIG1heC13aWR0aDogNzIwcHg7XHJcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcclxuICAgIG1hcmdpbi1yaWdodDogYXV0bztcclxuICAgIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcclxufVxyXG5cclxuLnN1Ym1pdF9idG57XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkZDMzEyO1xyXG4gICAgYm9yZGVyOiAwcHg7XHJcbn1cclxuXHJcbi51c2VyX2luZm97XHJcbiAgICBwYWRkaW5nLXRvcDogMjBweDtcclxufVxyXG5cclxuLnBhZ2VfdGl0bGV7XHJcbiAgICBjb2xvcjogIzA4YjJiODtcclxuICAgIG1hcmdpbi1sZWZ0OmF1dG87XHJcbiAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuXHJcbi5oZWFkZXJfdGl0bGV7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDI3MHB4O1xyXG59XHJcblxyXG4uY29udGFjdF9oZWFkZXJfdGl0bGV7XHJcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcclxuICAgIG1hcmdpbi1yaWdodDogYXV0bztcclxufVxyXG5cclxuLmFkZHJlc3NfaGVhZGVyX3RpdGxle1xyXG4gICAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuXHJcbi5sb2NhdGlvbl9pbmZve1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG59XHJcblxyXG4uYWRkcmVzc19pbmZve1xyXG4gICAgcGFkZGluZy10b3A6MTVweDtcclxufVxyXG5cclxuLnN1Ym1pdF9idXR0b257XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDE1cHg7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbn1cclxuXHJcbi5jaGVja2JveHtcclxuICAgIHBhZGRpbmctdG9wOjEwcHg7XHJcbiAgICBtYXJnaW4tbGVmdDogYXV0bztcclxufVxyXG5cclxuICAuZm9ybS1jaGVjay1sYWJlbHtcclxuICAgIGZvbnQtc2l6ZToxN3B4O1xyXG4gIH1cclxuXHJcbmgxIHtcclxuICAgIGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmO1xyXG4gICAgZm9udC1zaXplOiAzMnB4O1xyXG4gICAgZm9udC1zdHlsZTogbm9ybWFsO1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICBwYWRkaW5nLXRvcDogMjBweDtcclxuICAgIGNvbG9yOiAjMGViYmZmOyBcclxuICB9XHJcblxyXG5pbnB1dC5uZy10b3VjaGVkLm5nLWludmFsaWR7IGNvbG9yOiByZWQ7IFxyXG4gICAgYm9yZGVyLWNvbG9yOiByZWQ7fVxyXG5cclxuLndhcm5pbmd7XHJcbiAgICBjb2xvcjogcmVkOyBcclxufVxyXG5cclxuLmNhcmR7XHJcbiAgICBtYXJnaW46IGF1dG87XHJcbiAgICBtaW4taGVpZ2h0OiA2MjVweDtcclxuICAgIG1heC13aWR0aDogNDAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSkgIWltcG9ydGFudDtcclxufVxyXG5cclxuLnRleHRfaGVhZGVye1xyXG4gICAgY29sb3I6d2hpdGU7XHJcbn1cclxuXHJcbi5iYW5uZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJ2h0dHBzOi8vYy53YWxsaGVyZS5jb20vcGhvdG9zLzgzL2U4L2xham9sbGFfc3Vuc2V0X2JlYWNoX3NlYWxpb25fc2VhX2xpb25fc2FuZGllZ29fY2xvdWRzLTg3MjQ1MS5qcGchZCcpO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBmb250LWZhbWlseTogJ051bWFucycsIHNhbnMtc2VyaWY7XHJcbiAgICBwYWRkaW5nLXRvcDogMTAwcHg7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTAwcHg7XHJcbiAgICB9XHJcblxyXG5tYXQtY2hlY2tib3h7XHJcbiAgICBiYWNrZ3JvdW5kOiBub25lO1xyXG4gICAgYm9yZGVyOiAwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbn1cclxuXHJcbnNwYW57XHJcbiAgICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XHJcbiAgICB3b3JkLWJyZWFrOiBicmVhay13b3JkO1xyXG59XHJcblxyXG4uY2JfbGFiZWx7XHJcbiAgICBjb2xvcjp3aGl0ZTtcclxufVxyXG5cclxuLmlucHV0LWdyb3VwLXByZXBlbmQgc3BhbntcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNGRkMzMTI7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBib3JkZXI6MCAhaW1wb3J0YW50O1xyXG4gICAgd2lkdGg6NTBweDtcclxufVxyXG5cclxuOjpuZy1kZWVwIC5tYXQtY2hlY2tib3gtZnJhbWUge1xyXG4gICAgYm9yZGVyLWNvbG9yOiB3aGl0ZVxyXG4gIH0iXX0= */");
-
-/***/ }),
-
-/***/ "./src/app/customer-info/customer-info.component.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/customer-info/customer-info.component.ts ***!
-  \**********************************************************/
-/*! exports provided: CustomerRegisterComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerRegisterComponent", function() { return CustomerRegisterComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_customer_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/customer.services */ "./src/app/services/customer.services.ts");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
-/* harmony import */ var _components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/customer-modal-dialog/customer-modal-dialog.component */ "./src/app/components/customer-modal-dialog/customer-modal-dialog.component.ts");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-
-
-
-
-
-
-
-
-
-let CustomerRegisterComponent = class CustomerRegisterComponent {
-    constructor(auth, router, route, formBuilder, customerService, matDialog) {
-        this.auth = auth;
-        this.router = router;
-        this.route = route;
-        this.formBuilder = formBuilder;
-        this.customerService = customerService;
-        this.matDialog = matDialog;
-        this.submitted = false;
-        this.errorMessage = '';
-        this.faAddressBook = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faAddressBook"];
-        this.faPhoneSquare = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faPhoneSquare"];
-        this.faHome = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faHome"];
-        this.faMapMarker = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faMapMarker"];
-        this.faMapPin = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faMapPin"];
-        this.faMap = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faMap"];
-        this.credentials = {
-            UserPK: 0,
-            FirstName: '',
-            LastName: '',
-            PhoneNo: '',
-            Address: '',
-            City: '',
-            State: '',
-            Zipcode: '',
-            Subscribe: 0
-        };
-    }
-    ngOnInit() {
-        this.customerInfoForm = this.formBuilder.group({
-            firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            lastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            phoneNum: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(1000000000)]],
-            address_street: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            address_city: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            address_state: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(2)]],
-            address_zipcode: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(10000)]],
-            subscribe: [0]
-        });
-        this.route.params.subscribe(val => {
-            this.credentials.UserPK = val.id;
-        });
-        $('.state').bind('keydown keyup blur', function () {
-            var node = $(this);
-            node.val(node.val().replace(/[^A-Z]/g, ''));
-        });
-    }
-    checkSubmission() {
-        this.submitted = true;
-        return this.customerInfoForm.status;
-    }
-    get f() { return this.customerInfoForm.controls; }
-    openModal() {
-        //Validate form before open modal dialog
-        this.submitted = true;
-        // stop here if form is invalid
-        if (this.customerInfoForm.invalid) {
-            return;
-        }
-        //Configure Modal Dialog
-        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
-        dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
-        dialogConfig.autoFocus = false;
-        dialogConfig.data = {
-            title: "Register Confirmation",
-            firstName: this.customerInfoForm.get('firstName').value,
-            lastName: this.customerInfoForm.get('lastName').value,
-            phoneNo: this.customerInfoForm.get('phoneNum').value,
-            streetAddress: this.customerInfoForm.get('address_street').value,
-            // streetAddress2: '',
-            addressCity: this.customerInfoForm.get('address_city').value,
-            addressState: this.customerInfoForm.get('address_state').value,
-            addressZipCode: this.customerInfoForm.get('address_zipcode').value,
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
-        };
-        const modalDialog = this.matDialog.open(_components_customer_modal_dialog_customer_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["CustomerModalDialogComponent"], dialogConfig);
-        modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                this.finishRegister();
-            }
-        });
-    }
-    checkBoxClicked() {
-        if (this.customerInfoForm.get('subscribe').value == 0)
-            this.customerInfoForm.get('subscribe').setValue(1);
-        else
-            this.customerInfoForm.get('subscribe').setValue(0);
-        this.credentials.Subscribe = this.customerInfoForm.get('subscribe').value;
-    }
-    letterOnly(event) {
-        console.log(key);
-        console.log("Pressed");
-        var key = event.keyCode;
-        return (key >= 65 && key <= 90); // 8 for backspace and 32 for space
-    }
-    ;
-    finishRegister() {
-        this.submitted = true;
-        if (this.customerInfoForm.invalid) {
-            return;
-        }
-        // this.customer = new CustomerData()
-        this.customerService.finishRegister(this.credentials).subscribe((res) => {
-            if (res.error) {
-                this.errorMessage = "*" + res.error;
-                return;
-            }
-            else
-                this.router.navigateByUrl("/");
-        }, err => {
-            console.error(err);
-        });
-    }
-};
-CustomerRegisterComponent.ctorParameters = () => [
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
-    { type: _services_customer_services__WEBPACK_IMPORTED_MODULE_5__["CustomerService"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
-];
-CustomerRegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-customer-info',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./customer-info.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/customer-info/customer-info.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./customer-info.component.css */ "./src/app/customer-info/customer-info.component.css")).default]
-    })
-], CustomerRegisterComponent);
-
-// providers: [
-//   {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
-// ]
 
 
 /***/ }),
@@ -4521,6 +3868,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
 /* harmony import */ var _components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component */ "./src/app/components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component.ts");
 /* harmony import */ var _services_customer_services__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/customer.services */ "./src/app/services/customer.services.ts");
+/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
+
 
 
 
@@ -4556,8 +3905,8 @@ let DashboardComponent = class DashboardComponent {
         this.cancelledTotal = 0;
         this.cancelledDetails = [];
         /* CHART USING NG2-CHARTS */
-        //title = 'Bar Chart Example Using ng2-charts';
-        // ADD CHART OPTIONS. 
+        // title = 'Bar Chart Example Using ng2-charts';
+        // ADD CHART OPTIONS.
         /* chartOptions = {
           responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
         }
@@ -4609,15 +3958,15 @@ let DashboardComponent = class DashboardComponent {
         /* END PIE CHART*/
         // Dropdown Menu Option
         this.programCategories = [
-            { id: 0, name: "All Reservations" },
-            { id: 1, name: "Group Reservations" },
-            { id: 2, name: "Individual Reservations" }
+            { id: 0, name: 'All Reservations' },
+            { id: 1, name: 'Group Reservations' },
+            { id: 2, name: 'Individual Reservations' }
         ];
     }
     ngOnInit() {
         this.auth.profile().subscribe(user => {
             this.role = user.Role_FK;
-            if (this.role == '1') {
+            if (this.role === '1') {
                 this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser) => {
                     resByUser.forEach((item) => {
                         let details = {
@@ -4626,7 +3975,9 @@ let DashboardComponent = class DashboardComponent {
                             PaymentPK: 0,
                             ProgramPK: 0,
                             Quantity: 0,
+                            ReservationStatus: 0,
                             ProgramName: '',
+                            ProgramType: 0,
                             Date: '',
                             Time: '',
                             Total: '',
@@ -4639,14 +3990,18 @@ let DashboardComponent = class DashboardComponent {
                         details.Quantity = item.NumberOfParticipant;
                         this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
                             details.Date = schedule[0].Start.slice(0, 10);
-                            details.Time = schedule[0].Start.slice(12, 16) + " - " + schedule[0].End.slice(12, 16);
+                            details.Time = schedule[0].Start.slice(12, 16) + ' - ' + schedule[0].End.slice(12, 16);
                             details.ProgramPK = schedule[0].ProgramPK;
                             this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
                                 details.ProgramName = program.Name;
+                                details.ProgramType = program.ProgramType;
                             });
+                            if (item.ReservationStatus === _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING) {
+                                details.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING;
+                            }
                             /*  only display the current reservation, not past reservations */
-                            //this.newDate = new Date(schedule[0].Start)
-                            if ((item.ReservationStatus == _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING) || (item.ReservationStatus == _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ATTENDED)) {
+                            if ((item.ReservationStatus === _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING) ||
+                                (item.ReservationStatus === _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ATTENDED)) {
                                 this.customerRes.push(details);
                             }
                         });
@@ -4661,18 +4016,15 @@ let DashboardComponent = class DashboardComponent {
         });
     }
     clearSearch() {
-        this.searchText = "";
+        this.searchText = '';
     }
-    //On Click event of chart
+    // On Click event of chart
     onChartClick(event) {
         console.log(event);
     }
     /* Change the Start and End Date */
     onChangeDate() {
-        console.log("Start: " + this.range.start);
-        console.log("End: " + this.range.end);
         if (this.range.start <= this.range.end) {
-            console.log("in");
             this.range.start.setHours(0, 0, 0, 0);
             this.range.end.setHours(23, 59, 59, 999);
             this.completedRes = 0;
@@ -4707,7 +4059,7 @@ let DashboardComponent = class DashboardComponent {
                     reservation.SchedulePK = item.SchedulePK;
                     reservation.UserPK = item.UserPK;
                     this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-                        reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
+                        reservation.CustomerName = customer.LastName + ', ' + customer.FirstName;
                     });
                     reservation.Total = item.Total;
                     reservation.RemainingBalance = item.RemainingBalance;
@@ -4720,7 +4072,7 @@ let DashboardComponent = class DashboardComponent {
                     });
                     this.scheduleService.getScheduleById(item.SchedulePK).subscribe((schedule) => {
                         /* ??? before one date if change to Date */
-                        let resDate = new Date(schedule[0].Start.slice(0, 10));
+                        const resDate = new Date(schedule[0].Start);
                         if (this.range.start <= resDate && this.range.end >= resDate) {
                             switch (item.ReservationStatus) {
                                 case _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING: {
@@ -4760,25 +4112,64 @@ let DashboardComponent = class DashboardComponent {
     }
     // PaynowModal
     openPaynowModal() {
-        console.log("Paynow Modal called");
+        console.log('Paynow Modal called');
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
-        dialogConfig.id = "paynow-modal-component";
-        dialogConfig.height = "750px";
-        dialogConfig.maxHeight = "100%";
-        dialogConfig.width = "580px";
-        dialogConfig.maxWidth = "100%";
+        dialogConfig.id = 'paynow-modal-component';
+        dialogConfig.height = '750px';
+        dialogConfig.maxHeight = '100%';
+        dialogConfig.width = '580px';
+        dialogConfig.maxWidth = '100%';
         // dialogConfig.autoFocus = false;
         const paynowModalDialog = this.matDialog.open(_components_paynow_modal_dialog_paynow_modal_dialog_component__WEBPACK_IMPORTED_MODULE_4__["PaynowModalDialog"], dialogConfig);
     }
+    openCancelModal(type) {
+        console.log('Cancel Modal called');
+        //Configure Modal Dialog
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
+        dialogConfig.autoFocus = false;
+        if (type == _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM) {
+            dialogConfig.data = {
+                title: 'Cancel Confirmation',
+                description: 'Are you sure you would like to cancel this reservation? Your payment for this reservation will be refunded soon!',
+                actionButtonText: 'Confirm',
+                numberOfButton: '2'
+            };
+        }
+        else {
+            dialogConfig.data = {
+                title: 'Cancel Confirmation',
+                description: 'Are you sure you would like to cancel this reservation for customer? We will collect the $25 deposit and refund the rest of your payment!',
+                actionButtonText: 'Confirm',
+                numberOfButton: '2'
+            };
+        }
+        const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_11__["ModalDialogComponent"], dialogConfig);
+        modalDialog.afterClosed().subscribe(result => {
+            if (result == 'Yes') {
+                //Update Database
+                //Make the refund
+                //Send cancel email
+            }
+            else {
+                //Do nothing
+            }
+        });
+    }
     // viewReservationModal
     openReservationModal(status) {
-        console.log("Admin Reservations Modal called");
+        console.log('Admin Reservations Modal called');
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
-        dialogConfig.id = "admin-reservations-modal-component";
-        dialogConfig.maxHeight = "600px";
-        dialogConfig.width = "1000px";
+        dialogConfig.id = 'admin-reservations-modal-component';
+        dialogConfig.maxHeight = '600px';
+        dialogConfig.width = '1000px';
         dialogConfig.autoFocus = false;
         switch (status) {
             case _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].RESERVATION_STATUS_TEXT.ON_GOING: {
@@ -4798,7 +4189,7 @@ let DashboardComponent = class DashboardComponent {
                 break;
             }
         }
-        const adminReservationModalDialog = this.matDialog.open(_components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_9__["AdminReservationsModalDialog"], dialogConfig);
+        const adminReservationModalDialog = this.matDialog.open(_components_admin_reservations_modal_dialog_admin_reservations_modal_dialog_component__WEBPACK_IMPORTED_MODULE_9__["AdminReservationsModalDialogComponent"], dialogConfig);
     }
 };
 DashboardComponent.ctorParameters = () => [
@@ -4811,7 +4202,7 @@ DashboardComponent.ctorParameters = () => [
 ];
 DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'dashboard',
+        selector: 'app-dashboard',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./dashboard.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/dashboard/dashboard.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./dashboard.component.css */ "./src/app/dashboard/dashboard.component.css")).default]
     })
@@ -5111,24 +4502,21 @@ let EmailDetailsComponent = class EmailDetailsComponent {
     openModal() {
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "380px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '380px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Update Email Details",
-            description: "Are you sure that you are ready to submit?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Update Email Details',
+            description: 'Are you sure that you are ready to submit?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         };
         const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_5__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
+            if (result === 'Yes') {
                 this.submit();
-            }
-            else {
-                console.log("Action canceled");
             }
         });
     }
@@ -5137,7 +4525,7 @@ let EmailDetailsComponent = class EmailDetailsComponent {
         this.services.updateEmail(this.emailData).subscribe(res => {
             console.log(res);
             if (res) {
-                this.router.navigateByUrl("/profile/email-management");
+                this.router.navigateByUrl('/profile/email-management');
             }
         });
     }
@@ -5460,126 +4848,6 @@ IndividualProgramComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./individual-program.component.css */ "./src/app/individual-program/individual-program.component.css")).default]
     })
 ], IndividualProgramComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/login/login.component.css":
-/*!*******************************************!*\
-  !*** ./src/app/login/login.component.css ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n.banner{\r\n    background-image: url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    height: 100%;\r\n    font-family: 'Numans', sans-serif;\r\n    padding-top: 100px;\r\n    padding-bottom: 100px;\r\n    }\r\n    \r\n    .container{\r\n    height: 100vh;\r\n    align-content: center;\r\n    }\r\n    \r\n    .card{\r\n    height:430px;\r\n    margin-top: auto;\r\n    margin-bottom: auto;\r\n    width: 400px;\r\n    background-color: rgba(0, 0, 0, 0.5) !important;\r\n    }\r\n    \r\n    .card-header h3{\r\n    color: white;\r\n    }\r\n    \r\n    .input-group-prepend span{\r\n    width: 50px;\r\n    background-color: #FFC312;\r\n    color: black;\r\n    border:0 !important;\r\n    }\r\n    \r\n    input:focus{\r\n    outline: 0 0 0 0  !important;\r\n    box-shadow: 0 0 0 0 !important;\r\n    \r\n    }\r\n    \r\n    .remember{\r\n    color: white;\r\n    }\r\n    \r\n    .remember input\r\n    {\r\n    width: 20px;\r\n    height: 20px;\r\n    margin-left: 15px;\r\n    margin-right: 5px;\r\n    }\r\n    \r\n    .login_btn{\r\n    color: black;\r\n    background-color: #FFC312;\r\n    width: 100px;\r\n    }\r\n    \r\n    .login_btn:hover{\r\n    color: black;\r\n    background-color: white;\r\n    }\r\n    \r\n    .links{\r\n    color: white;\r\n    }\r\n    \r\n    .links a{\r\n    margin-left: 4px;\r\n    }\r\n    \r\n    .error{\r\n        color: rgb(211, 23, 23);\r\n        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n        font-size: 16px;\r\n    }\r\n\r\n    \r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSwrSEFBK0g7SUFDL0gsc0JBQXNCO0lBQ3RCLDRCQUE0QjtJQUM1QixZQUFZO0lBQ1osaUNBQWlDO0lBQ2pDLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckI7O0lBRUE7SUFDQSxhQUFhO0lBQ2IscUJBQXFCO0lBQ3JCOztJQUVBO0lBQ0EsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLCtDQUErQztJQUMvQzs7SUFFQTtJQUNBLFlBQVk7SUFDWjs7SUFFQTtJQUNBLFdBQVc7SUFDWCx5QkFBeUI7SUFDekIsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQjs7SUFFQTtJQUNBLDRCQUE0QjtJQUM1Qiw4QkFBOEI7O0lBRTlCOztJQUVBO0lBQ0EsWUFBWTtJQUNaOztJQUVBOztJQUVBLFdBQVc7SUFDWCxZQUFZO0lBQ1osaUJBQWlCO0lBQ2pCLGlCQUFpQjtJQUNqQjs7SUFFQTtJQUNBLFlBQVk7SUFDWix5QkFBeUI7SUFDekIsWUFBWTtJQUNaOztJQUVBO0lBQ0EsWUFBWTtJQUNaLHVCQUF1QjtJQUN2Qjs7SUFFQTtJQUNBLFlBQVk7SUFDWjs7SUFFQTtJQUNBLGdCQUFnQjtJQUNoQjs7SUFFQTtRQUNJLHVCQUF1QjtRQUN2Qiw2RUFBNkU7UUFDN0UsZUFBZTtJQUNuQiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuLmJhbm5lcntcclxuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCgnaHR0cHM6Ly9jLndhbGxoZXJlLmNvbS9waG90b3MvODMvZTgvbGFqb2xsYV9zdW5zZXRfYmVhY2hfc2VhbGlvbl9zZWFfbGlvbl9zYW5kaWVnb19jbG91ZHMtODcyNDUxLmpwZyFkJyk7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyO1xyXG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIGZvbnQtZmFtaWx5OiAnTnVtYW5zJywgc2Fucy1zZXJpZjtcclxuICAgIHBhZGRpbmctdG9wOiAxMDBweDtcclxuICAgIHBhZGRpbmctYm90dG9tOiAxMDBweDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmNvbnRhaW5lcntcclxuICAgIGhlaWdodDogMTAwdmg7XHJcbiAgICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5jYXJke1xyXG4gICAgaGVpZ2h0OjQzMHB4O1xyXG4gICAgbWFyZ2luLXRvcDogYXV0bztcclxuICAgIG1hcmdpbi1ib3R0b206IGF1dG87XHJcbiAgICB3aWR0aDogNDAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmNhcmQtaGVhZGVyIGgze1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAuaW5wdXQtZ3JvdXAtcHJlcGVuZCBzcGFue1xyXG4gICAgd2lkdGg6IDUwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkZDMzEyO1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYm9yZGVyOjAgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgaW5wdXQ6Zm9jdXN7XHJcbiAgICBvdXRsaW5lOiAwIDAgMCAwICAhaW1wb3J0YW50O1xyXG4gICAgYm94LXNoYWRvdzogMCAwIDAgMCAhaW1wb3J0YW50O1xyXG4gICAgXHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5yZW1lbWJlcntcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLnJlbWVtYmVyIGlucHV0XHJcbiAgICB7XHJcbiAgICB3aWR0aDogMjBweDtcclxuICAgIGhlaWdodDogMjBweDtcclxuICAgIG1hcmdpbi1sZWZ0OiAxNXB4O1xyXG4gICAgbWFyZ2luLXJpZ2h0OiA1cHg7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5sb2dpbl9idG57XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRkZDMzEyO1xyXG4gICAgd2lkdGg6IDEwMHB4O1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAubG9naW5fYnRuOmhvdmVye1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5saW5rc3tcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmxpbmtzIGF7XHJcbiAgICBtYXJnaW4tbGVmdDogNHB4O1xyXG4gICAgfVxyXG5cclxuICAgIC5lcnJvcntcclxuICAgICAgICBjb2xvcjogcmdiKDIxMSwgMjMsIDIzKTtcclxuICAgICAgICBmb250LWZhbWlseTogJ0dpbGwgU2FucycsICdHaWxsIFNhbnMgTVQnLCBDYWxpYnJpLCAnVHJlYnVjaGV0IE1TJywgc2Fucy1zZXJpZjtcclxuICAgICAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICB9XHJcblxyXG4gICAgXHJcbiJdfQ== */");
-
-/***/ }),
-
-/***/ "./src/app/login/login.component.ts":
-/*!******************************************!*\
-  !*** ./src/app/login/login.component.ts ***!
-  \******************************************/
-/*! exports provided: LoginComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-
-
-
-
-
-
-let LoginComponent = class LoginComponent {
-    constructor(auth, router, formBuilder, route) {
-        this.auth = auth;
-        this.router = router;
-        this.formBuilder = formBuilder;
-        this.route = route;
-        this.submitted = false;
-        this.errorMessage = "";
-        this.credentials = {
-            UserPK: 0,
-            Username: "",
-            Password: "",
-            Role_FK: "",
-            Email: "",
-        };
-        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faUser"];
-        this.faKey = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faKey"];
-    }
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
-        });
-        this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
-        // this.auth.profile().subscribe(
-        //     user => {
-        //         this.router.navigateByUrl('/')
-        //     }
-        // )
-    }
-    // convenience getter for easy access to form fields
-    get f() {
-        return this.loginForm.controls;
-    }
-    login() {
-        this.submitted = true;
-        if (this.loginForm.invalid) {
-            return;
-        }
-        this.auth.login(this.credentials).subscribe((res) => {
-            if (res.user.Role_FK == "1")
-                this.router.navigateByUrl("/");
-            else
-                this.router.navigateByUrl(this.returnUrl);
-        }, (err) => {
-            //alert('Username and password do not match')
-            this.errorMessage = "*Username and password do not match";
-            return;
-        });
-    }
-    MustMatch(controlName, matchingControlName) {
-        return (formGroup) => {
-            const control = formGroup.controls[controlName];
-            const matchingControl = formGroup.controls[matchingControlName];
-            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-                // return if another validator has already found an error on the matchingControl
-                return;
-            }
-            // set error on matchingControl if validation fails
-            if (control.value !== matchingControl.value) {
-                matchingControl.setErrors({ mustMatch: true });
-            }
-            else {
-                matchingControl.setErrors(null);
-            }
-        };
-    }
-};
-LoginComponent.ctorParameters = () => [
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
-];
-LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./login.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/login/login.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css")).default]
-    })
-], LoginComponent);
 
 
 
@@ -6302,7 +5570,7 @@ PaymentComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 45px;\r\n    font-weight: bold;\r\n    padding: 20px;\r\n    text-align: center;\r\n    color: #08b2b8; \r\n  }\r\n\r\nh2{\r\n    padding:20px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvZmlsZS1pbmZvL3Byb2ZpbGUtaW5mby5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMENBQTBDO0lBQzFDLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsYUFBYTtJQUNiLGtCQUFrQjtJQUNsQixjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksWUFBWTtBQUNoQiIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUtaW5mby9wcm9maWxlLWluZm8uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImgxIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICBmb250LXNpemU6IDQ1cHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIHBhZGRpbmc6IDIwcHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBjb2xvcjogIzA4YjJiODsgXHJcbiAgfVxyXG5cclxuaDJ7XHJcbiAgICBwYWRkaW5nOjIwcHg7XHJcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 45px;\r\n    font-weight: bold;\r\n    padding: 20px;\r\n    text-align: center;\r\n    color: #08b2b8; \r\n  }\r\n\r\nh2{\r\n    padding:20px;\r\n}\r\n\r\n.field{\r\n  padding: 8px 30px 8px 30px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvZmlsZS1pbmZvL3Byb2ZpbGUtaW5mby5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMENBQTBDO0lBQzFDLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsYUFBYTtJQUNiLGtCQUFrQjtJQUNsQixjQUFjO0VBQ2hCOztBQUVGO0lBQ0ksWUFBWTtBQUNoQjs7QUFFQTtFQUNFLDBCQUEwQjtBQUM1QiIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUtaW5mby9wcm9maWxlLWluZm8uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImgxIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICBmb250LXNpemU6IDQ1cHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICAgIHBhZGRpbmc6IDIwcHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICBjb2xvcjogIzA4YjJiODsgXHJcbiAgfVxyXG5cclxuaDJ7XHJcbiAgICBwYWRkaW5nOjIwcHg7XHJcbn1cclxuXHJcbi5maWVsZHtcclxuICBwYWRkaW5nOiA4cHggMzBweCA4cHggMzBweDtcclxufSJdfQ== */");
 
 /***/ }),
 
@@ -6356,7 +5624,7 @@ let ProfileInfo = class ProfileInfo {
             this.currentCustomerPK = val.id;
             this.customer.getCustomerInfoByID(this.currentCustomerPK).subscribe(cus => {
                 this.customerDetails = cus;
-                if (cus.Subscribe == 0) {
+                if (cus.Subscribe === 0) {
                     this.subscribeChecked = false;
                 }
                 else {
@@ -6384,39 +5652,35 @@ let ProfileInfo = class ProfileInfo {
             this.isDisabled = true;
         }
     }
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     openModal() {
-        //Form validation
+        // Form validation
         this.submitted = true;
         if (this.customerInfoForm.invalid) {
             return;
         }
-        //Configure Modal Dialog
+        // Configure Modal Dialog
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Update Personal Info",
-            description: "All information is correct?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Update Personal Info',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         };
-        // https://material.angular.io/components/dialog/overview
-        // https://material.angular.io/components/dialog/overview
         const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
+            if (result === 'Yes') {
+                // call register function
                 this.updateInfo();
             }
-            else {
-                console.log("stop");
-            }
+            else { }
         });
     }
     updateInfo() {
@@ -6427,12 +5691,8 @@ let ProfileInfo = class ProfileInfo {
             this.customerDetails.Subscribe = 0;
         }
         this.customer.updateCustomerInfo(this.currentCustomerPK, this.customerDetails).subscribe(res => {
-            console.log(res.message);
             this.router.navigateByUrl('/profile');
-        }),
-            error => {
-                console.log(error);
-            };
+        });
     }
 };
 ProfileInfo.ctorParameters = () => [
@@ -6498,8 +5758,7 @@ let ProfileComponent = class ProfileComponent {
         this.faPhone = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faPhone"];
     }
     ngOnInit() {
-        this.option = "";
-        /* this.hf.hide();  */
+        this.option = '';
         this.auth.profile().subscribe(user => {
             this.details = user;
             this.role = user.Role_FK;
@@ -6554,13 +5813,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _services_program_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/program.services */ "./src/app/services/program.services.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-decoupled-document */ "./node_modules/@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
-/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
-/* harmony import */ var _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/g-program/g-program.component */ "./src/app/components/g-program/g-program.component.ts");
-/* harmony import */ var _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/i-program/i-program.component */ "./src/app/components/i-program/i-program.component.ts");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
+/* harmony import */ var _components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/g-program/g-program.component */ "./src/app/components/g-program/g-program.component.ts");
+/* harmony import */ var _components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/i-program/i-program.component */ "./src/app/components/i-program/i-program.component.ts");
+/* harmony import */ var _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-decoupled-document */ "./node_modules/@ckeditor/ckeditor5-build-decoupled-document/build/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -6582,6 +5841,7 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
         this.services = services;
         this.auth = auth;
         this.router = router;
+        this.formData = new FormData();
         this.programData = {
             ProgramPK: 0,
             Name: '',
@@ -6594,27 +5854,27 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
             CreatedDate: '',
             CreatedBy: 0,
             IsActive: true,
-            SubProgramPK: 0
+            SubProgramPK: 0,
         };
-        this.Editor = _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_6__;
+        this.Editor = _ckeditor_ckeditor5_build_decoupled_document__WEBPACK_IMPORTED_MODULE_11__;
         // Option for dropdown list
         this.programCategories = [
-            { id: 0, name: "Group Program" },
-            { id: 1, name: "Individual Program" }
+            { id: 0, name: 'Group Program' },
+            { id: 1, name: 'Individual Program' },
         ];
     }
     // EventHandler for file upload
     onFileChange(event) {
         if (event.target.files.length > 0) {
             this.file = event.target.files[0];
-            this.programData.ImgData = (this.file ? this.file.name : '');
+            this.programData.ImgData = this.file ? this.file.name : '';
         }
     }
     ngOnInit() {
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
+        this.programCategories.forEach((e) => {
+            $('#programCat').append(new Option(e['name'], e['id']));
         });
-        this.route.params.subscribe(val => {
+        this.route.params.subscribe((val) => {
             this.ProgramPK = val.id;
             // Get the Page mode: View/Edit
             this.PageMode = val.mode;
@@ -6628,15 +5888,18 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
                     break;
             }
             // Get program details by ID
-            this.services.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe(program => {
+            this.services
+                .getProgramHeaderDeatailsByID(this.ProgramPK)
+                .subscribe((program) => {
                 this.programData = program;
-                this.viewImgHref = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].EXPRESS_SERVER_URL + this.programData.ImgData;
-                if (this.programData.ProgramType == 0) {
-                    this.ProgramTypeText = "Group Program";
+                this.viewImgHref =
+                    _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].EXPRESS_SERVER_URL + this.programData.ImgData;
+                if (this.programData.ProgramType === _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
+                    this.ProgramTypeText = _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].PROGRAM_TEXT.GROUP_PROGRAM;
                     this.programTypeShortText = 'g';
                 }
                 else {
-                    this.ProgramTypeText = "Individual Program";
+                    this.ProgramTypeText = _constants__WEBPACK_IMPORTED_MODULE_8__["AppConstants"].PROGRAM_TEXT.INDIVIDUAL_PROGRAM;
                     this.programTypeShortText = 'i';
                 }
             });
@@ -6647,44 +5910,45 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
         this.bookingRequirementData = data;
     }
     onReady(editor) {
-        editor.ui.getEditableElement().parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement());
+        editor.ui
+            .getEditableElement()
+            .parentElement.insertBefore(editor.ui.view.toolbar.element, editor.ui.getEditableElement());
     }
     getFormData() {
-        const formData = new FormData();
         if (this.file) {
-            formData.append('file', this.file, this.file.name);
+            this.formData.append('file', this.file, this.file.name);
         }
         for (const key of Object.keys(this.programData)) {
             const value = this.programData[key];
-            formData.append(key, value);
+            this.formData.append(key, value);
         }
-        return formData;
+        return this.formData;
     }
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     openModal() {
-        //Configure Modal Dialog
-        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MatDialogConfig"]();
+        // Configure Modal Dialog
+        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
         // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "430px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '430px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Update Group Program Details",
-            description: "All information is correct?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Update Group Program Details',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2',
         };
-        const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_8__["ModalDialogComponent"], dialogConfig);
-        modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
+        const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
+        modalDialog.afterClosed().subscribe((result) => {
+            if (result == 'Yes') {
+                // Call register function
                 this.submit();
             }
             else {
-                console.log("stop");
+                console.log('stop');
             }
         });
     }
@@ -6698,18 +5962,20 @@ let ProgramDetailsComponent = class ProgramDetailsComponent {
                 break;
         }
         // Update Program Header Data
-        this.services.updateProgramHeader(this.getFormData())
+        this.services
+            .updateProgramHeader(this.getFormData())
             .subscribe((result) => {
-            this.services.updateProgramLayoutDetails(this.programTypeShortText, this.bookingRequirementData)
+            this.services
+                .updateProgramLayoutDetails(this.programTypeShortText, this.bookingRequirementData)
                 .subscribe((res) => {
-                this.router.navigateByUrl("/profile/program-management");
+                this.router.navigateByUrl('/profile/program-management');
             });
         });
         console.log(this.gComponent.bookingGroup);
     }
 };
 ProgramDetailsComponent.ctorParameters = () => [
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_7__["MatDialog"] },
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
     { type: _services_program_services__WEBPACK_IMPORTED_MODULE_4__["ProgramServices"] },
@@ -6717,10 +5983,10 @@ ProgramDetailsComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_10__["GProgramComponent"], { static: false })
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_components_g_program_g_program_component__WEBPACK_IMPORTED_MODULE_9__["GProgramComponent"], { static: false })
 ], ProgramDetailsComponent.prototype, "gComponent", void 0);
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_11__["IProgramComponent"], { static: false })
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_components_i_program_i_program_component__WEBPACK_IMPORTED_MODULE_10__["IProgramComponent"], { static: false })
 ], ProgramDetailsComponent.prototype, "iComponent", void 0);
 ProgramDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -6786,10 +6052,6 @@ let ProgramManagementComponent = class ProgramManagementComponent {
         ];
     }
     ngOnInit() {
-        // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        });
         // Service call to get data from server
         this.programScheduleServices.getAllProgramsWithScheduleSettingsRequirements().subscribe((result) => {
             this.programs = result;
@@ -6897,550 +6159,6 @@ ProgramManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/program-schedule/program-schedule.component.css":
-/*!*****************************************************************!*\
-  !*** ./src/app/program-schedule/program-schedule.component.css ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".container {\r\n    padding-top: 100px;\r\n    padding-bottom: 56px;\r\n  }\r\n  \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvZ3JhbS1zY2hlZHVsZS9wcm9ncmFtLXNjaGVkdWxlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsb0JBQW9CO0VBQ3RCIiwiZmlsZSI6InNyYy9hcHAvcHJvZ3JhbS1zY2hlZHVsZS9wcm9ncmFtLXNjaGVkdWxlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcclxuICAgIHBhZGRpbmctdG9wOiAxMDBweDtcclxuICAgIHBhZGRpbmctYm90dG9tOiA1NnB4O1xyXG4gIH1cclxuICAiXX0= */");
-
-/***/ }),
-
-/***/ "./src/app/program-schedule/program-schedule.component.ts":
-/*!****************************************************************!*\
-  !*** ./src/app/program-schedule/program-schedule.component.ts ***!
-  \****************************************************************/
-/*! exports provided: ProgramScheduleComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProgramScheduleComponent", function() { return ProgramScheduleComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _services_program_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/program.services */ "./src/app/services/program.services.ts");
-/* harmony import */ var _services_schedule_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/schedule.services */ "./src/app/services/schedule.services.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
-/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
-/* harmony import */ var _components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/login-prompt-modal/login-prompt-modal.component */ "./src/app/components/login-prompt-modal/login-prompt-modal.component.ts");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
-
-
-
-
-
-
-
-
-
-
-
-let ProgramScheduleComponent = class ProgramScheduleComponent {
-    constructor(route, service, programScheduleServices, fb, matDialog, auth, router
-    //private _data: DataStorage  // Use to store data cross component
-    ) {
-        this.route = route;
-        this.service = service;
-        this.programScheduleServices = programScheduleServices;
-        this.fb = fb;
-        this.matDialog = matDialog;
-        this.auth = auth;
-        this.router = router;
-        this.isDisable = true;
-        this.selectedDate = new Date();
-        this.options = {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-        };
-        this.currTotalQuantity = 0;
-        this.submitted = false;
-        this.currentSession = {
-            SchedulePK: 0,
-            SessionDetailsPK: 0,
-            ProgramPK: 0,
-            Start: "",
-            End: "",
-            MaximumParticipant: 0,
-            CurrentNumberParticipant: 0,
-            CreatedBy: 0,
-            IsActive: true,
-            IsFull: false
-        };
-        //Define Schedule Module for Kendo schedule
-        this.eventFields = {
-            id: "CreatedBy",
-            title: "Title",
-            description: "Description",
-            startTimezone: "StartTimezone",
-            start: "Start",
-            end: "End",
-            endTimezone: "EndTimezone",
-            isAllDay: "IsAllDay",
-            recurrenceRule: "RecurrenceRule",
-            recurrenceId: "RecurrenceID",
-            recurrenceExceptions: "RecurrenceException",
-        };
-        //This function to capture and get the info of selected event
-        this.eventClick = (e) => {
-            this.isDisable = false;
-            this.enableQuantityField();
-            var eventStart = e.event.dataItem.Start.toString();
-            var eventEnd = e.event.dataItem.End.toString();
-            var programPK = e.event.dataItem.ProgramPK;
-            var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
-            this.programScheduleServices
-                .getScheduleByIdStartEnd(sessionDetailsPK, programPK, eventStart, eventEnd)
-                .subscribe((res) => {
-                if (res) {
-                    // There is a schedule in the database
-                    this.tempDate = new Date(res.Start);
-                    let end = new Date(res.End);
-                    this.currentSession = res;
-                    this.customerSelectDate = this.tempDate.toDateString();
-                    this.customerSelectTime = this.tempDate.toLocaleString("en-US", this.options)
-                        .concat(" - ", end.toLocaleString("en-US", this.options));
-                    this.availability = res.MaximumParticipant - res.CurrentNumberParticipant;
-                    this.quantityForm.get("CustomerSelectDate").setValue(this.customerSelectDate);
-                    this.quantityForm.get("CustomerSelectTime").setValue(this.customerSelectTime);
-                    this.quantityForm.get("Availability").setValue(this.availability);
-                    // Pass SchedulePK for Booking Page
-                    this.SchedulePK = res.SchedulePK;
-                }
-                else {
-                    // Create new schedule record and insert into the databse
-                    this.customerSelectDate = e.event.dataItem.Start.toDateString();
-                    this.customerSelectTime = e.event.dataItem.Start.toLocaleString("en-US", this.options)
-                        .concat(" - ", e.event.dataItem.End.toLocaleString("en-US", this.options));
-                    this.availability = e.event.dataItem.MaximumParticipant;
-                    this.quantityForm.get("CustomerSelectDate").setValue(this.customerSelectDate);
-                    this.quantityForm.get("CustomerSelectTime").setValue(this.customerSelectTime);
-                    this.quantityForm.get("Availability").setValue(this.availability);
-                    // Pass SchedulePK for Booking Page
-                    this.SchedulePK = e.event.dataItem.SchedulePK;
-                    this.currentSession.SchedulePK = 0;
-                    this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
-                    this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
-                    this.currentSession.Start = e.event.dataItem.Start.toString();
-                    this.currentSession.End = e.event.dataItem.End.toString();
-                    this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
-                    this.currentSession.CurrentNumberParticipant = 0;
-                    this.currentSession.IsActive = true;
-                    this.currentSession.CreatedBy = _constants__WEBPACK_IMPORTED_MODULE_10__["AppConstants"].SYSTEM_USER_PK; // UserPk represent for System Auto Create Data
-                }
-            });
-        };
-    }
-    ngOnInit() {
-        this.route.params.subscribe((val) => {
-            this.ProgramPK = val.id;
-        });
-        this.service
-            .getProgramHeaderDeatailsByID(this.ProgramPK)
-            .subscribe((details) => {
-            this.programDetails = details;
-            this.ProgramType = details.ProgramType;
-            this.programDesc = this.programDetails.Description;
-            this.programName = this.programDetails.Name;
-        });
-        //Define and create to get schedule by ProgramPk
-        const currentYear = new Date().getFullYear();
-        const parseAdjust = (eventDate) => {
-            const date = new Date(eventDate);
-            date.setFullYear(currentYear);
-            return date;
-        };
-        this.programScheduleServices
-            .getSessionDetailsById(this.ProgramPK)
-            .subscribe((schedules) => {
-            const sampleDataWithCustomSchema = schedules.map((dataItem) => (Object.assign({}, dataItem, { SessionDetailsPK: dataItem.SessionDetailsPK, ScheduleSettingPK: dataItem.ScheduleSettingPK, ProgramPK: dataItem.ProgramPK, Title: dataItem.Title, Description: dataItem.Description, StartTimezone: dataItem.StartTimezone, Start: parseAdjust(dataItem.Start), End: parseAdjust(dataItem.End), EndTimezone: dataItem.EndTimezone, MaximumParticipant: this.programDetails.MaximumParticipant, CurrentParticipant: 0, RecurrenceRule: dataItem.RecurrenceRule, EndRepeatDate: dataItem.EndRepeatDate, RecurrenceID: dataItem.RecurrenceID, RecurrenceException: dataItem.RecurrenceException, Color: dataItem.Color, CreatedBy: dataItem.CreatedBy, CreatedDate: dataItem.CreatedDate, IsActive: dataItem.IsActive })));
-            this.allEvents = sampleDataWithCustomSchema;
-        });
-        this.quantityForm = this.fb.group({
-            AdultQuantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age57Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age810Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age1112Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age1314Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age1415Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            Age1517Quantity: [
-                { value: "0", disabled: true },
-                [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(0)],
-            ],
-            TotalQuantity: ["0", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(1)]],
-            CustomerSelectDate: [],
-            CustomerSelectTime: [],
-            Availability: []
-        });
-        // Reload the data when user go back to pick number of participant.
-        if (JSON.parse(localStorage.getItem('QuantityFormLocal'))) {
-            var tempObj = JSON.parse(localStorage.getItem('QuantityFormLocal'));
-            this.quantityForm.get("AdultQuantity").setValue(tempObj.AdultQuantity);
-            this.quantityForm.get("Age57Quantity").setValue(tempObj.Age57Quantity);
-            this.quantityForm.get("Age810Quantity").setValue(tempObj.Age810Quantity);
-            this.quantityForm.get("Age1112Quantity").setValue(tempObj.Age1112Quantity);
-            this.quantityForm.get("Age1314Quantity").setValue(tempObj.Age1314Quantity);
-            this.quantityForm.get("Age1415Quantity").setValue(tempObj.Age1415Quantity);
-            this.quantityForm.get("Age1517Quantity").setValue(tempObj.Age1517Quantity);
-            this.quantityForm.get("TotalQuantity").setValue(tempObj.TotalQuantity);
-            this.quantityForm.value.CustomerSelectDate.setValue(tempObj.SelectedDateStr);
-            this.quantityForm.value.CustomerSelectTime.setValue(tempObj.SelectedDateTime);
-            this.quantityForm.value.Availability.setValue(tempObj.Availability);
-            // this.customerSelectDate = tempObj.SelectedDateStr;
-            // this.customerSelectTime = tempObj.SelectedDateStr;
-            // this.availability = tempObj.Availability;
-            this.enableQuantityField();
-        }
-    }
-    get f() {
-        return this.quantityForm.controls;
-    }
-    // Clear data when click on input field
-    onFocus(event) {
-        if (event.target.value == 0)
-            event.target.value = "";
-    }
-    // Restore data when lose focus on input field
-    lostFocus(event) {
-        if (event.target.value === 0 || event.target.value === "") {
-            event.target.value = 0;
-        }
-        this.calculateTotalQuantity();
-    }
-    // Helper function to calculate total attendee
-    calculateTotalQuantity() {
-        this.currTotalQuantity =
-            parseInt(this.quantityForm.get("AdultQuantity").value) +
-                parseInt(this.quantityForm.get("Age57Quantity").value) +
-                parseInt(this.quantityForm.get("Age810Quantity").value) +
-                parseInt(this.quantityForm.get("Age1112Quantity").value) +
-                parseInt(this.quantityForm.get("Age1314Quantity").value) +
-                parseInt(this.quantityForm.get("Age1415Quantity").value) +
-                parseInt(this.quantityForm.get("Age1517Quantity").value);
-        this.quantityForm.get("TotalQuantity").setValue(this.currTotalQuantity);
-    }
-    enableQuantityField() {
-        this.quantityForm.get("AdultQuantity").enable();
-        this.quantityForm.get("Age57Quantity").enable();
-        this.quantityForm.get("Age810Quantity").enable();
-        this.quantityForm.get("Age1112Quantity").enable();
-        this.quantityForm.get("Age1314Quantity").enable();
-        this.quantityForm.get("Age1415Quantity").enable();
-        this.quantityForm.get("Age1517Quantity").enable();
-    }
-    enterQuantity() {
-        this.submitted = true;
-        if (this.quantityForm.invalid) {
-            return;
-        }
-        //Configure Modal Dialog
-        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
-        // Check if user is logged in
-        if (!this.auth.isLoggedIn()) {
-            // Configure Modal Dialog For Login Prompt
-            const loginDialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
-            loginDialogConfig.id = "modal-component";
-            loginDialogConfig.minHeight = "450px";
-            // loginDialogConfig.maxHeight = "600px";
-            loginDialogConfig.width = "400px";
-            loginDialogConfig.autoFocus = false;
-            loginDialogConfig.data = {
-                routerURL: "/booking-group-program/" + this.ProgramPK
-            };
-            const loginModal = this.matDialog.open(_components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_8__["LoginPromptModal"], loginDialogConfig);
-            loginModal.afterClosed().subscribe((result) => {
-                if (result == "Yes") {
-                    console.log("Login Modal");
-                }
-            });
-        }
-        else {
-            // Proceed to next step
-            // The user can't close the dialog by clicking outside its body
-            dialogConfig.disableClose = true;
-            dialogConfig.id = "modal-component";
-            dialogConfig.height = "auto";
-            dialogConfig.maxHeight = "600px";
-            dialogConfig.width = "430px";
-            dialogConfig.autoFocus = false;
-            if (this.availability == null) {
-                dialogConfig.data = {
-                    title: "Warning!",
-                    description: "You haven't chosen any program. Please choose one program first!",
-                    actionButtonText: "Try again",
-                    numberOfButton: "1",
-                };
-            }
-            else if (this.currTotalQuantity > this.availability) {
-                dialogConfig.data = {
-                    title: "Warning!",
-                    description: "The total quantity exceeds the availability of this program. Please try again!",
-                    actionButtonText: "Try again",
-                    numberOfButton: "1",
-                };
-            }
-            else {
-                dialogConfig.data = {
-                    title: "Confirmation",
-                    description: "Are you sure to book this program for " +
-                        this.currTotalQuantity +
-                        " attendees?",
-                    actionButtonText: "Confirm",
-                    numberOfButton: "2",
-                };
-            }
-            const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["ModalDialogComponent"], dialogConfig);
-            modalDialog.afterClosed().subscribe((result) => {
-                if (result == "Yes") {
-                    //if exceed
-                    if (this.currTotalQuantity > this.availability || this.availability == null) {
-                        // if exceed, do nothing
-                    }
-                    else {
-                        //route to the booking page
-                        switch (this.ProgramType) {
-                            case _constants__WEBPACK_IMPORTED_MODULE_10__["AppConstants"].PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-                                this.router.navigateByUrl("/booking-individual-program/" + this.ProgramPK);
-                                break;
-                            case _constants__WEBPACK_IMPORTED_MODULE_10__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-                                // SchedulePK == 0 when there is no current schedule in Database
-                                if (this.currentSession.SchedulePK == 0) {
-                                    this.programScheduleServices.addNewSchedule(this.currentSession)
-                                        .subscribe((res) => {
-                                    });
-                                }
-                                break;
-                        }
-                    }
-                }
-                else {
-                    //otherwise, do nothing
-                }
-            });
-        }
-    }
-};
-ProgramScheduleComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-    { type: _services_program_services__WEBPACK_IMPORTED_MODULE_3__["ProgramServices"] },
-    { type: _services_schedule_services__WEBPACK_IMPORTED_MODULE_4__["ProgramScheduleService"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] },
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_9__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
-];
-tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-], ProgramScheduleComponent.prototype, "ProgramPK", void 0);
-ProgramScheduleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'program-schedule',
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./program-schedule.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/program-schedule/program-schedule.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./program-schedule.component.css */ "./src/app/program-schedule/program-schedule.component.css")).default]
-    })
-], ProgramScheduleComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/register/register.component.css":
-/*!*************************************************!*\
-  !*** ./src/app/register/register.component.css ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n.banner{\r\n    background-image: url('https://c.wallhere.com/photos/83/e8/lajolla_sunset_beach_sealion_sea_lion_sandiego_clouds-872451.jpg!d');\r\n    background-size: cover;\r\n    background-repeat: no-repeat;\r\n    height: 100%;\r\n    font-family: 'Numans', sans-serif;\r\n    padding-top: 100px;\r\n    padding-bottom: 100px;\r\n    }\r\n    \r\n  \r\n    .container{\r\n        height: 100vh;\r\n        align-content: center;\r\n    }\r\n    \r\n  \r\n    .card{\r\n    height: 600px;\r\n    margin-top: auto;\r\n    margin-bottom: auto;\r\n    width: 400px;\r\n    background-color: rgba(0, 0, 0, 0.5) !important;\r\n    }\r\n    \r\n  \r\n    .card-header h3{\r\n    color: white;\r\n    }\r\n    \r\n  \r\n    .input-group-prepend span{\r\n    width: 50px;\r\n    background-color: #FFC312;\r\n    color: black;\r\n    border:0 !important;\r\n    }\r\n    \r\n  \r\n    input:focus{\r\n    outline: 0 0 0 0  !important;\r\n    box-shadow: 0 0 0 0 !important;\r\n\r\n    }\r\n    \r\n  \r\n    .acceptTerms{\r\n    color: white;\r\n    }\r\n    \r\n  \r\n    .acceptTerms input\r\n    {\r\n    width: 20px;\r\n    height: 20px;\r\n    margin-left: 15px;\r\n    margin-right: 5px;\r\n    }\r\n    \r\n  \r\n    .register_btn{\r\n    color: black;\r\n    background-color: #FFC312;\r\n    width: 100px;\r\n    }\r\n    \r\n  \r\n    .register_btn:hover{\r\n    color: black;\r\n    background-color: white;\r\n    }\r\n    \r\n  \r\n    .error{\r\n        color: rgb(211, 23, 23);\r\n        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\r\n        font-size: 16px;\r\n    }\r\n    \r\n  \r\n    .links{\r\n        color: white;\r\n    }\r\n    \r\n  \r\n    .links a{\r\n        margin-left: 4px;\r\n    }\r\n\r\n    \r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQ0E7SUFDSSwrSEFBK0g7SUFDL0gsc0JBQXNCO0lBQ3RCLDRCQUE0QjtJQUM1QixZQUFZO0lBQ1osaUNBQWlDO0lBQ2pDLGtCQUFrQjtJQUNsQixxQkFBcUI7SUFDckI7OztJQUdBO1FBQ0ksYUFBYTtRQUNiLHFCQUFxQjtJQUN6Qjs7O0lBRUE7SUFDQSxhQUFhO0lBQ2IsZ0JBQWdCO0lBQ2hCLG1CQUFtQjtJQUNuQixZQUFZO0lBQ1osK0NBQStDO0lBQy9DOzs7SUFFQTtJQUNBLFlBQVk7SUFDWjs7O0lBRUE7SUFDQSxXQUFXO0lBQ1gseUJBQXlCO0lBQ3pCLFlBQVk7SUFDWixtQkFBbUI7SUFDbkI7OztJQUVBO0lBQ0EsNEJBQTRCO0lBQzVCLDhCQUE4Qjs7SUFFOUI7OztJQUVBO0lBQ0EsWUFBWTtJQUNaOzs7SUFFQTs7SUFFQSxXQUFXO0lBQ1gsWUFBWTtJQUNaLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakI7OztJQUVBO0lBQ0EsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixZQUFZO0lBQ1o7OztJQUVBO0lBQ0EsWUFBWTtJQUNaLHVCQUF1QjtJQUN2Qjs7O0lBRUE7UUFDSSx1QkFBdUI7UUFDdkIsNkVBQTZFO1FBQzdFLGVBQWU7SUFDbkI7OztJQUVBO1FBQ0ksWUFBWTtJQUNoQjs7O0lBRUE7UUFDSSxnQkFBZ0I7SUFDcEIiLCJmaWxlIjoic3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5iYW5uZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJ2h0dHBzOi8vYy53YWxsaGVyZS5jb20vcGhvdG9zLzgzL2U4L2xham9sbGFfc3Vuc2V0X2JlYWNoX3NlYWxpb25fc2VhX2xpb25fc2FuZGllZ29fY2xvdWRzLTg3MjQ1MS5qcGchZCcpO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb3ZlcjtcclxuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBmb250LWZhbWlseTogJ051bWFucycsIHNhbnMtc2VyaWY7XHJcbiAgICBwYWRkaW5nLXRvcDogMTAwcHg7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMTAwcHg7XHJcbiAgICB9XHJcbiAgICBcclxuICBcclxuICAgIC5jb250YWluZXJ7XHJcbiAgICAgICAgaGVpZ2h0OiAxMDB2aDtcclxuICAgICAgICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XHJcbiAgICB9XHJcblxyXG4gICAgLmNhcmR7XHJcbiAgICBoZWlnaHQ6IDYwMHB4O1xyXG4gICAgbWFyZ2luLXRvcDogYXV0bztcclxuICAgIG1hcmdpbi1ib3R0b206IGF1dG87XHJcbiAgICB3aWR0aDogNDAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNSkgIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLmNhcmQtaGVhZGVyIGgze1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG5cclxuICAgIC5pbnB1dC1ncm91cC1wcmVwZW5kIHNwYW57XHJcbiAgICB3aWR0aDogNTBweDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNGRkMzMTI7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBib3JkZXI6MCAhaW1wb3J0YW50O1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICBpbnB1dDpmb2N1c3tcclxuICAgIG91dGxpbmU6IDAgMCAwIDAgICFpbXBvcnRhbnQ7XHJcbiAgICBib3gtc2hhZG93OiAwIDAgMCAwICFpbXBvcnRhbnQ7XHJcblxyXG4gICAgfVxyXG4gICAgXHJcbiAgICAuYWNjZXB0VGVybXN7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB9XHJcbiAgICBcclxuICAgIC5hY2NlcHRUZXJtcyBpbnB1dFxyXG4gICAge1xyXG4gICAgd2lkdGg6IDIwcHg7XHJcbiAgICBoZWlnaHQ6IDIwcHg7XHJcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcclxuICAgIG1hcmdpbi1yaWdodDogNXB4O1xyXG4gICAgfVxyXG4gICAgXHJcbiAgICAucmVnaXN0ZXJfYnRue1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0ZGQzMxMjtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIH1cclxuICAgIFxyXG4gICAgLnJlZ2lzdGVyX2J0bjpob3ZlcntcclxuICAgIGNvbG9yOiBibGFjaztcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG5cclxuICAgIC5lcnJvcntcclxuICAgICAgICBjb2xvcjogcmdiKDIxMSwgMjMsIDIzKTtcclxuICAgICAgICBmb250LWZhbWlseTogJ0dpbGwgU2FucycsICdHaWxsIFNhbnMgTVQnLCBDYWxpYnJpLCAnVHJlYnVjaGV0IE1TJywgc2Fucy1zZXJpZjtcclxuICAgICAgICBmb250LXNpemU6IDE2cHg7XHJcbiAgICB9XHJcblxyXG4gICAgLmxpbmtze1xyXG4gICAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIH1cclxuICAgICAgICBcclxuICAgIC5saW5rcyBhe1xyXG4gICAgICAgIG1hcmdpbi1sZWZ0OiA0cHg7XHJcbiAgICB9XHJcblxyXG4gICAgXHJcbiJdfQ== */");
-
-/***/ }),
-
-/***/ "./src/app/register/register.component.ts":
-/*!************************************************!*\
-  !*** ./src/app/register/register.component.ts ***!
-  \************************************************/
-/*! exports provided: RegisterComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
-/* harmony import */ var _components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/register-modal-dialog/register-modal-dialog.component */ "./src/app/components/register-modal-dialog/register-modal-dialog.component.ts");
-
-
-
-
-
-
-
-
-let RegisterComponent = 
-// export class registrationDialog{
-//     constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-//     }
-// }
-class RegisterComponent {
-    constructor(auth, router, formBuilder, matDialog) {
-        this.auth = auth;
-        this.router = router;
-        this.formBuilder = formBuilder;
-        this.matDialog = matDialog;
-        this.submitted = false;
-        this.errorMessage = '';
-        this.registered = false;
-        this.credentials = {
-            UserPK: 0,
-            Username: '',
-            Password: '',
-            Role_FK: '1',
-            Email: ''
-        };
-        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faUser"];
-        this.faKey = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faKey"];
-        this.faEnvelope = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faEnvelope"];
-        this.faCheckDouble = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCheckDouble"];
-    }
-    ngOnInit() {
-        this.registerForm = this.formBuilder.group({
-            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].email, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$")]],
-            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(6)]],
-            confirmPassword: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            acceptTerms: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].requiredTrue]
-        }, {
-            validator: this.MustMatch('password', 'confirmPassword')
-        });
-    }
-    MustMatch(controlName, matchingControlName) {
-        return (formGroup) => {
-            const control = formGroup.controls[controlName];
-            const matchingControl = formGroup.controls[matchingControlName];
-            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-                // return if another validator has already found an error on the matchingControl
-                return;
-            }
-            // set error on matchingControl if validation fails
-            if (control.value !== matchingControl.value) {
-                matchingControl.setErrors({ mustMatch: true });
-            }
-            else {
-                matchingControl.setErrors(null);
-            }
-        };
-    }
-    // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
-    //Configure Modal Dialog
-    openModal() {
-        //Validate form before open modal dialog
-        this.submitted = true;
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-        //Configure Modal Dialog
-        const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogConfig"]();
-        // The user can't close the dialog by clicking outside its body
-        dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
-        dialogConfig.autoFocus = false;
-        dialogConfig.data = {
-            title: "Register Confirmation",
-            username: this.registerForm.get('username').value,
-            email: this.registerForm.get('email').value,
-            // description: "Are you sure you would like to register with the following information? Username: {{data.username}}",            
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
-        };
-        const modalDialog = this.matDialog.open(_components_register_modal_dialog_register_modal_dialog_component__WEBPACK_IMPORTED_MODULE_7__["RegisterModalDialogComponent"], dialogConfig);
-        modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
-                this.continue_register();
-            }
-            else {
-                console.log("stop");
-            }
-        });
-    }
-    continue_register() {
-        this.auth.register(this.credentials).subscribe((res) => {
-            if (res.error) {
-                console.log(res);
-                this.errorMessage = "*" + res.error;
-                return;
-            }
-            else {
-                this.currentUserPK = res.UserPK;
-                this.auth.registeredPK = this.currentUserPK.toString();
-                console.log("Current PK: " + this.currentUserPK);
-                this.router.navigateByUrl("/customer-register/" + this.currentUserPK);
-            }
-        }, err => {
-            console.error(err);
-            return;
-        });
-        //this.router.navigateByUrl("/customer-register/" + this.currentUserPK);
-    }
-};
-RegisterComponent.ctorParameters = () => [
-    { type: _authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"] },
-    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }
-];
-RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./register.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/register/register.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./register.component.css */ "./src/app/register/register.component.css")).default]
-    })
-    // export class registrationDialog{
-    //     constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    //     }
-    // }
-], RegisterComponent);
-
-
-
-/***/ }),
-
 /***/ "./src/app/report-management/report-management.component.css":
 /*!*******************************************************************!*\
   !*** ./src/app/report-management/report-management.component.css ***!
@@ -7450,7 +6168,7 @@ RegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".mat-button, .mat-raised-button:hover{\r\n    background-color: rgb(6, 3, 189);\r\n  } \r\n  \r\n  .col-lg-12{\r\n      padding-bottom: 25px;\r\n  } \r\n  \r\n  h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n      font-size: 50px;\r\n      font-weight: bold;\r\n      padding-top: 20px;\r\n      color:  #08b2b8;;\r\n  } \r\n  \r\n  thead{\r\n    background-color:  rgba(0, 0, 0, 0.658);\r\n    color: white;\r\n  } \r\n  \r\n  th, td {\r\n    padding: 15px;\r\n    text-align: left;\r\n  } \r\n  \r\n  td {\r\n    font-size: 18px;\r\n  } \r\n  \r\n  td.name{\r\n    color:  #08b2b8;\r\n  } \r\n  \r\n  th {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 22px;\r\n    font-weight: bold;\r\n  } \r\n  \r\n  .btn{\r\n    margin-right: 20px;\r\n  } \r\n  \r\n  .filter{\r\n    padding-bottom: 30px;\r\n    padding-left: 30px;\r\n    font-weight: bold;\r\n  } \r\n  \r\n  .paid{\r\n    cursor: default\r\n  }\r\n \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVwb3J0LW1hbmFnZW1lbnQvcmVwb3J0LW1hbmFnZW1lbnQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGdDQUFnQztFQUNsQzs7RUFFQTtNQUNJLG9CQUFvQjtFQUN4Qjs7RUFFQTtJQUNFLDBDQUEwQztNQUN4QyxlQUFlO01BQ2YsaUJBQWlCO01BQ2pCLGlCQUFpQjtNQUNqQixlQUFlO0VBQ25COztFQUVBO0lBQ0UsdUNBQXVDO0lBQ3ZDLFlBQVk7RUFDZDs7RUFFQTtJQUNFLGFBQWE7SUFDYixnQkFBZ0I7RUFDbEI7O0VBRUE7SUFDRSxlQUFlO0VBQ2pCOztFQUVBO0lBQ0UsZUFBZTtFQUNqQjs7RUFFQTtJQUNFLDBDQUEwQztJQUMxQyxlQUFlO0lBQ2YsaUJBQWlCO0VBQ25COztFQUVBO0lBQ0Usa0JBQWtCO0VBQ3BCOztFQUVBO0lBQ0Usb0JBQW9CO0lBQ3BCLGtCQUFrQjtJQUNsQixpQkFBaUI7RUFDbkI7O0VBRUE7SUFDRTtFQUNGIiwiZmlsZSI6InNyYy9hcHAvcmVwb3J0LW1hbmFnZW1lbnQvcmVwb3J0LW1hbmFnZW1lbnQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtYnV0dG9uLCAubWF0LXJhaXNlZC1idXR0b246aG92ZXJ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNiwgMywgMTg5KTtcclxuICB9IFxyXG4gIFxyXG4gIC5jb2wtbGctMTJ7XHJcbiAgICAgIHBhZGRpbmctYm90dG9tOiAyNXB4O1xyXG4gIH1cclxuICBcclxuICBoMSB7XHJcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gICAgICBmb250LXNpemU6IDUwcHg7XHJcbiAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgICBwYWRkaW5nLXRvcDogMjBweDtcclxuICAgICAgY29sb3I6ICAjMDhiMmI4OztcclxuICB9XHJcbiAgXHJcbiAgdGhlYWR7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAgcmdiYSgwLCAwLCAwLCAwLjY1OCk7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgfVxyXG4gIFxyXG4gIHRoLCB0ZCB7XHJcbiAgICBwYWRkaW5nOiAxNXB4O1xyXG4gICAgdGV4dC1hbGlnbjogbGVmdDtcclxuICB9XHJcbiAgXHJcbiAgdGQge1xyXG4gICAgZm9udC1zaXplOiAxOHB4O1xyXG4gIH1cclxuICBcclxuICB0ZC5uYW1le1xyXG4gICAgY29sb3I6ICAjMDhiMmI4O1xyXG4gIH1cclxuICBcclxuICB0aCB7XHJcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gICAgZm9udC1zaXplOiAyMnB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgfVxyXG4gIFxyXG4gIC5idG57XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDIwcHg7XHJcbiAgfVxyXG4gIFxyXG4gIC5maWx0ZXJ7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMzBweDtcclxuICAgIHBhZGRpbmctbGVmdDogMzBweDtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gIH1cclxuXHJcbiAgLnBhaWR7XHJcbiAgICBjdXJzb3I6IGRlZmF1bHRcclxuICB9XHJcbiAiXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".mat-button, .mat-raised-button:hover{\r\n    background-color: rgb(6, 3, 189);\r\n  } \r\n\r\ntable{\r\n  width: 100%;\r\n} \r\n\r\n.mat-header-cell{\r\n  background-color: teal;\r\n\r\n} \r\n\r\n.col-lg-12{\r\n      padding-bottom: 25px;\r\n  } \r\n\r\nh1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n      font-size: 50px;\r\n      font-weight: bold;\r\n      padding-top: 20px;\r\n      color:  #08b2b8;;\r\n  } \r\n\r\nthead{\r\n    background-color:  rgba(0, 0, 0, 0.658);\r\n    color: white;\r\n  } \r\n\r\nth, td {\r\n    padding: 15px;\r\n    text-align: left;\r\n  } \r\n\r\ntd {\r\n    font-size: 18px;\r\n  } \r\n\r\ntd.name{\r\n    color:  #08b2b8;\r\n  } \r\n\r\nth {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 22px;\r\n    font-weight: bold;\r\n  } \r\n\r\n.btn{\r\n    margin-right: 20px;\r\n  } \r\n\r\n.filter{\r\n    padding-bottom: 30px;\r\n    padding-left: 30px;\r\n    font-weight: bold;\r\n  } \r\n\r\n.paid{\r\n    cursor: default\r\n  }\r\n \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVwb3J0LW1hbmFnZW1lbnQvcmVwb3J0LW1hbmFnZW1lbnQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGdDQUFnQztFQUNsQzs7QUFFRjtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLHNCQUFzQjs7QUFFeEI7O0FBRUU7TUFDSSxvQkFBb0I7RUFDeEI7O0FBRUE7SUFDRSwwQ0FBMEM7TUFDeEMsZUFBZTtNQUNmLGlCQUFpQjtNQUNqQixpQkFBaUI7TUFDakIsZUFBZTtFQUNuQjs7QUFFQTtJQUNFLHVDQUF1QztJQUN2QyxZQUFZO0VBQ2Q7O0FBRUE7SUFDRSxhQUFhO0lBQ2IsZ0JBQWdCO0VBQ2xCOztBQUVBO0lBQ0UsZUFBZTtFQUNqQjs7QUFFQTtJQUNFLGVBQWU7RUFDakI7O0FBRUE7SUFDRSwwQ0FBMEM7SUFDMUMsZUFBZTtJQUNmLGlCQUFpQjtFQUNuQjs7QUFFQTtJQUNFLGtCQUFrQjtFQUNwQjs7QUFFQTtJQUNFLG9CQUFvQjtJQUNwQixrQkFBa0I7SUFDbEIsaUJBQWlCO0VBQ25COztBQUVBO0lBQ0U7RUFDRiIsImZpbGUiOiJzcmMvYXBwL3JlcG9ydC1tYW5hZ2VtZW50L3JlcG9ydC1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWF0LWJ1dHRvbiwgLm1hdC1yYWlzZWQtYnV0dG9uOmhvdmVye1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDYsIDMsIDE4OSk7XHJcbiAgfSBcclxuXHJcbnRhYmxle1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4ubWF0LWhlYWRlci1jZWxse1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHRlYWw7XHJcblxyXG59XHJcbiAgXHJcbiAgLmNvbC1sZy0xMntcclxuICAgICAgcGFkZGluZy1ib3R0b206IDI1cHg7XHJcbiAgfVxyXG4gIFxyXG4gIGgxIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICAgIGZvbnQtc2l6ZTogNTBweDtcclxuICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICAgIHBhZGRpbmctdG9wOiAyMHB4O1xyXG4gICAgICBjb2xvcjogICMwOGIyYjg7O1xyXG4gIH1cclxuICBcclxuICB0aGVhZHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICByZ2JhKDAsIDAsIDAsIDAuNjU4KTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICB9XHJcbiAgXHJcbiAgdGgsIHRkIHtcclxuICAgIHBhZGRpbmc6IDE1cHg7XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG4gIH1cclxuICBcclxuICB0ZCB7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgfVxyXG4gIFxyXG4gIHRkLm5hbWV7XHJcbiAgICBjb2xvcjogICMwOGIyYjg7XHJcbiAgfVxyXG4gIFxyXG4gIHRoIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICBmb250LXNpemU6IDIycHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxuICB9XHJcbiAgXHJcbiAgLmJ0bntcclxuICAgIG1hcmdpbi1yaWdodDogMjBweDtcclxuICB9XHJcbiAgXHJcbiAgLmZpbHRlcntcclxuICAgIHBhZGRpbmctYm90dG9tOiAzMHB4O1xyXG4gICAgcGFkZGluZy1sZWZ0OiAzMHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgfVxyXG5cclxuICAucGFpZHtcclxuICAgIGN1cnNvcjogZGVmYXVsdFxyXG4gIH1cclxuICJdfQ== */");
 
 /***/ }),
 
@@ -7466,129 +6184,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportManagementComponent", function() { return ReportManagementComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _services_program_services__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/program.services */ "./src/app/services/program.services.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
 
 
-
-
+const PAYMENT_DATA = [
+    { year: 2020, jan: 4000, feb: 5000, mar: 6000, apr: 7000, may: 8000, jun: 2345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234 },
+    { year: 2019, jan: 7000, feb: 2000, mar: 3000, apr: 2000, may: 4000, jun: 6345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234 },
+    { year: 2018, jan: 9000, feb: 6000, mar: 7000, apr: 8000, may: 2000, jun: 5345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234 },
+];
+const MONTHLY_DATA_FIELD_TRIP = [
+    { year: 2020, jan: 4, feb: 5, mar: 6, apr: 7, may: 8, jun: 23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12 },
+    { year: 2019, jan: 7, feb: 2, mar: 3, apr: 2, may: 4, jun: 63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134 },
+    { year: 2018, jan: 9, feb: 6, mar: 7, apr: 8, may: 2, jun: 53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124 },
+];
+const MONTHLY_DATA_GIRL_SCOUT = [
+    { year: 2020, jan: 20, feb: 53, mar: 64, apr: 7, may: 8, jun: 23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12 },
+    { year: 2019, jan: 74, feb: 22, mar: 33, apr: 2, may: 4, jun: 63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134 },
+    { year: 2018, jan: 92, feb: 61, mar: 27, apr: 8, may: 2, jun: 53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124 },
+];
 let ReportManagementComponent = class ReportManagementComponent {
-    constructor(programService, matDialog) {
-        this.programService = programService;
-        this.matDialog = matDialog;
-        this.individualProgram = [];
-        this.groupProgram = [];
-        this.selectedValue = 0;
-        // Dropdown Menu Option
-        this.programCategories = [
-            { id: 0, name: "All Program" },
-            { id: 1, name: "Group Program" },
-            { id: 2, name: "Individual Program" }
-        ];
-        /* CHART USING NG2-CHARTS */
-        this.title = 'Bar Chart Example Using ng2-charts';
-        // ADD CHART OPTIONS. 
-        this.chartOptions = {
-            responsive: true // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-        };
-        this.labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-        // STATIC DATA FOR THE CHART IN JSON FORMAT.
-        this.chartData = [
-            {
-                label: '1st Year',
-                data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
-            },
-            {
-                label: '2nd Year',
-                data: [47, 9, 28, 54, 77, 51, 24]
-            }
-        ];
-        // CHART COLOR.
-        this.colors = [
-            {
-                backgroundColor: 'rgba(77,83,96,0.2)'
-            },
-            {
-                backgroundColor: 'rgba(30, 169, 224, 0.8)'
-            }
-        ];
-        /* FINISH CHART USING NG2-CHARTS */
-        /* PIE CHART*/
-        this.pieChartOptions = {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            plugins: {
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        const label = ctx.chart.data.labels[ctx.dataIndex];
-                        return label;
-                    },
-                },
-            }
-        };
-        this.pieChartLabels = [
-            ['Request Reservation', 'Cancel', 'Completed'],
-            ['Showed', 'No Showed'],
-            ['Group Programs', 'Individual Programs']
-        ];
-        this.pieChartData = [300, 500, 100];
-        this.pieChartPlugins = [];
+    constructor() {
+        this.displayedColumns = ['year', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+        this.PaymentDataSource = PAYMENT_DATA;
+        this.MonthlyDataSourceField = MONTHLY_DATA_FIELD_TRIP;
+        this.MonthlyDataSourceGirl = MONTHLY_DATA_GIRL_SCOUT;
     }
     ngOnInit() {
-        // Add option for the dropdown menu
-        this.programCategories.forEach(e => {
-            $("#paymentCat").append(new Option(e['name'], e['id']));
-        });
-        // Service call to get data from server
-        this.programService.getAllPrograms().then((result) => {
-            this.programs = result;
-            this.allPrograms = result;
-            // Filter program into Group and Individual
-            this.programs.forEach(e => {
-                if (e.ProgramType == 0) {
-                    this.groupProgram.push(e);
-                }
-                else {
-                    this.individualProgram.push(e);
-                }
-            });
-        });
-    }
-    clearSearch() {
-        this.searchText = "";
-    }
-    // Catch the event dropdown menu
-    selectChangeHandler(event) {
-        let choice = event.target.value;
-        // Update the data of table
-        switch (choice) {
-            case '0':
-                this.programs = this.allPrograms;
-                break;
-            case '1':
-                this.programs = this.groupProgram;
-                break;
-            case '2':
-                this.programs = this.individualProgram;
-                break;
-        }
-    }
-    //On Click event of chart
-    onChartClick(event) {
-        console.log(event);
     }
 };
-ReportManagementComponent.ctorParameters = () => [
-    { type: _services_program_services__WEBPACK_IMPORTED_MODULE_2__["ProgramServices"] },
-    { type: _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"] }
-];
 ReportManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'report-management',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./report-management.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/report-management/report-management.component.html")).default,
-        providers: [_services_program_services__WEBPACK_IMPORTED_MODULE_2__["ProgramServices"]],
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./report-management.component.css */ "./src/app/report-management/report-management.component.css")).default]
     })
 ], ReportManagementComponent);
@@ -7606,7 +6232,7 @@ ReportManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("h1 {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 50px;\r\n    font-weight: bold;\r\n    padding-top: 10px;\r\n    color: #08b2b8; \r\n}\r\n\r\n.row{\r\n    padding-bottom: 20px;\r\n}\r\n\r\n.filter{\r\n    padding-bottom: 30px;\r\n    padding-left: 30px;\r\n    font-weight: bold;\r\n}\r\n\r\n/* TAB */\r\n\r\n/* Styles for tab labels */\r\n\r\n.mat-tab-label {\r\n    font-size: 18px;\r\n}\r\n\r\n/* Styles for the active tab label */\r\n\r\n.mat-tab-label.mat-tab-label-active {\r\n    font-weight: 700px;\r\n    font-size: 18px;\r\n    color: #08b2b8;\r\n}\r\n\r\n/* Styles for the ink bar */\r\n\r\n.mat-ink-bar {\r\n    background-color: #08b2b8 !important;\r\n}\r\n\r\n.mat-tab-body-wrapper{\r\n    padding-top: 30px;\r\n    padding-bottom: 30px;\r\n}\r\n\r\n/* TABLE */\r\n\r\nthead{\r\n    background-color:  rgba(0, 0, 0, 0.658);\r\n    color: white;\r\n}\r\n\r\nth, td {\r\n    text-align: left;\r\n}\r\n\r\ntd {\r\n    font-size: 15px;\r\n}\r\n\r\ntd.name{\r\n    color:  #08b2b8;\r\n}\r\n\r\nth {\r\n    font-family: 'Source Sans Pro', sans-serif; \r\n    font-size: 18px;\r\n    font-weight: bold;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVzZXJ2YXRpb24tbWFuYWdlbWVudC9yZXNlcnZhdGlvbi1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSwwQ0FBMEM7SUFDMUMsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIsY0FBYztBQUNsQjs7QUFFQTtJQUNJLG9CQUFvQjtBQUN4Qjs7QUFFQTtJQUNJLG9CQUFvQjtJQUNwQixrQkFBa0I7SUFDbEIsaUJBQWlCO0FBQ3JCOztBQUVBLFFBQVE7O0FBQ1IsMEJBQTBCOztBQUMxQjtJQUNJLGVBQWU7QUFDbkI7O0FBRUEsb0NBQW9DOztBQUNwQztJQUNJLGtCQUFrQjtJQUNsQixlQUFlO0lBQ2YsY0FBYztBQUNsQjs7QUFFQSwyQkFBMkI7O0FBQzNCO0lBQ0ksb0NBQW9DO0FBQ3hDOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLG9CQUFvQjtBQUN4Qjs7QUFFQSxVQUFVOztBQUNWO0lBQ0ksdUNBQXVDO0lBQ3ZDLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLDBDQUEwQztJQUMxQyxlQUFlO0lBQ2YsaUJBQWlCO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvcmVzZXJ2YXRpb24tbWFuYWdlbWVudC9yZXNlcnZhdGlvbi1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoMSB7XHJcbiAgICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gICAgZm9udC1zaXplOiA1MHB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICBwYWRkaW5nLXRvcDogMTBweDtcclxuICAgIGNvbG9yOiAjMDhiMmI4OyBcclxufVxyXG5cclxuLnJvd3tcclxuICAgIHBhZGRpbmctYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG4uZmlsdGVye1xyXG4gICAgcGFkZGluZy1ib3R0b206IDMwcHg7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDMwcHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxuLyogVEFCICovXHJcbi8qIFN0eWxlcyBmb3IgdGFiIGxhYmVscyAqL1xyXG4ubWF0LXRhYi1sYWJlbCB7XHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbn1cclxuXHJcbi8qIFN0eWxlcyBmb3IgdGhlIGFjdGl2ZSB0YWIgbGFiZWwgKi9cclxuLm1hdC10YWItbGFiZWwubWF0LXRhYi1sYWJlbC1hY3RpdmUge1xyXG4gICAgZm9udC13ZWlnaHQ6IDcwMHB4O1xyXG4gICAgZm9udC1zaXplOiAxOHB4O1xyXG4gICAgY29sb3I6ICMwOGIyYjg7XHJcbn1cclxuXHJcbi8qIFN0eWxlcyBmb3IgdGhlIGluayBiYXIgKi9cclxuLm1hdC1pbmstYmFyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMwOGIyYjggIWltcG9ydGFudDtcclxufVxyXG5cclxuLm1hdC10YWItYm9keS13cmFwcGVye1xyXG4gICAgcGFkZGluZy10b3A6IDMwcHg7XHJcbiAgICBwYWRkaW5nLWJvdHRvbTogMzBweDtcclxufVxyXG5cclxuLyogVEFCTEUgKi9cclxudGhlYWR7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAgcmdiYSgwLCAwLCAwLCAwLjY1OCk7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbn1cclxuXHJcbnRoLCB0ZCB7XHJcbiAgICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG59XHJcblxyXG50ZCB7XHJcbiAgICBmb250LXNpemU6IDE1cHg7XHJcbn1cclxuXHJcbnRkLm5hbWV7XHJcbiAgICBjb2xvcjogICMwOGIyYjg7XHJcbn1cclxuXHJcbnRoIHtcclxuICAgIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgICBmb250LXNpemU6IDE4cHg7XHJcbiAgICBmb250LXdlaWdodDogYm9sZDtcclxufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("h1 {\r\n  font-family: 'Source Sans Pro', sans-serif; \r\n  font-size: 50px;\r\n  font-weight: bold;\r\n  padding-top: 10px;\r\n  color: #08b2b8; \r\n}\r\n\r\n.row{\r\n  padding-bottom: 20px;\r\n}\r\n\r\n.filter{\r\n  padding-bottom: 30px;\r\n  padding-left: 30px;\r\n  font-weight: bold;\r\n}\r\n\r\n/* TAB */\r\n\r\n/* Styles for tab labels */\r\n\r\n.mat-tab-label {\r\n  font-size: 18px;\r\n}\r\n\r\n/* Styles for the active tab label */\r\n\r\n.mat-tab-label.mat-tab-label-active {\r\n  font-weight: 700px;\r\n  font-size: 18px;\r\n  color: #08b2b8;\r\n}\r\n\r\n/* Styles for the ink bar */\r\n\r\n.mat-ink-bar {\r\n  background-color: #08b2b8 !important;\r\n}\r\n\r\n.mat-tab-body-wrapper{\r\n  padding-top: 30px;\r\n  padding-bottom: 30px;\r\n}\r\n\r\n/* TABLE */\r\n\r\nthead{\r\n  background-color:  rgba(0, 0, 0, 0.658);\r\n  color: white;\r\n}\r\n\r\nth, td {\r\n  text-align: left;\r\n}\r\n\r\ntd {\r\n  font-size: 15px;\r\n}\r\n\r\ntd.name{\r\n  color:  #08b2b8;\r\n}\r\n\r\nth {\r\n  font-family: 'Source Sans Pro', sans-serif; \r\n  font-size: 18px;\r\n  font-weight: bold;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVzZXJ2YXRpb24tbWFuYWdlbWVudC9yZXNlcnZhdGlvbi1tYW5hZ2VtZW50LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQ0FBMEM7RUFDMUMsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsY0FBYztBQUNoQjs7QUFFQTtFQUNFLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLG9CQUFvQjtFQUNwQixrQkFBa0I7RUFDbEIsaUJBQWlCO0FBQ25COztBQUVBLFFBQVE7O0FBQ1IsMEJBQTBCOztBQUMxQjtFQUNFLGVBQWU7QUFDakI7O0FBRUEsb0NBQW9DOztBQUNwQztFQUNFLGtCQUFrQjtFQUNsQixlQUFlO0VBQ2YsY0FBYztBQUNoQjs7QUFFQSwyQkFBMkI7O0FBQzNCO0VBQ0Usb0NBQW9DO0FBQ3RDOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLG9CQUFvQjtBQUN0Qjs7QUFFQSxVQUFVOztBQUNWO0VBQ0UsdUNBQXVDO0VBQ3ZDLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsMENBQTBDO0VBQzFDLGVBQWU7RUFDZixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9yZXNlcnZhdGlvbi1tYW5hZ2VtZW50L3Jlc2VydmF0aW9uLW1hbmFnZW1lbnQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImgxIHtcclxuICBmb250LWZhbWlseTogJ1NvdXJjZSBTYW5zIFBybycsIHNhbnMtc2VyaWY7IFxyXG4gIGZvbnQtc2l6ZTogNTBweDtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBwYWRkaW5nLXRvcDogMTBweDtcclxuICBjb2xvcjogIzA4YjJiODsgXHJcbn1cclxuXHJcbi5yb3d7XHJcbiAgcGFkZGluZy1ib3R0b206IDIwcHg7XHJcbn1cclxuXHJcbi5maWx0ZXJ7XHJcbiAgcGFkZGluZy1ib3R0b206IDMwcHg7XHJcbiAgcGFkZGluZy1sZWZ0OiAzMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59XHJcblxyXG4vKiBUQUIgKi9cclxuLyogU3R5bGVzIGZvciB0YWIgbGFiZWxzICovXHJcbi5tYXQtdGFiLWxhYmVsIHtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbn1cclxuXHJcbi8qIFN0eWxlcyBmb3IgdGhlIGFjdGl2ZSB0YWIgbGFiZWwgKi9cclxuLm1hdC10YWItbGFiZWwubWF0LXRhYi1sYWJlbC1hY3RpdmUge1xyXG4gIGZvbnQtd2VpZ2h0OiA3MDBweDtcclxuICBmb250LXNpemU6IDE4cHg7XHJcbiAgY29sb3I6ICMwOGIyYjg7XHJcbn1cclxuXHJcbi8qIFN0eWxlcyBmb3IgdGhlIGluayBiYXIgKi9cclxuLm1hdC1pbmstYmFyIHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDhiMmI4ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbi5tYXQtdGFiLWJvZHktd3JhcHBlcntcclxuICBwYWRkaW5nLXRvcDogMzBweDtcclxuICBwYWRkaW5nLWJvdHRvbTogMzBweDtcclxufVxyXG5cclxuLyogVEFCTEUgKi9cclxudGhlYWR7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogIHJnYmEoMCwgMCwgMCwgMC42NTgpO1xyXG4gIGNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxudGgsIHRkIHtcclxuICB0ZXh0LWFsaWduOiBsZWZ0O1xyXG59XHJcblxyXG50ZCB7XHJcbiAgZm9udC1zaXplOiAxNXB4O1xyXG59XHJcblxyXG50ZC5uYW1le1xyXG4gIGNvbG9yOiAgIzA4YjJiODtcclxufVxyXG5cclxudGgge1xyXG4gIGZvbnQtZmFtaWx5OiAnU291cmNlIFNhbnMgUHJvJywgc2Fucy1zZXJpZjsgXHJcbiAgZm9udC1zaXplOiAxOHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG59Il19 */");
 
 /***/ }),
 
@@ -7614,12 +6240,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************************!*\
   !*** ./src/app/reservation-management/reservation-management.component.ts ***!
   \****************************************************************************/
-/*! exports provided: ReservationManagement */
+/*! exports provided: ReservationManagementComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservationManagement", function() { return ReservationManagement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReservationManagementComponent", function() { return ReservationManagementComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../authentication.service */ "./src/app/authentication.service.ts");
@@ -7630,6 +6256,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_schedule_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/schedule.services */ "./src/app/services/schedule.services.ts");
 /* harmony import */ var _services_customer_services__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/customer.services */ "./src/app/services/customer.services.ts");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../constants */ "./src/app/constants.ts");
+/* harmony import */ var _components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/modal-dialog/modal-dialog.component */ "./src/app/components/modal-dialog/modal-dialog.component.ts");
 
 
 
@@ -7640,7 +6267,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let ReservationManagement = class ReservationManagement {
+
+let ReservationManagementComponent = class ReservationManagementComponent {
     constructor(auth, reservationService, matDialog, scheduleService, customerService, programService) {
         this.auth = auth;
         this.reservationService = reservationService;
@@ -7658,34 +6286,33 @@ let ReservationManagement = class ReservationManagement {
         this.cancelledReservations = [];
         this.temp = [];
         this.selectedValue = 0;
-        // Dropdown Menu Option
         this.programCategoriesAdmin = [
-            { id: 0, name: "All Program" },
-            { id: 1, name: "Group Program" },
-            { id: 2, name: "Individual Program" },
-            { id: 3, name: "Ongoing Program" },
-            { id: 4, name: "Attended Program" },
-            { id: 5, name: "Completed Program" },
-            { id: 6, name: "Cancelled Program" }
+            { id: 0, name: 'All Program' },
+            { id: 1, name: 'Group Program' },
+            { id: 2, name: 'Individual Program' },
+            { id: 3, name: 'Ongoing Program' },
+            { id: 4, name: 'Attended Program' },
+            { id: 5, name: 'Completed Program' },
+            { id: 6, name: 'Cancelled Program' },
         ];
         this.programCategoriesCustomer = [
-            { id: 0, name: "All Program" },
-            { id: 1, name: "Group Program" },
-            { id: 2, name: "Individual Program" }
+            { id: 0, name: 'All Program' },
+            { id: 1, name: 'Group Program' },
+            { id: 2, name: 'Individual Program' },
         ];
     }
     ngOnInit() {
-        this.auth.profile().subscribe(user => {
+        this.auth.profile().subscribe((user) => {
             this.role = user.Role_FK;
             this.UserPK = user.UserPK;
-            if (this.role == '1') {
-                this.programCategoriesCustomer.forEach(e => {
-                    $("#programCat").append(new Option(e['name'], e['id']));
-                });
-                this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser) => {
+            if (this.role === '1') {
+                this.programCategories = this.programCategoriesCustomer;
+                this.reservationService
+                    .getAllReservationByUserPK(user.UserPK)
+                    .subscribe((resByUser) => {
                     resByUser.forEach((item) => {
                         console.log(item);
-                        let details = {
+                        const details = {
                             ReservationPK: 0,
                             SchedulePK: 0,
                             PaymentPK: 0,
@@ -7702,13 +6329,21 @@ let ReservationManagement = class ReservationManagement {
                         details.Total = item.Total;
                         details.RemainingBalance = item.RemainingBalance;
                         details.Quantity = item.NumberOfParticipant;
-                        this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
+                        this.scheduleService
+                            .getScheduleById(details.SchedulePK)
+                            .subscribe((schedule) => {
                             details.Date = schedule[0].Start.slice(0, 10);
-                            details.Time = schedule[0].Start.slice(12, 16) + " - " + schedule[0].End.slice(12, 16);
+                            details.Time =
+                                schedule[0].Start.slice(12, 16) +
+                                    ' - ' +
+                                    schedule[0].End.slice(12, 16);
                             details.ProgramPK = schedule[0].ProgramPK;
-                            this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
+                            this.programService
+                                .getProgramHeaderDeatailsByID(details.ProgramPK)
+                                .subscribe((program) => {
                                 details.ProgramName = program.Name;
-                                if (program.ProgramType == _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
+                                if (program.ProgramType ===
+                                    _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                                     this.groupReservations.push(details);
                                 }
                                 else {
@@ -7722,13 +6357,11 @@ let ReservationManagement = class ReservationManagement {
                 this.reservations = this.allReservations;
             }
             else {
-                this.programCategoriesAdmin.forEach(e => {
-                    $("#programCat").append(new Option(e['name'], e['id']));
-                });
+                this.programCategories = this.programCategoriesAdmin;
                 /* Get all Reservation details */
                 this.reservationService.getAllReservation().subscribe((allRes) => {
                     allRes.forEach((item) => {
-                        let reservation = {
+                        const reservation = {
                             ReservationPK: 0,
                             SchedulePK: 0,
                             UserPK: 0,
@@ -7744,57 +6377,51 @@ let ReservationManagement = class ReservationManagement {
                         reservation.ReservationPK = item.ReservationPK;
                         reservation.SchedulePK = item.SchedulePK;
                         reservation.UserPK = item.UserPK;
-                        this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-                            reservation.CustomerName = customer.LastName + ", " + customer.FirstName;
+                        this.customerService
+                            .getCustomerInfoByID(reservation.UserPK)
+                            .subscribe((customer) => {
+                            reservation.CustomerName =
+                                customer.LastName + ', ' + customer.FirstName;
                         });
-                        /* switch(item.ReservationStatus){
-                            case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                                break;
-                            }
-                            case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:{
-                                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                                break;
-                            }
-                            case AppConstants.RESERVATION_STATUS_CODE.COMPLETED:{
-                                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                                break;
-                            }
-                            case AppConstants.RESERVATION_STATUS_CODE.CANCELLED:{
-                                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                                break;
-                            }
-                        } */
                         reservation.Total = item.Total;
                         reservation.RemainingBalance = item.RemainingBalance;
-                        this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
+                        this.scheduleService
+                            .getScheduleById(reservation.SchedulePK)
+                            .subscribe((schedule) => {
                             reservation.Date = schedule[0].Start.slice(0, 10);
                             reservation.ProgramPK = schedule[0].ProgramPK;
-                            this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program) => {
+                            this.programService
+                                .getProgramHeaderDeatailsByID(reservation.ProgramPK)
+                                .subscribe((program) => {
                                 reservation.ProgramName = program.Name;
                                 switch (item.ReservationStatus) {
                                     case _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING: {
-                                        reservation.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.ON_GOING;
+                                        reservation.ReservationStatus =
+                                            _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.ON_GOING;
                                         this.ongoingReservations.push(reservation);
                                         break;
                                     }
                                     case _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_CODE.ATTENDED: {
-                                        reservation.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.ATTENDED;
+                                        reservation.ReservationStatus =
+                                            _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.ATTENDED;
                                         this.attendedReservations.push(reservation);
                                         break;
                                     }
                                     case _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_CODE.COMPLETED: {
-                                        reservation.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.COMPLETED;
+                                        reservation.ReservationStatus =
+                                            _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.COMPLETED;
                                         this.completedReservations.push(reservation);
                                         break;
                                     }
                                     case _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_CODE.CANCELLED: {
-                                        reservation.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.CANCELLED;
+                                        reservation.ReservationStatus =
+                                            _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].RESERVATION_STATUS_TEXT.CANCELLED;
                                         this.cancelledReservations.push(reservation);
                                         break;
                                     }
                                 }
-                                if (program.ProgramType == _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
+                                if (program.ProgramType ===
+                                    _constants__WEBPACK_IMPORTED_MODULE_9__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                                     this.groupReservations.push(reservation);
                                 }
                                 else {
@@ -7807,20 +6434,16 @@ let ReservationManagement = class ReservationManagement {
                 });
                 this.reservations = this.allReservations;
             }
-        }, err => {
+        }, (err) => {
             console.error(err);
         });
-        // Add option for the dropdown menu
-        /* this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        }); */
     }
     clearSearch() {
-        this.searchText = "";
+        this.searchText = '';
     }
     // Catch the event dropdown menu
     selectChangeHandler(event) {
-        let choice = event.target.value;
+        const choice = event.target.value;
         // Update the data of table
         switch (choice) {
             case '0':
@@ -7848,17 +6471,52 @@ let ReservationManagement = class ReservationManagement {
     }
     // viewReservationModal
     openReservationModal() {
-        console.log("Reservation Details Modal called");
+        console.log('Reservation Details Modal called');
         const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
         dialogConfig.disableClose = true;
-        dialogConfig.id = "reservation-modal-component";
-        dialogConfig.height = "600px";
-        dialogConfig.width = "750x";
+        dialogConfig.id = 'reservation-modal-component';
+        dialogConfig.height = '600px';
+        dialogConfig.width = '750x';
+        dialogConfig.autoFocus = false;
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'reservation-modal-component';
+        dialogConfig.height = '600px';
+        dialogConfig.width = '750x';
         dialogConfig.autoFocus = false;
         const reservationModalDialog = this.matDialog.open(_components_reservation_details_modal_dialog_reservation_details_modal_dialog_component__WEBPACK_IMPORTED_MODULE_5__["ReservationDetailsModalDialog"], dialogConfig);
     }
+    openCancelModal() {
+        // Configure Modal Dialog
+        const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialogConfig"]();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: 'Cancel Confirmation',
+            description: 'Are you sure you would like to cancel this reservation for the customer?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
+        };
+        const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_10__["ModalDialogComponent"], dialogConfig);
+        modalDialog.afterClosed().subscribe(result => {
+            if (result === 'Yes') {
+                // Update Database
+                // Make the refund
+                // Send cancel email
+            }
+            else {
+                // Do nothing
+            }
+        });
+    }
+    openPaynowModal() {
+    }
 };
-ReservationManagement.ctorParameters = () => [
+ReservationManagementComponent.ctorParameters = () => [
     { type: _authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"] },
     { type: _services_reservation_services__WEBPACK_IMPORTED_MODULE_3__["ReservationService"] },
     { type: _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] },
@@ -7866,13 +6524,12 @@ ReservationManagement.ctorParameters = () => [
     { type: _services_customer_services__WEBPACK_IMPORTED_MODULE_8__["CustomerService"] },
     { type: _services_program_services__WEBPACK_IMPORTED_MODULE_6__["ProgramServices"] }
 ];
-ReservationManagement = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+ReservationManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!.//reservation-management.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/reservation-management/reservation-management.component.html")).default,
-        encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./reservation-management.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/reservation-management/reservation-management.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./reservation-management.component.css */ "./src/app/reservation-management/reservation-management.component.css")).default]
     })
-], ReservationManagement);
+], ReservationManagementComponent);
 
 
 
@@ -7967,30 +6624,30 @@ let ReservationComponent = class ReservationComponent {
         this.submitted = false;
         // Intent Object
         this.paymentObj = {
-            token: "",
+            token: '',
             amount: 0,
-            description: "",
-            email: ""
+            description: '',
+            email: '',
         };
         this.paymentData = new _data_payment__WEBPACK_IMPORTED_MODULE_4__["Payment"]();
-        //Schedule Availability Status
+        // Schedule Availability Status
         this.scheduleFull = false;
         // Schedule View Variables
         this.selectedDate = new Date();
-        //This option for displaying the date to customer view
+        // This option for displaying the date to customer view
         this.options = {
-            hour: "numeric",
-            minute: "numeric",
+            hour: 'numeric',
+            minute: 'numeric',
             hour12: true,
         };
-        //Define this day arr to hide past event
-        this.dayOfWeekStr = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
-        //Define time format option for blackout date
+        // Define this day arr to hide past event
+        this.dayOfWeekStr = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+        // Define time format option for blackout date
         this.timeFormatOptions = {
             hour: 'numeric',
             minute: 'numeric',
             second: 'numeric',
-            hour12: false
+            hour12: false,
         };
         this.allBlackoutDateException = [];
         this.currTotalQuantity = 0;
@@ -7998,92 +6655,97 @@ let ReservationComponent = class ReservationComponent {
             SchedulePK: 0,
             SessionDetailsPK: 0,
             ProgramPK: 0,
-            Start: "",
-            End: "",
+            Start: '',
+            End: '',
             MaximumParticipant: 0,
             CurrentNumberParticipant: 0,
             CreatedBy: 0,
             IsActive: true,
-            IsFull: false
+            IsFull: false,
         };
-        //Define Schedule Module for Kendo schedule
+        // Define Schedule Module for Kendo schedule
         this.eventFields = {
-            id: "CreatedBy",
-            title: "Title",
-            description: "Description",
-            startTimezone: "StartTimezone",
-            start: "Start",
-            end: "End",
-            endTimezone: "EndTimezone",
-            isAllDay: "IsAllDay",
-            recurrenceRule: "RecurrenceRule",
-            recurrenceId: "RecurrenceID",
-            recurrenceExceptions: "RecurrenceException",
+            id: 'CreatedBy',
+            title: 'Title',
+            description: 'Description',
+            startTimezone: 'StartTimezone',
+            start: 'Start',
+            end: 'End',
+            endTimezone: 'EndTimezone',
+            isAllDay: 'IsAllDay',
+            recurrenceRule: 'RecurrenceRule',
+            recurrenceId: 'RecurrenceID',
+            recurrenceExceptions: 'RecurrenceException',
         };
-        //This function to capture and get the info of selected event
+        // This function to capture and get the info of selected event
         this.eventClick = (e) => {
             // this.isDisable = false;
             this.enableQuantityField();
-            var eventStart = e.event.dataItem.Start.toISOString();
-            var eventEnd = e.event.dataItem.End.toISOString();
-            var programPK = e.event.dataItem.ProgramPK;
-            var sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
+            const eventStart = e.event.dataItem.Start.toISOString();
+            const eventEnd = e.event.dataItem.End.toISOString();
+            const programPK = e.event.dataItem.ProgramPK;
+            const sessionDetailsPK = e.event.dataItem.SessionDetailsPK;
             this.programScheduleServices
                 .getScheduleByIdStartEnd(sessionDetailsPK, programPK, eventStart, eventEnd)
                 .subscribe((result) => {
                 if (result) {
                     // There is a schedule in the database
                     this.tempDate = new Date(result.Start);
-                    let end = new Date(result.End);
+                    const end = new Date(result.End);
                     this.currentSession = result;
                     this.customerSelectDate = this.tempDate.toDateString();
                     this.customerSelectTime = this.tempDate
-                        .toLocaleString("en-US", this.options)
-                        .concat(" - ", end.toLocaleString("en-US", this.options));
-                    this.availability = result.MaximumParticipant - result.CurrentNumberParticipant;
+                        .toLocaleString('en-US', this.options)
+                        .concat(' - ', end.toLocaleString('en-US', this.options));
+                    this.availability =
+                        result.MaximumParticipant - result.CurrentNumberParticipant;
                     this.scheduleFull = result.IsFull;
                     this.quantityForm
-                        .get("CustomerSelectDate")
+                        .get('CustomerSelectDate')
                         .setValue(this.customerSelectDate);
                     this.quantityForm
-                        .get("CustomerSelectTime")
+                        .get('CustomerSelectTime')
                         .setValue(this.customerSelectTime);
-                    this.quantityForm.get("Availability").setValue(this.availability);
+                    this.quantityForm.get('Availability').setValue(this.availability);
                     // Pass SchedulePK for Booking Page
                     this.SchedulePK = result.SchedulePK;
                 }
                 else {
                     this.customerSelectDate = e.event.dataItem.Start.toDateString();
-                    this.customerSelectTime = e.event.dataItem.Start.toLocaleString("en-US", this.options).concat(" - ", e.event.dataItem.End.toLocaleString("en-US", this.options));
+                    this.customerSelectTime = e.event.dataItem.Start.toLocaleString('en-US', this.options).concat(' - ', e.event.dataItem.End.toLocaleString('en-US', this.options));
                     this.availability = e.event.dataItem.MaximumParticipant;
                     this.scheduleFull = false;
                     this.quantityForm
-                        .get("CustomerSelectDate")
+                        .get('CustomerSelectDate')
                         .setValue(this.customerSelectDate);
                     this.quantityForm
-                        .get("CustomerSelectTime")
+                        .get('CustomerSelectTime')
                         .setValue(this.customerSelectTime);
-                    this.quantityForm.get("Availability").setValue(this.availability);
+                    this.quantityForm.get('Availability').setValue(this.availability);
                     // Pass SchedulePK for Booking Page
                     this.SchedulePK = 0;
                     this.currentSession.SchedulePK = 0; // SchedulePK is AutoIncrement
                     this.currentSession.ProgramPK = e.event.dataItem.ProgramPK;
-                    this.currentSession.SessionDetailsPK = e.event.dataItem.SessionDetailsPK;
+                    this.currentSession.SessionDetailsPK =
+                        e.event.dataItem.SessionDetailsPK;
                     this.currentSession.Start = e.event.dataItem.Start.toISOString();
                     this.currentSession.End = e.event.dataItem.End.toISOString();
-                    this.currentSession.MaximumParticipant = e.event.dataItem.MaximumParticipant;
+                    this.currentSession.MaximumParticipant =
+                        e.event.dataItem.MaximumParticipant;
                     this.currentSession.CurrentNumberParticipant = 0;
                     this.currentSession.IsActive = true;
                     this.currentSession.CreatedBy = _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].SYSTEM_USER_PK; // UserPk represent for System Auto Create Data
                     // Create new schedule record and insert into the database
-                    this.programScheduleServices.addNewSchedule(this.currentSession).subscribe((res) => {
+                    this.programScheduleServices
+                        .addNewSchedule(this.currentSession)
+                        .subscribe((res) => {
                         this.SchedulePK = res;
                         this.reservationHeader.SchedulePK = res;
                     });
                 }
                 if (this.ProgramType == _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                     // Set Validator for TotalQuantity
-                    const totalQuantControl = this.quantityForm.get("TotalQuantity");
+                    const totalQuantControl = this.quantityForm.get('TotalQuantity');
                     totalQuantControl.clearValidators();
                     totalQuantControl.setValidators([
                         _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required,
@@ -8096,37 +6758,37 @@ let ReservationComponent = class ReservationComponent {
         };
         this.quantityForm = this.fb.group({
             AdultQuantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age57Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age810Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age1112Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age1314Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age1415Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
             Age1517Quantity: [
-                { value: "0", disabled: true },
+                { value: '0', disabled: true },
                 [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(0)],
             ],
-            TotalQuantity: ["0", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(1)]],
-            CustomerSelectDate: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
-            CustomerSelectTime: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
-            Availability: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
+            TotalQuantity: ['0', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(1)]],
+            CustomerSelectDate: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
+            CustomerSelectTime: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
+            Availability: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]],
         });
     }
     ngOnInit() {
@@ -8134,7 +6796,9 @@ let ReservationComponent = class ReservationComponent {
             this.ProgramPK = val.id;
         });
         /******************PROGRAM SCHEDULE*************************/
-        this.service.getProgramHeaderDeatailsByID(this.ProgramPK).subscribe((details) => {
+        this.service
+            .getProgramHeaderDeatailsByID(this.ProgramPK)
+            .subscribe((details) => {
             this.programDetails = details;
             this.ProgramType = details.ProgramType;
             this.programDesc = this.programDetails.Description;
@@ -8142,63 +6806,111 @@ let ReservationComponent = class ReservationComponent {
             switch (this.ProgramType) {
                 /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
                 case _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-                    this.service.getProgramRequirementDetails("g", this.ProgramPK).subscribe((program) => {
+                    this.service
+                        .getProgramRequirementDetails('g', this.ProgramPK)
+                        .subscribe((program) => {
                         this.bookingGroup = program;
                         this.registerForm = this.fb.group({
-                            ProgramRestriction: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                            OrganizationName: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
-                            GradeLevel: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                            TeacherName: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
-                            TeacherEmail: [""],
-                            AlternativeDate: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5)]],
-                            TeacherPhoneNo: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(1000000000)]],
-                            EducationPurpose: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5)]],
+                            ProgramRestriction: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                            OrganizationName: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
+                            GradeLevel: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                            TeacherName: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
+                            TeacherEmail: [''],
+                            AlternativeDate: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5)],
+                            ],
+                            TeacherPhoneNo: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].min(1000000000)],
+                            ],
+                            EducationPurpose: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5)],
+                            ],
                         });
-                        //Clear the Validator for unavailable field
+                        // Clear the Validator for unavailable field
                         if (!this.bookingGroup.ProgramRestriction) {
-                            this.clearFormControlValidator(this.registerForm.get("ProgramRestriction"));
+                            this.clearFormControlValidator(this.registerForm.get('ProgramRestriction'));
                         }
                         if (!this.bookingGroup.OrganizationName) {
-                            this.clearFormControlValidator(this.registerForm.get("OrganizationName"));
+                            this.clearFormControlValidator(this.registerForm.get('OrganizationName'));
                         }
                         if (!this.bookingGroup.GradeLevel) {
-                            this.clearFormControlValidator(this.registerForm.get("GradeLevel"));
+                            this.clearFormControlValidator(this.registerForm.get('GradeLevel'));
                         }
                         if (!this.bookingGroup.TeacherName) {
-                            this.clearFormControlValidator(this.registerForm.get("TeacherName"));
+                            this.clearFormControlValidator(this.registerForm.get('TeacherName'));
                         }
                         if (!this.bookingGroup.TeacherEmail) {
-                            this.clearFormControlValidator(this.registerForm.get("TeacherEmail"));
+                            this.clearFormControlValidator(this.registerForm.get('TeacherEmail'));
                         }
                         if (!this.bookingGroup.TeacherPhoneNo) {
-                            this.clearFormControlValidator(this.registerForm.get("TeacherPhoneNo"));
+                            this.clearFormControlValidator(this.registerForm.get('TeacherPhoneNo'));
                         }
                         if (!this.bookingGroup.AlternativeDate) {
-                            this.clearFormControlValidator(this.registerForm.get("AlternativeDate"));
+                            this.clearFormControlValidator(this.registerForm.get('AlternativeDate'));
                         }
                         if (!this.bookingGroup.EducationPurpose) {
-                            this.clearFormControlValidator(this.registerForm.get("EducationPurpose"));
+                            this.clearFormControlValidator(this.registerForm.get('EducationPurpose'));
                         }
                     });
                     break;
                 /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
                 case _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
                     // Update the Total amount if user pick individual program
-                    this.service.getProgramRequirementDetails("i", this.ProgramPK).subscribe((program) => {
+                    this.service
+                        .getProgramRequirementDetails('i', this.ProgramPK)
+                        .subscribe((program) => {
                         this.bookingIndividual = program;
                         this.registerForm = this.fb.group({
-                            ParticipantName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
+                            ParticipantName: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
                             ParticipantAge: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                             Gender: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                             MerchSize: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                             AllergyInfo: [''],
                             SpecialInfo: [''],
-                            InsureProviderName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
-                            InsureRecipientName: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
-                            InsurePolicyNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(10)]],
-                            InsurePhoneNo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].maxLength(10)]],
-                            AuthorizedPickupName1: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)]],
-                            AuthorizedPickupPhone1: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].maxLength(10), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(10)]],
+                            InsureProviderName: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
+                            InsureRecipientName: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
+                            InsurePolicyNo: [
+                                '',
+                                [
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required,
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(5),
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(10),
+                                ],
+                            ],
+                            InsurePhoneNo: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].maxLength(10)],
+                            ],
+                            AuthorizedPickupName1: [
+                                '',
+                                [_angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(3)],
+                            ],
+                            AuthorizedPickupPhone1: [
+                                '',
+                                [
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required,
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].maxLength(10),
+                                    _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].minLength(10),
+                                ],
+                            ],
                             AuthorizedPickupName2: ['', []],
                             AuthorizedPickupPhone2: ['', []],
                             EarlyDropOff: [''],
@@ -8209,25 +6921,25 @@ let ReservationComponent = class ReservationComponent {
                         });
                         // Clear the Validator for unavailable field
                         if (!this.bookingIndividual.AllergyInfo) {
-                            this.clearFormControlValidator(this.registerForm.get("AllergyInfo"));
+                            this.clearFormControlValidator(this.registerForm.get('AllergyInfo'));
                         }
                         if (!this.bookingIndividual.ParticipantAge) {
-                            this.clearFormControlValidator(this.registerForm.get("ParticipantAge"));
+                            this.clearFormControlValidator(this.registerForm.get('ParticipantAge'));
                         }
                         if (!this.bookingIndividual.ParticipantName) {
-                            this.clearFormControlValidator(this.registerForm.get("ParticipantName"));
+                            this.clearFormControlValidator(this.registerForm.get('ParticipantName'));
                         }
                         if (!this.bookingIndividual.Gender) {
-                            this.clearFormControlValidator(this.registerForm.get("Gender"));
+                            this.clearFormControlValidator(this.registerForm.get('Gender'));
                         }
                         if (!this.bookingIndividual.MerchSize) {
-                            this.clearFormControlValidator(this.registerForm.get("MerchSize"));
+                            this.clearFormControlValidator(this.registerForm.get('MerchSize'));
                         }
                         if (!this.bookingIndividual.SpecialInfo) {
-                            this.clearFormControlValidator(this.registerForm.get("SpecialInfo"));
+                            this.clearFormControlValidator(this.registerForm.get('SpecialInfo'));
                         }
                         if (!this.bookingIndividual.InsureProviderName) {
-                            this.clearFormControlValidator(this.registerForm.get("InsureProviderName"));
+                            this.clearFormControlValidator(this.registerForm.get('InsureProviderName'));
                         }
                         if (!this.bookingIndividual.InsureRecipientName) {
                             this.clearFormControlValidator(this.registerForm.get('InsureRecipientName'));
@@ -8267,33 +6979,33 @@ let ReservationComponent = class ReservationComponent {
                         }
                     });
                     // Clear Validator for QuantityForm when Individual Program is loadded.
-                    this.clearFormControlValidator(this.quantityForm.get("AdultQuantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age57Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age810Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age1112Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age1314Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age1415Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("Age1517Quantity"));
-                    this.clearFormControlValidator(this.quantityForm.get("TotalQuantity"));
+                    this.clearFormControlValidator(this.quantityForm.get('AdultQuantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age57Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age810Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age1112Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age1314Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age1415Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('Age1517Quantity'));
+                    this.clearFormControlValidator(this.quantityForm.get('TotalQuantity'));
                     break;
             }
         }); // End Select Program header and initialize FormGroup
-        //Define and create to get schedule by ProgramPk
+        // Define and create to get schedule by ProgramPk
         const currentYear = new Date().getFullYear();
         const parseAdjust = (eventDateTime, RepeatDay) => {
-            var date = new Date(eventDateTime);
+            let date = new Date(eventDateTime);
             date.setFullYear(currentYear);
-            //Set the event Start and End to today dates if the Start/End is before today date
-            var eventStartTime = (new Date(eventDateTime)).toLocaleString('en-US', this.timeFormatOptions);
-            let todayDate = (new Date((new Date()).toISOString().slice(0, 10) + "T" + eventStartTime));
-            let dayIndex = todayDate.getDay();
-            //If date is before today's date and today's day is in the repeat day of the session
+            // Set the event Start and End to today dates if the Start/End is before today date
+            const eventStartTime = new Date(eventDateTime).toLocaleString('en-US', this.timeFormatOptions);
+            const todayDate = new Date(new Date().toISOString().slice(0, 10) + 'T' + eventStartTime);
+            const dayIndex = todayDate.getDay();
+            // If date is before today's date and today's day is in the repeat day of the session
             if (date < todayDate) {
                 if (RepeatDay.indexOf(this.dayOfWeekStr[dayIndex]) >= 0) {
                     date = todayDate;
                 }
                 else {
-                    for (var d = Object(_progress_kendo_date_math__WEBPACK_IMPORTED_MODULE_18__["addDays"])(todayDate, 1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)) {
+                    for (let d = Object(_progress_kendo_date_math__WEBPACK_IMPORTED_MODULE_18__["addDays"])(todayDate, 1), i = 0; i < 6; i++, d.setDate(d.getDate() + 1)) {
                         if (RepeatDay.indexOf(this.dayOfWeekStr[d.getDay()]) >= 0) {
                             date = d;
                             break;
@@ -8303,36 +7015,47 @@ let ReservationComponent = class ReservationComponent {
             }
             return date;
         };
-        //GET ALL BLACK-OUT DATES
-        this.programScheduleServices.getAllBlackoutDateException().subscribe((res) => {
+        // GET ALL BLACK-OUT DATES
+        this.programScheduleServices
+            .getAllBlackoutDateException()
+            .subscribe((res) => {
             this.allBlackoutDateException = res;
             console.log(res);
             // INITIALIZE THE SCHEDULE
-            this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) => {
+            this.programScheduleServices
+                .getSessionDetailsById(this.ProgramPK)
+                .subscribe((schedules) => {
                 const sampleDataWithCustomSchema = schedules.map((dataItem) => (Object.assign({}, dataItem, { SessionDetailsPK: dataItem.SessionDetailsPK, ScheduleSettingPK: dataItem.ScheduleSettingPK, ProgramPK: dataItem.ProgramPK, Title: dataItem.Title, Description: dataItem.Description, StartTimezone: dataItem.StartTimezone, Start: parseAdjust(dataItem.Start, dataItem.RepeatDay), End: parseAdjust(dataItem.End, dataItem.RepeatDay), EndTimezone: dataItem.EndTimezone, MaximumParticipant: this.programDetails.MaximumParticipant, CurrentParticipant: 0, RecurrenceRule: dataItem.RecurrenceRule, EndRepeatDate: dataItem.EndRepeatDate, RecurrenceID: dataItem.RecurrenceID, RecurrenceException: [], Color: dataItem.Color, CreatedBy: dataItem.CreatedBy, CreatedDate: dataItem.CreatedDate, IsActive: dataItem.IsActive })));
-                //Create Date array for each event in RecurrenceException
-                sampleDataWithCustomSchema.forEach(item => {
-                    //Just check repeated sessions, skip additional sessions (since it happens once)
+                // Create Date array for each event in RecurrenceException
+                sampleDataWithCustomSchema.forEach((item) => {
+                    // Just check repeated sessions, skip additional sessions (since it happens once)
                     if (item.ScheduleSettingPK != 0) {
-                        var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
-                        //get the time of the session
-                        var timezoneOffset = (new Date(item.Start)).getTimezoneOffset() * 60000;
-                        var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
-                        var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0, 10);
-                        //1. Add recurrence exception to each session based on Blackout Date
-                        //add the start date to the recurrence exception to avoid Kendo UI bug
-                        let newStartDateTime = new Date(eventStartDate + "T" + eventStartTime);
-                        //check if date exists in the RecurenceException arr
-                        if (!item.RecurrenceException.find(e => { return e.getTime() == newStartDateTime.getTime(); })) {
-                            item.RecurrenceException.push(new Date(eventStartDate + "T" + eventStartTime));
+                        var result = this.allBlackoutDateException.filter((x) => x.ProgramPK == item.ProgramPK);
+                        // Get the time of the session
+                        let timezoneOffset = new Date(item.Start).getTimezoneOffset() * 60000;
+                        const eventStartTime = new Date(item.Start).toLocaleString('en-US', this.timeFormatOptions);
+                        var eventStartDate = new Date(item.Start - timezoneOffset)
+                            .toISOString()
+                            .slice(0, 10);
+                        // 1. Add recurrence exception to each session based on Blackout Date
+                        // add the start date to the recurrence exception to avoid Kendo UI bug
+                        let newStartDateTime = new Date(eventStartDate + 'T' + eventStartTime);
+                        // check if date exists in the RecurenceException arr
+                        if (!item.RecurrenceException.find((e) => {
+                            return e.getTime() == newStartDateTime.getTime();
+                        })) {
+                            item.RecurrenceException.push(new Date(eventStartDate + 'T' + eventStartTime));
                         }
                         //if this session has blackout-date => add to recurenceException
                         if (result.length > 0) {
-                            //add each of the date in exceptionDateArr to recurence exception                        
-                            result[0].exceptionDateArr.forEach(exceptionDate => {
+                            //add each of the date in exceptionDateArr to recurence exception
+                            result[0].exceptionDateArr.forEach((exceptionDate) => {
                                 //check if date exists in the RecurenceException arr
-                                if (!item.RecurrenceException.find(e => { return e.getTime() == (new Date(exceptionDate + "T" + eventStartTime)).getTime(); })) {
-                                    item.RecurrenceException.push(new Date(exceptionDate + "T" + eventStartTime));
+                                if (!item.RecurrenceException.find((e) => {
+                                    return (e.getTime() ==
+                                        new Date(exceptionDate + 'T' + eventStartTime).getTime());
+                                })) {
+                                    item.RecurrenceException.push(new Date(exceptionDate + 'T' + eventStartTime));
                                 }
                             });
                         }
@@ -8350,11 +7073,11 @@ let ReservationComponent = class ReservationComponent {
     // Clear data when click on input field
     onFocus(event) {
         if (event.target.value == 0)
-            event.target.value = "";
+            event.target.value = '';
     }
     // Restore data when lose focus on input field
     lostFocus(event) {
-        if (event.target.value === 0 || event.target.value === "") {
+        if (event.target.value === 0 || event.target.value === '') {
             event.target.value = 0;
         }
         this.calculateTotalQuantity();
@@ -8362,27 +7085,27 @@ let ReservationComponent = class ReservationComponent {
     // Helper function to calculate total attendee
     calculateTotalQuantity() {
         this.currTotalQuantity =
-            parseInt(this.quantityForm.get("AdultQuantity").value) +
-                parseInt(this.quantityForm.get("Age57Quantity").value) +
-                parseInt(this.quantityForm.get("Age810Quantity").value) +
-                parseInt(this.quantityForm.get("Age1112Quantity").value) +
-                parseInt(this.quantityForm.get("Age1314Quantity").value) +
-                parseInt(this.quantityForm.get("Age1415Quantity").value) +
-                parseInt(this.quantityForm.get("Age1517Quantity").value);
-        this.quantityForm.get("TotalQuantity").setValue(this.currTotalQuantity);
+            parseInt(this.quantityForm.get('AdultQuantity').value, 10) +
+                parseInt(this.quantityForm.get('Age57Quantity').value, 10) +
+                parseInt(this.quantityForm.get('Age810Quantity').value, 10) +
+                parseInt(this.quantityForm.get('Age1112Quantity').value, 10) +
+                parseInt(this.quantityForm.get('Age1314Quantity').value, 10) +
+                parseInt(this.quantityForm.get('Age1415Quantity').value, 10) +
+                parseInt(this.quantityForm.get('Age1517Quantity').value, 10);
+        this.quantityForm.get('TotalQuantity').setValue(this.currTotalQuantity);
     }
     // Enable Quantity Field after User choose a schedule
     enableQuantityField() {
-        this.quantityForm.get("AdultQuantity").enable();
-        this.quantityForm.get("Age57Quantity").enable();
-        this.quantityForm.get("Age810Quantity").enable();
-        this.quantityForm.get("Age1112Quantity").enable();
-        this.quantityForm.get("Age1314Quantity").enable();
-        this.quantityForm.get("Age1415Quantity").enable();
-        this.quantityForm.get("Age1517Quantity").enable();
+        this.quantityForm.get('AdultQuantity').enable();
+        this.quantityForm.get('Age57Quantity').enable();
+        this.quantityForm.get('Age810Quantity').enable();
+        this.quantityForm.get('Age1112Quantity').enable();
+        this.quantityForm.get('Age1314Quantity').enable();
+        this.quantityForm.get('Age1415Quantity').enable();
+        this.quantityForm.get('Age1517Quantity').enable();
     }
     openLoginModal() {
-        const loginModal = this.matDialog.open(_components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_9__["LoginPromptModal"], _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].LOGIN_DIALOG_CONFIG);
+        const loginModal = this.matDialog.open(_components_login_prompt_modal_login_prompt_modal_component__WEBPACK_IMPORTED_MODULE_9__["LoginPromptModalComponent"], _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].LOGIN_DIALOG_CONFIG);
         loginModal.afterClosed();
     }
     /**************************************************************************************************************************/
@@ -8400,7 +7123,7 @@ let ReservationComponent = class ReservationComponent {
             const controlErrors = this.registerForm.get(key).errors;
             if (controlErrors != null) {
                 Object.keys(controlErrors).forEach((keyError) => {
-                    console.log("Key control: " + key + ", keyError: " + keyError + ", err value: ", controlErrors[keyError]);
+                    console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
                 });
             }
         });
@@ -8421,15 +7144,16 @@ let ReservationComponent = class ReservationComponent {
     quantityProgramStepperNext(stepper, type) {
         var balance = this.programDetails.PricePerParticipant;
         // Add quantity data for Group Program only.
-        if (type == "g") {
-            this.reservationGroupDetails.AdultQuantity = this.quantityForm.get("Age57Quantity").value;
-            this.reservationGroupDetails.Age810Quantity = this.quantityForm.get("Age810Quantity").value;
-            this.reservationGroupDetails.Age1112Quantity = this.quantityForm.get("Age1112Quantity").value;
-            this.reservationGroupDetails.Age1314Quantity = this.quantityForm.get("Age1314Quantity").value;
-            this.reservationGroupDetails.Age1415Quantity = this.quantityForm.get("Age1415Quantity").value;
-            this.reservationGroupDetails.Age1517Quantity = this.quantityForm.get("Age1517Quantity").value;
-            this.reservationGroupDetails.TotalQuantity = this.quantityForm.get("TotalQuantity").value;
-            balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
+        if (type == 'g') {
+            this.reservationGroupDetails.AdultQuantity = this.quantityForm.get('Age57Quantity').value;
+            this.reservationGroupDetails.Age810Quantity = this.quantityForm.get('Age810Quantity').value;
+            this.reservationGroupDetails.Age1112Quantity = this.quantityForm.get('Age1112Quantity').value;
+            this.reservationGroupDetails.Age1314Quantity = this.quantityForm.get('Age1314Quantity').value;
+            this.reservationGroupDetails.Age1415Quantity = this.quantityForm.get('Age1415Quantity').value;
+            this.reservationGroupDetails.Age1517Quantity = this.quantityForm.get('Age1517Quantity').value;
+            this.reservationGroupDetails.TotalQuantity = this.quantityForm.get('TotalQuantity').value;
+            balance =
+                this.currTotalQuantity * this.programDetails.PricePerParticipant;
         }
         else {
             this.currTotalQuantity = 1;
@@ -8437,7 +7161,8 @@ let ReservationComponent = class ReservationComponent {
         // Update data for Reservation Header.
         this.reservationHeader.SchedulePK = this.SchedulePK;
         this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
-        this.reservationHeader.ReservationStatus = _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING;
+        this.reservationHeader.ReservationStatus =
+            _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].RESERVATION_STATUS_CODE.ON_GOING;
         this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
         this.reservationHeader.Total = balance;
         this.reservationHeader.RemainingBalance = balance;
@@ -8447,37 +7172,37 @@ let ReservationComponent = class ReservationComponent {
     registerStepperNext(stepper) {
         // this.getFormValidationErrors();
         // Add User Input data to ReservationGroupDetails
-        this.reservationGroupDetails.ProgramRestriction = this.registerForm.get("ProgramRestriction").value;
-        this.reservationGroupDetails.OrganizationName = this.registerForm.get("OrganizationName").value;
-        this.reservationGroupDetails.GradeLevel = this.registerForm.get("GradeLevel").value;
-        this.reservationGroupDetails.TeacherName = this.registerForm.get("TeacherName").value;
-        this.reservationGroupDetails.TeacherEmail = this.registerForm.get("TeacherEmail").value;
-        this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get("TeacherPhoneNo").value;
-        this.reservationGroupDetails.AlternativeDate = this.registerForm.get("AlternativeDate").value;
-        this.reservationGroupDetails.EducationPurpose = this.registerForm.get("EducationPurpose").value;
+        this.reservationGroupDetails.ProgramRestriction = this.registerForm.get('ProgramRestriction').value;
+        this.reservationGroupDetails.OrganizationName = this.registerForm.get('OrganizationName').value;
+        this.reservationGroupDetails.GradeLevel = this.registerForm.get('GradeLevel').value;
+        this.reservationGroupDetails.TeacherName = this.registerForm.get('TeacherName').value;
+        this.reservationGroupDetails.TeacherEmail = this.registerForm.get('TeacherEmail').value;
+        this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get('TeacherPhoneNo').value;
+        this.reservationGroupDetails.AlternativeDate = this.registerForm.get('AlternativeDate').value;
+        this.reservationGroupDetails.EducationPurpose = this.registerForm.get('EducationPurpose').value;
         this.stepTwoIsCompleted = true;
         stepper.next();
     }
     registerIndividualStepperNext(stepper) {
         // Add User Input data to ReservationIndividualDetails
-        this.reservationIndividualDetails.ParticipantName = this.registerForm.get("ParticipantName").value;
-        this.reservationIndividualDetails.ParticipantAge = this.registerForm.get("ParticipantAge").value;
-        this.reservationIndividualDetails.Gender = this.registerForm.get("Gender").value;
-        this.reservationIndividualDetails.MerchSize = this.registerForm.get("MerchSize").value;
-        this.reservationIndividualDetails.AllergyInfo = this.registerForm.get("AllergyInfo").value;
-        this.reservationIndividualDetails.SpecialInfo = this.registerForm.get("SpecialInfo").value;
-        this.reservationIndividualDetails.InsureProviderName = this.registerForm.get("InsureProviderName").value;
-        this.reservationIndividualDetails.InsureRecipientName = this.registerForm.get("InsureRecipientName").value;
-        this.reservationIndividualDetails.InsurePolicyNo = this.registerForm.get("InsurePolicyNo").value;
-        this.reservationIndividualDetails.InsurePhoneNo = this.registerForm.get("InsurePhoneNo").value;
-        this.reservationIndividualDetails.AuthorizedPickupName1 = this.registerForm.get("AuthorizedPickupName1").value;
-        this.reservationIndividualDetails.AuthorizedPickupPhone1 = this.registerForm.get("AuthorizedPickupPhone1").value;
-        this.reservationIndividualDetails.AuthorizedPickupName2 = this.registerForm.get("AuthorizedPickupName2").value;
-        this.reservationIndividualDetails.AuthorizedPickupPhone2 = this.registerForm.get("AuthorizedPickupPhone2").value;
-        this.reservationIndividualDetails.EarlyDropOff = this.registerForm.get("EarlyDropOff").value;
-        this.reservationIndividualDetails.LatePickup = this.registerForm.get("LatePickup").value;
-        this.reservationIndividualDetails.MediaRelease = this.registerForm.get("MediaRelease").value;
-        this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get("EmergencyMedicalRelease").value;
+        this.reservationIndividualDetails.ParticipantName = this.registerForm.get('ParticipantName').value;
+        this.reservationIndividualDetails.ParticipantAge = this.registerForm.get('ParticipantAge').value;
+        this.reservationIndividualDetails.Gender = this.registerForm.get('Gender').value;
+        this.reservationIndividualDetails.MerchSize = this.registerForm.get('MerchSize').value;
+        this.reservationIndividualDetails.AllergyInfo = this.registerForm.get('AllergyInfo').value;
+        this.reservationIndividualDetails.SpecialInfo = this.registerForm.get('SpecialInfo').value;
+        this.reservationIndividualDetails.InsureProviderName = this.registerForm.get('InsureProviderName').value;
+        this.reservationIndividualDetails.InsureRecipientName = this.registerForm.get('InsureRecipientName').value;
+        this.reservationIndividualDetails.InsurePolicyNo = this.registerForm.get('InsurePolicyNo').value;
+        this.reservationIndividualDetails.InsurePhoneNo = this.registerForm.get('InsurePhoneNo').value;
+        this.reservationIndividualDetails.AuthorizedPickupName1 = this.registerForm.get('AuthorizedPickupName1').value;
+        this.reservationIndividualDetails.AuthorizedPickupPhone1 = this.registerForm.get('AuthorizedPickupPhone1').value;
+        this.reservationIndividualDetails.AuthorizedPickupName2 = this.registerForm.get('AuthorizedPickupName2').value;
+        this.reservationIndividualDetails.AuthorizedPickupPhone2 = this.registerForm.get('AuthorizedPickupPhone2').value;
+        this.reservationIndividualDetails.EarlyDropOff = this.registerForm.get('EarlyDropOff').value;
+        this.reservationIndividualDetails.LatePickup = this.registerForm.get('LatePickup').value;
+        this.reservationIndividualDetails.MediaRelease = this.registerForm.get('MediaRelease').value;
+        this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get('EmergencyMedicalRelease').value;
         this.stepTwoIsCompleted = true;
         this.getFormValidationErrors();
         stepper.next();
@@ -8488,7 +7213,9 @@ let ReservationComponent = class ReservationComponent {
         this.paymentObj.token = token;
     }
     submitReservation() {
-        this.resServices.addNewReservationHeader(this.reservationHeader).subscribe((resHeaderPK) => {
+        this.resServices
+            .addNewReservationHeader(this.reservationHeader)
+            .subscribe((resHeaderPK) => {
             if (resHeaderPK) {
                 switch (this.ProgramType) {
                     case _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PROGRAM_TYPE_CODE.GROUP_PROGRAM:
@@ -8497,49 +7224,57 @@ let ReservationComponent = class ReservationComponent {
                         this.paymentObj.description = this.auth.getUserDetails().Username;
                         this.paymentObj.email = this.auth.getUserDetails().Email;
                         // Charge User
-                        this.paymentServices.processToken(this.paymentObj).subscribe((chargeResult) => {
+                        this.paymentServices
+                            .processToken(this.paymentObj)
+                            .subscribe((chargeResult) => {
                             if (chargeResult) {
-                                this.paymentData.PaymentPK = this.paymentObj.token["id"];
+                                this.paymentData.PaymentPK = this.paymentObj.token['id'];
                                 this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
                                 this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
                                 this.paymentData.Total = chargeResult.amount;
                                 this.paymentData.ChargeToken = chargeResult.id;
-                                this.paymentData.PaymentType = _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PAYMENT_TYPE_CODE.CARD;
+                                this.paymentData.PaymentType =
+                                    _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PAYMENT_TYPE_CODE.CARD;
                                 // Create PaymenData
-                                this.paymentServices.createPaymentData(this.paymentData).subscribe((paymentInfo) => {
+                                this.paymentServices
+                                    .createPaymentData(this.paymentData)
+                                    .subscribe((paymentInfo) => {
                                     console.log(paymentInfo);
                                 });
                                 // Update reservation remaining balance
-                                this.resServices.updateRemainingBalance(resHeaderPK, this.reservationHeader.RemainingBalance - (chargeResult.amount / 100)).subscribe((info) => {
+                                this.resServices
+                                    .updateRemainingBalance(resHeaderPK, this.reservationHeader.RemainingBalance -
+                                    chargeResult.amount / 100)
+                                    .subscribe((info) => {
                                     console.log(info);
                                 });
-                                ;
                             }
                         });
                         // Update Schedule CurrentNumberParticipant
                         this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, this.reservationHeader.NumberOfParticipant);
                         // Insert Reservation Details
                         this.reservationGroupDetails.ReservationPK = resHeaderPK;
-                        this.resServices.addGroupReservationDetails(this.reservationGroupDetails)
+                        this.resServices
+                            .addGroupReservationDetails(this.reservationGroupDetails)
                             .subscribe((resGroupDetails) => {
                             if (resGroupDetails) {
                                 const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialogConfig"]();
                                 // The user can't close the dialog by clicking outside its body
                                 dialogConfig.disableClose = true;
-                                dialogConfig.id = "modal-component";
-                                dialogConfig.height = "auto";
-                                dialogConfig.maxHeight = "500px";
-                                dialogConfig.width = "430px";
+                                dialogConfig.id = 'modal-component';
+                                dialogConfig.height = 'auto';
+                                dialogConfig.maxHeight = '500px';
+                                dialogConfig.width = '430px';
                                 dialogConfig.data = {
-                                    title: "Thanks You.",
-                                    description: "Thank you for your reservation!",
-                                    actionButtonText: "Ok",
-                                    numberOfButton: "1"
+                                    title: 'Thanks You.',
+                                    description: 'Thank you for your reservation!',
+                                    actionButtonText: 'Ok',
+                                    numberOfButton: '1',
                                 };
                                 const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_10__["ModalDialogComponent"], dialogConfig);
-                                modalDialog.afterClosed().subscribe(result => {
-                                    if (result == "Yes") {
-                                        //call register function                
+                                modalDialog.afterClosed().subscribe((result) => {
+                                    if (result == 'Yes') {
+                                        //call register function
                                         this.router.navigateByUrl('/');
                                     }
                                 });
@@ -8552,14 +7287,16 @@ let ReservationComponent = class ReservationComponent {
                         this.paymentObj.description = this.auth.getUserDetails().Username;
                         this.paymentObj.email = this.auth.getUserDetails().Email;
                         // Charge User
-                        this.paymentServices.processToken(this.paymentObj)
+                        this.paymentServices
+                            .processToken(this.paymentObj)
                             .subscribe((res) => {
-                            this.paymentData.PaymentPK = this.paymentObj.token["id"];
+                            this.paymentData.PaymentPK = this.paymentObj.token['id'];
                             this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
                             this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
                             this.paymentData.Total = res.amount;
                             this.paymentData.ChargeToken = res.id;
-                            this.paymentData.PaymentType = _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PAYMENT_TYPE_CODE.CARD;
+                            this.paymentData.PaymentType =
+                                _constants__WEBPACK_IMPORTED_MODULE_12__["AppConstants"].PAYMENT_TYPE_CODE.CARD;
                             // Create PaymenData
                             this.paymentServices.createPaymentData(this.paymentData);
                             // Update reservation remaining balance
@@ -8569,25 +7306,27 @@ let ReservationComponent = class ReservationComponent {
                         this.programScheduleServices.updateNumberOfParticipant(this.reservationHeader.SchedulePK, 1);
                         // Insert Reservation Details
                         this.reservationIndividualDetails.ReservationPK = resHeaderPK;
-                        this.resServices.addIndividualReservationDetails(this.reservationIndividualDetails).subscribe((res) => {
+                        this.resServices
+                            .addIndividualReservationDetails(this.reservationIndividualDetails)
+                            .subscribe((res) => {
                             if (res) {
                                 const dialogConfig = new _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialogConfig"]();
                                 // The user can't close the dialog by clicking outside its body
                                 dialogConfig.disableClose = true;
-                                dialogConfig.id = "modal-component";
-                                dialogConfig.height = "auto";
-                                dialogConfig.maxHeight = "500px";
-                                dialogConfig.width = "430px";
+                                dialogConfig.id = 'modal-component';
+                                dialogConfig.height = 'auto';
+                                dialogConfig.maxHeight = '500px';
+                                dialogConfig.width = '430px';
                                 dialogConfig.data = {
-                                    title: "Thanks You.",
-                                    description: "Thank you for your reservation!",
-                                    actionButtonText: "Ok",
-                                    numberOfButton: "1"
+                                    title: 'Thanks You.',
+                                    description: 'Thank you for your reservation!',
+                                    actionButtonText: 'Ok',
+                                    numberOfButton: '1',
                                 };
                                 const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_10__["ModalDialogComponent"], dialogConfig);
-                                modalDialog.afterClosed().subscribe(result => {
-                                    if (result == "Yes") {
-                                        //call register function                
+                                modalDialog.afterClosed().subscribe((result) => {
+                                    if (result == 'Yes') {
+                                        // Call register function
                                         this.router.navigateByUrl('/');
                                     }
                                 });
@@ -8817,7 +7556,7 @@ let SetProgramScheduleComponent = class SetProgramScheduleComponent {
         this.programServices = programServices;
         this.programScheduleServices = programScheduleServices;
         this.auth = auth;
-        //Define success message
+        // Define success message
         this.programColorMessage = "";
         this.scheduleSuccessMessage = "";
         this.sessionSuccessMessage = "";
@@ -8879,7 +7618,7 @@ let SetProgramScheduleComponent = class SetProgramScheduleComponent {
         this.hasSession = false;
         this.hasAdditionalSession = false;
         this.hasBlackoutDate = false;
-        //WARNING: DO NOT CHANGE THE ORDER OF DAY
+        // WARNING: DO NOT CHANGE THE ORDER OF DAY
         this.dayArr = [
             { day: "Sunday", value: "SU", eventList: [] },
             { day: "Monday", value: "MO", eventList: [] },
@@ -9015,14 +7754,24 @@ let SetProgramScheduleComponent = class SetProgramScheduleComponent {
                     this.allScheduleSettings = res;
                     if (this.allScheduleSettings.length > 0) {
                         this.hasSchedule = true;
+                        var flag = false;
+                        var todayDate = (new Date()).toLocaleDateString();
                         this.allScheduleSettings.forEach(schedule => {
                             schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString();
                             schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString();
                             schedule.Start = new Date(schedule.Start);
                             schedule.End = new Date(schedule.End);
+                            //Set default view to current schedule
+                            if (schedule.tempStart <= todayDate && schedule.tempEnd >= todayDate) {
+                                this.currentScheduleSetting = schedule;
+                                schedule.IsSelected = true;
+                                flag = true;
+                            }
                         });
-                        this.currentScheduleSetting = this.allScheduleSettings[0];
-                        this.allScheduleSettings[0].IsSelected = true;
+                        if (!flag) {
+                            this.currentScheduleSetting = this.allScheduleSettings[0];
+                            this.allScheduleSettings[0].IsSelected = true;
+                        }
                     }
                 }
             });
@@ -9067,7 +7816,6 @@ let SetProgramScheduleComponent = class SetProgramScheduleComponent {
     // convenience getter for easy access to form fields
     get f() { return this.SetProgramScheduleForm.controls; }
     viewSchedule(schedule) {
-        console.log(schedule);
         this.allScheduleSettings.forEach(schedule => {
             schedule.IsSelected = false;
         });
@@ -9802,9 +8550,6 @@ let ViewScheduleComponent = class ViewScheduleComponent {
     }
     ngOnInit() {
         this.choice = "0";
-        this.programCategories.forEach(e => {
-            $("#programCat").append(new Option(e['name'], e['id']));
-        });
         // Service call to get data from server
         this.programService.getAllPrograms().then((result) => {
             this.programs = result;
@@ -10196,7 +8941,7 @@ EmailService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
 ];
 EmailService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: "root" })
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' })
 ], EmailService);
 
 
@@ -10435,92 +9180,92 @@ let ProgramScheduleService = class ProgramScheduleService {
             SCHEDULE SETTING
     ================================*/
     getScheduleSettingsByProgram(ProgramPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-schedule-settings-by-program/" + ProgramPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-schedule-settings-by-program/' + ProgramPK);
     }
     addNewScheduleSetting(scheduleSetting) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/add-new-schedule-setting", scheduleSetting);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/add-new-schedule-setting', scheduleSetting);
     }
     updateScheduleSetting(scheduleSetting) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-schedule-setting", scheduleSetting);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-schedule-setting', scheduleSetting);
     }
     updateScheduleSettingSessionDetails(sessions) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-schedule-setting-session-details", sessions);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-schedule-setting-session-details', sessions);
     }
     deactiveScheduleSetting(scheduleSetting) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/deactivate-schedule-setting", scheduleSetting);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/deactivate-schedule-setting', scheduleSetting);
     }
     getAllProgramsWithScheduleSettingsRequirements() {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-all-programs-with-schedule-settings-and-requirements");
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-all-programs-with-schedule-settings-and-requirements');
     }
     /*================================
             SESSION DETAILS
     ================================*/
     addNewSessionDetails(sessionDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/add-new-session-details", sessionDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/add-new-session-details', sessionDetails);
     }
     updateSessionDetails(sessionDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-session-details", sessionDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-session-details', sessionDetails);
     }
     deactivateSessionDetails(sessionDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/deactivate-session-details/", sessionDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/deactivate-session-details/', sessionDetails);
     }
     getAllSessionDetails() {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-all-session-details");
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-all-session-details');
     }
     getSessionDetailsById(ProgramPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-session-details-by-id/" + ProgramPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-session-details-by-id/' + ProgramPK);
     }
     updateSchedulesInBulk(schedules) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-schedules-in-bulk", schedules);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-schedules-in-bulk', schedules);
     }
     addNewAdditionalSessionDetails(sessionDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/add-new-additional-session-details", sessionDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/add-new-additional-session-details', sessionDetails);
     }
     updateAdditionalSessionDetails(sessionDetails) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-additional-session-details", sessionDetails);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-additional-session-details', sessionDetails);
     }
     /*================================
             SCHEDULE
     ================================*/
     addNewSchedule(schedule) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/add-new-schedule", schedule);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/add-new-schedule', schedule);
     }
     getScheduleByProgramPK(ProgramPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-programpk/" + ProgramPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-program-schedules-by-programpk/' + ProgramPK);
     }
     getScheduleByIdStartEnd(SessionDetailsPK, ProgramPK, eventStart, eventEnd) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-schedule-by-id-start-end/" + SessionDetailsPK
-            + "/" + ProgramPK + "/" + eventStart + "/" + eventEnd);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-schedule-by-id-start-end/' + SessionDetailsPK
+            + '/' + ProgramPK + '/' + eventStart + '/' + eventEnd);
     }
     getScheduleById(SchedulePK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-program-schedules-by-id/" + SchedulePK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-program-schedules-by-id/' + SchedulePK);
     }
     updateNumberOfParticipant(SchedulePK, quantity) {
-        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-number-participant/" + SchedulePK, { "quantity": quantity });
+        return this.http.put(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, { quantity });
     }
     /*================================
             BLACKOUT DATE
     ================================*/
     addBlackoutDate(blackoutDate) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/add-blackout-date", blackoutDate);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/add-blackout-date', blackoutDate);
     }
     updateBlackoutDate(blackoutDate) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/update-blackout-date", blackoutDate);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/update-blackout-date', blackoutDate);
     }
     deactivateBlackoutDate(blackoutDate) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/deactivate-blackout-date", blackoutDate);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/deactivate-blackout-date', blackoutDate);
     }
     getAllBlackoutDatesByProgram(ProgramPK) {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-program-blackout-date-by-id/" + ProgramPK);
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-program-blackout-date-by-id/' + ProgramPK);
     }
     getAllBlackoutDateException() {
-        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/get-all-blackout-date-exception/");
+        return this.http.get(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/get-all-blackout-date-exception/');
     }
     /*================================
             OTHERS
     ================================*/
     setProgramColor(programColor) {
-        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + "schedule/set-program-color", programColor);
+        return this.http.post(_constants__WEBPACK_IMPORTED_MODULE_3__["AppConstants"].EXPRESS_SERVER_URL + 'schedule/set-program-color', programColor);
     }
 };
 ProgramScheduleService.ctorParameters = () => [
@@ -10625,7 +9370,7 @@ let CreateNewUserComponent = class CreateNewUserComponent {
             Subscribe: []
         });
         this.userRoles.forEach(e => {
-            $("#roleSelection").append(new Option(e, e));
+            $('#roleSelection').append(new Option(e, e));
         });
     }
     get f() { return this.createNewUserForm.controls; }
@@ -10635,44 +9380,38 @@ let CreateNewUserComponent = class CreateNewUserComponent {
         if (this.createNewUserForm.invalid) {
             return;
         }
-        //Configure Modal Dialog
         const dialogConfig = new _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialogConfig"]();
-        // The user can't close the dialog by clicking outside its body
         dialogConfig.disableClose = true;
-        dialogConfig.id = "modal-component";
-        dialogConfig.height = "auto";
-        dialogConfig.maxHeight = "500px";
-        dialogConfig.width = "350px";
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '350px';
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
-            title: "Create New User",
-            description: "All information is correct?",
-            actionButtonText: "Confirm",
-            numberOfButton: "2"
+            title: 'Create New User',
+            description: 'All information is correct?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
         };
         const modalDialog = this.matDialog.open(_components_modal_dialog_modal_dialog_component__WEBPACK_IMPORTED_MODULE_6__["ModalDialogComponent"], dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
-            if (result == "Yes") {
-                //call register function                
+            if (result === 'Yes') {
                 this.createNewUser();
-            }
-            else {
-                console.log("stop");
             }
         });
     }
     createNewUser() {
-        //Get new role selected info
-        this.NewRole = $("#roleSelection :selected").text();
-        //Get new Role info
-        if (this.NewRole == "Customer") {
-            this.userDetails.Role_FK = "1";
+        // Get new role selected info
+        this.NewRole = $('#roleSelection :selected').text();
+        // Get new Role info
+        if (this.NewRole === 'Customer') {
+            this.userDetails.Role_FK = '1';
         }
-        else if (this.NewRole == "Manager") {
-            this.userDetails.Role_FK = "2";
+        else if (this.NewRole === 'Manager') {
+            this.userDetails.Role_FK = '2';
         }
         else {
-            this.userDetails.Role_FK = "3";
+            this.userDetails.Role_FK = '3';
         }
         //Get subscribe checkbox info
         if (this.subscribeChecked) {
@@ -10681,32 +9420,29 @@ let CreateNewUserComponent = class CreateNewUserComponent {
         else {
             this.customerDetails.Subscribe = 0;
         }
-        console.log(this.userDetails);
-        console.log(this.customerDetails);
         this.auth.register(this.userDetails).subscribe((res) => {
             if (res.error) {
                 console.log(res);
-                this.errorMessage = "*" + res.error;
+                this.errorMessage = '*' + res.error;
                 return;
             }
             else {
                 this.customerDetails.UserPK = res.UserPK;
                 this.userDetails.UserPK = res.UserPK;
-                this.customer.finishRegister(this.customerDetails).subscribe((res) => {
-                    console.log(res.message);
-                    //Send confirmation email confirmation and change password for the first time
-                    this.emailService.CreateNewUserConfirmationEmail(this.userDetails).subscribe((res) => {
-                        if (res.error) {
-                            console.log(res.error);
+                this.customer.finishRegister(this.customerDetails).subscribe((res2) => {
+                    console.log(res2.message);
+                    // Send confirmation email confirmation and change password for the first time
+                    this.emailService.CreateNewUserConfirmationEmail(this.userDetails).subscribe((res3) => {
+                        if (res3.error) {
+                            console.log(res3.error);
                         }
                         else {
-                            console.log("Reset Email has been sent to " + this.userDetails.Email);
+                            console.log('Reset Email has been sent to ' + this.userDetails.Email);
                         }
                     }, err => {
                         console.log(err);
                     });
-                    //Navigate back to User Management Page
-                    this.router.navigateByUrl("/profile/user-management");
+                    this.router.navigateByUrl('/profile/user-management');
                 });
             }
         }, err => {
@@ -11029,10 +9765,6 @@ let UserManagementComponent = class UserManagementComponent {
         ];
     }
     ngOnInit() {
-        // Add option for the dropdown menu
-        this.userStatus.forEach(e => {
-            $("#userStatus").append(new Option(e['name'], e['id']));
-        });
         this.userRoles = ['Customer', 'Manager', 'System Admin'];
         this.auth.getAllUser().subscribe((result) => {
             this.listOfUsers = result;
@@ -11154,7 +9886,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 
 const environment = {
-    production: false
+    production: true
 };
 /*
  * For easier debugging in development mode, you can import the following file
