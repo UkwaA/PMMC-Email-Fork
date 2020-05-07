@@ -16,10 +16,10 @@
           <div class="col-lg-8 col-md-7 col-sm-12 pr-5">
             <h3> Schedule </h3>
             <div class="row filter m-0 mb-5">
-              <kendo-scheduler [kendoSchedulerBinding]="allEvents" [eventClass]="getEventClass"
+              <kendo-scheduler [kendoSchedulerBinding]="allEvents" 
                 (eventClick)="eventClick($event)" [modelFields]="eventFields" [showWorkHours]="true"
                 [selectedDate]="selectedDate" style="height: 850px; width: 1500px">
-                <kendo-scheduler-week-view [startTime]="startTime">
+                <kendo-scheduler-week-view >
                   <ng-template kendoSchedulerEventTemplate let-event>
                     {{ event.dataItem.Title }}
                   </ng-template>
@@ -161,7 +161,7 @@
                   <input type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
                     [ngClass]="{'is-invalid': f.TotalQuantity.errors }" required>
                   <div *ngIf="f.TotalQuantity.errors" class="invalid-feedback">
-                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 1 person.</div>
+                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 8 person.</div>
                     <div *ngIf="f.TotalQuantity.errors.max">Must be smaller than the Availability</div>
                   </div>
                 </div>

@@ -26,19 +26,20 @@ export class DashboardComponent implements OnInit {
   customerRes = [];
   today = new Date();
   newDate: Date;
-  range = { start: new Date(), end: new Date()};
+  range = { start: new Date(this.today.getFullYear(), this.today.getMonth(), 1),
+            end: new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0)};
   completedRes = 0;
   completedTotal = 0;
-  completedDetails = [];
+  completedDetails = {range: {}, reservations: []};
   ongoingRes = 0;
   ongoingTotal = 0;
-  ongoingDetails = [];
+  ongoingDetails = {range: {}, reservations: []};
   attendedRes = 0;
   attendedTotal = 0;
-  attendedDetails = [];
+  attendedDetails = {range: {}, reservations: []};
   cancelledRes = 0;
   cancelledTotal = 0;
-  cancelledDetails = [];
+  cancelledDetails = {range: {}, reservations: []};
 
   /* CHART USING NG2-CHARTS */
   // title = 'Bar Chart Example Using ng2-charts';
@@ -143,12 +144,12 @@ export class DashboardComponent implements OnInit {
 
                   this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
                       details.Date = schedule[0].Start.slice(0, 10);
-                      details.Time = schedule[0].Start.slice(12,16) + ' - ' + schedule[0].End.slice(12,16);
+                      details.Time = schedule[0].Start.slice(12, 16) + ' - ' + schedule[0].End.slice(12, 16);
                       details.ProgramPK = schedule[0].ProgramPK;
-                      this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program)=>{
+                      this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
                           details.ProgramName = program.Name;
                           details.ProgramType = program.ProgramType;
-                      })
+                      });
 
                       if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
                         details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
@@ -187,16 +188,16 @@ export class DashboardComponent implements OnInit {
       this.range.end.setHours(23, 59, 59, 999);
       this.completedRes = 0;
       this.completedTotal = 0;
-      this.completedDetails = [];
+      this.completedDetails = {range: this.range, reservations: []};
       this.ongoingRes = 0;
       this.ongoingTotal = 0;
-      this.ongoingDetails = [];
+      this.ongoingDetails = {range: this.range, reservations: []};
       this.attendedRes = 0;
       this.attendedTotal = 0;
-      this.attendedDetails = [];
+      this.attendedDetails = {range: this.range, reservations: []};
       this.cancelledRes = 0;
       this.cancelledTotal = 0;
-      this.cancelledDetails = [];
+      this.cancelledDetails = {range: this.range, reservations: []};
 
       this.reservationService.getAllReservation().subscribe((allRes) => {
         allRes.forEach((item) =>{
@@ -238,28 +239,32 @@ export class DashboardComponent implements OnInit {
                   this.ongoingRes += 1;
                   this.ongoingTotal += item.Total;
                   reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                  this.ongoingDetails.push(reservation);
+                  this.ongoingDetails.reservations.push(reservation);
+                  // this.ongoingDetails.range = this.range;
                   break;
                 }
                 case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
                   this.attendedRes += 1;
                   this.attendedTotal += item.Total;
                   reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                  this.attendedDetails.push(reservation);
+                  this.attendedDetails.reservations.push(reservation);
+                  // this.attendedDetails.range = this.range;
                   break;
                 }
                 case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
                   this.completedRes += 1;
                   this.completedTotal += item.Total;
                   reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                  this.completedDetails.push(reservation);
+                  this.completedDetails.reservations.push(reservation);
+                  // this.completedDetails.range = this.range;
                   break;
                 }
                 case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
                   this.cancelledRes += 1;
                   this.cancelledTotal += item.Total;
                   reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                  this.cancelledDetails.push(reservation);
+                  this.cancelledDetails.reservations.push(reservation);
+                  // this.cancelledDetails.range = this.range;
                   break;
                 }
               }
@@ -272,91 +277,86 @@ export class DashboardComponent implements OnInit {
 
   // PaynowModal
   openPaynowModal(){
-    console.log('Paynow Modal called')
+    console.log('Paynow Modal called');
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.id = 'paynow-modal-component';
-    dialogConfig.height = '750px'
+    dialogConfig.height = '750px';
     dialogConfig.maxHeight = '100%';
     dialogConfig.width = '580px';
     dialogConfig.maxWidth = '100%';
     // dialogConfig.autoFocus = false;
-   
     const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
   }
 
   openCancelModal(type: number){
     console.log('Cancel Modal called')
-    //Configure Modal Dialog
+    // Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose =true;
+    dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
     dialogConfig.height = 'auto';
     dialogConfig.maxHeight = '500px';
     dialogConfig.width = '350px';
     dialogConfig.autoFocus = false;
-    if (type == AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM){
+    if (type === AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM){
       dialogConfig.data = {
         title: 'Cancel Confirmation',
         description: 'Are you sure you would like to cancel this reservation? Your payment for this reservation will be refunded soon!',            
-        actionButtonText: 'Confirm',   
-        numberOfButton: '2'         
-      }
-    }
-    else {
+        actionButtonText: 'Confirm',
+        numberOfButton: '2'
+      };
+    } else {
       dialogConfig.data = {
         title: 'Cancel Confirmation',
         description: 'Are you sure you would like to cancel this reservation for customer? We will collect the $25 deposit and refund the rest of your payment!',            
-        actionButtonText: 'Confirm',   
-        numberOfButton: '2'         
-      }
+        actionButtonText: 'Confirm',
+        numberOfButton: '2'
+      };
     }
 
     const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
-    modalDialog.afterClosed().subscribe(result =>{
-      if(result == 'Yes'){
-        //Update Database
-        //Make the refund
-        //Send cancel email
+    modalDialog.afterClosed().subscribe(result => {
+      if (result === 'Yes') {
+        // Update Database
+        // Make the refund
+        // Send cancel email
+      } else {
+        // Do nothing
       }
-      else {
-        //Do nothing
-      }
-    })
-        
+    });
   }
 
   // viewReservationModal
-  openReservationModal(status: string){
-    console.log('Admin Reservations Modal called')
+  openReservationModal(status: string) {
+    console.log('Admin Reservations Modal called');
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.id = 'admin-reservations-modal-component';
-    dialogConfig.maxHeight = '600px';
+    dialogConfig.maxHeight = '650px';
     dialogConfig.width = '1000px';
     dialogConfig.autoFocus = false;
-    switch(status){
-      case AppConstants.RESERVATION_STATUS_TEXT.ON_GOING:{
+    switch (status) {
+      case AppConstants.RESERVATION_STATUS_TEXT.ON_GOING: {
         dialogConfig.data = this.ongoingDetails;
         break;
       }
-      case AppConstants.RESERVATION_STATUS_TEXT.ATTENDED:{
+      case AppConstants.RESERVATION_STATUS_TEXT.ATTENDED: {
         dialogConfig.data = this.attendedDetails;
         break;
       }
-      case AppConstants.RESERVATION_STATUS_TEXT.COMPLETED:{
+      case AppConstants.RESERVATION_STATUS_TEXT.COMPLETED: {
         dialogConfig.data = this.completedDetails;
         break;
       }
-      case AppConstants.RESERVATION_STATUS_TEXT.CANCELLED:{
+      case AppConstants.RESERVATION_STATUS_TEXT.CANCELLED: {
         dialogConfig.data = this.cancelledDetails;
         break;
       }
     }
     const adminReservationModalDialog = this.matDialog.open(AdminReservationsModalDialogComponent, dialogConfig);
   }
-
 }

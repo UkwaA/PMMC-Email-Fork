@@ -6,8 +6,8 @@
     </div>
     <div class="row filter">
         <div class="col-lg-2 col-md-2 col-sm-3 p-0">
-            <select class="form-control" style="font-weight: bold" id="programCat"
-                (change)="selectChangeHandler($event)">
+            <select class="form-control" style="font-weight: bold" id="programCat" (change)="selectChangeHandler($event)">
+                <option *ngFor="let item of programCategories" [value]="item.id">{{item.name}}</option>
             </select>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-7 pr-0">

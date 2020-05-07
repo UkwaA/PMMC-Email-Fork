@@ -8,8 +8,7 @@ import { DOCUMENT } from '@angular/common';
 import { PlatformLocation } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { LoginPromptModalComponent } from './components/login-prompt-modal/login-prompt-modal.component';
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.component";
+import { MatDialog } from "@angular/material";
 import { AppConstants } from './constants';
 
 declare const window: any;
@@ -104,7 +103,7 @@ export class AppComponent implements OnInit {
 
   // Change color on scroll
    header_variable = false;
-   @HostListener('document:scroll', ['$event'])
+   @HostListener('document:scroll', [''])
    scrollfunction() {
      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
        this.header_variable = true;

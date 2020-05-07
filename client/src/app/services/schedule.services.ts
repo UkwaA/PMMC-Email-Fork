@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'
-import {ProgramScheduleData} from '../data/program-schedule-data'
 import { AppConstants } from '../constants'
 
 @Injectable()
@@ -91,7 +90,7 @@ export class ProgramScheduleService{
     }
 
     public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
-        return this.http.put(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {quantity});
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {"value": quantity});
     }
 
     /*================================

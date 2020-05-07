@@ -4,9 +4,14 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const User = require('../models/User');
 const Email = require('../models/Email');
 const Schedule = require('../models/Schedule.js');
+=======
+const User = require('../models/User')
+const Email = require('../models/Email')
+>>>>>>> 75c5e1ae9b36dbba93991e7dd69381791adf72e2
 
 const app = express.Router();
 app.use(cors());
@@ -158,20 +163,20 @@ async function sendContactEmail(user, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
+    from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: user.subject, // Subject line
     html: `
@@ -255,20 +260,20 @@ async function sendResetPasswordEmail(userInfo, email, callback) {
     // date.setUTCSeconds(expirationTime)    
 
     let transporter = nodemailer.createTransport({
-      host: emailServer.host,
-      port: emailServer.port,
+      host: process.env.emailServer_host,
+      port: process.env.emailServer_port,
       secure: false, // true for 465, false for other ports
       auth: {
           //This is AWS SES credential
-        user: emailServer.user,
-        pass: emailServer.pass
+        user: process.env.emailServer_username,
+        pass: process.env.emailServer_password
       }
     });
     
     let mailOptions = {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
+    from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: email.Subject, // Subject line
     html: email.Body
@@ -344,20 +349,20 @@ app.post('/send-password-confirmation-email', (req,res) => {
 
 async function sendPasswordConfirmationEmail(userInfo, callback){
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
     //from and to email needs to be verified in order to use SES
     // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
+    from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - Update Password Confirmation", // Subject line
     
@@ -411,13 +416,13 @@ app.post('/create-new-user-confirmation-email', (req,res) => {
 
 async function CreateNewUserConfirmationEmail(userInfo, email, callback){
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
@@ -441,7 +446,7 @@ async function CreateNewUserConfirmationEmail(userInfo, email, callback){
     // let decodeUserPassword = decodedToken.userPassword
 
   let mailOptions = {
-    from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
+    from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: email.Subject, // Subject line
     html: email.Body
@@ -493,13 +498,13 @@ app.post('/send-booking-request-confirmation-email', (req,res) => {
 
 async function SendBookingRequestConfirmationEmail(userInfo, email, callback){
 let transporter = nodemailer.createTransport({
-  host: emailServer.host,
-  port: emailServer.port,
+  host: process.env.emailServer_host,
+  port: process.env.emailServer_port,
   secure: false, // true for 465, false for other ports
   auth: {
       //This is AWS SES credential
-    user: emailServer.user,
-    pass: emailServer.pass
+    user: process.env.emailServer_username,
+    pass: process.env.emailServer_password
   }
 });
 
@@ -521,7 +526,7 @@ let token = jwt.sign(payload, process.env.SECRET_KEY, {
   // let decodeUserPassword = decodedToken.userPassword
 
 let mailOptions = {
-  from: emailServer.sponsorEmail, // sender address need to change to Sponsor email
+  from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
   to: "uakkum@uci.edu", // need to put userInfo.Email
   subject: email.Subject, // Subject line
   html: email.Body
@@ -574,20 +579,20 @@ async function sendRegistrationConfirmationEmail(email, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
+    from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: email.Subject, // Subject line
     html: email.Body
@@ -627,20 +632,20 @@ async function sendProgramConfirmationEmail(user, email, schedule, programName, 
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
+    from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: 'Program Confirmation', // Subject line
     html: `
@@ -675,20 +680,20 @@ async function sendProgramReminderEmail(user, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
+    from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: "PMMC Upcoming Program", // Subject line
     html: `
@@ -722,20 +727,20 @@ async function sendPaymentConfirmationEmail(user, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
   });
 
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
+    from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: "PMMC - Payment Confirmation", // Subject line
     html: `
@@ -756,58 +761,74 @@ async function sendPaymentConfirmationEmail(user, callback) {
 /***********************
   POST-PROGRAM EMAIL
 ***********************/
-app.post('/send-post-program-email', (req, res) => {
-  sendPostProgramEmail(user, info => {
-    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-    res.send(info);
-  });
-});
+// app.post('/send-post-program-email', (req, res) => {
+//   sendPostProgramEmail(user, info => {
+//     console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+//     res.send(info);
+//   });
+// });
 
-async function sendPostProgramEmail(user, callback) {
+async function sendPostProgramEmail(reservationInfo, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
-    host: emailServer.host,
-    port: emailServer.port,
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
     secure: false, // true for 465, false for other ports
     auth: {
         //This is AWS SES credential
-      user: emailServer.user,
-      pass: emailServer.pass
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
     }
-  });
-
+  });  
+  
+  let displayTimeFormatOption ={
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+    };
+  let date = (new Date(reservationInfo.Start)).toLocaleDateString()
+  let startTime = (new Date(reservationInfo.Start)).toLocaleString('en-US', displayTimeFormatOption)
+  let endTime = (new Date(reservationInfo.End)).toLocaleString('en-US', displayTimeFormatOption)
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
-    from: emailServer.sponsorEmail, // sender address
-    to: "uakkum@uci.edu", // list of receivers
-    subject: "Thank you from PMMC", // Subject line
+    from: process.env.emailServer_sponsorEmail, // sender address
+    bcc: reservationInfo.EmailList, // list of receivers
+    subject: "Thank you from Pacific Marine Mammal Center", // Subject line
     html: `
-    <i>Thank you for attending your program (AUTOMATIC INSERTION OF PROGRAM 
-    NAME DATE/TIME) with Pacific Marine Mammal Center! We appreciate the 
+    <h5> Hi, </h5>
+    <p>Thank you for attending your program <b>${reservationInfo.ProgramName}</b> 
+    on <b>${date}, ${startTime} - ${endTime}</b> 
+    with Pacific Marine Mammal Center! We appreciate the 
     opportunity to share our mission of ocean awareness and conservation 
-    with you.</i>
+    with you.</p>
     <br/>
-    <i>PMMC is always striving to improve our educational efforts. You can 
+    <p>PMMC is always striving to improve our educational efforts. You can 
     help by giving a quick program evaluation here: 
-    (AUTOMATIC INSERTION OF SPECIFIC SURVEY LINK). </i>
+    (AUTOMATIC INSERTION OF SPECIFIC SURVEY LINK). </p>
     <br/>
-    <i>We are also grateful for your support of our seal and sea lion 
+    <p>We are also grateful for your support of our seal and sea lion 
     patients! Should you wish to keep up with our patients’ stories, 
-    sign up for our e-newsletter or a membership today at:</i>
+    sign up for our e-newsletter or a membership today at: https://www.pacificmmc.org/</p>
     <br/>
-    <i>We look forward to seeing you again in the future!</i>
+    <p>We look forward to seeing you again in the future!</p>
     `
   };
 
   // send mail with defined transport object
   let info = await transporter.sendMail(mailOptions);
-
-  callback(info);
+  callback(info); 
 }
 
+<<<<<<< HEAD
 
 
 // main().catch(console.error);
 module.exports = app
+=======
+//main().catch(console.error);
+module.exports = app
+//export sendPostProgramEmail() to use in Node-schedule
+module.exports.sendPostProgramEmail = sendPostProgramEmail
+>>>>>>> 75c5e1ae9b36dbba93991e7dd69381791adf72e2

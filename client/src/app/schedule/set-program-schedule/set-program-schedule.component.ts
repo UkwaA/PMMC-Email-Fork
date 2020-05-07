@@ -19,18 +19,19 @@ declare var $: any;
 })
 
 export class SetProgramScheduleComponent {
-	//Define success message
-	programColorMessage = ""
-	scheduleSuccessMessage = ""
-	sessionSuccessMessage = ""
-	additionalSessionSuccessMessage = ""
-	blackoutDateSuccessMessage = ""
+	// Define success message
+	programColorMessage = "";
+	scheduleSuccessMessage = "";
+	sessionSuccessMessage = "";
+	additionalSessionSuccessMessage = "";
+	blackoutDateSuccessMessage = "";
 
 	ProgramPK = 0;
 	currentUserPK = 0;
 	allBlackoutDates: any[] = []
 	allSessions: any[] = [];
 	allAdditionalSessions:any[] = [];
+
 	programData: ProgramData = {
 		ProgramPK: 0,
 		Name: "",
@@ -44,9 +45,9 @@ export class SetProgramScheduleComponent {
 		CreatedBy: 0,
 		IsActive: true,
 		SubProgramPK: 0        
-	}
+	};
 
-    allScheduleSettings: any = []
+    allScheduleSettings: any = [];
     currentScheduleSetting = {
         ScheduleSettingPK: -1,
         ProgramPK: 0,
@@ -58,7 +59,7 @@ export class SetProgramScheduleComponent {
         tempStart: "",
         tempEnd: "",
         IsSelected: true
-    }
+    };
 
 	currentSessionDetails = {
 		SessionDetailsPK: 0,		
@@ -77,7 +78,7 @@ export class SetProgramScheduleComponent {
 		CreatedBy: 0,        
 		IsActive: true,
 		IsAllDay: false
-    }
+    };
 
     SetProgramScheduleForm: FormGroup;
     submitted = false;
@@ -87,7 +88,7 @@ export class SetProgramScheduleComponent {
 	hasAdditionalSession = false;
 	hasBlackoutDate = false;
 
-    //WARNING: DO NOT CHANGE THE ORDER OF DAY
+    // WARNING: DO NOT CHANGE THE ORDER OF DAY
     dayArr = [
         {day: "Sunday", value: "SU", eventList:[]},
         {day: "Monday", value: "MO", eventList:[]},
@@ -102,7 +103,7 @@ export class SetProgramScheduleComponent {
         hour: 'numeric',
         minute: 'numeric',
         hour12: true
-	  };
+	};
     selectedColor: string = "";
 	
     public settings: PaletteSettings = {
@@ -129,6 +130,7 @@ export class SetProgramScheduleComponent {
         recurrenceExceptions : 'RecurrenceException'
     };
 	
+	hoveredIndex:any;
 	/********************************************
 	 * FUNCTION DECLARATION
 	*********************************************/
@@ -165,6 +167,7 @@ export class SetProgramScheduleComponent {
 	}
 
 	reloadAllSessions(){
+		this.hoveredIndex = null	
 		this.hasSession = false
 		this.hasAdditionalSession = false
 		this.programScheduleServices.getSessionDetailsById(this.ProgramPK).subscribe((schedules) =>{
@@ -207,7 +210,7 @@ export class SetProgramScheduleComponent {
 				//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
 					this.dayArr.forEach(day =>{
 						if(session.RepeatDay.indexOf(day.value) >= 0){
-								day.eventList.push(session)
+							day.eventList.push(session)
 						}                        
 					})
 				}
@@ -235,11 +238,10 @@ export class SetProgramScheduleComponent {
 	/*********************  END FUNCTION DECLARATION **********************/
 
     constructor (private formBuilder: FormBuilder, public matDialog: MatDialog, private fb: FormBuilder,
-        private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
-        private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
+			private route: ActivatedRoute, private router: Router, private programServices: ProgramServices,
+        	private programScheduleServices: ProgramScheduleService, private auth: AuthenticationService) {}
 
 	ngOnInit(){ 		
-		console.log((new Date()).toISOString())
 		this.errorMessage = ''
 		this.SetProgramScheduleForm = this.fb.group({    
 			programName: [],
@@ -268,16 +270,16 @@ export class SetProgramScheduleComponent {
 						var flag = false
 						var todayDate = (new Date()).toLocaleDateString()
 						this.allScheduleSettings.forEach(schedule => {
-								schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
-								schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
-								schedule.Start = new Date(schedule.Start)
-								schedule.End = new Date(schedule.End)
-								//Set default view to current schedule
-								if(schedule.tempStart <= todayDate && schedule.tempEnd >= todayDate){
-									this.currentScheduleSetting = schedule
-									schedule.IsSelected = true
-									flag = true
-								}
+							schedule.tempStart = (new Date(schedule.Start)).toLocaleDateString()
+							schedule.tempEnd = (new Date(schedule.End)).toLocaleDateString()
+							schedule.Start = new Date(schedule.Start)
+							schedule.End = new Date(schedule.End)
+							//Set default view to current schedule
+							if(schedule.tempStart <= todayDate && schedule.tempEnd >= todayDate){
+								this.currentScheduleSetting = schedule
+								schedule.IsSelected = true
+								flag = true
+							}
 						})									
 						if(!flag){
 							this.currentScheduleSetting = this.allScheduleSettings[0]
@@ -326,7 +328,7 @@ export class SetProgramScheduleComponent {
 						//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList	
 							this.dayArr.forEach(day =>{
 								if(session.RepeatDay.indexOf(day.value) >= 0){
-										day.eventList.push(session)
+									day.eventList.push(session)
 								}                        
 							})
 						}
@@ -359,7 +361,6 @@ export class SetProgramScheduleComponent {
 	get f() { return this.SetProgramScheduleForm.controls; }
     
 	viewSchedule(schedule){
-		console.log(schedule)        
 		this.allScheduleSettings.forEach(schedule => {
 			schedule.IsSelected = false
 		})
@@ -375,7 +376,7 @@ export class SetProgramScheduleComponent {
 			//for each event, check if the Repeat Day is in the list of dayArr => yes, append to eventList
 				this.dayArr.forEach(day =>{
 					if(session.RepeatDay.indexOf(day.value) >= 0){
-							day.eventList.push(session)
+						day.eventList.push(session)
 					}                        
 				})
 			}
@@ -434,17 +435,17 @@ export class SetProgramScheduleComponent {
 		dialogConfig.width = "700px";
 		dialogConfig.autoFocus = false;
 		dialogConfig.data = {
-			 title: "Edit schedule",
-			 mode: "editschedule",
-			 description: "",
-			 programPK: this.ProgramPK,
-			 name: this.programData.Name,
-			 userPK: this.currentUserPK,
-			 currentScheduleSetting: currentScheduleSetting,
-			 allScheduleSetting: this.allScheduleSettings,  
-			 allSessions: this.allSessions,          
-			 actionButtonText: "Save",   
-			 numberOfButton: "2"         
+			title: "Edit schedule",
+			mode: "editschedule",
+			description: "",
+			programPK: this.ProgramPK,
+			name: this.programData.Name,
+			userPK: this.currentUserPK,
+			currentScheduleSetting: currentScheduleSetting,
+			allScheduleSetting: this.allScheduleSettings,  
+			allSessions: this.allSessions,          
+			actionButtonText: "Save",   
+			numberOfButton: "2"         
 			 }
 		const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
 		addScheduleModalDialog.afterClosed().subscribe(res =>{

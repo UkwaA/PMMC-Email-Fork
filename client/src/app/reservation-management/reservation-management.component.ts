@@ -10,14 +10,12 @@ import { AppConstants } from '../constants';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
 import { NumericTextBoxComponent } from '@progress/kendo-angular-inputs';
 
-declare var $: any;
 @Component({
   templateUrl: './reservation-management.component.html',
   styleUrls: ['./reservation-management.component.css']
 })
 
 export class ReservationManagementComponent implements OnInit {
-  // @ViewChild('programCat', { static: false }) programCat;
   p: number;
   role: string;
   UserPK: number;
@@ -34,6 +32,7 @@ export class ReservationManagementComponent implements OnInit {
   selectedValue = 0;
 
   // Dropdown Menu Option
+  programCategories: Array<any>;
   programCategoriesAdmin: Array<any> = [
     { id: 0, name: 'All Program' },
     { id: 1, name: 'Group Program' },
@@ -64,12 +63,7 @@ export class ReservationManagementComponent implements OnInit {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
         if (this.role === '1') {
-          /* this.programCategoriesCustomer.forEach((e) => {
-            this.programCat.appendChild(new Option(e['name'], e['id']));
-          }); */
-          this.programCategoriesCustomer.forEach(e => {
-            $('programCat').append(new Option(e['name'], e['id']));
-          });
+          this.programCategories = this.programCategoriesCustomer;
           this.reservationService
             .getAllReservationByUserPK(user.UserPK)
             .subscribe((resByUser) => {
@@ -121,12 +115,7 @@ export class ReservationManagementComponent implements OnInit {
             });
           this.reservations = this.allReservations;
         } else {
-          this.programCategoriesCustomer.forEach(e => {
-            $('#programCat').append(new Option(e['name'], e['id']));
-          });
-          /* this.programCategoriesAdmin.forEach((e) => {
-            this.programCat.appendChild(new Option(e['name'], e['id']));
-          }); */
+          this.programCategories = this.programCategoriesAdmin;
           /* Get all Reservation details */
           this.reservationService.getAllReservation().subscribe((allRes) => {
             allRes.forEach((item) => {

@@ -49,9 +49,9 @@
                             <label><h5>Current Role</h5></label>
                         </div>
                         <div class="col-md-8">
-                            <div *ngIf = "userDetails.Role_FK == 1">Customer</div>
-                            <div *ngIf = "userDetails.Role_FK == 2">Manager</div>
-                            <div *ngIf = "userDetails.Role_FK == 3">System Admin</div>
+                            <div *ngIf = "userDetails.Role_FK == '1'">Customer</div>
+                            <div *ngIf = "userDetails.Role_FK == '2'">Manager</div>
+                            <div *ngIf = "userDetails.Role_FK == '3'">System Admin</div>
                         </div>
                     </div>
                     <br/>
