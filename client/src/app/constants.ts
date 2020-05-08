@@ -75,11 +75,13 @@ export class AppConstants {
     FIELD_TRIP: 'Field Trip',
     SCOUT_PROGRAM: 'Scout Program',
     DISTANCE_LEARNING: 'Distance Learning',
+    SPECIAL_FIELD_TRIP: 'Specialty Field Trips'
   };
 
   public static SUB_PROGRAM_CODE = {
     FIELD_TRIP: 1,
     SCOUT_PROGRAM: 2,
     DISTANCE_LEARNING: 3,
+    SPECIAL_FIELD_TRIP: 4
   };
 }

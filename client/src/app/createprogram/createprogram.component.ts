@@ -57,6 +57,7 @@ export class CreateProgramComponent implements OnInit {
     { id: 1, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.FIELD_TRIP },
     { id: 2, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.SCOUT_PROGRAM },
     { id: 3, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.DISTANCE_LEARNING },
+    { id: 4, name: AppConstants.SUB_GROUP_PROGRAM_TEXT.SPECIAL_FIELD_TRIP }
   ];
 
   constructor(

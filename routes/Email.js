@@ -4,14 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
-const User = require('../models/User');
-const Email = require('../models/Email');
-const Schedule = require('../models/Schedule.js');
-=======
 const User = require('../models/User')
 const Email = require('../models/Email')
->>>>>>> 75c5e1ae9b36dbba93991e7dd69381791adf72e2
 
 const app = express.Router();
 app.use(cors());
@@ -791,7 +785,7 @@ async function sendPostProgramEmail(reservationInfo, callback) {
   let startTime = (new Date(reservationInfo.Start)).toLocaleString('en-US', displayTimeFormatOption)
   let endTime = (new Date(reservationInfo.End)).toLocaleString('en-US', displayTimeFormatOption)
   let mailOptions = {
-      //from and to email needs to be verified in order to use SES
+      // from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address
     bcc: reservationInfo.EmailList, // list of receivers
@@ -821,14 +815,7 @@ async function sendPostProgramEmail(reservationInfo, callback) {
   callback(info); 
 }
 
-<<<<<<< HEAD
-
-
-// main().catch(console.error);
-module.exports = app
-=======
 //main().catch(console.error);
 module.exports = app
 //export sendPostProgramEmail() to use in Node-schedule
 module.exports.sendPostProgramEmail = sendPostProgramEmail
->>>>>>> 75c5e1ae9b36dbba93991e7dd69381791adf72e2
