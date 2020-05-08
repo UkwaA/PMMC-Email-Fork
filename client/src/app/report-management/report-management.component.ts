@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
-import { ProgramData } from '../data/program-data';
 import { ProgramServices } from '../services/program.services'
+import { ReportServices } from '../services/report.services'
 import { MatTableModule } from '@angular/material/table';
 import { Sort } from '@angular/material';
 import { AuthenticationService } from '../authentication.service';
@@ -28,18 +28,6 @@ const PAYMENT_DATA: PeriodicElement[] = [
   {year: 2018, jan: 9000, feb: 6000, mar: 7000, apr: 8000, may: 2000, jun:5345, jul: 9000, aug: 10000, sep: 11000, oct: 1000, nov: 2345, dec: 1234},
 ];
 
-const MONTHLY_DATA_FIELD_TRIP: PeriodicElement[] = [
-  {year: 2020, jan: 4, feb: 5, mar: 6, apr: 7, may: 8, jun:23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12},
-  {year: 2019, jan: 7, feb: 2, mar: 3, apr: 2, may: 4, jun:63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134},
-  {year: 2018, jan: 9, feb: 6, mar: 7, apr: 8, may: 2, jun:53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124},
-];
-
-const MONTHLY_DATA_GIRL_SCOUT: PeriodicElement[] = [
-  {year: 2020, jan: 20, feb: 53, mar: 64, apr: 7, may: 8, jun:23, jul: 90, aug: 100, sep: 11, oct: 100, nov: 23, dec: 12},
-  {year: 2019, jan: 74, feb: 22, mar: 33, apr: 2, may: 4, jun:63, jul: 9, aug: 100, sep: 11, oct: 10, nov: 23, dec: 134},
-  {year: 2018, jan: 92, feb: 61, mar: 27, apr: 8, may: 2, jun:53, jul: 90, aug: 10, sep: 110, oct: 10, nov: 23, dec: 124},
-];
-
 @Component({
     selector: 'report-management',
     templateUrl: './report-management.component.html',
@@ -47,13 +35,59 @@ const MONTHLY_DATA_GIRL_SCOUT: PeriodicElement[] = [
 })
 
 export class ReportManagementComponent {
-  displayedColumns: string[] = ['year', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  displayedColumns: string[] = ['year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   PaymentDataSource = PAYMENT_DATA;
-  MonthlyDataSourceField = MONTHLY_DATA_FIELD_TRIP;
-  MonthlyDataSourceGirl = MONTHLY_DATA_GIRL_SCOUT;
+  MonthlyDataSourceField:any = []
 
-  
+  //Define variables for date picker
+  endYear:Date = (new Date())
+  startYear:Date = (new Date())
+  steps = 1;
+  isFormValid = true;
+  endYearErrorMessage =  '';
 
-    ngOnInit() {
+  constructor( public reportServices: ReportServices
+  ) {};
+
+  ngOnInit() {
+    this.endYearErrorMessage = ''
+    this.isFormValid = true;
+    this.startYear.setFullYear(this.endYear.getFullYear() - 3);
+    this.reportServices.getReservationsByYearRange(this.startYear.getFullYear(), this.endYear.getFullYear())
+      .subscribe(result =>{
+        this.MonthlyDataSourceField = result;
+      })
+
+  }
+
+  onChangeStartDate(event){
+    if(event > this.endYear){
+      this.endYear = event;
+    }     
+    this.isFormValid = true;
+  };
+
+  onChangeEndDate(event){
+    if(event < this.startYear){
+      this.endYearErrorMessage = "End Year must be after Start Year";
+      this.isFormValid = false;
+		}      
+		else{
+      this.endYearErrorMessage = "";
+      this.isFormValid = true;
+    } 
+  };
+
+  viewMonthlyReport(){
+    if(!this.isFormValid){
+        return
+    }
+    else{
+      this.reportServices.getReservationsByYearRange(this.startYear.getFullYear(), this.endYear.getFullYear())
+      .subscribe(result =>{
+        this.MonthlyDataSourceField = result;
+      })
     }
   }
+
+}

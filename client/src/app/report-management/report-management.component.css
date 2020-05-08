@@ -61,3 +61,8 @@ table{
     cursor: default
   }
  
+  .errorMessage{
+    font-weight: lighter;
+    color: red;
+    font-size: 10pt;
+}
