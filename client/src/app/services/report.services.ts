@@ -12,4 +12,8 @@ export class ReportServices{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'report/get-reservation-by-year-range/' + startYear + '/' + endYear);
     }
 
+    /*******RESERVATION PAYMENT REPORT**********/
+    public getIncomeByYearRange(startYear: any, endYear:any): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'report/get-income-by-year-range/' + startYear + '/' + endYear);
+    }
 }
