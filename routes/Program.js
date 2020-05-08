@@ -10,7 +10,7 @@ const IndividualProgramRequirement = require("../models/IndividualRequirement");
 const GroupProgramRequirement = require("../models/GroupRequirement");
 
 program.use(bodyParser.json());
-program.use(bodyParser.urlencoded({ extended: false }));
+program.use(bodyParser.urlencoded({ extended: true }));
 program.use(cors());
 program.use(fileUpload());
 

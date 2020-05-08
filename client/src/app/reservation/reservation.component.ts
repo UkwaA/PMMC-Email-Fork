@@ -972,7 +972,9 @@ export class ReservationComponent implements OnInit {
               this.programScheduleServices.updateNumberOfParticipant(
                 this.reservationHeader.SchedulePK,
                 this.reservationHeader.NumberOfParticipant
-              );
+              ).subscribe((info) => {
+                console.log(info);
+              });
 
               // Insert Reservation Details
               this.reservationGroupDetails.ReservationPK = resHeaderPK;
@@ -1027,17 +1029,23 @@ export class ReservationComponent implements OnInit {
                     AppConstants.PAYMENT_TYPE_CODE.CARD;
 
                   // Create PaymenData
-                  this.paymentServices.createPaymentData(this.paymentData);
+                  this.paymentServices.createPaymentData(this.paymentData).subscribe((info) => {
+                    console.log(info);
+                  });
 
                   // Update reservation remaining balance
-                  this.resServices.updateRemainingBalance(resHeaderPK, 0);
+                  this.resServices.updateRemainingBalance(resHeaderPK, 0).subscribe((info) => {
+                    console.log(info);
+                  });
                 });
 
               // Update Schedule CurrentNumberParticipant
               this.programScheduleServices.updateNumberOfParticipant(
                 this.reservationHeader.SchedulePK,
                 1
-              );
+              ).subscribe((info) => {
+                console.log(info);
+              });
 
               // Insert Reservation Details
               this.reservationIndividualDetails.ReservationPK = resHeaderPK;

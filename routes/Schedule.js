@@ -1,5 +1,5 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const schedule = express.Router();
 const bodyParser = require("body-parser");
 
@@ -15,7 +15,8 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 schedule.use(bodyParser.json());
-// schedule.use(cors());
+schedule.use(bodyParser.urlencoded({ extended: true }));
+schedule.use(cors());
 
 /*************************************************************
    GET ALL PROGRAM SCHEDULE SETTING AND REQUIREMENTS FOR PROGRAM MANAGEMENT
@@ -1146,15 +1147,20 @@ schedule.post("/set-program-color", (req,res) => {
           UPDATE NUMBER OF PARTICIPANT
  **********************************************/
 schedule.post("/update-number-participant/:id", (req,res) => {
-  const temp = req.body.value;
+  var temp = req.body.value;
+ 
   Schedule.findOne({
     where :{
       SchedulePK: req.params.id 
     }
   })
   .then((result) => {
+    temp = temp + result.CurrentNumberParticipant;
+    let isFull = (temp === result.MaximumParticipant ? true : false);
+
     result.update({
-      CurrentNumberParticipant: result.CurrentNumberParticipant + temp
+      CurrentNumberParticipant: temp,
+      IsFull: isFull
     }).then(
       res.json({
         message: "NUMBER OF PARTICIPANT has been changed."
