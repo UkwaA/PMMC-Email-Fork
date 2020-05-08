@@ -92,12 +92,13 @@ NodeSchedule.scheduleJob(everydayRule, function(){
               });
 
             //TODO: send out post-program email to thank you, survey
-            var query = `(SELECT schedule.SchedulePK, schedule.ProgramPK, program.Name, schedule.Start, schedule.End, reservationheader.UserPK, users.Email
-                    FROM pmmc.schedule 
-                        INNER JOIN pmmc.reservationheader on schedule.SchedulePK = reservationheader.SchedulePK 
-                        INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK 
-                        INNER JOIN pmmc.users on reservationheader.UserPK = users.UserPK                         
-                    WHERE schedule.SchedulePK in (:schedulePKlist))`
+            var query = `(SELECT schedule.SchedulePK, schedule.ProgramPK, program.Name, 
+                            schedule.Start, schedule.End, reservationheader.UserPK, users.Email
+                        FROM pmmc.schedule 
+                            INNER JOIN pmmc.reservationheader on schedule.SchedulePK = reservationheader.SchedulePK 
+                            INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK 
+                            INNER JOIN pmmc.users on reservationheader.UserPK = users.UserPK                         
+                        WHERE schedule.SchedulePK in (:schedulePKlist))`
             Sequelize.query(query,{ 
                 replacements: {schedulePKlist: schedulePKArr},
                 type: Sequelize.QueryTypes.SELECT})

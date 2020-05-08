@@ -4,8 +4,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
-const User = require('../models/User')
-const Email = require('../models/Email')
+const User = require('../models/User');
+const Email = require('../models/Email');
+const Schedule = require('../models/Schedule.js');
 
 const app = express.Router();
 app.use(cors());
@@ -754,6 +755,7 @@ async function sendPaymentConfirmationEmail(user, callback) {
 
 /***********************
   POST-PROGRAM EMAIL
+  //NOTE: THIS HAS BEEN DONE, PLEASE DO NOT MODIFY
 ***********************/
 // app.post('/send-post-program-email', (req, res) => {
 //   sendPostProgramEmail(user, info => {
@@ -761,6 +763,7 @@ async function sendPaymentConfirmationEmail(user, callback) {
 //     res.send(info);
 //   });
 // });
+
 
 async function sendPostProgramEmail(reservationInfo, callback) {
   // create reusable transporter object using the default SMTP transport
