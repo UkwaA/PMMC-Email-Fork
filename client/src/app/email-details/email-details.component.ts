@@ -8,11 +8,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-
-
-
-
-
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     templateUrl: './email-details.component.html',
@@ -28,24 +24,29 @@ export class EmailDetailsComponent {
         EmailPK: 0,
         Subject: '',
         Body: '',
-        // FileData: '', Not yet functioning
         Type: '',
         IsActive: true,
+        HasAttachments: 0,
+        AttachmentNames: ''
     };
-    file: File;
+    filesInfo = {files: [], filesChanged: false};
     isDisabled: boolean;
     Editor = DecoupledEditor;
+    formData = new FormData();
+    currentAttachments = [];
+    deletedFiles=[];
 
     constructor(
         public matDialog: MatDialog,
         private route: ActivatedRoute, private http: HttpClient,
         private services: EmailService, private auth: AuthenticationService,
-        private router: Router) { }
+        private router: Router, private emailService: EmailService) { }
 
     ngOnInit() {
         this.route.params.subscribe(val => {
             this.EmailPK = val.id;
             this.PageMode = val.mode;
+            // this.emailService.getEmailAttachmentsByID();
 
             switch (this.PageMode) {
                 case 'view':
@@ -59,6 +60,9 @@ export class EmailDetailsComponent {
             this.services.getEmailByID(this.EmailPK).subscribe(email => {
                 this.emailData = email;
                 this.emailTypeText = email.Type;
+                if (this.emailData.HasAttachments) {
+                    this.currentAttachments = this.emailData.AttachmentNames.split('/');
+                }
             });
         });
     }
@@ -70,7 +74,24 @@ export class EmailDetailsComponent {
         );
     }
 
-    openModal() {
+    onFileChange(event) {
+        console.log(event.target.files);
+        this.filesInfo.filesChanged = true;
+        let file_list = '';
+        function add_filelist(value){
+            file_list += '<li>' + value + '</li>'
+        }
+        if (this.emailData.HasAttachments)
+            this.emailData.AttachmentNames.split('/').forEach(add_filelist)
+
+        for (var count = 0; count < event.target.files.length; ++count){
+            this.filesInfo.files.push(event.target.files[count]);
+            file_list += '<li>' + event.target.files[count].name+'</li>';
+        }
+        document.getElementById('filelist').innerHTML = '<ul>'+file_list+'</ul>';
+    }
+
+    openSubmissionModal() {
          const dialogConfig = new MatDialogConfig();
          dialogConfig.disableClose = true;
          dialogConfig.id = 'modal-component';
@@ -80,7 +101,7 @@ export class EmailDetailsComponent {
          dialogConfig.autoFocus = false;
          dialogConfig.data = {
              title: 'Update Email Details',
-             description: 'Are you sure that you are ready to submit?',
+             description: 'Are you sure you are ready to submit?',
              actionButtonText: 'Confirm',
              numberOfButton: '2'
          };
@@ -92,9 +113,47 @@ export class EmailDetailsComponent {
         });
     }
 
+    openAttachmentModal(attachment): any {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.id = 'modal-component';
+        dialogConfig.height = 'auto';
+        dialogConfig.maxHeight = '500px';
+        dialogConfig.width = '380px';
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: 'Update Email Details',
+            description: 'Are you sure you would like to delete this attachment?',
+            actionButtonText: 'Confirm',
+            numberOfButton: '2'
+        };
+        const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+        modalDialog.afterClosed().subscribe(result => {
+           if (result === 'Yes') {
+            this.deletedFiles.push(attachment);
+            console.log('deleted files: ' + this.deletedFiles)
+            this.currentAttachments.splice(this.currentAttachments.indexOf(attachment),1);
+           }
+           return false;
+       });
+   }
+
     submit() {
-        console.log(this.emailData);
-        this.services.updateEmail(this.emailData).subscribe(res => {
+        for (var i = 0; i < this.filesInfo.files.length; ++i) {
+            this.formData.append(i.toString(), this.filesInfo.files[i], this.filesInfo.files[i].name);
+        }
+
+        for (const key of Object.keys(this.emailData)) {
+            const value = this.emailData[key];
+            this.formData.append(key, value);
+        }
+        // console.log('to string: ' + this.filesInfo.filesChanged.toString())
+        this.formData.append('filesChanged', this.filesInfo.filesChanged.toString())
+        console.log(this.formData);
+
+        console.log(this.formData.get('EmailPK'))
+
+        this.services.updateEmail(this.formData).subscribe(res => {
             console.log(res);
             if (res) {
                 this.router.navigateByUrl('/profile/email-management');

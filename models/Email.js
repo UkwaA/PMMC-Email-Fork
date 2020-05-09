@@ -20,8 +20,11 @@ module.exports = db.sequelize.define(
         IsActive: {
             type: Sequelize.BOOLEAN
         },
-        FileData: {
-            type: Sequelize.JSON
+        HasAttachments: {
+            type: Sequelize.INTEGER
+        },
+        AttachmentNames: {
+            type: Sequelize.TEXT
         }
     }
 )

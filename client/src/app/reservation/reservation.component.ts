@@ -6,6 +6,7 @@ import { ProgramData } from '../data/program-data';
 import { Payment } from '../data/payment';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { ReservationService } from '../services/reservation.services';
+import { EmailService } from '../services/email.services';
 import {
   SchedulerEvent,
   SchedulerModelFields,
@@ -146,6 +147,7 @@ export class ReservationComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ProgramServices,
     private programScheduleServices: ProgramScheduleService,
+    private emailService: EmailService,
     private fb: FormBuilder,
     public matDialog: MatDialog,
     public auth: AuthenticationService,
@@ -1007,6 +1009,9 @@ export class ReservationComponent implements OnInit {
                 .addGroupReservationDetails(this.reservationGroupDetails)
                 .subscribe((resGroupDetails) => {
                   if (resGroupDetails) {
+                    // Send booking requested email
+                    this.emailService.SendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
+                    
                     const dialogConfig = new MatDialogConfig();
                     // The user can't close the dialog by clicking outside its body
                     dialogConfig.disableClose = true;
@@ -1080,6 +1085,9 @@ export class ReservationComponent implements OnInit {
                 )
                 .subscribe((res) => {
                   if (res) {
+                    // Send booking requested email
+                    this.emailService.SendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
+
                     const dialogConfig = new MatDialogConfig();
                     // The user can't close the dialog by clicking outside its body
                     dialogConfig.disableClose = true;
