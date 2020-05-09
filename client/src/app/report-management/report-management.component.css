@@ -7,8 +7,21 @@ table{
 }
 
 .mat-header-cell{
-  background-color: teal;
+  background-color: #4cb69f;
 
+}
+
+
+h2{
+  color: #00303F; 
+  font-family: 'Open Sans Condensed', sans-serif; 
+  font-size: 40px; 
+  font-weight: 700; 
+  line-height: 64px; 
+  margin: 0 0 0; 
+  padding: 20px 30px; 
+  text-align: center; 
+  text-transform: uppercase;
 }
   
   .col-lg-12{

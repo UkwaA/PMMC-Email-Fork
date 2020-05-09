@@ -1,10 +1,11 @@
-import {Component, OnInit, Input, Inject} from '@angular/core';
+import {Component, OnInit, Input, Inject, ViewChild, ElementRef} from '@angular/core';
 import { ProgramServices } from '../services/program.services'
 import { ReportServices } from '../services/report.services'
 import { MatTableModule } from '@angular/material/table';
 import { Sort } from '@angular/material';
 import { AuthenticationService } from '../authentication.service';
 import { Observable, Observer } from 'rxjs';
+import * as xlsx from 'xlsx';
 
 export interface PeriodicElement {
   year: number;
@@ -33,6 +34,9 @@ export class ReportManagementComponent {
   steps = 1;
   MonthlyDataSourceField:any = [];
   PaymentDataSource: any = [];
+  @ViewChild('PAYMENT',  { static: false }) payment: ElementRef;
+  @ViewChild('MONTHLY',{ static: false }) monthly: ElementRef;
+
   //Define report tab with index
   reportIndex = {
     1: 'Payment Report',
@@ -105,6 +109,22 @@ export class ReportManagementComponent {
   }
 
   tabClick(event){
+  }
+
+  exportToExcelPayment() {
+    const ws: xlsx.WorkSheet =   
+    xlsx.utils.table_to_sheet(this.payment.nativeElement);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+    xlsx.writeFile(wb, 'payment_report.xlsx');
+  }
+
+  exportToExcelMonthly() {
+    const ws: xlsx.WorkSheet =   
+    xlsx.utils.table_to_sheet(this.monthly.nativeElement);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+    xlsx.writeFile(wb, 'monthly_report.xlsx');
   }
 
 }
