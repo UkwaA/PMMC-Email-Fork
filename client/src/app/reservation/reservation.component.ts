@@ -10,7 +10,7 @@ import {
   SchedulerEvent,
   SchedulerModelFields,
 } from '@progress/kendo-angular-scheduler';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { QuantiyFormData } from '../data/quantity-form-data';
 import { ProgramScheduleData } from '../data/program-schedule-data';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -36,11 +36,21 @@ import { PaymentServices } from '../services/payment.services';
 })
 export class ReservationComponent implements OnInit {
   @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
+  private _paymentOption: number;
+  private _customPayment: number;
+  payment = { name: 0};
+  valueControl: any;
+  valid:boolean = false;
+  remaining: number = 0;
+
 
   ProgramPK: number;
   stepOneIsCompleted = false;
   stepTwoIsCompleted = false;
   stepThreeIsCompleted = false;
+
+  // Verify card information
+  isVerified : boolean = false;
 
   // Data Model to store User Input
   reservationHeader = new ReservationHeader();
@@ -818,6 +828,13 @@ export class ReservationComponent implements OnInit {
     this.reservationHeader.Total = balance;
     this.reservationHeader.RemainingBalance = balance;
     this.stepOneIsCompleted = true;
+
+    this.valueControl = new FormControl('', [
+      Validators.required,
+      Validators.min(this.programDetails.DepositAmount),
+      Validators.max(this.reservationHeader.Total)
+    ]);
+
     stepper.next();
   }
 
@@ -922,15 +939,22 @@ export class ReservationComponent implements OnInit {
     this.paymentObj.token = token;
   }
 
+  // Check verification
+  getVerified(verified: boolean){
+    this.isVerified = verified;
+  }
+
+
   submitReservation() {
-    this.resServices
-      .addNewReservationHeader(this.reservationHeader)
-      .subscribe((resHeaderPK) => {
-        if (resHeaderPK) {
-          switch (this.ProgramType) {
+    if(this.valid){
+      this.resServices
+        .addNewReservationHeader(this.reservationHeader)
+        .subscribe((resHeaderPK) => {
+          if (resHeaderPK) {
+            switch (this.ProgramType) {
             case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
               // Update the Amount Due when User checkout
-              this.paymentObj.amount = this.programDetails.DepositAmount;
+              this.paymentObj.amount = this.payment.name;
               this.paymentObj.description = this.auth.getUserDetails().Username;
               this.paymentObj.email = this.auth.getUserDetails().Email;
 
@@ -1055,7 +1079,7 @@ export class ReservationComponent implements OnInit {
                     dialogConfig.width = '430px';
                     dialogConfig.data = {
                       title: 'Thanks You.',
-                      description: 'Thank you for your reservation!',
+                      description: 'Thank you for your reservation! You will be redirect to the homepage!',
                       actionButtonText: 'Ok',
                       numberOfButton: '1',
                     };
@@ -1076,5 +1100,31 @@ export class ReservationComponent implements OnInit {
           }
         }
       });
+    }
+    else {
+      console.log("invalid");
+    }
+  }
+
+  get paymentOption(): number {
+    return this._paymentOption;
+  }
+  set paymentOption(value: number) {
+    this._paymentOption = value;
+    this.updatePaymentName();
+  }
+
+  get customPayment(): number {
+    return this._customPayment;
+  }
+  set customPayment(value: number) {
+    this._customPayment = value;
+    this.updatePaymentName();
+  }
+
+  private updatePaymentName(): void {
+    this.payment.name = this._paymentOption === -1 ? this._customPayment : this._paymentOption;
+    this.valid = this._paymentOption === -1 ? this.valueControl.valid : true;
+    this.remaining = this.reservationHeader.Total - this.payment.name;
   }
 }

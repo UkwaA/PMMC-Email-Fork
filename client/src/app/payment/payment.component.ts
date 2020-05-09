@@ -23,10 +23,17 @@ export class PaymentComponent implements OnInit  {
   @Input() reservationDetails: any;
   @Input() reservationHeader: ReservationHeader;
   @Input() ProgramPK: number;
+  @Input() valid:boolean;
   @Output() token = new EventEmitter<any>();
+  @Output() verified = new EventEmitter<boolean>();
+
 
   elements: Elements;
   card: StripeElement;
+  isClickPayNow: boolean = false;
+  isVerified: boolean = false;
+  enterPayment: boolean = false;
+  isError: boolean = false;
 
   ProgramType = "";
   userDetails: any;
@@ -60,7 +67,7 @@ export class PaymentComponent implements OnInit  {
     this.userDetails = this.auth.getUserDetails();
 
     this.stripeTest = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
     });
 
     this.stripeService.elements(this.elementsOptions)
@@ -108,12 +115,16 @@ export class PaymentComponent implements OnInit  {
       .createToken(this.card, {})
       .subscribe(result => {
         if (result.token) {
-          this.token.emit(result.token)
+          this.token.emit(result.token);
+          this.isVerified = true;
+          this.enterPayment = false;
+          this.verified.emit(this.isVerified);
+          this.isError = false;
 
           // Use the token to create a charge or a customer
           // https://stripe.com/docs/charges
-          const dialogConfig = new MatDialogConfig();
           // The user can't close the dialog by clicking outside its body
+          /* const dialogConfig = new MatDialogConfig();
           dialogConfig.disableClose = true;
           dialogConfig.id = "modal-component";
           dialogConfig.height = "auto";
@@ -129,13 +140,27 @@ export class PaymentComponent implements OnInit  {
           modalDialog.afterClosed().subscribe(result => {
             if (result == "Yes") {
             }
-          })
+          }) */
           console.log(result.token);
         } else if (result.error) {
           // Error creating the token
+          this.isError = true;
           console.log(result.error.message);
         }
       });
+   /*  this.isVerified = true;
+    this.enterPayment = false;
+    this.verified.emit(this.isVerified); */
   }
 
+  isClickPay(){
+    this.isClickPayNow = true;
+    this.enterPayment = true;   
+  }
+
+  changeCard(){
+    this.isVerified = false;
+    this.enterPayment = true;   
+    this.verified.emit(this.isVerified);
+  }
 }

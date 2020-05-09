@@ -239,21 +239,15 @@ export class ReservationManagementComponent implements OnInit {
   openReservationModal() {
     console.log('Reservation Details Modal called');
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.id = 'reservation-modal-component';
     dialogConfig.height = '600px';
     dialogConfig.width = '750x';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = true;
-    dialogConfig.id = 'reservation-modal-component';
-    dialogConfig.height = '600px';
-    dialogConfig.width = '750x';
-    dialogConfig.autoFocus = false;
-
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
 
-    }
+  }
 
     openCancelModal() {
     // Configure Modal Dialog

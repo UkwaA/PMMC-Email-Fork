@@ -7,16 +7,25 @@
     <button #payment mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="pay()">Submit Payment</button>
 </form> -->
 
+<div *ngIf="isVerified" class="row p-3">
+  <h5> <mat-icon>verified_user</mat-icon> Verified succesfully!</h5>
+</div>
 
-<form (ngSubmit)="pay()"[formGroup]="stripeTest">
+<div class="row">
+  <div class="col-md-6">
+    <button *ngIf= "!isClickPayNow" [disabled]="!valid" mat-raised-button class="btn btn-warning left-right" type="submit" (click)="isClickPay()" onfocus="blur()">Pay Now</button>
+    <button *ngIf= "isVerified" mat-raised-button class="btn btn-warning left-right" type="submit" (click)="changeCard()" onfocus="blur()">Change your card</button>
+  </div>
+</div>
+<form [hidden]="!enterPayment" (ngSubmit)="pay()"[formGroup]="stripeTest">
   <div id="card-element">
   </div>
   <button type="submit">
     <div class="spinner hidden" id="spinner"></div>
     <span id="button-text">Verify</span>
   </button>
-  <p id="card-errors" role="alert"></p>
-  <p class="result-message hidden">
+  <p *ngIf="isError">Cannot verify the card. Please try again!</p>
+  <!-- <p class="result-message hidden">
     Verify succeeded
-  </p>
+  </p> -->
 </form>

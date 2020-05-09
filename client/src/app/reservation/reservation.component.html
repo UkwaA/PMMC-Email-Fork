@@ -754,8 +754,8 @@
           <table class="table table-hover" style="width:100%">
               <thead>
                   <tr>
-                      <th style="width:60%">General Information</th>
-                      <th style="width:40%">  </th>
+                      <th style="width:50%">General Information</th>
+                      <th style="width:50%">  </th>
                   </tr>
               </thead>
               <tbody>
@@ -776,8 +776,8 @@
           <table class="table table-hover" style="width:100%">
               <thead>
                   <tr>
-                      <th style="width:60%">Reservation Information</th>
-                      <th style="width:40%">  </th>
+                      <th style="width:50%">Reservation Information</th>
+                      <th style="width:50%">  </th>
                   </tr>
               </thead>
               <tbody *ngIf= "ProgramType == 0">
@@ -900,8 +900,8 @@
           <table class="table table-hover" style="width:100%">
               <thead>
                   <tr>
-                      <th style="width:60%">Payment Information</th>
-                      <th style="width:40%">  </th>
+                      <th style="width:50%">Payment Information</th>
+                      <th style="width:50%">  </th>
                   </tr>
               </thead>
               <tbody>
@@ -920,16 +920,44 @@
                   <tr >
                     <td>Amount Due Today</td>
                     <!-- Amount Due will be 25 for group program -->
-                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}</td>
+                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}
+                    </td>
                     <!-- Amount Due will be the Total for Individual program -->
-                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}</td>
+                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}
+                    </td>
+                  </tr>
+                  <tr >
+                    <td>Payment Verifivation </td>
+                    <td>
+                      <div *ngIf= "ProgramType == 0" class="payment-info">
+                        <label id="radio-group-label">Pick your choice of payment: </label>
+                        <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
+                            <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
+                            <mat-radio-button  class = "radio-button" name="payment-name" [value]="reservationHeader.Total">Pay in full: ${{reservationHeader.Total}}</mat-radio-button>
+                            <mat-radio-button class = "radio-button"  name="payment_name" [value]="-1">
+                              <mat-form-field>
+                                <input matInput type="number" placeholder="Other amount" [formControl]="valueControl" [min]="programDetails.DepositAmount" [max]="reservationHeader.Total" [(ngModel)]="customPayment" (ngModelChange)="paymentOption = -1">
+                                <mat-hint>The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}</mat-hint>
+                                <mat-error *ngIf="valueControl.hasError('min') || valueControl.hasError('max')">
+                                  The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}
+                                </mat-error>
+                                <mat-error *ngIf="valueControl.hasError('required')">
+                                  The amount is <strong>required</strong>
+                                </mat-error>
+                              </mat-form-field>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <h6 *ngIf="valid">Remaining Balance: {{remaining}}</h6>
+                      </div>
+                      <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid"></payment>
+                    </td>
                   </tr>
               </tbody>
           </table>
         </div>
 
          <!-- Verify Payment Info -->
-         <div class="table-responsive-sm">
+         <!-- <div class="table-responsive-sm">
           <table class="table table-hover" style="width:100%">
               <thead>
                   <tr>
@@ -938,10 +966,33 @@
                   </tr>
               </thead>
           </table>
+        </div> -->
+        <!-- <div class="payment-info">
+          <label id="radio-group-label">Pick your choice of payment: </label>
+          <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
+              <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
+              <mat-radio-button  class = "radio-button" name="payment-name" [value]="reservationHeader.Total">Pay in full: ${{reservationHeader.Total}}</mat-radio-button>
+              <mat-radio-button class = "radio-button"  name="payment_name" value="other">
+                <mat-form-field>
+                  <input matInput type="number" placeholder="Other amount" [formControl]="valueControl" [min]="programDetails.DepositAmount" [max]="reservationHeader.Total" [(ngModel)]="customPayment" (ngModelChange)="paymentOption = 'other'">
+                  <mat-hint>The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}</mat-hint>
+                  <mat-error *ngIf="valueControl.hasError('min') || valueControl.hasError('max')">
+                    The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}
+                  </mat-error>
+                  <mat-error *ngIf="valueControl.hasError('required')">
+                    The amount is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </mat-radio-button>
+          </mat-radio-group>
+          <h6> {{payment.name}} </h6>
         </div>
-        <payment (token)="dataChangedHandler($event)"></payment>
+       
+        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)"></payment> -->
 
       </div>
+      <mat-divider></mat-divider>
+      <br>
       <!-- <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
         <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
       </ng-container>
@@ -950,7 +1001,7 @@
       </ng-container> -->
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-        <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button"> Submit </button>  
+        <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button" [disabled]="!isVerified"> Submit </button>  
       </div>
     </mat-step>
   </mat-horizontal-stepper>

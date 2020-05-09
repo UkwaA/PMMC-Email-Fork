@@ -1,6 +1,6 @@
 .container {
-    padding-top: 100px;
-    padding-bottom: 56px;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 .width-btn{
@@ -78,4 +78,25 @@ button.full:disabled{
   border-radius: 20px;
   width: 90px;
   height: 30px;    
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+mat-form-field{
+  width: 400px;
+}
+
+.payment-info label{
+  font-family: 'Source Sans Pro', sans-serif; 
+  font-size: 20px;
+  font-weight: bold;
+  color: #08b2b8; 
 }
