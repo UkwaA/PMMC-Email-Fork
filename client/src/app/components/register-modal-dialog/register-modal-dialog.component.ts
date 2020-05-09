@@ -25,6 +25,7 @@ export class RegisterModalDialogComponent implements OnInit {
     submitted = false;
     errorMessage = '';
     currentUserPK: number;
+    subscribeChecked: boolean;
 
     userInfo: UserData = {
       UserPK: 0,
@@ -54,7 +55,7 @@ export class RegisterModalDialogComponent implements OnInit {
       private custService: CustomerService, private router: Router,
       public dialogLoginRef: MatDialogRef<LoginPromptModalComponent>,
       public emailService: EmailService,
-      @Inject(MAT_DIALOG_DATA) private modalData: any) {}
+      @Inject(MAT_DIALOG_DATA) public modalData: any) {}
 
     ngOnInit() {
       this.newUserForm = this.fb.group({

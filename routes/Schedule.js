@@ -15,6 +15,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 schedule.use(bodyParser.json());
+schedule.use(bodyParser.urlencoded({ extended: true }));
 schedule.use(cors());
 
 /*************************************************************
@@ -1145,32 +1146,26 @@ schedule.post("/set-program-color", (req,res) => {
 /**********************************************
           UPDATE NUMBER OF PARTICIPANT
  **********************************************/
-schedule.put("/update-number-participant/:id", (req,res) => {
+schedule.post("/update-number-participant/:id", (req,res) => {
+  var temp = req.body.value;
+ 
   Schedule.findOne({
     where :{
       SchedulePK: req.params.id 
     }
   })
   .then((result) => {
-    if(result){
-      console.log(req.body.quantity);
-      var temp = result.CurrentNumberParticipant + req.body.quantity;
-      result.update({
-        CurrentNumberParticipant: temp
-      })
-      .then(result =>{
-        if (result) {
-          res.send({
-           message: "NUMBER OF PARTICIPANT has been changed."
-          });
-        }
-        else {
-          res.send({
-           error: "Cannot update NUMBER OF PARTICIPANT."
-          });
-        }
-      })
-    }
+    temp = temp + result.CurrentNumberParticipant;
+    let isFull = (temp === result.MaximumParticipant ? true : false);
+
+    result.update({
+      CurrentNumberParticipant: temp,
+      IsFull: isFull
+    }).then(
+      res.json({
+        message: "NUMBER OF PARTICIPANT has been changed."
+    }))
+    
   })
   .catch(err => {
     res.send("error: " + err);

@@ -36,6 +36,9 @@ app.use('/reservation', Reservation)
 var Payment = require('./routes/Payment')
 app.use('/payment', Payment)
 
+var Report = require('./routes/Report')
+app.use('/report', Report)
+
 var NodeSchedule = require('./routes/Node-Schedule')
 app.use('/node-schedule', NodeSchedule)
 

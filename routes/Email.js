@@ -4,8 +4,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
-const User = require('../models/User')
-const Email = require('../models/Email')
+const User = require('../models/User');
+const Email = require('../models/Email');
+const Schedule = require('../models/Schedule.js');
 
 const app = express.Router();
 app.use(cors());
@@ -29,7 +30,6 @@ app.get('/get-all-emails', (req,res) => {
   .then(email => {
     if (email) {
       res.json(email);
-      console.log(email);
     }
   })
   .catch(err => {
@@ -360,6 +360,7 @@ async function sendPasswordConfirmationEmail(userInfo, callback){
     from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
     subject: "PMMC - Update Password Confirmation", // Subject line
+    
     html: `<h1>Hi ${userInfo.Username},</h1><br>
     <h4>Email: ${userInfo.Email}</h4>     
     <h4>This is the confirmation that your password has been updated.</h4>
@@ -388,13 +389,19 @@ app.post('/create-new-user-confirmation-email', (req,res) => {
           userInfo.Username = user.Username
           userInfo.UserPK = user.UserPK
           userInfo.Email = user.Email
-          userInfo.Password = user.Password            
+          userInfo.Password = user.Password  
           
-          //send email to user            
-          CreateNewUserConfirmationEmail(userInfo, info => {
-              console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-              res.send(info);
-            });
+          Email.findOne({
+            where: {EmailPK: 4}
+          }).then(email => {
+            if (email){
+              CreateNewUserConfirmationEmail(userInfo, email, info => {
+                console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+                res.send(info);
+              });
+            }
+          })
+          
         }          
     })
     .catch(err => {
@@ -402,7 +409,7 @@ app.post('/create-new-user-confirmation-email', (req,res) => {
     })
 });
 
-async function CreateNewUserConfirmationEmail(userInfo, callback){
+async function CreateNewUserConfirmationEmail(userInfo, email, callback){
   let transporter = nodemailer.createTransport({
     host: process.env.emailServer_host,
     port: process.env.emailServer_port,
@@ -424,6 +431,8 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
   let token = jwt.sign(payload, process.env.SECRET_KEY, {
     expiresIn: 604800 //expires in 7 days
   })
+
+  email.Body = email.Body.replace("{Username}", `${userInfo.Username}`).replace("{token}", `${token}`)
   
   //For Testing only
     // let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
@@ -434,19 +443,8 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
   let mailOptions = {
     from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
-    subject: "PMMC - New Account Confirmation", // Subject line
-    html: `<h2>Hi,</h2>
-    <h4>Thank you for registering a new account with Pacific Marine Mammal Center. 
-    This account will give you the opportunity to book programs, view/modify reservations, 
-    save payment information for later use and much more. If you have any questions please do not 
-    hesitate to contact us. Lastly, for future reference we have included your username below.
-    </h4>
-    <h4>Your username is: ${userInfo.Username} </h4>
-    <h4>If you would like to reset your password please click the following link to do so: </h4>
-    <h4>http://localhost:4200/login/reset-password/${token}</h4>
-    <h4>The link will expire within 7 days.</h4>
-    <h4> We look forward to seeing you in the future. </h4>
-    <h5>If you did not request a new account, please contact us immediately.</h5>`
+    subject: email.Subject, // Subject line
+    html: email.Body
     };
 
   let info = await transporter.sendMail(mailOptions);
@@ -457,6 +455,7 @@ async function CreateNewUserConfirmationEmail(userInfo, callback){
   PROGRAM BOOKED - SEND EMAIL CONFIRMATION FOR PROGRAM REQUESTED
 ***********************************************************************/
 app.post('/send-booking-request-confirmation-email', (req,res) => {
+  console.log("booking requested")
   User.findOne({
     where: {          
       UserPK : req.body.UserPK
@@ -532,6 +531,28 @@ let info = await transporter.sendMail(mailOptions);
 callback(info);
 }
 
+
+/***********************
+  CHANGE EMAIL ACTIVE STATUS
+***********************/
+app.post('/change-email-active-status', (req, res) => {
+  console.log("Change email called2");
+  const email = {IsActive: req.body.IsActive}
+  Email.update(email, {where: {EmailPK: req.body.EmailPK}})
+  res.send(true);
+})
+
+/***********************
+  GET  EMAIL ATTACHMENTS
+***********************/
+app.get('/get-email-attachments/:id', (req, res) => {
+  Email.findOne({
+    where: {EmailPK: req.params.id}
+  }).then(email => {
+    console.log(email.fileData)
+  })
+})
+
 /***********************
   SEND REGISTRATION CONFIRMATION EMAIL
 ***********************/
@@ -588,15 +609,21 @@ app.post('/send-program-confirmation-email', (req, res) => {
     }
   }).then( user => {
     if (user){
-      sendProgramConfirmationEmail(user, info => {
-        console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-        res.send(info);
+      Schedule.findOne({
+        where: {SchedulePK: req.body.SchedulePK}
+      }).then( schedule => {
+        Email.findOne({
+          where: {EmailPK: 5}
+        }).then(email => {
+          sendProgramConfirmationEmail(user, email, schedule, req.body.programName, info => {
+            console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+            res.send(info);
+          })
+        })
       })
-  }
-  });
-});
+  }})});
 
-async function sendProgramConfirmationEmail(user, callback) {
+async function sendProgramConfirmationEmail(user, email, schedule, programName, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
@@ -615,11 +642,11 @@ async function sendProgramConfirmationEmail(user, callback) {
       // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
-    subject: "PMMC - Final Booking Confirmation", // Subject line
+    subject: 'Program Confirmation', // Subject line
     html: `
     <i>Your program with Pacific Marine Mammal Center has been confirmed! 
     You are now registered for:
-    (PROGRAM NAME, DATE & TIME SHOULD BE INSERTED AUTOMATICALLY HERE) </i>
+    ${programName} at ${schedule.Start} </i>
     <i>We have processed your deposit of 
     (AUTOMATIC INSERTION OF DEPOSIT AMOUNT IF MADE). 
     Your remaining balance of (AUTOMATIC INSERTION OF REMAINING BALANCE DUE) 
@@ -728,6 +755,7 @@ async function sendPaymentConfirmationEmail(user, callback) {
 
 /***********************
   POST-PROGRAM EMAIL
+  //NOTE: THIS HAS BEEN DONE, PLEASE DO NOT MODIFY
 ***********************/
 // app.post('/send-post-program-email', (req, res) => {
 //   sendPostProgramEmail(user, info => {
@@ -735,6 +763,7 @@ async function sendPaymentConfirmationEmail(user, callback) {
 //     res.send(info);
 //   });
 // });
+
 
 async function sendPostProgramEmail(reservationInfo, callback) {
   // create reusable transporter object using the default SMTP transport
@@ -759,7 +788,7 @@ async function sendPostProgramEmail(reservationInfo, callback) {
   let startTime = (new Date(reservationInfo.Start)).toLocaleString('en-US', displayTimeFormatOption)
   let endTime = (new Date(reservationInfo.End)).toLocaleString('en-US', displayTimeFormatOption)
   let mailOptions = {
-      //from and to email needs to be verified in order to use SES
+      // from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address
     bcc: reservationInfo.EmailList, // list of receivers

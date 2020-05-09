@@ -5,7 +5,7 @@
         </div>
 
         <div class="tab-group col-lg-12">
-            <mat-tab-group>
+            <mat-tab-group (selectedTabChange)="tabClick($event)">
                 <mat-tab>
                     <ng-template mat-tab-label>
                         <mat-icon matListIcon>payment </mat-icon>
@@ -17,20 +17,38 @@
                     <div class="col-sm-12">
                         <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Payment Report</strong>
                         </h5>
-                        <kendo-daterange class="float-left">
+                        <div class="row">
                             <label>
                                 <span class="label p-3">From </span>
-                                <!-- <kendo-dateinput kendoDateRangeStartInput 
-                                        [(value)]="range.start"
-                                        (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                                <kendo-dateinput
+                                    [format]="'yyyy'"
+                                    [steps]="steps"
+                                    [max]="endYear"
+                                    [spinners]="true"
+                                    [(ngModel)]="startYear"
+                                    (valueChange)="onChangeStartDate($event)"
+                                ></kendo-dateinput>
                             </label>
                             <label>
                                 <span class="label p-3">To </span>
-                                <!-- <kendo-dateinput kendoDateRangeEndInput 
-                                        [(value)]="range.end"
-                                        (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                                <kendo-dateinput
+                                    [format]="'yyyy'"
+                                    [steps]="steps"                                
+                                    [min] = "startYear"
+                                    [spinners]="true"
+                                    [(ngModel)]="endYear"
+                                    (valueChange)="onChangeEndDate($event)"
+                                ></kendo-dateinput>
                             </label>
-                        </kendo-daterange>
+                            <button mat-raised-button id="modal-action-button" color='primary' (click)="viewPaymentReport()"
+                                [disabled]='!isFormValid'>
+                                View
+                            </button>
+                        </div>
+                        <div class="row" *ngIf="YearErrorMessage">
+                            <div class="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{YearErrorMessage}}</div>
+                        </div>
                     </div>
 
                     <br /><br />
@@ -47,63 +65,63 @@
                             <td mat-cell *matCellDef="let element">{{element.year}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="jan">
-                            <th mat-header-cell *matHeaderCellDef> Jan </th>
+                        <ng-container matColumnDef="01">
+                            <th mat-header-cell *matHeaderCellDef> 01 </th>
                             <td mat-cell *matCellDef="let element">{{element.jan}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="feb">
-                            <th mat-header-cell *matHeaderCellDef> Feb </th>
+                        <ng-container matColumnDef="02">
+                            <th mat-header-cell *matHeaderCellDef> 02 </th>
                             <td mat-cell *matCellDef="let element">{{element.feb}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="mar">
-                            <th mat-header-cell *matHeaderCellDef> Mar </th>
+                        <ng-container matColumnDef="03">
+                            <th mat-header-cell *matHeaderCellDef> 03 </th>
                             <td mat-cell *matCellDef="let element">{{element.mar}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="apr">
-                            <th mat-header-cell *matHeaderCellDef> Apr </th>
+                        <ng-container matColumnDef="04">
+                            <th mat-header-cell *matHeaderCellDef> 04 </th>
                             <td mat-cell *matCellDef="let element">{{element.apr}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="may">
-                            <th mat-header-cell *matHeaderCellDef> May </th>
+                        <ng-container matColumnDef="05">
+                            <th mat-header-cell *matHeaderCellDef> 05 </th>
                             <td mat-cell *matCellDef="let element">{{element.may}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="jun">
-                            <th mat-header-cell *matHeaderCellDef> Jun </th>
+                        <ng-container matColumnDef="06">
+                            <th mat-header-cell *matHeaderCellDef> 06 </th>
                             <td mat-cell *matCellDef="let element">{{element.jun}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="jul">
-                            <th mat-header-cell *matHeaderCellDef> Jul </th>
+                        <ng-container matColumnDef="07">
+                            <th mat-header-cell *matHeaderCellDef> 07 </th>
                             <td mat-cell *matCellDef="let element">{{element.jul}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="aug">
-                            <th mat-header-cell *matHeaderCellDef> Aug </th>
+                        <ng-container matColumnDef="08">
+                            <th mat-header-cell *matHeaderCellDef> 08 </th>
                             <td mat-cell *matCellDef="let element">{{element.aug}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="sep">
-                            <th mat-header-cell *matHeaderCellDef> Sep </th>
+                        <ng-container matColumnDef="09">
+                            <th mat-header-cell *matHeaderCellDef> 09 </th>
                             <td mat-cell *matCellDef="let element">{{element.sep}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="oct">
-                            <th mat-header-cell *matHeaderCellDef> Oct </th>
+                        <ng-container matColumnDef="10">
+                            <th mat-header-cell *matHeaderCellDef> 10 </th>
                             <td mat-cell *matCellDef="let element">{{element.oct}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="nov">
-                            <th mat-header-cell *matHeaderCellDef> Nov </th>
+                        <ng-container matColumnDef="11">
+                            <th mat-header-cell *matHeaderCellDef> 11 </th>
                             <td mat-cell *matCellDef="let element">{{element.nov}}</td>
                         </ng-container>
 
-                        <ng-container matColumnDef="dec">
-                            <th mat-header-cell *matHeaderCellDef> Dec </th>
+                        <ng-container matColumnDef="12">
+                            <th mat-header-cell *matHeaderCellDef> 12 </th>
                             <td mat-cell *matCellDef="let element">{{element.dec}}</td>
                         </ng-container>
 
@@ -120,21 +138,40 @@
                         </span>
                     </ng-template>
                     <div class="col-sm-12">
-                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Monthly Report</strong></h5>
-                        <kendo-daterange class="float-left">
+                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Monthly Report</strong></h5>                        
+                        <div class="row">
                             <label>
                                 <span class="label p-3">From </span>
-                                <!-- <kendo-dateinput kendoDateRangeStartInput 
-                                             [(value)]="range.start"
-                                             (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                                <kendo-dateinput
+                                    [format]="'yyyy'"
+                                    [steps]="steps"
+                                    [max]="endYear"
+                                    [spinners]="true"
+                                    [(ngModel)]="startYear"
+                                    (valueChange)="onChangeStartDate($event)"
+                                ></kendo-dateinput>
                             </label>
                             <label>
                                 <span class="label p-3">To </span>
-                                <!-- <kendo-dateinput kendoDateRangeEndInput 
-                                             [(value)]="range.end"
-                                             (valueChange)="onChangeDate()"></kendo-dateinput> -->
+                                <kendo-dateinput
+                                    [format]="'yyyy'"
+                                    [steps]="steps"                                
+                                    [min] = "startYear"
+                                    [spinners]="true"
+                                    [(ngModel)]="endYear"
+                                    (valueChange)="onChangeEndDate($event)"
+                                ></kendo-dateinput>
                             </label>
-                        </kendo-daterange>
+                            <button mat-raised-button id="modal-action-button" color='primary' (click)="viewMonthlyReport()"
+                                [disabled]='!isFormValid'>
+                                View
+                            </button>
+                        </div>
+                        <div class="row" *ngIf="YearErrorMessage">
+                            <div class="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{YearErrorMessage}}</div>
+                        </div>                        
+                        
                     </div>
                     <br /><br />
                     <div class="download-btn col-md-12" style="text-align: right;">
@@ -143,80 +180,83 @@
                             <mat-icon matListIcon>cloud_download</mat-icon>
                         </button>
                     </div>
-                    <h4 class="program-name float-left">Field Trip</h4>
-                    <table mat-table [dataSource]="MonthlyDataSourceField" class="mat-elevation-z8">
-                        <ng-container matColumnDef="year">
-                            <th mat-header-cell *matHeaderCellDef> Year </th>
-                            <td mat-cell *matCellDef="let element">{{element.year}}</td>
-                        </ng-container>
+                    <div *ngFor="let program of MonthlyDataSourceField">
+                        <h4 class="program-name float-left">{{program.ProgramName}}</h4>
+                        <table mat-table [dataSource]="program.Data" class="mat-elevation-z8">
+                            <ng-container matColumnDef="year">
+                                <th mat-header-cell *matHeaderCellDef> Year </th>
+                                <td mat-cell *matCellDef="let element">{{element.year}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="jan">
-                            <th mat-header-cell *matHeaderCellDef> Jan </th>
-                            <td mat-cell *matCellDef="let element">{{element.jan}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="01">
+                                <th mat-header-cell *matHeaderCellDef> 01 </th>
+                                <td mat-cell *matCellDef="let element">{{element.jan}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="feb">
-                            <th mat-header-cell *matHeaderCellDef> Feb </th>
-                            <td mat-cell *matCellDef="let element">{{element.feb}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="02">
+                                <th mat-header-cell *matHeaderCellDef> 02 </th>
+                                <td mat-cell *matCellDef="let element">{{element.feb}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="mar">
-                            <th mat-header-cell *matHeaderCellDef> Mar </th>
-                            <td mat-cell *matCellDef="let element">{{element.mar}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="03">
+                                <th mat-header-cell *matHeaderCellDef> 03 </th>
+                                <td mat-cell *matCellDef="let element">{{element.mar}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="apr">
-                            <th mat-header-cell *matHeaderCellDef> Apr </th>
-                            <td mat-cell *matCellDef="let element">{{element.apr}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="04">
+                                <th mat-header-cell *matHeaderCellDef> 04 </th>
+                                <td mat-cell *matCellDef="let element">{{element.apr}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="may">
-                            <th mat-header-cell *matHeaderCellDef> May </th>
-                            <td mat-cell *matCellDef="let element">{{element.may}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="05">
+                                <th mat-header-cell *matHeaderCellDef> 05 </th>
+                                <td mat-cell *matCellDef="let element">{{element.may}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="jun">
-                            <th mat-header-cell *matHeaderCellDef> Jun </th>
-                            <td mat-cell *matCellDef="let element">{{element.jun}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="06">
+                                <th mat-header-cell *matHeaderCellDef> 06 </th>
+                                <td mat-cell *matCellDef="let element">{{element.jun}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="jul">
-                            <th mat-header-cell *matHeaderCellDef> Jul </th>
-                            <td mat-cell *matCellDef="let element">{{element.jul}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="07">
+                                <th mat-header-cell *matHeaderCellDef> 07 </th>
+                                <td mat-cell *matCellDef="let element">{{element.jul}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="aug">
-                            <th mat-header-cell *matHeaderCellDef> Aug </th>
-                            <td mat-cell *matCellDef="let element">{{element.aug}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="08">
+                                <th mat-header-cell *matHeaderCellDef> 08 </th>
+                                <td mat-cell *matCellDef="let element">{{element.aug}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="sep">
-                            <th mat-header-cell *matHeaderCellDef> Sep </th>
-                            <td mat-cell *matCellDef="let element">{{element.sep}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="09">
+                                <th mat-header-cell *matHeaderCellDef> 09 </th>
+                                <td mat-cell *matCellDef="let element">{{element.sep}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="oct">
-                            <th mat-header-cell *matHeaderCellDef> Oct </th>
-                            <td mat-cell *matCellDef="let element">{{element.oct}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="10">
+                                <th mat-header-cell *matHeaderCellDef> 10 </th>
+                                <td mat-cell *matCellDef="let element">{{element.oct}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="nov">
-                            <th mat-header-cell *matHeaderCellDef> Nov </th>
-                            <td mat-cell *matCellDef="let element">{{element.nov}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="11">
+                                <th mat-header-cell *matHeaderCellDef> 11 </th>
+                                <td mat-cell *matCellDef="let element">{{element.nov}}</td>
+                            </ng-container>
 
-                        <ng-container matColumnDef="dec">
-                            <th mat-header-cell *matHeaderCellDef> Dec </th>
-                            <td mat-cell *matCellDef="let element">{{element.dec}}</td>
-                        </ng-container>
+                            <ng-container matColumnDef="12">
+                                <th mat-header-cell *matHeaderCellDef> 12 </th>
+                                <td mat-cell *matCellDef="let element">{{element.dec}}</td>
+                            </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
-                    </table>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+                        </table>
+                        <br/><br/>
+                    </div>
 
                     <br /><br />
 
-                    <h4 class="program-name float-left">Girl Scout</h4>
+                    <!-- <h4 class="program-name float-left">Girl Scout</h4>
                     <table mat-table [dataSource]="MonthlyDataSourceGirl" class="mat-elevation-z8">
                         <ng-container matColumnDef="year">
                             <th mat-header-cell *matHeaderCellDef> Year </th>
@@ -285,7 +325,7 @@
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
-                    </table>
+                    </table> -->
 
                 </mat-tab>
                 <mat-tab>

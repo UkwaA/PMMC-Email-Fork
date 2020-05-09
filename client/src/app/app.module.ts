@@ -23,6 +23,7 @@ import { EmailService } from './services/email.services';
 import { EmailDetailsComponent } from './email-details/email-details.component';
 import { CustomerService } from './services/customer.services';
 import { ProgramScheduleService } from './services/schedule.services';
+import { ReportServices } from './services/report.services';
 import { ReservationService } from './services/reservation.services';
 import { GroupProgramComponent } from './group-program/group-program.component';
 import { IndividualProgramComponent} from './individual-program/individual-program.component';
@@ -240,7 +241,8 @@ const routes: Routes = [
     NgxStripeModule.forRoot('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W'),
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService,
-              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, DataStorage
+              AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, 
+              ReportServices, DataStorage
               // {
               //   provide: HTTP_INTERCEPTORS,
               //   useClass: AuthInterceptor,
