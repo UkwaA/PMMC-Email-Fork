@@ -6,11 +6,15 @@ const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Email = require('../models/Email');
-const Schedule = require('../models/Schedule.js');
+const UserDetails = require('../models/UserDetails')
+const Schedule = require('../models/Schedule');
+const fs = require("fs");
+const fileUpload = require("express-fileupload");
 
 const app = express.Router();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 //TO DO: need to update to sponsor's email server
 let emailServer = {
@@ -109,7 +113,6 @@ app.get('/get-email-by-id/:id', (req,res) => {
   .then(email => {
     if (email) {
       res.json(email);
-      console.log(email);
     }
   })
   .catch(err => {
@@ -121,11 +124,51 @@ app.get('/get-email-by-id/:id', (req,res) => {
   UPDATE EMAIL
 ***********************/
 app.post('/update-email', (req,res) => {
-  console.log(req.body)
+  console.log('Updating email');
+  // var files = req.body.fileDetails.files;
+  var filesChanged = (req.body.filesChanged == 'true')
+  var hasAttachments;
+
+  // Creates a new directory for Email ID attachments if it does not exist
+  var tempDir = './public/uploads/email-attachments/'+req.body.EmailPK;
+  if (filesChanged) {
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+  }
+  var attachmentNames = '';
+  var numAttachments = 0;
+
+  // Moves the new files to the newly created directory
+  // for (var i = 0; i < 3; ++i) {
+  //   var file = req.files[i];
+  //   var filePath = tempDir + '/' + file.name;
+  //   file.mv(filePath);
+  // } 
+  // console.log('len: ' + fs.readdir(tempDir).length());
+
+  function printNames(value){
+    console.log(value);
+    attachmentNames += value+'/';
+  }
+
+  function printValues(value){
+    console.log('new value: ' + value)
+  }
+
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir))
+    fs.readdirSync(tempDir).forEach(printNames);
+  attachmentNames = attachmentNames.slice(0,-1);
+  if (attachmentNames.length > 0)
+    numAttachments = attachmentNames.split('/').length;
+
   const email = {
     Subject: req.body.Subject,
     Body: req.body.Body,
     Type: req.body.Type,
+    HasAttachments: numAttachments,
+    AttachmentNames: attachmentNames
   }
   Email.update(email, {
     where:{
@@ -135,7 +178,7 @@ app.post('/update-email', (req,res) => {
   .then(email => {
     if (email) {
       res.json("Email successfully updated");
-      console.log(email);
+      // console.log(email);
     }
   })
   .catch(err => {
@@ -531,6 +574,112 @@ let info = await transporter.sendMail(mailOptions);
 callback(info);
 }
 
+/***********************
+  CONVERT PROGRAM TIME
+************************/
+function convertTime(time){
+  time = time.split(':');
+
+  var hours = Number(time[0]);
+  var minutes = Number(time[1]);
+
+  var timeValue;
+
+  if (hours > 0 && hours <= 12) {
+    timeValue= '' + hours;
+  } else if (hours > 12) {
+    timeValue= '' + (hours - 12);
+  } else if (hours == 0) {
+    timeValue= '12';
+  }
+  
+  timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;
+  timeValue += (hours >= 12) ? " P.M" : " A.M";
+
+  console.log(timeValue);
+  return timeValue;
+}
+
+/***********************
+  SEND SPECIFIC PROGRAM EMAIL
+************************/
+app.post('/send-pinniped-program-email', (req, res) => {
+  console.log('pinniped email route');
+  console.log(req.body)
+  console.log(req.body.UserPK)
+
+  console.log('Part 2');
+
+  tempDir = './public/uploads/email-attachments/77/';
+
+  attachments = [];
+
+  function addAttachmentNames(value){
+    console.log(value);
+    attachments.push({filename: value, path: tempDir+value})
+  }
+
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir)) {
+    console.log('directory exists');
+    fs.readdirSync(tempDir).forEach(addAttachmentNames);
+  }
+  console.log(attachments);
+
+  var firstName, programDateTime;
+  UserDetails.findOne({
+    where: {UserPK: req.body.UserPK}
+  }).then(user => {
+    console.log('1st name: ' + user.FirstName)
+    firstName = user.FirstName;
+
+    Schedule.findOne({
+      where: {SchedulePK: req.body.SchedulePK}
+    }).then(schedule => {
+      programDateTime = new Date(schedule.Start);
+      var date = programDateTime.toDateString() + ' at ' + convertTime(programDateTime.toTimeString().slice(0,5))
+      sendPinnipedProgramEmail(user.FirstName, user.Email, date, attachments, info => {
+        console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+        res.send(info);
+      })
+    })
+
+  })
+
+})
+
+async function sendPinnipedProgramEmail(firstName, email, date, Attachments, callback) {
+  let transporter = nodemailer.createTransport({
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
+    }
+  });
+
+  let mailOptions = {
+      //from and to email needs to be verified in order to use SES
+      // otherwise, need to upgrade to Premium
+    from: process.env.emailServer_sponsorEmail, // sender address
+    to: "uakkum@uci.edu", // list of receivers
+    subject: 'Pinniped Program Confirmation', // Subject line
+    html: `Hi ${firstName},<br>
+    Your class is confirmed for the Pinniped Pollution Project Program on
+     <b>${date}</b>. Attached to this email you will find five pre-visit documents.
+     We have also included a few helpful field trip reminders below. Please 
+     be sure to communicate the bus information with your driver. Lastly, 
+     <b>please respond to this message confirming</b> your visit. Thank you!`,
+     attachments: Attachments
+  };
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail(mailOptions);
+
+  callback(info);
+}
 
 /***********************
   CHANGE EMAIL ACTIVE STATUS
