@@ -177,13 +177,11 @@ export class DashboardComponent implements OnInit {
       user => {
         this.role = user.Role_FK;
         if (this.role === '1') {
-          this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser) => {
+          this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
+              console.log(item);
               let details = {
                 ReservationPK: 0,
-                SchedulePK: 0,
-                PaymentPK: 0,
-                ProgramPK: 0,
                 Quantity: 0,
                 ReservationStatus: 0,
                 ProgramName: '',
@@ -194,32 +192,22 @@ export class DashboardComponent implements OnInit {
                 RemainingBalance: '',
               };
               details.ReservationPK = item.ReservationPK;
-              details.SchedulePK = item.SchedulePK;
               details.Total = item.Total;
               details.RemainingBalance = item.RemainingBalance;
               details.Quantity = item.NumberOfParticipant;
-
-              this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
-                details.Date = schedule[0].Start.slice(0, 10);
-                details.Time = schedule[0].Start.slice(12, 16) + ' - ' + schedule[0].End.slice(12, 16);
-                details.ProgramPK = schedule[0].ProgramPK;
-                this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
-                  details.ProgramName = program.Name;
-                  details.ProgramType = program.ProgramType;
-                });
-
-                if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
-                  details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
-                }
-
-                /*  only display the current reservation, not past reservations */
-                if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
-                  (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
-                  this.customerRes.push(details);
-                }
-              });
-            });
-          });
+              details.Date = item.Start.slice(0, 10);
+              details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
+              details.ProgramName = item.Name;
+              details.ProgramType = item.ProgramType;
+              if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
+                details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+              }
+              if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
+                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
+                this.customerRes.push(details);
+              }
+            })
+          })
         } else {
           this.onChangeDate();
         }
