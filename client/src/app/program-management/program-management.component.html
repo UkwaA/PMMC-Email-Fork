@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row text-center text-white mb-5 mt-4">
+    <div class="row text-center text-white mb-3 mt-3">
         <div class="col-lg-7 mx-auto">
             <h1>Program Management</h1>
         </div>
@@ -25,7 +25,7 @@
                 <tr>
                     <th style="width:45%"> Program Name </th>
                     <th style="width:20%"> Program Type </th>
-                    <th style="width:35%"> Actions</th>
+                    <th colspan="3" style="width:30%"> Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,18 +43,23 @@
                     <td *ngIf="program.ProgramType =='0'"> Group Program </td>
                     <td *ngIf="program.ProgramType =='1'"> Individual Program </td>
                     <td>
-                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']"
+                        <button mat-raised-button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'view']"
                             class="btn btn-info">
                             <mat-icon matListIcon>visibility</mat-icon> View
                         </button>
-                        <button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
-                            class="btn btn-warning">
-                            <mat-icon matListIcon>edit</mat-icon> Edit
+                    </td>
+                    <td>
+                        <button mat-raised-button [routerLink]="['/profile', 'program-details', program.ProgramPK, 'edit']"
+                        class="btn btn-warning">
+                        <mat-icon matListIcon>edit</mat-icon> Edit
                         </button>
-                        <button [routerLink]="['/profile','program-details', program.ProgramPK, 'set-program-schedule']"
+                    </td>
+                    <td>
+                        <button mat-raised-button [routerLink]="['/profile','program-details', program.ProgramPK, 'set-program-schedule']"
                             class="btn btn-success">
                             <mat-icon matListIcon>calendar_today</mat-icon> Schedule
                        </button>
+                    </td>
                         
                         <!-- <button *ngIf="!program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-success">
@@ -63,8 +68,7 @@
                         <!-- <button *ngIf="program.IsActive" (click)="openModalSwitch(program.ProgramPK, program.IsActive)"
                             class="btn btn-danger">
                             <mat-icon matListIcon> visibility_off </mat-icon> Disable
-                        </button> -->
-                    </td>    
+                        </button> -->   
                 </tr>
             </tbody>
         </table>

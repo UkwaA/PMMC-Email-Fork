@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row text-center text-white mb-5">
-        <div class="col-lg-7 mt-5 mx-auto">
+    <div class="row text-center text-white mb-3">
+        <div class="col-lg-7 mt-3 mx-auto">
             <h1>User Management</h1>
         </div>
     </div>      
@@ -25,7 +25,7 @@
                     <th style="width:25%"> User Name </th>
                     <th style="width:20%"> Current Role </th>
                     <th style="width:25%"> Email </th>
-                    <th style="width:30%"> Actions</th>
+                    <th colspan="2" style="width:30%"> Actions</th>
                 </tr>
             </thead>
             <tbody *ngFor = "let user of listOfUsers | filter:searchText  | paginate:{itemsPerPage: 7, currentPage:p}">
@@ -36,15 +36,19 @@
                     <td *ngIf="user.Role_FK == 3">System Admin</td>
                     
                     <td> {{user.Email}} </td>
-                    <td><button [routerLink]="['/profile', 'user-details', user.UserPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
-                        <button *ngIf = "!user.IsActive" (click) = "openModalSwitch(user.UserPK, user.IsActive)"
+                    <td>
+                        <button mat-raised-button  [routerLink]="['/profile', 'user-details', user.UserPK]" class="btn btn-warning"> <mat-icon matListIcon>edit</mat-icon> Edit</button>
+                    </td>
+                    <td>
+                        <button mat-raised-button *ngIf = "!user.IsActive" (click) = "openModalSwitch(user.UserPK, user.IsActive)"
                             class="btn btn-success">
                             Activate Account  
                         </button>
-                        <button *ngIf = "user.IsActive" (click) = "openModalSwitch(user.UserPK, user.IsActive)"
+                        <button mat-raised-button *ngIf = "user.IsActive" (click) = "openModalSwitch(user.UserPK, user.IsActive)"
                             class="btn btn-danger">
                             Deactivate Account
                         </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

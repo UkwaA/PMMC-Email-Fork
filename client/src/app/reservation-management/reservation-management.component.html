@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row text-center">
-      <div class="col-lg-7 mt-5 mx-auto">
+      <div class="col-lg-7 mt-3 mx-auto">
           <h1>Reservation Management</h1>
       </div>
   </div> 
@@ -28,7 +28,7 @@
               <tr>
                   <th style="width:7.5%"> #Res </th>
                   <th style="width:17.5%"> Program Name </th>
-                  <th style="width:12.5%"> Date </th>
+                  <th style="width:12%"> Date </th>
                   <th title="Ongoing: Haven't attended yet
 Attended: Attened the program + Not completed payment yet
 Completed: Attened the program + Completed payment
@@ -36,7 +36,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <th style="width:15%"> Name </th>
                   <th style="width:10%"> Total </th>
                   <th style="width:10%"> Remaining </th>
-                  <th style="width:17.5%"> Action </th>
+                  <th colspan="2" style="width:18%"> Action </th>
               </tr>
           </thead>
           <tbody>
@@ -48,7 +48,10 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td> {{reservation.CustomerName}} </td>
                   <td> {{reservation.Total}} </td>
                   <td> {{reservation.RemainingBalance}} </td>
-                  <td> <button mat-raised-button class="btn btn-warning mr-3" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
+                  <td> 
+                      <button mat-raised-button class="btn btn-warning" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
+                  </td>
+                  <td>
                       <button *ngIf = "reservation.ReservationStatus == 'On Going'" mat-raised-button class="btn btn-danger" type="submit" (click)="openCancelModal()" onfocus="blur()">Cancel</button>
                   </td>
               </tr>
