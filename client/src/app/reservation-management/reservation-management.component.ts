@@ -68,9 +68,6 @@ export class ReservationManagementComponent implements OnInit {
             resByUser.forEach((item) => {
               const details = {
                 ReservationPK: 0,
-                SchedulePK: 0,
-                PaymentPK: 0,
-                ProgramPK: 0,
                 Quantity: 0,
                 ProgramName: '',
                 ReservationStatus: '',
@@ -80,13 +77,11 @@ export class ReservationManagementComponent implements OnInit {
                 RemainingBalance: '',
               };
               details.ReservationPK = item.ReservationPK;
-              details.SchedulePK = item.SchedulePK;
               details.Total = item.Total;
               details.RemainingBalance = item.RemainingBalance;
               details.Quantity = item.NumberOfParticipant;
               details.Date = item.Start.slice(0, 10);
               details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
-              details.ProgramPK = item.ProgramPK;
               details.ProgramName = item.Name;
               switch (item.ReservationStatus) {
                 case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
@@ -194,7 +189,6 @@ export class ReservationManagementComponent implements OnInit {
                       }
                     });
                 });
-
               this.allReservations.push(reservation);
             });
           });
