@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ProgramData } from '../data/program-data';
 import { MatDialogConfig, MatDialog } from '@angular/material';
@@ -12,6 +12,36 @@ import { AdminReservationsModalDialogComponent } from '../components/admin-reser
 import { CustomerService } from '../services/customer.services';
 import { Breakpoints } from '@angular/cdk/layout';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
+export interface DataElement {
+  no: number;
+  username: string;
+  first: string;
+  last: string;
+  email: string;
+  createDate: Date;
+}
+
+const ELEMENT_DATA: DataElement[] = [
+  { no: 1, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/8/2020') },
+  { no: 2, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/8/2020') },
+  { no: 3, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
+  { no: 4, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
+  { no: 5, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
+  { no: 6, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/9/2020') },
+  { no: 7, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/7/2020') },
+  { no: 8, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/4/2020') },
+  { no: 9, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
+  { no: 10, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/3/2020') },
+  { no: 11, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
+  { no: 12, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/5/2020') },
+  { no: 13, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
+  { no: 14, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('5/8/2020') },
+  { no: 15, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('6/8/2020') },
+];
 
 declare var $: any;
 
@@ -21,86 +51,108 @@ declare var $: any;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  /* New user Table */
+  displayedColumns: string[] = ['no', 'username', 'first', 'last', 'email', 'createDate'];
+  dataSource = new MatTableDataSource<DataElement>(ELEMENT_DATA);
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   role: string;
   searchText: string;
   customerRes = [];
   today = new Date();
   newDate: Date;
-  range = { start: new Date(this.today.getFullYear(), this.today.getMonth(), 1),
-            end: new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0)};
+  range = {
+    start: new Date(this.today.getFullYear(), this.today.getMonth(), 1),
+    end: new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0)
+  };
   completedRes = 0;
   completedTotal = 0;
-  completedDetails = {range: {}, reservations: []};
+  completedDetails = { range: {}, reservations: [] };
   ongoingRes = 0;
   ongoingTotal = 0;
-  ongoingDetails = {range: {}, reservations: []};
+  ongoingDetails = { range: {}, reservations: [] };
   attendedRes = 0;
   attendedTotal = 0;
-  attendedDetails = {range: {}, reservations: []};
+  attendedDetails = { range: {}, reservations: [] };
   cancelledRes = 0;
   cancelledTotal = 0;
-  cancelledDetails = {range: {}, reservations: []};
+  cancelledDetails = { range: {}, reservations: [] };
 
   /* CHART USING NG2-CHARTS */
-  // title = 'Bar Chart Example Using ng2-charts';
+  title = 'Reservation By Years';
 
   // ADD CHART OPTIONS.
-  /* chartOptions = {
+  chartOptions = {
     responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
   }
 
-  labels =  ['On Going', 'Completed', 'Attended', 'Cancelled'];
-  chartData = []; */
+  labels = ['On Going', 'Completed', 'Attended', 'Cancelled'];
+  // chartData = [];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  // chartData = [
-  //   {
-  //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-  //   },
-  //   { 
-  //     label: '2nd Year',
-  //     data: [47, 9, 28, 54, 77, 51, 24]
-  //   }
-  // ];
+  chartData = [
+    {
+      label: '2019',
+      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
+    },
+    {
+      label: '2020',
+      data: [47, 9, 28, 54, 77, 51, 24]
+    }
+  ];
 
   // CHART COLOR.
- //colors = [
-   // { // 1st Year.
-    //  backgroundColor: 'rgba(77,83,96,0.2)'
-  //  },
-  //  { // 2nd Year.
-  //    backgroundColor: 'rgba(30, 169, 224, 0.8)'
-   // }
-//  ]
-   /* FINISH CHART USING NG2-CHARTS */
-  
-   
-/* PIE CHART*/
-// pieChartOptions = {
-//   responsive: true,
-//   legend: {
-//     position: 'top',
-//   },
-//   plugins: {
-//     datalabels: {
-//       formatter: (value, ctx) => {
-//         const label = ctx.chart.data.labels[ctx.dataIndex];
-//         return label;
-//       },
-//     },
-//   }
-// };
-//  pieChartLabels = [
-//   ['Request Reservation', 'Cancel', 'Completed'],
-//   ['Showed', 'No Showed'],
-//   ['Group Programs', 'Individual Programs']];
+  colors = [
+    { // 1st Year.
+      backgroundColor: 'rgba(161, 12, 12, 0.7)'
+    },
+    { // 2nd Year.
+      backgroundColor: 'rgba(161, 161, 12, 0.7)'
+    }
+  ]
+  /* FINISH CHART USING NG2-CHARTS */
 
-//  pieChartData = [300,500,100];
 
-//  pieChartPlugins = [];
+  /* PIE CHART*/
+  title_pie = 'Comparison By Programs';
 
-/* END PIE CHART*/
+  pieChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          const label = ctx.chart.data.labels[ctx.dataIndex];
+          return label;
+        },
+      },
+    }
+  };
+  pieChartLabels = [
+    ['Group Programs'],
+    ['Individual Programs']];
+
+  pieChartData = [300, 500];
+
+  pieChartColors = [
+    {
+      backgroundColor: ['rgba(12, 86, 161, 0.7)', 'rgba(12, 161, 86, 0.7)']
+    }
+  ]
+
+  pieChartPlugins = [];
+
+  /* END PIE CHART*/
 
   // Dropdown Menu Option
   programCategories: Array<object> = [
@@ -110,68 +162,75 @@ export class DashboardComponent implements OnInit {
   ]
 
   constructor(private auth: AuthenticationService, public matDialog: MatDialog,
-              private reservationService: ReservationService,
-              private scheduleService: ProgramScheduleService,
-              private programService: ProgramServices,
-              private customerService: CustomerService) { }
+    private reservationService: ReservationService,
+    private scheduleService: ProgramScheduleService,
+    private programService: ProgramServices,
+    private customerService: CustomerService) { }
+
 
   ngOnInit() {
+    // sort and paginator
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    
     this.auth.profile().subscribe(
       user => {
         this.role = user.Role_FK;
-        if (this.role === '1'){
+        if (this.role === '1') {
           this.reservationService.getAllReservationByUserPK(user.UserPK).subscribe((resByUser) => {
-              resByUser.forEach((item) => {
-                  let details = {
-                      ReservationPK: 0,
-                      SchedulePK: 0,
-                      PaymentPK: 0,
-                      ProgramPK: 0,
-                      Quantity: 0,
-                      ReservationStatus: 0,
-                      ProgramName: '',
-                      ProgramType: 0,
-                      Date: '',
-                      Time: '',
-                      Total: '',
-                      RemainingBalance: '',
-                  };
-                  details.ReservationPK = item.ReservationPK;
-                  details.SchedulePK = item.SchedulePK;
-                  details.Total = item.Total;
-                  details.RemainingBalance = item.RemainingBalance;
-                  details.Quantity = item.NumberOfParticipant;
+            resByUser.forEach((item) => {
+              let details = {
+                ReservationPK: 0,
+                SchedulePK: 0,
+                PaymentPK: 0,
+                ProgramPK: 0,
+                Quantity: 0,
+                ReservationStatus: 0,
+                ProgramName: '',
+                ProgramType: 0,
+                Date: '',
+                Time: '',
+                Total: '',
+                RemainingBalance: '',
+              };
+              details.ReservationPK = item.ReservationPK;
+              details.SchedulePK = item.SchedulePK;
+              details.Total = item.Total;
+              details.RemainingBalance = item.RemainingBalance;
+              details.Quantity = item.NumberOfParticipant;
 
-                  this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
-                      details.Date = schedule[0].Start.slice(0, 10);
-                      details.Time = schedule[0].Start.slice(12, 16) + ' - ' + schedule[0].End.slice(12, 16);
-                      details.ProgramPK = schedule[0].ProgramPK;
-                      this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
-                          details.ProgramName = program.Name;
-                          details.ProgramType = program.ProgramType;
-                      });
+              this.scheduleService.getScheduleById(details.SchedulePK).subscribe((schedule) => {
+                details.Date = schedule[0].Start.slice(0, 10);
+                details.Time = schedule[0].Start.slice(12, 16) + ' - ' + schedule[0].End.slice(12, 16);
+                details.ProgramPK = schedule[0].ProgramPK;
+                this.programService.getProgramHeaderDeatailsByID(details.ProgramPK).subscribe((program) => {
+                  details.ProgramName = program.Name;
+                  details.ProgramType = program.ProgramType;
+                });
 
-                      if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
-                        details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
-                      }
+                if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
+                  details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+                }
 
-                     /*  only display the current reservation, not past reservations */
-                      if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
-                      (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
-                        this.customerRes.push(details);
-                      }
-                  });
+                /*  only display the current reservation, not past reservations */
+                if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
+                  (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
+                  this.customerRes.push(details);
+                }
               });
+            });
           });
         } else {
           this.onChangeDate();
         }
       },
       err => {
-          console.error(err);
+        console.error(err);
       }
     )
+
   }
+
   clearSearch() {
     this.searchText = '';
   }
@@ -188,19 +247,19 @@ export class DashboardComponent implements OnInit {
       this.range.end.setHours(23, 59, 59, 999);
       this.completedRes = 0;
       this.completedTotal = 0;
-      this.completedDetails = {range: this.range, reservations: []};
+      this.completedDetails = { range: this.range, reservations: [] };
       this.ongoingRes = 0;
       this.ongoingTotal = 0;
-      this.ongoingDetails = {range: this.range, reservations: []};
+      this.ongoingDetails = { range: this.range, reservations: [] };
       this.attendedRes = 0;
       this.attendedTotal = 0;
-      this.attendedDetails = {range: this.range, reservations: []};
+      this.attendedDetails = { range: this.range, reservations: [] };
       this.cancelledRes = 0;
       this.cancelledTotal = 0;
-      this.cancelledDetails = {range: this.range, reservations: []};
+      this.cancelledDetails = { range: this.range, reservations: [] };
 
       this.reservationService.getAllReservation().subscribe((allRes) => {
-        allRes.forEach((item) =>{
+        allRes.forEach((item) => {
           /* Object for reservation details */
           let reservation = {
             ReservationPK: 0,
@@ -219,16 +278,16 @@ export class DashboardComponent implements OnInit {
           reservation.SchedulePK = item.SchedulePK;
           reservation.UserPK = item.UserPK;
           this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-              reservation.CustomerName = customer.LastName + ', ' + customer.FirstName;
+            reservation.CustomerName = customer.LastName + ', ' + customer.FirstName;
           });
           reservation.Total = item.Total;
           reservation.RemainingBalance = item.RemainingBalance;
           this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
-              reservation.Date = schedule[0].Start.slice(0, 10);
-              reservation.ProgramPK = schedule[0].ProgramPK;
-              this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program)=>{
-                  reservation.ProgramName = program.Name;
-              });
+            reservation.Date = schedule[0].Start.slice(0, 10);
+            reservation.ProgramPK = schedule[0].ProgramPK;
+            this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program) => {
+              reservation.ProgramName = program.Name;
+            });
           });
           this.scheduleService.getScheduleById(item.SchedulePK).subscribe((schedule) => {
             /* ??? before one date if change to Date */
@@ -276,7 +335,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // PaynowModal
-  openPaynowModal(){
+  openPaynowModal() {
     console.log('Paynow Modal called');
     const dialogConfig = new MatDialogConfig();
 
@@ -290,7 +349,7 @@ export class DashboardComponent implements OnInit {
     const paynowModalDialog = this.matDialog.open(PaynowModalDialog, dialogConfig);
   }
 
-  openCancelModal(type: number){
+  openCancelModal(type: number) {
     console.log('Cancel Modal called')
     // Configure Modal Dialog
     const dialogConfig = new MatDialogConfig();
@@ -301,17 +360,17 @@ export class DashboardComponent implements OnInit {
     dialogConfig.maxHeight = '500px';
     dialogConfig.width = '350px';
     dialogConfig.autoFocus = false;
-    if (type === AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM){
+    if (type === AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM) {
       dialogConfig.data = {
         title: 'Cancel Confirmation',
-        description: 'Are you sure you would like to cancel this reservation? Your payment for this reservation will be refunded soon!',            
+        description: 'Are you sure you would like to cancel this reservation? Your payment for this reservation will be refunded soon!',
         actionButtonText: 'Confirm',
         numberOfButton: '2'
       };
     } else {
       dialogConfig.data = {
         title: 'Cancel Confirmation',
-        description: 'Are you sure you would like to cancel this reservation for customer? We will collect the $25 deposit and refund the rest of your payment!',            
+        description: 'Are you sure you would like to cancel this reservation for customer? We will collect the $25 deposit and refund the rest of your payment!',
         actionButtonText: 'Confirm',
         numberOfButton: '2'
       };

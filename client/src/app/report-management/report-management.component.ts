@@ -7,21 +7,21 @@ import { AuthenticationService } from '../authentication.service';
 import { Observable, Observer } from 'rxjs';
 import * as xlsx from 'xlsx';
 
-export interface PeriodicElement {
-  year: number;
-  jan: number;
-  feb: number;
-  mar: number;
-  apr: number;
-  may: number;
-  jun: number;
-  jul: number;
-  aug: number;
-  sep: number;
-  oct: number;
-  nov: number;
-  dec: number;
-}
+// export interface PeriodicElement {
+//   year: number;
+//   jan: number;
+//   feb: number;
+//   mar: number;
+//   apr: number;
+//   may: number;
+//   jun: number;
+//   jul: number;
+//   aug: number;
+//   sep: number;
+//   oct: number;
+//   nov: number;
+//   dec: number;
+// }
 
 @Component({
     selector: 'report-management',
@@ -30,7 +30,7 @@ export interface PeriodicElement {
 })
 
 export class ReportManagementComponent {
-  displayedColumns: string[] = ['year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];  
+  displayedColumns: string[] = ['name','year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];  
   steps = 1;
   MonthlyDataSourceField:any = [];
   PaymentDataSource: any = [];

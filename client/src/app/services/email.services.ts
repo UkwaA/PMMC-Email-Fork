@@ -54,12 +54,12 @@ export class EmailService {
   }
 
   // Connected
-  public CreateNewUserConfirmationEmail(body): Observable<any> {
+  public sendCreateNewUserConfirmationEmail(body): Observable<any> {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/create-new-user-confirmation-email/', body);
   }
 
   // 
-  public SendBookingRequestConfirmationEmail(body): Observable<any> {
+  public sendBookingRequestConfirmationEmail(body): Observable<any> {
     console.log("Send booking request called");
     console.log(body);
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-booking-request-confirmation-email/', body);
@@ -71,7 +71,11 @@ export class EmailService {
   }
 
   public sendProgramConfirmationEmail(body): Observable<any> {
-    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-confirmation-email/', body);
+    if (body.ProgramPK == 79)
+      return this.sendPinnipedProgramEmail(body);
+    // else if (insert all other specific program emails)
+    else
+      return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-confirmation-email/', body);
   }
 
   public sendProgramReminderEmail(body): Observable<any> {

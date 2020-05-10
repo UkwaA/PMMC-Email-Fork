@@ -53,6 +53,12 @@
                     </div>
                     <div #PAYMENT>
                         <table mat-table [dataSource]="PaymentDataSource" class="mat-elevation-z8">
+                            
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef style="width:230px"> Payment Report </th>
+                                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                            </ng-container>
+
                             <ng-container matColumnDef="year">
                                 <th mat-header-cell *matHeaderCellDef> Year </th>
                                 <td mat-cell *matCellDef="let element">{{element.year}}</td>
@@ -118,6 +124,11 @@
                                 <td mat-cell *matCellDef="let element">{{element.dec}}</td>
                             </ng-container>
 
+                            <!-- <ng-container matColumnDef="total">
+                                <th mat-header-cell *matHeaderCellDef> Total </th>
+                                <td mat-cell *matCellDef="let element">{{element.total}}</td>
+                            </ng-container> -->
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
@@ -168,11 +179,13 @@
                     </div>
                     <div #MONTHLY>
                         <div *ngFor="let program of MonthlyDataSourceField">
-                            <h4 class="program-name float-left">{{program.ProgramName}}</h4>
+                            <!-- <h4 class="program-name float-left">{{program.ProgramName}}</h4> -->
                             <table mat-table [dataSource]="program.Data" class="mat-elevation-z8">
-                                <!-- <ng-container matColumnDef="name">
-                                    <th mat-header-cell *matHeaderCellDef> {{program.ProgramName}}</th>
-                                </ng-container> -->
+                                <ng-container matColumnDef="name">
+                                    <th mat-header-cell *matHeaderCellDef style="width:300px;"  > {{program.ProgramName}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                                </ng-container>
+
                                 <ng-container matColumnDef="year">
                                     <th mat-header-cell *matHeaderCellDef> Year </th>
                                     <td mat-cell *matCellDef="let element">{{element.year}}</td>

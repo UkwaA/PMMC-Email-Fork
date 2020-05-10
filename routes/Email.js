@@ -517,7 +517,7 @@ app.post('/send-booking-request-confirmation-email', (req,res) => {
           where: {emailPK: 2}
         }).then(email => {
           if (email){
-            SendBookingRequestConfirmationEmail(userInfo, email, info => {
+            sendBookingRequestConfirmationEmail(userInfo, email, info => {
               console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
               res.send(info);
             });
@@ -534,7 +534,7 @@ app.post('/send-booking-request-confirmation-email', (req,res) => {
   })
 });
 
-async function SendBookingRequestConfirmationEmail(userInfo, email, callback){
+async function sendBookingRequestConfirmationEmail(userInfo, email, callback){
 let transporter = nodemailer.createTransport({
   host: process.env.emailServer_host,
   port: process.env.emailServer_port,
@@ -795,10 +795,11 @@ async function sendProgramConfirmationEmail(user, email, schedule, programName, 
     html: `
     <i>Your program with Pacific Marine Mammal Center has been confirmed! 
     You are now registered for:
-    ${programName} at ${schedule.Start} </i>
-    <i>We have processed your deposit of 
-    (AUTOMATIC INSERTION OF DEPOSIT AMOUNT IF MADE). 
-    Your remaining balance of (AUTOMATIC INSERTION OF REMAINING BALANCE DUE) 
+    ${programName} at ${schedule.Start} </i>` + 
+    (`${deposit}` ? `<i>We have processed your deposit of 
+    ${deposit}.` : '') +
+    ` 
+    Your remaining balance of ${remainingBalance} should be paid
     prior to your program unless special arrangements have been made with 
     PMMC administration.</i>
     <i>We look forward to having you join us. See you soon! </i>`
@@ -814,10 +815,14 @@ async function sendProgramConfirmationEmail(user, email, schedule, programName, 
   PROGRAM/PAYMENT REMINDER
 ***********************/
 app.post('/send-program-reminder-email', (req, res) => {
-  sendProgramReminderEmail(user, info => {
-    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-    res.send(info);
-  });
+  User.findOne({
+    where: {UserPK: req.body.UserPK}
+  }).then(user => {
+    sendProgramReminderEmail(user, info => {
+      console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+      res.send(info);
+    });
+  })
 });
 
 async function sendProgramReminderEmail(user, callback) {
@@ -842,11 +847,9 @@ async function sendProgramReminderEmail(user, callback) {
     subject: "PMMC Upcoming Program", // Subject line
     html: `
     <i>This is a reminder about your upcoming visit to Pacific Marine Mammal 
-    Center on (AUTOMATIC INSERTION OF PROGRAM DATE/TIME) for 
-    (AUTOMATIC INSERTION OF PROGRAM NAME). Your balance of: 
-    (AUTOMATIC INSERTION OF PROGRAM BALANCE HERE) should be paid prior to 
-    your program unless special arrangements have been made with PMMC 
-    administration.</i>
+    Center on ${programDate} for ${programName}. Your balance of: ${balance} 
+    should be paid prior to your program unless special arrangements have been 
+    made with PMMC administration.</i>
     <br/>
     <i>We look forward to having you join us. See you soon! </i>`
   };
@@ -861,13 +864,17 @@ async function sendProgramReminderEmail(user, callback) {
   PAYMENT CONFIRMATION
 ***********************/
 app.post('/send-payment-confirmation-email', (req, res) => {
-  sendPaymentConfirmationEmail(user, info => {
-    console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-    res.send(info);
-  });
+  User.findOne({
+    where: { UserPK: req.body.UserPK }
+  }).then(user => { 
+    sendPaymentConfirmationEmail(user, info => {
+      console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+      res.send(info);
+    });
+  })
 });
 
-async function sendPaymentConfirmationEmail(user, callback) {
+async function sendPaymentConfirmationEmail(user, payment, programName, programDate, callback) {
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
@@ -888,10 +895,9 @@ async function sendPaymentConfirmationEmail(user, callback) {
     to: "uakkum@uci.edu", // list of receivers
     subject: "PMMC - Payment Confirmation", // Subject line
     html: `
-    <i>Thank you for your payment of (AUTOMATIC INSERTION OF PAYMENT BALANCE) 
-    for your program with Pacific Marine Mammal Center (AUTOMATIC INSERTION 
-    OF PROGRAM NAME, DATE/TIME HERE). All education program proceeds help 
-    support our seal and sea lion patients!</i>
+    <i>Thank you for your payment of ${payment} for your program with 
+    Pacific Marine Mammal Center ${programName} at ${programDate}. All 
+    education program proceeds help support our seal and sea lion patients!</i>
     <br/>
     <i>We look forward to having you join us. See you soon! </i>`
   };

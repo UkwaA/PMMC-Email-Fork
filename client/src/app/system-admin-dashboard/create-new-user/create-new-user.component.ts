@@ -133,7 +133,7 @@ export class CreateNewUserComponent {
                 this.customer.finishRegister(this.customerDetails).subscribe((res2) => {
                     console.log(res2.message);
                     // Send confirmation email confirmation and change password for the first time
-                    this.emailService.CreateNewUserConfirmationEmail(this.userDetails).subscribe(
+                    this.emailService.sendCreateNewUserConfirmationEmail(this.userDetails).subscribe(
                         (res3) => {
                             if (res3.error) {
                                 console.log(res3.error);

@@ -1010,7 +1010,7 @@ export class ReservationComponent implements OnInit {
                 .subscribe((resGroupDetails) => {
                   if (resGroupDetails) {
                     // Send booking requested email
-                    this.emailService.SendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
+                    this.emailService.sendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
                     
                     const dialogConfig = new MatDialogConfig();
                     // The user can't close the dialog by clicking outside its body
@@ -1086,7 +1086,7 @@ export class ReservationComponent implements OnInit {
                 .subscribe((res) => {
                   if (res) {
                     // Send booking requested email
-                    this.emailService.SendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
+                    this.emailService.sendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
 
                     const dialogConfig = new MatDialogConfig();
                     // The user can't close the dialog by clicking outside its body
