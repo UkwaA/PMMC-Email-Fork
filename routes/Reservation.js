@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const ReservationHeader = require("../models/ReservationHeader");
 const ReservationGroupDetails = require("../models/ReservationGroupDetails");
 const ReservationIndividualDetails = require("../models/ReservationIndividualDetails");
+const Payment = require("../models/Payment");
 
 reservation.use(bodyParser.json());         // to support JSON-encoded bodies
 reservation.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -97,7 +98,7 @@ async function getReservationBySchedulePK(schedulepk, callback){
 }
 
 /***********************************************************
- *  GET ALL RESERVATION DETAILS FOR RESERVATION MANAGEMENT
+ *  GET ALL RESERVATION DETAILS FOR RESERVATION MANAGEMENT (FOR ADMIN DASHBOARD)
  * It will return an object from ReservationHeader table, Reservationdetails table,
  * Schedule table, User detail table, Program table, and Payment table
  ***********************************************************/
@@ -110,6 +111,30 @@ reservation.get("/get-all-reservation-details-for-reservation-management", (req,
                 INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
               ORDER BY reservationheader.ReservationPK`;
     Sequelize.query(query,{ 
+        type: Sequelize.QueryTypes.SELECT})
+    .then(reservationInfo =>{
+      res.json(reservationInfo);
+    })
+});
+
+/***********************************************************
+ *  GET ALL RESERVATION DETAILS FOR RESERVATION MANAGEMENT BY USERPK (FOR CUSTOMER DASHBOARD)
+ * It will return an object from ReservationHeader table, Reservationdetails table,
+ * Schedule table, User detail table, Program table, and Payment table
+ ***********************************************************/
+reservation.get("/get-all-reservation-details-for-reservation-management-by-userpk/:id", (req, res) => {  
+  var query = `SELECT  reservationheader.*, schedule.Start, schedule.End, userdetails.FirstName, 
+                  userdetails.LastName, program.Name, program.ProgramType
+              FROM pmmc.reservationheader
+                INNER JOIN pmmc.schedule on schedule.SchedulePK = reservationheader.SchedulePK
+                INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
+                INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
+              WHERE reservationheader.UserPK = (:UserPK)
+              ORDER BY reservationheader.ReservationPK`;
+    Sequelize.query(query,{
+        replacements: {
+          UserPK: req.params.id
+        }, 
         type: Sequelize.QueryTypes.SELECT})
     .then(reservationInfo =>{
       res.json(reservationInfo);
@@ -196,6 +221,20 @@ reservation.post("/add-group-reservation-details", (req, res) => {
     });
 });
 
+/******************************************
+ *  GET GROUP RESERVATION DETAILS BY RESERVATIONPK *
+ ******************************************/
+reservation.get("/get-group-reservation-details-by-reservationpk/:id", (req, res) => {
+  ReservationGroupDetails.findOne({
+    where:{
+      ReservationPK: req.params.id
+    }
+  })
+  .then(reservationInfo =>{
+    res.json(reservationInfo);
+  })
+});
+
 /*************************************************
  *  CREATE NEW INDIVIDUAL RESERVATION DETAILS      *
  **************************************************/
@@ -209,6 +248,33 @@ reservation.post("/add-individual-reservation-details", (req, res) => {
     });
 });
 
+/******************************************
+ *  GET GROUP RESERVATION DETAILS BY RESERVATIONPK *
+ ******************************************/
+reservation.get("/get-individual-reservation-details-by-reservationpk/:id", (req, res) => {
+  ReservationIndividualDetails.findOne({
+    where:{
+      ReservationPK: req.params.id
+    }
+  })
+  .then(reservationInfo =>{
+    res.json(reservationInfo);
+  })
+});
+
+/******************************************
+ *  GET PAYMENT INFO BY RESERVATIONPK *
+ ******************************************/
+reservation.get("/get-payment-info-by-reservationpk/:id", (req, res) => {
+  Payment.findOne({
+    where:{
+      ReservationPK: req.params.id
+    }
+  })
+  .then(reservationInfo =>{
+    res.json(reservationInfo);
+  })
+});
 
 /******************************************
       UPDATE REMAINING BALANCE    

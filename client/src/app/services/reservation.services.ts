@@ -22,9 +22,13 @@ export class ReservationService {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-schedulepk/" + SchedulePK);
     }
 
-    //This request is specified for Reservation Management page
+    //This request is specified in Reservation Management page
     public getAllReservationDetailsForReservationManagement(): Observable<any>{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-reservation-management/");
+    }
+
+    public getAllReservationDetailsForReservationManagementByUserPK(UserPK: number): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-reservation-management-by-userpk/" + UserPK);
     }
 
     //Define this request for View Schedule Page
@@ -40,17 +44,21 @@ export class ReservationService {
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/add-group-reservation-details", reservationDetails);
     }
 
+    public getGroupReservationDetailsByReservationPK(ReservationPK: any) {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-group-reservation-details-by-reservationpk/" + ReservationPK);
+    }
+
     public addIndividualReservationDetails(reservationDetails: any) {
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/add-individual-reservation-details", reservationDetails);
     }
 
-    public getCustomerInfoByID(UserPK: number):Observable<any>{
-        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/profile-info/" + UserPK);
+    public getIndividualReservationDetailsByReservationPK(ReservationPK: any) {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-individual-reservation-details-by-reservationpk/" + ReservationPK);
     }
 
-    public updateCustomerInfo(UserPK: number, customer: CustomerData):Observable<any>{
-        return this.http.put(AppConstants.EXPRESS_SERVER_URL + "reservation/update-customer-info/" + UserPK, customer);
-    }
+    public getPaymentInfoByReservationPK(ReservationPK: number):Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-payment-info-by-reservationpk/" + ReservationPK);
+    }  
 
     public updateRemainingBalance(ReservationPK: number, amount: number):Observable<any>{
         return this.http.put(AppConstants.EXPRESS_SERVER_URL + "reservation/update-balance/" + ReservationPK, {"value" : amount});
