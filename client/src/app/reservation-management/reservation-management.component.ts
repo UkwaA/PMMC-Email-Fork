@@ -117,14 +117,10 @@ export class ReservationManagementComponent implements OnInit {
         } else {
           this.programCategories = this.programCategoriesAdmin;
           /* Get all Reservation details */
-          this.reservationService.getAllReservation().subscribe((allRes) => {
+          this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
             allRes.forEach((item) => {
               const reservation = {
                 ReservationPK: 0,
-                SchedulePK: 0,
-                UserPK: 0,
-                PaymentPK: 0,
-                ProgramPK: 0,
                 ProgramName: '',
                 Date: '',
                 CustomerName: '',
@@ -133,62 +129,42 @@ export class ReservationManagementComponent implements OnInit {
                 RemainingBalance: '',
               };
               reservation.ReservationPK = item.ReservationPK;
-              reservation.SchedulePK = item.SchedulePK;
-              reservation.UserPK = item.UserPK;
-
-              this.customerService
-                .getCustomerInfoByID(reservation.UserPK)
-                .subscribe((customer) => {
-                  reservation.CustomerName =
-                    customer.LastName + ', ' + customer.FirstName;
-                });
+              reservation.CustomerName = item.LastName + ', ' + item.FirstName;
               reservation.Total = item.Total;
               reservation.RemainingBalance = item.RemainingBalance;
-              this.scheduleService
-                .getScheduleById(reservation.SchedulePK)
-                .subscribe((schedule) => {
-                  reservation.Date = schedule[0].Start.slice(0, 10);
-                  reservation.ProgramPK = schedule[0].ProgramPK;
-                  this.programService
-                    .getProgramHeaderDeatailsByID(reservation.ProgramPK)
-                    .subscribe((program) => {
-                      reservation.ProgramName = program.Name;
-                      switch (item.ReservationStatus) {
-                        case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                          reservation.ReservationStatus =
-                            AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                          this.ongoingReservations.push(reservation);
-                          break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
-                          reservation.ReservationStatus =
-                            AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                          this.attendedReservations.push(reservation);
-                          break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
-                          reservation.ReservationStatus =
-                            AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                          this.completedReservations.push(reservation);
-                          break;
-                        }
-                        case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
-                          reservation.ReservationStatus =
-                            AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                          this.cancelledReservations.push(reservation);
-                          break;
-                        }
-                      }
-                      if (
-                        program.ProgramType ===
-                        AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM
-                      ) {
-                        this.groupReservations.push(reservation);
-                      } else {
-                        this.individualReservations.push(reservation);
-                      }
-                    });
-                });
+              reservation.Date = item.Start.slice(0, 10);
+              reservation.ProgramName = item.Name;
+              switch (item.ReservationStatus) {
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                  this.ongoingReservations.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                  this.attendedReservations.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                  this.completedReservations.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                  this.cancelledReservations.push(reservation);
+                  break;
+                }
+              }
+              if (item.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
+                this.groupReservations.push(reservation);
+              } else {
+                this.individualReservations.push(reservation);
+              }
               this.allReservations.push(reservation);
             });
           });
