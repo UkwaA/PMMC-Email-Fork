@@ -53,8 +53,24 @@ td {
   font-size: 15px;
 }
 
-td.name{
-  color:  #08b2b8;
+td.attended{
+  color: #FFB64D;
+  font-weight: bold;
+}
+
+td.ongoing{
+  color: blue;
+  font-weight: bold;
+}
+
+td.completed{
+  color: #5cb85c;
+  font-weight: bold;
+}
+
+td.cancelled{
+  color: #d9534f;
+  font-weight: bold;
 }
 
 th {
@@ -62,3 +78,4 @@ th {
   font-size: 18px;
   font-weight: bold;
 }
+

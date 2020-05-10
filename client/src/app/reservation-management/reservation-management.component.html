@@ -44,7 +44,10 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td> {{reservation.ReservationPK}} </td>
                   <td> {{reservation.ProgramName}} </td>
                   <td> {{reservation.Date}}</td>
-                  <td > {{reservation.ReservationStatus}} </td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Attended'" class='attended'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.CustomerName}} </td>
                   <td> {{reservation.Total}} </td>
                   <td> {{reservation.RemainingBalance}} </td>
@@ -78,7 +81,10 @@ Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon mat
               <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                   <td> {{reservation.ReservationPK}} </td>
                   <td> {{reservation.ProgramName}} </td>
-                  <td> {{reservation.ReservationStatus}} </td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Attended'" class='attended'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.Date}}</td>
                   <td> {{reservation.Time}}</td>
                   <td> {{reservation.Quantity}} </td>
