@@ -64,78 +64,60 @@ export class ReservationManagementComponent implements OnInit {
         this.UserPK = user.UserPK;
         if (this.role === '1') {
           this.programCategories = this.programCategoriesCustomer;
-          this.reservationService
-            .getAllReservationByUserPK(user.UserPK)
-            .subscribe((resByUser) => {
-              resByUser.forEach((item) => {
-                console.log(item);
-                const details = {
-                  ReservationPK: 0,
-                  SchedulePK: 0,
-                  PaymentPK: 0,
-                  ProgramPK: 0,
-                  Quantity: 0,
-                  ProgramName: '',
-                  ReservationStatus: '',
-                  Date: '',
-                  Time: '',
-                  Total: '',
-                  RemainingBalance: '',
-                };
-                details.ReservationPK = item.ReservationPK;
-                details.SchedulePK = item.SchedulePK;
-                details.Total = item.Total;
-                details.RemainingBalance = item.RemainingBalance;
-                details.Quantity = item.NumberOfParticipant;
-
-                this.scheduleService
-                  .getScheduleById(details.SchedulePK)
-                  .subscribe((schedule) => {
-                    details.Date = schedule[0].Start.slice(0, 10);
-                    details.Time =
-                      schedule[0].Start.slice(12, 16) +
-                      ' - ' +
-                      schedule[0].End.slice(12, 16);
-                    details.ProgramPK = schedule[0].ProgramPK;
-                    this.programService
-                      .getProgramHeaderDeatailsByID(details.ProgramPK)
-                      .subscribe((program) => {
-                        details.ProgramName = program.Name;
-                        switch (item.ReservationStatus) {
-                          case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                            details.ReservationStatus =
-                              AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                            break;
-                          }
-                          case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
-                            details.ReservationStatus =
-                              AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                            break;
-                          }
-                          case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
-                            details.ReservationStatus =
-                              AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                            break;
-                          }
-                          case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
-                            details.ReservationStatus =
-                              AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                            break;
-                          }
-                        }
-                        if (
-                          program.ProgramType ===
-                          AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM
-                        ) {
-                          this.groupReservations.push(details);
-                        } else {
-                          this.individualReservations.push(details);
-                        }
-                      });
-                  });
-                this.allReservations.push(details);
-              });
+          this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
+            resByUser.forEach((item) => {
+              const details = {
+                ReservationPK: 0,
+                SchedulePK: 0,
+                PaymentPK: 0,
+                ProgramPK: 0,
+                Quantity: 0,
+                ProgramName: '',
+                ReservationStatus: '',
+                Date: '',
+                Time: '',
+                Total: '',
+                RemainingBalance: '',
+              };
+              details.ReservationPK = item.ReservationPK;
+              details.SchedulePK = item.SchedulePK;
+              details.Total = item.Total;
+              details.RemainingBalance = item.RemainingBalance;
+              details.Quantity = item.NumberOfParticipant;
+              details.Date = item.Start.slice(0, 10);
+              details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
+              details.ProgramPK = item.ProgramPK;
+              details.ProgramName = item.Name;
+              switch (item.ReservationStatus) {
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                  break;
+                }
+              }
+              if (item.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
+                this.groupReservations.push(details);
+              } else {
+                this.individualReservations.push(details);
+              }
+              this.allReservations.push(details);
             });
+          });
           this.reservations = this.allReservations;
         } else {
           this.programCategories = this.programCategoriesAdmin;
