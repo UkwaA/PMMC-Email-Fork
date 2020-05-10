@@ -22,6 +22,11 @@ export class ReservationService {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-by-schedulepk/" + SchedulePK);
     }
 
+    //This request is specified for Reservation Management page
+    public getAllReservationDetailsForReservationManagement(): Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-reservation-management/");
+    }
+
     //Define this request for View Schedule Page
     public getAllReservationDetailsForViewSchedule(SchedulePK: number, ProgramPK: number, ProgramType: number): Observable<any>{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-all-reservation-details-for-view-schedule/" + SchedulePK + "/" + ProgramPK + "/" + ProgramType);

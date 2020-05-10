@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const report = express.Router();
@@ -62,10 +63,15 @@ report.get("/get-reservation-by-year-range/:start/:end", (req, res) => {
                 WHERE reservationheader.SchedulePK = schedule.SchedulePK
                     AND schedule.ProgramPK = program.ProgramPK
                     AND substring(schedule.Start, 1, 4) between (:start) and (:end)
+                    AND reservationheader.ReservationStatus <> (:canceled)
                 GROUP BY Year, Month, program.Name
                 ORDER BY program.ProgramPK`;
     Sequelize.query(query,{ 
-        replacements: {start: req.params.start, end:req.params.end },
+        replacements: {
+            start: req.params.start, 
+            end:req.params.end,
+            canceled: process.env.RESERVATION_STATUS_CODE_CANCELLED
+         },
         type: Sequelize.QueryTypes.SELECT})
     .then((reservationInfo) =>{        
         var returnReservationInfo = [];

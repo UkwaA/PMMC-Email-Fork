@@ -12,7 +12,9 @@ reservation.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
-const Sequelize = require('sequelize');
+//Define veriable for Sequelize database
+const db = require('../db');
+const Sequelize = db.sequelize;
 const Op = Sequelize.Op;
 
 reservation.use(bodyParser.json());
@@ -93,6 +95,27 @@ async function getReservationBySchedulePK(schedulepk, callback){
       callback("error: Get Reservation" + err);
       });  
 }
+
+/***********************************************************
+ *  GET ALL RESERVATION DETAILS FOR RESERVATION MANAGEMENT
+ * It will return an object from ReservationHeader table, Reservationdetails table,
+ * Schedule table, User detail table, Program table, and Payment table
+ ***********************************************************/
+reservation.get("/get-all-reservation-details-for-reservation-management", (req, res) => {  
+  var query = `SELECT  reservationheader.*, schedule.Start, schedule.End, userdetails.FirstName, 
+                  userdetails.LastName, program.Name, program.ProgramType
+              FROM pmmc.reservationheader
+                INNER JOIN pmmc.schedule on schedule.SchedulePK = reservationheader.SchedulePK
+                INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
+                INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
+              ORDER BY reservationheader.ReservationPK`;
+    Sequelize.query(query,{ 
+        type: Sequelize.QueryTypes.SELECT})
+    .then(reservationInfo =>{
+      res.json(reservationInfo);
+    })
+});
+
 
 /***********************************************************
  *  GET ALL ACTIVE RESERVATION DETAILS FOR VIEW SCHEDULE
