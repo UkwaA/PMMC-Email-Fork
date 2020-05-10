@@ -17,6 +17,7 @@ import { NumericTextBoxComponent } from '@progress/kendo-angular-inputs';
 
 export class ReservationManagementComponent implements OnInit {
   p: number;
+  choice = '';
   role: string;
   UserPK: number;
   reservations = [];
@@ -27,23 +28,20 @@ export class ReservationManagementComponent implements OnInit {
   attendedReservations = [];
   completedReservations = [];
   cancelledReservations = [];
+  filterReservations = [];
   searchText: string;
   temp = [];
   selectedValue = 0;
 
   // Dropdown Menu Option
-  programCategories: Array<any>;
-  programCategoriesAdmin: Array<any> = [
-    { id: 0, name: 'All Program' },
-    { id: 1, name: 'Group Program' },
-    { id: 2, name: 'Individual Program' },
-    { id: 3, name: 'Ongoing Program' },
-    { id: 4, name: 'Attended Program' },
-    { id: 5, name: 'Completed Program' },
-    { id: 6, name: 'Cancelled Program' },
+  typeCategories: Array<any> = [
+    { id: 1, name: 'On Going' },
+    { id: 2, name: 'Attended' },
+    { id: 3, name: 'Completed' },
+    { id: 4, name: 'Cancelled' },
   ];
 
-  programCategoriesCustomer: Array<any> = [
+  programCategories: Array<any> = [
     { id: 0, name: 'All Program' },
     { id: 1, name: 'Group Program' },
     { id: 2, name: 'Individual Program' },
@@ -63,7 +61,6 @@ export class ReservationManagementComponent implements OnInit {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
         if (this.role === '1') {
-          this.programCategories = this.programCategoriesCustomer;
           this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
               const details = {
@@ -114,8 +111,8 @@ export class ReservationManagementComponent implements OnInit {
             });
           });
           this.reservations = this.allReservations;
+          this.filterReservations = this.allReservations;
         } else {
-          this.programCategories = this.programCategoriesAdmin;
           /* Get all Reservation details */
           this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
             allRes.forEach((item) => {
@@ -169,6 +166,7 @@ export class ReservationManagementComponent implements OnInit {
             });
           });
           this.reservations = this.allReservations;
+          this.filterReservations = this.allReservations;
         }
       },
       (err) => {
@@ -183,30 +181,67 @@ export class ReservationManagementComponent implements OnInit {
 
   // Catch the event dropdown menu
   selectChangeHandler(event: any) {
-    const choice = event.target.value;
+    this.choice = event.target.value;
     // Update the data of table
-    switch (choice) {
+    switch (this.choice) {
       case '0':
         this.reservations = this.allReservations;
+        this.filterReservations = this.reservations;
         break;
       case '1':
         this.reservations = this.groupReservations;
+        this.filterReservations = this.reservations;
         break;
       case '2':
         this.reservations = this.individualReservations;
+        this.filterReservations = this.reservations;
         break;
-      case '3':
-        this.reservations = this.ongoingReservations;
+    }
+  }
+
+  selectTypeHandler(type: any){
+    const status = type.target.value;
+    this.filterReservations = [];
+    if(status != 0){
+      this.reservations.forEach((res)=> {
+        switch(status){
+          case '1':
+            if (res.ReservationStatus === 'On Going'){
+              this.filterReservations.push(res);
+            }
+            break;
+          case '2':
+            if (res.ReservationStatus === 'Attended'){
+              this.filterReservations.push(res);
+            }
+            break;
+          case '3': 
+            if (res.ReservationStatus === 'Completed'){
+              this.filterReservations.push(res);
+            }
+            break;
+          case '4':
+            if (res.ReservationStatus === 'Cancelled'){
+              this.filterReservations.push(res);
+            }
+            break;
+        }
+      });
+    } else {
+      switch (this.choice) {
+      case '0':
+        this.reservations = this.allReservations;
+        this.filterReservations = this.reservations;
         break;
-      case '4':
-        this.reservations = this.attendedReservations;
+      case '1':
+        this.reservations = this.groupReservations;
+        this.filterReservations = this.reservations;
         break;
-      case '5':
-        this.reservations = this.completedReservations;
+      case '2':
+        this.reservations = this.individualReservations;
+        this.filterReservations = this.reservations;
         break;
-      case '6':
-        this.reservations = this.cancelledReservations;
-        break;
+      }
     }
   }
 

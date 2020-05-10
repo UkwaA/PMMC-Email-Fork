@@ -7,18 +7,24 @@
 
   <!-- SEARCH BAR -->
   <div class="row filter">
-      <div class="col-lg-2 col-md-2 col-sm-3 p-0">
-          <select class="form-control" style="font-weight: bold" id="programCat" (change)="selectChangeHandler($event)">
-            <option *ngFor="let item of programCategories" [value]="item.id">{{item.name}}</option>
-          </select>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-7 pr-0">
-          <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
-              [(ngModel)]="searchText">
-      </div>
-      <div class="col-lg-2 col-md-2 col-sm-2">
-          <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
-      </div>
+        <div class="col-lg-2 col-md-2 col-sm-3 p-0">
+            <select class="form-control" style="font-weight: bold" id="programCat" (change)="selectChangeHandler($event)">
+                <option *ngFor="let item of programCategories" [value]="item.id">{{item.name}}</option>
+            </select>
+        </div>
+        <div *ngIf = "role == '2' || role == '3'" class="col-lg-2 col-md-2 col-sm-3 pr-3">
+            <select class="form-control" style="font-weight: bold" id="typeCat" (change)="selectTypeHandler($event)">
+            <option selected value="0"> --- Status --- </option>
+            <option *ngFor="let type of typeCategories" [value]="type.id">{{type.name}}</option>
+            </select>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 pr-0">
+            <input type="text" class="form-control" placeholder="Type in Program Name or Keywords to Search"
+                [(ngModel)]="searchText">
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <button mat-raised-button color="primary" (click)="clearSearch()" onfocus="blur()">Clear Search</button>
+        </div>
   </div>
 
   <div class="table-responsive-sm hide-with-small">
@@ -40,7 +46,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let reservation of reservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+              <tr *ngFor="let reservation of filterReservations | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
                   <td> {{reservation.ReservationPK}} </td>
                   <td> {{reservation.ProgramName}} </td>
                   <td> {{reservation.Date}}</td>
