@@ -257,16 +257,11 @@ export class DashboardComponent implements OnInit {
       this.cancelledRes = 0;
       this.cancelledTotal = 0;
       this.cancelledDetails = { range: this.range, reservations: [] };
-
-      this.reservationService.getAllReservation().subscribe((allRes) => {
+      this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
         allRes.forEach((item) => {
-          /* Object for reservation details */
+          //console.log(item);
           let reservation = {
             ReservationPK: 0,
-            SchedulePK: 0,
-            UserPK: 0,
-            PaymentPK: 0,
-            ProgramPK: 0,
             ProgramName: '',
             Date: '',
             CustomerName: '',
@@ -275,61 +270,49 @@ export class DashboardComponent implements OnInit {
             RemainingBalance: '',
           };
           reservation.ReservationPK = item.ReservationPK;
-          reservation.SchedulePK = item.SchedulePK;
-          reservation.UserPK = item.UserPK;
-          this.customerService.getCustomerInfoByID(reservation.UserPK).subscribe(customer => {
-            reservation.CustomerName = customer.LastName + ', ' + customer.FirstName;
-          });
           reservation.Total = item.Total;
           reservation.RemainingBalance = item.RemainingBalance;
-          this.scheduleService.getScheduleById(reservation.SchedulePK).subscribe((schedule) => {
-            reservation.Date = schedule[0].Start.slice(0, 10);
-            reservation.ProgramPK = schedule[0].ProgramPK;
-            this.programService.getProgramHeaderDeatailsByID(reservation.ProgramPK).subscribe((program) => {
-              reservation.ProgramName = program.Name;
-            });
-          });
-          this.scheduleService.getScheduleById(item.SchedulePK).subscribe((schedule) => {
-            /* ??? before one date if change to Date */
-            const resDate = new Date(schedule[0].Start);
-            if (this.range.start <= resDate && this.range.end >= resDate) {
-              switch (item.ReservationStatus) {
-                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                  this.ongoingRes += 1;
-                  this.ongoingTotal += item.Total;
-                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                  this.ongoingDetails.reservations.push(reservation);
-                  // this.ongoingDetails.range = this.range;
-                  break;
-                }
-                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
-                  this.attendedRes += 1;
-                  this.attendedTotal += item.Total;
-                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                  this.attendedDetails.reservations.push(reservation);
-                  // this.attendedDetails.range = this.range;
-                  break;
-                }
-                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
-                  this.completedRes += 1;
-                  this.completedTotal += item.Total;
-                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                  this.completedDetails.reservations.push(reservation);
-                  // this.completedDetails.range = this.range;
-                  break;
-                }
-                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
-                  this.cancelledRes += 1;
-                  this.cancelledTotal += item.Total;
-                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                  this.cancelledDetails.reservations.push(reservation);
-                  // this.cancelledDetails.range = this.range;
-                  break;
-                }
+          reservation.CustomerName = item.LastName + ', ' + item.FirstName;
+          reservation.Date = item.Start.slice(0, 10);
+          reservation.ProgramName = item.Name;
+          const resDate = new Date(item.Start);
+          if (this.range.start <= resDate && this.range.end >= resDate) {
+            switch (item.ReservationStatus) {
+              case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                this.ongoingRes += 1;
+                this.ongoingTotal += item.Total;
+                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                this.ongoingDetails.reservations.push(reservation);
+                break;
+              }
+              case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
+                this.attendedRes += 1;
+                this.attendedTotal += item.Total;
+                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                this.attendedDetails.reservations.push(reservation);
+                break;
+              }
+              case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
+                this.completedRes += 1;
+                this.completedTotal += item.Total;
+                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                this.completedDetails.reservations.push(reservation);
+                break;
+              }
+              case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
+                this.cancelledRes += 1;
+                this.cancelledTotal += item.Total;
+                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                this.cancelledDetails.reservations.push(reservation);
+                break;
               }
             }
-          });
+          }
         });
+
+        //Can use value of total income and total reservation here
+        console.log(this.ongoingTotal);
+        console.log(this.ongoingRes);
       });
     }
   }
