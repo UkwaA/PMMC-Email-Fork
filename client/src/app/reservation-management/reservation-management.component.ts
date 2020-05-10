@@ -76,6 +76,7 @@ export class ReservationManagementComponent implements OnInit {
                   ProgramPK: 0,
                   Quantity: 0,
                   ProgramName: '',
+                  ReservationStatus: '',
                   Date: '',
                   Time: '',
                   Total: '',
@@ -100,6 +101,28 @@ export class ReservationManagementComponent implements OnInit {
                       .getProgramHeaderDeatailsByID(details.ProgramPK)
                       .subscribe((program) => {
                         details.ProgramName = program.Name;
+                        switch (item.ReservationStatus) {
+                          case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                            details.ReservationStatus =
+                              AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                            break;
+                          }
+                          case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
+                            details.ReservationStatus =
+                              AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                            break;
+                          }
+                          case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
+                            details.ReservationStatus =
+                              AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                            break;
+                          }
+                          case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
+                            details.ReservationStatus =
+                              AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                            break;
+                          }
+                        }
                         if (
                           program.ProgramType ===
                           AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM
