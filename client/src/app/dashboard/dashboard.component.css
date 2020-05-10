@@ -10,6 +10,18 @@ h4{
     color: #08b2b8;
 }
 
+table{
+    width: 100%;
+}
+
+.filter{
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+  } 
+  
 span.label{
     font-weight: bold;
 }

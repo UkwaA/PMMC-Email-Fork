@@ -84,7 +84,9 @@ import { ReportManagementComponent } from './report-management/report-management
 import { PaynowModalDialog } from './components/paynow-modal-dialog/paynow-modal-dialog.component';
 import { ReservationDetailsModalDialog } from './components/reservation-details-modal-dialog/reservation-details-modal-dialog.component';
 import { AdminReservationsModalDialogComponent } from './components/admin-reservations-modal-dialog/admin-reservations-modal-dialog.component';
-import {MatTableModule} from '@angular/material';
+import { MatTableModule} from '@angular/material';
+import { MatSortModule} from '@angular/material';
+import { MatPaginatorModule} from '@angular/material';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -239,6 +241,8 @@ const routes: Routes = [
     MatTabsModule,
     MatTableModule,
     NgxStripeModule.forRoot('pk_test_Z6rVNt6q0I5cKzAfeGOYp7wV00zAX9dQ8W'),
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [EmailService, ProgramServices, CustomerService, AuthRoleGuardService, AuthSystemRoleGuardService, AuthGuardService,
               AuthCustomerGuardService, AuthenticationService, ProgramScheduleService, ReservationService, PaymentServices, 
