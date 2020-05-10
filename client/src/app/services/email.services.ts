@@ -30,8 +30,8 @@ export class EmailService {
     return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-email-by-id/' + emailPK);
   }
 
-  public updateEmail(data: EmailData): Observable<any> {
-    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/update-email', data);
+  public updateEmail(emailData: any): Observable<any> {
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/update-email', emailData);
   }
 
   public sendContactEmail(data)  {
@@ -93,6 +93,11 @@ export class EmailService {
   public changeEmailActiveStatus(body): Observable<any> {
     console.log('Change email called1');
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/change-email-active-status/', body);
+  }
+
+  public sendPinnipedProgramEmail(body): Observable<any> {
+    console.log('Send Pinniped Called')
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-pinniped-program-email/', body);
   }
 
 

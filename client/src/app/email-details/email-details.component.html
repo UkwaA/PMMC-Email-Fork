@@ -18,14 +18,24 @@
                     <label class="font-weight-bold">Body</label>
                     <ckeditor [editor]="Editor" [disabled]="isDisabled" (ready)="onReady($event)" name="editor" [(ngModel)]="emailData.Body"></ckeditor>
                 </div>
-                <div class="form-group font-weight-bold">
-                    <div class="col-md-4">
-                        <label>Attachment</label>
+                <div *ngIf="this.emailData.HasAttachments" class="form-group">
+                    <label class='font-weight-bold'> Current Attachments: </label><br>
+                    <ul>
+                        <li *ngFor="let attachment of this.currentAttachments" class="row">
+                            {{attachment}}<button mat-mini-fab (click)='openAttachmentModal(attachment)'> <mat-icon>delete</mat-icon> </button>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="this.emailData.Type == 'Specific Program'" class="form-group">
+                    <div class="col-md-12 font-weight-bold">
+                        <label>New Attachments (Accepts: .pdf, .doc, .docx)</label>
                     </div>
                     <div class="col-md-8">
                         <!-- add file change function -->
-                        <input type="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" />
+                        <input type="file" id="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" (change)='onFileChange($event)' multiple>
+                        
                     </div>
+                    <div id="filelist"></div>
                 </div>
                 <div class="form-group font-weight-bold">
                     <div class="row">
@@ -39,7 +49,7 @@
                     </div>
                 </div>
                 <div *ngIf='PageMode == "edit"' class="button pt-5 pb-5">
-                    <button class="btn btn-lg btn-info btn-block " type="submit" (click)="openModal()" onfocus="blur()">Update Email</button>
+                    <button class="btn btn-lg btn-info btn-block " type="submit" (click)="openSubmissionModal()" onfocus="blur()">Update Email</button>
                 </div>
             </fieldset>
             </form>

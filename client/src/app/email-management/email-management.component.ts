@@ -88,7 +88,8 @@ export class EmailManagementComponent {
             actionButtonText: 'Confirm',
             numberOfButton: '2'
             };
-        } else {
+        }
+        else {
             dialogConfig.data = {
             title: 'Enable Email',
             description: 'This action will now allow this email to be automatically sent to customers.' +
