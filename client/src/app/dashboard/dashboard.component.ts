@@ -46,8 +46,8 @@ const ELEMENT_DATA: DataElement[] = [
 declare var $: any;
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'dashboard.component',
+  templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
   dataSource = new MatTableDataSource<DataElement>(ELEMENT_DATA);
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

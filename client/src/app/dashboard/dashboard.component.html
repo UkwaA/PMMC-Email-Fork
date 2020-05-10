@@ -1,4 +1,4 @@
-<div *ngIf="role == '2' || role == '3'" class="container">
+<div class="container">
     <div class="row text-center">
         <div class="col-lg-7 mt-3 mx-auto">
             <h1>Dashboard</h1>
@@ -107,7 +107,7 @@
 
             <!-- Number Column -->
             <ng-container matColumnDef="no">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <th mat-header-cell *matHeaderCellDef> No. </th>
                 <td mat-cell *matCellDef="let element"> {{element.no}} </td>
             </ng-container>
 
