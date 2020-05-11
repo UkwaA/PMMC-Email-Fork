@@ -250,11 +250,8 @@ export class ReservationManagementComponent implements OnInit {
   }
 
   // viewReservationModal
-  openReservationModal(reservationPK: number, programType: number, userPK: number) {
+  openReservationModal(reservation: any) {
     console.log('Reservation Details Modal called');
-    console.log(reservationPK);
-    console.log(programType)
-    console.log(userPK)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = 'reservation-modal-component';
@@ -262,11 +259,9 @@ export class ReservationManagementComponent implements OnInit {
     dialogConfig.maxWidth = '750x';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = true;
-    dialogConfig.data = {
-      ReservationPK: reservationPK,
-      ProgramType: programType,
-      UserPK: userPK,
-  };
+    let details: any;
+    
+    dialogConfig.data = reservation;
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
 
   }

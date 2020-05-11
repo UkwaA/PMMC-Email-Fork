@@ -15,9 +15,35 @@
 
     <mat-dialog-content>
         <mat-tab-group>
+            <mat-tab label="General Info">
+                <ng-template matTabContent>
+                    <div class="container">
+                        <form [formGroup]="generalForm">
+                            <fieldset disabled>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Reservation ID: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationPK"  [(ngModel)]="data.ReservationPK">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Program Name: </label>
+                                    <input type="text" class="col-sm-5 form-control" formControlName="ProgramName"  [(ngModel)]="data.ProgramName">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Date: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Date"  [(ngModel)]="data.Date">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Reservation Status: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationStatus"  [(ngModel)]="data.ReservationStatus">
+                                </div>     
+                            </fieldset>
+                        </form>
+                    </div>
+                </ng-template>
+            </mat-tab>
             <mat-tab label="Reservation Info">
                 <ng-template matTabContent>
-                    <!-- <div *ngIf= "data.ProgramType == 0" class="container">
+                    <div *ngIf= "data.ProgramType == 0" class="container">
                         <form [formGroup]="groupForm">
                             <fieldset disabled>
                                 <div class="row">
@@ -116,7 +142,7 @@
                                 </div>
                             </fieldset>
                         </form>
-                    </div> -->
+                    </div>
                 </ng-template>
             </mat-tab>
             <mat-tab label="Customer Info">
@@ -162,24 +188,22 @@
             <mat-tab label="Payment Info">
                 <ng-template matTabContent>
                     <div class="container">
-                        <div class="container">
-                            <form [formGroup]="paymentForm">
-                                <fieldset disabled>
-                                    <div class="row form-group">
-                                        <label class="col-sm-3 control-label">Total Amount: </label>
-                                        <input type="text" class="col-sm-3 form-control" formControlName="Total"  [(ngModel)]="paymentDetails.Total">
-                                    </div> 
-                                    <div class="row form-group">
-                                        <label class="col-sm-3 control-label">Paid Amount: </label>
-                                        <input type="text" class="col-sm-3 form-control" formControlName="Paid"  [(ngModel)]="paymentDetails.RemainingBalance">
-                                    </div> 
-                                    <div class="row form-group">
-                                        <label class="col-sm-3 control-label">Remaining Amount: </label>
-                                        <input type="text" class="col-sm-3 form-control" formControlName="RemainingBalance"  [(ngModel)]="paymentDetails.RemainingBalance">
-                                    </div>   
-                                </fieldset>
-                            </form>
-                        </div>
+                        <form [formGroup]="paymentForm">
+                            <fieldset disabled>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Total Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Total"  [(ngModel)]="data.Total">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Paid Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Paid"  [(ngModel)]="paid">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Remaining Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="RemainingBalance"  [(ngModel)]="data.RemainingBalance">
+                                </div>   
+                            </fieldset>
+                        </form>
                     </div>
                 </ng-template>
             </mat-tab>

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 import { CustomerService } from 'src/app/services/customer.services';
 import { ReservationService } from 'src/app/services/reservation.services';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ReservationGroupDetails } from 'src/app/data/reservation-group-details';
 
 declare var $: any;
 
@@ -22,15 +23,20 @@ export class ReservationDetailsModalDialog implements OnInit{
     groupForm: FormGroup;
     individualForm: FormGroup;
     paymentForm: FormGroup;
+    paid: number;
+    generalForm: FormGroup;
 
     constructor(public dialogRef: MatDialogRef<ReservationDetailsModalDialog>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) private modalData: any, public customerService: CustomerService,
                 public reservationService: ReservationService, private fb: FormBuilder) {}
     ngOnInit() {
         this.data = this.modalData;
+        console.log(this.data);
+        this.paid = this.data.Total - this.data.RemainingBalance;
         this.customerService.getCustomerInfoByID(this.data.UserID).subscribe((info) => {
             this.customerDetails = info;
         });
+
         this.customerInfoForm = this.fb.group({
             FirstName: [''],
             LastName: [''],
@@ -42,16 +48,26 @@ export class ReservationDetailsModalDialog implements OnInit{
             Subscribe: []
         });
 
-        this.reservationService.getReservationHeaderByReservationPK(this.data.ReservationPK).subscribe((payment) => {
-            console.log("payment");
-            console.log(payment);
-            this.paymentDetails = payment;
-        })
         if (this.data.ProgramType === 0){
             this.reservationService.getGroupReservationDetailsByReservationPK(this.data.ReservationPK).subscribe((group) => {
                 this.groupDetails = group;
+                console.log(this.groupDetails);
+                console.log(this.groupDetails.ProgramRestriction);
             })
-            this.groupForm = this.fb.group({
+        } else {
+            this.reservationService.getIndividualReservationDetailsByReservationPK(this.data.ReservationPK).subscribe((individual) => {
+                this.individualDetails = individual;
+            })
+        }
+
+        this.generalForm = this.fb.group({
+            ReservationPK: [''],
+            ProgramName: [''],
+            ReservationStatus: [''],
+            Date: ['']
+        });
+
+        this.groupForm = this.fb.group({
                 AdultQuantity: [''],
                 Age57Quantity: [''],
                 Age810Quantity: [''],
@@ -69,13 +85,7 @@ export class ReservationDetailsModalDialog implements OnInit{
                 AlternativeDate: [''],
                 EducationPurpose: ['']
             });
-        } else {
-            this.reservationService.getIndividualReservationDetailsByReservationPK(this.data.ReservationPK).subscribe((individual) => {
-                this.individualDetails = individual;
-            })
-        }
         
-
         this.individualForm = this.fb.group({
             ParticipantName: [''],
             ParticipantAge: [''],

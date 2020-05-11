@@ -41,7 +41,7 @@ export class ReservationComponent implements OnInit {
   private _customPayment: number;
   payment = { name: 0};
   valueControl: any;
-  valid:boolean = false;
+  valid:boolean;
   remaining: number = 0;
 
 
@@ -208,6 +208,7 @@ export class ReservationComponent implements OnInit {
         switch (this.ProgramType) {
           /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
           case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+            this.valid = false;
             this.service
               .getProgramRequirementDetails('g', this.ProgramPK)
               .subscribe((program) => {
@@ -286,6 +287,7 @@ export class ReservationComponent implements OnInit {
 
           /*************  GET THE INDIVIDUAL PROGRAM REQUIREMENT  ******************* */
           case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+            this.valid = true;
             // Update the Total amount if user pick individual program
             this.service
               .getProgramRequirementDetails('i', this.ProgramPK)
