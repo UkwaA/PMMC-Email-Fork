@@ -8,6 +8,12 @@ const path = require("path");
 
 const User = require("../models/User");
 const Customer = require("../models/UserDetails");
+
+//Define veriable for Sequelize database
+const db = require('../db');
+const Sequelize = db.sequelize;
+const Op = Sequelize.Op;
+
 users.use(cors());
 
 /**************************
@@ -27,9 +33,11 @@ users.post("/register", (req, res) => {
 
   User.findOne({
     where: {
-      //check if the username exists
-      Username: req.body.Username
-      //Email : req.body.Email
+      //check if the username or email exists
+      [Op.or]:[
+        {Username: req.body.Username},
+        {Email: req.body.Email}
+      ]   
     }
   })
     //TODO bcrypt
@@ -64,7 +72,7 @@ users.post("/register", (req, res) => {
             res.send("errorExpressErr: " + err);
           });
       } else {
-        res.json({ error: "This username is taken" });
+        res.json({ error: "This username or email already exists" });
       }
     })
     .catch(err => {
