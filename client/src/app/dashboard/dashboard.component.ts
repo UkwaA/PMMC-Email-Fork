@@ -46,8 +46,8 @@ const ELEMENT_DATA: DataElement[] = [
 declare var $: any;
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'dashboard.component',
+  templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
@@ -56,8 +56,13 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['no', 'username', 'first', 'last', 'email', 'createDate'];
   dataSource = new MatTableDataSource<DataElement>(ELEMENT_DATA);
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
+
+  @ViewChild(MatPaginator, { static: false }) set contentpage(paginator: MatPaginator){
+    this.dataSource.paginator = paginator;
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -169,9 +174,6 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    // sort and paginator
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
     
     this.auth.profile().subscribe(
       user => {
