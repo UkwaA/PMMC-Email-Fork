@@ -163,7 +163,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-10">
                             <div class="row" *ngIf="hasSession && hasSchedule">
-                                <div class="col-md-12 text-center">
+                                <div class="col-md-12 text-center pb-0">
                                     <p>This <strong>{{currentScheduleSetting.ScheduleSettingName}}</strong> schedule is effective from 
                                         {{currentScheduleSetting.tempStart}} to {{currentScheduleSetting.tempEnd}}.
                                     </p>
@@ -190,10 +190,11 @@
                             </div>
                         </div>
                     </div>
-                    <mat-divider></mat-divider>                    
-                    <div class="row pt-3">
+                                        
+                    <div class="row pt-3" *ngIf="hasSession">
+                        <mat-divider></mat-divider>
                         <div class="col-md-2"></div>
-                        <div class="col-md-6 text-center">
+                        <div class="col-md-6 text-center pt-2">
                             <h6>You can edit the session's info in the table below.</h6>
                         </div>                        
                     </div>
