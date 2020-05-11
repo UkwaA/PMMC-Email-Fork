@@ -63,4 +63,8 @@ export class ReservationService {
     public updateRemainingBalance(ReservationPK: number, amount: number):Observable<any>{
         return this.http.put(AppConstants.EXPRESS_SERVER_URL + "reservation/update-balance/" + ReservationPK, {"value" : amount});
     }
+
+    public getReservationHeaderByReservationPK(ReservationPK: number):Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-reservation-header-by-reservationpk/" + ReservationPK);
+    }
 }

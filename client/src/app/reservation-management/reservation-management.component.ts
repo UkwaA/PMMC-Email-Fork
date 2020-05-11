@@ -113,11 +113,13 @@ export class ReservationManagementComponent implements OnInit {
           this.reservations = this.allReservations;
           this.filterReservations = this.allReservations;
         } else {
-          /* Get all Reservation details */
+          /* Get all Reservation details for Admin */
           this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
             allRes.forEach((item) => {
               const reservation = {
                 ReservationPK: 0,
+                UserPK: 0,
+                ProgramType: 0,
                 ProgramName: '',
                 Date: '',
                 CustomerName: '',
@@ -126,6 +128,8 @@ export class ReservationManagementComponent implements OnInit {
                 RemainingBalance: '',
               };
               reservation.ReservationPK = item.ReservationPK;
+              reservation.UserPK = item.UserPK;
+              reservation.ProgramType = item.ProgramType;
               reservation.CustomerName = item.LastName + ', ' + item.FirstName;
               reservation.Total = item.Total;
               reservation.RemainingBalance = item.RemainingBalance;
@@ -246,15 +250,23 @@ export class ReservationManagementComponent implements OnInit {
   }
 
   // viewReservationModal
-  openReservationModal() {
+  openReservationModal(reservationPK: number, programType: number, userPK: number) {
     console.log('Reservation Details Modal called');
+    console.log(reservationPK);
+    console.log(programType)
+    console.log(userPK)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = 'reservation-modal-component';
-    dialogConfig.height = '600px';
-    dialogConfig.width = '750x';
+    dialogConfig.maxHeight = '630px';
+    dialogConfig.maxWidth = '750x';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      ReservationPK: reservationPK,
+      ProgramType: programType,
+      UserPK: userPK,
+  };
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
 
   }

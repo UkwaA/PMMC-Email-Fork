@@ -141,6 +141,20 @@ reservation.get("/get-all-reservation-details-for-reservation-management-by-user
     })
 });
 
+/***********************************************************
+ *  GET RESERVATION HEADER BY PROGRAMPK (FOR VIEW RESERVATION DETAILS)
+ ***********************************************************/
+reservation.get("/get-reservation-header-by-reservationpk/:id", (req, res) => {  
+  ReservationHeader.findOne({
+    where:{
+      ReservationPK: req.params.id
+    }
+  })
+  .then(reservationInfo =>{
+    res.json(reservationInfo);
+  })
+});
+
 
 /***********************************************************
  *  GET ALL ACTIVE RESERVATION DETAILS FOR VIEW SCHEDULE
