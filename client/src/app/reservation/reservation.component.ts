@@ -83,6 +83,17 @@ export class ReservationComponent implements OnInit {
 
   paymentData = new Payment();
 
+  // Initialize Dropdown List for Marketing Info
+  marketingInfos = [
+    { id: 1, name: AppConstants.MARKETTING_INFO.PMMC_SITE },
+    { id: 2, name: AppConstants.MARKETTING_INFO.ADS },
+    { id: 3, name: AppConstants.MARKETTING_INFO.FRIEND },
+    { id: 4, name: AppConstants.MARKETTING_INFO.ONLINE },
+    { id: 5, name: AppConstants.MARKETTING_INFO.EMAIL },
+    { id: 6, name: AppConstants.MARKETTING_INFO.OTHER }
+  ];
+
+  selectedMarketingInfo = 0;
   // Schedule Availability Status
   scheduleFull = false;
 
@@ -228,11 +239,11 @@ export class ReservationComponent implements OnInit {
                   TeacherEmail: [''],
                   AlternativeDate: [
                     '',
-                    [Validators.required, Validators.minLength(5)],
+                    [Validators.minLength(5)],
                   ],
                   TeacherPhoneNo: [
                     '',
-                    [Validators.required, Validators.min(1000000000)],
+                    [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
                   ],
                   EducationPurpose: [
                     '',
@@ -322,7 +333,7 @@ export class ReservationComponent implements OnInit {
                   ],
                   InsurePhoneNo: [
                     '',
-                    [Validators.required, Validators.maxLength(10)],
+                    [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
                   ],
                   AuthorizedPickupName1: [
                     '',
@@ -331,13 +342,11 @@ export class ReservationComponent implements OnInit {
                   AuthorizedPickupPhone1: [
                     '',
                     [
-                      Validators.required,
-                      Validators.maxLength(10),
-                      Validators.minLength(10),
+                      Validators.required, Validators.min(1000000000), Validators.max(9999999999)
                     ],
                   ],
                   AuthorizedPickupName2: ['', []],
-                  AuthorizedPickupPhone2: ['', []],
+                  AuthorizedPickupPhone2: ['', [ Validators.min(1000000000), Validators.max(9999999999)]],
                   EarlyDropOff: [''],
                   LatePickup: [''],
                   MediaRelease: [false, Validators.requiredTrue],
@@ -605,9 +614,16 @@ export class ReservationComponent implements OnInit {
     return this.quantityForm.controls;
   }
 
+  // EventHandler for drop down list Sub Type of Group Program
+  selectMarketingInfos(event: any) {
+    // Update the variable
+    this.selectedMarketingInfo = event.target.value;
+    console.log(this.selectedMarketingInfo);
+  }
+
   // Clear data when click on input field
   onFocus(event) {
-    if (event.target.value == 0) {
+    if (event.target.value === 0 || event.target.value === '0') {
       event.target.value = ''
     }
   }
@@ -845,7 +861,7 @@ export class ReservationComponent implements OnInit {
   }
 
   registerStepperNext(stepper: MatStepper) {
-    // this.getFormValidationErrors();
+    this.getFormValidationErrors();
 
     // Add User Input data to ReservationGroupDetails
     this.reservationGroupDetails.ProgramRestriction = this.registerForm.get(
