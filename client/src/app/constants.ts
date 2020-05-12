@@ -84,4 +84,13 @@ export class AppConstants {
     DISTANCE_LEARNING: 3,
     SPECIAL_FIELD_TRIP: 4
   };
+
+  public static MARKETTING_INFO = {
+    PMMC_SITE: 'PMMC Website',
+    ADS: 'Advertisement',
+    FRIEND: 'Friend/Family',
+    ONLINE: 'Online Search',
+    EMAIL: 'Email',
+    OTHER: 'Other'
+  }
 }
