@@ -58,7 +58,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td> {{reservation.Total}} </td>
                   <td> {{reservation.RemainingBalance}} </td>
                   <td> 
-                      <button mat-raised-button class="btn btn-warning" type="submit" (click)="openReservationModal()" onfocus="blur()">View</button>
+                      <button mat-raised-button class="btn btn-warning" type="submit" (click)="openReservationModal(reservation)" onfocus="blur()">View</button>
                   </td>
                   <td>
                       <button *ngIf = "reservation.ReservationStatus == 'On Going'" mat-raised-button class="btn btn-danger" type="submit" (click)="openCancelModal()" onfocus="blur()">Cancel</button>

@@ -1,44 +1,210 @@
 <div id="modal-content-wrapper" style="text-align: center;">
     <header id="modal-header">
         <button type="button" class="close" (click)="closeModal()" onfocus="blur()">X</button>
-        <!-- <div class="alert alert-success alert-dismissible fade show mb-0">
-            <strong>Booking Successful!</strong> Please check your email for a confirmation detail.
-            <button type="button" close="close" data-dismiss="alert">&times;</button>
-        </div>
-        <div class="alert alert-danger alert-dismissible fade show mb-0">
-            <strong>Error!</strong>Make sure all infomation is correct.
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-        </div> -->
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
                 </div>
-            </div>
-            <!-- <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
                     <h3>Reservation Details</h3>
-                    <br/>
                 </div>
-            </div> -->
+            </div>
         </div>
     </header>
 
     <mat-dialog-content>
         <mat-tab-group>
+            <mat-tab label="General Info">
+                <ng-template matTabContent>
+                    <div class="container">
+                        <form [formGroup]="generalForm">
+                            <fieldset disabled>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Reservation ID: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationPK"  [(ngModel)]="data.ReservationPK">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Program Name: </label>
+                                    <input type="text" class="col-sm-5 form-control" formControlName="ProgramName"  [(ngModel)]="data.ProgramName">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Date: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Date"  [(ngModel)]="data.Date">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Reservation Status: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationStatus"  [(ngModel)]="data.ReservationStatus">
+                                </div>     
+                            </fieldset>
+                        </form>
+                    </div>
+                </ng-template>
+            </mat-tab>
             <mat-tab label="Reservation Info">
-              <ng-template matTabContent>
-                Reservation Information
-              </ng-template>
+                <ng-template matTabContent>
+                    <div *ngIf= "data.ProgramType == 0" class="container">
+                        <form [formGroup]="groupForm">
+                            <fieldset disabled>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">Adult: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="AdultQuantity" placeholder="First name"  [(ngModel)]="groupDetails.AdultQuantity">
+                                    <label class="col-sm-2 control-label">Age 5-7: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age57Quantity" placeholder="First name" [(ngModel)]="groupDetails.Age57Quantity">
+                                    <label class="col-sm-2 control-label">Age 8-10: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age810Quantity"  [(ngModel)]="groupDetails.Age810Quantity">
+                                    <label class="col-sm-2 control-label">Age 11-12: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age1112Quantity"  [(ngModel)]="groupDetails.Age1112Quantity">
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 control-label">Age 13-14: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age1314Quantity"  [(ngModel)]="groupDetails.Age1314Quantity">
+                                    <label class="col-sm-2 control-label">Age 14-15: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age1415Quantity"  [(ngModel)]="groupDetails.Age1415Quantity">
+                                    <label class="col-sm-2 control-label">Age 15-17: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Age1517Quantity"  [(ngModel)]="groupDetails.Age1517Quantity">
+                                    <label class="col-sm-2 control-label">Total Quantity: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="TotalQuantity"  [(ngModel)]="groupDetails.TotalQuantity">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Program Restriction: </label>
+                                    <input type="text" class="col-sm-2 form-control" formControlName="ProgramRestriction"  [(ngModel)]="groupDetails.ProgramRestriction">
+                                    <label class="col-sm-2 control-label">Organization Name: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="OrganizationName"  [(ngModel)]="groupDetails.OrganizationName">
+                                    <label class="col-sm-2 control-label">Grade Level: </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="GradeLevel"  [(ngModel)]="groupDetails.GradeLevel">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Teacher Name: </label>
+                                    <input type="text" class="col-sm-2 form-control" formControlName="TeacherName"  [(ngModel)]="groupDetails.TeacherName">
+                                    <label class="col-sm-2 control-label">Teacher Email: </label>
+                                    <input type="text" class="col-sm-2 form-control" formControlName="TeacherEmail"  [(ngModel)]="groupDetails.TeacherEmail">
+                                    <label class="col-sm-2 control-label">Teacher Phone No: </label>
+                                    <input type="text" class="col-sm-2 form-control" formControlName="TeacherPhoneNo"  [(ngModel)]="groupDetails.TeacherPhoneNo">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Alternative Date: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="AlternativeDate"  [(ngModel)]="groupDetails.AlternativeDate">
+                                    <label class="col-sm-3 control-label">Education Purpose: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="EducationPurpose"  [(ngModel)]="groupDetails.EducationPurpose">
+                                </div>   
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div *ngIf= "data.ProgramType == 1" class="container">
+                        <form  [formGroup]="individualForm">
+                            <fieldset disabled>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Name </label>
+                                    <input type="text" class="col-sm-2 form-control" formControlName="ParticipantName"  [(ngModel)]="individualDetails.ParticipantName">
+                                    <label class="col-sm-1 control-label">Age </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="ParticipantAge"  [(ngModel)]="individualDetails.ParticipantAge">
+                                    <label class="col-sm-2 control-label">Gender </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="Gender"  [(ngModel)]="individualDetails.Gender">
+                                    <label class="col-sm-2 control-label">T-Shirt Size </label>
+                                    <input type="text" class="col-sm-1 form-control" formControlName="MerchSize"  [(ngModel)]="individualDetails.MerchSize">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Allergy Info </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="AllergyInfo"  [(ngModel)]="individualDetails.AllergyInfo">
+                                    <label class="col-sm-2 control-label">Special Info </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="SpecialInfo"  [(ngModel)]="individualDetails.SpecialInfo">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Insure Provider Name </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="InsureProviderName"  [(ngModel)]="individualDetails.InsureProviderName">
+                                    <label class="col-sm-2 control-label">Insure Recipient Name </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="InsureRecipientName"  [(ngModel)]="individualDetails.InsureRecipientName">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Insure Policy No </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="InsurePolicyNo"  [(ngModel)]="individualDetails.InsurePolicyNo">
+                                    <label class="col-sm-2 control-label">Insure Phone No </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="InsurePhoneNo"  [(ngModel)]="individualDetails.InsurePhoneNo">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Authorized Pickup Name 1 </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="AuthorizedPickupName1"  [(ngModel)]="individualDetails.AuthorizedPickupName1">
+                                    <label class="col-sm-2 control-label">Authorized Pickup Phone 1 </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="AuthorizedPickupPhone1"  [(ngModel)]="individualDetails.AuthorizedPickupPhone1">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Authorized Pickup Name 2 </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="AuthorizedPickupName2"  [(ngModel)]="individualDetails.AuthorizedPickupName2">
+                                    <label class="col-sm-2 control-label">Authorized Pickup Phone 2 </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="AuthorizedPickupPhone2"  [(ngModel)]="individualDetails.AuthorizedPickupPhone2">
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-2 control-label">Early Drop Off </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="EarlyDropOff"  [(ngModel)]="individualDetails.EarlyDropOff">
+                                    <label class="col-sm-2 control-label">Late Pick Up </label>
+                                    <input type="text" class="col-sm-4 form-control" formControlName="LatePickUp"  [(ngModel)]="individualDetails.LatePickUp">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </ng-template>
             </mat-tab>
             <mat-tab label="Customer Info">
-              <ng-template matTabContent>
-                  <profile-info></profile-info>
-              </ng-template>
+                <ng-template matTabContent>
+                    <div class="container">
+                        <form [formGroup]="customerInfoForm">
+                            <fieldset disabled>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 field">
+                                        <label><h4>First name</h4></label>
+                                        <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 field">
+                                        <label><h4>Last name</h4></label>
+                                        <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName">
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 field">
+                                        <label><h4>Address</h4></label>
+                                        <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 field">
+                                        <label><h4>Phone Number</h4></label>
+                                        <input type="text" pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 field">
+                                        <label><h4>City</h4></label>
+                                        <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" >
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 field">
+                                        <label><h4>State</h4></label>
+                                        <input type="text" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State">
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 field">
+                                        <label><h4>Zipcode</h4></label>
+                                        <input type="text" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </ng-template>
             </mat-tab>
             <mat-tab label="Payment Info">
                 <ng-template matTabContent>
-                    <payment></payment>
+                    <div class="container">
+                        <form [formGroup]="paymentForm">
+                            <fieldset disabled>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Total Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Total"  [(ngModel)]="data.Total">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Paid Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="Paid"  [(ngModel)]="paid">
+                                </div> 
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Remaining Amount: </label>
+                                    <input type="text" class="col-sm-3 form-control" formControlName="RemainingBalance"  [(ngModel)]="data.RemainingBalance">
+                                </div>   
+                            </fieldset>
+                        </form>
+                    </div>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>
