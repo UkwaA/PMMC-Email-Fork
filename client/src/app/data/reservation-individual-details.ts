@@ -16,9 +16,9 @@ export class ReservationIndividualDetails {
   AuthorizedPickupPhone2: string;
   EarlyDropOff: string;
   LatePickup: string;
-  MediaRelease: string;
-  EmergencyMedicalRelease: string;
-  LiabilityAgreement: string;
+  MediaRelease: boolean;
+  EmergencyMedicalRelease: boolean;
+  LiabilityAgreement: boolean;
   
   constructor (){
       this.ReservationPK = 0;
@@ -38,8 +38,8 @@ export class ReservationIndividualDetails {
       this.AuthorizedPickupPhone2 ="";
       this.EarlyDropOff = "";
       this.LatePickup = "";
-      this.MediaRelease ="";
-      this.EmergencyMedicalRelease = "";
-      this.LiabilityAgreement = "";
+      this.MediaRelease = false;
+      this.EmergencyMedicalRelease = false;
+      this.LiabilityAgreement = false;
   }
 }

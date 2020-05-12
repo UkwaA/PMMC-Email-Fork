@@ -872,22 +872,22 @@
                 <tr>
                   <td>Media Release</td>
                   <td class="name"> 
-                    <div *ngIf="reservationIndividualDetails.MediaRelease == true; else elseBlock">Checked</div>  
-                    <ng-template> #elseBlock>N/A</ng-template>
+                    <div *ngIf="reservationIndividualDetails.MediaRelease === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
                   </td>
                 </tr>
                 <tr>
                   <td>Emergency Medical Release</td>
                   <td class="name"> 
-                    <div *ngIf="reservationIndividualDetails.EmergencyMedicalRelease == true; else elseBlock">Checked</div>  
-                    <ng-template> #elseBlock>N/A</ng-template>
+                    <div *ngIf="reservationIndividualDetails.EmergencyMedicalRelease === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
                   </td>
                 </tr>
                 <tr>
                   <td>Liability Agreement</td>
                   <td class="name"> 
-                    <div *ngIf="reservationIndividualDetails.LiabilityAgreement == true; else elseBlock">Checked</div>  
-                    <ng-template> #elseBlock>N/A</ng-template>
+                    <div *ngIf="reservationIndividualDetails.LiabilityAgreement === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
                   </td>
                 </tr>
             </tbody>
