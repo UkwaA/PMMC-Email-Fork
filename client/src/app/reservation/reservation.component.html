@@ -330,13 +330,13 @@
               <div class="row">
                 <label class="col-form-label col-sm-2" for="TeacherPhoneNo">Teacher Phone Number: </label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="TeacherPhoneNo"
-                    [ngClass]="{ 'is-invalid': g.TeacherPhoneNo.errors }" />
-                  <div *ngIf="g.TeacherPhoneNo.errors" class="invalid-feedback">
-                    <div *ngIf="g.TeacherPhoneNo.errors.required">This is required</div>
-                    <div *ngIf="g.TeacherPhoneNo.errors.min">Please enter a valid phone number</div>
-                    <!-- <div *ngIf="f.TeacherPhoneNo.errors.pattern">Invalid Phone Number</div> -->
-                  </div>
+                  <input class="form-control" type="number" placeholder="" formControlName="TeacherPhoneNo"
+                    [ngClass]="{'is-invalid': g.TeacherPhoneNo.errors }">
+                    <div *ngIf="g.TeacherPhoneNo.errors" class="invalid-feedback">
+                      <div *ngIf="g.TeacherPhoneNo.errors.required">This is required</div>
+                      <div *ngIf="g.TeacherPhoneNo.errors.min">Please enter a valid phone number</div>
+                      <div *ngIf="g.TeacherPhoneNo.errors.max">Please enter a valid phone number</div>
+                    </div>
                 </div>
               </div>
             </fieldset>
@@ -348,7 +348,7 @@
                   <input class="form-control" type="text" formControlName="AlternativeDate"
                     [ngClass]="{ 'is-invalid': g.AlternativeDate.errors }" />
                   <div *ngIf="g.AlternativeDate.errors" class="invalid-feedback">
-                    <div *ngIf="g.AlternativeDate.errors.required">Alternative Date is required</div>
+                    <div *ngIf="g.AlternativeDate.errors.minLength">Alternative Date is invalid</div>
                   </div>
                 </div>
               </div>
@@ -441,8 +441,9 @@
               <div class="row">
                 <label class="col-form-label col-sm-2" for="ParticipantAge">Participant Age: </label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="number" min="5" max="18" placeholder=""
-                    formControlName="ParticipantAge" [ngClass]="{'is-invalid': g.ParticipantAge.errors }">
+                  <input class="form-control" type="number" placeholder="Age"
+                    formControlName="ParticipantAge" [ngClass]="{'is-invalid': g.ParticipantAge.errors }" 
+                    (focus)="onFocus($event)" (blur)="lostFocus($event)">
                   <div *ngIf="g.ParticipantAge.errors" class="invalid-feedback">
                     <div *ngIf="g.ParticipantAge.errors.required">Paticipant Age is required</div>
                   </div>
@@ -611,12 +612,12 @@
               <div class="row">
                 <label class="col-form-label col-sm-3" for="InsurePhoneNo">Insurance Phone Number: </label>
                 <div class="col-sm-9">
-                  <input class="form-control" type="number" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
+                  <input class="form-control" type="number" maxlength="10" placeholder="xxx-xxx-xxxx" formControlName="InsurePhoneNo"
                     [ngClass]="{ 'is-invalid':g.InsurePhoneNo.errors }">
                   <div *ngIf="g.InsurePhoneNo.errors" class="invalid-feedback">
                     <div *ngIf="g.InsurePhoneNo.errors.required">Insurance Phone Number is required</div>
-                    <div *ngIf="g.InsurePhoneNo.errors.maxLength">Please enter a valid phone number</div>
-                    <div *ngIf="g.InsurePhoneNo.errors.minlength">Please enter a valid phone number</div>
+                    <div *ngIf="g.InsurePhoneNo.errors.max">Please enter a valid phone number</div>
+                    <div *ngIf="g.InsurePhoneNo.errors.min">Please enter a valid phone number</div>
                     <!-- <div *ngIf="f.InsurePhoneNo.errors.pattern">Invalid Phone Number</div> -->
                   </div>
                 </div>
@@ -648,8 +649,8 @@
                     [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone1.errors }">
                   <div *ngIf="g.AuthorizedPickupPhone1.errors" class="invalid-feedback">
                     <div *ngIf="g.AuthorizedPickupPhone1.errors.required">Authorized Pickup Phone is required</div>
-                    <div *ngIf="g.AuthorizedPickupPhone1.errors.maxLength">Please enter a valid phone number</div>
-                    <div *ngIf="g.AuthorizedPickupPhone1.errors.minLength">Please enter a valid phone number</div>
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.max">Please enter a valid phone number</div>
+                    <div *ngIf="g.AuthorizedPickupPhone1.errors.min">Please enter a valid phone number</div>
                   </div>
                 </div>
               </div>
@@ -674,6 +675,10 @@
                   <input class="form-control" type="number" placeholder="xxx-xxx-xxxx"
                     formControlName="AuthorizedPickupPhone2"
                     [ngClass]="{ 'is-invalid': g.AuthorizedPickupPhone2.errors }">
+                </div>
+                <div *ngIf="g.AuthorizedPickupPhone2.errors" class="invalid-feedback">
+                  <div *ngIf="g.AuthorizedPickupPhone2.errors.max">Please enter a valid phone number</div>
+                  <div *ngIf="g.AuthorizedPickupPhone2.errors.min">Please enter a valid phone number</div>
                 </div>
               </div>
             </fieldset>
@@ -894,7 +899,33 @@
             </tbody>
           </table>
         </div>
-      
+        <!-- Marketing Information -->
+        <mat-divider></mat-divider>
+        <div class="table-responsive-sm">
+          <table class="table table-hover" style="width:100%">
+              <thead>
+                  <tr>
+                      <th style="width:50%">Other Information</th>
+                      <th style="width:50%">  </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>How did you hear about our education program?</td>
+                    <td class="name">
+                      <select  class="form-control" formControlName="userMarketingInfo" (change)="selectMarketingInfos($event)"  
+                      [ngClass]="{ 'is-invalid': submitted && f.userMarketingInfo.errors }">
+                          <option *ngFor="let subType of marketingInfos; let i = index"
+                              [value]="marketingInfos[i].id">
+                              {{marketingInfos[i].name}}
+                          </option>
+                      </select>
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+        
         <!-- Payment Info -->
         <div class="table-responsive-sm">
           <table class="table table-hover" style="width:100%">
@@ -956,49 +987,10 @@
           </table>
         </div>
 
-         <!-- Verify Payment Info -->
-         <!-- <div class="table-responsive-sm">
-          <table class="table table-hover" style="width:100%">
-              <thead>
-                  <tr>
-                      <th style="width:60%">Verify Payment</th>
-                      <th style="width:40%">  </th>
-                  </tr>
-              </thead>
-          </table>
-        </div> -->
-        <!-- <div class="payment-info">
-          <label id="radio-group-label">Pick your choice of payment: </label>
-          <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
-              <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
-              <mat-radio-button  class = "radio-button" name="payment-name" [value]="reservationHeader.Total">Pay in full: ${{reservationHeader.Total}}</mat-radio-button>
-              <mat-radio-button class = "radio-button"  name="payment_name" value="other">
-                <mat-form-field>
-                  <input matInput type="number" placeholder="Other amount" [formControl]="valueControl" [min]="programDetails.DepositAmount" [max]="reservationHeader.Total" [(ngModel)]="customPayment" (ngModelChange)="paymentOption = 'other'">
-                  <mat-hint>The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}</mat-hint>
-                  <mat-error *ngIf="valueControl.hasError('min') || valueControl.hasError('max')">
-                    The amount must be between ${{programDetails.DepositAmount}} and ${{reservationHeader.Total}}
-                  </mat-error>
-                  <mat-error *ngIf="valueControl.hasError('required')">
-                    The amount is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-              </mat-radio-button>
-          </mat-radio-group>
-          <h6> {{payment.name}} </h6>
-        </div>
-       
-        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)"></payment> -->
-
+        
       </div>
-      <mat-divider></mat-divider>
+      
       <br>
-      <!-- <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
-      </ng-container>
-      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
-        <confirmation [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK" [customerSelectDate]="customerSelectDate" [customerSelectTime]="customerSelectTime"></confirmation>
-      </ng-container> -->
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
         <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" (click)="submitReservation()" type="button" [disabled]="!isVerified"> Submit </button>  
