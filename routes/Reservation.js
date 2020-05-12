@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const ReservationHeader = require("../models/ReservationHeader");
 const ReservationGroupDetails = require("../models/ReservationGroupDetails");
 const ReservationIndividualDetails = require("../models/ReservationIndividualDetails");
+const MarketingInfo = require("../models/MarketingInformation");
 const Payment = require("../models/Payment");
 
 reservation.use(bodyParser.json());         // to support JSON-encoded bodies
@@ -322,7 +323,26 @@ reservation.put("/update-balance/:id", (req, res) => {
     });
 });
 
+/*************************************************
+ *         CREATE NEW MARKETING INFORMATION      *
+ **************************************************/
+reservation.post("/create-new-marketing", (req, res) => {
+  const inputData = {
+    MarketingPK: req.body.MarketingPK,
+    ProgramPK: req.body.ProgramPK,
+    UserPK: req.body.UserPK,
+    MarketingContentPK: req.body.MarketingContentPK,
+    Memo: req.body.Memo
+  };
 
+  MarketingInfo.create(inputData)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send("err Create new marketing information " + err);
+    });
+});
 
 // ========================END=====================
 

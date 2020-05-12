@@ -168,7 +168,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+                  <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()" [disabled]="disableQuantity"> Book </button>
                   <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
                 </div>
               </div>
@@ -688,12 +688,12 @@
                 <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="EarlyDropOff"
-                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
-                    <option>No, thanks! (+$0) </option>
-                    <option>Monday Early Drop Off (+$7)</option>
-                    <option>Tueday Early Drop Off (+$7)</option>
-                    <option>Wednesday Early Drop Off (+$7)</option>
-                    <option>Thursday Early Drop Off (+$7)</option>
+                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }"  (change)="selectEarlyDropOff($event)">
+                    <option id="0">No, thanks! (+$0) </option>
+                    <option id="1">Monday Early Drop Off (+$7)</option>
+                    <option id="2">Tueday Early Drop Off (+$7)</option>
+                    <option id="3">Wednesday Early Drop Off (+$7)</option>
+                    <option id="4">Thursday Early Drop Off (+$7)</option>
                   </select>
                   <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
                     <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
@@ -707,12 +707,12 @@
                 <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="LatePickup"
-                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
-                    <option>No, thanks! (+$0) </option>
-                    <option>Monday Late Pick-Up (+$7)</option>
-                    <option>Tueday Late Pick-Up (+$7)</option>
-                    <option>Wednesday Late Pick-Up (+$7)</option>
-                    <option>Thursday Late Pick-Up (+$7)</option>
+                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }"  (change)="selectLatePickup($event)">
+                    <option id="0">No, thanks! (+$0) </option>
+                    <option id="1">Monday Late Pick-Up (+$7)</option>
+                    <option id="2">Tueday Late Pick-Up (+$7)</option>
+                    <option id="3">Wednesday Late Pick-Up (+$7)</option>
+                    <option id="4">Thursday Late Pick-Up (+$7)</option>
                   
                   </select>
                   <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
@@ -732,21 +732,6 @@
     </ng-container>
       <!-- END INDIVIDUAL PROGRAM SECTION -->
     </mat-step>
-    <!-- <mat-step [stepControl]="confirmation">
-      <ng-template matStepLabel>Payment</ng-template>
-      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"></payment>
-      </ng-container>
-      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"></payment>
-      </ng-container>
-      <div class="row pt-3">
-        <div class="col-md-12">
-          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-          <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
-        </div>
-      </div>
-    </mat-step> -->
     <mat-step [stepControl]="confirmation">
       <ng-template matStepLabel>Confirmation</ng-template>
       <div *ngIf="stepTwoIsCompleted" class="container">
@@ -886,15 +871,24 @@
                 </tr>
                 <tr>
                   <td>Media Release</td>
-                  <td class="name">{{reservationIndividualDetails.MediaRelease}}</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.MediaRelease == true; else elseBlock">Checked</div>  
+                    <ng-template> #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
                 <tr>
                   <td>Emergency Medical Release</td>
-                  <td class="name">{{reservationIndividualDetails.EmergencyMedicalRelease}}</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.EmergencyMedicalRelease == true; else elseBlock">Checked</div>  
+                    <ng-template> #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Liability Argreement</td>
-                  <td class="name">{{reservationIndividualDetails.LiabilityAgreement}}</td>
+                  <td>Liability Agreement</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.LiabilityAgreement == true; else elseBlock">Checked</div>  
+                    <ng-template> #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
             </tbody>
           </table>
@@ -902,30 +896,40 @@
         <!-- Marketing Information -->
         <mat-divider></mat-divider>
         <div class="table-responsive-sm">
-          <table class="table table-hover" style="width:100%">
-              <thead>
-                  <tr>
-                      <th style="width:50%">Other Information</th>
-                      <th style="width:50%">  </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td>How did you hear about our education program?</td>
-                    <td class="name">
-                      <select  class="form-control" formControlName="userMarketingInfo" (change)="selectMarketingInfos($event)"  
-                      [ngClass]="{ 'is-invalid': submitted && f.userMarketingInfo.errors }">
-                          <option *ngFor="let subType of marketingInfos; let i = index"
-                              [value]="marketingInfos[i].id">
-                              {{marketingInfos[i].name}}
-                          </option>
-                      </select>
-                    </td>
-                  </tr>
-              </tbody>
-          </table>
+          <form [formGroup]="marketingForm">
+            <table class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Other Information</th>
+                        <th style="width:50%">  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>How did you hear about our education program?</td>
+                      <td class="name">
+                        <select  class="form-control" formControlName="UserMarketingInfo" (change)="selectMarketingInfos($event)"  
+                        [ngClass]="{ 'is-invalid': submitted && m.UserMarketingInfo.errors }">
+                            <option *ngFor="let subType of marketingInfos; let i = index"
+                                [value]="marketingInfos[i].id">
+                                {{marketingInfos[i].name}}
+                            </option>
+                        </select>
+                      </td>
+                    </tr>
+                      <tr *ngIf="selectedMarketingInfo == 6">
+                        <td>Please Specify</td>
+                        <td class="name">
+                            <input class="form-control" type="text" placeholder="I hear your program from ..."
+                              formControlName="UserInputOther"
+                              [ngClass]="{ 'is-invalid': m.UserInputOther.errors }">
+                        </td>
+                      </tr>
+                </tbody>
+            </table>
+          </form>
         </div>
-        
+
         <!-- Payment Info -->
         <div class="table-responsive-sm">
           <table class="table table-hover" style="width:100%">

@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 7, currentPage:p}">
+                <tr *ngFor="let program of programs | filter:searchText | paginate:{itemsPerPage: 15, currentPage:p}">
                     <td class="name"> {{program.Name}}
                         <div class="row errorMessage ml-auto" *ngIf="!program.hasSchedule">
                             <mat-icon color="orange">error</mat-icon>

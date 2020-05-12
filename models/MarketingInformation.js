@@ -10,10 +10,12 @@ module.exports = db.sequelize.define(
       autoIncrement: true
     },
     ProgramPK: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      primaryKey: true
     },
     UserPK: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      primaryKey: true
     },
     MarketingContentPK: {
       type: Sequelize.INTEGER

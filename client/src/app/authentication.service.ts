@@ -77,6 +77,7 @@ export class AuthenticationService {
         window.localStorage.removeItem('usertoken');
         window.localStorage.removeItem('QuantityFormLocal');
         window.localStorage.removeItem('ReservationGroupLocal');
+        this.router.navigateByUrl('/');
         return false;
       }
     } else {

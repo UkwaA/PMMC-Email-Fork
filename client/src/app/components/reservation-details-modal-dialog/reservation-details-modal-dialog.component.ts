@@ -33,7 +33,7 @@ export class ReservationDetailsModalDialog implements OnInit{
         this.data = this.modalData;
         console.log(this.data);
         this.paid = this.data.Total - this.data.RemainingBalance;
-        this.customerService.getCustomerInfoByID(this.data.UserID).subscribe((info) => {
+        this.customerService.getCustomerInfoByID(this.data.UserPK).subscribe((info) => {
             this.customerDetails = info;
         });
 
