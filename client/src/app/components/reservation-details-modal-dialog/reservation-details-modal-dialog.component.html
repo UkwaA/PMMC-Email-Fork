@@ -18,26 +18,38 @@
             <mat-tab label="General Info">
                 <ng-template matTabContent>
                     <div class="container">
-                        <form [formGroup]="generalForm">
-                            <fieldset disabled>
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Reservation ID: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationPK"  [(ngModel)]="data.ReservationPK">
-                                </div> 
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Program Name: </label>
-                                    <input type="text" class="col-sm-5 form-control" formControlName="ProgramName"  [(ngModel)]="data.ProgramName">
-                                </div> 
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Date: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Date"  [(ngModel)]="data.Date">
-                                </div> 
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Reservation Status: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="ReservationStatus"  [(ngModel)]="data.ReservationStatus">
-                                </div>     
-                            </fieldset>
-                        </form>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Reservation ID:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{data.ReservationPK}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Program Name:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{data.ProgramName}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Date:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{data.Date}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Reservation Status:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{data.ReservationStatus}}</h6>
+                            </div>
+                        </div>  
                     </div>
                 </ng-template>
             </mat-tab>
@@ -148,60 +160,110 @@
             <mat-tab label="Customer Info">
                 <ng-template matTabContent>
                     <div class="container">
-                        <form [formGroup]="customerInfoForm">
-                            <fieldset disabled>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 field">
-                                        <label><h4>First name</h4></label>
-                                        <input type="text" class="form-control" formControlName="FirstName" placeholder="First name" [(ngModel)]="customerDetails.FirstName">
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 field">
-                                        <label><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" formControlName="LastName"placeholder="Last name" [(ngModel)]="customerDetails.LastName">
-                                    </div>
-                                    <div class="col-md-8 col-sm-8 field">
-                                        <label><h4>Address</h4></label>
-                                        <input type="text" class="form-control" formControlName="Address"placeholder="enter address" [(ngModel)]="customerDetails.Address" >
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 field">
-                                        <label><h4>Phone Number</h4></label>
-                                        <input type="text" pattern="[0-9]{10}" class="form-control" formControlName="PhoneNo" placeholder="Phone No" [(ngModel)]="customerDetails.PhoneNo" >
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 field">
-                                        <label><h4>City</h4></label>
-                                        <input type="text" class="form-control" formControlName="City" placeholder="enter city" [(ngModel)]="customerDetails.City" >
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 field">
-                                        <label><h4>State</h4></label>
-                                        <input type="text" class="form-control" formControlName="State" placeholder="enter state" [(ngModel)]="customerDetails.State">
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 field">
-                                        <label><h4>Zipcode</h4></label>
-                                        <input type="text" class="form-control" formControlName="Zipcode" placeholder="enter zipcode" [(ngModel)]="customerDetails.Zipcode">
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>First Name:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{customerDetails.FirstName}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Last Name:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{customerDetails.LastName}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Address:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{customerDetails.Address}}, {{customerDetails.City}}, {{customerDetails.State}} {{customerDetails.Zipcode}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Phone Number:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{customerDetails.PhoneNo}}</h6>
+                            </div>
+                        </div>                       
                     </div>
                 </ng-template>
             </mat-tab>
             <mat-tab label="Payment Info">
                 <ng-template matTabContent>
                     <div class="container">
-                        <form [formGroup]="paymentForm">
-                            <fieldset disabled>
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Total Amount: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Total"  [(ngModel)]="data.Total">
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Total Amount:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>${{data.Total}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Paid Amount:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>${{paid}}</h6>
+                            </div>
+                        </div>
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Remaining Amount:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>${{data.RemainingBalance}}</h6>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <form>
+                            <fieldset>
+                                <div class="row">
+                                    <h4> Manual Payment </h4>
                                 </div> 
                                 <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Paid Amount: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Paid"  [(ngModel)]="paid">
+                                    <label class="col-sm-3 control-label">Choose Type: </label>
+                                    <select class="col-sm-3 control-label" id="type">
+                                        <option value="default">---Type of Payment---</option>
+                                        <option value="card">Card</option>
+                                        <option value="other">Others</option>
+                                    </select>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Enter Amount: </label>
+                                    <input type="number" class="col-sm-3 form-control" formControlName="amount">
+                                    <div class="col-sm-6">
+                                        <button type="submit" class="btn btn-success float-right" value="Submit">Add Payment</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+
+                        <form>
+                            <fieldset>
+                                <div class="row">
+                                    <h4> Refund Section </h4>
+                                </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Refund Amount: </label>
+                                    <input type="number" class="col-sm-3 form-control">
                                 </div> 
                                 <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Remaining Amount: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="RemainingBalance"  [(ngModel)]="data.RemainingBalance">
-                                </div>   
+                                    <label class="col-sm-3 control-label">Reason: </label>
+                                    <textarea class="col-sm-9 form-control"  rows="3"></textarea>                                        
+                                </div> 
+                                <div class="row form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-danger float-right" value="Submit">Refund</button>
+                                    </div>
+                                </div> 
                             </fieldset>
                         </form>
                     </div>

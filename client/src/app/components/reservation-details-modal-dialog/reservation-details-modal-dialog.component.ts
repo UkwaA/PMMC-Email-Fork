@@ -37,35 +37,15 @@ export class ReservationDetailsModalDialog implements OnInit{
             this.customerDetails = info;
         });
 
-        this.customerInfoForm = this.fb.group({
-            FirstName: [''],
-            LastName: [''],
-            PhoneNo: [''],
-            Address: [''],
-            City: [''],
-            State: [''],
-            Zipcode: [''],
-            Subscribe: []
-        });
-
         if (this.data.ProgramType === 0){
             this.reservationService.getGroupReservationDetailsByReservationPK(this.data.ReservationPK).subscribe((group) => {
                 this.groupDetails = group;
-                console.log(this.groupDetails);
-                console.log(this.groupDetails.ProgramRestriction);
             })
         } else {
             this.reservationService.getIndividualReservationDetailsByReservationPK(this.data.ReservationPK).subscribe((individual) => {
                 this.individualDetails = individual;
             })
         }
-
-        this.generalForm = this.fb.group({
-            ReservationPK: [''],
-            ProgramName: [''],
-            ReservationStatus: [''],
-            Date: ['']
-        });
 
         this.groupForm = this.fb.group({
                 AdultQuantity: [''],
@@ -103,11 +83,6 @@ export class ReservationDetailsModalDialog implements OnInit{
             AuthorizedPickupPhone2: [''],
             EarlyDropOff: [''],
             LatePickUp: [''],
-        });
-        this.paymentForm = this.fb.group({
-            Total: [''],
-            Paid: [''],
-            RemainingBalance: ['']
         });
     }
 
