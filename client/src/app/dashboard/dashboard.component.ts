@@ -15,6 +15,7 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { start } from 'repl';
 
 export interface DataElement {
   no: number;
@@ -75,21 +76,21 @@ export class DashboardComponent implements OnInit {
   today = new Date();
   newDate: Date;
   range = {
-    start: new Date(this.today.getFullYear(), this.today.getMonth(), 1),
-    end: new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0)
+    end: this.today,
+    start: new Date(this.today.getTime() - (7 * 24 * 60 * 60 * 1000))
   };
   completedRes = 0;
   completedTotal = 0;
-  completedDetails = { range: {}, reservations: [] };
+  completedDetails = [];
   ongoingRes = 0;
   ongoingTotal = 0;
-  ongoingDetails = { range: {}, reservations: [] };
+  ongoingDetails = [];
   attendedRes = 0;
   attendedTotal = 0;
-  attendedDetails = { range: {}, reservations: [] };
+  attendedDetails = [];
   cancelledRes = 0;
   cancelledTotal = 0;
-  cancelledDetails = { range: {}, reservations: [] };
+  cancelledDetails = [];
 
   /* CHART USING NG2-CHARTS */
   title = 'Reservation By Years';
@@ -232,21 +233,21 @@ export class DashboardComponent implements OnInit {
 
   /* Change the Start and End Date */
   onChangeDate() {
-    if (this.range.start <= this.range.end) {
+    //if (this.range.start <= this.range.end) {}
       this.range.start.setHours(0, 0, 0, 0);
-      this.range.end.setHours(23, 59, 59, 999);
+      this.range.end.setHours(0, 0, 0, 0);
       this.completedRes = 0;
       this.completedTotal = 0;
-      this.completedDetails = { range: this.range, reservations: [] };
+      this.completedDetails = [];
       this.ongoingRes = 0;
       this.ongoingTotal = 0;
-      this.ongoingDetails = { range: this.range, reservations: [] };
+      this.ongoingDetails = [];
       this.attendedRes = 0;
       this.attendedTotal = 0;
-      this.attendedDetails = { range: this.range, reservations: [] };
+      this.attendedDetails = [];
       this.cancelledRes = 0;
       this.cancelledTotal = 0;
-      this.cancelledDetails = { range: this.range, reservations: [] };
+      this.cancelledDetails = [];
       this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
         allRes.forEach((item) => {
           //console.log(item);
@@ -272,39 +273,34 @@ export class DashboardComponent implements OnInit {
                 this.ongoingRes += 1;
                 this.ongoingTotal += item.Total;
                 reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                this.ongoingDetails.reservations.push(reservation);
+                this.ongoingDetails.push(reservation);
                 break;
               }
               case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
                 this.attendedRes += 1;
                 this.attendedTotal += item.Total;
                 reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                this.attendedDetails.reservations.push(reservation);
+                this.attendedDetails.push(reservation);
                 break;
               }
               case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
                 this.completedRes += 1;
                 this.completedTotal += item.Total;
                 reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                this.completedDetails.reservations.push(reservation);
+                this.completedDetails.push(reservation);
                 break;
               }
               case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
                 this.cancelledRes += 1;
                 this.cancelledTotal += item.Total;
                 reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                this.cancelledDetails.reservations.push(reservation);
+                this.cancelledDetails.push(reservation);
                 break;
               }
             }
           }
         });
-
-        //Can use value of total income and total reservation here
-        console.log(this.ongoingTotal);
-        console.log(this.ongoingRes);
       });
-    }
   }
 
   // PaynowModal

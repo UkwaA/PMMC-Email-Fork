@@ -16,9 +16,7 @@ export class AdminReservationsModalDialogComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     ngOnInit() {
-        this.reservations = this.data.reservations;
-        this.range.start = this.data.range.start.toDateString();
-        this.range.end = this.data.range.end.toDateString();
+        this.reservations = this.data;
     }
 
     closeModal() {
