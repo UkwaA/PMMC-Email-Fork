@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="row">
-                <h6>Here are the general information of <strong>{{reservation.ReservationStatus}}</strong> reservations in the last 7 days.</h6>
+                <h6>Here are the general information of the <strong>{{ReservationStatus}}</strong> reservations in the last 7 days.</h6>
             </div>
         </div>
     </header>
@@ -27,8 +27,8 @@
                     <th style="width:17%"> Name </th>
                     <th style="width:10%"> Quantity </th>
                     <th style="width:10%"> Total </th>
-                    <th *ngIf="ReservationStatus != 5" style="width:20%"> Remaining </th>
-                    <th *ngIf="ReservationStatus == 5" style="width:20%"> Action </th>
+                    <th *ngIf="ReservationStatus != 'Pending'" style="width:20%"> Remaining </th>
+                    <th *ngIf="ReservationStatus == 'Pending'" style="width:20%"> Action </th>
 
                 </tr>
             </thead>
@@ -40,8 +40,8 @@
                     <td> {{reservation.CustomerName}} </td>
                     <td> {{reservation.NumberOfParticipant}} </td>
                     <td> ${{reservation.Total}} </td>
-                    <td *ngIf="ReservationStatus != 5"> ${{reservation.RemainingBalance}} </td>
-                    <td *ngIf="ReservationStatus == 5">
+                    <td *ngIf="ReservationStatus != 'Pending'"> ${{reservation.RemainingBalance}} </td>
+                    <td *ngIf="ReservationStatus == 'Pending'">
                         <button mat-raised-button class="btn btn-warning" type="submit" onfocus="blur()">Accept</button>
                         <button mat-raised-button class="btn btn-danger ml-3" type="submit" onfocus="blur()">Deny</button>
                     </td>

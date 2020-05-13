@@ -390,23 +390,23 @@ export class DashboardComponent implements OnInit {
     dialogConfig.autoFocus = false;
     switch (status) {
       case AppConstants.RESERVATION_STATUS_TEXT.ON_GOING: {
-        dialogConfig.data = [1,this.ongoingDetails];
+        dialogConfig.data = [status,this.ongoingDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.ATTENDED: {
-        dialogConfig.data = [2,this.attendedDetails];
+        dialogConfig.data = [status,this.attendedDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.COMPLETED: {
-        dialogConfig.data = [3,this.completedDetails];
+        dialogConfig.data = [status,this.completedDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.CANCELLED: {
-        dialogConfig.data = [4,this.cancelledDetails];
+        dialogConfig.data = [status,this.cancelledDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.PENDING: {
-        dialogConfig.data = [5,this.pendingDetails];
+        dialogConfig.data = [status,this.pendingDetails];
         break;
       }
     }
