@@ -18,7 +18,6 @@ export class AdminReservationsModalDialogComponent implements OnInit {
     ngOnInit() {
         this.reservations = this.data[1];
         this.ReservationStatus = this.data[0];
-        console.log(this.ReservationStatus);
     }
 
     closeModal() {

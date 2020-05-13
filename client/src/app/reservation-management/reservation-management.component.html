@@ -50,6 +50,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td> {{reservation.ReservationPK}} </td>
                   <td> {{reservation.ProgramName}} </td>
                   <td> {{reservation.Date}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Attended'" class='attended'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>

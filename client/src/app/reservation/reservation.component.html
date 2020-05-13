@@ -161,7 +161,7 @@
                   <input type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
                     [ngClass]="{'is-invalid': f.TotalQuantity.errors }" required>
                   <div *ngIf="f.TotalQuantity.errors" class="invalid-feedback">
-                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 8 person.</div>
+                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 3 person.</div>
                     <div *ngIf="f.TotalQuantity.errors.max">Must be smaller than the Availability</div>
                   </div>
                 </div>
