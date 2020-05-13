@@ -831,7 +831,7 @@ export class ReservationComponent implements OnInit {
           totalQuantControl.clearValidators();
           totalQuantControl.setValidators([
             Validators.required,
-            Validators.min(8),
+            Validators.min(3),
             Validators.max(this.availability),
           ]);
           totalQuantControl.updateValueAndValidity();
@@ -913,8 +913,36 @@ export class ReservationComponent implements OnInit {
       this.reservationGroupDetails.TotalQuantity = this.quantityForm.get(
         "TotalQuantity"
       ).value;
-      balance =
-        this.currTotalQuantity * this.programDetails.PricePerParticipant;
+
+      // If the TotalQuantity < 8, User still have to pay for 8 participant
+      // This will only affect the Balance of the reservation
+      if(this.currTotalQuantity < 8) {
+        balance = 8 * this.programDetails.PricePerParticipant;
+
+        const participantDialog = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        participantDialog.disableClose = true;
+        participantDialog.id = "modal-component";
+        participantDialog.height = "auto";
+        participantDialog.maxHeight = "500px";
+        participantDialog.width = "430px";
+        participantDialog.data = {
+          title: "Message",
+          description: "The program is designed for the minimum for 8 participant. Even though your group size is smaller than 8, we still have count your group as 8 participants. Thank you for you understanding.",
+          actionButtonText: "Ok",
+          numberOfButton: "1",
+        };
+
+        const modalDialog = this.matDialog.open(
+          ModalDialogComponent,
+          participantDialog
+        );
+        modalDialog.afterClosed().subscribe((result) => {
+          if (result == "Ok") {}
+        });
+      } else {
+        balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
+      }
     } else {
       this.currTotalQuantity = 1;
     }
@@ -923,8 +951,8 @@ export class ReservationComponent implements OnInit {
     this.reservationHeader.SchedulePK = this.SchedulePK;
     this.reservationHeader.UserPK = this.currUser.UserPK;
     
-    // Reservation Status Will be Pending if the User is School Account.
-    this.reservationHeader.ReservationStatus = this.currUser.Role_FK === AppConstants.USER_ROLE_CODE.SCHOOL ? AppConstants.RESERVATION_STATUS_CODE.PENDING : AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+    // Reservation Status Will be Pending if User book Group Program
+    this.reservationHeader.ReservationStatus = this.programDetails.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM ? AppConstants.RESERVATION_STATUS_CODE.PENDING : AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
       
     this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
     this.reservationHeader.Total = balance;
@@ -1105,7 +1133,6 @@ export class ReservationComponent implements OnInit {
                     }
                   });
                 }
-               
 
                 // Update Schedule CurrentNumberParticipant
                 this.programScheduleServices
@@ -1137,7 +1164,7 @@ export class ReservationComponent implements OnInit {
                       dialogConfig.width = "430px";
                       dialogConfig.data = {
                         title: "Thanks You.",
-                        description: "Thank you for your reservation!",
+                        description: "Thank you for your reservation! You will receive an email when your reservation is accepted.",
                         actionButtonText: "Ok",
                         numberOfButton: "1",
                       };

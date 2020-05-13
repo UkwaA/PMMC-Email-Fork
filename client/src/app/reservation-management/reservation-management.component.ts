@@ -39,6 +39,7 @@ export class ReservationManagementComponent implements OnInit {
     { id: 2, name: 'Attended' },
     { id: 3, name: 'Completed' },
     { id: 4, name: 'Cancelled' },
+    { id: 5, name: 'Pending' },
   ];
 
   programCategories: Array<any> = [
@@ -165,6 +166,12 @@ export class ReservationManagementComponent implements OnInit {
                   this.cancelledReservations.push(reservation);
                   break;
                 }
+                case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.PENDING;
+                  this.cancelledReservations.push(reservation);
+                  break;
+                }
               }
               if (item.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                 this.groupReservations.push(reservation);
@@ -231,6 +238,11 @@ export class ReservationManagementComponent implements OnInit {
             break;
           case '4':
             if (res.ReservationStatus === 'Cancelled'){
+              this.filterReservations.push(res);
+            }
+            break;
+          case '5':
+            if (res.ReservationStatus === 'Pending'){
               this.filterReservations.push(res);
             }
             break;
