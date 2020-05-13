@@ -1,6 +1,6 @@
 import { OnInit, Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { ReservationService } from '../../services/reservation.services'
 
 @Component ({
     selector: 'app-admin-reservations-modal-dialog',
@@ -13,7 +13,8 @@ export class AdminReservationsModalDialogComponent implements OnInit {
     ReservationStatus: string;
     p: number;
     constructor(public dialogRef: MatDialogRef<AdminReservationsModalDialogComponent>, public matDialog: MatDialog,
-                @Inject(MAT_DIALOG_DATA) public data: any) {}
+                @Inject(MAT_DIALOG_DATA) public data: any,
+                private reservationService: ReservationService) {}
 
     ngOnInit() {
         this.reservations = this.data[1];
@@ -28,4 +29,18 @@ export class AdminReservationsModalDialogComponent implements OnInit {
         console.log('Modal closing');
         this.dialogRef.close('Yes');
     }
+
+    // Accept Pending Reservation Method
+    acceptReservation(ReservationPK: number) {
+        this.reservationService.acceptPendingReservation(ReservationPK).subscribe((result) => {
+            console.log("Update Succesfull");
+        })
+    }
+
+     // Cancel Pending Reservation Method
+    cancelReservation(ReservationPK: number) {
+        this.reservationService.cancelPendingReservation(ReservationPK).subscribe((result) => {
+            console.log("Update Succesfull");
+    })
+}
 }
