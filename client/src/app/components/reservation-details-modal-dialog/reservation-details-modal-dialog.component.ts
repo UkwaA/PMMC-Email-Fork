@@ -56,34 +56,7 @@ export class ReservationDetailsModalDialog implements OnInit{
                 Age1415Quantity: [''],
                 Age1517Quantity: [''],
                 TotalQuantity: [''],
-                ProgramRestriction: [''],
-                OrganizationName: [''],
-                GradeLevel: [''],
-                TeacherName: [''],
-                TeacherEmail: [''],
-                TeacherPhoneNo: [''],
-                AlternativeDate: [''],
-                EducationPurpose: ['']
             });
-        
-        this.individualForm = this.fb.group({
-            ParticipantName: [''],
-            ParticipantAge: [''],
-            Gender: [''],
-            MerchSize: [''],
-            AllergyInfo: [''],
-            SpecialInfo: [''],
-            InsureProviderName: [''],
-            InsureRecipientName: [''],
-            InsurePolicyNo: [''],
-            InsurePhoneNo: [''],
-            AuthorizedPickupName1: [''],
-            AuthorizedPickupPhone1: [''],
-            AuthorizedPickupName2: [''],
-            AuthorizedPickupPhone2: [''],
-            EarlyDropOff: [''],
-            LatePickUp: [''],
-        });
     }
 
 
