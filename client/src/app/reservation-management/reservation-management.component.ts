@@ -28,6 +28,7 @@ export class ReservationManagementComponent implements OnInit {
   attendedReservations = [];
   completedReservations = [];
   cancelledReservations = [];
+  pendingReservations = [];
   filterReservations = [];
   searchText: string;
   temp = [];
@@ -39,6 +40,7 @@ export class ReservationManagementComponent implements OnInit {
     { id: 2, name: 'Attended' },
     { id: 3, name: 'Completed' },
     { id: 4, name: 'Cancelled' },
+    { id: 5, name: 'Pending' }
   ];
 
   programCategories: Array<any> = [
@@ -165,6 +167,12 @@ export class ReservationManagementComponent implements OnInit {
                   this.cancelledReservations.push(reservation);
                   break;
                 }
+                case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.PENDING;
+                  this.pendingReservations.push(reservation);
+                  break;
+                }
               }
               if (item.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                 this.groupReservations.push(reservation);
@@ -234,23 +242,28 @@ export class ReservationManagementComponent implements OnInit {
               this.filterReservations.push(res);
             }
             break;
+          case '5':
+            if (res.ReservationStatus === 'Pending'){
+              this.filterReservations.push(res);
+            }
+            break;
         }
       });
     } else {
       switch (this.choice) {
-      case '0':
-        this.reservations = this.allReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '1':
-        this.reservations = this.groupReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '2':
-        this.reservations = this.individualReservations;
-        this.filterReservations = this.reservations;
-        break;
-      }
+        case '0':
+          this.reservations = this.allReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '1':
+          this.reservations = this.groupReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '2':
+          this.reservations = this.individualReservations;
+          this.filterReservations = this.reservations;
+          break;
+        }
     }
   }
 

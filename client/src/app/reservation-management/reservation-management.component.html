@@ -14,8 +14,8 @@
         </div>
         <div *ngIf = "role == 2 || role == 3" class="col-lg-2 col-md-2 col-sm-3 pr-3">
             <select class="form-control" style="font-weight: bold" id="typeCat" (change)="selectTypeHandler($event)">
-            <option selected value="0"> --- Status --- </option>
-            <option *ngFor="let type of typeCategories" [value]="type.id">{{type.name}}</option>
+                <option selected value="0"> --- Status --- </option>
+                <option *ngFor="let type of typeCategories" [value]="type.id">{{type.name}}</option>
             </select>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 pr-0">
@@ -54,6 +54,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.CustomerName}} </td>
                   <td> ${{reservation.Total}} </td>
                   <td> ${{reservation.RemainingBalance}} </td>
@@ -91,6 +92,7 @@ Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.Date}}</td>
                   <td> {{reservation.Time}}</td>
