@@ -952,19 +952,17 @@
                     <td>Total Amount</td>
                     <td class="name">${{reservationHeader.Total}}</td>
                   </tr>
-                  <tr >
+                  <tr *ngIf= "!(ProgramType == 0 && currUser.Role_FK == 4)">
                     <td>Amount Due Today</td>
                     <!-- Amount Due will be 25 for group program -->
-                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}
-                    </td>
+                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}</td>
                     <!-- Amount Due will be the Total for Individual program -->
-                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}
-                    </td>
+                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}</td>
                   </tr>
-                  <tr >
+                  <tr *ngIf= "!(ProgramType == 0 && currUser.Role_FK == 4)">
                     <td>Payment Verifivation </td>
                     <td>
-                      <div *ngIf= "ProgramType == 0 && currUser.Role_FK != 4" class="payment-info">
+                      <div *ngIf= "ProgramType ==0" class="payment-info">
                         <label id="radio-group-label">Pick your choice of payment: </label>
                         <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
                             <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
@@ -983,8 +981,8 @@
                             </mat-radio-button>
                         </mat-radio-group>
                         <h6 *ngIf="valid">Remaining Balance: {{remaining}}</h6>
-                        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid"></payment>
                       </div>
+                      <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid"></payment>
                     </td>
                   </tr>
               </tbody>

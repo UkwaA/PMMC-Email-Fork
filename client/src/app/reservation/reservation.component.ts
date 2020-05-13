@@ -224,15 +224,6 @@ export class ReservationComponent implements OnInit {
     // Get UserDetails
     this.currUser = this.auth.getUserDetails();
 
-     // Set Validation of Payment to True for User Role is School Account
-     // This will let User submit reservation without asking them the deposit amount.
-     if(this.currUser.Role_FK == 4) {
-      this.isVerified = true;
-      this.valid = true;
-     } else {
-      this.valid = false;
-     }
-
     this.route.params.subscribe((val) => {
       this.ProgramPK = val.id;
     });
@@ -255,6 +246,14 @@ export class ReservationComponent implements OnInit {
         switch (this.ProgramType) {
           /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
           case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+            // Set Validation of Payment to True for User Role is School Account
+            // This will let User submit reservation without asking them the deposit amount.
+            if(this.currUser.Role_FK == 4) {
+              this.isVerified = true;
+              this.valid = true;
+            } else {
+              this.valid = false;
+            }
             this.service
               .getProgramRequirementDetails("g", this.ProgramPK)
               .subscribe((program) => {
