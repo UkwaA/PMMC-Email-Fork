@@ -19,4 +19,8 @@ export class CustomerService{
     public updateCustomerInfo(UserPK: number, customer: CustomerData):Observable<any>{
         return this.http.put(AppConstants.EXPRESS_SERVER_URL + "customers/update-customer-info/" + UserPK, customer);
     }
+
+    public getAllUsersCreatedInTimeRange(start:any, end:any):Observable<any>{
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + "customers/get-all-users-created-within-time-range/" + start + "/" + end);
+    }
 }

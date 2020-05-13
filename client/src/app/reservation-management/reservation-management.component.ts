@@ -78,7 +78,7 @@ export class ReservationManagementComponent implements OnInit {
               details.RemainingBalance = item.RemainingBalance;
               details.Quantity = item.NumberOfParticipant;
               details.Date = item.Start.slice(0, 10);
-              details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
+              details.Time = item.Start.slice(11, 16) + ' - ' + item.End.slice(11, 16);
               details.ProgramName = item.Name;
               switch (item.ReservationStatus) {
                 case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {

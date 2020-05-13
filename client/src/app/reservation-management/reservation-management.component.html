@@ -55,8 +55,8 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.CustomerName}} </td>
-                  <td> {{reservation.Total}} </td>
-                  <td> {{reservation.RemainingBalance}} </td>
+                  <td> ${{reservation.Total}} </td>
+                  <td> ${{reservation.RemainingBalance}} </td>
                   <td> 
                       <button mat-raised-button class="btn btn-warning" type="submit" (click)="openReservationModal(reservation)" onfocus="blur()">View</button>
                   </td>
@@ -94,8 +94,8 @@ Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon mat
                   <td> {{reservation.Date}}</td>
                   <td> {{reservation.Time}}</td>
                   <td> {{reservation.Quantity}} </td>
-                  <td> {{reservation.Total}} </td>
-                  <td> {{reservation.RemainingBalance}} 
+                  <td> ${{reservation.Total}} </td>
+                  <td> ${{reservation.RemainingBalance}} 
                       <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
                   </td>
               </tr>
