@@ -42,8 +42,8 @@
                     <td> ${{reservation.Total}} </td>
                     <td *ngIf="ReservationStatus != 'Pending'"> ${{reservation.RemainingBalance}} </td>
                     <td *ngIf="ReservationStatus == 'Pending'">
-                        <button mat-raised-button class="btn btn-warning" type="submit" onfocus="blur()">Accept</button>
-                        <button mat-raised-button class="btn btn-danger ml-3" type="submit" onfocus="blur()">Deny</button>
+                        <button mat-raised-button class="btn btn-warning" type="submit" onfocus="blur()" (click)="acceptReservation(reservation.ReservationPK)">Accept</button>
+                        <button mat-raised-button class="btn btn-danger ml-3" type="submit" onfocus="blur()" (click)="cancelReservation(reservation.ReservationPK)">Cancel</button>
                     </td>
                 </tr>
             </tbody>

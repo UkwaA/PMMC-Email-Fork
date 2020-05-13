@@ -344,6 +344,84 @@ reservation.post("/create-new-marketing", (req, res) => {
     });
 });
 
+
+
+/*************************************************
+ *         ACCEPT PENDING RESERVATION            *
+ *************************************************/
+reservation.post("/accept-pending-reservation", (req, res) => {
+  ReservationHeader.findOne({
+    where :{
+      ReservationPK: req.body.ReservationPK
+    }
+    })
+    .then((result) => {
+      if(result) {
+        result.update({
+          ReservationStatus: 1
+        })
+        .then(result =>{
+          if (result) {
+            res.send({
+             message: "ReservationStatus has been changed."
+            });
+          }
+          else {
+            res.send({
+             error: "Cannot update ReservationStatus."
+            });
+          }
+        })
+      } else {
+        res.send({
+          error:  req.body.ReservationPK + "There is no ReservationHeader."
+         });
+      }
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
+
+
+/*************************************************
+ *         CANCEL PENDING RESERVATION            *
+ *************************************************/
+reservation.post("/cancel-pending-reservation", (req, res) => {
+  ReservationHeader.findOne({
+    where :{
+      ReservationPK: req.body.ReservationPK
+    }
+    })
+    .then((result) => {
+      if(result) {
+        result.update({
+          ReservationStatus: 4
+        })
+        .then(result =>{
+          if (result) {
+            res.send({
+             message: "ReservationStatus has been changed."
+            });
+          }
+          else {
+            res.send({
+             error: "Cannot update ReservationStatus."
+            });
+          }
+        })
+      } else {
+        res.send({
+          error:  req.body.ReservationPK + "There is no ReservationHeader."
+         });
+      }
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
+
+
 // ========================END=====================
 
 
