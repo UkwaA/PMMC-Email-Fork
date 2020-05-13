@@ -91,12 +91,13 @@ Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.Date}}</td>
                   <td> {{reservation.Time}}</td>
                   <td> {{reservation.Quantity}} </td>
                   <td> ${{reservation.Total}} </td>
                   <td> ${{reservation.RemainingBalance}} 
-                      <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                      <button *ngIf = "reservation.RemainingBalance != 0 && reservation.ReservationStatus != 'Pending'" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
                   </td>
               </tr>
           </tbody>

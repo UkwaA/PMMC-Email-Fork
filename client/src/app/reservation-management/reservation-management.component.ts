@@ -101,6 +101,11 @@ export class ReservationManagementComponent implements OnInit {
                     AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
                   break;
                 }
+                case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.PENDING;
+                  break;
+                }
               }
               if (item.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
                 this.groupReservations.push(details);

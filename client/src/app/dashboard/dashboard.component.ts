@@ -184,11 +184,21 @@ export class DashboardComponent implements OnInit {
               details.Time = item.Start.slice(11, 16) + ' - ' + item.End.slice(11, 16);
               details.ProgramName = item.Name;
               details.ProgramType = item.ProgramType;
-              if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
-                details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+              switch(item.ReservationStatus) {
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING:
+                  details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+                  break;
+                  case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:
+                    details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ATTENDED;
+                    break;
+                  case AppConstants.RESERVATION_STATUS_CODE.PENDING:
+                    details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.PENDING;
+                    break;
               }
+
               if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
-                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
+                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED) ||
+                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.PENDING)) {
                 this.customerRes.push(details);
               }
             })
