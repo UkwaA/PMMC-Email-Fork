@@ -964,7 +964,7 @@
                   <tr >
                     <td>Payment Verifivation </td>
                     <td>
-                      <div *ngIf= "ProgramType == 0" class="payment-info">
+                      <div *ngIf= "ProgramType == 0 && currUser.Role_FK != 4" class="payment-info">
                         <label id="radio-group-label">Pick your choice of payment: </label>
                         <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
                             <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
@@ -983,17 +983,14 @@
                             </mat-radio-button>
                         </mat-radio-group>
                         <h6 *ngIf="valid">Remaining Balance: {{remaining}}</h6>
+                        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid"></payment>
                       </div>
-                      <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid"></payment>
                     </td>
                   </tr>
               </tbody>
           </table>
         </div>
-
-        
       </div>
-      
       <br>
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>

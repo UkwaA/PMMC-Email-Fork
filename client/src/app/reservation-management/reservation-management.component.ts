@@ -18,7 +18,7 @@ import { NumericTextBoxComponent } from '@progress/kendo-angular-inputs';
 export class ReservationManagementComponent implements OnInit {
   p: number;
   choice = '';
-  role: string;
+  role: number;
   UserPK: number;
   reservations = [];
   allReservations = [];
@@ -60,7 +60,7 @@ export class ReservationManagementComponent implements OnInit {
       (user) => {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
-        if (this.role === '1') {
+        if (this.role === AppConstants.USER_ROLE_CODE.CUSTOMER || this.role === AppConstants.USER_ROLE_CODE.SCHOOL) {
           this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
               const details = {

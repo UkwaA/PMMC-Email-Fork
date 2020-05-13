@@ -24,6 +24,7 @@ export class AppConstants {
   public static get SYSTEM_USER_PK(): number {
     return 6868;
   }
+
   // Set additional session's ScheduleSettingPK to 0
   public static get ADDITIONAL_SESSION_DETAIL(): number {
     return 0;
@@ -44,6 +45,7 @@ export class AppConstants {
     ATTENDED: 2,
     COMPLETED: 3,
     CANCELLED: 4,
+    PENDING: 5
   };
 
   public static RESERVATION_STATUS_TEXT = {
@@ -51,6 +53,7 @@ export class AppConstants {
     ATTENDED: 'Attended',
     COMPLETED: 'Completed',
     CANCELLED: 'Cancelled',
+    PENDING: 'Pending'
   };
 
   public static PAYMENT_TYPE_CODE = {
@@ -65,10 +68,11 @@ export class AppConstants {
     CHECK: 'Check',
   };
 
-  public static USER_ROLE = {
+  public static USER_ROLE_CODE = {
     CUSTOMER: 1,
     MANAGER: 2,
     SYSTEM: 3,
+    SCHOOL: 4
   };
 
   public static SUB_GROUP_PROGRAM_TEXT = {

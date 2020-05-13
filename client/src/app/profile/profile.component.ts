@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     details: UserDetails;
     faPhone = faPhone;
     option: string;
-    role: string;
+    role: number;
     userName: string;
     id: number;
 

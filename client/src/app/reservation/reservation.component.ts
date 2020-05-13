@@ -22,7 +22,7 @@ import { ProgramScheduleData } from "../data/program-schedule-data";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { LoginPromptModalComponent } from "../components/login-prompt-modal/login-prompt-modal.component";
 import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
-import { AuthenticationService } from "../authentication.service";
+import { AuthenticationService, UserDetails } from "../authentication.service";
 import { AppConstants } from "../constants";
 import { MatStepper } from "@angular/material/stepper";
 
@@ -81,6 +81,9 @@ export class ReservationComponent implements OnInit {
   // Marketing Form
   marketingForm: FormGroup;
   marketingData: MarketingData;
+
+  // Current User Detail
+  currUser: UserDetails;
 
   programDetails: ProgramData;
   programName: string;
@@ -218,13 +221,25 @@ export class ReservationComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Get UserDetails
+    this.currUser = this.auth.getUserDetails();
+
+     // Set Validation of Payment to True for User Role is School Account
+     // This will let User submit reservation without asking them the deposit amount.
+     if(this.currUser.Role_FK == 4) {
+      this.isVerified = true;
+      this.valid = true;
+     } else {
+      this.valid = false;
+     }
+
     this.route.params.subscribe((val) => {
       this.ProgramPK = val.id;
     });
 
     /******************MARKETING FORM*************************/
     this.marketingForm = this.fb.group ({
-      UserMarketingInfo: [0, Validators.required],
+      UserMarketingInfo: [1, Validators.required],
       UserInputOther: ["", Validators.required]
     });
 
@@ -240,7 +255,6 @@ export class ReservationComponent implements OnInit {
         switch (this.ProgramType) {
           /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
           case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-            this.valid = false;
             this.service
               .getProgramRequirementDetails("g", this.ProgramPK)
               .subscribe((program) => {
@@ -908,9 +922,11 @@ export class ReservationComponent implements OnInit {
 
     // Update data for Reservation Header.
     this.reservationHeader.SchedulePK = this.SchedulePK;
-    this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
-    this.reservationHeader.ReservationStatus =
-      AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+    this.reservationHeader.UserPK = this.currUser.UserPK;
+    
+    // Reservation Status Will be Pending if the User is School Account.
+    this.reservationHeader.ReservationStatus = this.currUser.Role_FK === AppConstants.USER_ROLE_CODE.SCHOOL ? AppConstants.RESERVATION_STATUS_CODE.PENDING : AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+      
     this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
     this.reservationHeader.Total = balance;
     this.reservationHeader.RemainingBalance = balance;
@@ -1053,16 +1069,17 @@ export class ReservationComponent implements OnInit {
               case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
                 // Update the Amount Due when User checkout
                 this.paymentObj.amount = this.payment.name;
-                this.paymentObj.description = this.auth.getUserDetails().Username;
-                this.paymentObj.email = this.auth.getUserDetails().Email;
+                this.paymentObj.description = this.currUser.Username;
+                this.paymentObj.email = this.currUser .Email;
 
-                // Charge User
-                this.paymentServices
+                // Only Charge User If not the School Account
+                if(this.currUser.Role_FK != 4) {
+                  this.paymentServices
                   .processToken(this.paymentObj)
                   .subscribe((chargeResult) => {
                     if (chargeResult) {
                       this.paymentData.PaymentPK = this.paymentObj.token["id"];
-                      this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+                      this.paymentData.UserPK = this.currUser.UserPK;
                       this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
                       this.paymentData.Total = chargeResult.amount;
                       this.paymentData.ChargeToken = chargeResult.id;
@@ -1088,6 +1105,8 @@ export class ReservationComponent implements OnInit {
                         });
                     }
                   });
+                }
+               
 
                 // Update Schedule CurrentNumberParticipant
                 this.programScheduleServices
@@ -1107,9 +1126,7 @@ export class ReservationComponent implements OnInit {
                     if (resGroupDetails) {
                       // Send booking requested email
                       this.emailService
-                        .sendBookingRequestConfirmationEmail(
-                          this.auth.getUserDetails()
-                        )
+                        .sendBookingRequestConfirmationEmail(this.currUser)
                         .subscribe((email) => {});
 
                       const dialogConfig = new MatDialogConfig();
@@ -1146,15 +1163,15 @@ export class ReservationComponent implements OnInit {
                   this.programDetails.PricePerParticipant +
                   this.additionalDropOffFee +
                   this.additionalPickupFee;
-                this.paymentObj.description = this.auth.getUserDetails().Username;
-                this.paymentObj.email = this.auth.getUserDetails().Email;
+                this.paymentObj.description = this.currUser.Username;
+                this.paymentObj.email = this.currUser.Email;
 
                 // Charge User
                 this.paymentServices
                   .processToken(this.paymentObj)
                   .subscribe((res) => {
                     this.paymentData.PaymentPK = this.paymentObj.token["id"];
-                    this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+                    this.paymentData.UserPK = this.currUser.UserPK;
                     this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
                     this.paymentData.Total = res.amount;
                     this.paymentData.ChargeToken = res.id;
@@ -1196,9 +1213,7 @@ export class ReservationComponent implements OnInit {
                     if (res) {
                       // Send booking requested email
                       this.emailService
-                        .sendBookingRequestConfirmationEmail(
-                          this.auth.getUserDetails()
-                        )
+                        .sendBookingRequestConfirmationEmail(this.currUser)
                         .subscribe((email) => {});
 
                       const dialogConfig = new MatDialogConfig();

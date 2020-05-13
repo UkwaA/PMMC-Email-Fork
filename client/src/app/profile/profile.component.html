@@ -12,20 +12,20 @@
       <mat-divider> </mat-divider>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/profile']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"> <mat-icon  matListIcon>dashboard</mat-icon>Dashboard</a>
-        <a *ngIf = "role == '1'" mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
+        <a *ngIf = "role == 1 || role == 4" mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
       </mat-nav-list>
 
-      <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Reservation </section>
-      <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
-      <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
+      <section [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3"> Reservation </section>
+      <mat-divider [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3"></mat-divider>
+      <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3">
         <a mat-list-item [routerLink]="['/profile/reservation-management']" [routerLinkActive]="['active']"> <mat-icon  matListIcon>view_list</mat-icon>Reservation Management</a>
         <a mat-list-item [routerLink]="['/profile/report-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>view_quilt</mat-icon>Report Management</a>
         <!-- <a mat-list-item [routerLink]="['/profile/payment-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>credit_card</mat-icon> Payment Management</a> -->
       </mat-nav-list>
 
-      <section [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"> Program </section>
-      <mat-divider [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'"></mat-divider>
-      <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == '2' || role == '3'">
+      <section [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3"> Program </section>
+      <mat-divider [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3"></mat-divider>
+      <mat-nav-list [routerLinkActive]="['active']" *ngIf = "role == 2 || role == 3">
         <a mat-list-item [routerLink]="['/profile/createprogram']" [routerLinkActive]="['active']"> <mat-icon [class.active]="['selected']" matListIcon>add_circle</mat-icon> New Program</a>
         <a mat-list-item [routerLink]="['/profile/program-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>edit</mat-icon> Program Management</a>
         <a mat-list-item [routerLink]="['/profile/view-schedule','viewAllSchedule']" [routerLinkActive]="['active']"><mat-icon matListIcon>calendar_view_day</mat-icon> View Calendar</a>
@@ -33,9 +33,9 @@
         <a mat-list-item [routerLink]="['/profile/email-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>email</mat-icon>Email Management</a>
       </mat-nav-list>
 
-      <section *ngIf = "role == '3'"> User</section>
-      <mat-divider *ngIf = "role == '3'"></mat-divider>
-      <mat-nav-list *ngIf = "role == '3'">
+      <section *ngIf = "role == 3"> User</section>
+      <mat-divider *ngIf = "role == 3"></mat-divider>
+      <mat-nav-list *ngIf = "role == 3">
         <a mat-list-item [routerLink]="['/profile/create-new-user']" [routerLinkActive]="['active']"> <mat-icon [class.active]="['selected']" matListIcon>add_circle</mat-icon>Create New User</a>
         <a mat-list-item [routerLink]="['/profile/user-management']" [routerLinkActive]="['active']"><mat-icon matListIcon>supervised_user_circle</mat-icon>User Management</a>
       </mat-nav-list>

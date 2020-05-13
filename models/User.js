@@ -16,7 +16,7 @@ module.exports = db.sequelize.define(
       type: Sequelize.TEXT
     },
     Role_FK: {
-      type: Sequelize.TEXT
+      type: Sequelize.INTEGER
     },
     Email: {
       type: Sequelize.TEXT

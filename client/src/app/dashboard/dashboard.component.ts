@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  role: string;
+  role: number;
   searchText: string;
   customerRes = [];
   today = new Date();
@@ -179,7 +179,7 @@ export class DashboardComponent implements OnInit {
     this.auth.profile().subscribe(
       user => {
         this.role = user.Role_FK;
-        if (this.role === '1') {
+        if (this.role === AppConstants.USER_ROLE_CODE.CUSTOMER || this.role === AppConstants.USER_ROLE_CODE.SCHOOL) {
           this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
               console.log(item);

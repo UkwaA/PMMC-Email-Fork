@@ -31,7 +31,7 @@ export class RegisterModalDialogComponent implements OnInit {
       UserPK: 0,
       Username: '',
       Password: '',
-      Role_FK: '',
+      Role_FK: 0,
       Email: '',
       IsActive: true,
       CreatedDate: ''
@@ -89,7 +89,7 @@ export class RegisterModalDialogComponent implements OnInit {
       this.userInfo.Username = this.newUserForm.get('username').value;
       this.userInfo.Email = this.newUserForm.get('email').value;
       this.userInfo.Password = this.newUserForm.get('password').value;
-      this.userInfo.Role_FK = '1';
+      this.userInfo.Role_FK = 1;
     }
 
     loadCustomerDetails() {

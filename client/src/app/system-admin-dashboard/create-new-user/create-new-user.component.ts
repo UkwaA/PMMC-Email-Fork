@@ -28,7 +28,7 @@ export class CreateNewUserComponent {
         UserPK: 0,
         Username: '',
         Password: '',
-        Role_FK: '',
+        Role_FK: 0,
         Email: '',
         IsActive: true,
         CreatedDate: ''
@@ -108,10 +108,10 @@ export class CreateNewUserComponent {
 
         // Get new Role info
         if (this.NewRole === 'Customer')
-            {this.userDetails.Role_FK = '1'} else
+            {this.userDetails.Role_FK = 1} else
         if(this.NewRole === 'Manager')
-            {this.userDetails.Role_FK = '2'} else
-                {this.userDetails.Role_FK = '3'}
+            {this.userDetails.Role_FK = 2} else
+                {this.userDetails.Role_FK = 3}
 
         // Get subscribe checkbox info
         if (this.subscribeChecked) {
