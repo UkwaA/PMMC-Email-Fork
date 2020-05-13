@@ -19,30 +19,12 @@ import { start } from 'repl';
 
 export interface DataElement {
   no: number;
-  username: string;
-  first: string;
-  last: string;
-  email: string;
-  createDate: Date;
+  Username: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  CreatedDate: string;
 }
-
-const ELEMENT_DATA: DataElement[] = [
-  { no: 1, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/8/2020') },
-  { no: 2, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/8/2020') },
-  { no: 3, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
-  { no: 4, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
-  { no: 5, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
-  { no: 6, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/9/2020') },
-  { no: 7, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/7/2020') },
-  { no: 8, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/4/2020') },
-  { no: 9, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
-  { no: 10, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/3/2020') },
-  { no: 11, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
-  { no: 12, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/5/2020') },
-  { no: 13, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
-  { no: 14, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('5/8/2020') },
-  { no: 15, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('6/8/2020') },
-];
 
 declare var $: any;
 
@@ -54,20 +36,20 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
 
   /* New user Table */
-  displayedColumns: string[] = ['no', 'username', 'first', 'last', 'email', 'createDate'];
-  dataSource = new MatTableDataSource<DataElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['no', 'Username', 'FirstName', 'LastName', 'Email', 'CreatedDate'];
+  UserDetailsInfo = new MatTableDataSource<DataElement>();
 
   @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
-    this.dataSource.sort = sort;
+    this.UserDetailsInfo.sort = sort;
   }
 
   @ViewChild(MatPaginator, { static: false }) set contentpage(paginator: MatPaginator){
-    this.dataSource.paginator = paginator;
+    this.UserDetailsInfo.paginator = paginator;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.UserDetailsInfo.filter = filterValue.trim().toLowerCase();
   }
 
   role: string;
@@ -236,6 +218,14 @@ export class DashboardComponent implements OnInit {
     //if (this.range.start <= this.range.end) {}
       this.range.start.setHours(0, 0, 0, 0);
       this.range.end.setHours(0, 0, 0, 0);
+
+      //Get Customer Infodata
+      this.customerService.getAllUsersCreatedInTimeRange(this.range.start.toISOString().slice(0,10),
+                                                        this.range.end.toISOString().slice(0,10))
+          .subscribe(customerInfo =>{                        
+            this.UserDetailsInfo.data = customerInfo as DataElement[];            
+          })
+
       this.completedRes = 0;
       this.completedTotal = 0;
       this.completedDetails = [];

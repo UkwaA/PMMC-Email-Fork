@@ -110,7 +110,7 @@ reservation.get("/get-all-reservation-details-for-reservation-management", (req,
                 INNER JOIN pmmc.schedule on schedule.SchedulePK = reservationheader.SchedulePK
                 INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
                 INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
-              ORDER BY reservationheader.ReservationPK`;
+              ORDER BY schedule.Start desc, reservationheader.ReservationStatus`;
     Sequelize.query(query,{ 
         type: Sequelize.QueryTypes.SELECT})
     .then(reservationInfo =>{
@@ -131,7 +131,7 @@ reservation.get("/get-all-reservation-details-for-reservation-management-by-user
                 INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
                 INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
               WHERE reservationheader.UserPK = (:UserPK)
-              ORDER BY reservationheader.ReservationPK`;
+              ORDER BY schedule.Start desc, reservationheader.ReservationStatus`;
     Sequelize.query(query,{
         replacements: {
           UserPK: req.params.id
