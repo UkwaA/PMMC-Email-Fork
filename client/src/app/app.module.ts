@@ -87,6 +87,7 @@ import { AdminReservationsModalDialogComponent } from './components/admin-reserv
 import { MatTableModule} from '@angular/material';
 import { MatSortModule} from '@angular/material';
 import { MatPaginatorModule} from '@angular/material';
+// import { AngularFileUploadModule } from 'angular-file-upload' 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -201,6 +202,7 @@ const routes: Routes = [
     AdminReservationsModalDialogComponent
   ],
   imports: [
+    // AngularFileUploadModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,

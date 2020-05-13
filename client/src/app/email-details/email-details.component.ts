@@ -5,16 +5,21 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+// import * as  AngularFileUploadModule from 'angular-file-upload' 
+import { angularFileUpload } from 'angular-file-upload' 
 import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
     templateUrl: './email-details.component.html',
     styleUrls: ['./email-details.component.css'],
     providers: [EmailService]
 })
+
+
 
 export class EmailDetailsComponent {
     EmailPK: number;
@@ -29,7 +34,9 @@ export class EmailDetailsComponent {
         HasAttachments: 0,
         AttachmentNames: ''
     };
-    filesInfo = {files: [], filesChanged: false};
+    filesInfo = {files: [], filesAdded: false};
+    filesDeleted = false;
+    numNewAttachments = 0;
     isDisabled: boolean;
     Editor = DecoupledEditor;
     formData = new FormData();
@@ -46,7 +53,6 @@ export class EmailDetailsComponent {
         this.route.params.subscribe(val => {
             this.EmailPK = val.id;
             this.PageMode = val.mode;
-            // this.emailService.getEmailAttachmentsByID();
 
             switch (this.PageMode) {
                 case 'view':
@@ -75,19 +81,26 @@ export class EmailDetailsComponent {
     }
 
     onFileChange(event) {
+        // if (event.type === HttpEventType.UploadProgress) {
+        //     console.log(Math.round(100 * event.loaded / event.total))
+        //     // this.percentComplete = Math.round(100 * event.loaded / event.total);
+        //   } else if (event.type === HttpEventType.Response) {
+        //     // do something with body event.body
+        //   }
         console.log(event.target.files);
-        this.filesInfo.filesChanged = true;
+        this.filesInfo.files = [];
+        this.filesInfo.filesAdded = true;
         let file_list = '';
         function add_filelist(value){
+            console.log('adding: ' + value)
             file_list += '<li>' + value + '</li>'
         }
-        if (this.emailData.HasAttachments)
-            this.emailData.AttachmentNames.split('/').forEach(add_filelist)
 
         for (var count = 0; count < event.target.files.length; ++count){
-            this.filesInfo.files.push(event.target.files[count]);
+            this.filesInfo.files.push(event.target.files[count])
             file_list += '<li>' + event.target.files[count].name+'</li>';
         }
+        this.numNewAttachments = event.target.files.length;
         document.getElementById('filelist').innerHTML = '<ul>'+file_list+'</ul>';
     }
 
@@ -130,8 +143,10 @@ export class EmailDetailsComponent {
         const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
         modalDialog.afterClosed().subscribe(result => {
            if (result === 'Yes') {
+            this.filesDeleted = true;
             this.deletedFiles.push(attachment);
-            console.log('deleted files: ' + this.deletedFiles)
+            this.formData.append('deletedFiles[]', attachment);
+            console.log('deleted files formdata: ' + this.formData.getAll('deletedFiles[]'))
             this.currentAttachments.splice(this.currentAttachments.indexOf(attachment),1);
            }
            return false;
@@ -142,13 +157,14 @@ export class EmailDetailsComponent {
         for (var i = 0; i < this.filesInfo.files.length; ++i) {
             this.formData.append(i.toString(), this.filesInfo.files[i], this.filesInfo.files[i].name);
         }
-
+        this.formData.append('numNewAttachments', this.numNewAttachments.toString());
         for (const key of Object.keys(this.emailData)) {
             const value = this.emailData[key];
             this.formData.append(key, value);
         }
-        // console.log('to string: ' + this.filesInfo.filesChanged.toString())
-        this.formData.append('filesChanged', this.filesInfo.filesChanged.toString())
+        // console.log('to string: ' + this.filesInfo.filesAdded.toString())
+        this.formData.append('filesAdded', this.filesInfo.filesAdded.toString())
+        this.formData.append('filesDeleted', this.filesDeleted.toString())
         console.log(this.formData);
 
         console.log(this.formData.get('EmailPK'))
@@ -156,7 +172,7 @@ export class EmailDetailsComponent {
         this.services.updateEmail(this.formData).subscribe(res => {
             console.log(res);
             if (res) {
-                this.router.navigateByUrl('/profile/email-management');
+                // this.router.navigateByUrl('/profile/email-management');
             }
         });
     }

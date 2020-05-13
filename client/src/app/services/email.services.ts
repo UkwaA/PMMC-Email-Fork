@@ -90,10 +90,6 @@ export class EmailService {
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-post-program-email/', body);
   }
 
-  public getEmailAttachmentsByID(): Observable<any> {
-    return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'service/get-email-attachments/' + 2);
-  }
-
   public changeEmailActiveStatus(body): Observable<any> {
     console.log('Change email called1');
     return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/change-email-active-status/', body);

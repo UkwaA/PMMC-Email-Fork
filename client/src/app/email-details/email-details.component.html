@@ -26,13 +26,14 @@
                         </li>
                     </ul>
                 </div>
-                <div *ngIf="this.emailData.Type == 'Specific Program'" class="form-group">
+                <div class="form-group">
+                <!-- <div *ngIf="this.emailData.Type == 'Specific Program'" class="form-group"> -->
                     <div class="col-md-12 font-weight-bold">
                         <label>New Attachments (Accepts: .pdf, .doc, .docx)</label>
                     </div>
                     <div class="col-md-8">
                         <!-- add file change function -->
-                        <input type="file" id="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" (change)='onFileChange($event)' multiple>
+                        <input nv-file-select='' type="file" id="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" (change)='onFileChange($event)' multiple>
                         
                     </div>
                     <div id="filelist"></div>

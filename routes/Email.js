@@ -125,43 +125,61 @@ app.get('/get-email-by-id/:id', (req,res) => {
 ***********************/
 app.post('/update-email', (req,res) => {
   console.log('Updating email');
-  // var files = req.body.fileDetails.files;
-  var filesChanged = (req.body.filesChanged == 'true')
-  var hasAttachments;
+  console.log(req.body)
+  console.log(req.files)
 
-  // Creates a new directory for Email ID attachments if it does not exist
+  var attachmentNames = [];
+  var numAttachments = 0;
+  
+
+  // Moves the new files to the newly created directory
+  function moveFile(file){
+    console.log('movefile called: '+ file.tempFilePath)
+    filePath = tempDir + '/' + file.name;
+    fs.appendFileSync(filePath, file.data);
+  };
+
+  // // Creates a new directory for Email ID attachments if it does not exist
+  // // Move the new files to the directory
   var tempDir = './public/uploads/email-attachments/'+req.body.EmailPK;
-  if (filesChanged) {
+  if (req.body.filesAdded == 'true') {
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir);
     }
-  }
-  var attachmentNames = '';
-  var numAttachments = 0;
-
-  // Moves the new files to the newly created directory
-  // for (var i = 0; i < 3; ++i) {
-  //   var file = req.files[i];
-  //   var filePath = tempDir + '/' + file.name;
-  //   file.mv(filePath);
-  // } 
-  // console.log('len: ' + fs.readdir(tempDir).length());
-
-  function printNames(value){
-    console.log(value);
-    attachmentNames += value+'/';
+    console.log('should be calling array here')
+    Object.keys(req.files).forEach(function(key) {
+      moveFile(req.files[key]);
+      console.log('file moved')
+  });
+    
   }
 
-  function printValues(value){
-    console.log('new value: ' + value)
+  // // Delete requested files
+  function deleteFile(file){
+    fs.unlinkSync(tempDir+'/'+file)
   }
+
+  if (req.body.filesDeleted == 'true'){
+    if (typeof req.body['deletedFiles[]'] == 'string')
+      deleteFile(req.body['deletedFiles[]'])
+    else
+      req.body['deletedFiles[]'].forEach(deleteFile)
+  }
+
+  function getAttachmentNames(value){
+    console.log('attachment name: ' + value);
+    attachmentNames.push(value);
+    ++numAttachments;
+  }
+
 
   // Gather all attachment names to upload to the DB
-  if (fs.existsSync(tempDir))
-    fs.readdirSync(tempDir).forEach(printNames);
-  attachmentNames = attachmentNames.slice(0,-1);
-  if (attachmentNames.length > 0)
-    numAttachments = attachmentNames.split('/').length;
+
+  fs.readdirSync(tempDir).forEach(getAttachmentNames);
+  console.log('attachment names: ' + attachmentNames.join('/'))
+  console.log('len: ' + attachmentNames.length)
+  attachmentNames = attachmentNames.join('/');
+
 
   const email = {
     Subject: req.body.Subject,
@@ -231,8 +249,6 @@ async function sendContactEmail(user, callback) {
 /**************************
   SEND RESET PASSWORD EMAIL
 ***************************/
-
-
 app.post('/send-reset-password-email', (req,res) => {
     User.findOne({
         where: {       
@@ -453,6 +469,21 @@ app.post('/create-new-user-confirmation-email', (req,res) => {
 });
 
 async function CreateNewUserConfirmationEmail(userInfo, email, callback){
+  tempDir = './public/uploads/email-attachments/'+email.EmailPK+'/';
+  attachments = [];
+
+  function addAttachments(value){
+    console.log(value);
+    attachments.push({filename: value, path: tempDir+value})
+  }
+
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir)) {
+    console.log('directory exists');
+    fs.readdirSync(tempDir).forEach(addAttachments);
+  }
+  console.log(attachments);
+
   let transporter = nodemailer.createTransport({
     host: process.env.emailServer_host,
     port: process.env.emailServer_port,
@@ -535,43 +566,58 @@ app.post('/send-booking-request-confirmation-email', (req,res) => {
 });
 
 async function sendBookingRequestConfirmationEmail(userInfo, email, callback){
-let transporter = nodemailer.createTransport({
-  host: process.env.emailServer_host,
-  port: process.env.emailServer_port,
-  secure: false, // true for 465, false for other ports
-  auth: {
-      //This is AWS SES credential
-    user: process.env.emailServer_username,
-    pass: process.env.emailServer_password
+  tempDir = './public/uploads/email-attachments/'+email.EmailPK+'/';
+  attachments = [];
+
+  function addAttachments(value){
+    console.log(value);
+    attachments.push({filename: value, path: tempDir+value})
   }
-});
 
-//Create new token
-let payload = {
-  userID: userInfo.UserPK,
-  userEmail: userInfo.Email,
-  userPassword : userInfo.Password
-};
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir)) {
+    console.log('directory exists');
+    fs.readdirSync(tempDir).forEach(addAttachments);
+  }
+  console.log(attachments);
 
-let token = jwt.sign(payload, process.env.SECRET_KEY, {
-  expiresIn: 604800 //expires in 7 days
-})
+  let transporter = nodemailer.createTransport({
+    host: process.env.emailServer_host,
+    port: process.env.emailServer_port,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        //This is AWS SES credential
+      user: process.env.emailServer_username,
+      pass: process.env.emailServer_password
+    }
+  });
 
-//For Testing only
-  // let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
-  // let decodeUserPK = decodedToken.userID
-  // let decodeUserEmail = decodedToken.userEmail
-  // let decodeUserPassword = decodedToken.userPassword
-
-let mailOptions = {
-  from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
-  to: "uakkum@uci.edu", // need to put userInfo.Email
-  subject: email.Subject, // Subject line
-  html: email.Body
+  //Create new token
+  let payload = {
+    userID: userInfo.UserPK,
+    userEmail: userInfo.Email,
+    userPassword : userInfo.Password
   };
 
-let info = await transporter.sendMail(mailOptions);
-callback(info);
+  let token = jwt.sign(payload, process.env.SECRET_KEY, {
+    expiresIn: 604800 //expires in 7 days
+  })
+
+  //For Testing only
+    // let decodedToken = jwt.decode(token, process.env.SECRET_KEY)
+    // let decodeUserPK = decodedToken.userID
+    // let decodeUserEmail = decodedToken.userEmail
+    // let decodeUserPassword = decodedToken.userPassword
+
+  let mailOptions = {
+    from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
+    to: "uakkum@uci.edu", // need to put userInfo.Email
+    subject: email.Subject, // Subject line
+    html: email.Body
+  };
+
+  let info = await transporter.sendMail(mailOptions);
+  callback(info);
 }
 
 /***********************
@@ -614,7 +660,7 @@ app.post('/send-pinniped-program-email', (req, res) => {
 
   attachments = [];
 
-  function addAttachmentNames(value){
+  function addAttachments(value){
     console.log(value);
     attachments.push({filename: value, path: tempDir+value})
   }
@@ -622,7 +668,7 @@ app.post('/send-pinniped-program-email', (req, res) => {
   // Gather all attachment names to upload to the DB
   if (fs.existsSync(tempDir)) {
     console.log('directory exists');
-    fs.readdirSync(tempDir).forEach(addAttachmentNames);
+    fs.readdirSync(tempDir).forEach(addAttachments);
   }
   console.log(attachments);
 
@@ -692,17 +738,6 @@ app.post('/change-email-active-status', (req, res) => {
 })
 
 /***********************
-  GET  EMAIL ATTACHMENTS
-***********************/
-app.get('/get-email-attachments/:id', (req, res) => {
-  Email.findOne({
-    where: {EmailPK: req.params.id}
-  }).then(email => {
-    console.log(email.fileData)
-  })
-})
-
-/***********************
   SEND REGISTRATION CONFIRMATION EMAIL
 ***********************/
 app.post('/send-registration-confirmation-email', (req, res) => {
@@ -720,6 +755,20 @@ app.post('/send-registration-confirmation-email', (req, res) => {
 });
 
 async function sendRegistrationConfirmationEmail(email, callback) {
+  tempDir = './public/uploads/email-attachments/'+email.EmailPK+'/';
+  attachments = [];
+
+  function addAttachments(value){
+    console.log(value);
+    attachments.push({filename: value, path: tempDir+value})
+  }
+
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir)) {
+    console.log('directory exists');
+    fs.readdirSync(tempDir).forEach(addAttachments);
+  }
+  console.log(attachments);
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
@@ -739,7 +788,8 @@ async function sendRegistrationConfirmationEmail(email, callback) {
     from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
     subject: email.Subject, // Subject line
-    html: email.Body
+    html: email.Body,
+    attachments: this.attachments
   };
 
   // send mail with defined transport object
@@ -773,6 +823,21 @@ app.post('/send-program-confirmation-email', (req, res) => {
   }})});
 
 async function sendProgramConfirmationEmail(user, email, schedule, programName, callback) {
+  tempDir = './public/uploads/email-attachments/'+email.EmailPK+'/';
+  attachments = [];
+
+  function addAttachments(value){
+    console.log(value);
+    attachments.push({filename: value, path: tempDir+value})
+  }
+
+  // Gather all attachment names to upload to the DB
+  if (fs.existsSync(tempDir)) {
+    console.log('directory exists');
+    fs.readdirSync(tempDir).forEach(addAttachments);
+  }
+  console.log(attachments);
+
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
   let transporter = nodemailer.createTransport({
