@@ -196,8 +196,8 @@
                                     <td> {{res.Date}}</td>
                                     <td> {{res.Time}}</td>
                                     <td> {{res.Quantity}} </td>
-                                    <td> {{res.Total}} </td>
-                                    <td> {{res.RemainingBalance}}
+                                    <td> ${{res.Total}} </td>
+                                    <td> ${{res.RemainingBalance}}
                                         <button mat-raised-button *ngIf="res.RemainingBalance != 0"
                                             class="btn btn-warning float-right" type="submit"
                                             (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
