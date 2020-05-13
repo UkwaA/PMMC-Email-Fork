@@ -28,6 +28,7 @@ export class ReservationManagementComponent implements OnInit {
   attendedReservations = [];
   completedReservations = [];
   cancelledReservations = [];
+  pendingReservations = [];
   filterReservations = [];
   searchText: string;
   temp = [];
@@ -39,7 +40,7 @@ export class ReservationManagementComponent implements OnInit {
     { id: 2, name: 'Attended' },
     { id: 3, name: 'Completed' },
     { id: 4, name: 'Cancelled' },
-    { id: 5, name: 'Pending' },
+    { id: 5, name: 'Pending' }
   ];
 
   programCategories: Array<any> = [
@@ -169,7 +170,7 @@ export class ReservationManagementComponent implements OnInit {
                 case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
                   reservation.ReservationStatus =
                     AppConstants.RESERVATION_STATUS_TEXT.PENDING;
-                  this.cancelledReservations.push(reservation);
+                  this.pendingReservations.push(reservation);
                   break;
                 }
               }
@@ -250,19 +251,19 @@ export class ReservationManagementComponent implements OnInit {
       });
     } else {
       switch (this.choice) {
-      case '0':
-        this.reservations = this.allReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '1':
-        this.reservations = this.groupReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '2':
-        this.reservations = this.individualReservations;
-        this.filterReservations = this.reservations;
-        break;
-      }
+        case '0':
+          this.reservations = this.allReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '1':
+          this.reservations = this.groupReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '2':
+          this.reservations = this.individualReservations;
+          this.filterReservations = this.reservations;
+          break;
+        }
     }
   }
 
