@@ -89,6 +89,10 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-program-schedules-by-id/' + SchedulePK);
     }
 
+    public getAllScheduleWithReservationInfo(): Observable<any> {
+        return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-all-schedules-with-reservation-info/');
+    }
+
     public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {"value": quantity});
     }

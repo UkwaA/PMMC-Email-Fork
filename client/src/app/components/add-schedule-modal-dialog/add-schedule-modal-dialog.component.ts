@@ -421,7 +421,6 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
 				//======= ADD NEW SESSION ===========
 				case "newsession":
-					debugger
 					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
 					this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
 						if(res.error){

@@ -11,7 +11,9 @@ const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
 const BlackoutDate = require("../models/ProgramBlackoutDate");
 
-const Sequelize = require('sequelize');
+//Define veriable for Sequelize database
+const db = require('../db');
+const Sequelize = db.sequelize;
 const Op = Sequelize.Op;
 
 schedule.use(bodyParser.json());
@@ -799,6 +801,34 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
     .catch(err => {
       res.send("error: " + err);
     });
+});
+
+/*****************************************************************************************
+  GET ALL PROGRAM SCHEDULES THAT HAVE RESERVATION (FOR VIEW SCHEDULE PAGE)
+ ****************************************************************************************/
+schedule.get("/get-all-schedules-with-reservation-info", (req, res) => {
+  var query = `SELECT schedule.*, program.Name, program.ProgramType, reservationheader.ReservationPK, 
+                SUM(rgd.AdultQuantity) as AdultQuantity, SUM(rgd.Age57Quantity) as Age57Quantity, 
+                  SUM(rgd.Age810Quantity) as Age810Quantity, SUM(rgd.Age1112Quantity) as Age1112Quantity, 
+                  SUM(rgd.Age1314Quantity) as Age1314Quantity, SUM(rgd.Age1415Quantity) as Age1415Quantity,
+                  SUM(rgd.Age1517Quantity) as Age1517Quantity, SUM(rgd.TotalQuantity) as GroupTotalQuantity, 
+                  Min(rid.ParticipantAge) as IndividualMinAge, Max(rid.ParticipantAge) as IndividualMaxAge, 
+                  COUNT(rid.ParticipantAge) as IndividualTotalQuantity
+              FROM pmmc.schedule 
+                INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
+                  INNER JOIN pmmc.reservationheader on schedule.SchedulePK = reservationheader.SchedulePK
+                  LEFT JOIN pmmc.reservationgroupdetails as rgd on reservationheader.ReservationPK = rgd.ReservationPK 
+                    AND program.ProgramType = 0
+                  LEFT JOIN pmmc.reservationindividualdetails as rid on reservationheader.ReservationPK = rid.ReservationPK 
+                    AND program.ProgramType = 1
+              WHERE schedule.CurrentNumberParticipant > 0
+              GROUP BY schedule.SchedulePK
+              ORDER BY schedule.Start desc, schedule.ProgramPK asc`;
+    Sequelize.query(query,{
+        type: Sequelize.QueryTypes.SELECT})
+      .then(scheduleInfo =>{
+        res.json(scheduleInfo);
+    })
 });
 
 
