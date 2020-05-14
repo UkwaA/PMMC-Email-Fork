@@ -23,24 +23,33 @@ export class AdminReservationsModalDialogComponent implements OnInit {
 
     closeModal() {
         this.dialogRef.close('No');
+        if (this.ReservationStatus === 'Pending'){
+            window.location.reload();
+        }
     }
 
-    actionFunction() {
+  /*   actionFunction() {
         console.log('Modal closing');
         this.dialogRef.close('Yes');
-    }
+    } */
 
     // Accept Pending Reservation Method
     acceptReservation(ReservationPK: number) {
         this.reservationService.acceptPendingReservation(ReservationPK).subscribe((result) => {
             console.log("Update Succesfull");
         })
+        this.reservations = this.reservations.filter(function( obj ) {
+            return obj.ReservationPK != ReservationPK;
+        });
     }
 
      // Cancel Pending Reservation Method
     cancelReservation(ReservationPK: number) {
         this.reservationService.cancelPendingReservation(ReservationPK).subscribe((result) => {
             console.log("Update Succesfull");
-    })
-}
+        })
+        this.reservations = this.reservations.filter(function( obj ) {
+            return obj.ReservationPK != ReservationPK;
+        });
+    }
 }

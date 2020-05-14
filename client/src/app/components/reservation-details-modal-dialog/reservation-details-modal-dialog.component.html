@@ -56,31 +56,39 @@
             <mat-tab label="Reservation Info">
                 <ng-template matTabContent>
                     <div *ngIf= "data.ProgramType == 0" class="container">
+                        <section class="readonly field">
+                            <button *ngIf="isDisabled" class="btn btn-sm btn-warning float-left" type="submit" (click)="viewOrEditMode()">
+                                <mat-icon matListIcon>edit</mat-icon>Edit
+                            </button>
+                            <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary float-left" type="submit" (click)="viewOrEditMode()">
+                                <mat-icon matListIcon>edit</mat-icon>Editing...
+                            </button>
+                        </section>
                         <form [formGroup]="groupForm">
-                            <fieldset>
+                            <fieldset [disabled]="isDisabled">
                                 <div class="row">
                                     <label class="col-sm-3 control-label">Adult: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="AdultQuantity" placeholder="First name"  [(ngModel)]="groupDetails.AdultQuantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="AdultQuantity" placeholder="First name"  [(ngModel)]="groupDetails.AdultQuantity" (blur)="lostFocus($event)">
                                     <label class="col-sm-3 control-label">Age 5-7: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age57Quantity" placeholder="First name" [(ngModel)]="groupDetails.Age57Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age57Quantity" placeholder="First name" [(ngModel)]="groupDetails.Age57Quantity" (blur)="lostFocus($event)">
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-3 control-label">Age 8-10: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age810Quantity"  [(ngModel)]="groupDetails.Age810Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age810Quantity"  [(ngModel)]="groupDetails.Age810Quantity" (blur)="lostFocus($event)">
                                     <label class="col-sm-3 control-label">Age 11-12: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age1112Quantity"  [(ngModel)]="groupDetails.Age1112Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1112Quantity"  [(ngModel)]="groupDetails.Age1112Quantity" (blur)="lostFocus($event)">
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-3 control-label">Age 13-14: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age1314Quantity"  [(ngModel)]="groupDetails.Age1314Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1314Quantity"  [(ngModel)]="groupDetails.Age1314Quantity" (blur)="lostFocus($event)">
                                     <label class="col-sm-3 control-label">Age 14-15: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age1415Quantity"  [(ngModel)]="groupDetails.Age1415Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1415Quantity"  [(ngModel)]="groupDetails.Age1415Quantity" (blur)="lostFocus($event)">
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-3 control-label">Age 15-17: </label>
-                                    <input type="text" class="col-sm-3 form-control" formControlName="Age1517Quantity"  [(ngModel)]="groupDetails.Age1517Quantity">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1517Quantity"  [(ngModel)]="groupDetails.Age1517Quantity" (blur)="lostFocus($event)">
                                     <label class="col-sm-3 control-label">Total Quantity: </label>
-                                    <input disabled type="text" class="col-sm-3 form-control" formControlName="TotalQuantity"  [(ngModel)]="groupDetails.TotalQuantity">
+                                    <input disabled type="number" class="col-sm-3 form-control" formControlName="TotalQuantity"  [(ngModel)]="groupDetails.TotalQuantity">
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">

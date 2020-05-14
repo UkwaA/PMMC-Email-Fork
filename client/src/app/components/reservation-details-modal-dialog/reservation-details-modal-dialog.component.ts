@@ -39,6 +39,8 @@ export class ReservationDetailsModalDialog implements OnInit{
     };
     valid: boolean = true;
     refundForm: FormGroup;
+    currTotalQuantity: number;
+    isDisabled: boolean = true;
 
     constructor(public dialogRef: MatDialogRef<ReservationDetailsModalDialog>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) private modalData: any, public customerService: CustomerService,
@@ -67,14 +69,38 @@ export class ReservationDetailsModalDialog implements OnInit{
         }
 
         this.groupForm = this.fb.group({
-            AdultQuantity: [''],
-            Age57Quantity: [''],
-            Age810Quantity: [''],
-            Age1112Quantity: [''],
-            Age1314Quantity: [''],
-            Age1415Quantity: [''],
-            Age1517Quantity: [''],
-            TotalQuantity: [''],
+            AdultQuantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age57Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age810Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age1112Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age1314Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age1415Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            Age1517Quantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
+            TotalQuantity: ['', [
+                Validators.required,
+                Validators.min(0)
+            ]],
         });
         this.paymentForm = this.fb.group({
             PaymentType: ['', [
@@ -99,6 +125,36 @@ export class ReservationDetailsModalDialog implements OnInit{
         });
     }
 
+    lostFocus(event) {
+        if (event.target.value === 0 || event.target.value === "") {
+          event.target.value = "0";
+        }
+        this.calculateTotalQuantity();
+        // console.log(this.quantityForm.value);
+    }
+
+    // Helper function to calculate total attendee
+    calculateTotalQuantity() {
+    this.currTotalQuantity =
+        parseInt(this.groupForm.get("AdultQuantity").value, 10) +
+        parseInt(this.groupForm.get("Age57Quantity").value, 10) +
+        parseInt(this.groupForm.get("Age810Quantity").value, 10) +
+        parseInt(this.groupForm.get("Age1112Quantity").value, 10) +
+        parseInt(this.groupForm.get("Age1314Quantity").value, 10) +
+        parseInt(this.groupForm.get("Age1415Quantity").value, 10) +
+        parseInt(this.groupForm.get("Age1517Quantity").value, 10);
+
+        this.groupForm.get("TotalQuantity").setValue(this.currTotalQuantity);
+    }
+
+    //view or edit quantity
+    viewOrEditMode() {
+        if (this.isDisabled) {
+            this.isDisabled = false;
+        } else {
+            this.isDisabled = true;
+        }
+    }
     get paymentType() {
         return this.paymentForm.get('PaymentType');
     }
@@ -110,16 +166,9 @@ export class ReservationDetailsModalDialog implements OnInit{
     dataChangedHandler(token: string) {
         // Update the pToken
         this.paymentObj.token = token;
-      }
+    }
     
-
-
     closeModal() {
         this.dialogRef.close('No');
-    }
-
-    actionFunction() {
-        console.log('Modal closing');
-        this.dialogRef.close('Yes');
     }
 }
