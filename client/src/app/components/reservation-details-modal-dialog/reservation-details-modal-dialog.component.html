@@ -1,7 +1,7 @@
-<div id="modal-content-wrapper" style="text-align: center;">
+<div class="modal-content-wrapper" style="text-align: center;">
     <header id="modal-header">
         <button type="button" class="close" (click)="closeModal()" onfocus="blur()">X</button>
-        <div class="container">
+        <div>
             <div class="row">
                 <div class="col-md-3">
                     <h2><img class="logo" src="https://static1.squarespace.com/static/5bb6555ef8135a760bccc650/t/5bb657c153450a81182db75a/1585949118301/" alt="" style="height:40px; width: 90px;"></h2>
@@ -56,14 +56,16 @@
             <mat-tab label="Reservation Info">
                 <ng-template matTabContent>
                     <div *ngIf= "data.ProgramType == 0" class="container">
-                        <section class="readonly field">
-                            <button *ngIf="isDisabled" class="btn btn-sm btn-warning float-left" type="submit" (click)="viewOrEditMode()">
-                                <mat-icon matListIcon>edit</mat-icon>Edit
-                            </button>
-                            <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary float-left" type="submit" (click)="viewOrEditMode()">
-                                <mat-icon matListIcon>edit</mat-icon>Editing...
-                            </button>
-                        </section>
+                        <div class="row">
+                            <section class="readonly field">
+                                <button *ngIf="isDisabled" class="btn btn-sm btn-warning float-left" type="submit" (click)="viewOrEditMode()">
+                                    <mat-icon matListIcon>edit</mat-icon>Edit
+                                </button>
+                                <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary float-left" type="submit" (click)="viewOrEditMode()">
+                                    <mat-icon matListIcon>edit</mat-icon>Editing...
+                                </button>
+                            </section>
+                        </div>
                         <form [formGroup]="groupForm">
                             <fieldset [disabled]="isDisabled">
                                 <div class="row">
@@ -423,8 +425,7 @@
             </mat-tab>
         </mat-tab-group>
     </mat-dialog-content>
-
-    <footer id ="modal-footer">
+    <div class="modal-footer">
         <button mat-raised-button id="modal-cancel-button" class="btn-warning" (click)="closeModal()" onfocus="blur()" style="float:right"> Cancel</button>
-    </footer>
+    </div>
 </div>

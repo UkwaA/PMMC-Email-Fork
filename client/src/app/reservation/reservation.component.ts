@@ -284,6 +284,10 @@ export class ReservationComponent implements OnInit {
                     "",
                     [Validators.required, Validators.minLength(5)],
                   ],
+                  OtherInfo: [
+                    "",
+                    [Validators.minLength(2)],
+                  ]
                 });
 
                 // Clear the Validator for unavailable field
@@ -325,6 +329,11 @@ export class ReservationComponent implements OnInit {
                 if (!this.bookingGroup.EducationPurpose) {
                   this.clearFormControlValidator(
                     this.registerForm.get("EducationPurpose")
+                  );
+                }
+                if (!this.bookingGroup.OtherInfo) {
+                  this.clearFormControlValidator(
+                    this.registerForm.get("OtherInfo")
                   );
                 }
               });
@@ -893,6 +902,9 @@ export class ReservationComponent implements OnInit {
     // Add quantity data for Group Program only.
     if (type == "g") {
       this.reservationGroupDetails.AdultQuantity = this.quantityForm.get(
+        "AdultQuantity"
+      ).value;
+      this.reservationGroupDetails.Age57Quantity = this.quantityForm.get(
         "Age57Quantity"
       ).value;
       this.reservationGroupDetails.Age810Quantity = this.quantityForm.get(
@@ -928,7 +940,7 @@ export class ReservationComponent implements OnInit {
         participantDialog.width = "430px";
         participantDialog.data = {
           title: "Message",
-          description: "The program is designed for the minimum for 8 participant. Even though your group size is smaller than 8, we still have count your group as 8 participants. Thank you for you understanding.",
+          description: "The program is designed for the minimum for 8 participant. Even though your group size is smaller than 8, we still have to count your group as 8 participants. Thank you for you understanding.",
           actionButtonText: "Ok",
           numberOfButton: "1",
         };
@@ -993,6 +1005,9 @@ export class ReservationComponent implements OnInit {
     ).value;
     this.reservationGroupDetails.EducationPurpose = this.registerForm.get(
       "EducationPurpose"
+    ).value;
+    this.reservationGroupDetails.OtherInfo = this.registerForm.get(
+      "OtherInfo"
     ).value;
     this.stepTwoIsCompleted = true;
 

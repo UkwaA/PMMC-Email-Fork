@@ -16,19 +16,19 @@ module.exports = db.sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
+    ChargeToken: {
+      type: Sequelize.TEXT
+    },
     PaymentType: {
       type: Sequelize.INTEGER
     },
     Total: {
       type: Sequelize.INTEGER
     },
-    ChargeToken: {
-      type: Sequelize.TEXT
-    },
     CreatedDate: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
-    },
+    }
   },
   {
     freezeTableName: true,
