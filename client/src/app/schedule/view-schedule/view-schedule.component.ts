@@ -298,8 +298,8 @@ export class ViewScheduleComponent {
         dialogConfig.data = {
             title: "Edit Schedule",
             mode: "editsingleschedule",
-            description: "This action will also affect the sessions that are currently reserved by customers. "
-			+ "Customers will receive emails about this change. Are you sure to edit this session?",
+            description: "This action will affect all current reservations for this schedule. "
+			+ "Customers will receive emails about this change. Are you sure to edit this schedule?",
             currentScheduleDetails: this.currentScheduleDetails,
             name: this.currentScheduleDetails.Name,
             actionButtonText: "Update",   

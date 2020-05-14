@@ -275,11 +275,10 @@ export class ReservationManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = 'reservation-modal-component';
-    dialogConfig.maxHeight = '630px';
-    dialogConfig.maxWidth = '750x';
+    //dialogConfig.height = 'auto';
+    //dialogConfig.maxWidth = '750x';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = true;
-    let details: any;
     
     dialogConfig.data = reservation;
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
@@ -292,9 +291,9 @@ export class ReservationManagementComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
-    //dialogConfig.height = 'auto';
+    dialogConfig.height = 'auto';
     dialogConfig.maxHeight = '600px';
-    //dialogConfig.width = '350px';
+    dialogConfig.width = '350px';
     dialogConfig.autoFocus = false;
     dialogConfig.data = {
         title: 'Cancel Confirmation',

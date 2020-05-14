@@ -1,16 +1,13 @@
 import { OnInit, Component, Input, Output,EventEmitter } from "@angular/core";
 import { AuthenticationService, UserDetails } from "../authentication.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialogConfig, MatDialog } from "@angular/material";
-import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
+import { MatDialog } from "@angular/material";
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { ProgramServices } from "../services/program.services";
 import { PaymentServices } from "../services/payment.services";
 import { ReservationService } from "../services/reservation.services";
 import { ReservationHeader } from "../data/reservation-header";
-import { ReservationGroupDetails } from "../data/reservation-group-details";
-import { ReservationIndividualDetails } from "../data/reservation-individual-details";
 import { AppConstants } from "../constants";
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
 

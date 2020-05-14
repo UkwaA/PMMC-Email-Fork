@@ -516,19 +516,44 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						Start: eventStartDateTime,
 						End: eventEndDateTime
 					};
-					this.programScheduleServices.updateSingleScheduleAndSendEmail(newStartEndTimeObject).subscribe(res =>{
-						if(res.error){
-							this.isDisabled = true;
-							this.endTimeErrorMessage = res.error;
+					//Configure Modal Dialog
+					const dialogConfig = new MatDialogConfig();
+					// The user can't close the dialog by clicking outside its body
+					dialogConfig.disableClose =true;
+					dialogConfig.id = "modal-component";
+					dialogConfig.height = "auto";
+					dialogConfig.maxHeight = "500px";
+					dialogConfig.width = "350px";
+					dialogConfig.autoFocus = false;
+					dialogConfig.data = {
+						title: "Update Schedule",
+						description: this.modalData.description,
+						mode: "editsingleschedule",
+						actionButtonText: "Confirm",
+						numberOfButton: "2"
+						}
+					const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+					modalDialog.afterClosed().subscribe(result =>{
+						if(result == "Yes"){
+							this.programScheduleServices.updateSingleScheduleAndSendEmail(newStartEndTimeObject).subscribe(res =>{
+								if(res.error){
+									this.isDisabled = true;
+									this.endTimeErrorMessage = res.error;
+								}
+								else{
+									this.endTimeErrorMessage = "";
+									this.isDisabled = false
+									if(!this.isDisabled){
+										this.dialogRef.close(newStartEndTimeObject)
+									}              
+								}
+							})							
 						}
 						else{
-							this.endTimeErrorMessage = "";
-							this.isDisabled = false
-							if(!this.isDisabled){
-								this.dialogRef.close(newStartEndTimeObject)
-							}              
+							console.log("stop")                
 						}
 					})
+					
 					break;
 				
 				//======= ADD BLACKOUT DATE ===========
@@ -572,7 +597,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				
 
 			}         
-      }        
+      	}        
 	}	
     
 }
