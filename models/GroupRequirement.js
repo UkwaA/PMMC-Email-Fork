@@ -34,6 +34,9 @@ module.exports = db.sequelize.define(
     },
     EducationPurpose:{
         type: Sequelize.BOOLEAN
+    },  
+    OtherInfo:{
+        type: Sequelize.BOOLEAN
     },
     CreatedBy: {
         type: Sequelize.INTEGER

@@ -55,6 +55,9 @@ module.exports = db.sequelize.define(
     },
     EducationPurpose: {
       type: Sequelize.TEXT
+    },
+    OtherInfo: {
+      type: Sequelize.TEXT
     }
   },
   {

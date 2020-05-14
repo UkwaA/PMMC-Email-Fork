@@ -278,6 +278,7 @@ program.post("/update-g-program-requirement", (req, res) => {
           TeacherPhoneNo: req.body.TeacherPhoneNo,
           AlternativeDate: req.body.AlternativeDate,
           EducationPurpose: req.body.EducationPurpose,
+          OtherInfo: req.body.OtherInfo,
           CreatedBy: req.body.CreatedBy,
           CreatedDate: today,
         });
