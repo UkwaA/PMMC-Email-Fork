@@ -53,7 +53,7 @@
                     </div>
                     <div #PAYMENT>
                         <table mat-table [dataSource]="PaymentDataSource" class="mat-elevation-z8">
-                            
+
                             <ng-container matColumnDef="name">
                                 <th mat-header-cell *matHeaderCellDef style="width:230px"> Payment Report </th>
                                 <td mat-cell *matCellDef="let element">{{element.name}}</td>
@@ -182,7 +182,8 @@
                             <!-- <h4 class="program-name float-left">{{program.ProgramName}}</h4> -->
                             <table mat-table [dataSource]="program.Data" class="mat-elevation-z8">
                                 <ng-container matColumnDef="name">
-                                    <th mat-header-cell *matHeaderCellDef style="width:300px;"  > {{program.ProgramName}}</th>
+                                    <th mat-header-cell *matHeaderCellDef style="width:300px;"> {{program.ProgramName}}
+                                    </th>
                                     <td mat-cell *matCellDef="let element">{{element.name}}</td>
                                 </ng-container>
 
@@ -267,6 +268,33 @@
                             Camp Program Report
                         </span>
                     </ng-template>
+                    <div class="col-sm-12">
+                        <h2 class="title mt-5">Camp Program Report</h2>
+                        <h6>Report detail of information for each Camp reservations</h6>
+                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Camp Program Report</strong></h5>
+                        <div class="row">
+                            <label>
+                                <span class="label p-3">From </span>
+                                <kendo-dateinput [format]="'yyyy'" [steps]="steps" [max]="endYear" [spinners]="true"
+                                    [(ngModel)]="startYear" (valueChange)="onChangeStartDate($event)"></kendo-dateinput>
+                            </label>
+                            <label>
+                                <span class="label p-3">To </span>
+                                <kendo-dateinput [format]="'yyyy'" [steps]="steps" [min]="startYear" [spinners]="true"
+                                    [(ngModel)]="endYear" (valueChange)="onChangeEndDate($event)"></kendo-dateinput>
+                            </label>
+                            <button class="view-btn ml-5" mat-raised-button id="modal-action-button" color='primary'
+                                (click)="viewMonthlyReport()" [disabled]='!isFormValid'>
+                                View
+                            </button>
+                        </div>
+                        <div class="row" *ngIf="YearErrorMessage">
+                            <div class="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{YearErrorMessage}}
+                            </div>
+                        </div>
+
+                    </div>
                     <br /><br />
                     <div class="download-btn col-md-12" style="text-align: right;">
                         <h5>Export</h5>
@@ -274,7 +302,94 @@
                             <mat-icon matListIcon>cloud_download</mat-icon>
                         </button>
                     </div>
-                    Camp
+                    <div #CAMP>
+                        <table mat-table [dataSource]="CampDataSource" class="mat-elevation-z8">
+
+                            <!-- Number Column -->
+                            <ng-container matColumnDef="no">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef style="width:230px"> Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="age">
+                                <th mat-header-cell *matHeaderCellDef> Age </th>
+                                <td mat-cell *matCellDef="let element">{{element.age}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="gender">
+                                <th mat-header-cell *matHeaderCellDef> Gender </th>
+                                <td mat-cell *matCellDef="let element">{{element.gender}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="merchSize">
+                                <th mat-header-cell *matHeaderCellDef> Merch Size </th>
+                                <td mat-cell *matCellDef="let element">{{element.merchSize}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="allergy">
+                                <th mat-header-cell *matHeaderCellDef> Allergy Info </th>
+                                <td mat-cell *matCellDef="let element">{{element.allergy}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="special">
+                                <th mat-header-cell *matHeaderCellDef> Special Info </th>
+                                <td mat-cell *matCellDef="let element">{{element.special}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insureProviderName">
+                                <th mat-header-cell *matHeaderCellDef> Insurance Provider Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.insureProviderName}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insurePolicyNo">
+                                <th mat-header-cell *matHeaderCellDef> Insurance Policy Number </th>
+                                <td mat-cell *matCellDef="let element">{{element.insurePolicyNo}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insurePhoneNo">
+                                <th mat-header-cell *matHeaderCellDef> Insure Phone Number </th>
+                                <td mat-cell *matCellDef="let element">{{element.insurePhoneNo}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoName1">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Name 1 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoName1}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoPhone1">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Phone 1 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoPhone1}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoName2">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Name 2 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoName2}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoPhone2">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Phone 2 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoPhone2}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="earlyDropOff">
+                                <th mat-header-cell *matHeaderCellDef> Early Drop Off </th>
+                                <td mat-cell *matCellDef="let element">{{element.earlyDropOff}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="latePickUp">
+                                <th mat-header-cell *matHeaderCellDef> Late Pick Up </th>
+                                <td mat-cell *matCellDef="let element">{{element.latePickUp}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="campColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: campColumns;"></tr>
+                        </table>
+                    </div>
                 </mat-tab>
 
                 <mat-tab>
@@ -296,7 +411,7 @@
                 </mat-tab>
                 <mat-tab>
                     <ng-template mat-tab-label>
-                        <mat-icon matListIcon>schedule </mat-icon>
+                        <mat-icon matListIcon>multiline_chart </mat-icon>
                         <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
                             Marketing Information Summary
                         </span>

@@ -30,4 +30,11 @@ export class IndividualProgramComponent implements OnInit{
     clearSearch() {
         this.searchText = "";
     }
+
+    showShortDesciption = true
+
+    alterDescriptionText() {
+    this.showShortDesciption = !this.showShortDesciption
+ }
+
 }

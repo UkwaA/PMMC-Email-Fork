@@ -6,8 +6,10 @@ table{
   width: 100%;
 }
 
+
 .mat-header-cell{
   background-color: #4cb69f;
+  padding-right: 25px;
 
 }
 
