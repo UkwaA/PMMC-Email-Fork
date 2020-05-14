@@ -16,15 +16,17 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(fileUpload());
 
-//TO DO: need to update to sponsor's email server
-let emailServer = {
-  sponsorEmail: "uakkum@uci.edu",
-  host: "email-smtp.us-west-2.amazonaws.com",
-  port: 587,
-  //This is AWS SES credential
-  user: "AKIAZLUS724LTPCQBNLZ",
-  pass: "BDoLIi+pcZX19ruFCRysMVNNxdxF2HbRou5fT785SM08"
-};
+//Using AWS SES for SMTP server
+let transporter = nodemailer.createTransport({
+  host: process.env.emailServer_host,
+  port: process.env.emailServer_port,
+  secure: false, // true for 465, false for other ports
+  auth: {
+      //This is AWS SES credential
+    user: process.env.emailServer_username,
+    pass: process.env.emailServer_password
+  }
+});
 
 /***********************
   GET ALL EMAILS
@@ -973,7 +975,46 @@ async function sendPostProgramEmail(reservationInfo, callback) {
   callback(info); 
 }
 
+/**********************************************
+  SEND EMAIL ON UPDATING A SPECIFIC SCHEDULE
+  Send emails to all current reservation to notify about the change.
+**********************************************/
+async function sendEmailUpdateOnSchedule(reservationInfo, callback) {
+  let displayTimeFormatOption ={
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+    };
+  let date = (new Date(reservationInfo.Start)).toLocaleDateString();
+  let startTime = (new Date(reservationInfo.Start)).toLocaleString('en-US', displayTimeFormatOption);
+  let endTime = (new Date(reservationInfo.End)).toLocaleString('en-US', displayTimeFormatOption);
+  let mailOptions = {
+    // from and to email needs to be verified in order to use SES
+    // otherwise, need to upgrade to Premium
+    from: process.env.emailServer_sponsorEmail, // sender address
+    bcc: reservationInfo.EmailList, // list of receivers
+    subject: "Update on current reservation at Pacific Marine Mammal Center", // Subject line
+    html: `
+    <h5> Hi, </h5>
+    <p>We recently made a change to your current reservation on the program 
+    <b>${reservationInfo.ProgramName}</b>. The new date and time for this reservation
+    will be on <b>${date}, ${startTime} - ${endTime}</b>.     
+    </p>    
+    <br/>
+    <p>Sorry for the inconvenience. We look forward to seeing you soon!</p>
+    `
+  };
+
+
+  let info = await transporter.sendMail(mailOptions);
+  callback(info); 
+}
+
+
+
+/*=======================END=====================================*/
 //main().catch(console.error);
 module.exports = app
-//export sendPostProgramEmail() to use in Node-schedule
+//export to use in other Routes
 module.exports.sendPostProgramEmail = sendPostProgramEmail
+module.exports.sendEmailUpdateOnSchedule = sendEmailUpdateOnSchedule

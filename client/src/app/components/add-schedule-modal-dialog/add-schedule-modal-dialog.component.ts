@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { Session } from 'protractor';
 import { AppConstants } from "../../constants";
+import { ConnectedPositionStrategy } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'add-schedule-modal-dialog',
@@ -176,7 +177,14 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				this.endTime = new Date(this.modalData.currentSession.End)
 				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
 				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
-				this.eventDescription = this.modalData.currentSession.Description
+				break;
+			
+			case "editsingleschedule":
+				this.startDate = new Date(this.modalData.currentScheduleDetails.Start)
+				this.startTime = new Date(this.modalData.currentScheduleDetails.Start)
+				this.endTime = new Date(this.modalData.currentScheduleDetails.End)
+				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
+				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")				
 				break;
 
 			case "addblackoutdate":
@@ -499,6 +507,29 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						} 
 					})
 					break;
+
+				//======= EDIT SINGLE SCHEDULE (in View Schedule Page) ===========
+				case "editsingleschedule":
+					var newStartEndTimeObject:any = {
+						SchedulePK: this.modalData.currentScheduleDetails.SchedulePK,
+						ProgramName: this.modalData.currentScheduleDetails.Name,
+						Start: eventStartDateTime,
+						End: eventEndDateTime
+					};
+					this.programScheduleServices.updateSingleScheduleAndSendEmail(newStartEndTimeObject).subscribe(res =>{
+						if(res.error){
+							this.isDisabled = true;
+							this.endTimeErrorMessage = res.error;
+						}
+						else{
+							this.endTimeErrorMessage = "";
+							this.isDisabled = false
+							if(!this.isDisabled){
+								this.dialogRef.close(newStartEndTimeObject)
+							}              
+						}
+					})
+					break;
 				
 				//======= ADD BLACKOUT DATE ===========
 				case "addblackoutdate":
@@ -513,7 +544,6 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						else{
 							this.isDisabled = false
 							if(!this.isDisabled){
-
 								this.dialogRef.close("Yes")
 							}              
 						}

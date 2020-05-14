@@ -93,6 +93,10 @@ export class ProgramScheduleService{
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-all-schedules-with-reservation-info/');
     }
 
+    public updateSingleScheduleAndSendEmail(startEndTimeObject: any): Observable<any>{
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-single-schedule-send-email-notification', startEndTimeObject);
+    }
+
     public updateNumberOfParticipant(SchedulePK: number, quantity: number): Observable<any> {
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/update-number-participant/' + SchedulePK, {"value": quantity});
     }
@@ -111,7 +115,6 @@ export class ProgramScheduleService{
     public deactivateBlackoutDate(blackoutDate: any): Observable<any>{
         return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'schedule/deactivate-blackout-date', blackoutDate);
     }
-
 
     public getAllBlackoutDatesByProgram(ProgramPK: number): Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + 'schedule/get-program-blackout-date-by-id/' + ProgramPK);

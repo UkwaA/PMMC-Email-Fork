@@ -65,13 +65,16 @@
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-12" *ngIf="currentScheduleDetails.Start >= todayDate">
+                                <div class="col-md-4" *ngIf="currentStart >= todayDate">
                                     <button class="available" *ngIf="currentScheduleDetails.Availability != 0" disabled>
                                         Available</button>
                                     <button class="full" *ngIf="currentScheduleDetails.Availability == 0" disabled>
                                         Full</button>
                                 </div>
-                                <div class="col-md-12" *ngIf="currentScheduleDetails.Start < todayDate">
+                                <div class="col-md-8" class="successColorMessage" *ngIf="scheduleSuccessMessage">
+                                    <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>{{scheduleSuccessMessage}}
+                                </div>
+                                <div class="col-md-12" *ngIf="currentStart < todayDate">
                                     <button class="pastevent" disabled>
                                         PAST EVENT</button>
                                 </div>
@@ -153,8 +156,7 @@
                 </mat-card-content>
                 <mat-card-actions align="end">
                     <button mat-raised-button onclick="this.blur()" color="primary" 
-                        [disabled]="IsDisabled || currentScheduleDetails.Start < todayDate"
-                        [routerLink]="['/profile','program-details', currentScheduleDetails.ProgramPK, 'set-program-schedule']">
+                        [disabled]="IsDisabled || currentStart < todayDate" (click)="updateSessionDetailsModal()">
                         EDIT SCHEDULE</button>
                 </mat-card-actions>
             </mat-card>
