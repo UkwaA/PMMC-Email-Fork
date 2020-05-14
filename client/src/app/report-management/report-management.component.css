@@ -81,3 +81,7 @@ h2{
     color: red;
     font-size: 10pt;
 }
+
+.container{
+  padding: 10px;
+}

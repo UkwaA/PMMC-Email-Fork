@@ -39,7 +39,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class ReportManagementComponent {
-  displayedColumns: string[] = ['name','year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  displayedColumns: string[] = ['name','year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', 'total'];
   campColumns: string[] = ['no', 'name', 'age', 'gender', 'merchSize', 'allergy', 'special', 'insureProviderName', 'insurePolicyNo', 'insurePhoneNo', 'authoName1', 'authoPhone1','authoName2', 'authoPhone2','earlyDropOff','latePickUp']  
   steps = 1;
   MonthlyDataSourceField:any = [];
@@ -48,6 +48,7 @@ export class ReportManagementComponent {
 
   @ViewChild('PAYMENT',  { static: false }) payment: ElementRef;
   @ViewChild('MONTHLY',{ static: false }) monthly: ElementRef;
+  @ViewChild('CAMP',{ static: false}) camp: ElementRef;
 
   //Define report tab with index
   reportIndex = {
@@ -120,6 +121,8 @@ export class ReportManagementComponent {
     }
   }
 
+  //viewCampReport(){}
+
   tabClick(event){
   }
 
@@ -137,6 +140,14 @@ export class ReportManagementComponent {
     const wb: xlsx.WorkBook = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
     xlsx.writeFile(wb, 'monthly_report.xlsx');
+  }
+
+  exportToExcelCamp() {
+    const ws: xlsx.WorkSheet =   
+    xlsx.utils.table_to_sheet(this.monthly.nativeElement);
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+    xlsx.writeFile(wb, 'camp_program_report.xlsx');
   }
 
 }

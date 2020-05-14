@@ -127,19 +127,19 @@ export class DashboardComponent implements OnInit {
   // CHART COLOR.
   colors = [
     { // Pending
-      backgroundColor: 'rgba(238, 148, 52, 0.94)'
+      backgroundColor: '#E63946'
     },
     { // Completed
-      backgroundColor: 'rgba(143, 146, 17, 0.84)'
+      backgroundColor: '#F1FAEE'
     },
     { // Ongoing
-      backgroundColor: 'rgba(234, 238, 47, 0.54)'
+      backgroundColor: '#A8DADC'
     },
     { // Attended
-      backgroundColor: 'rgba(13, 169, 94, 0.54)'
+      backgroundColor: '#457B9D'
     },
     { // Cancelled
-      backgroundColor: 'rgba(146, 19, 17, 0.84)'
+      backgroundColor: '#1D3557'
     }
   ]
   /* FINISH CHART USING NG2-CHARTS */
