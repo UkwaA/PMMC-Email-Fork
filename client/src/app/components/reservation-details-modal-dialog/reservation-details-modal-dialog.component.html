@@ -355,46 +355,57 @@
                                 <h6>${{data.RemainingBalance}}</h6>
                             </div>
                         </div>
-                        <mat-divider></mat-divider>
-                        <form>
+                        <mat-divider *ngIf = "data.ProgramType == 0"></mat-divider>
+                        <form *ngIf = "data.ProgramType == 0" [formGroup]="paymentForm">
                             <fieldset>
                                 <div class="row">
                                     <h4> Manual Payment </h4>
                                 </div> 
                                 <div class="row form-group">
                                     <label class="col-sm-3 control-label">Choose Type: </label>
-                                    <select class="col-sm-3 control-label" id="type">
-                                        <option value="default">---Type of Payment---</option>
+                                    <select class="col-sm-3 control-label" id="type" formControlName="PaymentType">
+                                        <option value="">---Type of Payment---</option>
                                         <option value="card">Card</option>
                                         <option value="other">Others</option>
                                     </select>
-                                </div>
-                                <div class="row form-group">
                                     <label class="col-sm-3 control-label">Enter Amount: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="amount">
-                                    <div class="col-sm-6">
-                                        <button type="submit" class="btn btn-success float-right" value="Submit">Add Payment</button>
+                                    <input type="number" class="col-sm-3 form-control" formControlName="PaymentAmount">
+                                </div>
+                                <!-- <div class="row form-group">
+                                    <label class="col-sm-3 control-label">Enter Amount: </label>
+                                    <input type="number" class="col-sm-3 form-control" formControlName="Amount">
+                                </div> -->
+                                <div>
+                                    <div *ngIf = "paymentType.value =='card' && paymentForm.valid">
+                                        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid" [ProgramPK]="ProgramPK"></payment>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-success float-right" value="Submit" [disabled]="(paymentType.value =='card'&&!isVerified)||(paymentType.value !='card'&&!paymentForm.valid)">Add Payment</button>
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
+                        <br>
+                        <mat-divider></mat-divider>
 
-                        <form>
+                        <form [formGroup]="refundForm">
                             <fieldset>
                                 <div class="row">
                                     <h4> Refund Section </h4>
                                 </div>
                                 <div class="row form-group">
                                     <label class="col-sm-3 control-label">Refund Amount: </label>
-                                    <input type="number" class="col-sm-3 form-control">
+                                    <input type="number" class="col-sm-3 form-control" formControlName="RefundAmount">
                                 </div> 
                                 <div class="row form-group">
                                     <label class="col-sm-3 control-label">Reason: </label>
-                                    <textarea class="col-sm-9 form-control"  rows="3"></textarea>                                        
+                                    <textarea class="col-sm-9 form-control"  rows="3" formControlName="RefundReason"></textarea>                                        
                                 </div> 
                                 <div class="row form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-danger float-right" value="Submit">Refund</button>
+                                        <button type="submit" class="btn btn-danger float-right" value="Submit" [disabled]="!refundForm.valid">Refund</button>
                                     </div>
                                 </div> 
                             </fieldset>

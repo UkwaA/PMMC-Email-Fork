@@ -133,9 +133,11 @@ export class ReservationManagementComponent implements OnInit {
                 ReservationStatus: '',
                 Total: '',
                 RemainingBalance: '',
+                SchedulePK: 0
               };
               reservation.ReservationPK = item.ReservationPK;
               reservation.UserPK = item.UserPK;
+              reservation.SchedulePK = item.SchedulePK,
               reservation.ProgramType = item.ProgramType;
               reservation.CustomerName = item.LastName + ', ' + item.FirstName;
               reservation.Total = item.Total;
@@ -290,9 +292,9 @@ export class ReservationManagementComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
-    dialogConfig.height = 'auto';
-    dialogConfig.maxHeight = '500px';
-    dialogConfig.width = '350px';
+    //dialogConfig.height = 'auto';
+    dialogConfig.maxHeight = '600px';
+    //dialogConfig.width = '350px';
     dialogConfig.autoFocus = false;
     dialogConfig.data = {
         title: 'Cancel Confirmation',
