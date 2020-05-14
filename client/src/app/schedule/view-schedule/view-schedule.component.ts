@@ -3,6 +3,7 @@ import { ProgramData } from '../../data/program-data';
 import { ProgramServices } from '../../services/program.services'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
+import { AddScheduleModalDialogComponent } from '../../components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
 import { SchedulerEvent, SchedulerModelFields, CreateFormGroupArgs, SlotClassArgs, EventStyleArgs, DateChangeEvent} from '@progress/kendo-angular-scheduler';
 import { ProgramScheduleService } from '../../services/schedule.services';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
@@ -74,9 +75,12 @@ export class ViewScheduleComponent {
 
     currentScheduleDetails: any = {}
     IsDisabled = true;
+    currentStart:string = '';
+    currentEnd:string = '';
+    scheduleSuccessMessage:string = '';
 
     constructor (private programService : ProgramServices, private programScheduleServices: ProgramScheduleService,
-        private formBuilder: FormBuilder, private route: ActivatedRoute, private cd: ChangeDetectorRef,
+        private route: ActivatedRoute, private cd: ChangeDetectorRef, public matDialog: MatDialog,
         private reservationService: ReservationService) {           
         }
     
@@ -103,16 +107,22 @@ export class ViewScheduleComponent {
             if(this.currentMode != "viewAllSchedule"){
                 this.selectedProgramPK = val.mode
             }
-         }) 
+        });
 
-        const currentYear = new Date().getFullYear();
-        const parseAdjust = (eventDateTime: string): Date => {
-            
-            var date = new Date(eventDateTime);
-            date.setFullYear(currentYear);            
-            return date;
-        };
+        //load all schedules
+        this.loadAllSchedules();
+    }
 
+    reloadAllSchedules(){
+        this.groupEvent = [];
+        this.individualEvent = [];
+        this.allPrograms.forEach(program =>{            
+            program.eventList = [];
+        })
+        this.loadAllSchedules();
+    }
+
+    loadAllSchedules(){
         this.programScheduleServices.getAllScheduleWithReservationInfo().subscribe((schedules) =>{                
             const sampleDataWithCustomSchema = schedules.map(dataItem => (                                
                 {
@@ -142,63 +152,11 @@ export class ViewScheduleComponent {
                     IndividualTotalQuantity: dataItem.IndividualTotalQuantity,
                     tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.displayTimeFormatOption),
                     tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption),
-                    tempDate: (new Date(dataItem.Start)).toLocaleDateString()
-                    // Color: dataItem.Color,
-
-                    //************REMOVE WHEN DONE**************** */
-                    // ScheduleSettingPK: dataItem.ScheduleSettingPK,
-                    // ProgramPK: dataItem.ProgramPK,
-                    // Title: dataItem.Title,
-                    // Description: dataItem.Description,
-                    // StartTimezone: dataItem.StartTimezone,
-                    // Start: parseAdjust(dataItem.Start),
-                    // End: parseAdjust(dataItem.End),
-                    // EndTimezone: dataItem.EndTimezone,                    
-                    // RecurrenceRule: dataItem.RecurrenceRule,
-                    // EndRepeatDate: dataItem.EndRepeatDate,
-                    // RepeatDay: dataItem.RepeatDay,
-                    // RecurrenceID: dataItem.RecurrenceID,
-                    // RecurrenceException: [], //Date object array
-                    // //RecurrenceException: [new Date("2020-04-20T09:00:00"), new Date("2020-04-20T10:00:00")],
-                    // Color: dataItem.Color,
-                    // CreatedBy: dataItem.CreatedBy,
-                    // CreatedDate: dataItem.CreatedDate,
-                    // IsActive: dataItem.IsActive,
-                    // tempStart: (new Date(dataItem.Start)).toLocaleString('en-US', this.displayTimeFormatOption),
-                    // tempEnd: (new Date(dataItem.End)).toLocaleString('en-US', this.displayTimeFormatOption),
-                    // tempDate: (new Date(dataItem.Start)).toLocaleDateString()
+                    tempDate: (new Date(dataItem.Start)).toLocaleDateString(),
+                    Color: dataItem.Color
                 }
             ));  
-            //Create Date array for each event in RecurrenceException
-            // sampleDataWithCustomSchema.forEach(item =>{
-            //     //Just check repeated sessions, skip additional sessions (since it happens once)
-            //     if(item.ScheduleSettingPK != 0){
-            //         var result = this.allBlackoutDateException.filter(x => x.ProgramPK == item.ProgramPK);
-            //         //get the time of the session
-            //         var timezoneOffset = (new Date(item.Start)).getTimezoneOffset()*60000
-            //         var eventStartTime = (new Date(item.Start)).toLocaleString('en-US', this.timeFormatOptions);
-            //         //var eventEndTime = (new Date(item.End)).toLocaleString('en-US', this.timeFormatOptions);
-            //         var eventStartDate = (new Date(item.Start - timezoneOffset)).toISOString().slice(0,10)
-            //         //1. Add recurrence exception to each session based on Blackout Date
-            //         //add the start date to the recurrence exception to avoid Kendo UI bug
-            //         let newStartDateTime = new Date(eventStartDate+"T"+eventStartTime)
-            //         //check if date exists in the RecurenceException arr
-            //         if(!item.RecurrenceException.find(e => {return e.getTime() == newStartDateTime.getTime()})){
-            //             item.RecurrenceException.push(new Date(eventStartDate+"T"+eventStartTime))
-            //         }
-                    
-            //         //if this session has blackout-date => add to recurenceException
-            //         if(result.length > 0){ 
-            //             //add each of the date in exceptionDateArr to recurence exception                        
-            //             result[0].exceptionDateArr.forEach(exceptionDate =>{
-            //                 //check if date exists in the RecurenceException arr
-            //                 if(!item.RecurrenceException.find(e => {return e.getTime() == (new Date(exceptionDate+"T"+eventStartTime)).getTime()})){
-            //                     item.RecurrenceException.push(new Date(exceptionDate+"T"+eventStartTime))    
-            //                 }                                
-            //             })
-            //         }
-            //     }
-            // })
+            
             this.events = sampleDataWithCustomSchema
             this.allEvents = sampleDataWithCustomSchema
             console.log(sampleDataWithCustomSchema)
@@ -219,8 +177,7 @@ export class ViewScheduleComponent {
                         }
                         program.eventList.push(event)
                     }
-                })                
-
+                })
             }) 
             if(this.currentMode != "viewAllSchedule"){
                 this.programs.forEach(program =>{
@@ -229,7 +186,7 @@ export class ViewScheduleComponent {
                     }
                 })
             }
-        })            
+        }) 
     }
 
     //Capture the filter option
@@ -295,9 +252,10 @@ export class ViewScheduleComponent {
 
     //Display event info when clicked on calendar
     public eventClick = (e) => {   
+        this.currentStart = e.event.start.toISOString();
+        this.currentEnd = e.event.end.toISOString();
         this.IsDisabled = false;     
-        this.currentScheduleDetails = e.event.dataItem;
-        
+        this.currentScheduleDetails = e.event.dataItem;        
         this.currentScheduleDetails.Availability = this.currentScheduleDetails.MaximumParticipant - this.currentScheduleDetails.CurrentNumberParticipant;
         this.currentScheduleDetails.NumChildren = parseInt(this.currentScheduleDetails.Age57Quantity) + parseInt(this.currentScheduleDetails.Age810Quantity)
                                                 + parseInt(this.currentScheduleDetails.Age1112Quantity) + parseInt(this.currentScheduleDetails.Age1314Quantity)
@@ -312,7 +270,7 @@ export class ViewScheduleComponent {
         }
         console.log(e.event)
         
-        this.currentScheduleDetails.tempDate = e.event.start.toLocaleDateString()
+        this.currentScheduleDetails.tempDate = e.event.start.toLocaleDateString();
         this.currentScheduleDetails.tempStart = (new Date(e.event.start)).toLocaleString('en-US', this.displayTimeFormatOption)
         this.currentScheduleDetails.tempEnd = (new Date(e.event.end)).toLocaleString('en-US', this.displayTimeFormatOption)
         
@@ -324,18 +282,50 @@ export class ViewScheduleComponent {
         else{
             $("#matcard").css("border","");
         }        
-      }
+    }
+
+    //Edit schedule
+    updateSessionDetailsModal(){
+        //Configure Modal Dialog
+        const dialogConfig = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        dialogConfig.disableClose = true;
+        dialogConfig.id = "update-session-modal-component";
+        dialogConfig.height = "auto";
+        dialogConfig.maxHeight = "600px";
+        dialogConfig.width = "700px";
+        dialogConfig.autoFocus = false;
+        dialogConfig.data = {
+            title: "Edit Schedule",
+            mode: "editsingleschedule",
+            description: "This action will also affect the sessions that are currently reserved by customers. "
+			+ "Customers will receive emails about this change. Are you sure to edit this session?",
+            currentScheduleDetails: this.currentScheduleDetails,
+            name: this.currentScheduleDetails.Name,
+            actionButtonText: "Update",   
+            numberOfButton: "2"            
+            }
+        const addScheduleModalDialog = this.matDialog.open(AddScheduleModalDialogComponent, dialogConfig);
+        addScheduleModalDialog.afterClosed().subscribe(result =>{
+            if(result != "No"){                
+                this.currentScheduleDetails.tempStart = (new Date(result.Start)).toLocaleString('en-US', this.displayTimeFormatOption);
+                this.currentScheduleDetails.tempEnd = (new Date(result.End)).toLocaleString('en-US', this.displayTimeFormatOption);
+                this.reloadAllSchedules();
+                //Display success message
+				this.scheduleSuccessMessage = "Schedule has been updated."
+				setTimeout(()=>{ 
+					this.scheduleSuccessMessage = "";
+					}, 5000);
+            }
+            else{
+                console.log("stop")                
+            }
+        })
+    }
 
     //get all events in a selected view
     public getEventClass(args: EventStyleArgs ){        
-        //console.log(args)
-        // var todayDate = (new Date()).toDateString();     
-        // var startDate = (new Date(args.event.start)).toDateString();
-        // if(startDate < todayDate){
-        //     console.log(startDate)
-        //     args.event.dataItem.RecurrenceException = [(new Date(startDate))]
-        //     args.event.recurrenceExceptions = [(new Date(startDate))]            
-        // }
+        //console.log(args)        
                 
         //return args.event.dataItem.type;        
         //need to included this [eventClass]="getEventClass" in html kendo

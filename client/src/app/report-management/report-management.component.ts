@@ -121,7 +121,7 @@ export class ReportManagementComponent {
     }
   }
 
-  //viewCampReport(){}
+  viewCampReport(){}
 
   tabClick(event){
   }
