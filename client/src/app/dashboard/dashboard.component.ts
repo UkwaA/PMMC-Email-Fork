@@ -267,9 +267,10 @@ export class DashboardComponent implements OnInit {
       //this.range.end.setHours(0, 0, 0, 0);
 
       //Get Customer Infodata
-      this.customerService.getAllUsersCreatedInTimeRange(this.range.start.toISOString().slice(0,10),
-                                                        this.range.end.toISOString().slice(0,10))
-          .subscribe(customerInfo =>{                        
+      this.customerService.getAllUsersCreatedInTimeRange(this.range.start.toISOString(),
+                                                        this.range.end.toISOString())
+          .subscribe(customerInfo =>{    
+            console.log(customerInfo)                    
             this.UserDetailsInfo.data = customerInfo as DataElement[];            
           })
 
