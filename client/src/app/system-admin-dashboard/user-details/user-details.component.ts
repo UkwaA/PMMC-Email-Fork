@@ -75,11 +75,11 @@ export class UserDetailsComponent implements OnInit {
         this.userDetails = user
         this.editedUserRoleFK = this.userDetails.Role_FK        
 
-        if(this.editedUserRoleFK == 1)
+        if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.CUSTOMER)
           {this.userRoles = ['Manager','System Admin','School Account']}
-        else if(this.editedUserRoleFK == 2)
+        else if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.MANAGER)
           this.userRoles = ['System Admin','Customer','School Account']
-        else if(this.editedUserRoleFK == 3)
+        else if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.SYSTEM)
           this.userRoles = ['Customer','Manager','School Account']
         else
           this.userRoles = ['Customer', 'Manager','System Admin']
@@ -146,16 +146,16 @@ openModalUpdateUserDetail(){
     //Get new Role info
     switch(this.NewRole) {
       case "Customer":
-        this.userDetails.Role_FK = 1
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.CUSTOMER
         break;
       case "Manager":
-        this.userDetails.Role_FK = 2
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.MANAGER
         break;
       case "Admin":
-        this.userDetails.Role_FK = 3
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.SYSTEM
         break;
       case "School Account":
-        this.userDetails.Role_FK = 4
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.SCHOOL
         break;
     }
    
