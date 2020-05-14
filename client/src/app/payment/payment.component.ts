@@ -58,6 +58,7 @@ export class PaymentComponent implements OnInit  {
   ) {}
 
   ngOnInit() {
+    console.log(this.ProgramPK);
     this.program
       .getProgramHeaderDeatailsByID(this.ProgramPK)
       .subscribe((result) => {
