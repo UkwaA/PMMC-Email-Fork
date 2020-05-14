@@ -893,6 +893,9 @@ export class ReservationComponent implements OnInit {
     // Add quantity data for Group Program only.
     if (type == "g") {
       this.reservationGroupDetails.AdultQuantity = this.quantityForm.get(
+        "AdultQuantity"
+      ).value;
+      this.reservationGroupDetails.Age57Quantity = this.quantityForm.get(
         "Age57Quantity"
       ).value;
       this.reservationGroupDetails.Age810Quantity = this.quantityForm.get(
