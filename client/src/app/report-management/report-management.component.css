@@ -6,8 +6,10 @@ table{
   width: 100%;
 }
 
+
 .mat-header-cell{
   background-color: #4cb69f;
+  padding-right: 25px;
 
 }
 
@@ -78,4 +80,8 @@ h2{
     font-weight: lighter;
     color: red;
     font-size: 10pt;
+}
+
+.container{
+  padding: 10px;
 }

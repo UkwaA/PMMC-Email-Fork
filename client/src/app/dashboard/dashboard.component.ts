@@ -16,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { start } from 'repl';
+import { formatDate } from '@angular/common';
 
 export interface DataElement {
   no: number;
@@ -77,36 +78,68 @@ export class DashboardComponent implements OnInit {
   pendingTotal = 0;
   pendingDetails = [];
 
+  /*Date for barchart */
+  current =  formatDate(this.today, 'EEE MMM dd yyyy', 'en');
+  current_1 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_2 = formatDate( new Date(this.today.getTime() - (2 * 24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_3 = formatDate( new Date(this.today.getTime() - (3 * 24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_4 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_5 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_6 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+
+
+
   /* CHART USING NG2-CHARTS */
-  title = 'Reservation By Years';
+  title = 'Reservation';
 
   // ADD CHART OPTIONS.
   chartOptions = {
     responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
   }
 
-  labels = ['On Going', 'Completed', 'Attended', 'Cancelled'];
+  labels = [this.current_1,this.current];
   // chartData = [];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
   chartData = [
     {
-      label: '2019',
-      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
+      label: 'Pending',
+      data: [9,12, 4, 12, 5,12, 23]
     },
     {
-      label: '2020',
-      data: [47, 9, 28, 54, 77, 51, 24]
+      label: 'Completed',
+      data: [47, 2, 28, 6, 23,3,12]
+    },
+    {
+      label: 'Ongoing',
+      data: [7, 5, 18, 54, 45,9,11]
+    },
+    {
+      label: 'Attended',
+      data: [43, 7, 12, 4, 23,4,5]
+    },
+    {
+      label: 'Cancelled',
+      data: [12, 9, 28, 24, 12, 2, 4]
     }
   ];
 
   // CHART COLOR.
   colors = [
-    { // 1st Year.
-      backgroundColor: 'rgba(161, 12, 12, 0.7)'
+    { // Pending
+      backgroundColor: '#E63946'
     },
-    { // 2nd Year.
-      backgroundColor: 'rgba(161, 161, 12, 0.7)'
+    { // Completed
+      backgroundColor: '#F1FAEE'
+    },
+    { // Ongoing
+      backgroundColor: '#A8DADC'
+    },
+    { // Attended
+      backgroundColor: '#457B9D'
+    },
+    { // Cancelled
+      backgroundColor: '#1D3557'
     }
   ]
   /* FINISH CHART USING NG2-CHARTS */
@@ -160,6 +193,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+
     
     this.auth.profile().subscribe(
       user => {

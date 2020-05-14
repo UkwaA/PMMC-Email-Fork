@@ -1,3 +1,14 @@
+.show-less {
+  height: 20rem;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.readMore{
+  color:#08b2b8 ;
+}
+
+
 h1 {
   font-family: 'Source Sans Pro', sans-serif; 
   font-size: 50px;
