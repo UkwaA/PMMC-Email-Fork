@@ -4,17 +4,16 @@
             <form>
                 <fieldset [disabled]="isDisabled">
                 <h1 class="text-center">Email Editor</h1>
-                <div class="form-group font-weight-bold">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Subject</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="name" [(ngModel)]="emailData.Subject">
-                        </div>
+                <div class="form-group font-weight-bold row">
+                    <div class="col-md-3">
+                        <label>Subject</label>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="name" [(ngModel)]="emailData.Subject" maxlength="45">
+                        <small>Max: 45 characters</small>
                     </div>
                 </div>
-                <div class="form-group ">
+                <div class="form-group">
                     <label class="font-weight-bold">Body</label>
                     <ckeditor [editor]="Editor" [disabled]="isDisabled" (ready)="onReady($event)" name="editor" [(ngModel)]="emailData.Body"></ckeditor>
                 </div>
@@ -22,31 +21,29 @@
                     <label class='font-weight-bold'> Current Attachments: </label><br>
                     <ul>
                         <li *ngFor="let attachment of this.currentAttachments" class="row">
-                            {{attachment}}<button mat-mini-fab (click)='openAttachmentModal(attachment)'> <mat-icon>delete</mat-icon> </button>
+                            <button class='mat-btn-holder' mat-icon (click)='openAttachmentModal(attachment)'> <mat-icon color='warn'>delete</mat-icon> </button>{{attachment}}
                         </li>
                     </ul>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                 <!-- <div *ngIf="this.emailData.Type == 'Specific Program'" class="form-group"> -->
                     <div class="col-md-12 font-weight-bold">
-                        <label>New Attachments (Accepts: .pdf, .doc, .docx)</label>
+                        <label>Attach new file(s) (.pdf, .doc, and .docx only)</label>
                     </div>
                     <div class="col-md-8">
                         <!-- add file change function -->
-                        <input nv-file-select='' type="file" id="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" (change)='onFileChange($event)' multiple>
+                        <input type="file" id="file" [disabled]="isDisabled" accept=".pdf,.doc,.docx" style="color:transparent" (change)='onFileChange($event)' multiple>
                         
                     </div>
                     <div id="filelist"></div>
                 </div>
-                <div class="form-group font-weight-bold">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Group</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="emailType"
-                            [(ngModel)]="emailTypeText" readonly>
-                        </div>
+                <div class="form-group font-weight-bold row">
+                    <div class="col-md-4">
+                        <label>Group</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="emailType"
+                        [(ngModel)]="emailTypeText" readonly>
                     </div>
                 </div>
                 <div *ngIf='PageMode == "edit"' class="button pt-5 pb-5">

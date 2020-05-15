@@ -136,7 +136,7 @@ export class EmailDetailsComponent {
         dialogConfig.autoFocus = false;
         dialogConfig.data = {
             title: 'Update Email Details',
-            description: 'Are you sure you would like to delete this attachment?',
+            description: 'Are you sure you would like to remove the attachment "'+attachment+'"?',
             actionButtonText: 'Confirm',
             numberOfButton: '2'
         };
@@ -172,7 +172,7 @@ export class EmailDetailsComponent {
         this.services.updateEmail(this.formData).subscribe(res => {
             console.log(res);
             if (res) {
-                // this.router.navigateByUrl('/profile/email-management');
+                this.router.navigateByUrl('/profile/email-management');
             }
         });
     }

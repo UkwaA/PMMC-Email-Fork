@@ -8,6 +8,7 @@ const fileUpload = require("express-fileupload");
 const Program = require("../models/Program");
 const IndividualProgramRequirement = require("../models/IndividualRequirement");
 const GroupProgramRequirement = require("../models/GroupRequirement");
+const Email = require('../models/Email');
 
 program.use(bodyParser.json());
 program.use(bodyParser.urlencoded({ extended: true }));
@@ -195,7 +196,21 @@ program.post("/add-program", (req, res) => {
           };
           IndividualProgramRequirement.create(individualDetail)
             .then((program) => {
-              res.json(programPK);
+              console.log('name1: ' + req.body.Name);
+              console.log('type: ' + typeof req.body.Name)
+              var name = req.body.Name;
+              var individualEmail = { 
+                EmailPK: programPK,
+                Type: 'Program', 
+                Subject: req.body.Name.slice(0,20) + ' Booking Confirmation',
+                Body: '<i>Your program with Pacific Marine Mammal Center has been confirmed! You are now registered for <b>{programName} on {programDate}</b> </i><br> <i>We have processed your payment of {deposit}.</i><br>     <i>We look forward to having you join us. See you soon! </i>',
+                IsActive: 1,
+                HasAttachments: 0,
+                AttachmentNames: null
+              }
+              Email.create(individualEmail).then(email => {
+                res.json(programPK);
+              })
             })
             .catch((err) => {
               res.send("err Insert Individual Requirement" + err);

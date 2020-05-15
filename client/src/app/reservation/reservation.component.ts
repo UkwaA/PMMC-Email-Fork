@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProgramServices } from '../services/program.services';
 import { ProgramData } from '../data/program-data';
 import { Payment } from '../data/payment';
+import { IndividualEmailData } from '../data/individual-email-data';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { ReservationService } from '../services/reservation.services';
 import { EmailService } from '../services/email.services';
@@ -66,6 +67,9 @@ export class ReservationComponent implements OnInit {
   // FormGroup for User input the program
   registerForm: FormGroup;
   submitted = false;
+
+  // Formgroup for email service
+  individualEmailData = new IndividualEmailData(0,0,0,0,'',0);
 
   programDetails: ProgramData;
   programName: string;
@@ -1104,7 +1108,15 @@ export class ReservationComponent implements OnInit {
                 .subscribe((res) => {
                   if (res) {
                     // Send booking requested email
-                    this.emailService.sendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
+                    console.log('successful res')
+                    this.individualEmailData.UserPK = this.auth.getUserDetails().UserPK;
+                    this.individualEmailData.SchedulePK = this.reservationHeader.SchedulePK;
+                    this.individualEmailData.ResPK = resHeaderPK;
+                    this.individualEmailData.ProgramPK = this.ProgramPK;
+                    this.individualEmailData.ProgramName = this.programName;
+                    this.individualEmailData.Deposit = this.reservationHeader.Total;
+
+                    this.emailService.sendProgramConfirmationEmail(this.individualEmailData).subscribe(email => {});
 
                     const dialogConfig = new MatDialogConfig();
                     // The user can't close the dialog by clicking outside its body

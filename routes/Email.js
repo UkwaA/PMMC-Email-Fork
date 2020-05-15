@@ -267,17 +267,11 @@ app.post('/send-reset-password-email', (req,res) => {
             userInfo.Email = user.Email
             userInfo.Password = user.Password   
             
-            Email.findOne({
-              where:{ 
-                EmailPK: 1
-              }
-            }).then(email => {
               //send email to user            
-              sendResetPasswordEmail(userInfo, email, info => {
+              sendResetPasswordEmail(userInfo, info => {
                 console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
                 res.send(info);
-              });
-            })     
+              });   
             
           }          
       })
@@ -288,7 +282,7 @@ app.post('/send-reset-password-email', (req,res) => {
 });
 
 
-async function sendResetPasswordEmail(userInfo, email, callback) {
+async function sendResetPasswordEmail(userInfo, callback) {
     //Create new token
     let payload = {
       userID: userInfo.UserPK,
@@ -300,8 +294,8 @@ async function sendResetPasswordEmail(userInfo, email, callback) {
       expiresIn: 3600 //expires in 1 hour
     })
 
-    email.Body = email.Body.replace("{Username}", `${userInfo.Username}`).replace("{token}", `${token}`)
-    console.log(email.Body)
+    // email.Body = email.Body.replace("{Username}", `${userInfo.Username}`).replace("{token}", `${token}`)
+    // console.log(email.Body)
     
 
     //For Testing only
@@ -329,8 +323,12 @@ async function sendResetPasswordEmail(userInfo, email, callback) {
     // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address need to change to Sponsor email
     to: "uakkum@uci.edu", // need to put userInfo.Email
-    subject: email.Subject, // Subject line
-    html: email.Body
+    subject: 'PMMC Reset Password', // Subject line
+    html: `Hi ${userInfo.Username}, <br>
+    Here's the link to reset your password: 
+    http://localhost:4200/login/reset-password/${token}  
+    <br>This link will expire within 1 hour. If you did not request this, 
+    please ignore this email and your password will remain unchanged.`
     };
 
     // send mail with defined transport object
@@ -451,7 +449,7 @@ app.post('/create-new-user-confirmation-email', (req,res) => {
           userInfo.Password = user.Password  
           
           Email.findOne({
-            where: {EmailPK: 4}
+            where: {EmailPK: 2}
           }).then(email => {
             if (email){
               CreateNewUserConfirmationEmail(userInfo, email, info => {
@@ -536,19 +534,14 @@ app.post('/send-booking-request-confirmation-email', (req,res) => {
     }
   })
   .then(user =>{
-      if(!user) {
-        res.json({ error: 'User does not exist' })            
-      }
-      else{                        
-        let userInfo = req.body
-        userInfo.UserPK = user.UserPK
-        userInfo.Email = user.Email
+      if(user) {                     
+        let bookingInfo = req.body
 
         Email.findOne({
-          where: {emailPK: 2}
+          where: {emailPK: 1}
         }).then(email => {
           if (email){
-            sendBookingRequestConfirmationEmail(userInfo, email, info => {
+            sendBookingRequestConfirmationEmail(bookingInfo, email, info => {
               console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
               res.send(info);
             });
@@ -647,87 +640,6 @@ function convertTime(time){
 }
 
 /***********************
-  SEND SPECIFIC PROGRAM EMAIL
-************************/
-app.post('/send-pinniped-program-email', (req, res) => {
-  console.log('pinniped email route');
-  console.log(req.body)
-  console.log(req.body.UserPK)
-
-  console.log('Part 2');
-
-  tempDir = './public/uploads/email-attachments/77/';
-
-  attachments = [];
-
-  function addAttachments(value){
-    console.log(value);
-    attachments.push({filename: value, path: tempDir+value})
-  }
-
-  // Gather all attachment names to upload to the DB
-  if (fs.existsSync(tempDir)) {
-    console.log('directory exists');
-    fs.readdirSync(tempDir).forEach(addAttachments);
-  }
-  console.log(attachments);
-
-  var firstName, programDateTime;
-  UserDetails.findOne({
-    where: {UserPK: req.body.UserPK}
-  }).then(user => {
-    console.log('1st name: ' + user.FirstName)
-    firstName = user.FirstName;
-
-    Schedule.findOne({
-      where: {SchedulePK: req.body.SchedulePK}
-    }).then(schedule => {
-      programDateTime = new Date(schedule.Start);
-      var date = programDateTime.toDateString() + ' at ' + convertTime(programDateTime.toTimeString().slice(0,5))
-      sendPinnipedProgramEmail(user.FirstName, user.Email, date, attachments, info => {
-        console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
-        res.send(info);
-      })
-    })
-
-  })
-
-})
-
-async function sendPinnipedProgramEmail(firstName, email, date, Attachments, callback) {
-  let transporter = nodemailer.createTransport({
-    host: process.env.emailServer_host,
-    port: process.env.emailServer_port,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        //This is AWS SES credential
-      user: process.env.emailServer_username,
-      pass: process.env.emailServer_password
-    }
-  });
-
-  let mailOptions = {
-      //from and to email needs to be verified in order to use SES
-      // otherwise, need to upgrade to Premium
-    from: process.env.emailServer_sponsorEmail, // sender address
-    to: "uakkum@uci.edu", // list of receivers
-    subject: 'Pinniped Program Confirmation', // Subject line
-    html: `Hi ${firstName},<br>
-    Your class is confirmed for the Pinniped Pollution Project Program on
-     <b>${date}</b>. Attached to this email you will find five pre-visit documents.
-     We have also included a few helpful field trip reminders below. Please 
-     be sure to communicate the bus information with your driver. Lastly, 
-     <b>please respond to this message confirming</b> your visit. Thank you!`,
-     attachments: Attachments
-  };
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail(mailOptions);
-
-  callback(info);
-}
-
-/***********************
   CHANGE EMAIL ACTIVE STATUS
 ***********************/
 app.post('/change-email-active-status', (req, res) => {
@@ -802,6 +714,7 @@ async function sendRegistrationConfirmationEmail(email, callback) {
   PROGRAM BOOKING CONFIRMED
 ***********************/
 app.post('/send-program-confirmation-email', (req, res) => {
+  console.log(req);
   User.findOne({
     where: {
       UserPK: req.body.UserPK
@@ -811,24 +724,26 @@ app.post('/send-program-confirmation-email', (req, res) => {
       Schedule.findOne({
         where: {SchedulePK: req.body.SchedulePK}
       }).then( schedule => {
+        programDate = new Date(schedule.Start);
+        programDate = programDate.toDateString() + ' at ' + convertTime(programDate.toTimeString().slice(0,5))
         Email.findOne({
-          where: {EmailPK: 5}
+          where: {EmailPK: req.body.ProgramPK}
         }).then(email => {
-          sendProgramConfirmationEmail(user, email, schedule, req.body.programName, info => {
+          sendProgramConfirmationEmail(user, email, req.body.ProgramName, programDate, req.body.Deposit,info => {
             console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
             res.send(info);
           })
         })
       })
-  }})});
+}})});
 
-async function sendProgramConfirmationEmail(user, email, schedule, programName, callback) {
+async function sendProgramConfirmationEmail(user, email, programName, programDate, deposit, callback) {
   tempDir = './public/uploads/email-attachments/'+email.EmailPK+'/';
-  attachments = [];
+  Attachments = [];
 
   function addAttachments(value){
     console.log(value);
-    attachments.push({filename: value, path: tempDir+value})
+    Attachments.push({filename: value, path: tempDir+value})
   }
 
   // Gather all attachment names to upload to the DB
@@ -836,7 +751,7 @@ async function sendProgramConfirmationEmail(user, email, schedule, programName, 
     console.log('directory exists');
     fs.readdirSync(tempDir).forEach(addAttachments);
   }
-  console.log(attachments);
+  console.log(Attachments);
 
   // create reusable transporter object using the default SMTP transport
   //Using AWS SES for SMTP server
@@ -851,23 +766,25 @@ async function sendProgramConfirmationEmail(user, email, schedule, programName, 
     }
   });
 
+  // email.Body = email.Body.replace('{firstName}', `${user.FirstName}`);
+  email.Body = email.Body.replace('{programName}', `${programName}`);
+  email.Body = email.Body.replace('{programDate}', `${programDate}`);
+  email.Body = email.Body.replace('{deposit}', `\$${deposit}`);
+
   let mailOptions = {
       //from and to email needs to be verified in order to use SES
       // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
-    subject: 'Program Confirmation', // Subject line
-    html: `
-    <i>Your program with Pacific Marine Mammal Center has been confirmed! 
-    You are now registered for:
-    ${programName} at ${schedule.Start} </i>` + 
-    (`${deposit}` ? `<i>We have processed your deposit of 
-    ${deposit}.` : '') +
-    ` 
-    Your remaining balance of ${remainingBalance} should be paid
-    prior to your program unless special arrangements have been made with 
-    PMMC administration.</i>
-    <i>We look forward to having you join us. See you soon! </i>`
+    subject: email.Subject, // Subject line
+    html: email.Body,
+    // `
+    // <i>Your program with Pacific Marine Mammal Center has been confirmed! 
+    // You are now registered for
+    // <b>{programName} at {programDate}</b> </i><br>
+    // <i>We have processed your payment of {deposit}.</i><br>
+    // <i>We look forward to having you join us. See you soon! </i>`
+    attachments: Attachments
   };
 
   // send mail with defined transport object
@@ -958,7 +875,7 @@ async function sendPaymentConfirmationEmail(user, payment, programName, programD
       // otherwise, need to upgrade to Premium
     from: process.env.emailServer_sponsorEmail, // sender address
     to: "uakkum@uci.edu", // list of receivers
-    subject: "PMMC - Payment Confirmation", // Subject line
+    subject: "PMMC Payment Confirmation", // Subject line
     html: `
     <i>Thank you for your payment of ${payment} for your program with 
     Pacific Marine Mammal Center ${programName} at ${programDate}. All 

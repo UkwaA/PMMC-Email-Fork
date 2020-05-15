@@ -71,11 +71,9 @@ export class EmailService {
   }
 
   public sendProgramConfirmationEmail(body): Observable<any> {
-    if (body.ProgramPK == 79)
-      return this.sendPinnipedProgramEmail(body);
-    // else if (insert all other specific program emails)
-    else
-      return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-confirmation-email/', body);
+    console.log('Send Program Confirmation called');
+    console.log(body);
+    return this.http.post(AppConstants.EXPRESS_SERVER_URL + 'service/send-program-confirmation-email/', body);
   }
 
   public sendProgramReminderEmail(body): Observable<any> {
