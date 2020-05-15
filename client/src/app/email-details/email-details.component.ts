@@ -8,8 +8,6 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { AuthenticationService } from '../authentication.service';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-// import * as  AngularFileUploadModule from 'angular-file-upload' 
-import { angularFileUpload } from 'angular-file-upload' 
 import {MatButtonModule} from '@angular/material/button';
 
 
