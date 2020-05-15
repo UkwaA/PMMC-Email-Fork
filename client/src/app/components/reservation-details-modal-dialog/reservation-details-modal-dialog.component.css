@@ -5,15 +5,26 @@ h3 {
     color: #08b2b8; 
 }
 
-.container {
+h4{
+    color: #08b2b8; 
+}
+
+.modal-content-wrapper{
     width: 750px;
-    padding: 10px 20px 20px 20px;
+    height: 600px;
+    position: relative;
 }
 
 .row {
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 label{
     font-weight: bold;
+}
+
+.modal-content-wrapper .modal-footer{
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
 }

@@ -15,7 +15,7 @@ import { UserData } from '../data/user-data';
       UserPK: 0,
       Username: '',
       Password: '',
-      Role_FK: '',
+      Role_FK: 0,
       Email: '',
       IsActive: false,
       CreatedDate: ''

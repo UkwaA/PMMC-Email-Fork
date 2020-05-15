@@ -1,4 +1,4 @@
-<!-- <div class="container"> -->
+<div class="container">
     <div class="row text-center text-white mb-2 mt-2">
         <div class="col-lg-7 mx-auto">
             <h1>View Schedule</h1>
@@ -33,10 +33,9 @@
                     [selectedDate]="selectedDate"
                     [showWorkHours] = "true"
                     [eventStyles]="getEventStyles"
-                    [eventClass]="getEventClass" 
                     style="height: 850px; width: 1500px">
                     <ng-template kendoSchedulerEventTemplate let-event>
-                        {{ event.dataItem.Title }} 
+                        {{ event.dataItem.Name }} 
                     </ng-template>
                     <!-- <kendo-scheduler-day-view >
                     </kendo-scheduler-day-view> -->
@@ -53,26 +52,29 @@
                 <mat-card-header>
                     <div class="container p-0">
                         <mat-card-title>
-                            {{currentSessionDetails.Title}}
+                            {{currentScheduleDetails.Name}}
                         </mat-card-title>  
-                        <mat-card-subtitle *ngIf="currentSessionDetails.ProgramPK == 0">
+                        <mat-card-subtitle *ngIf="IsDisabled">
                             Select a session on calendar to see more detail.
                         </mat-card-subtitle>
-                        <mat-card-subtitle *ngIf="currentSessionDetails.ProgramPK != 0">                           
+                        <mat-card-subtitle *ngIf="!IsDisabled">
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{currentSessionDetails.tempDate}}, 
-                                    {{currentSessionDetails.tempStart}} - {{currentSessionDetails.tempEnd}}
+                                    {{currentScheduleDetails.tempDate}}, 
+                                    {{currentScheduleDetails.tempStart}} - {{currentScheduleDetails.tempEnd}}
                                 </div>
                             </div>
                             <div class="row pt-2">
-                                <div class="col-md-12" *ngIf="currentSessionDetails.Start >= todayDate">
-                                    <button class="available" *ngIf="currentSessionDetails.Availability != 0" disabled>
+                                <div class="col-md-4" *ngIf="currentStart >= todayDate">
+                                    <button class="available" *ngIf="currentScheduleDetails.Availability != 0" disabled>
                                         Available</button>
-                                    <button class="full" *ngIf="currentSessionDetails.Availability == 0" disabled>
+                                    <button class="full" *ngIf="currentScheduleDetails.Availability == 0" disabled>
                                         Full</button>
                                 </div>
-                                <div class="col-md-12" *ngIf="currentSessionDetails.Start < todayDate">
+                                <div class="col-md-8" class="successColorMessage" *ngIf="scheduleSuccessMessage">
+                                    <mat-icon matListIcon id="doneIcon">check_circle</mat-icon>{{scheduleSuccessMessage}}
+                                </div>
+                                <div class="col-md-12" *ngIf="currentStart < todayDate">
                                     <button class="pastevent" disabled>
                                         PAST EVENT</button>
                                 </div>
@@ -94,47 +96,47 @@
                             </div> -->
                             <div class="row pb-1">
                                 <div class="col-md-8"><h6>Seats:</h6></div>
-                                <div class="col-md-3 text-right">{{currentSessionDetails.MaximumParticipant}}</div>
+                                <div class="col-md-3 text-right">{{currentScheduleDetails.MaximumParticipant}}</div>
                             </div>
                             <div class="row pb-1">
                                 <div class="col-md-8"><h6>Available: </h6></div>
-                                <div class="col-md-3 text-right">{{currentSessionDetails.Availability}}</div>
+                                <div class="col-md-3 text-right">{{currentScheduleDetails.Availability}}</div>
                             </div>                            
                             <div *ngIf="programType =='group'">  <!-- Group -->
                                 <div class="row pb-1">
                                     <div class="col-md-8"><h6>No. of chaperones: </h6></div>
-                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChaparones}}</div>
+                                    <div class="col-md-3 text-right">{{currentScheduleDetails.AdultQuantity}}</div>
                                 </div>
                                 <div class="row pb-1">
                                     <div class="col-md-8"><h6>Total children: </h6></div>
-                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChildren}}</div>
+                                    <div class="col-md-3 text-right">{{currentScheduleDetails.NumChildren}}</div>
                                 </div>
                                 <div class="row pb-1">
                                     <div class="col-md-1"></div>
                                     <div class="col-md-11">
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 5-7</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age57}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age57Quantity}}</div>
                                         </div>
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 8-10</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age810}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age810Quantity}}</div>
                                         </div>
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 11-12</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1112}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age1112Quantity}}</div>
                                         </div>
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 13-14</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1314}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age1314Quantity}}</div>
                                         </div>
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 14-15</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1415}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age1415Quantity}}</div>
                                         </div>
                                         <div class="row pb-1">
                                             <div class="col-md-9">Age 15-17</div>
-                                            <div class="col-md-3 text-right">{{currentSessionDetails.Age1517}}</div>
+                                            <div class="col-md-3 text-right">{{currentScheduleDetails.Age1517Quantity}}</div>
                                         </div>
                                     </div>                                    
                                 </div>
@@ -142,11 +144,11 @@
                             <div *ngIf="programType =='individual'">  <!-- Individual -->
                                 <div class="row pb-1">
                                     <div class="col-md-8"><h6>Total children: </h6></div>
-                                    <div class="col-md-3 text-right">{{currentSessionDetails.NumChildren}}</div>
+                                    <div class="col-md-3 text-right">{{currentScheduleDetails.IndividualTotalQuantity}}</div>
                                 </div>
                                 <div class="row pb-1">
                                     <div class="col-md-8"><h6>Age Range: </h6></div>
-                                    <div class="col-md-3 text-right">{{currentSessionDetails.AgeRange}}</div>
+                                    <div class="col-md-3 text-right">{{currentScheduleDetails.AgeRange}}</div>
                                 </div>
                             </div> <!--End individual-->
                         </div>
@@ -154,11 +156,10 @@
                 </mat-card-content>
                 <mat-card-actions align="end">
                     <button mat-raised-button onclick="this.blur()" color="primary" 
-                        [disabled]="currentSessionDetails.ProgramPK == 0 || currentSessionDetails.Start < todayDate"
-                        [routerLink]="['/profile','program-details', currentSessionDetails.ProgramPK, 'set-program-schedule']">
-                        EDIT SESSION</button>
+                        [disabled]="IsDisabled || currentStart < todayDate" (click)="updateSessionDetailsModal()">
+                        EDIT SCHEDULE</button>
                 </mat-card-actions>
             </mat-card>
         </div>        
     </div>
-<!-- </div> -->
+</div>

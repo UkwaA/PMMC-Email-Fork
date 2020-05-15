@@ -8,52 +8,64 @@ import { IndividualEmailData } from '../data/individual-email-data';
 import { ProgramScheduleService } from '../services/schedule.services';
 import { ReservationService } from '../services/reservation.services';
 import { EmailService } from '../services/email.services';
+import { MarketingData } from "../data/marketing-data";
 import {
   SchedulerEvent,
   SchedulerModelFields,
-} from '@progress/kendo-angular-scheduler';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { QuantiyFormData } from '../data/quantity-form-data';
-import { ProgramScheduleData } from '../data/program-schedule-data';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { LoginPromptModalComponent } from '../components/login-prompt-modal/login-prompt-modal.component';
-import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.component';
-import { AuthenticationService } from '../authentication.service';
-import { AppConstants } from '../constants';
-import { MatStepper } from '@angular/material/stepper';
+} from "@progress/kendo-angular-scheduler";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from "@angular/forms";
+import { QuantiyFormData } from "../data/quantity-form-data";
+import { ProgramScheduleData } from "../data/program-schedule-data";
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { LoginPromptModalComponent } from "../components/login-prompt-modal/login-prompt-modal.component";
+import { ModalDialogComponent } from "../components/modal-dialog/modal-dialog.component";
+import { AuthenticationService, UserDetails } from "../authentication.service";
+import { AppConstants } from "../constants";
+import { MatStepper } from "@angular/material/stepper";
 
 /*************  BOOKING GROUP PROGRAM  ******************* */
-import { BookingGroupData } from '../data/booking-group-data';
-import { BookingIndividualData } from '../data/booking-individual-data';
-import { ReservationHeader } from '../data/reservation-header';
-import { ValidationErrors } from '@angular/forms';
-import { ReservationGroupDetails } from '../data/reservation-group-details';
-import { ReservationIndividualDetails } from '../data/reservation-individual-details';
-import { addDays } from '@progress/kendo-date-math';
-import { PaymentServices } from '../services/payment.services';
+import { BookingGroupData } from "../data/booking-group-data";
+import { BookingIndividualData } from "../data/booking-individual-data";
+import { ReservationHeader } from "../data/reservation-header";
+import { ValidationErrors } from "@angular/forms";
+import { ReservationGroupDetails } from "../data/reservation-group-details";
+import { ReservationIndividualDetails } from "../data/reservation-individual-details";
+import { addDays } from "@progress/kendo-date-math";
+import { PaymentServices } from "../services/payment.services";
 
 @Component({
-  templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.css'],
+  templateUrl: "./reservation.component.html",
+  styleUrls: ["./reservation.component.css"],
 })
 export class ReservationComponent implements OnInit {
-  @ViewChild('stepper', { static: false }) private myStepper: MatStepper;
+  @ViewChild("stepper", { static: false }) private myStepper: MatStepper;
   private _paymentOption: number;
   private _customPayment: number;
-  payment = { name: 0};
+
+  payment = { name: 0 };
   valueControl: any;
-  valid:boolean;
+  valid: boolean;
   remaining: number = 0;
 
+  // Use this variable to set enable QuantityForm and Book button
+  disableQuantity = true;
 
   confirmation: any;
   ProgramPK: number;
   stepOneIsCompleted = false;
   stepTwoIsCompleted = false;
-  stepThreeIsCompleted = false;
+
+  // Additional Fee for Drop Off and Pick Up
+  additionalDropOffFee = 0;
+  additionalPickupFee = 0;
 
   // Verify card information
-  isVerified : boolean = false;
+  isVerified: boolean = false;
 
   // Data Model to store User Input
   reservationHeader = new ReservationHeader();
@@ -70,6 +82,12 @@ export class ReservationComponent implements OnInit {
 
   // Formgroup for email service
   individualEmailData = new IndividualEmailData(0,0,0,0,'',0);
+  // Marketing Form
+  marketingForm: FormGroup;
+  marketingData: MarketingData;
+
+  // Current User Detail
+  currUser: UserDetails;
 
   programDetails: ProgramData;
   programName: string;
@@ -79,10 +97,10 @@ export class ReservationComponent implements OnInit {
 
   // Intent Object
   paymentObj = {
-    token: '',
+    token: "",
     amount: 0,
-    description: '',
-    email: '',
+    description: "",
+    email: "",
   };
 
   paymentData = new Payment();
@@ -94,7 +112,7 @@ export class ReservationComponent implements OnInit {
     { id: 3, name: AppConstants.MARKETTING_INFO.FRIEND },
     { id: 4, name: AppConstants.MARKETTING_INFO.ONLINE },
     { id: 5, name: AppConstants.MARKETTING_INFO.EMAIL },
-    { id: 6, name: AppConstants.MARKETTING_INFO.OTHER }
+    { id: 6, name: AppConstants.MARKETTING_INFO.OTHER },
   ];
 
   selectedMarketingInfo = 0;
@@ -108,18 +126,18 @@ export class ReservationComponent implements OnInit {
   tempDate: Date;
   // This option for displaying the date to customer view
   options = {
-    hour: 'numeric',
-    minute: 'numeric',
+    hour: "numeric",
+    minute: "numeric",
     hour12: true,
   };
 
   // Define this day arr to hide past event
-  dayOfWeekStr = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+  dayOfWeekStr = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
   // Define time format option for blackout date
   timeFormatOptions = {
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
     hour12: false,
   };
 
@@ -133,8 +151,8 @@ export class ReservationComponent implements OnInit {
     SchedulePK: 0,
     SessionDetailsPK: 0,
     ProgramPK: 0,
-    Start: '',
-    End: '',
+    Start: "",
+    End: "",
     MaximumParticipant: 0,
     CurrentNumberParticipant: 0,
     CreatedBy: 0,
@@ -144,17 +162,17 @@ export class ReservationComponent implements OnInit {
 
   // Define Schedule Module for Kendo schedule
   public eventFields: SchedulerModelFields = {
-    id: 'CreatedBy', // Point id to dummy to avoid bug
-    title: 'Title',
-    description: 'Description',
-    startTimezone: 'StartTimezone',
-    start: 'Start',
-    end: 'End',
-    endTimezone: 'EndTimezone',
-    isAllDay: 'IsAllDay',
-    recurrenceRule: 'RecurrenceRule',
-    recurrenceId: 'RecurrenceID',
-    recurrenceExceptions: 'RecurrenceException',
+    id: "CreatedBy", // Point id to dummy to avoid bug
+    title: "Title",
+    description: "Description",
+    startTimezone: "StartTimezone",
+    start: "Start",
+    end: "End",
+    endTimezone: "EndTimezone",
+    isAllDay: "IsAllDay",
+    recurrenceRule: "RecurrenceRule",
+    recurrenceId: "RecurrenceID",
+    recurrenceExceptions: "RecurrenceException",
   };
 
   /**************************************************************/
@@ -172,43 +190,52 @@ export class ReservationComponent implements OnInit {
   ) {
     this.quantityForm = this.fb.group({
       AdultQuantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age57Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age810Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age1112Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age1314Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age1415Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
       Age1517Quantity: [
-        { value: '0', disabled: true },
+        { value: "0", disabled: this.disableQuantity },
         [Validators.required, Validators.min(0)],
       ],
-      TotalQuantity: ['0', [Validators.required, Validators.min(1)]],
-      CustomerSelectDate: ['', [Validators.required]],
-      CustomerSelectTime: ['', [Validators.required]],
-      Availability: ['', [Validators.required]],
+      TotalQuantity: ["0", [Validators.required, Validators.min(1)]],
+      CustomerSelectDate: ["", [Validators.required]],
+      CustomerSelectTime: ["", [Validators.required]],
+      Availability: ["", [Validators.required]],
     });
   }
 
   ngOnInit() {
+    // Get UserDetails
+    this.currUser = this.auth.getUserDetails();
+
     this.route.params.subscribe((val) => {
       this.ProgramPK = val.id;
+    });
+
+    /******************MARKETING FORM*************************/
+    this.marketingForm = this.fb.group ({
+      UserMarketingInfo: [1, Validators.required],
+      UserInputOther: ["", Validators.required]
     });
 
     /******************PROGRAM SCHEDULE*************************/
@@ -223,77 +250,94 @@ export class ReservationComponent implements OnInit {
         switch (this.ProgramType) {
           /*************  GET THE GROUP PROGRAM REQUIREMENT ******************* */
           case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-            this.valid = false;
+            // Set Validation of Payment to True for User Role is School Account
+            // This will let User submit reservation without asking them the deposit amount.
+            if(this.currUser.Role_FK == 4) {
+              this.isVerified = true;
+              this.valid = true;
+            } else {
+              this.valid = false;
+            }
             this.service
-              .getProgramRequirementDetails('g', this.ProgramPK)
+              .getProgramRequirementDetails("g", this.ProgramPK)
               .subscribe((program) => {
                 this.bookingGroup = program;
 
                 this.registerForm = this.fb.group({
-                  ProgramRestriction: ['', Validators.required],
+                  ProgramRestriction: ["", Validators.required],
                   OrganizationName: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
-                  GradeLevel: ['', Validators.required],
+                  GradeLevel: ["", Validators.required],
                   TeacherName: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
-                  TeacherEmail: [''],
-                  AlternativeDate: [
-                    '',
-                    [Validators.minLength(5)],
-                  ],
+                  TeacherEmail: [""],
+                  AlternativeDate: ["", [Validators.minLength(5)]],
                   TeacherPhoneNo: [
-                    '',
-                    [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
+                    "",
+                    [
+                      Validators.required,
+                      Validators.min(1000000000),
+                      Validators.max(9999999999),
+                    ],
                   ],
                   EducationPurpose: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(5)],
                   ],
+                  OtherInfo: [
+                    "",
+                    [Validators.minLength(2)],
+                  ]
                 });
 
                 // Clear the Validator for unavailable field
                 if (!this.bookingGroup.ProgramRestriction) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('ProgramRestriction')
+                    this.registerForm.get("ProgramRestriction")
                   );
                 }
                 if (!this.bookingGroup.OrganizationName) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('OrganizationName')
+                    this.registerForm.get("OrganizationName")
                   );
                 }
                 if (!this.bookingGroup.GradeLevel) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('GradeLevel')
+                    this.registerForm.get("GradeLevel")
                   );
                 }
                 if (!this.bookingGroup.TeacherName) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('TeacherName')
+                    this.registerForm.get("TeacherName")
                   );
                 }
                 if (!this.bookingGroup.TeacherEmail) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('TeacherEmail')
+                    this.registerForm.get("TeacherEmail")
                   );
                 }
                 if (!this.bookingGroup.TeacherPhoneNo) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('TeacherPhoneNo')
+                    this.registerForm.get("TeacherPhoneNo")
                   );
                 }
                 if (!this.bookingGroup.AlternativeDate) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AlternativeDate')
+                    this.registerForm.get("AlternativeDate")
                   );
                 }
                 if (!this.bookingGroup.EducationPurpose) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('EducationPurpose')
+                    this.registerForm.get("EducationPurpose")
+                  );
+                }
+                if (!this.bookingGroup.OtherInfo) {
+                  this.clearFormControlValidator(
+                    this.registerForm.get("OtherInfo")
                   );
                 }
               });
@@ -305,30 +349,30 @@ export class ReservationComponent implements OnInit {
             this.valid = true;
             // Update the Total amount if user pick individual program
             this.service
-              .getProgramRequirementDetails('i', this.ProgramPK)
+              .getProgramRequirementDetails("i", this.ProgramPK)
               .subscribe((program) => {
                 this.bookingIndividual = program;
 
                 this.registerForm = this.fb.group({
                   ParticipantName: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
                   ParticipantAge: [0, Validators.required],
-                  Gender: ['', Validators.required],
-                  MerchSize: ['', Validators.required],
-                  AllergyInfo: [''],
-                  SpecialInfo: [''],
+                  Gender: ["", Validators.required],
+                  MerchSize: ["", Validators.required],
+                  AllergyInfo: [""],
+                  SpecialInfo: [""],
                   InsureProviderName: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
                   InsureRecipientName: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
                   InsurePolicyNo: [
-                    '',
+                    "",
                     [
                       Validators.required,
                       Validators.minLength(5),
@@ -336,23 +380,32 @@ export class ReservationComponent implements OnInit {
                     ],
                   ],
                   InsurePhoneNo: [
-                    '',
-                    [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
+                    "",
+                    [
+                      Validators.required,
+                      Validators.min(1000000000),
+                      Validators.max(9999999999),
+                    ],
                   ],
                   AuthorizedPickupName1: [
-                    '',
+                    "",
                     [Validators.required, Validators.minLength(3)],
                   ],
                   AuthorizedPickupPhone1: [
-                    '',
+                    "",
                     [
-                      Validators.required, Validators.min(1000000000), Validators.max(9999999999)
+                      Validators.required,
+                      Validators.min(1000000000),
+                      Validators.max(9999999999),
                     ],
                   ],
-                  AuthorizedPickupName2: ['', []],
-                  AuthorizedPickupPhone2: ['', [ Validators.min(1000000000), Validators.max(9999999999)]],
-                  EarlyDropOff: [''],
-                  LatePickup: [''],
+                  AuthorizedPickupName2: ["", []],
+                  AuthorizedPickupPhone2: [
+                    "",
+                    [Validators.min(1000000000), Validators.max(9999999999)],
+                  ],
+                  EarlyDropOff: [""],
+                  LatePickup: [""],
                   MediaRelease: [false, Validators.requiredTrue],
                   EmergencyMedicalRelease: [false, Validators.requiredTrue],
                   LiabilityAgreement: [false, Validators.requiredTrue],
@@ -361,125 +414,125 @@ export class ReservationComponent implements OnInit {
                 // Clear the Validator for unavailable field
                 if (!this.bookingIndividual.AllergyInfo) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AllergyInfo')
+                    this.registerForm.get("AllergyInfo")
                   );
                 }
                 if (!this.bookingIndividual.ParticipantAge) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('ParticipantAge')
+                    this.registerForm.get("ParticipantAge")
                   );
                 }
                 if (!this.bookingIndividual.ParticipantName) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('ParticipantName')
+                    this.registerForm.get("ParticipantName")
                   );
                 }
                 if (!this.bookingIndividual.Gender) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('Gender')
+                    this.registerForm.get("Gender")
                   );
                 }
                 if (!this.bookingIndividual.MerchSize) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('MerchSize')
+                    this.registerForm.get("MerchSize")
                   );
                 }
                 if (!this.bookingIndividual.SpecialInfo) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('SpecialInfo')
+                    this.registerForm.get("SpecialInfo")
                   );
                 }
                 if (!this.bookingIndividual.InsureProviderName) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('InsureProviderName')
+                    this.registerForm.get("InsureProviderName")
                   );
                 }
                 if (!this.bookingIndividual.InsureRecipientName) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('InsureRecipientName')
+                    this.registerForm.get("InsureRecipientName")
                   );
                 }
                 if (!this.bookingIndividual.InsurePolicyNo) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('InsurePolicyNo')
+                    this.registerForm.get("InsurePolicyNo")
                   );
                 }
                 if (!this.bookingIndividual.InsurePhoneNo) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('InsurePhoneNo')
+                    this.registerForm.get("InsurePhoneNo")
                   );
                 }
                 if (!this.bookingIndividual.AuthorizedPickupName1) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AuthorizedPickupName1')
+                    this.registerForm.get("AuthorizedPickupName1")
                   );
                 }
                 if (!this.bookingIndividual.AuthorizedPickupPhone1) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AuthorizedPickupPhone1')
+                    this.registerForm.get("AuthorizedPickupPhone1")
                   );
                 }
                 if (!this.bookingIndividual.AuthorizedPickupName2) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AuthorizedPickupName2')
+                    this.registerForm.get("AuthorizedPickupName2")
                   );
                 }
                 if (!this.bookingIndividual.AuthorizedPickupPhone2) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('AuthorizedPickupPhone2')
+                    this.registerForm.get("AuthorizedPickupPhone2")
                   );
                 }
                 if (!this.bookingIndividual.EarlyDropOff) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('EarlyDropOff')
+                    this.registerForm.get("EarlyDropOff")
                   );
                 }
                 if (!this.bookingIndividual.LatePickup) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('LatePickup')
+                    this.registerForm.get("LatePickup")
                   );
                 }
                 if (!this.bookingIndividual.MediaRelease) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('MediaRelease')
+                    this.registerForm.get("MediaRelease")
                   );
                 }
                 if (!this.bookingIndividual.EmergencyMedicalRelease) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('EmergencyMedicalRelease')
+                    this.registerForm.get("EmergencyMedicalRelease")
                   );
                 }
                 if (!this.bookingIndividual.LiabilityAgreement) {
                   this.clearFormControlValidator(
-                    this.registerForm.get('LiabilityAgreement')
+                    this.registerForm.get("LiabilityAgreement")
                   );
                 }
               });
 
             // Clear Validator for QuantityForm when Individual Program is loadded.
             this.clearFormControlValidator(
-              this.quantityForm.get('AdultQuantity')
+              this.quantityForm.get("AdultQuantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age57Quantity')
+              this.quantityForm.get("Age57Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age810Quantity')
+              this.quantityForm.get("Age810Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age1112Quantity')
+              this.quantityForm.get("Age1112Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age1314Quantity')
+              this.quantityForm.get("Age1314Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age1415Quantity')
+              this.quantityForm.get("Age1415Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('Age1517Quantity')
+              this.quantityForm.get("Age1517Quantity")
             );
             this.clearFormControlValidator(
-              this.quantityForm.get('TotalQuantity')
+              this.quantityForm.get("TotalQuantity")
             );
             break;
         }
@@ -492,11 +545,11 @@ export class ReservationComponent implements OnInit {
       date.setFullYear(currentYear);
       // Set the event Start and End to today dates if the Start/End is before today date
       const eventStartTime = new Date(eventDateTime).toLocaleString(
-        'en-US',
+        "en-US",
         this.timeFormatOptions
       );
       const todayDate = new Date(
-        new Date().toISOString().slice(0, 10) + 'T' + eventStartTime
+        new Date().toISOString().slice(0, 10) + "T" + eventStartTime
       );
       const dayIndex = todayDate.getDay();
       // If date is before today's date and today's day is in the repeat day of the session
@@ -563,7 +616,7 @@ export class ReservationComponent implements OnInit {
                 let timezoneOffset =
                   new Date(item.Start).getTimezoneOffset() * 60000;
                 const eventStartTime = new Date(item.Start).toLocaleString(
-                  'en-US',
+                  "en-US",
                   this.timeFormatOptions
                 );
                 var eventStartDate = new Date(item.Start - timezoneOffset)
@@ -572,7 +625,7 @@ export class ReservationComponent implements OnInit {
                 // 1. Add recurrence exception to each session based on Blackout Date
                 // add the start date to the recurrence exception to avoid Kendo UI bug
                 let newStartDateTime = new Date(
-                  eventStartDate + 'T' + eventStartTime
+                  eventStartDate + "T" + eventStartTime
                 );
                 // check if date exists in the RecurenceException arr
                 if (
@@ -581,7 +634,7 @@ export class ReservationComponent implements OnInit {
                   })
                 ) {
                   item.RecurrenceException.push(
-                    new Date(eventStartDate + 'T' + eventStartTime)
+                    new Date(eventStartDate + "T" + eventStartTime)
                   );
                 }
                 // if this session has blackout-date => add to recurenceException
@@ -594,13 +647,13 @@ export class ReservationComponent implements OnInit {
                         return (
                           e.getTime() ==
                           new Date(
-                            exceptionDate + 'T' + eventStartTime
+                            exceptionDate + "T" + eventStartTime
                           ).getTime()
                         );
                       })
                     ) {
                       item.RecurrenceException.push(
-                        new Date(exceptionDate + 'T' + eventStartTime)
+                        new Date(exceptionDate + "T" + eventStartTime)
                       );
                     }
                   });
@@ -618,24 +671,42 @@ export class ReservationComponent implements OnInit {
     return this.quantityForm.controls;
   }
 
+  // Helper Function for select Marketing Form Control
+  get m() {
+    return this.marketingForm.controls;
+  }
   // EventHandler for drop down list Sub Type of Group Program
   selectMarketingInfos(event: any) {
     // Update the variable
     this.selectedMarketingInfo = event.target.value;
-    console.log(this.selectedMarketingInfo);
+    if(this.selectedMarketingInfo != 6) {
+      this.marketingForm.get("UserInputOther").patchValue('');
+    }
+  }
+
+  // EventHandler for Additional Drop Off Fee
+  selectEarlyDropOff(event: any) {
+    // Update the variable
+    this.additionalDropOffFee = event.target.id !== 0 ? 7 : 0;
+  }
+
+  // EventHandler for Additional Pick Up Fee
+  selectLatePickup(event: any) {
+    // Update the variable
+    this.additionalPickupFee = event.target.id !== 0 ? 7 : 0;
   }
 
   // Clear data when click on input field
   onFocus(event) {
-    if (event.target.value === 0 || event.target.value === '0') {
-      event.target.value = ''
+    if (event.target.value === 0 || event.target.value === "0") {
+      event.target.value = "";
     }
   }
 
   // Restore data when lose focus on input field
   lostFocus(event) {
-    if (event.target.value === 0 || event.target.value === '') {
-      event.target.value = '0';
+    if (event.target.value === 0 || event.target.value === "") {
+      event.target.value = "0";
     }
     this.calculateTotalQuantity();
     // console.log(this.quantityForm.value);
@@ -644,33 +715,42 @@ export class ReservationComponent implements OnInit {
   // Helper function to calculate total attendee
   calculateTotalQuantity() {
     this.currTotalQuantity =
-      parseInt(this.quantityForm.get('AdultQuantity').value, 10) +
-      parseInt(this.quantityForm.get('Age57Quantity').value, 10) +
-      parseInt(this.quantityForm.get('Age810Quantity').value, 10) +
-      parseInt(this.quantityForm.get('Age1112Quantity').value, 10) +
-      parseInt(this.quantityForm.get('Age1314Quantity').value, 10) +
-      parseInt(this.quantityForm.get('Age1415Quantity').value, 10) +
-      parseInt(this.quantityForm.get('Age1517Quantity').value, 10);
+      parseInt(this.quantityForm.get("AdultQuantity").value, 10) +
+      parseInt(this.quantityForm.get("Age57Quantity").value, 10) +
+      parseInt(this.quantityForm.get("Age810Quantity").value, 10) +
+      parseInt(this.quantityForm.get("Age1112Quantity").value, 10) +
+      parseInt(this.quantityForm.get("Age1314Quantity").value, 10) +
+      parseInt(this.quantityForm.get("Age1415Quantity").value, 10) +
+      parseInt(this.quantityForm.get("Age1517Quantity").value, 10);
 
-    this.quantityForm.get('TotalQuantity').setValue(this.currTotalQuantity);
+    this.quantityForm.get("TotalQuantity").setValue(this.currTotalQuantity);
   }
 
   // Enable Quantity Field after User choose a schedule
   enableQuantityField() {
-    this.quantityForm.get('AdultQuantity').enable();
-    this.quantityForm.get('Age57Quantity').enable();
-    this.quantityForm.get('Age810Quantity').enable();
-    this.quantityForm.get('Age1112Quantity').enable();
-    this.quantityForm.get('Age1314Quantity').enable();
-    this.quantityForm.get('Age1415Quantity').enable();
-    this.quantityForm.get('Age1517Quantity').enable();
+    this.quantityForm.get("AdultQuantity").enable();
+    this.quantityForm.get("Age57Quantity").enable();
+    this.quantityForm.get("Age810Quantity").enable();
+    this.quantityForm.get("Age1112Quantity").enable();
+    this.quantityForm.get("Age1314Quantity").enable();
+    this.quantityForm.get("Age1415Quantity").enable();
+    this.quantityForm.get("Age1517Quantity").enable();
+    this.disableQuantity = false;
+  }
+
+  disableQuantityField() {
+    this.quantityForm.get("AdultQuantity").disable();
+    this.quantityForm.get("Age57Quantity").disable();
+    this.quantityForm.get("Age810Quantity").disable();
+    this.quantityForm.get("Age1112Quantity").disable();
+    this.quantityForm.get("Age1314Quantity").disable();
+    this.quantityForm.get("Age1415Quantity").disable();
+    this.quantityForm.get("Age1517Quantity").disable();
+    this.disableQuantity = true;
   }
 
   // This function to capture and get the info of selected event
   public eventClick = (e) => {
-    // this.isDisable = false;
-    this.enableQuantityField();
-
     const eventStart = e.event.dataItem.Start.toISOString();
     const eventEnd = e.event.dataItem.End.toISOString();
     const programPK = e.event.dataItem.ProgramPK;
@@ -685,48 +765,55 @@ export class ReservationComponent implements OnInit {
       )
       .subscribe((result) => {
         if (result) {
+          this.availability =
+            result.MaximumParticipant - result.CurrentNumberParticipant;
+          // Check is the Availability > 8 then Enable the Quantity Form
+          if (this.availability > 0) {
+            this.enableQuantityField();
+          } else {
+            this.disableQuantityField();
+          }
+
           // There is a schedule in the database
           this.tempDate = new Date(result.Start);
           const end = new Date(result.End);
           this.currentSession = result;
           this.customerSelectDate = this.tempDate.toDateString();
           this.customerSelectTime = this.tempDate
-            .toLocaleString('en-US', this.options)
-            .concat(' - ', end.toLocaleString('en-US', this.options));
+            .toLocaleString("en-US", this.options)
+            .concat(" - ", end.toLocaleString("en-US", this.options));
 
-          this.availability =
-            result.MaximumParticipant - result.CurrentNumberParticipant;
           this.scheduleFull = result.IsFull;
 
           this.quantityForm
-            .get('CustomerSelectDate')
+            .get("CustomerSelectDate")
             .setValue(this.customerSelectDate);
           this.quantityForm
-            .get('CustomerSelectTime')
+            .get("CustomerSelectTime")
             .setValue(this.customerSelectTime);
-          this.quantityForm.get('Availability').setValue(this.availability);
+          this.quantityForm.get("Availability").setValue(this.availability);
 
           // Pass SchedulePK for Booking Page
           this.SchedulePK = result.SchedulePK;
         } else {
           this.customerSelectDate = e.event.dataItem.Start.toDateString();
           this.customerSelectTime = e.event.dataItem.Start.toLocaleString(
-            'en-US',
+            "en-US",
             this.options
           ).concat(
-            ' - ',
-            e.event.dataItem.End.toLocaleString('en-US', this.options)
+            " - ",
+            e.event.dataItem.End.toLocaleString("en-US", this.options)
           );
 
           this.availability = e.event.dataItem.MaximumParticipant;
           this.scheduleFull = false;
           this.quantityForm
-            .get('CustomerSelectDate')
+            .get("CustomerSelectDate")
             .setValue(this.customerSelectDate);
           this.quantityForm
-            .get('CustomerSelectTime')
+            .get("CustomerSelectTime")
             .setValue(this.customerSelectTime);
-          this.quantityForm.get('Availability').setValue(this.availability);
+          this.quantityForm.get("Availability").setValue(this.availability);
 
           // Pass SchedulePK for Booking Page
           this.SchedulePK = 0;
@@ -753,11 +840,11 @@ export class ReservationComponent implements OnInit {
 
         if (this.ProgramType == AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM) {
           // Set Validator for TotalQuantity
-          const totalQuantControl = this.quantityForm.get('TotalQuantity');
+          const totalQuantControl = this.quantityForm.get("TotalQuantity");
           totalQuantControl.clearValidators();
           totalQuantControl.setValidators([
             Validators.required,
-            Validators.min(8),
+            Validators.min(3),
             Validators.max(this.availability),
           ]);
           totalQuantControl.updateValueAndValidity();
@@ -790,7 +877,7 @@ export class ReservationComponent implements OnInit {
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach((keyError) => {
           console.log(
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
+            "Key control: " + key + ", keyError: " + keyError + ", err value: ",
             controlErrors[keyError]
           );
         });
@@ -817,80 +904,114 @@ export class ReservationComponent implements OnInit {
   quantityProgramStepperNext(stepper: MatStepper, type: string) {
     var balance = this.programDetails.PricePerParticipant;
     // Add quantity data for Group Program only.
-    if (type == 'g') {
+    if (type == "g") {
       this.reservationGroupDetails.AdultQuantity = this.quantityForm.get(
-        'Age57Quantity'
+        "AdultQuantity"
+      ).value;
+      this.reservationGroupDetails.Age57Quantity = this.quantityForm.get(
+        "Age57Quantity"
       ).value;
       this.reservationGroupDetails.Age810Quantity = this.quantityForm.get(
-        'Age810Quantity'
+        "Age810Quantity"
       ).value;
       this.reservationGroupDetails.Age1112Quantity = this.quantityForm.get(
-        'Age1112Quantity'
+        "Age1112Quantity"
       ).value;
       this.reservationGroupDetails.Age1314Quantity = this.quantityForm.get(
-        'Age1314Quantity'
+        "Age1314Quantity"
       ).value;
       this.reservationGroupDetails.Age1415Quantity = this.quantityForm.get(
-        'Age1415Quantity'
+        "Age1415Quantity"
       ).value;
       this.reservationGroupDetails.Age1517Quantity = this.quantityForm.get(
-        'Age1517Quantity'
+        "Age1517Quantity"
       ).value;
       this.reservationGroupDetails.TotalQuantity = this.quantityForm.get(
-        'TotalQuantity'
+        "TotalQuantity"
       ).value;
-      balance =
-        this.currTotalQuantity * this.programDetails.PricePerParticipant;
+
+      // If the TotalQuantity < 8, User still have to pay for 8 participant
+      // This will only affect the Balance of the reservation
+      if(this.currTotalQuantity < 8) {
+        balance = 8 * this.programDetails.PricePerParticipant;
+
+        const participantDialog = new MatDialogConfig();
+        // The user can't close the dialog by clicking outside its body
+        participantDialog.disableClose = true;
+        participantDialog.id = "modal-component";
+        participantDialog.height = "auto";
+        participantDialog.maxHeight = "500px";
+        participantDialog.width = "430px";
+        participantDialog.data = {
+          title: "Message",
+          description: "The program is designed for the minimum for 8 participant. Even though your group size is smaller than 8, we still have to count your group as 8 participants. Thank you for you understanding.",
+          actionButtonText: "Ok",
+          numberOfButton: "1",
+        };
+
+        const modalDialog = this.matDialog.open(
+          ModalDialogComponent,
+          participantDialog
+        );
+        modalDialog.afterClosed().subscribe((result) => {
+          if (result == "Ok") {}
+        });
+      } else {
+        balance = this.currTotalQuantity * this.programDetails.PricePerParticipant;
+      }
     } else {
       this.currTotalQuantity = 1;
     }
 
     // Update data for Reservation Header.
     this.reservationHeader.SchedulePK = this.SchedulePK;
-    this.reservationHeader.UserPK = this.auth.getUserDetails().UserPK;
-    this.reservationHeader.ReservationStatus =
-      AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+    this.reservationHeader.UserPK = this.currUser.UserPK;
+    
+    // Reservation Status Will be Pending if User book Group Program
+    this.reservationHeader.ReservationStatus = this.programDetails.ProgramType === AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM ? AppConstants.RESERVATION_STATUS_CODE.PENDING : AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+      
     this.reservationHeader.NumberOfParticipant = this.currTotalQuantity;
     this.reservationHeader.Total = balance;
     this.reservationHeader.RemainingBalance = balance;
     this.stepOneIsCompleted = true;
 
-    this.valueControl = new FormControl('', [
+    this.valueControl = new FormControl("", [
       Validators.required,
       Validators.min(this.programDetails.DepositAmount),
-      Validators.max(this.reservationHeader.Total)
+      Validators.max(this.reservationHeader.Total),
     ]);
 
     stepper.next();
   }
 
   registerStepperNext(stepper: MatStepper) {
-    this.getFormValidationErrors();
-
     // Add User Input data to ReservationGroupDetails
     this.reservationGroupDetails.ProgramRestriction = this.registerForm.get(
-      'ProgramRestriction'
+      "ProgramRestriction"
     ).value;
     this.reservationGroupDetails.OrganizationName = this.registerForm.get(
-      'OrganizationName'
+      "OrganizationName"
     ).value;
     this.reservationGroupDetails.GradeLevel = this.registerForm.get(
-      'GradeLevel'
+      "GradeLevel"
     ).value;
     this.reservationGroupDetails.TeacherName = this.registerForm.get(
-      'TeacherName'
+      "TeacherName"
     ).value;
     this.reservationGroupDetails.TeacherEmail = this.registerForm.get(
-      'TeacherEmail'
+      "TeacherEmail"
     ).value;
     this.reservationGroupDetails.TeacherPhoneNo = this.registerForm.get(
-      'TeacherPhoneNo'
+      "TeacherPhoneNo"
     ).value;
     this.reservationGroupDetails.AlternativeDate = this.registerForm.get(
-      'AlternativeDate'
+      "AlternativeDate"
     ).value;
     this.reservationGroupDetails.EducationPurpose = this.registerForm.get(
-      'EducationPurpose'
+      "EducationPurpose"
+    ).value;
+    this.reservationGroupDetails.OtherInfo = this.registerForm.get(
+      "OtherInfo"
     ).value;
     this.stepTwoIsCompleted = true;
 
@@ -900,61 +1021,66 @@ export class ReservationComponent implements OnInit {
   registerIndividualStepperNext(stepper: MatStepper) {
     // Add User Input data to ReservationIndividualDetails
     this.reservationIndividualDetails.ParticipantName = this.registerForm.get(
-      'ParticipantName'
+      "ParticipantName"
     ).value;
     this.reservationIndividualDetails.ParticipantAge = this.registerForm.get(
-      'ParticipantAge'
+      "ParticipantAge"
     ).value;
     this.reservationIndividualDetails.Gender = this.registerForm.get(
-      'Gender'
+      "Gender"
     ).value;
     this.reservationIndividualDetails.MerchSize = this.registerForm.get(
-      'MerchSize'
+      "MerchSize"
     ).value;
     this.reservationIndividualDetails.AllergyInfo = this.registerForm.get(
-      'AllergyInfo'
+      "AllergyInfo"
     ).value;
     this.reservationIndividualDetails.SpecialInfo = this.registerForm.get(
-      'SpecialInfo'
+      "SpecialInfo"
     ).value;
     this.reservationIndividualDetails.InsureProviderName = this.registerForm.get(
-      'InsureProviderName'
+      "InsureProviderName"
     ).value;
     this.reservationIndividualDetails.InsureRecipientName = this.registerForm.get(
-      'InsureRecipientName'
+      "InsureRecipientName"
     ).value;
     this.reservationIndividualDetails.InsurePolicyNo = this.registerForm.get(
-      'InsurePolicyNo'
+      "InsurePolicyNo"
     ).value;
     this.reservationIndividualDetails.InsurePhoneNo = this.registerForm.get(
-      'InsurePhoneNo'
+      "InsurePhoneNo"
     ).value;
     this.reservationIndividualDetails.AuthorizedPickupName1 = this.registerForm.get(
-      'AuthorizedPickupName1'
+      "AuthorizedPickupName1"
     ).value;
     this.reservationIndividualDetails.AuthorizedPickupPhone1 = this.registerForm.get(
-      'AuthorizedPickupPhone1'
+      "AuthorizedPickupPhone1"
     ).value;
     this.reservationIndividualDetails.AuthorizedPickupName2 = this.registerForm.get(
-      'AuthorizedPickupName2'
+      "AuthorizedPickupName2"
     ).value;
     this.reservationIndividualDetails.AuthorizedPickupPhone2 = this.registerForm.get(
-      'AuthorizedPickupPhone2'
+      "AuthorizedPickupPhone2"
     ).value;
     this.reservationIndividualDetails.EarlyDropOff = this.registerForm.get(
-      'EarlyDropOff'
+      "EarlyDropOff"
     ).value;
     this.reservationIndividualDetails.LatePickup = this.registerForm.get(
-      'LatePickup'
+      "LatePickup"
     ).value;
     this.reservationIndividualDetails.MediaRelease = this.registerForm.get(
-      'MediaRelease'
+      "MediaRelease"
     ).value;
     this.reservationIndividualDetails.EmergencyMedicalRelease = this.registerForm.get(
-      'EmergencyMedicalRelease'
+      "EmergencyMedicalRelease"
+    ).value;
+    this.reservationIndividualDetails.LiabilityAgreement = this.registerForm.get(
+      "LiabilityAgreement"
     ).value;
     this.stepTwoIsCompleted = true;
     this.getFormValidationErrors();
+
+    this.reservationHeader.Total += this.additionalDropOffFee + this.additionalPickupFee;
 
     stepper.next();
   }
@@ -966,138 +1092,161 @@ export class ReservationComponent implements OnInit {
   }
 
   // Check verification
-  getVerified(verified: boolean){
+  getVerified(verified: boolean) {
     this.isVerified = verified;
   }
 
-
   submitReservation() {
-    if(this.valid){
+    // Update Marketing Data
+    this.marketingData = new MarketingData(this.ProgramPK,this.reservationHeader.UserPK,
+                                          this.selectedMarketingInfo, this.marketingForm.get("UserInputOther").value);
+              
+    if (this.valid) {
       this.resServices
         .addNewReservationHeader(this.reservationHeader)
         .subscribe((resHeaderPK) => {
           if (resHeaderPK) {
-            switch (this.ProgramType) {
-            case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
-              // Update the Amount Due when User checkout
-              this.paymentObj.amount = this.payment.name;
-              this.paymentObj.description = this.auth.getUserDetails().Username;
-              this.paymentObj.email = this.auth.getUserDetails().Email;
+            // Create Marketing Information
+            this.resServices.addNewMarketingInfo(this.marketingData).subscribe((res) => {
+              console.log(res);
+            });
 
-              // Charge User
-              this.paymentServices
-                .processToken(this.paymentObj)
-                .subscribe((chargeResult) => {
-                  if (chargeResult) {
+            switch (this.ProgramType) {
+              case AppConstants.PROGRAM_TYPE_CODE.GROUP_PROGRAM:
+                // Update the Amount Due when User checkout
+                this.paymentObj.amount = this.payment.name;
+                this.paymentObj.description = this.currUser.Username;
+                this.paymentObj.email = this.currUser .Email;
+
+                // Only Charge User If not the School Account
+                if(this.currUser.Role_FK != 4) {
+                  this.paymentServices
+                  .processToken(this.paymentObj)
+                  .subscribe((chargeResult) => {
+                    if (chargeResult) {
+                      this.paymentData.PaymentPK = this.paymentObj.token["id"];
+                      this.paymentData.UserPK = this.currUser.UserPK;
+                      this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
+                      this.paymentData.Total = chargeResult.amount;
+                      this.paymentData.ChargeToken = chargeResult.id;
+                      this.paymentData.PaymentType =
+                        AppConstants.PAYMENT_TYPE_CODE.CARD;
+
+                      // Create PaymenData
+                      this.paymentServices
+                        .createPaymentData(this.paymentData)
+                        .subscribe((paymentInfo) => {
+                          console.log(paymentInfo);
+                        });
+
+                      // Update reservation remaining balance
+                      this.resServices
+                        .updateRemainingBalance(
+                          resHeaderPK,
+                          this.reservationHeader.RemainingBalance -
+                            chargeResult.amount / 100
+                        )
+                        .subscribe((info) => {
+                          console.log(info);
+                        });
+                    }
+                  });
+                }
+
+                // Update Schedule CurrentNumberParticipant
+                this.programScheduleServices
+                  .updateNumberOfParticipant(
+                    this.reservationHeader.SchedulePK,
+                    this.reservationHeader.NumberOfParticipant
+                  )
+                  .subscribe((info) => {
+                    console.log(info);
+                  });
+
+                // Insert Reservation Details
+                this.reservationGroupDetails.ReservationPK = resHeaderPK;
+                this.resServices
+                  .addGroupReservationDetails(this.reservationGroupDetails)
+                  .subscribe((resGroupDetails) => {
+                    if (resGroupDetails) {
+                      // Send booking requested email
+                      this.emailService
+                        .sendBookingRequestConfirmationEmail(this.currUser)
+                        .subscribe((email) => {});
+
+                      const dialogConfig = new MatDialogConfig();
+                      // The user can't close the dialog by clicking outside its body
+                      dialogConfig.disableClose = true;
+                      dialogConfig.id = "modal-component";
+                      dialogConfig.height = "auto";
+                      dialogConfig.maxHeight = "500px";
+                      dialogConfig.width = "430px";
+                      dialogConfig.data = {
+                        title: "Thanks You.",
+                        description: "Thank you for your reservation! You will receive an email when your reservation is accepted.",
+                        actionButtonText: "Ok",
+                        numberOfButton: "1",
+                      };
+
+                      const modalDialog = this.matDialog.open(
+                        ModalDialogComponent,
+                        dialogConfig
+                      );
+                      modalDialog.afterClosed().subscribe((result) => {
+                        if (result == "Yes") {
+                          //call register function
+                          this.router.navigateByUrl("/");
+                        }
+                      });
+                    }
+                  });
+
+                break;
+              case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
+                // Update the Amount Due when User checkout
+                this.paymentObj.amount =
+                  this.programDetails.PricePerParticipant +
+                  this.additionalDropOffFee +
+                  this.additionalPickupFee;
+                this.paymentObj.description = this.currUser.Username;
+                this.paymentObj.email = this.currUser.Email;
+
+                // Charge User
+                this.paymentServices
+                  .processToken(this.paymentObj)
+                  .subscribe((res) => {
                     this.paymentData.PaymentPK = this.paymentObj.token["id"];
-                    this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
+                    this.paymentData.UserPK = this.currUser.UserPK;
                     this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
-                    this.paymentData.Total = chargeResult.amount;
-                    this.paymentData.ChargeToken = chargeResult.id;
+                    this.paymentData.Total = res.amount;
+                    this.paymentData.ChargeToken = res.id;
                     this.paymentData.PaymentType =
                       AppConstants.PAYMENT_TYPE_CODE.CARD;
 
                     // Create PaymenData
                     this.paymentServices
                       .createPaymentData(this.paymentData)
-                      .subscribe((paymentInfo) => {
-                        console.log(paymentInfo);
+                      .subscribe((info) => {
+                        console.log(info);
                       });
 
                     // Update reservation remaining balance
                     this.resServices
-                      .updateRemainingBalance(
-                        resHeaderPK,
-                        this.reservationHeader.RemainingBalance -
-                        chargeResult.amount / 100
-                      )
+                      .updateRemainingBalance(resHeaderPK, 0)
                       .subscribe((info) => {
                         console.log(info);
                       });
-                  }
-                });
-
-              // Update Schedule CurrentNumberParticipant
-              this.programScheduleServices.updateNumberOfParticipant(
-                this.reservationHeader.SchedulePK,
-                this.reservationHeader.NumberOfParticipant
-              ).subscribe((info) => {
-                console.log(info);
-              });
-
-              // Insert Reservation Details
-              this.reservationGroupDetails.ReservationPK = resHeaderPK;
-              this.resServices
-                .addGroupReservationDetails(this.reservationGroupDetails)
-                .subscribe((resGroupDetails) => {
-                  if (resGroupDetails) {
-                    // Send booking requested email
-                    this.emailService.sendBookingRequestConfirmationEmail(this.auth.getUserDetails()).subscribe(email => {});
-                    
-                    const dialogConfig = new MatDialogConfig();
-                    // The user can't close the dialog by clicking outside its body
-                    dialogConfig.disableClose = true;
-                    dialogConfig.id = 'modal-component';
-                    dialogConfig.height = 'auto';
-                    dialogConfig.maxHeight = '500px';
-                    dialogConfig.width = '430px';
-                    dialogConfig.data = {
-                      title: 'Thanks You.',
-                      description: 'Thank you for your reservation!',
-                      actionButtonText: 'Ok',
-                      numberOfButton: '1',
-                    };
-
-                    const modalDialog = this.matDialog.open(
-                      ModalDialogComponent,
-                      dialogConfig
-                    );
-                    modalDialog.afterClosed().subscribe((result) => {
-                      if (result == 'Yes') {
-                        //call register function
-                        this.router.navigateByUrl('/');
-                      }
-                    });
-                  }
-                });
-
-              break;
-            case AppConstants.PROGRAM_TYPE_CODE.INDIVIDUAL_PROGRAM:
-              // Update the Amount Due when User checkout
-              this.paymentObj.amount = this.programDetails.PricePerParticipant;
-              this.paymentObj.description = this.auth.getUserDetails().Username;
-              this.paymentObj.email = this.auth.getUserDetails().Email;
-
-              // Charge User
-              this.paymentServices
-                .processToken(this.paymentObj)
-                .subscribe((res) => {
-                  this.paymentData.PaymentPK = this.paymentObj.token['id'];
-                  this.paymentData.UserPK = this.auth.getUserDetails().UserPK;
-                  this.paymentData.ReservationPK = resHeaderPK; // ReservationPK
-                  this.paymentData.Total = res.amount;
-                  this.paymentData.ChargeToken = res.id;
-                  this.paymentData.PaymentType =
-                    AppConstants.PAYMENT_TYPE_CODE.CARD;
-
-                  // Create PaymenData
-                  this.paymentServices.createPaymentData(this.paymentData).subscribe((info) => {
-                    console.log(info);
                   });
 
-                  // Update reservation remaining balance
-                  this.resServices.updateRemainingBalance(resHeaderPK, 0).subscribe((info) => {
+                // Update Schedule CurrentNumberParticipant
+                this.programScheduleServices
+                  .updateNumberOfParticipant(
+                    this.reservationHeader.SchedulePK,
+                    1
+                  )
+                  .subscribe((info) => {
                     console.log(info);
                   });
-                });
-
-              // Update Schedule CurrentNumberParticipant
-              this.programScheduleServices.updateNumberOfParticipant(
-                this.reservationHeader.SchedulePK,
-                1
-              ).subscribe((info) => {
-                console.log(info);
-              });
 
               // Insert Reservation Details
               this.reservationIndividualDetails.ReservationPK = resHeaderPK;
@@ -1145,11 +1294,51 @@ export class ReservationComponent implements OnInit {
                   }
                 });
               break;
+                // Insert Reservation Details
+                this.reservationIndividualDetails.ReservationPK = resHeaderPK;
+                this.resServices
+                  .addIndividualReservationDetails(
+                    this.reservationIndividualDetails
+                  )
+                  .subscribe((res) => {
+                    if (res) {
+                      // Send booking requested email
+                      this.emailService
+                        .sendBookingRequestConfirmationEmail(this.currUser)
+                        .subscribe((email) => {});
+
+                      const dialogConfig = new MatDialogConfig();
+                      // The user can't close the dialog by clicking outside its body
+                      dialogConfig.disableClose = true;
+                      dialogConfig.id = "modal-component";
+                      dialogConfig.height = "auto";
+                      dialogConfig.maxHeight = "500px";
+                      dialogConfig.width = "430px";
+                      dialogConfig.data = {
+                        title: "Thanks You.",
+                        description:
+                          "Thank you for your reservation! You will be redirect to the homepage!",
+                        actionButtonText: "Ok",
+                        numberOfButton: "1",
+                      };
+
+                      const modalDialog = this.matDialog.open(
+                        ModalDialogComponent,
+                        dialogConfig
+                      );
+                      modalDialog.afterClosed().subscribe((result) => {
+                        if (result == "Yes") {
+                          // Call register function
+                          this.router.navigateByUrl("/");
+                        }
+                      });
+                    }
+                  });
+                break;
+            }
           }
-        }
-      });
-    }
-    else {
+        });
+    } else {
       console.log("invalid");
     }
   }
@@ -1171,7 +1360,8 @@ export class ReservationComponent implements OnInit {
   }
 
   private updatePaymentName(): void {
-    this.payment.name = this._paymentOption === -1 ? this._customPayment : this._paymentOption;
+    this.payment.name =
+      this._paymentOption === -1 ? this._customPayment : this._paymentOption;
     this.valid = this._paymentOption === -1 ? this.valueControl.valid : true;
     this.remaining = this.reservationHeader.Total - this.payment.name;
   }

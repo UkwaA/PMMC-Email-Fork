@@ -19,8 +19,8 @@ declare var $: any;
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {  
-  userRoles:string[]
-  editedUserRoleFK:string
+  userRoles: string[]
+  editedUserRoleFK: number
   UserPK: number  
   NewRole: string = ''
   message = ''
@@ -32,7 +32,7 @@ export class UserDetailsComponent implements OnInit {
       UserPK: 0,
       Username: '',
       Password: '',
-      Role_FK: '',
+      Role_FK: 0,
       Email: '',      
       IsActive: false,
       CreatedDate: ''      
@@ -75,12 +75,14 @@ export class UserDetailsComponent implements OnInit {
         this.userDetails = user
         this.editedUserRoleFK = this.userDetails.Role_FK        
 
-        if(this.editedUserRoleFK == "1")
-          {this.userRoles = ['Customer','Manager','System Admin']}
-        else if(this.editedUserRoleFK == "2")
-          this.userRoles = ['Manager','System Admin','Customer']
+        if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.CUSTOMER)
+          {this.userRoles = ['Manager','System Admin','School Account']}
+        else if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.MANAGER)
+          this.userRoles = ['System Admin','Customer','School Account']
+        else if(this.editedUserRoleFK == AppConstants.USER_ROLE_CODE.SYSTEM)
+          this.userRoles = ['Customer','Manager','School Account']
         else
-          this.userRoles = ['System Admin','Customer','Manager']
+          this.userRoles = ['Customer', 'Manager','System Admin']
 
         this.userRoles.forEach(e => {
           $("#roleSelection").append(new Option(e, e));  
@@ -142,13 +144,21 @@ openModalUpdateUserDetail(){
     this.NewRole = $("#roleSelection :selected").text();   
     
     //Get new Role info
-    if(this.NewRole == "Customer") 
-      {this.userDetails.Role_FK = "1"}
-    else if(this.NewRole == "Manager")
-      {this.userDetails.Role_FK = "2"}
-    else
-      {this.userDetails.Role_FK = "3"}
-
+    switch(this.NewRole) {
+      case "Customer":
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.CUSTOMER
+        break;
+      case "Manager":
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.MANAGER
+        break;
+      case "Admin":
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.SYSTEM
+        break;
+      case "School Account":
+        this.userDetails.Role_FK = AppConstants.USER_ROLE_CODE.SCHOOL
+        break;
+    }
+   
     //Get subscribe checkbox info
     if(this.subscribeChecked){
       this.customerDetails.Subscribe = 1

@@ -42,13 +42,21 @@ span.label{
     border-left-color:  #ffc107;
 }
 
-.waiting{
-    background-color: #ffc107;
+.pending{
+    padding: 5px;
+    background-color: orange;
     color: white;
 }
 
-.completed{
-    background-color: rgb(14, 161, 14);
+.ongoing{
+    padding: 5px;
+    background-color: #2f66a9;
+    color: white;
+}
+
+.attended{
+    padding: 5px;
+    background-color: #FFB64D;
     color: white;
 }
 
@@ -57,26 +65,43 @@ span.label{
     color: #fff;
 }
 
+.bg-c-orange {
+    background: #f77f00;
+}
+
 .bg-c-green {
     background: #5cb85c;
 }
 
 .bg-c-blue {
-    background: blue;
+    background: #2f66a9;
 }
 
 .bg-c-yellow {
-    background: linear-gradient(45deg,#FFB64D,#ffcb80);
+    background: #ffbf00;
 }
 
 .bg-c-pink {
     background: #d9534f;
 }
 
+.bg-o-white {
+    color: #fc6600;
+    background: white;
+}
+
+.bg-o-white button.link{
+    padding: 0;
+    color: #fc6600;
+    background: none;
+    border: none;
+}
+
 .bg-g-white {
     color: #5cb85c;
     background: white;
 }
+
 .bg-g-white button.link{
     padding: 0;
     color: #5cb85c;

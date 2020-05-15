@@ -12,10 +12,10 @@
                 <option *ngFor="let item of programCategories" [value]="item.id">{{item.name}}</option>
             </select>
         </div>
-        <div *ngIf = "role == '2' || role == '3'" class="col-lg-2 col-md-2 col-sm-3 pr-3">
+        <div *ngIf = "role == 2 || role == 3" class="col-lg-2 col-md-2 col-sm-3 pr-3">
             <select class="form-control" style="font-weight: bold" id="typeCat" (change)="selectTypeHandler($event)">
-            <option selected value="0"> --- Status --- </option>
-            <option *ngFor="let type of typeCategories" [value]="type.id">{{type.name}}</option>
+                <option selected value="0"> --- Status --- </option>
+                <option *ngFor="let type of typeCategories" [value]="type.id">{{type.name}}</option>
             </select>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 pr-0">
@@ -29,7 +29,7 @@
 
   <div class="table-responsive-sm hide-with-small">
       <!-- List of all reservations for admin -->
-      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '2' || role == '3'">
+      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == 2 || role == 3">
           <thead>
               <tr>
                   <th style="width:7.5%"> #Res </th>
@@ -54,9 +54,10 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.CustomerName}} </td>
-                  <td> {{reservation.Total}} </td>
-                  <td> {{reservation.RemainingBalance}} </td>
+                  <td> ${{reservation.Total}} </td>
+                  <td> ${{reservation.RemainingBalance}} </td>
                   <td> 
                       <button mat-raised-button class="btn btn-warning" type="submit" (click)="openReservationModal(reservation)" onfocus="blur()">View</button>
                   </td>
@@ -67,7 +68,7 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
           </tbody>
       </table>
       <!-- List of Reservarion By Customer -->
-      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == '1'">
+      <table #datatable class="table table-hover" style="width:100%" *ngIf = "role == 1 || role == 4">
           <thead>
               <tr>
                   <th style="width:7%"> #ID </th>
@@ -76,11 +77,12 @@ Cancelled: Cancelled reservation" style="width:10%"> Status <small><mat-icon mat
 Attended: Attened the program + Not completed payment yet
 Completed: Attened the program + Completed payment
 Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon matListIcon >report</mat-icon></small> </th>
-                  <th style="width:11%"> Date </th>
-                  <th style="width:11%"> Time </th>
-                  <th style="width:7%"> Quantity </th>
-                  <th style="width:8%"> Total </th>
-                  <th style="width:15%"> Remaining </th>
+                  <th style="width: 9%"> Date </th>
+                  <th style="width: 9%"> Time </th>
+                  <th style="width: 8%"> Quantity </th>
+                  <th style="width: 8%"> Total </th>
+                  <th style="width: 8%"> Remaining </th>
+                  <th style="width: 20%"> Action </th>
               </tr>
           </thead>
           <tbody>
@@ -91,12 +93,15 @@ Cancelled: Cancelled reservation" style="width:11%"> Status <small><mat-icon mat
                   <td *ngIf ="reservation.ReservationStatus == 'On Going'" class='ongoing'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Completed'" class='completed'> {{reservation.ReservationStatus}}</td>
                   <td *ngIf ="reservation.ReservationStatus == 'Cancelled'" class='cancelled'> {{reservation.ReservationStatus}}</td>
+                  <td *ngIf ="reservation.ReservationStatus == 'Pending'" class='pending'> {{reservation.ReservationStatus}}</td>
                   <td> {{reservation.Date}}</td>
                   <td> {{reservation.Time}}</td>
                   <td> {{reservation.Quantity}} </td>
-                  <td> {{reservation.Total}} </td>
-                  <td> {{reservation.RemainingBalance}} 
-                      <button *ngIf = "reservation.RemainingBalance != 0" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                  <td> ${{reservation.Total}} </td>
+                  <td> ${{reservation.RemainingBalance}} </td>
+                  <td>
+                    <button *ngIf = "reservation.RemainingBalance != 0 && reservation.ReservationStatus != 'Pending'" mat-raised-button class="btn btn-warning float-right" type="submit" (click)="openPaynowModal()" onfocus="blur()">Pay Now</button>
+                    <button mat-raised-button class="btn btn-info ml-1" type="submit" (click)="openReservationModal(reservation)" onfocus="blur()"> View </button>
                   </td>
               </tr>
           </tbody>

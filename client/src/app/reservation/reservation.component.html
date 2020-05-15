@@ -161,14 +161,14 @@
                   <input type="number" min="1" class="form-control" formControlName="TotalQuantity" value="0" readonly
                     [ngClass]="{'is-invalid': f.TotalQuantity.errors }" required>
                   <div *ngIf="f.TotalQuantity.errors" class="invalid-feedback">
-                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 8 person.</div>
+                    <div *ngIf="f.TotalQuantity.errors.min">Must be at least 3 person.</div>
                     <div *ngIf="f.TotalQuantity.errors.max">Must be smaller than the Availability</div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()"> Book </button>
+                  <button mat-raised-button *ngIf="!auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="openLoginModal()" [disabled]="disableQuantity"> Book </button>
                   <button mat-raised-button *ngIf="auth.isLoggedIn()" class="btn btn-lg btn-info btn-block" (click)="quantityProgramStepperNext(stepper,'g')" type="button"> Next </button>
                 </div>
               </div>
@@ -405,6 +405,19 @@
                     [ngClass]="{ 'is-invalid': g.EducationPurpose.errors }" />
                   <div *ngIf="g.EducationPurpose.errors" class="invalid-feedback">
                     <div *ngIf="g.EducationPurpose.errors.required">Education Purpose is required</div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <!-- Other Information  -->
+            <fieldset class="form-group font-weight-bold" *ngIf="bookingGroup.OtherInfo">
+              <div class="row">
+                <label class="col-form-label col-sm-2" for="OtherInfo">Other Information </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" formControlName="OtherInfo" rows="3"
+                    [ngClass]="{ 'is-invalid': g.EducationPurpose.errors }"></textarea>
+                  <div *ngIf="g.OtherInfo.errors" class="invalid-feedback">
+                    <div *ngIf="g.OtherInfo.errors.minLength">Other Information is too short.</div>
                   </div>
                 </div>
               </div>
@@ -688,12 +701,12 @@
                 <label class="col-form-label col-sm-3" for="EarlyDropOff">Early Drop Off: </label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="EarlyDropOff"
-                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }">
-                    <option>No, thanks! (+$0) </option>
-                    <option>Monday Early Drop Off (+$7)</option>
-                    <option>Tueday Early Drop Off (+$7)</option>
-                    <option>Wednesday Early Drop Off (+$7)</option>
-                    <option>Thursday Early Drop Off (+$7)</option>
+                    [ngClass]="{ 'is-invalid': g.EarlyDropOff.errors }"  (change)="selectEarlyDropOff($event)">
+                    <option id="0">No, thanks! (+$0) </option>
+                    <option id="1">Monday Early Drop Off (+$7)</option>
+                    <option id="2">Tueday Early Drop Off (+$7)</option>
+                    <option id="3">Wednesday Early Drop Off (+$7)</option>
+                    <option id="4">Thursday Early Drop Off (+$7)</option>
                   </select>
                   <div *ngIf="g.EarlyDropOff.errors" class="invalid-feedback">
                     <div *ngIf="g.EarlyDropOff.errors.required">This selection is required</div>
@@ -707,12 +720,12 @@
                 <label class="col-form-label col-sm-3" for="LatePickup">Late Pick Up: </label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="LatePickup"
-                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }">
-                    <option>No, thanks! (+$0) </option>
-                    <option>Monday Late Pick-Up (+$7)</option>
-                    <option>Tueday Late Pick-Up (+$7)</option>
-                    <option>Wednesday Late Pick-Up (+$7)</option>
-                    <option>Thursday Late Pick-Up (+$7)</option>
+                    [ngClass]="{ 'is-invalid': g.LatePickup.errors }"  (change)="selectLatePickup($event)">
+                    <option id="0">No, thanks! (+$0) </option>
+                    <option id="1">Monday Late Pick-Up (+$7)</option>
+                    <option id="2">Tueday Late Pick-Up (+$7)</option>
+                    <option id="3">Wednesday Late Pick-Up (+$7)</option>
+                    <option id="4">Thursday Late Pick-Up (+$7)</option>
                   
                   </select>
                   <div *ngIf="g.LatePickup.errors" class="invalid-feedback">
@@ -732,21 +745,6 @@
     </ng-container>
       <!-- END INDIVIDUAL PROGRAM SECTION -->
     </mat-step>
-    <!-- <mat-step [stepControl]="confirmation">
-      <ng-template matStepLabel>Payment</ng-template>
-      <ng-container *ngIf="stepTwoIsCompleted  && ProgramType == 0">
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationGroupDetails" [ProgramPK]="ProgramPK"></payment>
-      </ng-container>
-      <ng-container *ngIf="stepTwoIsCompleted && ProgramType == 1">
-        <payment [reservationHeader]="reservationHeader" [reservationDetails]="reservationIndividualDetails" [ProgramPK]="ProgramPK"></payment>
-      </ng-container>
-      <div class="row pt-3">
-        <div class="col-md-12">
-          <button mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>
-          <button mat-raised-button class="btn btn-lg btn-info float-right width-btn" matStepperNext type="button"> Next </button>  
-        </div>
-      </div>
-    </mat-step> -->
     <mat-step [stepControl]="confirmation">
       <ng-template matStepLabel>Confirmation</ng-template>
       <div *ngIf="stepTwoIsCompleted" class="container">
@@ -818,6 +816,10 @@
                   <td>Education Purpose</td>
                   <td class="name">{{reservationGroupDetails.EducationPurpose}}</td>
                 </tr>
+                <tr>
+                  <td>Other Information</td>
+                  <td class="name">{{reservationGroupDetails.OtherInfo}}</td>
+                </tr>
               </tbody>
               <tbody *ngIf= "ProgramType == 1">
                 <tr>
@@ -886,15 +888,24 @@
                 </tr>
                 <tr>
                   <td>Media Release</td>
-                  <td class="name">{{reservationIndividualDetails.MediaRelease}}</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.MediaRelease === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
                 <tr>
                   <td>Emergency Medical Release</td>
-                  <td class="name">{{reservationIndividualDetails.EmergencyMedicalRelease}}</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.EmergencyMedicalRelease === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Liability Argreement</td>
-                  <td class="name">{{reservationIndividualDetails.LiabilityAgreement}}</td>
+                  <td>Liability Agreement</td>
+                  <td class="name"> 
+                    <div *ngIf="reservationIndividualDetails.LiabilityAgreement === true; else elseBlock">Checked</div>  
+                    <ng-template #elseBlock>N/A</ng-template>
+                  </td>
                 </tr>
             </tbody>
           </table>
@@ -902,30 +913,40 @@
         <!-- Marketing Information -->
         <mat-divider></mat-divider>
         <div class="table-responsive-sm">
-          <table class="table table-hover" style="width:100%">
-              <thead>
-                  <tr>
-                      <th style="width:50%">Other Information</th>
-                      <th style="width:50%">  </th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                    <td>How did you hear about our education program?</td>
-                    <td class="name">
-                      <select  class="form-control" formControlName="userMarketingInfo" (change)="selectMarketingInfos($event)"  
-                      [ngClass]="{ 'is-invalid': submitted && f.userMarketingInfo.errors }">
-                          <option *ngFor="let subType of marketingInfos; let i = index"
-                              [value]="marketingInfos[i].id">
-                              {{marketingInfos[i].name}}
-                          </option>
-                      </select>
-                    </td>
-                  </tr>
-              </tbody>
-          </table>
+          <form [formGroup]="marketingForm">
+            <table class="table table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Other Information</th>
+                        <th style="width:50%">  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>How did you hear about our education program?</td>
+                      <td class="name">
+                        <select  class="form-control" formControlName="UserMarketingInfo" (change)="selectMarketingInfos($event)"  
+                        [ngClass]="{ 'is-invalid': submitted && m.UserMarketingInfo.errors }">
+                            <option *ngFor="let subType of marketingInfos; let i = index"
+                                [value]="marketingInfos[i].id">
+                                {{marketingInfos[i].name}}
+                            </option>
+                        </select>
+                      </td>
+                    </tr>
+                      <tr *ngIf="selectedMarketingInfo == 6">
+                        <td>Please Specify</td>
+                        <td class="name">
+                            <input class="form-control" type="text" placeholder="I hear your program from ..."
+                              formControlName="UserInputOther"
+                              [ngClass]="{ 'is-invalid': m.UserInputOther.errors }">
+                        </td>
+                      </tr>
+                </tbody>
+            </table>
+          </form>
         </div>
-        
+
         <!-- Payment Info -->
         <div class="table-responsive-sm">
           <table class="table table-hover" style="width:100%">
@@ -948,19 +969,17 @@
                     <td>Total Amount</td>
                     <td class="name">${{reservationHeader.Total}}</td>
                   </tr>
-                  <tr >
+                  <tr *ngIf= "!(ProgramType == 0 && currUser.Role_FK == 4)">
                     <td>Amount Due Today</td>
                     <!-- Amount Due will be 25 for group program -->
-                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}
-                    </td>
+                    <td *ngIf= "ProgramType == 0" class="name">${{programDetails.DepositAmount}}</td>
                     <!-- Amount Due will be the Total for Individual program -->
-                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}
-                    </td>
+                    <td *ngIf= "ProgramType == 1" class="name">${{reservationHeader.Total}}</td>
                   </tr>
-                  <tr >
+                  <tr *ngIf= "!(ProgramType == 0 && currUser.Role_FK == 4)">
                     <td>Payment Verifivation </td>
                     <td>
-                      <div *ngIf= "ProgramType == 0" class="payment-info">
+                      <div *ngIf= "ProgramType ==0" class="payment-info">
                         <label id="radio-group-label">Pick your choice of payment: </label>
                         <mat-radio-group class = "radio-group" aria-labelledby="radio-group-label" [(ngModel)]="paymentOption" required>
                             <mat-radio-button class = "radio-button" name="payment-name" [value]="programDetails.DepositAmount">Amount due today: ${{programDetails.DepositAmount}}</mat-radio-button>
@@ -986,10 +1005,7 @@
               </tbody>
           </table>
         </div>
-
-        
       </div>
-      
       <br>
       <div>
         <button  mat-raised-button class="btn btn-lg btn-secondary float-left width-btn" matStepperPrevious type="button"> Back </button>

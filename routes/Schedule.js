@@ -11,8 +11,13 @@ const SessionDetails = require("../models/SessionDetails");
 const ScheduleSetting = require("../models/ScheduleSetting");
 const BlackoutDate = require("../models/ProgramBlackoutDate");
 
-const Sequelize = require('sequelize');
+//Define veriable for Sequelize database
+const db = require('../db');
+const Sequelize = db.sequelize;
 const Op = Sequelize.Op;
+
+//Define node-mailer
+const emailService = require('./Email');
 
 schedule.use(bodyParser.json());
 schedule.use(bodyParser.urlencoded({ extended: true }));
@@ -801,6 +806,93 @@ schedule.get("/get-program-schedules-by-id/:id", (req, res) => {
     });
 });
 
+/*****************************************************************************************
+  GET ALL PROGRAM SCHEDULES THAT HAVE RESERVATION (FOR VIEW SCHEDULE PAGE)
+ ****************************************************************************************/
+schedule.get("/get-all-schedules-with-reservation-info", (req, res) => {
+  var query = `SELECT schedule.*, program.Name, program.ProgramType, 
+                SUM(rgd.AdultQuantity) as AdultQuantity, SUM(rgd.Age57Quantity) as Age57Quantity, 
+                SUM(rgd.Age810Quantity) as Age810Quantity, SUM(rgd.Age1112Quantity) as Age1112Quantity, 
+                SUM(rgd.Age1314Quantity) as Age1314Quantity, SUM(rgd.Age1415Quantity) as Age1415Quantity,
+                SUM(rgd.Age1517Quantity) as Age1517Quantity, SUM(rgd.TotalQuantity) as GroupTotalQuantity, 
+                Min(rid.ParticipantAge) as IndividualMinAge, Max(rid.ParticipantAge) as IndividualMaxAge, 
+                COUNT(rid.ParticipantAge) as IndividualTotalQuantity, sessiondetails.Color
+              FROM pmmc.schedule
+                LEFT JOIN pmmc.sessiondetails on schedule.SessionDetailsPK = sessiondetails.SessionDetailsPK 
+                INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
+                INNER JOIN pmmc.reservationheader on schedule.SchedulePK = reservationheader.SchedulePK
+                LEFT JOIN pmmc.reservationgroupdetails as rgd on reservationheader.ReservationPK = rgd.ReservationPK 
+                  AND program.ProgramType = 0
+                LEFT JOIN pmmc.reservationindividualdetails as rid on reservationheader.ReservationPK = rid.ReservationPK 
+                  AND program.ProgramType = 1
+              WHERE schedule.CurrentNumberParticipant > 0
+              GROUP BY schedule.SchedulePK
+              ORDER BY schedule.Start desc, schedule.ProgramPK asc`;
+    Sequelize.query(query,{
+        type: Sequelize.QueryTypes.SELECT})
+      .then(scheduleInfo =>{
+        res.json(scheduleInfo);
+    })
+});
+
+/*****************************************************************************************
+  UPDATE SINGLE SCHEDULE and SEND EMAIL REGARDING THE CHANGES TO ALL ON-GOING RESERVATIONS
+   (FOR VIEW SCHEDULE PAGE)
+ ****************************************************************************************/
+schedule.post("/update-single-schedule-send-email-notification", (req, res) => {
+  if(req.body.Start >= req.body.End){
+    res.json({error: "End Time must be after Start Time"});
+  }
+  else{
+    Schedule.update({
+      Start: req.body.Start,
+      End: req.body.End
+    },{
+      where:{
+        SchedulePK: req.body.SchedulePK
+      }
+    })
+    .then(result =>{
+      if(result == 1){
+        var query = `SELECT reservationheader.*, users.Username, users.Email
+                    FROM pmmc.reservationheader
+                      INNER JOIN pmmc.users on users.UserPK = reservationheader.UserPK
+                    WHERE reservationheader.SchedulePK = (:schedulepk)`;
+        Sequelize.query(query,{ 
+          replacements: {
+              schedulepk: req.body.SchedulePK              
+            },
+          type: Sequelize.QueryTypes.SELECT})
+        .then(reservationInfo =>{
+            var emailObject = {
+              Start: req.body.Start,
+              End: req.body.End,
+              ProgramName: req.body.ProgramName,
+              EmailList: []
+            }
+            //Loop through all reservationInfo and add email to EmailList
+            reservationInfo.forEach(reservation =>{
+              if(emailObject.EmailList.indexOf(reservation.Email) < 0){
+                emailObject.EmailList.push(reservation.Email);
+              }
+            })
+
+            //Send email to all current reservation upon the change
+            emailService.sendEmailUpdateOnSchedule(emailObject, info => {
+              console.log(`The mail has been sent 😃 and the id is ${info.messageId}`);
+              res.json({message: "Schedule has been updated and emails have been sent." });
+            });
+            
+        })
+
+        
+      }    
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+  }  
+});
 
 /**********************************************
    GET ALL BLACKOUT DATE EXCEPTION ARRAY 

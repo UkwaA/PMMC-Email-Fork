@@ -67,4 +67,16 @@ export class ReservationService {
     public getReservationHeaderByReservationPK(ReservationPK: number):Observable<any> {
         return this.http.get(AppConstants.EXPRESS_SERVER_URL + "reservation/get-reservation-header-by-reservationpk/" + ReservationPK);
     }
+
+    public addNewMarketingInfo(MarketingInfo: any):Observable<any> {
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/create-new-marketing", MarketingInfo);
+    }
+
+    public acceptPendingReservation(ReservationPK: number):Observable<any> {
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/accept-pending-reservation/", {"ReservationPK": ReservationPK});
+    }
+
+    public cancelPendingReservation(ReservationPK: number):Observable<any> {
+        return this.http.post(AppConstants.EXPRESS_SERVER_URL + "reservation/cancel-pending-reservation/", {"ReservationPK": ReservationPK});
+    }
 }

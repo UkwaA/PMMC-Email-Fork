@@ -67,7 +67,6 @@ import { LoginPromptModalComponent } from './components/login-prompt-modal/login
 import { RegisterModalDialogComponent } from './components/register-modal-dialog/register-modal-dialog.component';
 import { CustomerModalDialogComponent } from './components/customer-modal-dialog/customer-modal-dialog.component';
 import { AddScheduleModalDialogComponent } from './components/add-schedule-modal-dialog/add-schedule-modal-dialog.component';
-import { ScheduleManagementComponent } from './schedule/schedule-management/schedule-management.component';
 import { ViewScheduleComponent } from './schedule/view-schedule/view-schedule.component';
 import { SetProgramScheduleComponent } from './schedule/set-program-schedule/set-program-schedule.component';
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
@@ -113,7 +112,6 @@ const routes: Routes = [
         component: ViewScheduleComponent,
         canActivate: [AuthRoleGuardService]
       },
-      {path: 'schedule-management', component: ScheduleManagementComponent, canActivate: [AuthRoleGuardService]},
       {path: 'report-management', component: ReportManagementComponent, canActivate: [AuthRoleGuardService]},
       {
         path: 'program-details/:id/set-program-schedule',
@@ -186,7 +184,6 @@ const routes: Routes = [
     CustomerModalDialogComponent,
     AddScheduleModalDialogComponent,
     LoginPromptModalComponent,
-    ScheduleManagementComponent,
     ViewScheduleComponent,
     AccountSetting,
     ProfileInfo,

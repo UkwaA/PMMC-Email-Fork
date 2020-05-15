@@ -39,7 +39,8 @@ export class GProgramComponent implements OnInit {
       { var: 'TeacherEmail', label: 'Teacher Email'},
       { var: 'TeacherPhoneNo', label: 'Teacher Phone Number'},
       { var: 'AlternativeDate', label: 'Alternative Date'},
-      { var: 'EducationPurpose', label: 'Education Purpose'}
+      { var: 'EducationPurpose', label: 'Education Purpose'},
+      { var: 'OtherInfo', label: 'Other Information'}
     ];
     this.bookingGroup.GroupProgramPK = this.ProgramPK;
     this.bookingGroup.CreatedBy = this.auth.getUserDetails().UserPK;

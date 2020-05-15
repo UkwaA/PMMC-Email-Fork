@@ -10,7 +10,7 @@ export interface UserDetails {
     UserPK: number
     Username: string
     Password: string
-    Role_FK: string
+    Role_FK: number
     Email: string
     IsActive: boolean
     exp: number
@@ -31,7 +31,7 @@ export interface TokenPayload {
     UserPK: number
     Username: string
     Password: string
-    Role_FK: string
+    Role_FK: number
     Email: string
 }
 
@@ -77,6 +77,7 @@ export class AuthenticationService {
         window.localStorage.removeItem('usertoken');
         window.localStorage.removeItem('QuantityFormLocal');
         window.localStorage.removeItem('ReservationGroupLocal');
+        this.router.navigateByUrl('/');
         return false;
       }
     } else {

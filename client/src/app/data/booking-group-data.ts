@@ -9,6 +9,7 @@ export class BookingGroupData {
   TeacherPhoneNo: boolean;
   AlternativeDate: boolean;
   EducationPurpose: boolean;
+  OtherInfo: boolean;
   CreatedBy: number;
   CreatedDate: Date;
 
@@ -22,6 +23,7 @@ export class BookingGroupData {
     this.TeacherPhoneNo = true;
     this.AlternativeDate = true;
     this.EducationPurpose = true;
+    this.OtherInfo = true;
     this.CreatedBy = 0;
     this.CreatedDate = new Date();
   }

@@ -7,7 +7,7 @@ export class AuthSystemRoleGuardService implements CanActivate {
     constructor(private auth: AuthenticationService, private router: Router) {}
 
     canActivate () {
-        if(this.auth.getUserDetails().Role_FK != '3')
+        if(this.auth.getUserDetails().Role_FK != 3)
         {
             this.router.navigateByUrl('/')
             return false

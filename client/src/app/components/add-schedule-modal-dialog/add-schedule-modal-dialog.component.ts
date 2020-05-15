@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { Session } from 'protractor';
 import { AppConstants } from "../../constants";
+import { ConnectedPositionStrategy } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'add-schedule-modal-dialog',
@@ -176,7 +177,14 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				this.endTime = new Date(this.modalData.currentSession.End)
 				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
 				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")
-				this.eventDescription = this.modalData.currentSession.Description
+				break;
+			
+			case "editsingleschedule":
+				this.startDate = new Date(this.modalData.currentScheduleDetails.Start)
+				this.startTime = new Date(this.modalData.currentScheduleDetails.Start)
+				this.endTime = new Date(this.modalData.currentScheduleDetails.End)
+				this.minTime = new Date(this.startTime.toISOString().slice(0,10) + "T07:00:00")
+				this.maxTime = new Date(this.startTime.toISOString().slice(0,10) + "T18:00:00")				
 				break;
 
 			case "addblackoutdate":
@@ -421,7 +429,6 @@ export class AddScheduleModalDialogComponent implements OnInit{
 
 				//======= ADD NEW SESSION ===========
 				case "newsession":
-					debugger
 					this.currentSessionDetail.ScheduleSettingPK = this.modalData.currentScheduleSetting.ScheduleSettingPK
 					this.programScheduleServices.addNewSessionDetails(this.currentSessionDetail).subscribe(res=>{
 						if(res.error){
@@ -500,6 +507,54 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						} 
 					})
 					break;
+
+				//======= EDIT SINGLE SCHEDULE (in View Schedule Page) ===========
+				case "editsingleschedule":
+					var newStartEndTimeObject:any = {
+						SchedulePK: this.modalData.currentScheduleDetails.SchedulePK,
+						ProgramName: this.modalData.currentScheduleDetails.Name,
+						Start: eventStartDateTime,
+						End: eventEndDateTime
+					};
+					//Configure Modal Dialog
+					const dialogConfig = new MatDialogConfig();
+					// The user can't close the dialog by clicking outside its body
+					dialogConfig.disableClose =true;
+					dialogConfig.id = "modal-component";
+					dialogConfig.height = "auto";
+					dialogConfig.maxHeight = "500px";
+					dialogConfig.width = "350px";
+					dialogConfig.autoFocus = false;
+					dialogConfig.data = {
+						title: "Update Schedule",
+						description: this.modalData.description,
+						mode: "editsingleschedule",
+						actionButtonText: "Confirm",
+						numberOfButton: "2"
+						}
+					const modalDialog = this.matDialog.open(ModalDialogComponent, dialogConfig);
+					modalDialog.afterClosed().subscribe(result =>{
+						if(result == "Yes"){
+							this.programScheduleServices.updateSingleScheduleAndSendEmail(newStartEndTimeObject).subscribe(res =>{
+								if(res.error){
+									this.isDisabled = true;
+									this.endTimeErrorMessage = res.error;
+								}
+								else{
+									this.endTimeErrorMessage = "";
+									this.isDisabled = false
+									if(!this.isDisabled){
+										this.dialogRef.close(newStartEndTimeObject)
+									}              
+								}
+							})							
+						}
+						else{
+							console.log("stop")                
+						}
+					})
+					
+					break;
 				
 				//======= ADD BLACKOUT DATE ===========
 				case "addblackoutdate":
@@ -514,7 +569,6 @@ export class AddScheduleModalDialogComponent implements OnInit{
 						else{
 							this.isDisabled = false
 							if(!this.isDisabled){
-
 								this.dialogRef.close("Yes")
 							}              
 						}
@@ -543,7 +597,7 @@ export class AddScheduleModalDialogComponent implements OnInit{
 				
 
 			}         
-      }        
+      	}        
 	}	
     
 }

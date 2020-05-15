@@ -27,7 +27,7 @@ export class ChangeCurrentPasswordComponent{
         UserPK: 0,
         Username: '',
         Password: '',
-        Role_FK: '',
+        Role_FK: 0,
         Email: ''
     }
 

@@ -59,7 +59,7 @@ td.attended{
 }
 
 td.ongoing{
-  color: blue;
+  color: #2f66a9;
   font-weight: bold;
 }
 
@@ -70,6 +70,11 @@ td.completed{
 
 td.cancelled{
   color: #d9534f;
+  font-weight: bold;
+}
+
+td.pending{
+  color: #f77f00;
   font-weight: bold;
 }
 

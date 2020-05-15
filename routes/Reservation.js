@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const ReservationHeader = require("../models/ReservationHeader");
 const ReservationGroupDetails = require("../models/ReservationGroupDetails");
 const ReservationIndividualDetails = require("../models/ReservationIndividualDetails");
+const MarketingInfo = require("../models/MarketingInformation");
 const Payment = require("../models/Payment");
 
 reservation.use(bodyParser.json());         // to support JSON-encoded bodies
@@ -109,7 +110,7 @@ reservation.get("/get-all-reservation-details-for-reservation-management", (req,
                 INNER JOIN pmmc.schedule on schedule.SchedulePK = reservationheader.SchedulePK
                 INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
                 INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
-              ORDER BY reservationheader.ReservationPK`;
+              ORDER BY schedule.Start desc, reservationheader.ReservationStatus`;
     Sequelize.query(query,{ 
         type: Sequelize.QueryTypes.SELECT})
     .then(reservationInfo =>{
@@ -130,7 +131,7 @@ reservation.get("/get-all-reservation-details-for-reservation-management-by-user
                 INNER JOIN pmmc.userdetails on reservationheader.UserPK = userdetails.UserPK
                 INNER JOIN pmmc.program on schedule.ProgramPK = program.ProgramPK
               WHERE reservationheader.UserPK = (:UserPK)
-              ORDER BY reservationheader.ReservationPK`;
+              ORDER BY schedule.Start desc, reservationheader.ReservationStatus`;
     Sequelize.query(query,{
         replacements: {
           UserPK: req.params.id
@@ -322,6 +323,103 @@ reservation.put("/update-balance/:id", (req, res) => {
     });
 });
 
+/*************************************************
+ *         CREATE NEW MARKETING INFORMATION      *
+ **************************************************/
+reservation.post("/create-new-marketing", (req, res) => {
+  const inputData = {
+    MarketingPK: req.body.MarketingPK,
+    ProgramPK: req.body.ProgramPK,
+    UserPK: req.body.UserPK,
+    MarketingContentPK: req.body.MarketingContentPK,
+    Memo: req.body.Memo
+  };
+
+  MarketingInfo.create(inputData)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.send("err Create new marketing information " + err);
+    });
+});
+
+
+
+/*************************************************
+ *         ACCEPT PENDING RESERVATION            *
+ *************************************************/
+reservation.post("/accept-pending-reservation", (req, res) => {
+  ReservationHeader.findOne({
+    where :{
+      ReservationPK: req.body.ReservationPK
+    }
+    })
+    .then((result) => {
+      if(result) {
+        result.update({
+          ReservationStatus: 1
+        })
+        .then(result =>{
+          if (result) {
+            res.send({
+             message: "ReservationStatus has been changed."
+            });
+          }
+          else {
+            res.send({
+             error: "Cannot update ReservationStatus."
+            });
+          }
+        })
+      } else {
+        res.send({
+          error:  req.body.ReservationPK + "There is no ReservationHeader."
+         });
+      }
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
+
+
+/*************************************************
+ *         CANCEL PENDING RESERVATION            *
+ *************************************************/
+reservation.post("/cancel-pending-reservation", (req, res) => {
+  ReservationHeader.findOne({
+    where :{
+      ReservationPK: req.body.ReservationPK
+    }
+    })
+    .then((result) => {
+      if(result) {
+        result.update({
+          ReservationStatus: 4
+        })
+        .then(result =>{
+          if (result) {
+            res.send({
+             message: "ReservationStatus has been changed."
+            });
+          }
+          else {
+            res.send({
+             error: "Cannot update ReservationStatus."
+            });
+          }
+        })
+      } else {
+        res.send({
+          error:  req.body.ReservationPK + "There is no ReservationHeader."
+         });
+      }
+    })
+    .catch(err => {
+      res.send("error: " + err);
+    });
+});
 
 
 // ========================END=====================

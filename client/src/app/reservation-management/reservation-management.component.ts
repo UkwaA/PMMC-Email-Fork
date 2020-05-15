@@ -18,7 +18,7 @@ import { NumericTextBoxComponent } from '@progress/kendo-angular-inputs';
 export class ReservationManagementComponent implements OnInit {
   p: number;
   choice = '';
-  role: string;
+  role: number;
   UserPK: number;
   reservations = [];
   allReservations = [];
@@ -28,6 +28,7 @@ export class ReservationManagementComponent implements OnInit {
   attendedReservations = [];
   completedReservations = [];
   cancelledReservations = [];
+  pendingReservations = [];
   filterReservations = [];
   searchText: string;
   temp = [];
@@ -39,6 +40,7 @@ export class ReservationManagementComponent implements OnInit {
     { id: 2, name: 'Attended' },
     { id: 3, name: 'Completed' },
     { id: 4, name: 'Cancelled' },
+    { id: 5, name: 'Pending' }
   ];
 
   programCategories: Array<any> = [
@@ -60,7 +62,7 @@ export class ReservationManagementComponent implements OnInit {
       (user) => {
         this.role = user.Role_FK;
         this.UserPK = user.UserPK;
-        if (this.role === '1') {
+        if (this.role === AppConstants.USER_ROLE_CODE.CUSTOMER || this.role === AppConstants.USER_ROLE_CODE.SCHOOL) {
           this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
               const details = {
@@ -68,17 +70,23 @@ export class ReservationManagementComponent implements OnInit {
                 Quantity: 0,
                 ProgramName: '',
                 ReservationStatus: '',
+                UserPK: 0,
+                ProgramType: 0,
+                SchedulePK: 0,
                 Date: '',
                 Time: '',
                 Total: '',
                 RemainingBalance: '',
               };
+              details.UserPK = item.UserPK;
+              details.ProgramType = item.ProgramType;
+              details.SchedulePK = item.SchedulePK;
               details.ReservationPK = item.ReservationPK;
               details.Total = item.Total;
               details.RemainingBalance = item.RemainingBalance;
               details.Quantity = item.NumberOfParticipant;
               details.Date = item.Start.slice(0, 10);
-              details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
+              details.Time = item.Start.slice(11, 16) + ' - ' + item.End.slice(11, 16);
               details.ProgramName = item.Name;
               switch (item.ReservationStatus) {
                 case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
@@ -99,6 +107,11 @@ export class ReservationManagementComponent implements OnInit {
                 case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
                   details.ReservationStatus =
                     AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
+                  details.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.PENDING;
                   break;
                 }
               }
@@ -126,9 +139,11 @@ export class ReservationManagementComponent implements OnInit {
                 ReservationStatus: '',
                 Total: '',
                 RemainingBalance: '',
+                SchedulePK: 0
               };
               reservation.ReservationPK = item.ReservationPK;
               reservation.UserPK = item.UserPK;
+              reservation.SchedulePK = item.SchedulePK,
               reservation.ProgramType = item.ProgramType;
               reservation.CustomerName = item.LastName + ', ' + item.FirstName;
               reservation.Total = item.Total;
@@ -158,6 +173,12 @@ export class ReservationManagementComponent implements OnInit {
                   reservation.ReservationStatus =
                     AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
                   this.cancelledReservations.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.PENDING: {
+                  reservation.ReservationStatus =
+                    AppConstants.RESERVATION_STATUS_TEXT.PENDING;
+                  this.pendingReservations.push(reservation);
                   break;
                 }
               }
@@ -229,23 +250,28 @@ export class ReservationManagementComponent implements OnInit {
               this.filterReservations.push(res);
             }
             break;
+          case '5':
+            if (res.ReservationStatus === 'Pending'){
+              this.filterReservations.push(res);
+            }
+            break;
         }
       });
     } else {
       switch (this.choice) {
-      case '0':
-        this.reservations = this.allReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '1':
-        this.reservations = this.groupReservations;
-        this.filterReservations = this.reservations;
-        break;
-      case '2':
-        this.reservations = this.individualReservations;
-        this.filterReservations = this.reservations;
-        break;
-      }
+        case '0':
+          this.reservations = this.allReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '1':
+          this.reservations = this.groupReservations;
+          this.filterReservations = this.reservations;
+          break;
+        case '2':
+          this.reservations = this.individualReservations;
+          this.filterReservations = this.reservations;
+          break;
+        }
     }
   }
 
@@ -255,11 +281,10 @@ export class ReservationManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.id = 'reservation-modal-component';
-    dialogConfig.maxHeight = '630px';
-    dialogConfig.maxWidth = '750x';
+    //dialogConfig.height = 'auto';
+    //dialogConfig.maxWidth = '750x';
     dialogConfig.autoFocus = false;
     dialogConfig.disableClose = true;
-    let details: any;
     
     dialogConfig.data = reservation;
     const reservationModalDialog = this.matDialog.open(ReservationDetailsModalDialog, dialogConfig);
@@ -273,7 +298,7 @@ export class ReservationManagementComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.id = 'modal-component';
     dialogConfig.height = 'auto';
-    dialogConfig.maxHeight = '500px';
+    dialogConfig.maxHeight = '600px';
     dialogConfig.width = '350px';
     dialogConfig.autoFocus = false;
     dialogConfig.data = {

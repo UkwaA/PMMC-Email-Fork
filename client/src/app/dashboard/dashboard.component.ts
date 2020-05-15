@@ -15,33 +15,17 @@ import { ModalDialogComponent } from '../components/modal-dialog/modal-dialog.co
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { start } from 'repl';
+import { formatDate } from '@angular/common';
 
 export interface DataElement {
   no: number;
-  username: string;
-  first: string;
-  last: string;
-  email: string;
-  createDate: Date;
+  Username: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  CreatedDate: string;
 }
-
-const ELEMENT_DATA: DataElement[] = [
-  { no: 1, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/8/2020') },
-  { no: 2, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/8/2020') },
-  { no: 3, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
-  { no: 4, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
-  { no: 5, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
-  { no: 6, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/9/2020') },
-  { no: 7, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/7/2020') },
-  { no: 8, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('4/4/2020') },
-  { no: 9, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/8/2020') },
-  { no: 10, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('5/3/2020') },
-  { no: 11, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('2/8/2020') },
-  { no: 12, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('3/5/2020') },
-  { no: 13, username: 'nhatv', first: 'Nina', last: 'Vuong', email: 'nhatv@uci.edu', createDate: new Date('1/8/2020') },
-  { no: 14, username: 'abc', first: 'Annie', last: 'Nguyen', email: 'abc@uci.edu', createDate: new Date('5/8/2020') },
-  { no: 15, username: 'def', first: 'Danny', last: 'Tran', email: 'def@uci.edu', createDate: new Date('6/8/2020') },
-];
 
 declare var $: any;
 
@@ -53,74 +37,109 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
 
   /* New user Table */
-  displayedColumns: string[] = ['no', 'username', 'first', 'last', 'email', 'createDate'];
-  dataSource = new MatTableDataSource<DataElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['no', 'Username', 'FirstName', 'LastName', 'Email', 'CreatedDate'];
+  UserDetailsInfo = new MatTableDataSource<DataElement>();
 
   @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
-    this.dataSource.sort = sort;
+    this.UserDetailsInfo.sort = sort;
   }
 
   @ViewChild(MatPaginator, { static: false }) set contentpage(paginator: MatPaginator){
-    this.dataSource.paginator = paginator;
+    this.UserDetailsInfo.paginator = paginator;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.UserDetailsInfo.filter = filterValue.trim().toLowerCase();
   }
 
-  role: string;
+  role: number;
   searchText: string;
   customerRes = [];
   today = new Date();
   newDate: Date;
   range = {
-    start: new Date(this.today.getFullYear(), this.today.getMonth(), 1),
-    end: new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0)
+    end: this.today,
+    start: new Date(this.today.getTime() - (7 * 24 * 60 * 60 * 1000))
   };
   completedRes = 0;
   completedTotal = 0;
-  completedDetails = { range: {}, reservations: [] };
+  completedDetails = [];
   ongoingRes = 0;
   ongoingTotal = 0;
-  ongoingDetails = { range: {}, reservations: [] };
+  ongoingDetails = [];
   attendedRes = 0;
   attendedTotal = 0;
-  attendedDetails = { range: {}, reservations: [] };
+  attendedDetails = [];
   cancelledRes = 0;
   cancelledTotal = 0;
-  cancelledDetails = { range: {}, reservations: [] };
+  cancelledDetails = [];
+  pendingRes = 0;
+  pendingTotal = 0;
+  pendingDetails = [];
+
+  /*Date for barchart */
+  current =  formatDate(this.today, 'EEE MMM dd yyyy', 'en');
+  current_1 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_2 = formatDate( new Date(this.today.getTime() - (2 * 24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_3 = formatDate( new Date(this.today.getTime() - (3 * 24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_4 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_5 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+  current_6 = formatDate( new Date(this.today.getTime() - (24 * 60 * 60 * 1000)), 'EEE MMM dd yyyy', 'en');
+
+
 
   /* CHART USING NG2-CHARTS */
-  title = 'Reservation By Years';
+  title = 'Reservation';
 
   // ADD CHART OPTIONS.
   chartOptions = {
     responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
   }
 
-  labels = ['On Going', 'Completed', 'Attended', 'Cancelled'];
+  labels = [this.current_1,this.current];
   // chartData = [];
 
   // STATIC DATA FOR THE CHART IN JSON FORMAT.
   chartData = [
     {
-      label: '2019',
-      data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
+      label: 'Pending',
+      data: [9,12, 4, 12, 5,12, 23]
     },
     {
-      label: '2020',
-      data: [47, 9, 28, 54, 77, 51, 24]
+      label: 'Completed',
+      data: [47, 2, 28, 6, 23,3,12]
+    },
+    {
+      label: 'Ongoing',
+      data: [7, 5, 18, 54, 45,9,11]
+    },
+    {
+      label: 'Attended',
+      data: [43, 7, 12, 4, 23,4,5]
+    },
+    {
+      label: 'Cancelled',
+      data: [12, 9, 28, 24, 12, 2, 4]
     }
   ];
 
   // CHART COLOR.
   colors = [
-    { // 1st Year.
-      backgroundColor: 'rgba(161, 12, 12, 0.7)'
+    { // Pending
+      backgroundColor: '#E63946'
     },
-    { // 2nd Year.
-      backgroundColor: 'rgba(161, 161, 12, 0.7)'
+    { // Completed
+      backgroundColor: '#F1FAEE'
+    },
+    { // Ongoing
+      backgroundColor: '#A8DADC'
+    },
+    { // Attended
+      backgroundColor: '#457B9D'
+    },
+    { // Cancelled
+      backgroundColor: '#1D3557'
     }
   ]
   /* FINISH CHART USING NG2-CHARTS */
@@ -174,11 +193,12 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+
     
     this.auth.profile().subscribe(
       user => {
         this.role = user.Role_FK;
-        if (this.role === '1') {
+        if (this.role === AppConstants.USER_ROLE_CODE.CUSTOMER || this.role === AppConstants.USER_ROLE_CODE.SCHOOL) {
           this.reservationService.getAllReservationDetailsForReservationManagementByUserPK(user.UserPK).subscribe((resByUser) => {
             resByUser.forEach((item) => {
               console.log(item);
@@ -198,14 +218,24 @@ export class DashboardComponent implements OnInit {
               details.RemainingBalance = item.RemainingBalance;
               details.Quantity = item.NumberOfParticipant;
               details.Date = item.Start.slice(0, 10);
-              details.Time = item.Start.slice(12, 16) + ' - ' + item.End.slice(12, 16);
+              details.Time = item.Start.slice(11, 16) + ' - ' + item.End.slice(11, 16);
               details.ProgramName = item.Name;
               details.ProgramType = item.ProgramType;
-              if (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) {
-                details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+              switch(item.ReservationStatus) {
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING:
+                  details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ON_GOING;
+                  break;
+                  case AppConstants.RESERVATION_STATUS_CODE.ATTENDED:
+                    details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.ATTENDED;
+                    break;
+                  case AppConstants.RESERVATION_STATUS_CODE.PENDING:
+                    details.ReservationStatus = AppConstants.RESERVATION_STATUS_CODE.PENDING;
+                    break;
               }
+
               if ((item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ON_GOING) ||
-                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED)) {
+                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.ATTENDED) ||
+                (item.ReservationStatus === AppConstants.RESERVATION_STATUS_CODE.PENDING)) {
                 this.customerRes.push(details);
               }
             })
@@ -232,21 +262,33 @@ export class DashboardComponent implements OnInit {
 
   /* Change the Start and End Date */
   onChangeDate() {
-    if (this.range.start <= this.range.end) {
+    //if (this.range.start <= this.range.end) {}
       this.range.start.setHours(0, 0, 0, 0);
-      this.range.end.setHours(23, 59, 59, 999);
+      //this.range.end.setHours(0, 0, 0, 0);
+
+      //Get Customer Infodata
+      this.customerService.getAllUsersCreatedInTimeRange(this.range.start.toISOString(),
+                                                        this.range.end.toISOString())
+          .subscribe(customerInfo =>{    
+            console.log(customerInfo)                    
+            this.UserDetailsInfo.data = customerInfo as DataElement[];            
+          })
+
       this.completedRes = 0;
       this.completedTotal = 0;
-      this.completedDetails = { range: this.range, reservations: [] };
+      this.completedDetails = [];
       this.ongoingRes = 0;
       this.ongoingTotal = 0;
-      this.ongoingDetails = { range: this.range, reservations: [] };
+      this.ongoingDetails = [];
       this.attendedRes = 0;
       this.attendedTotal = 0;
-      this.attendedDetails = { range: this.range, reservations: [] };
+      this.attendedDetails = [];
       this.cancelledRes = 0;
       this.cancelledTotal = 0;
-      this.cancelledDetails = { range: this.range, reservations: [] };
+      this.cancelledDetails = [];
+      this.pendingRes = 0;
+      this.pendingTotal = 0;
+      this.pendingDetails = [];
       this.reservationService.getAllReservationDetailsForReservationManagement().subscribe((allRes) => {
         allRes.forEach((item) => {
           //console.log(item);
@@ -255,56 +297,66 @@ export class DashboardComponent implements OnInit {
             ProgramName: '',
             Date: '',
             CustomerName: '',
+            NumberOfParticipant: 0,
             ReservationStatus: '',
             Total: '',
             RemainingBalance: '',
           };
           reservation.ReservationPK = item.ReservationPK;
+          reservation.NumberOfParticipant = item.NumberOfParticipant;
           reservation.Total = item.Total;
           reservation.RemainingBalance = item.RemainingBalance;
           reservation.CustomerName = item.LastName + ', ' + item.FirstName;
           reservation.Date = item.Start.slice(0, 10);
           reservation.ProgramName = item.Name;
-          const resDate = new Date(item.Start);
-          if (this.range.start <= resDate && this.range.end >= resDate) {
-            switch (item.ReservationStatus) {
-              case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
-                this.ongoingRes += 1;
-                this.ongoingTotal += item.Total;
-                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
-                this.ongoingDetails.reservations.push(reservation);
-                break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
-                this.attendedRes += 1;
-                this.attendedTotal += item.Total;
-                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
-                this.attendedDetails.reservations.push(reservation);
-                break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
-                this.completedRes += 1;
-                this.completedTotal += item.Total;
-                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
-                this.completedDetails.reservations.push(reservation);
-                break;
-              }
-              case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
-                this.cancelledRes += 1;
-                this.cancelledTotal += item.Total;
-                reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
-                this.cancelledDetails.reservations.push(reservation);
-                break;
+          if (item.ReservationStatus != AppConstants.RESERVATION_STATUS_CODE.PENDING){
+            const resDate = new Date(item.Start);
+            if (this.range.start <= resDate && this.range.end >= resDate) {
+              switch (item.ReservationStatus) {
+                case AppConstants.RESERVATION_STATUS_CODE.ON_GOING: {
+                  this.ongoingRes += 1;
+                  this.ongoingTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ON_GOING;
+                  this.ongoingDetails.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.ATTENDED: {
+                  this.attendedRes += 1;
+                  this.attendedTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.ATTENDED;
+                  this.attendedDetails.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.COMPLETED: {
+                  this.completedRes += 1;
+                  this.completedTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.COMPLETED;
+                  this.completedDetails.push(reservation);
+                  break;
+                }
+                case AppConstants.RESERVATION_STATUS_CODE.CANCELLED: {
+                  this.cancelledRes += 1;
+                  this.cancelledTotal += item.Total;
+                  reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.CANCELLED;
+                  this.cancelledDetails.push(reservation);
+                  break;
+                }
               }
             }
           }
+          else {
+            const createdDate = new Date(item.CreatedDate);
+            if (this.range.start <= createdDate && this.range.end >= createdDate) {
+              this.pendingRes += 1;
+              this.pendingTotal += item.Total;
+              reservation.ReservationStatus = AppConstants.RESERVATION_STATUS_TEXT.PENDING;
+              this.pendingDetails.push(reservation);
+              console.log(this.pendingDetails);
+            }
+          }
+          
         });
-
-        //Can use value of total income and total reservation here
-        console.log(this.ongoingTotal);
-        console.log(this.ongoingRes);
       });
-    }
   }
 
   // PaynowModal
@@ -373,19 +425,23 @@ export class DashboardComponent implements OnInit {
     dialogConfig.autoFocus = false;
     switch (status) {
       case AppConstants.RESERVATION_STATUS_TEXT.ON_GOING: {
-        dialogConfig.data = this.ongoingDetails;
+        dialogConfig.data = [status,this.ongoingDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.ATTENDED: {
-        dialogConfig.data = this.attendedDetails;
+        dialogConfig.data = [status,this.attendedDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.COMPLETED: {
-        dialogConfig.data = this.completedDetails;
+        dialogConfig.data = [status,this.completedDetails];
         break;
       }
       case AppConstants.RESERVATION_STATUS_TEXT.CANCELLED: {
-        dialogConfig.data = this.cancelledDetails;
+        dialogConfig.data = [status,this.cancelledDetails];
+        break;
+      }
+      case AppConstants.RESERVATION_STATUS_TEXT.PENDING: {
+        dialogConfig.data = [status,this.pendingDetails];
         break;
       }
     }

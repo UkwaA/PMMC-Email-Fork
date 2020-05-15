@@ -31,4 +31,10 @@ export class GroupProgramComponent implements OnInit{
         this.searchText = "";
     }
 
+    showShortDesciption = true
+
+    alterDescriptionText() {
+    this.showShortDesciption = !this.showShortDesciption
+ }
+
 }

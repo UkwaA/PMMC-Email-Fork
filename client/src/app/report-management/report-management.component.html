@@ -1,4 +1,4 @@
-<div class="container">
+<div class="report">
     <div class="row text-center mb-5 mt-4">
         <div class="col-lg-7 mx-auto pb-5">
             <h1>Report Management </h1>
@@ -53,7 +53,7 @@
                     </div>
                     <div #PAYMENT>
                         <table mat-table [dataSource]="PaymentDataSource" class="mat-elevation-z8">
-                            
+
                             <ng-container matColumnDef="name">
                                 <th mat-header-cell *matHeaderCellDef style="width:230px"> Payment Report </th>
                                 <td mat-cell *matCellDef="let element">{{element.name}}</td>
@@ -66,68 +66,68 @@
 
                             <ng-container matColumnDef="01">
                                 <th mat-header-cell *matHeaderCellDef> Jan </th>
-                                <td mat-cell *matCellDef="let element">{{element.jan}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.jan | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="02">
                                 <th mat-header-cell *matHeaderCellDef> Feb </th>
-                                <td mat-cell *matCellDef="let element">{{element.feb}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.feb | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="03">
                                 <th mat-header-cell *matHeaderCellDef> Mar </th>
-                                <td mat-cell *matCellDef="let element">{{element.mar}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.mar | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="04">
                                 <th mat-header-cell *matHeaderCellDef> Apr </th>
-                                <td mat-cell *matCellDef="let element">{{element.apr}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.apr | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="05">
                                 <th mat-header-cell *matHeaderCellDef> May </th>
-                                <td mat-cell *matCellDef="let element">{{element.may}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.may | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="06">
                                 <th mat-header-cell *matHeaderCellDef> Jun </th>
-                                <td mat-cell *matCellDef="let element">{{element.jun}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.jun | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="07">
                                 <th mat-header-cell *matHeaderCellDef> Jul </th>
-                                <td mat-cell *matCellDef="let element">{{element.jul}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.jul | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="08">
                                 <th mat-header-cell *matHeaderCellDef> Aug </th>
-                                <td mat-cell *matCellDef="let element">{{element.aug}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.aug | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="09">
                                 <th mat-header-cell *matHeaderCellDef> Sep </th>
-                                <td mat-cell *matCellDef="let element">{{element.sep}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.sep | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="10">
                                 <th mat-header-cell *matHeaderCellDef> Oct </th>
-                                <td mat-cell *matCellDef="let element">{{element.oct}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.oct | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="11">
                                 <th mat-header-cell *matHeaderCellDef> Nov </th>
-                                <td mat-cell *matCellDef="let element">{{element.nov}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.nov | currency}}</td>
                             </ng-container>
 
                             <ng-container matColumnDef="12">
                                 <th mat-header-cell *matHeaderCellDef> Dec </th>
-                                <td mat-cell *matCellDef="let element">{{element.dec}}</td>
+                                <td mat-cell *matCellDef="let element">{{element.dec | currency}}</td>
                             </ng-container>
 
-                            <!-- <ng-container matColumnDef="total">
+                            <ng-container matColumnDef="total">
                                 <th mat-header-cell *matHeaderCellDef> Total </th>
                                 <td mat-cell *matCellDef="let element">{{element.total}}</td>
-                            </ng-container> -->
+                            </ng-container> 
 
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -182,7 +182,8 @@
                             <!-- <h4 class="program-name float-left">{{program.ProgramName}}</h4> -->
                             <table mat-table [dataSource]="program.Data" class="mat-elevation-z8">
                                 <ng-container matColumnDef="name">
-                                    <th mat-header-cell *matHeaderCellDef style="width:300px;"  > {{program.ProgramName}}</th>
+                                    <th mat-header-cell *matHeaderCellDef style="width:300px;"> {{program.ProgramName}}
+                                    </th>
                                     <td mat-cell *matCellDef="let element">{{element.name}}</td>
                                 </ng-container>
 
@@ -251,6 +252,11 @@
                                     <td mat-cell *matCellDef="let element">{{element.dec}}</td>
                                 </ng-container>
 
+                                <ng-container matColumnDef="total">
+                                    <th mat-header-cell *matHeaderCellDef> Total </th>
+                                    <td mat-cell *matCellDef="let element">{{element.total}}</td>
+                                </ng-container> 
+
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
                             </table>
@@ -267,14 +273,143 @@
                             Camp Program Report
                         </span>
                     </ng-template>
+                    <div class="col-sm-12">
+                        <h2 class="title mt-5">Camp Program Report</h2>
+                        <h6>Report detail of information for each Camp reservations</h6>
+                        <h5 class="lable text-left pt-5 pb-1">*Choose the range for <strong>Camp Program Report</strong></h5>
+                        <div class="row">
+                            <label>
+                                <span class="label p-3">From </span>
+                                <kendo-dateinput [format]="'yyyy'" [steps]="steps" [max]="endYear" [spinners]="true"
+                                    [(ngModel)]="startYear" (valueChange)="onChangeStartDate($event)"></kendo-dateinput>
+                            </label>
+                            <label>
+                                <span class="label p-3">To </span>
+                                <kendo-dateinput [format]="'yyyy'" [steps]="steps" [min]="startYear" [spinners]="true"
+                                    [(ngModel)]="endYear" (valueChange)="onChangeEndDate($event)"></kendo-dateinput>
+                            </label>
+                            <button class="view-btn ml-5" mat-raised-button id="modal-action-button" color='primary'
+                                (click)="viewCampReport()" [disabled]='!isFormValid'>
+                                View
+                            </button>
+                        </div>
+                        <div class="row" *ngIf="YearErrorMessage">
+                            <div class="errorMessage">
+                                <mat-icon matListIcon>error</mat-icon>{{YearErrorMessage}}
+                            </div>
+                        </div>
+
+                    </div>
                     <br /><br />
                     <div class="download-btn col-md-12" style="text-align: right;">
                         <h5>Export</h5>
-                        <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                        <button (click)="exportToExcelCamp()" data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
                             <mat-icon matListIcon>cloud_download</mat-icon>
                         </button>
                     </div>
-                    Camp
+                    <div #CAMP>
+                        <table mat-table [dataSource]="CampDataSource" class="mat-elevation-z8">
+
+                            <!-- Number Column -->
+                            <ng-container matColumnDef="no" >
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="program">
+                                <th mat-header-cell *matHeaderCellDef > Program Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.program}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="start" >
+                                <th mat-header-cell *matHeaderCellDef> Start Date </th>
+                                <td mat-cell *matCellDef="let element">{{element.start}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="end">
+                                <th mat-header-cell *matHeaderCellDef> End Date </th>
+                                <td mat-cell *matCellDef="let element">{{element.end}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name" sticky>
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="age">
+                                <th mat-header-cell *matHeaderCellDef> Age </th>
+                                <td mat-cell *matCellDef="let element">{{element.age}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="gender">
+                                <th mat-header-cell *matHeaderCellDef> Gender </th>
+                                <td mat-cell *matCellDef="let element">{{element.gender}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="merchSize">
+                                <th mat-header-cell *matHeaderCellDef> Merch Size </th>
+                                <td mat-cell *matCellDef="let element">{{element.merchSize}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="allergy">
+                                <th mat-header-cell *matHeaderCellDef> Allergy Info </th>
+                                <td mat-cell *matCellDef="let element">{{element.allergy}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="special">
+                                <th mat-header-cell *matHeaderCellDef> Special Info </th>
+                                <td mat-cell *matCellDef="let element">{{element.special}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insureProviderName">
+                                <th mat-header-cell *matHeaderCellDef> Insurance Provider Name </th>
+                                <td mat-cell *matCellDef="let element">{{element.insureProviderName}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insurePolicyNo">
+                                <th mat-header-cell *matHeaderCellDef> Insurance Policy Number </th>
+                                <td mat-cell *matCellDef="let element">{{element.insurePolicyNo}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="insurePhoneNo">
+                                <th mat-header-cell *matHeaderCellDef> Insure Phone Number </th>
+                                <td mat-cell *matCellDef="let element">{{element.insurePhoneNo}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoName1">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Name 1 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoName1}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoPhone1">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Phone 1 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoPhone1}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoName2">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Name 2 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoName2}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="authoPhone2">
+                                <th mat-header-cell *matHeaderCellDef> Authorized Pick Up Phone 2 </th>
+                                <td mat-cell *matCellDef="let element">{{element.authoPhone2}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="earlyDropOff">
+                                <th mat-header-cell *matHeaderCellDef> Early Drop Off </th>
+                                <td mat-cell *matCellDef="let element">{{element.earlyDropOff}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="latePickUp">
+                                <th mat-header-cell *matHeaderCellDef> Late Pick Up </th>
+                                <td mat-cell *matCellDef="let element">{{element.latePickUp}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="campColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: campColumns;"></tr>
+                        </table>
+                    </div>
                 </mat-tab>
 
                 <mat-tab>
@@ -293,6 +428,22 @@
                     </div>
                     schedule
 
+                </mat-tab>
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon matListIcon>multiline_chart </mat-icon>
+                        <span style="font-weight:bold; font-size: 20px; color: rgb(9, 118, 221);">
+                            Marketing Information Summary
+                        </span>
+                    </ng-template>
+                    <br /><br />
+                    <div class="download-btn col-md-12" style="text-align: right;">
+                        <h5>Export</h5>
+                        <button data-toggle="tooltip" data-placement="right" title="Download Report" class="btn">
+                            <mat-icon matListIcon>cloud_download</mat-icon>
+                        </button>
+                    </div>
+                    schedule
                 </mat-tab>
 
             </mat-tab-group>

@@ -29,7 +29,7 @@ export class UserManagementComponent {
   constructor(private auth: AuthenticationService, public matDialog: MatDialog) {}
 
   ngOnInit() {
-    this.userRoles = ['Customer', 'Manager','System Admin'];
+    this.userRoles = ['Customer', 'Manager','System Admin', 'School Account'];
     this.auth.getAllUser().subscribe((result) => {
       this.listOfUsers = result;
       this.allUsers = result;
