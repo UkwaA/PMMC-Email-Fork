@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ReservationGroupDetails } from 'src/app/data/reservation-group-details';
 import { ReservationHeader } from 'src/app/data/reservation-header';
 import { ProgramScheduleService } from 'src/app/services/schedule.services';
+import { AuthenticationService } from 'src/app/authentication.service';
 
 declare var $: any;
 
@@ -41,11 +42,12 @@ export class ReservationDetailsModalDialog implements OnInit{
     refundForm: FormGroup;
     currTotalQuantity: number;
     isDisabled: boolean = true;
+    userRole: number;
 
     constructor(public dialogRef: MatDialogRef<ReservationDetailsModalDialog>, public matDialog: MatDialog,
                 @Inject(MAT_DIALOG_DATA) private modalData: any, public customerService: CustomerService,
                 public reservationService: ReservationService, private fb: FormBuilder,
-                public scheduleService: ProgramScheduleService) {}
+                public scheduleService: ProgramScheduleService, private auth: AuthenticationService) {}
     ngOnInit() {
         this.data = this.modalData;
         console.log(this.data);
@@ -56,6 +58,11 @@ export class ReservationDetailsModalDialog implements OnInit{
 
         this.scheduleService.getScheduleById(this.data.SchedulePK).subscribe((schedule) => {
             this.ProgramPK = schedule[0].ProgramPK;
+        });
+
+        this.auth.profile().subscribe(
+            (user) => {
+              this.userRole = user.Role_FK;
         })
 
         if (this.data.ProgramType === 0){

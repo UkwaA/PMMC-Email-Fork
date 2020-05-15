@@ -70,11 +70,17 @@ export class ReservationManagementComponent implements OnInit {
                 Quantity: 0,
                 ProgramName: '',
                 ReservationStatus: '',
+                UserPK: 0,
+                ProgramType: 0,
+                SchedulePK: 0,
                 Date: '',
                 Time: '',
                 Total: '',
                 RemainingBalance: '',
               };
+              details.UserPK = item.UserPK;
+              details.ProgramType = item.ProgramType;
+              details.SchedulePK = item.SchedulePK;
               details.ReservationPK = item.ReservationPK;
               details.Total = item.Total;
               details.RemainingBalance = item.RemainingBalance;

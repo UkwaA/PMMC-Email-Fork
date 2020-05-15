@@ -56,49 +56,110 @@
             <mat-tab label="Reservation Info">
                 <ng-template matTabContent>
                     <div *ngIf= "data.ProgramType == 0" class="container">
-                        <div class="row">
-                            <section class="readonly field">
-                                <button *ngIf="isDisabled" class="btn btn-sm btn-warning float-left" type="submit" (click)="viewOrEditMode()">
-                                    <mat-icon matListIcon>edit</mat-icon>Edit
-                                </button>
-                                <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary float-left" type="submit" (click)="viewOrEditMode()">
-                                    <mat-icon matListIcon>edit</mat-icon>Editing...
-                                </button>
-                            </section>
-                        </div>
-                        <form [formGroup]="groupForm">
-                            <fieldset [disabled]="isDisabled">
-                                <div class="row">
-                                    <label class="col-sm-3 control-label">Adult: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="AdultQuantity" placeholder="First name"  [(ngModel)]="groupDetails.AdultQuantity" (blur)="lostFocus($event)">
-                                    <label class="col-sm-3 control-label">Age 5-7: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age57Quantity" placeholder="First name" [(ngModel)]="groupDetails.Age57Quantity" (blur)="lostFocus($event)">
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-3 control-label">Age 8-10: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age810Quantity"  [(ngModel)]="groupDetails.Age810Quantity" (blur)="lostFocus($event)">
-                                    <label class="col-sm-3 control-label">Age 11-12: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1112Quantity"  [(ngModel)]="groupDetails.Age1112Quantity" (blur)="lostFocus($event)">
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-3 control-label">Age 13-14: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1314Quantity"  [(ngModel)]="groupDetails.Age1314Quantity" (blur)="lostFocus($event)">
-                                    <label class="col-sm-3 control-label">Age 14-15: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1415Quantity"  [(ngModel)]="groupDetails.Age1415Quantity" (blur)="lostFocus($event)">
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-3 control-label">Age 15-17: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Age1517Quantity"  [(ngModel)]="groupDetails.Age1517Quantity" (blur)="lostFocus($event)">
-                                    <label class="col-sm-3 control-label">Total Quantity: </label>
-                                    <input disabled type="number" class="col-sm-3 form-control" formControlName="TotalQuantity"  [(ngModel)]="groupDetails.TotalQuantity">
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <button mat-raised-button class="btn btn-info float-right" type="submit" onfocus="blur()">Update Quantity</button>
+                        <div *ngIf = "userRole == 2 || userRole == 3">
+                            <div class="row">
+                                <section class="readonly field">
+                                    <button *ngIf="isDisabled" class="btn btn-sm btn-warning float-left" type="submit" (click)="viewOrEditMode()">
+                                        <mat-icon matListIcon>edit</mat-icon>Edit
+                                    </button>
+                                    <button *ngIf="!isDisabled" class="btn btn-sm btn-secondary float-left" type="submit" (click)="viewOrEditMode()">
+                                        <mat-icon matListIcon>edit</mat-icon>Editing...
+                                    </button>
+                                </section>
+                            </div>
+                            <form [formGroup]="groupForm">
+                                <fieldset [disabled]="isDisabled">
+                                    <div class="row">
+                                        <label class="col-sm-3 control-label">Adult: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="AdultQuantity"  [(ngModel)]="groupDetails.AdultQuantity" (blur)="lostFocus($event)">
+                                        <label class="col-sm-3 control-label">Age 5-7: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age57Quantity" [(ngModel)]="groupDetails.Age57Quantity" (blur)="lostFocus($event)">
                                     </div>
+                                    <div class="row">
+                                        <label class="col-sm-3 control-label">Age 8-10: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age810Quantity"  [(ngModel)]="groupDetails.Age810Quantity" (blur)="lostFocus($event)">
+                                        <label class="col-sm-3 control-label">Age 11-12: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age1112Quantity"  [(ngModel)]="groupDetails.Age1112Quantity" (blur)="lostFocus($event)">
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-3 control-label">Age 13-14: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age1314Quantity"  [(ngModel)]="groupDetails.Age1314Quantity" (blur)="lostFocus($event)">
+                                        <label class="col-sm-3 control-label">Age 14-15: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age1415Quantity"  [(ngModel)]="groupDetails.Age1415Quantity" (blur)="lostFocus($event)">
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-3 control-label">Age 15-17: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Age1517Quantity"  [(ngModel)]="groupDetails.Age1517Quantity" (blur)="lostFocus($event)">
+                                        <label class="col-sm-3 control-label">Total Quantity: </label>
+                                        <input disabled type="number" class="col-sm-3 form-control" formControlName="TotalQuantity"  [(ngModel)]="groupDetails.TotalQuantity">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button mat-raised-button class="btn btn-info float-right" type="submit" onfocus="blur()">Update Quantity</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div *ngIf = "userRole == 1 || userRole == 4">
+                            <div class="row text-left">
+                                <div class="col-sm-4">
+                                    <h6><strong>Adult:</strong></h6>
                                 </div>
-                            </fieldset>
-                        </form>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.AdultQuantity}}</h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 5-7:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age57Quantity}}</h6>
+                                </div>
+                            </div>
+                            <div class="row text-left">
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 8-10:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age810Quantity}}</h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 11-12:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age1112Quantity}}</h6>
+                                </div>
+                            </div> 
+                            <div class="row text-left">
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 13-14:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age1314Quantity}}</h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 14-15:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age1415Quantity}}</h6>
+                                </div>
+                            </div> 
+                            <div class="row text-left">
+                                <div class="col-sm-4">
+                                    <h6><strong>Age 15-17:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.Age1517Quantity}}</h6>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h6><strong>Total Quantity:</strong></h6>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h6>{{groupDetails.TotalQuantity}}</h6>
+                                </div>
+                            </div> 
+                        </div>
+                        
                         <br>
                         <mat-divider></mat-divider>
                         <div class="row text-left">
@@ -163,6 +224,14 @@
                             </div>
                             <div class="col-sm-8">
                                 <h6>{{groupDetails.EducationPurpose}}</h6>
+                            </div>
+                        </div> 
+                        <div class="row text-left">
+                            <div class="col-sm-4">
+                                <h6><strong>Other Information:</strong></h6>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6>{{groupDetails.OtherInfo}}</h6>
                             </div>
                         </div> 
                     </div>
@@ -300,7 +369,7 @@
                     </div>
                 </ng-template>
             </mat-tab>
-            <mat-tab label="Customer Info">
+            <mat-tab *ngIf = "userRole == 2 || userRole == 3" label="Customer Info">
                 <ng-template matTabContent>
                     <div class="container">
                         <div class="row text-left">
@@ -365,61 +434,63 @@
                                 <h6>${{data.RemainingBalance}}</h6>
                             </div>
                         </div>
-                        <mat-divider *ngIf = "data.ProgramType == 0"></mat-divider>
-                        <form *ngIf = "data.ProgramType == 0" [formGroup]="paymentForm">
-                            <fieldset>
-                                <div class="row">
-                                    <h4> Manual Payment </h4>
-                                </div> 
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Choose Type: </label>
-                                    <select class="col-sm-3 control-label" id="type" formControlName="PaymentType">
-                                        <option value="">---Type of Payment---</option>
-                                        <option value="card">Card</option>
-                                        <option value="other">Others</option>
-                                    </select>
-                                    <label class="col-sm-3 control-label">Enter Amount: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="PaymentAmount">
-                                </div>
-                                <!-- <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Enter Amount: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="Amount">
-                                </div> -->
-                                <div>
-                                    <div *ngIf = "paymentType.value =='card' && paymentForm.valid">
-                                        <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid" [ProgramPK]="ProgramPK"></payment>
+                        <div *ngIf = "userRole == 2 || userRole == 3">
+                            <mat-divider *ngIf = "data.ProgramType == 0"></mat-divider>
+                            <form *ngIf = "data.ProgramType == 0" [formGroup]="paymentForm">
+                                <fieldset>
+                                    <div class="row">
+                                        <h4> Manual Payment </h4>
+                                    </div> 
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Choose Type: </label>
+                                        <select class="col-sm-3 control-label" id="type" formControlName="PaymentType">
+                                            <option value="">---Type of Payment---</option>
+                                            <option value="card">Card</option>
+                                            <option value="other">Others</option>
+                                        </select>
+                                        <label class="col-sm-3 control-label">Enter Amount: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="PaymentAmount">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success float-right" value="Submit" [disabled]="(paymentType.value =='card'&&!isVerified)||(paymentType.value !='card'&&!paymentForm.valid)">Add Payment</button>
+                                    <!-- <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Enter Amount: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="Amount">
+                                    </div> -->
+                                    <div>
+                                        <div *ngIf = "paymentType.value =='card' && paymentForm.valid">
+                                            <payment (token)="dataChangedHandler($event)" (verified)="getVerified($event)" [valid]="valid" [ProgramPK]="ProgramPK"></payment>
+                                        </div>
                                     </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <br>
-                        <mat-divider></mat-divider>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-success float-right" value="Submit" [disabled]="(paymentType.value =='card'&&!isVerified)||(paymentType.value !='card'&&!paymentForm.valid)">Add Payment</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <br>
+                            <mat-divider></mat-divider>
 
-                        <form [formGroup]="refundForm">
-                            <fieldset>
-                                <div class="row">
-                                    <h4> Refund Section </h4>
-                                </div>
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Refund Amount: </label>
-                                    <input type="number" class="col-sm-3 form-control" formControlName="RefundAmount">
-                                </div> 
-                                <div class="row form-group">
-                                    <label class="col-sm-3 control-label">Reason: </label>
-                                    <textarea class="col-sm-9 form-control"  rows="3" formControlName="RefundReason"></textarea>                                        
-                                </div> 
-                                <div class="row form-group">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-danger float-right" value="Submit" [disabled]="!refundForm.valid">Refund</button>
+                            <form [formGroup]="refundForm">
+                                <fieldset>
+                                    <div class="row">
+                                        <h4> Refund Section </h4>
                                     </div>
-                                </div> 
-                            </fieldset>
-                        </form>
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Refund Amount: </label>
+                                        <input type="number" class="col-sm-3 form-control" formControlName="RefundAmount">
+                                    </div> 
+                                    <div class="row form-group">
+                                        <label class="col-sm-3 control-label">Reason: </label>
+                                        <textarea class="col-sm-9 form-control"  rows="3" formControlName="RefundReason"></textarea>                                        
+                                    </div> 
+                                    <div class="row form-group">
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-danger float-right" value="Submit" [disabled]="!refundForm.valid">Refund</button>
+                                        </div>
+                                    </div> 
+                                </fieldset>
+                            </form> 
+                        </div>
                     </div>
                 </ng-template>
             </mat-tab>
