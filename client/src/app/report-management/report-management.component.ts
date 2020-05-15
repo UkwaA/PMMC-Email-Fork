@@ -9,6 +9,9 @@ import * as xlsx from 'xlsx';
 
 export interface PeriodicElement {
   no: number;
+  program: string;
+  start: string;
+  end: string;
   name: string;
   age: number;
   gender: string;
@@ -27,8 +30,8 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {no: 1, name: 'Alex', age: 11, gender: 'male', merchSize: 'medium', allergy: 'N/a', special: 'N/a', insureProviderName: 'Medical', insurePolicyNo: 123456789, insurePhoneNo: 7149999999, authoName1: 'Annie Nguyen', authoPhone1: 7144567899, authoName2: 'Peter Tran', authoPhone2: 9494561231, earlyDropOff:'N/a', latePickUp:'N/a'},
-  {no: 2, name: 'Mie', age: 8, gender: 'female', merchSize: 'small', allergy: 'N/a', special: 'N/a', insureProviderName: 'Medical', insurePolicyNo: 123456789, insurePhoneNo: 7149999999, authoName1: 'Mary Nguyen', authoPhone1: 7144567899, authoName2: 'Ryan Tran', authoPhone2: 9494561231, earlyDropOff:'N/a', latePickUp:'N/a'},
+  {no: 1, program: 'Camp Pinniped', start: '5/1/2020', end:'5/6/2020', name: 'Alex', age: 11, gender: 'male', merchSize: 'medium', allergy: 'N/a', special: 'N/a', insureProviderName: 'Medical', insurePolicyNo: 123456789, insurePhoneNo: 7149999999, authoName1: 'Annie Nguyen', authoPhone1: 7144567899, authoName2: 'Peter Tran', authoPhone2: 9494561231, earlyDropOff:'N/a', latePickUp:'N/a'},
+  {no: 2, program: 'Marine Mammal Rehabilitation and Research Lab', start: '5/1/2020', end:'5/6/2020', name: 'Mie', age: 8, gender: 'female', merchSize: 'small', allergy: 'N/a', special: 'N/a', insureProviderName: 'Medical', insurePolicyNo: 123456789, insurePhoneNo: 7149999999, authoName1: 'Mary Nguyen', authoPhone1: 7144567899, authoName2: 'Ryan Tran', authoPhone2: 9494561231, earlyDropOff:'N/a', latePickUp:'N/a'},
 
 ]
 
@@ -40,7 +43,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 export class ReportManagementComponent {
   displayedColumns: string[] = ['name','year', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', 'total'];
-  campColumns: string[] = ['no', 'name', 'age', 'gender', 'merchSize', 'allergy', 'special', 'insureProviderName', 'insurePolicyNo', 'insurePhoneNo', 'authoName1', 'authoPhone1','authoName2', 'authoPhone2','earlyDropOff','latePickUp']  
+  campColumns: string[] = ['no', 'program', 'start', 'end', 'name', 'age', 'gender', 'merchSize', 'allergy', 'special', 'insureProviderName', 'insurePolicyNo', 'insurePhoneNo', 'authoName1', 'authoPhone1','authoName2', 'authoPhone2','earlyDropOff','latePickUp']  
   steps = 1;
   MonthlyDataSourceField:any = [];
   PaymentDataSource: any = [];
